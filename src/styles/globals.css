@@ -1,0 +1,23 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  font-size: 62.5%;
+}
+
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  font-family: 'Pretendard', Helvetica;
+}
+
+body,
+input:not([type='checkbox']),
+textarea,
+a {
+  all: unset;
+}
+/* 스타일 초기화 */
