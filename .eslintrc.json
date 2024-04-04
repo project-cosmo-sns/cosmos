@@ -9,7 +9,6 @@
   "extends": [
     "airbnb",
     "airbnb/hooks",
-    "react-app",
     "prettier",
     "eslint:recommended",
     "plugin:react/recommended",
