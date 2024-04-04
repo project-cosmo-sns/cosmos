@@ -35,7 +35,7 @@
     "semi": ["warn", "never"],
     "react/function-component-definition": [
       "warn",
-      { "namedComponents": "arrow-function" }
+      { "namedComponents": "function-declaration" }
     ],
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-filename-extension": [

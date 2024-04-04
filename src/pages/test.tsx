@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 const Test = () => {
-  const test1 = ()=>{
+  const test1 = () => {
     console.log('test1');
-  }
+  };
   return <div>test1234</div>;
 };
 
