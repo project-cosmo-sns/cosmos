@@ -7,7 +7,6 @@ type Props = {
 
 function QueryProvider({ children }: Props) {
   const queryClient = new QueryClient();
-  console.log(queryClient);
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
