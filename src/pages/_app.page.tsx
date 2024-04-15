@@ -1,4 +1,4 @@
-import '@/src/styles/globals.css';
+import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import QueryProvider from '../utils/QueryProvider';
 import { CookiesProvider } from 'react-cookie';
