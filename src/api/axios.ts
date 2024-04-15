@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getCookie } from '../Utils/Cookies';
 
 const instance = axios.create({
-  baseURL: '',
+  baseURL: 'https://cosmo-sns.vercel.app',
   timeout: 5000,
 });
 
