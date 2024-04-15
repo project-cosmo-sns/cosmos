@@ -1,3 +1,12 @@
+import NavigaionBar from '@/components/Common/NavigationBar';
+import SideBar from '@/components/Common/SideBar';
+
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <div>
+      <SideBar />
+      <br/>
+      <NavigaionBar />
+    </div>
+  );
 }
