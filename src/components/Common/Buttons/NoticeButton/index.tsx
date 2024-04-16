@@ -13,7 +13,7 @@ const cn = classNames.bind(styles);
 export default function NoticeButton({ onClick }: NoticeButtonType) {
   const [isActive, setIsActive] = useState(false);
 
-  const handleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setIsActive(!isActive);
     if (onClick) onClick(e);
   };
