@@ -8,7 +8,9 @@ const cn = classNames.bind(styles);
 export default function NavigaionBar() {
   return (
     <div className={cn('container')}>
-      <Link href="/">1</Link>
+      <Link href="/">
+        <Image src="icon/logo.svg" alt="logo" width={100} height={15} />
+      </Link>
       <div className={cn('input-wrapper')}>
         <input type="text" placeholder="Search" className={styles.search} />
       </div>

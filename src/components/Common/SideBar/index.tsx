@@ -14,10 +14,21 @@ export default function SideBar() {
   return (
     <div className={cn('container')}>
       <div className={cn('icon-wrapper')}>
-        <Link href="/">1</Link>
-
+        <Link href="/">
+          <Image src="/icon/home.svg" alt="home" width={24} height={24} />
+        </Link>
+        <Image
+          src="/icon/purple.svg"
+          alt="add"
+          width={24}
+          height={24}
+          onClick={onClick}
+        />
         {isPopOver && <PopOver />}
-        <Link href="/profile">2</Link>
+        <Image src="/icon/bell.svg" alt="bell" width={24} height={24} />
+        <Link href="/profile">
+          <Image src="/icon/user.svg" alt="profile" width={24} height={24} />
+        </Link>
       </div>
     </div>
   );
