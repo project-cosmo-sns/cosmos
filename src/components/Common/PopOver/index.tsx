@@ -6,18 +6,18 @@ const cn = classNames.bind(styles);
 
 type PopOverProps = {
   items: string[];
+  popOverRef: React.RefObject<HTMLUListElement>;
 };
 
-export default function PopOver({ items }: PopOverProps) {
+export default function PopOver({ items, popOverRef }: PopOverProps) {
   return (
-    <ul className={cn('container')}>
+    <ul className={cn('container')} ref={popOverRef}>
       {items.map((item, index) => (
         <li key={index} className={cn('content-list')}>
           {item}
           <Image src="/icon/right.svg" alt="right" width={24} height={24} />
         </li>
       ))}
-      <li className={cn('close')}>닫기</li>
     </ul>
   );
 }

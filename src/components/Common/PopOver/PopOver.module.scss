@@ -1,7 +1,7 @@
 .container {
   width: 250px;
   margin: 0;
-  padding: 20px 0 0 0;
+  padding: 20px 0 ;
   position: absolute;
   border: 1px solid #dbdbdb;
   font-size: 1.4rem;
@@ -10,22 +10,11 @@
   border-radius: 8px;
 
   .content-list {
+    height: 40px;
     padding: 0 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 40px;
-    list-style: none;
-    cursor: pointer;
-  }
-
-  .close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    min-height: 50px;
-    border-top: 1px solid black;
     list-style: none;
     cursor: pointer;
   }
