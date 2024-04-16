@@ -1,6 +1,7 @@
 import FollowButton from '@/components/Common/Buttons/ActiveButton/FollowButton';
 import CtaDefault from '@/components/Common/Buttons/CtaDefault/CtaDefault';
 import NoticeButton from '@/components/Common/Buttons/NoticeButton/NoticeButton';
+import SortDropdown from '@/components/Common/Buttons/SortDropdown/SortDropdown';
 
 export default function ProfilePage() {
   const handleClick = () => {
@@ -18,6 +19,7 @@ export default function ProfilePage() {
         color="purple"
       />
       <NoticeButton onClick={handleClick} />
+      <SortDropdown />
     </div>
   );
 }
