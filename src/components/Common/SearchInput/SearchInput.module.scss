@@ -1,0 +1,27 @@
+// focus in 같은 액션은 디자인 추가되고 지정하면 될듯
+
+.input-wrap {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  box-sizing: border-box;
+
+  input {
+    max-width: 210px;
+    max-height: 36px;
+    padding: 10px 20px;
+    border-radius: 56px;
+    background: $white-01;
+    font-size: 0.875rem;
+    font-weight: 600;
+
+    &::placeholder {
+      color: $gary-02;
+    }
+  }
+
+  img {
+    position: absolute;
+    right: 20px;
+  }
+}
