@@ -20,4 +20,10 @@
       border: none;
     }
   }
+  @media (min-width: 768px) {
+    height: 100px;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 20px;
+  }
 }

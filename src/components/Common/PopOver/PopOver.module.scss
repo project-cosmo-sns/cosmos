@@ -1,0 +1,16 @@
+.container {
+  width: 200px;
+  height: 150px;
+  margin: 0;
+  padding: 10px;
+  position: absolute;
+  border: 1px solid #dbdbdb;
+  font-size: 1.4rem;
+  bottom: 70px;
+  left: 90px;
+  li {
+    height: 40px;
+    border: 1px solid #dbdbdb;
+    list-style: none;
+  }
+}

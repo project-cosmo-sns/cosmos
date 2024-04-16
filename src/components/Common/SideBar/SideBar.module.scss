@@ -5,6 +5,7 @@
   background: var(--gray2, #dbdbdb);
   display: flex;
   position: fixed;
+  bottom: 0;
 
   .icon-wrapper {
     width: 100%;
@@ -12,6 +13,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
   }
 
   @media (min-width: 768px) {
@@ -21,6 +23,7 @@
     background: var(--gray2, #dbdbdb);
     backdrop-filter: blur(15px);
     padding: 30px 0;
+    top: 0;
 
     .icon-wrapper {
       display: flex;
@@ -31,6 +34,5 @@
     .icon-wrapper :nth-child(2) {
       order: 1;
     }
-    
   }
 }
