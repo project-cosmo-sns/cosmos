@@ -18,9 +18,15 @@ export default function SortDropdown({
   onSortAll,
   onSortMyGen,
 }: SortDropdownType) {
+  const SORT_TYPES = {
+    ALL: '전체',
+    FOLLOW: '팔로우',
+    MY_GEN: '내 기수',
+  };
+
+  const sortTypeList = [SORT_TYPES.ALL, SORT_TYPES.FOLLOW, SORT_TYPES.MY_GEN];
   const [isExpanded, setIsExpanded] = useState(false);
-  const [sortType, setSortType] = useState('전체');
-  const sortTypeList = ['전체', '팔로우', '내 기수'];
+  const [sortType, setSortType] = useState(SORT_TYPES.ALL);
 
   const sortExpandHandler = () => {
     setIsExpanded(!isExpanded);
@@ -29,11 +35,11 @@ export default function SortDropdown({
   const sortTypeHandler = (type: string) => {
     setSortType(type);
     setIsExpanded(false);
-    if (type === '전체') {
+    if (type === SORT_TYPES.ALL) {
       onSortAll();
-    } else if (type === '팔로우') {
+    } else if (type === SORT_TYPES.FOLLOW) {
       onSortFollow();
-    } else if (type === '내 기수') {
+    } else if (type === SORT_TYPES.MY_GEN) {
       onSortMyGen();
     }
   };
