@@ -22,11 +22,11 @@ export default function SortDropdown({
   const [sortType, setSortType] = useState('전체');
   const sortTypeList = ['전체', '팔로우', '내 기수'];
 
-  const SortExpandHandler = () => {
+  const sortExpandHandler = () => {
     setIsExpanded(!isExpanded);
   };
 
-  const SortTypeHandler = (type: string) => {
+  const sortTypeHandler = (type: string) => {
     setSortType(type);
     setIsExpanded(false);
     if (type === '전체') {
@@ -40,40 +40,40 @@ export default function SortDropdown({
 
   return (
     <div>
-      {
-        <button
-          onClick={SortExpandHandler}
-          className={cn('dropdown-expand-button')}
-        >
-          {sortType}
-          <div className={cn('icon-container')}>
-            {isExpanded ? (
-              <Image
-                src="/icon/up.svg"
-                width={18}
-                height={18}
-                alt="접는 아이콘"
-              />
-            ) : (
-              <Image
-                src="/icon/down.svg"
-                width={18}
-                height={18}
-                alt="펼치는 아이콘"
-              />
-            )}
-          </div>
-        </button>
-      }
+      <button
+        type="button"
+        onClick={sortExpandHandler}
+        className={cn('dropdown-expand-button')}
+      >
+        {sortType}
+        <div className={cn('icon-container')}>
+          {isExpanded ? (
+            <Image
+              src="/icon/up.svg"
+              width={18}
+              height={18}
+              alt="접는 아이콘"
+            />
+          ) : (
+            <Image
+              src="/icon/down.svg"
+              width={18}
+              height={18}
+              alt="펼치는 아이콘"
+            />
+          )}
+        </div>
+      </button>
+
       {isExpanded && (
         <div
-          onClick={SortExpandHandler}
+          onClick={sortExpandHandler}
           className={cn('expanded-dropdown-container')}
         >
           {sortTypeList.map((type, idx) => (
             <button
               key={type}
-              onClick={() => SortTypeHandler(type)}
+              onClick={() => sortTypeHandler(type)}
               className={cn('expanded-dropdown-list', {
                 'first-item': idx === 0,
                 'last-item': idx === sortTypeList.length - 1,

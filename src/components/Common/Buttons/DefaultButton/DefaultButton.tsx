@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './CtaDefault.module.scss';
-import CtaDefaultType from './CtaDefaultType';
+import DefaultButtonType from './DefaultButtonType';
 
 /**
  *
@@ -14,18 +14,18 @@ import CtaDefaultType from './CtaDefaultType';
 
 const cn = classNames.bind(styles);
 
-export default function CtaDefault({
+export default function DefaultButton({
   children,
   type = 'button',
   onClick,
   size,
   color,
-}: CtaDefaultType) {
+}: DefaultButtonType) {
   return (
     <button
       type={type}
       onClick={onClick}
-      className={cn('create-button', size, color)}
+      className={cn('default-button', size, color)}
     >
       {children}
     </button>
