@@ -69,6 +69,8 @@ export default function SortDropdown({
         <div
           onClick={sortExpandHandler}
           className={cn('expanded-dropdown-container')}
+          role="button"
+          tabIndex={0}
         >
           {sortTypeList.map((type, idx) => (
             <button
@@ -78,6 +80,7 @@ export default function SortDropdown({
                 'first-item': idx === 0,
                 'last-item': idx === sortTypeList.length - 1,
               })}
+              type="button"
             >
               {type}
             </button>
