@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './SortDropdown.module.scss';
+import Image from 'next/image';
 import { useState } from 'react';
 
 const cn = classNames.bind(styles);
@@ -26,7 +27,23 @@ export default function SortDropdown() {
           className={cn('dropdown-expand-button')}
         >
           {sortType}
-          {isExpanded ? '^' : '⌄'}
+          <div className={cn('icon-container')}>
+            {isExpanded ? (
+              <Image
+                src="/icon/up.svg"
+                width={18}
+                height={18}
+                alt="접는 아이콘"
+              />
+            ) : (
+              <Image
+                src="/icon/down.svg"
+                width={18}
+                height={18}
+                alt="펼치는 아이콘"
+              />
+            )}
+          </div>
         </button>
       }
       {isExpanded && (

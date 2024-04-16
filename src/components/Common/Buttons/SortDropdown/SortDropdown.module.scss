@@ -10,6 +10,9 @@
     font-weight: 600;
     text-align: left;
     padding-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
   }
 
   .expanded-dropdown-container {
@@ -17,6 +20,10 @@
     flex-direction: column;
   }
 }
+.icon-container {
+  display: inline-flex;
+}
+
 .expanded-dropdown-list {
   display: flex;
   color: rgba(54, 54, 54, 1);
