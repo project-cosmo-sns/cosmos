@@ -21,7 +21,7 @@
     "react-cookie": "^7.1.4",
     "react-dom": "^18",
     "react-hook-form": "^7.51.2",
-    "sass": "^1.72.0"
+    "sass": "^1.75.0"
   },
   "devDependencies": {
     "@types/node": "^20",
