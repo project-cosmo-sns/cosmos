@@ -1,7 +1,6 @@
 import styles from './PopOver.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { Children } from 'react';
 
 const cn = classNames.bind(styles);
 
