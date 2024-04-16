@@ -74,6 +74,7 @@
     ],
 
     "@typescript-eslint/unbound-method": "off",
+    "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     // !를 사용하여 null 또는 undefined가 아님을 단언하는 것을 허용하는 TypeScript ESLint 규칙을 해제
     "@typescript-eslint/no-unsafe-member-access": "off",
