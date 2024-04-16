@@ -8,6 +8,18 @@ export default function ProfilePage() {
     console.log('냐냥');
   };
 
+  const handleSortTypeChangeFollow = () => {
+    console.log('팔로우로정렬한당');
+  };
+
+  const handleSortTypeChangeAll = () => {
+    console.log('전체보기한당');
+  };
+
+  const handleSortTypeChangeMyGen = () => {
+    console.log('내 기수만 모여라');
+  };
+
   return (
     <div>
       <FollowButton onClick={handleClick} />
@@ -19,7 +31,11 @@ export default function ProfilePage() {
         color="purple"
       />
       <NoticeButton onClick={handleClick} />
-      <SortDropdown />
+      <SortDropdown
+        onSortFollow={handleSortTypeChangeFollow}
+        onSortAll={handleSortTypeChangeAll}
+        onSortMyGen={handleSortTypeChangeMyGen}
+      />
     </div>
   );
 }
