@@ -4,7 +4,7 @@ import NoticeButton from '@/components/Common/Buttons/NoticeButton/NoticeButton'
 
 export default function ProfilePage() {
   const handleClick = () => {
-    console.log('냐냐');
+    console.log('냐냥');
   };
 
   return (
