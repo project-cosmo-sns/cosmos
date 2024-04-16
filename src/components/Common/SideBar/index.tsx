@@ -24,7 +24,7 @@ export default function SideBar() {
           height={24}
           onClick={onClick}
         />
-        {isPopOver && <PopOver />}
+        {isPopOver && <PopOver items={['피드 작성하기', '포스트 작성하기']} />}
         <Image src="/icon/bell.svg" alt="bell" width={24} height={24} />
         <Link href="/profile">
           <Image src="/icon/user.svg" alt="profile" width={24} height={24} />

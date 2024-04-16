@@ -14,6 +14,9 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
+    img{
+      cursor: pointer;
+    }
   }
 
   @media (min-width: 768px) {
