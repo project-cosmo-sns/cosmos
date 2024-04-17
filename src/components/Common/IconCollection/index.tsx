@@ -1,4 +1,6 @@
-import IconCollectionType from './IconCollectionType';
+interface IconCollectionType {
+  className?: string;
+}
 
 export const GlassIcon = ({ className }: IconCollectionType) => {
   return (
