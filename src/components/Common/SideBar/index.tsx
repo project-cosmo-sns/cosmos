@@ -10,7 +10,7 @@ export default function SideBar() {
   const [isPopOver, setIsPopOver] = useState(false);
   const popOverRef = useRef<HTMLUListElement>(null);
 
-  const onClick = (e: React.MouseEvent<HTMLElement>) => {
+  const popOverClick = () => {
     setIsPopOver(!isPopOver);
   };
 
@@ -40,7 +40,7 @@ export default function SideBar() {
           alt="add"
           width={24}
           height={24}
-          onClick={onClick}
+          onClick={popOverClick}
         />
         {isPopOver && (
           <AddContentPopOver
