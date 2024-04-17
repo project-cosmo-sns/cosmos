@@ -1,7 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './CategoryFlag.module.scss';
-
-type CategoryType = '공지사항' | '이벤트' | '특강' | '정보공유' | '오늘의 질문';
+import { CategoryType } from '@/@types/type';
 
 interface CategoryFlag {
   category: CategoryType;

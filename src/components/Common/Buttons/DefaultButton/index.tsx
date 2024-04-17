@@ -1,5 +1,5 @@
 import classNames from 'classnames/bind';
-import styles from './CtaDefault.module.scss';
+import styles from './DefaultButton.module.scss';
 import DefaultButtonType from './DefaultButtonType';
 
 /**
