@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './SearchInput.module.scss';
-import Image from 'next/image';
 import { ChangeEvent, useState } from 'react';
+// import SearchIcon from '/images/galss.svg';
 
 const cn = classNames.bind(styles);
 
@@ -21,7 +21,7 @@ export default function SearchInput() {
         value={search}
         onChange={handleSearchChange}
       />
-      <Image src="/images/glass.svg" alt="검색 아이콘" width={18} height={18} />
+      {/* <SearchIcon className={cn('search-icon')} /> */}
     </div>
   );
 }
