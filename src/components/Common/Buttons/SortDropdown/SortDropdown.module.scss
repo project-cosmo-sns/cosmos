@@ -1,7 +1,7 @@
 @media (min-width: 1200px) {
   .dropdown-expand-button {
-    color: rgba(54, 54, 54, 1);
-    background-color: rgba(246, 246, 246, 1);
+    color: $black-01;
+    background-color: $gary-03;
     width: 84px;
     height: 32px;
     border-radius: 5px;
@@ -27,8 +27,8 @@
 
 .expanded-dropdown-list {
   display: flex;
-  color: rgba(54, 54, 54, 1);
-  background-color: rgba(246, 246, 246, 1);
+  color: $black-01;
+  background-color: $gary-03;
   width: 84px;
   height: 32px;
   border: none;

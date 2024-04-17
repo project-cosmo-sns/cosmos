@@ -1,7 +1,7 @@
 @media (min-width: 1200px) {
   .default-button {
-    background-color: #9747ff;
-    color: #ffffff;
+    background-color: $purple-0;
+    color: $white-0;
     font-size: 1.6rem;
     font-weight: 700;
     width: 320px;
@@ -25,11 +25,11 @@
     }
 
     &.purple {
-      background-color: #9747ff;
+      background-color: $purple-01;
     }
 
     &.lightgray {
-      background: rgba(219, 219, 219, 1);
+      background: $gary-02;
     }
   }
 }

@@ -1,7 +1,6 @@
 .header-container {
   display: flex;
-  justify-content: space-between;
-  background-color: rgba(219, 219, 219, 1);
+  background-color: $gary-02;
   width: 740px;
   height: 126px;
   border-radius: 10px;
@@ -12,24 +11,45 @@
 .profile-information {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 15px;
+  margin-top: 3px;
+  margin-left: 20px;
+  margin-right: 285px;
 }
 
 .profile-name-section {
   display: flex;
+  font-weight: 700;
+  margin: auto 0;
+}
 
-  .gen-badge {
-    font-size: 1.2rem;
-    text-align: center;
-    background: rgba(240, 228, 255, 1);
-    width: 38px;
-    height: 18px;
-    // padding: 7px 10px;
-    gap: 10px;
-    border-radius: 100px;
-  }
+.gen-badge {
+  color: $purple-01;
+  background: $purple-02;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  width: 38px;
+  height: 18px;
+  padding-top: 3px;
+  gap: 10px;
+  border-radius: 100px;
+  margin-left: 6px;
 }
 
 .profile-following-section {
   display: flex;
+  font-weight: 600;
+  gap: 20px;
+  color: $black-02;
+
+  span {
+    color: $black-03;
+    font-weight: 500;
+    margin-right: 8px;
+  }
+}
+
+.profile-intruduce-section {
+  color: $gary-01;
 }
