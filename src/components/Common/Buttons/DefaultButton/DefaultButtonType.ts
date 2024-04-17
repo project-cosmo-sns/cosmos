@@ -1,7 +1,7 @@
 export default interface DefaultButtonType {
   children: string;
-  buttonType: 'button' | 'submit' | 'reset' | undefined;
+  buttonType?: 'button' | 'submit';
   onClick: React.MouseEventHandler<HTMLButtonElement>;
-  size: 'small' | 'medium' | 'large';
-  color: 'purple' | 'lightgray';
+  size: 'small' | 'medium' | 'large' | 'modal';
+  color: string;
 }
