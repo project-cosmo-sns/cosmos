@@ -166,6 +166,5 @@ textarea {
 
 textarea::placeholder,
 input::placeholder {
-  color: var(--gray-01, var(--gray1, #a8a8a8));
-  font-weight: 600;
+  @include font-style(1.6rem, $gary-01, 600);
 }

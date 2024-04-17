@@ -1,5 +1,5 @@
-@media (min-width: 1200px) {
-  .default-button {
+.default-button {
+  @media (min-width: 1200px) {
     background-color: $primary-01;
     color: $white-01;
     font-size: 1.6rem;
@@ -57,28 +57,28 @@
       box-shadow: 0px 4px 4px 0px #00000040;
     }
   }
-}
 
-@media (min-width: 768px) {
-  &.large {
-    width: 100%;
+  @media (min-width: 768px) {
+    &.large {
+      width: 100%;
+    }
+
+    &.medium {
+      width: 100px;
+    }
+
+    &.small {
+      width: 85px;
+    }
   }
 
-  &.medium {
-    width: 100px;
-  }
+  @media (min-width: 360px) {
+    &.large {
+      width: 100%;
+    }
 
-  &.small {
-    width: 85px;
-  }
-}
-
-@media (min-width: 360px) {
-  &.large {
-    width: 100%;
-  }
-
-  &.medium {
-    width: 100%;
+    &.medium {
+      width: 100%;
+    }
   }
 }
