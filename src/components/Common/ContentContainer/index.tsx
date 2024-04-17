@@ -33,14 +33,18 @@ export default function ContentContainer({
           <button
             type="button"
             onClick={() => setSelectedOption('feed')}
-            className={cn('option')}
+            className={cn('option', {
+              'active-text': selectedOption === 'feed',
+            })}
           >
             피드
           </button>
           <button
             type="button"
             onClick={() => setSelectedOption('post')}
-            className={cn('option')}
+            className={cn('option', {
+              'active-text': selectedOption === 'post',
+            })}
           >
             포스트
           </button>
@@ -48,7 +52,9 @@ export default function ContentContainer({
             <button
               type="button"
               onClick={() => setSelectedOption('scrap')}
-              className={cn('option')}
+              className={cn('option', {
+                'active-text': selectedOption === 'scrap',
+              })}
             >
               스크랩
             </button>

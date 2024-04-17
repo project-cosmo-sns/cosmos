@@ -8,9 +8,9 @@
   padding: 30px;
 
   border-radius: 10px;
-  background: var(--white-01, #fff);
+  background: $white-01;
 
-  color: var(--black-01, var(--black, #363636));
+  color: $black-01;
   font-size: 2rem;
   font-weight: 700;
 }

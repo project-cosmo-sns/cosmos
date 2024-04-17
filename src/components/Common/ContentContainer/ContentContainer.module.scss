@@ -5,7 +5,7 @@
   height: 500px;
   flex-shrink: 0;
   border-radius: 10px;
-  background: var(--gray2, #dbdbdb);
+  background: $white-01;
   backdrop-filter: blur(15px);
 }
 
@@ -22,24 +22,28 @@
   display: flex;
   gap: 40px;
   height: 100%;
-  color: var(--black-01, var(--black, #363636));
+  color: $black-01;
   font-weight: 700;
   margin-left: 30px;
   position: relative;
 }
 
 .option {
-  color: var(--black-01, var(--black, #363636));
-  font-size: 1rem;
+  font-size: 1.6rem;
+  color: $gray-02;
   font-weight: 700;
   height: 100%;
+
+  &.active-text {
+    color: $purple-01;
+  }
 }
 
 .active {
   position: absolute;
   top: 49px;
   height: 2px;
-  background-color: var(--black, #363636);
+  background-color: $purple-01;
   transition: 0.15s transform ease-in-out;
 
   &.feed {
