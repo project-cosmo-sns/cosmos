@@ -1,15 +1,13 @@
-.container {
-  p {
-    height: 40px;
-    padding: 0 10px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    list-style: none;
-    font-size: 1rem;
-    cursor: pointer;
-  }
-  p:hover {
-    background-color: #f9f9f9;
-  }
+.content-list {
+  height: 40px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.content-list:hover {
+  background-color: $gary-03;
 }

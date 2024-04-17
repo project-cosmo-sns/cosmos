@@ -5,8 +5,13 @@ const cn = classNames.bind(styles);
 
 type PopOverProps = {
   children: React.ReactNode;
+  popOverRef: React.RefObject<HTMLDivElement>;
 };
 
-export default function PopOver({ children }: PopOverProps) {
-  return <div className={cn('container')}>{children}</div>;
+export default function PopOver({ children, popOverRef }: PopOverProps) {
+  return (
+    <div ref={popOverRef} className={cn('popOver-container')}>
+      {children}
+    </div>
+  );
 }

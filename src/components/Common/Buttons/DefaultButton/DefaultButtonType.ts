@@ -4,4 +4,4 @@ export default interface DefaultButtonType {
   onClick: React.MouseEventHandler<HTMLButtonElement>;
   size: 'small' | 'medium' | 'large';
   color: 'purple' | 'lightgray';
-};
+}

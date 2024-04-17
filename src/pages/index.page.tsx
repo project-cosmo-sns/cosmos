@@ -1,5 +1,5 @@
-import NavigaionBar from '@/components/Common/NavigationBar';
-import SideBar from '@/components/Common/SideBar';
+import NavigaionBar from '@/components/Common/Layout/NavigationBar';
+import SideBar from '@/components/Common/Layout/SideBar';
 
 export default function Home() {
   return (

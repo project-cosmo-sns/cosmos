@@ -3,14 +3,15 @@ import Image from 'next/image';
 import classNames from 'classnames/bind';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
-import AddContentPopOver from '../AddContentPopOver';
+import AddContentPopOver from '../../AddContentPopOver';
 
 const cn = classNames.bind(styles);
 export default function SideBar() {
   const [isPopOver, setIsPopOver] = useState(false);
-  const popOverRef = useRef<HTMLUListElement>(null);
+  const popOverRef = useRef<HTMLDivElement>(null);
 
-  const popOverClick = () => {
+  const popOverClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.stopPropagation();
     setIsPopOver(!isPopOver);
   };
 
@@ -30,7 +31,7 @@ export default function SideBar() {
     };
   }, []);
   return (
-    <div className={cn('container')}>
+    <div className={cn('sideBar-container')}>
       <div className={cn('icon-wrapper')}>
         <Link href="/">
           <Image src="/icon/home.svg" alt="home" width={24} height={24} />

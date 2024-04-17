@@ -7,7 +7,7 @@ const cn = classNames.bind(styles);
 
 export default function NavigaionBar() {
   return (
-    <div className={cn('container')}>
+    <div className={cn('navigaionBar-container')}>
       <Link href="/">
         <Image src="icon/logo.svg" alt="logo" width={100} height={15} />
       </Link>

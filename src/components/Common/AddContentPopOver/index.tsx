@@ -4,16 +4,16 @@ import Image from 'next/image';
 import PopOver from '../PopOverBox';
 
 type PopOverProps = {
-  popOverRef: React.RefObject<HTMLUListElement>;
+  popOverRef: React.RefObject<HTMLDivElement>;
   items: string[];
 };
 
 const cn = classNames.bind(styles);
 
-export default function AddContentPopOver({ items, popOverRef }: PopOverProps) {
+export default function AddContentPopOver({ popOverRef, items }: PopOverProps) {
   return (
-    <PopOver>
-      <div className={cn('container')}>
+    <PopOver popOverRef={popOverRef}>
+      <div>
         {items.map((item, index) => (
           <p key={index} className={cn('content-list')}>
             {item}
