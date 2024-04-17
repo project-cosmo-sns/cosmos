@@ -8,20 +8,20 @@ const cn = classNames.bind(styles);
 export default function SearchInput() {
   const [search, setSearch] = useState('');
 
-  const handleSearchTermChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target;
+  const handleSearchChange = ({
+    target: { value },
+  }: ChangeEvent<HTMLInputElement>) => {
     setSearch(value);
   };
-
   return (
-    <div className={cn('input-wrap')}>
+    <div className={cn('search-container')}>
       <input
         type="text"
         placeholder="검색"
         value={search}
-        onChange={handleSearchTermChange}
+        onChange={handleSearchChange}
       />
-      <Image src="/icon/glass.svg" alt="검색 아이콘" width={14} height={14} />
+      <Image src="/images/glass.svg" alt="검색 아이콘" width={18} height={18} />
     </div>
   );
 }
