@@ -53,7 +53,6 @@
     //이 설정을 해제할 수 있습니다.
     "import/order": "off",
     "import/no-anonymous-default-export": "off",
-    "import/no-extraneous-dependencies": 0,
     "no-param-reassign": ["error", { "props": false }],
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": ["error"],
@@ -66,7 +65,7 @@
       "error",
       {
         "selector": "variable",
-        "format": ["camelCase"]
+        "format": ["camelCase", "UPPER_CASE", "snake_case"]
       },
       {
         "selector": "function",

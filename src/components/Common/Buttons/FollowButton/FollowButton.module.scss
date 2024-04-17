@@ -1,0 +1,19 @@
+@media (min-width: 1200px) {
+  .follow-button {
+    font-size: 1.4rem;
+    font-weight: 600;
+    width: 72px;
+    height: 32px;
+    border-radius: 5px;
+    border: none;
+    opacity: 0px;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgba(54, 54, 54, 1);
+    cursor: pointer;
+
+    &.isActive {
+      color: rgba(80, 80, 80, 1);
+      background-color: rgba(219, 219, 219, 1);
+    }
+  }
+}
