@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html {
@@ -17,8 +19,6 @@ body {
 }
 
 // reset css
-html,
-body,
 div,
 span,
 applet,
