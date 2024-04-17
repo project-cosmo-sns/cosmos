@@ -2,8 +2,9 @@ import styles from './SideBar.module.scss';
 import Image from 'next/image';
 import classNames from 'classnames/bind';
 import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import AddContentPopOver from '../../AddContentPopOver';
+import UseOutSideClick from '@/hooks/UseOutSideClick';
 
 const cn = classNames.bind(styles);
 export default function SideBar() {
@@ -15,21 +16,8 @@ export default function SideBar() {
     setIsPopOver(!isPopOver);
   };
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (
-        popOverRef.current &&
-        !popOverRef.current.contains(e.target as Node)
-      ) {
-        setIsPopOver(false);
-      }
-    };
+  UseOutSideClick({ ref: popOverRef, callback: () => setIsPopOver(false) });
 
-    document.addEventListener('click', handleClickOutside);
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, []);
   return (
     <div className={cn('sideBar-container')}>
       <div className={cn('icon-wrapper')}>
