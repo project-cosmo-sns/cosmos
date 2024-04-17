@@ -1,3 +1,5 @@
+@import 'fonts';
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -14,7 +16,6 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Pretendard', Helvetica;
-
   font-size: 1.6rem;
 }
 
@@ -74,6 +75,8 @@ ul,
 li,
 fieldset,
 form,
+input,
+textarea,
 label,
 legend,
 table,
