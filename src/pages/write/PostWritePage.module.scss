@@ -2,30 +2,26 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 740px;
-  height: 638px;
-  gap: 30px;
-  padding: 30px;
-
-  border-radius: 10px;
+  width: 100%;
+  gap: 40px;
+  padding: 20px;
   background: $gray-02;
 
   color: $black-01;
   font-size: 2rem;
   font-weight: 700;
-  overflow-y: scroll;
+}
 
-  &::-webkit-scrollbar {
-    width: 20px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: $gray-01;
+@media (min-width: 768px) {
+  .wrapper {
+    width: 614px;
+    padding: 30px;
     border-radius: 10px;
-    border: 7px solid $gray-02;
   }
+}
 
-  &::-webkit-scrollbar-track {
-    background-color: inherit;
+@media (min-width: 1200px) {
+  .wrapper {
+    width: 740px;
   }
 }

@@ -1,11 +1,10 @@
 .wrapper {
   display: flex;
   flex-direction: column;
-  width: 740px;
-  height: 500px;
+  width: 100%;
+  height: 100%;
   flex-shrink: 0;
-  border-radius: 10px;
-  background: $white-01;
+  background: $gray-02;
   backdrop-filter: blur(15px);
 }
 
@@ -30,7 +29,7 @@
 
 .option {
   font-size: 1.6rem;
-  color: $gray-02;
+  color: $gray-01;
   font-weight: 700;
   height: 100%;
 
@@ -48,31 +47,53 @@
 
   &.feed {
     width: 40px;
-    transform: translateX(0px);
+    transform: translateX(-6px);
   }
 
   &.post {
     width: 53px;
-    transform: translateX(80px);
+    transform: translateX(61px);
   }
 
   &.scrap {
     width: 53px;
-    transform: translateX(173.5px);
+    transform: translateX(143.5px);
   }
 }
 
 .divide-line {
-  width: 740px;
+  width: 100%;
   height: 1px;
-  background: #767676;
+  background: $gray-01;
 }
 
 // 추후 dropdown 컴포넌트로 변경 예정
 .dropdown {
-  margin-right: 24px;
+  margin-right: 20px;
 }
 
 .content {
-  padding: 16px 24px;
+  padding: 12px 0;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    width: 614px;
+    height: 500px;
+    border-radius: 10px;
+  }
+
+  .dropdown {
+    margin-right: 24px;
+  }
+
+  .content {
+    padding: 16px 24px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .wrapper {
+    width: 740px;
+  }
 }

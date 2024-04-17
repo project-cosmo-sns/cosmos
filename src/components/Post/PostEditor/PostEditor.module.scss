@@ -17,6 +17,8 @@
 }
 
 .input {
+  display: flex;
+  flex-wrap: wrap;
   width: 100%;
   border-radius: 5px;
   background: $white-01;
@@ -36,6 +38,7 @@
 .category-box {
   display: flex;
   align-items: flex-start;
+  flex-wrap: wrap;
   gap: 6px;
 }
 
