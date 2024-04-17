@@ -2,8 +2,8 @@ import styles from './SideBar.module.scss';
 import Image from 'next/image';
 import classNames from 'classnames/bind';
 import Link from 'next/link';
-import PopOver from '../PopOver';
 import { useState, useEffect, useRef } from 'react';
+import AddContentPopOver from '../AddContentPopOver';
 
 const cn = classNames.bind(styles);
 export default function SideBar() {
@@ -11,7 +11,6 @@ export default function SideBar() {
   const popOverRef = useRef<HTMLUListElement>(null);
 
   const onClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.stopPropagation();
     setIsPopOver(!isPopOver);
   };
 
@@ -44,9 +43,9 @@ export default function SideBar() {
           onClick={onClick}
         />
         {isPopOver && (
-          <PopOver
-            items={['피드 작성하기', '포스트 작성하기']}
+          <AddContentPopOver
             popOverRef={popOverRef}
+            items={['피드 작성하기', '포스트 작성하기']}
           />
         )}
         <Image src="/icon/bell.svg" alt="bell" width={24} height={24} />
