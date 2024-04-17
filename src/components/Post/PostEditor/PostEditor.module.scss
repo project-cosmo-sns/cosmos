@@ -4,18 +4,39 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  gap: 8px;
+  gap: 40px;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px;
 }
 
 .input {
   width: 100%;
   border-radius: 5px;
-  background: $gray-03;
+  background: $white-01;
   padding: 12px 20px;
+}
 
-  &.-title {
-    height: 48px;
-  }
+.title {
+  height: 48px;
+}
+
+.subtitle {
+  color: $black-01;
+  font-weight: 700;
+  font-size: 1.6rem;
+}
+
+.category-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
 }
 
 .editor {
@@ -24,5 +45,5 @@
   resize: none;
   border-radius: 5px;
   padding: 15px 20px;
-  background: $gray-03;
+  background: $white-01;
 }
