@@ -1,0 +1,16 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 740px;
+  height: 638px;
+  gap: 30px;
+  padding: 30px;
+
+  border-radius: 10px;
+  background: var(--white-01, #fff);
+
+  color: var(--black-01, var(--black, #363636));
+  font-size: 2rem;
+  font-weight: 700;
+}
