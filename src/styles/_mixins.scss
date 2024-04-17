@@ -1,0 +1,12 @@
+@mixin CommentInputSizeLarge {
+    width: 559px;
+    height: 48px;
+}
+@mixin CommentInputSizeMedium {
+    width: 433px;
+    height: 48px;
+}
+@mixin CommentInputSizeSmall {
+    width: 231px;
+    height: 48px;
+}

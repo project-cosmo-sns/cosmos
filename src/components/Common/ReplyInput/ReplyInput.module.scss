@@ -1,1 +1,21 @@
-/* 임시 */
+.home {
+  @include CommentInputSizeSmall;
+  border: none;
+  flex-shrink: 0;
+  background-color: $gary-03;
+  border-radius: 5px;
+  text-indent: 1rem;
+  font-size: 1.6rem;
+  @media (min-width: 768px) {
+    @include CommentInputSizeMedium;
+  } 
+
+  @media (min-width: 1200px) {
+    @include CommentInputSizeLarge;
+  }
+}
+.home::placeholder {
+  color: $gary-01;
+  font-weight: 600;
+  line-height: normal;
+}
