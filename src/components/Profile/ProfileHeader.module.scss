@@ -1,0 +1,35 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgba(219, 219, 219, 1);
+  width: 740px;
+  height: 126px;
+  border-radius: 10px;
+  opacity: 0px;
+  padding: 20px 30px;
+}
+
+.profile-information {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.profile-name-section {
+  display: flex;
+
+  .gen-badge {
+    font-size: 1.2rem;
+    text-align: center;
+    background: rgba(240, 228, 255, 1);
+    width: 38px;
+    height: 18px;
+    // padding: 7px 10px;
+    gap: 10px;
+    border-radius: 100px;
+  }
+}
+
+.profile-following-section {
+  display: flex;
+}
