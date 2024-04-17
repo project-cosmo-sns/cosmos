@@ -65,7 +65,7 @@
       "error",
       {
         "selector": "variable",
-        "format": ["camelCase"]
+        "format": ["camelCase", "UPPER_CASE", "snake_case"]
       },
       {
         "selector": "function",
