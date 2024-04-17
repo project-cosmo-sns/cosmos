@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './SearchInput.module.scss';
 import { ChangeEvent, useState } from 'react';
-// import SearchIcon from '/images/galss.svg';
+import { GlassIcon } from '@/components/Common/IconCollection';
 
 const cn = classNames.bind(styles);
 
@@ -21,7 +21,7 @@ export default function SearchInput() {
         value={search}
         onChange={handleSearchChange}
       />
-      {/* <SearchIcon className={cn('search-icon')} /> */}
+      <GlassIcon className={cn('search-icon')} />
     </div>
   );
 }

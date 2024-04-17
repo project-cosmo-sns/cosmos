@@ -1,4 +1,6 @@
-export const GlassIcon = () => {
+import IconCollectionType from './IconCollectionType';
+
+export const GlassIcon = ({ className }: IconCollectionType) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -6,6 +8,7 @@ export const GlassIcon = () => {
       height="24"
       viewBox="0 0 25 24"
       fill="none"
+      className={className}
     >
       <path
         fill-rule="evenodd"
