@@ -1,0 +1,13 @@
+.content-list {
+  height: 40px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  list-style: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+.content-list:hover {
+  background-color: $gary-03;
+}
