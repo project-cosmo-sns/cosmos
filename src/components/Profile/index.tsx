@@ -19,8 +19,12 @@ export default function ProfileHeader() {
       </div>
       <div className={cn('profile-information')}>
         <div className={cn('profile-name-section')}>
-          <div>{'회원임?' ? '최유정' : '게스트'}</div>
-          <div className={cn('gen-badge')}>{'회원임?' ? '3기' : '대기중'}</div>
+          <div> {/* {'회원임?' ? '최유정' : '게스트'} */}</div>
+          최유정
+          <div className={cn('gen-badge')}>
+            {/* {'회원임?' ? '3기' : '대기중'} */}
+            3기
+          </div>
         </div>
         <div className={cn('profile-following-section')}>
           <div>
@@ -31,11 +35,12 @@ export default function ProfileHeader() {
           </div>
         </div>
         <div className={cn('profile-intruduce-section')}>
-          {'데이터있음?' ? '나는 짱정이다' : '소개가 없습니다.'}
+          {/* {'데이터있음?' ? '나는 짱정이다' : '소개가 없습니다.'} */}
+          소개가 없습니다.
         </div>
       </div>
       <div className={cn('profile-setting-button')}>
-        {!'회원임?' ? (
+        {/* {'회원임?' ? (
           <Link href="/설정모달띄우기">
             <Image
               src="/icon/setting.svg"
@@ -46,15 +51,21 @@ export default function ProfileHeader() {
           </Link>
         ) : (
           <DefaultButton
-            children="인증하기"
-            buttonType="button"
             onClick={() => {
               console.log('클릭햇당인증하기');
             }}
             size="small"
-            color="lightgray"
-          />
-        )}
+            color="white-01"
+          >
+            인증하기
+          </DefaultButton>
+        )} */}
+        <Image
+          src="/icon/setting.svg"
+          width={18}
+          height={18}
+          alt="설정 아이콘"
+        />
       </div>
     </div>
   );
