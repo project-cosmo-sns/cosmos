@@ -30,7 +30,6 @@
       }
     ],
     "arrow-body-style": "off",
-    "semi": ["warn", "always"],
     "react/function-component-definition": [
       "warn",
       { "namedComponents": "function-declaration" }

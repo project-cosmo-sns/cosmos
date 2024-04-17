@@ -6,7 +6,7 @@ import { GlassIcon } from '@/components/Common/IconCollection';
 const cn = classNames.bind(styles);
 
 export default function SearchInput() {
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState<string>('');
 
   const handleSearchChange = ({
     target: { value },
