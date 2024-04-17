@@ -2,6 +2,7 @@ import styles from './ProfileHeader.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
+import DefaultButton from '../Common/Buttons/DefaultButton';
 
 const cn = classNames.bind(styles);
 
@@ -33,17 +34,26 @@ export default function ProfileHeader() {
           {'데이터있음?' ? '나는 짱정이다' : '소개가 없습니다.'}
         </div>
       </div>
-      <div>
-        <Link href="/설정모달띄우기"></Link>
-        {'회원임?' ? (
-          <Image
-            src="/icon/setting.svg"
-            width={18}
-            height={18}
-            alt="설정 아이콘"
-          />
+      <div className={cn('profile-setting-button')}>
+        {!'회원임?' ? (
+          <Link href="/설정모달띄우기">
+            <Image
+              src="/icon/setting.svg"
+              width={18}
+              height={18}
+              alt="설정 아이콘"
+            />
+          </Link>
         ) : (
-          <div className={cn('certification-button')}>'인증하기'</div>
+          <DefaultButton
+            children="인증하기"
+            buttonType="button"
+            onClick={() => {
+              console.log('클릭햇당인증하기');
+            }}
+            size="small"
+            color="lightgray"
+          />
         )}
       </div>
     </div>
