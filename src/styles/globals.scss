@@ -1,5 +1,7 @@
 * {
   box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 html {
@@ -12,6 +14,7 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Pretendard', Helvetica;
+
   font-size: 1.6rem;
 }
 
@@ -22,9 +25,6 @@ button {
 }
 
 // reset css
-
-html,
-body,
 div,
 span,
 applet,
