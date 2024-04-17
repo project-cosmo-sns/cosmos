@@ -1,14 +1,12 @@
 .navigaionBar-container {
   width: 100%;
-  max-width: 740px;
   height: 60px;
-  padding: 12px 20px;
-  background: $gary-01;
+  padding: 0 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: fixed;
-  top: 0;
+  background: $gary-01;
 
   .input-wrapper {
     width: 65%;
@@ -22,6 +20,10 @@
   }
 
   @media (min-width: 768px) {
-    display: flex;
+    max-width: 614px;
+    padding: 0px;
+  }
+  @media (min-width: 1200px) {
+    max-width: 740px;
   }
 }
