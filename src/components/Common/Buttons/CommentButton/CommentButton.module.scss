@@ -1,0 +1,11 @@
+.comment-button {
+    @include COMMENT_BUTTON_SIZE;
+    background-color: $purple-01;
+    border: none;
+    border-radius: 5px;
+    color: $white-01;
+}
+.comment-button:hover {
+    background-color: $purple-02;
+    color: $gray-01;
+}

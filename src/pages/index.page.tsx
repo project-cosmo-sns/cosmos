@@ -1,12 +1,12 @@
-import ReplyButton from '@/components/Common/ReplyButton';
-import ReplyInput from '@/components/Common/ReplyInput';
+import CommentButton from '@/components/Common/Buttons/CommentButton';
+import CommentInput from '@/components/Common/CommentInput';
 
 export default function Home() {
   return (
     <>
       <div>Home</div>
-      <ReplyInput placeholder="댓글을 입력해주세요" />
-      <ReplyButton clickEvent={() => console.log('1')}>등록</ReplyButton>
+      <CommentInput placeholder="댓글을 입력해주세요" />
+      <CommentButton clickEvent={() => console.log('1')}>등록</CommentButton>
     </>
   );
 }

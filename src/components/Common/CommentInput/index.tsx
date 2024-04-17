@@ -1,16 +1,16 @@
-import styles from './ReplyInput.module.scss';
+import styles from './CommentInput.module.scss';
 import classNames from 'classnames/bind';
 
-interface ReplyInputTypes {
+interface CommentInputTypes {
   placeholder: string;
 }
 
 const cn = classNames.bind(styles);
 
-export default function ReplyInput({ placeholder }: ReplyInputTypes) {
+export default function CommentInput({ placeholder }: CommentInputTypes) {
   return (
     <input
-      className={cn('home')}
+      className={cn('comment-input')}
       type="text"
       name="commentInput"
       placeholder={placeholder}
