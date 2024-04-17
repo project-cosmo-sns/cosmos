@@ -18,6 +18,12 @@ body {
   font-size: 1.6rem;
 }
 
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
 // reset css
 div,
 span,
@@ -140,4 +146,23 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+input,
+textarea {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+textarea::placeholder,
+input::placeholder {
+  color: var(--gray-01, var(--gray1, #a8a8a8));
+  font-weight: 600;
 }
