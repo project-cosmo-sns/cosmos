@@ -1,0 +1,96 @@
+.feed-card-container {
+  @include FEED_CARD_SIZE_SMALL;
+  @include FLEX_CENTER;
+  padding: 16px;
+  border-radius: 10px;
+  .feed-card-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 15px;
+    .feed-card-user {
+      display: flex;
+      gap: 3px;
+      .user-image {
+        @include FLEX_CENTER;
+        position: relative;
+        background-color: $gray-01;
+        width: 40px;
+        height: 40px;
+        border-radius: 100px;
+      }
+      .user-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        .info {
+          display: flex;
+          gap: 5px;
+          .name {
+            font-size: 1.4rem;
+          }
+          .term {
+            font-size: 1.2rem;
+          }
+        }
+        .createdAt {
+          font-size: 1.2rem;
+          color: $black-03;
+        }
+      }
+    }
+    .feed-card-content {
+    }
+    .feed-card-interaction {
+      .interaction-wrapper {
+        display: flex;
+        justify-content: space-between;
+        border-radius: 5px;
+        .interaction-emoji {
+          @include FLEX_CENTER;
+          flex-grow: 1;
+          .emoji-wrapper {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            gap: 8px;
+            color: $gray-01;
+          }
+          &:hover {
+            background-color: $gray-03;
+          }
+        }
+        .interaction-comment {
+          @include FLEX_CENTER;
+          flex-grow: 1;
+          border-radius: 5px;
+          .comment-wrapper {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            gap: 8px;
+            color: $gray-01;
+          }
+          &:hover {
+            background-color: $gray-03;
+          }
+        }
+        .interaction-eye {
+          @include FLEX_CENTER;
+          flex-grow: 1;
+          border-radius: 5px;
+          .eye-wrapper {
+            display: flex;
+            align-items: center;
+            font-size: 1.2rem;
+            gap: 8px;
+            color: $gray-01;
+          }
+          &:hover {
+            background-color: $gray-03;
+          }
+        }
+      }
+    }
+  }
+}

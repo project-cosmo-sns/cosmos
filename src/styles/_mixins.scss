@@ -1,0 +1,14 @@
+@mixin FEED_CARD_SIZE_SMALL {
+  width: 360px;
+}
+@mixin FEED_CARD_SIZE_MEDIUM {
+  width: 566px;
+}
+@mixin FEED_CARD_SIZE_LARGE {
+  width: 692px;
+}
+@mixin FLEX_CENTER {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
