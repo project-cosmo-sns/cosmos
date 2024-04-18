@@ -17,7 +17,7 @@ export default function AddContentPopOver({ popOverRef, items }: PopOverProps) {
         {items.map((item, index) => (
           <p key={index} className={cn('content-list')}>
             {item}
-            <Image src="/icon/right.svg" alt="right" width={24} height={24} />
+            <Image src="/images/right.svg" alt="right" width={24} height={24} />
           </p>
         ))}
       </div>
