@@ -9,6 +9,7 @@ import {
   HomeIcon,
   BellIcon,
   UserIcon,
+  AddIcon,
 } from '@/components/Common/IconCollection';
 
 const cn = classNames.bind(styles);
@@ -29,13 +30,7 @@ export default function SideBar() {
         <Link href="/">
           <HomeIcon />
         </Link>
-        <Image
-          src="/images/purple.svg"
-          alt="add"
-          width={24}
-          height={24}
-          onClick={popOverClick}
-        />
+        <AddIcon fill="#9747FF" />
         {isPopOver && (
           <AddContentPopOver
             popOverRef={popOverRef}

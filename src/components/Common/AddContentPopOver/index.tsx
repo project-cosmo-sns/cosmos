@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './AddContentPopOver.module.scss';
-import Image from 'next/image';
 import PopOver from '../PopOverBox';
+import { PostIcon, FeedIcon } from '@/components/Common/IconCollection';
 
 type PopOverProps = {
   popOverRef: React.RefObject<HTMLDivElement>;
@@ -13,14 +13,16 @@ const cn = classNames.bind(styles);
 export default function AddContentPopOver({ popOverRef, items }: PopOverProps) {
   return (
     <PopOver popOverRef={popOverRef}>
-      <div>
-        {items.map((item, index) => (
-          <p key={index} className={cn('content-list')}>
-            {item}
-            <Image src="/images/right.svg" alt="right" width={24} height={24} />
-          </p>
-        ))}
-      </div>
+      <ul>
+        <li className={cn('content-list')}>
+          <FeedIcon />
+          <span>피드 작성하기</span>
+        </li>
+        <li className={cn('content-list')}>
+          <PostIcon />
+          <span>포스트 작성하기</span>
+        </li>
+      </ul>
     </PopOver>
   );
 }
