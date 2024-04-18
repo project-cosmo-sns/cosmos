@@ -1,16 +1,14 @@
 .category {
-  display: flex;
+  @include flex-arrange;
+  @include font-style(1.4rem, $black-01, 600);
   height: 32px;
   padding: 7px 20px;
-  justify-content: center;
-  align-items: center;
   gap: 10px;
   border-radius: 100px;
-  background: $gary-03;
+  background: $gray-03;
 
   &.selected {
     background: $black-01;
-    color: #fff;
-    font-weight: 600;
+    color: $white-01;
   }
 }

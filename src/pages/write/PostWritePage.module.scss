@@ -1,15 +1,12 @@
 .wrapper {
-  display: flex;
+  @include flex-arrange;
   flex-direction: column;
-  align-items: center;
   width: 100%;
   gap: 40px;
   padding: 20px;
-  background: $gary-02;
+  background: $gray-02;
 
-  color: $black-01;
-  font-size: 2rem;
-  font-weight: 700;
+  @include font-style(2rem, $black-01, 700);
 }
 
 @media (min-width: 768px) {
