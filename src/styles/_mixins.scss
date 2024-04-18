@@ -1,14 +1,11 @@
-@mixin FEED_CARD_SIZE_SMALL {
-  width: 360px;
-}
-@mixin FEED_CARD_SIZE_MEDIUM {
-  width: 566px;
-}
-@mixin FEED_CARD_SIZE_LARGE {
-  width: 692px;
-}
-@mixin FLEX_CENTER {
+@mixin flex-arrange($justify: center, $align: center) {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin font-style($size, $color: $black-01, $weight: 600) {
+  font-size: $size;
+  color: $color;
+  font-weight: $weight;
 }

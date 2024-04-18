@@ -1,0 +1,91 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  width: 100%;
+  height: 100%;
+  background: $gray-02;
+  backdrop-filter: blur(15px);
+}
+
+.header {
+  @include flex-arrange(space-between, center);
+  width: 100%;
+  height: 50px;
+}
+
+.post-type {
+  display: flex;
+  gap: 40px;
+  height: 100%;
+  margin-left: 30px;
+  position: relative;
+}
+
+.option {
+  @include font-style(1.6rem, $gray-01, 700);
+  height: 100%;
+
+  &.active-text {
+    color: $black-01;
+    transition: 0.15s color ease-in-out;
+  }
+}
+
+.active {
+  position: absolute;
+  top: 49px;
+  width: 53px;
+  height: 2px;
+  background-color: $black-01;
+  transition: 0.15s transform ease-in-out;
+
+  &.feed {
+    width: 40px;
+    transform: translateX(-6px);
+  }
+
+  &.post {
+    transform: translateX(61px);
+  }
+
+  &.scrap {
+    transform: translateX(143.5px);
+  }
+}
+
+.divide-line {
+  width: 100%;
+  height: 1px;
+  background: $gray-01;
+}
+
+// 추후 dropdown 컴포넌트로 변경 예정
+.dropdown {
+  margin-right: 20px;
+}
+
+.content {
+  padding: 12px 0;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    width: 614px;
+    border-radius: 10px;
+  }
+
+  .dropdown {
+    margin-right: 24px;
+  }
+
+  .content {
+    padding: 16px 24px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .wrapper {
+    width: 740px;
+  }
+}

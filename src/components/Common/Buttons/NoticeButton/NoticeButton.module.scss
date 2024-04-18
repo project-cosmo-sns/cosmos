@@ -10,13 +10,13 @@
     border-radius: 100px;
     border: none;
     opacity: 0px;
-    color: rgba(255, 255, 255, 1);
-    background-color: rgba(54, 54, 54, 1);
+    color: $white-01;
+    background-color: $black-01;
     cursor: pointer;
 
     &.isActive {
-      color: rgba(54, 54, 54, 1);
-      background-color: rgba(219, 219, 219, 1);
+      color: $black-01;
+      background-color: $gray-03;
     }
   }
 }

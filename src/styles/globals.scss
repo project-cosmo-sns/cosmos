@@ -1,3 +1,5 @@
+@import 'fonts';
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -14,12 +16,16 @@ body {
   padding: 0;
   margin: 0;
   font-family: 'Pretendard', Helvetica;
-
   font-size: 1.6rem;
 }
 
+button {
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
 // reset css
-div,
 span,
 applet,
 object,
@@ -68,6 +74,8 @@ ul,
 li,
 fieldset,
 form,
+input,
+textarea,
 label,
 legend,
 table,
@@ -140,4 +148,22 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+input,
+textarea {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  margin: 0;
+  padding: 0;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+textarea::placeholder,
+input::placeholder {
+  @include font-style(1.6rem, $gray-01, 600);
 }

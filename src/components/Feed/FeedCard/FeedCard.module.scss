@@ -1,3 +1,13 @@
+@mixin FEED_CARD_SIZE_SMALL {
+  width: 360px;
+}
+@mixin FEED_CARD_SIZE_MEDIUM {
+  width: 566px;
+}
+@mixin FEED_CARD_SIZE_LARGE {
+  width: 692px;
+}
+
 .feed-card-container {
   @include FEED_CARD_SIZE_SMALL;
   @include FLEX_CENTER;

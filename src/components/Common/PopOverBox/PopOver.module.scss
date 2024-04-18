@@ -1,0 +1,14 @@
+.popOver-container {
+  width: 230px;
+  margin: 0;
+  padding: 20px 0;
+  position: absolute;
+  border: 1px solid #dbdbdb;
+  bottom: 70px;
+  left: 90px;
+  border-radius: 8px;
+
+  @media (min-width: 768px) {
+    bottom: 0px;
+  }
+}
