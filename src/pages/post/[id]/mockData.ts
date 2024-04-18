@@ -8,7 +8,7 @@ export interface Author {
 
 export interface Comment {
   id: string;
-  created_at: string;
+  createdAt: string;
   author: Author;
   content: string;
   reactionCount: number;
@@ -55,7 +55,7 @@ const mockData: postData = {
   comments: [
     {
       id: 'tmpcommentId1',
-      created_at: '2024-04-18T17:29:56',
+      createdAt: '2024-04-18T17:29:56',
       author: {
         id: 'tmpuserId',
         nickname: '코스모스',
@@ -67,10 +67,10 @@ const mockData: postData = {
     },
     {
       id: 'tmpcommentId2',
-      created_at: '2024-04-17T17:29:56',
+      createdAt: '2024-04-17T17:29:56',
       author: {
         id: 'tmpuserId2',
-        nickname: '',
+        nickname: 'cosmos',
         generation: '3기',
       },
       content: '저요',
