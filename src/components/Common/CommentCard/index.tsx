@@ -1,4 +1,4 @@
-import AuthorProfile from '@/components/Post/AuthorProfile';
+import AuthorProfile from '@/components/Common/AuthorProfile';
 import { Comment } from '@/pages/post/[id]/mockData';
 import classNames from 'classnames/bind';
 import styles from './CommentCard.module.scss';

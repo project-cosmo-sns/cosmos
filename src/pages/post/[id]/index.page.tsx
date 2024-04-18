@@ -5,7 +5,7 @@ import {
   EditIcon,
 } from '@/components/Common/IconCollection';
 import ReactionContainer from '@/components/Common/ReactionContainer';
-import AuthorProfile from '@/components/Post/AuthorProfile';
+import AuthorProfile from '@/components/Common/AuthorProfile';
 import HashTag from '@/components/Post/HashTag';
 import classNames from 'classnames/bind';
 import styles from './PostDetail.module.scss';
