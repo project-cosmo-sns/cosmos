@@ -5,6 +5,11 @@ import Link from 'next/link';
 import { useState, useRef } from 'react';
 import AddContentPopOver from '../../AddContentPopOver';
 import UseOutSideClick from '@/hooks/UseOutSideClick';
+import {
+  HomeIcon,
+  BellIcon,
+  UserIcon,
+} from '@/components/Common/IconCollection';
 
 const cn = classNames.bind(styles);
 export default function SideBar() {
@@ -22,7 +27,7 @@ export default function SideBar() {
     <div className={cn('sideBar-container')}>
       <div className={cn('icon-wrapper')}>
         <Link href="/">
-          <Image src="/images/home.svg" alt="home" width={24} height={24} />
+          <HomeIcon />
         </Link>
         <Image
           src="/images/purple.svg"
@@ -37,9 +42,9 @@ export default function SideBar() {
             items={['피드 작성하기', '포스트 작성하기']}
           />
         )}
-        <Image src="/images/bell.svg" alt="bell" width={24} height={24} />
+        <BellIcon />
         <Link href="/profile">
-          <Image src="/images/user.svg" alt="profile" width={24} height={24} />
+          <UserIcon />
         </Link>
       </div>
     </div>

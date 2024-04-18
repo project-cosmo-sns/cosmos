@@ -1,13 +1,14 @@
 import styles from './ImageInput.module.scss';
 import classNames from 'classnames/bind';
-import Image from 'next/image';
 import { useState } from 'react';
+import RenderImageLabelContent from './RenderImageLabel';
 
 /**
  * ImageInput component
- * @param {string} type - feed or profile
- * width 와 height를 100%로 설정하여 부모 요소에 맞게 이미지가 출력되도록 설정했습니다. .
- * feed 타입은 이미지 추가 아이콘이 작게 나오도록 설정했습니다. .
+ * @param {string} type - feed or profile or certify
+ * feed 타입은 이미지 추가 아이콘이 작게 나오도록 설정했습니다.
+ * certify 타입은 이미지 추가 아이콘이 크게 나오도록 설정했습니다.
+ * profile 타입은 profile 아이콘이 크게 나오고, 카메라 아이콘이 나오도록 설정했습니다.
  */
 
 const cn = classNames.bind(styles);
@@ -16,6 +17,7 @@ export default function ImageInput({ type }: { type?: string }) {
   const [imageFile, setImageFile] = useState<string | null>(null);
   const feedImage = type === 'feed';
   const profileImage = type === 'profile';
+  const certifyImage = type === 'certify';
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
@@ -30,21 +32,12 @@ export default function ImageInput({ type }: { type?: string }) {
   return (
     <div className={cn('image-container', { feedImage, profileImage })}>
       <label className={cn('image-label')} htmlFor="file">
-        {/* {imageFile ? (
-          <Image src={imageFile} layout="fill" alt="image" />
-        ) : feedImage ? (
-          <>
-            <Image
-              src="/images/addImage.svg"
-              width={65}
-              height={55}
-              alt="addImage"
-            />
-            <span>이미지 추가</span>
-          </>
-        ) : (
-          <Image src="/images/user.svg" width={65} height={65} alt="user" />
-        )} */}
+        <RenderImageLabelContent
+          imageFile={imageFile}
+          feedImage={feedImage}
+          profileImage={profileImage}
+          certifyImage={certifyImage}
+        />
       </label>
       <input
         className={cn('image-input')}

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import classNames from 'classnames/bind';
 import Link from 'next/link';
 import SearchInput from '@/components/Common/SearchInput';
+// import {LogoIcon} from '@/components/Common/IconCollection';
 
 const cn = classNames.bind(styles);
 

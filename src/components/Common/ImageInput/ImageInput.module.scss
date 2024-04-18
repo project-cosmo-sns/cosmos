@@ -13,13 +13,11 @@
     background: $gray-03;
     border-radius: 5px;
     gap: 10px;
+    cursor: pointer;
     span {
       font-size: 1.2rem;
       font-weight: 600;
       color: $gray-01;
-    }
-    img {
-      border-radius: 5px;
     }
   }
   .image-input {
@@ -29,10 +27,8 @@
 
 .feedImage {
   @extend .image-container;
-  img {
-    width: 18px;
-    height: 18px;
-  }
+  width: 110px;
+  height: 110px;
 }
 
 .profileImage {
@@ -40,7 +36,17 @@
   height: 86px;
   .image-label {
     border-radius: 50%;
-    img {
-    }
+  }
+  .camera-container {
+    width: 28px;
+    height: 28px;
+    background: $white-01;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
   }
 }
