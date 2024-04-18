@@ -5,12 +5,11 @@ import { PostIcon, FeedIcon } from '@/components/Common/IconCollection';
 
 type PopOverProps = {
   popOverRef: React.RefObject<HTMLDivElement>;
-  items: string[];
 };
 
 const cn = classNames.bind(styles);
 
-export default function AddContentPopOver({ popOverRef, items }: PopOverProps) {
+export default function AddContentPopOver({ popOverRef }: PopOverProps) {
   return (
     <PopOver popOverRef={popOverRef}>
       <ul>

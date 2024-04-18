@@ -1,5 +1,4 @@
 import styles from './SideBar.module.scss';
-import Image from 'next/image';
 import classNames from 'classnames/bind';
 import Link from 'next/link';
 import { useState, useRef } from 'react';
@@ -30,13 +29,10 @@ export default function SideBar() {
         <Link href="/">
           <HomeIcon />
         </Link>
-        <AddIcon fill="#9747FF" />
-        {isPopOver && (
-          <AddContentPopOver
-            popOverRef={popOverRef}
-            items={['피드 작성하기', '포스트 작성하기']}
-          />
-        )}
+        <button type="button" aria-label="Close" onClick={popOverClick}>
+          <AddIcon fill="#9747FF" />
+        </button>
+        {isPopOver && <AddContentPopOver popOverRef={popOverRef} />}
         <BellIcon />
         <Link href="/profile">
           <UserIcon />
