@@ -1,18 +1,14 @@
 .wrapper {
-  display: flex;
+  @include flex-arrange;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   width: 100%;
   gap: 40px;
 }
 
 .container {
-  display: flex;
+  @include flex-arrange(center, flex-start);
   width: 100%;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
   gap: 12px;
 }
 
@@ -30,14 +26,11 @@
 }
 
 .subtitle {
-  color: $black-01;
-  font-weight: 700;
-  font-size: 1.6rem;
+  @include font-style(1.6rem, $black-01, 700);
 }
 
 .category-box {
-  display: flex;
-  align-items: flex-start;
+  @include flex-arrange(center, flex-start);
   flex-wrap: wrap;
   gap: 6px;
 }
