@@ -2,7 +2,8 @@ import styles from './ProfileHeader.module.scss';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import Link from 'next/link';
-import DefaultButton from '../Common/Buttons/DefaultButton';
+import DefaultButton from '../../Common/Buttons/DefaultButton';
+import ClassBadge from '@/components/Common/ClassBadge';
 
 const cn = classNames.bind(styles);
 
@@ -19,12 +20,9 @@ export default function ProfileHeader() {
       </div>
       <div className={cn('profile-information')}>
         <div className={cn('profile-name-section')}>
-          <div> {/* {'회원임?' ? '최유정' : '게스트'} */}</div>
+          {/* {'회원임?' ? '최유정' : '게스트'} */}
           최유정
-          <div className={cn('gen-badge')}>
-            {/* {'회원임?' ? '3기' : '대기중'} */}
-            3기
-          </div>
+          <ClassBadge />
         </div>
         <div className={cn('profile-following-section')}>
           <div>
@@ -50,15 +48,9 @@ export default function ProfileHeader() {
             />
           </Link>
         ) : (
-          <DefaultButton
-            onClick={() => {
-              console.log('클릭햇당인증하기');
-            }}
-            size="small"
-            color="white-01"
-          >
+          <button type='button' onClick={인증모달띄우기}>
             인증하기
-          </DefaultButton>
+          </button>
         )} */}
         <Image
           src="/icon/setting.svg"
