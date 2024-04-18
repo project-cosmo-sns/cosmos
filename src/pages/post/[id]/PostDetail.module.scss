@@ -3,6 +3,7 @@
   flex-direction: column;
   padding: 78px 20px;
   width: 100%;
+  background-color: $white-01;
   position: relative;
 }
 
@@ -55,4 +56,24 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    width: 614px;
+    border-radius: 10px;
+    backdrop-filter: blur(15px);
+    padding: 98px 30px;
+  }
+
+  .back {
+    top: 40px;
+    left: 30px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .wrapper {
+    width: 740px;
+  }
 }
