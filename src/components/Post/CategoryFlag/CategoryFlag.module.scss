@@ -1,0 +1,16 @@
+.category {
+  display: flex;
+  height: 32px;
+  padding: 7px 20px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 100px;
+  background: $gary-03;
+
+  &.selected {
+    background: $black-01;
+    color: #fff;
+    font-weight: 600;
+  }
+}

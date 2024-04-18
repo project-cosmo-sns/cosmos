@@ -1,17 +1,46 @@
-@media (min-width: 1200px) {
-  .default-button {
-    background-color: #9747ff;
-    color: #ffffff;
-    font-size: 1.6rem;
-    font-weight: 700;
-    width: 320px;
-    height: 48px;
-    padding: 14px 28px;
-    border: none;
-    border-radius: 5px;
-    gap: 10px;
-    cursor: pointer;
+.default-button {
+  width: 320px;
+  height: 48px;
+  background-color: $primary-01;
+  color: $white-01;
+  font-size: 1.6rem;
+  font-weight: 700;
+  padding: 14px 28px;
+  border-radius: 5px;
+  gap: 10px;
+  cursor: pointer;
+  border: none;
 
+  // 버튼 컬러들 (추후 추가 가능)
+  &.primary-01 {
+    background: $primary-01;
+    color: $white-01;
+  }
+
+  &.primary-02 {
+    background: $primary-02;
+    color: $primary-01;
+  }
+
+  &.gary-02 {
+    background: $gary-02;
+    color: $white-01;
+  }
+
+  &.red-01 {
+    background: $red-01;
+    color: $white-01;
+  }
+
+  &.white-01 {
+    background: $white-01;
+    color: $primary-01;
+    border: 1px solid #9747ff;
+    box-shadow: 0px 4px 4px 0px #00000040;
+  }
+
+  @media (min-width: 1200px) {
+    // 버튼 사이즈
     &.large {
       width: 320px;
     }
@@ -24,12 +53,32 @@
       width: 85px;
     }
 
-    &.purple {
-      background-color: #9747ff;
+    &.modal {
+      width: 100%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    &.large {
+      width: 100%;
     }
 
-    &.lightgray {
-      background: rgba(219, 219, 219, 1);
+    &.medium {
+      width: 100px;
+    }
+
+    &.small {
+      width: 85px;
+    }
+  }
+
+  @media (min-width: 360px) {
+    &.large {
+      width: 100%;
+    }
+
+    &.medium {
+      width: 100%;
     }
   }
 }

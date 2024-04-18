@@ -30,7 +30,6 @@
       }
     ],
     "arrow-body-style": "off",
-    "semi": ["warn", "always"],
     "react/function-component-definition": [
       "warn",
       { "namedComponents": "function-declaration" }
@@ -65,7 +64,7 @@
       "error",
       {
         "selector": "variable",
-        "format": ["camelCase", "UPPER_CASE", "snake_case"]
+        "format": ["camelCase", "UPPER_CASE", "snake_case", "PascalCase"]
       },
       {
         "selector": "function",
