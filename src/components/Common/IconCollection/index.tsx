@@ -1,7 +1,10 @@
 import IconTemplate from './IconTemplate';
 
-interface IconCollectionType {
+export interface IconCollectionType {
+  width?: string;
+  height?: string;
   fill?: string;
+  className?: string;
 }
 
 /**
