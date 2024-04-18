@@ -165,5 +165,5 @@ textarea {
 
 textarea::placeholder,
 input::placeholder {
-  @include font-style(1.6rem, $gary-01, 600);
+  @include font-style(1.6rem, $gray-01, 600);
 }
