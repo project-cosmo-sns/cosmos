@@ -22,10 +22,10 @@ export default function SideBar() {
     <div className={cn('sideBar-container')}>
       <div className={cn('icon-wrapper')}>
         <Link href="/">
-          <Image src="/icon/home.svg" alt="home" width={24} height={24} />
+          <Image src="/images/home.svg" alt="home" width={24} height={24} />
         </Link>
         <Image
-          src="/icon/purple.svg"
+          src="/images/purple.svg"
           alt="add"
           width={24}
           height={24}
@@ -37,9 +37,9 @@ export default function SideBar() {
             items={['피드 작성하기', '포스트 작성하기']}
           />
         )}
-        <Image src="/icon/bell.svg" alt="bell" width={24} height={24} />
+        <Image src="/images/bell.svg" alt="bell" width={24} height={24} />
         <Link href="/profile">
-          <Image src="/icon/user.svg" alt="profile" width={24} height={24} />
+          <Image src="/images/user.svg" alt="profile" width={24} height={24} />
         </Link>
       </div>
     </div>
