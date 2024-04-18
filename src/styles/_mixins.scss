@@ -1,0 +1,16 @@
+@mixin COMMENT_INPUT_SIZE_LARGE {
+  width: 559px;
+  height: 48px;
+}
+@mixin COMMENT_INPUT_SIZE_MEDIUM {
+  width: 433px;
+  height: 48px;
+}
+@mixin COMMENT_INPUT_SIZE_SMALL {
+  width: 231px;
+  height: 48px;
+}
+@mixin COMMENT_BUTTON_SIZE {
+  width: 85px;
+  height: 48px;
+}
