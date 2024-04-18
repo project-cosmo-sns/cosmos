@@ -61,7 +61,23 @@ export default function TestPage() {
           <Icon.EyeIcon />
           <Icon.FeedIcon />
           <Icon.FollowedIcon />
+          <Icon.FollowingIcon />
           <Icon.GlassIcon />
+          <Icon.HomeIcon />
+          <Icon.KebabIcon />
+          <Icon.LeftIcon />
+          <Icon.LikeIcon />
+          <Icon.LikedIcon />
+          <Icon.LinkIcon />
+          <Icon.PostIcon />
+          <Icon.RightIcon />
+          <Icon.ScrapIcon />
+          <Icon.ScrapedIcon />
+          <Icon.SettingIcon />
+          <Icon.ShareIcon />
+          <Icon.UpIcon />
+          <Icon.UserIcon />
+          <Icon.XIcon />
         </div>
       </div>
     </>
