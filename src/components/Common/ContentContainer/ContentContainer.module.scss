@@ -4,7 +4,7 @@
   flex-shrink: 0;
   width: 100%;
   height: 100%;
-  background: $gary-02;
+  background: $gray-02;
   backdrop-filter: blur(15px);
 }
 
@@ -23,7 +23,7 @@
 }
 
 .option {
-  @include font-style(1.6rem, $gary-01, 700);
+  @include font-style(1.6rem, $gray-01, 700);
   height: 100%;
 
   &.active-text {
@@ -57,7 +57,7 @@
 .divide-line {
   width: 100%;
   height: 1px;
-  background: $gary-01;
+  background: $gray-01;
 }
 
 // 추후 dropdown 컴포넌트로 변경 예정
