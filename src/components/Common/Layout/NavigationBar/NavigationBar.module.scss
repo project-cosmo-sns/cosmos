@@ -8,17 +8,6 @@
   position: fixed;
   background: $gary-01;
 
-  .input-wrapper {
-    width: 65%;
-    max-width: 390px;
-    input {
-      width: 100%;
-      height: 36px;
-      border-radius: 56px;
-      border: none;
-    }
-  }
-
   @media (min-width: 768px) {
     max-width: 614px;
     padding: 0px;
