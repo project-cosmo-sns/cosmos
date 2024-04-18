@@ -71,8 +71,20 @@ export default function PostDetailPage() {
         <AuthorProfile author={author} createdAt={formattedCreatedAt} />
         {isMyPost && (
           <div className={cn('edit')}>
-            <EditIcon width="18" height="18" />
-            <DeleteIcon width="18" height="18" />
+            <button
+              type="button"
+              aria-label="수정"
+              onClick={() => console.log('포스트 수정')}
+            >
+              <EditIcon width="18" height="18" />
+            </button>
+            <button
+              type="button"
+              aria-label="삭제"
+              onClick={() => console.log('포스트 삭제')}
+            >
+              <DeleteIcon width="18" height="18" />
+            </button>
           </div>
         )}
       </div>
@@ -87,6 +99,9 @@ export default function PostDetailPage() {
         emoji={emoji}
         commentsCount={comments.length}
         views={views}
+        handleEmojiClick={() =>
+          console.log('이모지 모달 열기 or 좋아요만 하려면 이모지 토글')
+        }
       />
       {/* 아래 CommentInput 추후 CommentInput 컴포넌트 완성되면 대체 예정 */}
       <CommentInput />

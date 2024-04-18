@@ -11,8 +11,9 @@
 }
 
 .nickname {
-  grid-area: nickname;
   @include font-style(1.4rem, $black-01, 600);
+  grid-area: nickname;
+  text-align: left;
 }
 
 .created-at {

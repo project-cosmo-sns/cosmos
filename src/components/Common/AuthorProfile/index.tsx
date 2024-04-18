@@ -24,7 +24,13 @@ export default function AuthorProfile({
         height={40}
         onClick={() => console.log('프로필모달 열기')}
       />
-      <span className={cn('nickname')}>{nickname}</span>
+      <button
+        type="button"
+        className={cn('nickname')}
+        onClick={() => console.log('프로필모달 열기')}
+      >
+        {nickname}
+      </button>
       <span className={cn('created-at')}>{createdAt}</span>
       <div className={cn('generation-badge')}>{generation}</div>
     </div>

@@ -28,8 +28,20 @@ export default function CommentCard({ comment }: CommentCardProps) {
           </div>
           {isMyComment && (
             <>
-              <EditIcon width="18" height="18" />
-              <DeleteIcon width="18" height="18" />
+              <button
+                type="button"
+                aria-label="수정"
+                onClick={() => console.log('댓글 수정')}
+              >
+                <EditIcon width="18" height="18" />
+              </button>
+              <button
+                type="button"
+                aria-label="삭제"
+                onClick={() => console.log('댓글 삭제')}
+              >
+                <DeleteIcon width="18" height="18" />
+              </button>
             </>
           )}
         </div>
