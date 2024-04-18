@@ -4,6 +4,10 @@
 
   .layout-contnet {
     padding-top: 65px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
   }
 
   @media (min-width: 768px) {
@@ -15,9 +19,7 @@
       grid-column: 4 / 5;
       padding: 0;
     }
-    .layout-navigaionBar {
-      padding-top: 49px;
-    }
+
     .layout-sideBar {
       grid-column: 2 / 3;
     }

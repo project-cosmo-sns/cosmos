@@ -6,11 +6,13 @@
   align-items: center;
   justify-content: space-between;
   position: fixed;
+  z-index: 1;
   background: $gray-01;
 
   @media (min-width: 768px) {
     max-width: 614px;
-    padding: 0px;
+    height: 109px;
+    padding: 45px 0 0 0;
   }
   @media (min-width: 1200px) {
     max-width: 740px;

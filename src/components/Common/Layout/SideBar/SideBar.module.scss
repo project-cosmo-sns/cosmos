@@ -5,6 +5,7 @@
   background: $gray-02;
   display: flex;
   position: fixed;
+  z-index: 1;
   bottom: 0;
 
   .icon-wrapper {
