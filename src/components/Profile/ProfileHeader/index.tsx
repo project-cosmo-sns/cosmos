@@ -2,8 +2,6 @@ import styles from './ProfileHeader.module.scss';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import * as Icon from '@/components/Common/IconCollection';
-import Link from 'next/link';
-import DefaultButton from '../../Common/Buttons/DefaultButton';
 import ClassBadge from '@/components/Common/ClassBadge';
 import ProfileEditModal from '../ProfileEditModal';
 
@@ -14,9 +12,10 @@ export default function ProfileHeader() {
 
   return (
     <div className={cn('header-container')}>
-      <div>
+      <div className={cn('profile-image')}>
         <Icon.ProfileIcon width="86" height="86" />
       </div>
+      <div className={cn('profile-middle-section')}></div>
       <div className={cn('profile-information')}>
         <div className={cn('profile-name-section')}>
           {/* {'회원임?' ? '최유정' : '게스트'} */}
@@ -31,10 +30,10 @@ export default function ProfileHeader() {
             <span>팔로잉</span>100
           </div>
         </div>
-        <div className={cn('profile-intruduce-section')}>
-          {/* {'데이터있음?' ? '나는 짱정이다' : '소개가 없습니다.'} */}
-          소개가 없습니다.
-        </div>
+      </div>
+      <div className={cn('profile-introduce-section')}>
+        {/* {'데이터있음?' ? '나는 짱정이다' : '소개가 없습니다.'} */}
+        소개가 없습니다.
       </div>
 
       {/* {'회원임?' ? (
