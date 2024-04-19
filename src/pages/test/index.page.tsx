@@ -1,4 +1,5 @@
 import ContentContainer from '@/components/Common/ContentContainer';
+import Modal from '@/components/Common/Layout/Modal';
 import { useState } from 'react';
 import * as Icon from '@/components/Common/IconCollection';
 
@@ -6,6 +7,7 @@ export default function TestPage() {
   const [selectedOption, setSelectedOption] = useState<
     'post' | 'feed' | 'scrap'
   >('feed');
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   return (
     <>
@@ -79,6 +81,29 @@ export default function TestPage() {
           <Icon.UserIcon />
           <Icon.XIcon />
         </div>
+      </div>
+      <div>
+        <button type="button" onClick={() => setIsModalOpen(!isModalOpen)}>
+          on/off
+        </button>
+        {isModalOpen && (
+          <Modal
+            currentValue={isModalOpen}
+            handleClick={setIsModalOpen}
+            title="피드 생성"
+          >
+            <div
+              style={{
+                height: '600px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <span>모달 컴포넌트</span>
+            </div>
+          </Modal>
+        )}
       </div>
     </>
   );

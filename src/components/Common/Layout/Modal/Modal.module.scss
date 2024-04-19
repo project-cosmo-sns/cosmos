@@ -1,0 +1,37 @@
+.modal-layout-container {
+  @include flex-arrange;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+
+  .modal-layout-wrapper {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    gap: 12px;
+    width: 740px;
+    background-color: $white-01;
+    padding: {
+      top: 50px;
+      bottom: 30px;
+      right: 20px;
+      left: 20px;
+    }
+    border-radius: 10px;
+    .modal-layout-x {
+      position: absolute;
+      cursor: pointer;
+      top: 20px;
+      right: 20px;
+    }
+    .modal-layout-title {
+      @include font-style(2rem, $black-01, 700);
+      margin: 0 auto;
+    }
+    .modal-layout-component {
+      @include flex-arrange;
+      background-color: $gray-01;
+    }
+  }
+}
