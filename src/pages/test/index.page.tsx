@@ -3,6 +3,7 @@ import Modal from '@/components/Common/Layout/Modal';
 import { useState } from 'react';
 import * as Icon from '@/components/Common/IconCollection';
 import CreateFeed from '@/components/Feed/CreateFeed';
+import FeedCardList from '@/components/Feed/FeedCardList';
 
 export default function TestPage() {
   const [selectedOption, setSelectedOption] = useState<
@@ -17,7 +18,6 @@ export default function TestPage() {
           background: '#f3f3f3',
           width: '100%',
           height: '100vh',
-          padding: '20px',
         }}
       >
         <ContentContainer
@@ -25,7 +25,7 @@ export default function TestPage() {
           setSelectedOption={setSelectedOption}
           isMyProfile
         >
-          컨텐츠 내용
+          {selectedOption === 'feed' && <FeedCardList />}
         </ContentContainer>
       </div>
       <div
@@ -47,7 +47,7 @@ export default function TestPage() {
             gap: '10px',
           }}
         >
-          <Icon.AddIcon fill="#511264" />
+          {/* <Icon.AddIcon fill="#511264" />
           <Icon.AddImageIcon />
           <Icon.BackIcon />
           <Icon.BellIcon />
@@ -80,25 +80,8 @@ export default function TestPage() {
           <Icon.ShareIcon />
           <Icon.UpIcon />
           <Icon.UserIcon />
-          <Icon.XIcon />
+          <Icon.XIcon /> */}
         </div>
-      </div>
-      <div>
-        <button type="button" onClick={() => setIsModalOpen(!isModalOpen)}>
-          on/off
-        </button>
-        {isModalOpen && (
-          <Modal
-            currentValue={isModalOpen}
-            handleClick={setIsModalOpen}
-            title="피드 생성"
-          >
-            <CreateFeed />
-          </Modal>
-        )}
-      </div>
-      <div>
-        <CreateFeed />
       </div>
     </>
   );

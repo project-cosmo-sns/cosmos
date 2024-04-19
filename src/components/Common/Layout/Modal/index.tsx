@@ -34,7 +34,9 @@ export default function Modal({
         <div role="presentation" onClick={() => handleClick(!currentValue)}>
           <Icon.XIcon className={cn('modal-layout-x')} width="18" height="18" />
         </div>
-        <span className={cn('modal-layout-title')}>{title}</span>
+        <div className={cn('modal-layout-title')}>
+          <span>{title}</span>
+        </div>
         <div className={cn('modal-layout-component')}>{children}</div>
       </div>
     </div>

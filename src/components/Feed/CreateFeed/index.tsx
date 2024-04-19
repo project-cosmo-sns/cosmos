@@ -2,6 +2,7 @@ import Image from 'next/image';
 import styels from './CreateFeed.module.scss';
 import classNames from 'classnames/bind';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
+import ImageInput from '@/components/Common/ImageInput';
 
 const cn = classNames.bind(styels);
 
@@ -17,7 +18,9 @@ export default function CreateFeed() {
             className={cn('create-feed-text')}
             placeholder="글을 작성해보세요"
           />
-          <div className={cn('create-feed-addImage')}>이미지 업로드 영역</div>
+          <div className={cn('create-feed-addImage')}>
+            <ImageInput type="feed" />
+          </div>
         </div>
       </div>
       <div className={cn('create-feed-button')}>

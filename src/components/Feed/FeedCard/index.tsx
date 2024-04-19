@@ -9,7 +9,6 @@ interface FeedCardTypes {
   term: number;
   date: string;
   content: string;
-  image?: string;
   emojiCount: number;
   commentCount: number;
   eyeCount: number;
@@ -19,10 +18,9 @@ const cn = classNames.bind(styles);
 
 export default function FeedCard({
   userImage = '',
-  userName = '',
+  userName = '코스모스',
   term = 0,
-  date = '',
-  image = '',
+  date = '2024.4.11',
   content = '',
   emojiCount = 0,
   commentCount = 0,
@@ -33,17 +31,21 @@ export default function FeedCard({
       <div className={cn('feed-card-wrapper')}>
         <div className={cn('feed-card-user')}>
           <div className={cn('user-image')}>
-            <Image fill src="/images/profile.svg" alt="user-profile" />
+            <Image
+              fill
+              src={userImage || '/images/profile.svg'}
+              alt="user-profile"
+            />
           </div>
           <div className={cn('user-wrapper')}>
             <div className={cn('info')}>
-              <div className={cn('name')}>코스모스</div>
-              <TermBadge term={3} />
+              <div className={cn('name')}>{userName}</div>
+              <TermBadge term={term} />
             </div>
-            <div className={cn('createdAt')}>2024.4.11</div>
+            <div className={cn('createdAt')}>{date}</div>
           </div>
         </div>
-        <div className={cn('feed-card-content')}>오늘 술 마실 사람?</div>
+        <div className={cn('feed-card-content')}>{content}</div>
         <div className={cn('feed-card-interaction')}>
           <div className={cn('interaction-wrapper')}>
             <div className={cn('interaction-emoji')}>
@@ -54,7 +56,7 @@ export default function FeedCard({
                   src="/images/emoji.svg"
                   alt="emoji"
                 />
-                <span>3</span>
+                <span>{emojiCount}</span>
               </div>
             </div>
             <div className={cn('interaction-comment')}>
@@ -65,13 +67,13 @@ export default function FeedCard({
                   src="/images/comment.svg"
                   alt="comment"
                 />
-                <span>3</span>
+                <span>{commentCount}</span>
               </div>
             </div>
             <div className={cn('interaction-eye')}>
               <div className={cn('eye-wrapper')}>
                 <Image width={18} height={18} src="/images/eye.svg" alt="eye" />
-                <span>3</span>
+                <span>{eyeCount}</span>
               </div>
             </div>
           </div>

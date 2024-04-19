@@ -13,6 +13,7 @@
   @include flex-arrange;
   padding: 16px;
   border-radius: 10px;
+  width: 100%;
   .feed-card-wrapper {
     display: flex;
     flex-direction: column;
