@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './HashTag.module.scss';
-import { Tag } from '@/pages/post/[id]/mockData';
+import { Tag } from '@/pages/post/[postId]/mockData';
 
 interface HashTagProps {
   tag: Tag;
