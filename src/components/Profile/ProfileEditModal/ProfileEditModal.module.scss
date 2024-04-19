@@ -1,6 +1,16 @@
+.modal-wrapper {
+  width: 380px;
+  height: auto;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .profile-image-edit {
   position: relative;
   margin-bottom: 12px;
+  margin-top: 40px;
 }
 
 .profile-image {
@@ -31,7 +41,7 @@
 .introduce {
   font-weight: 700;
   margin-top: 60px;
-  margin-bottom: 20px;
+  // margin-bottom: auto;
 
   textarea {
     display: flex;
@@ -48,6 +58,27 @@
   }
 }
 
+.flex-grow-div {
+  flex-grow: 1;
+  height: auto;
+  min-height: 20px;
+}
+
 .edit-button {
-  margin-bottom: 30px;
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .edit-button {
+    margin-bottom: 30px;
+  }
+
+  .introduce {
+    margin-bottom: 20px;
+
+    textarea {
+      margin-bottom: 0;
+    }
+  }
 }

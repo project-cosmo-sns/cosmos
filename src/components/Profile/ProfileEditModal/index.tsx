@@ -24,16 +24,7 @@ export default function ProfileEditModal({
           handleClick={setIsOpen}
           title="프로필 수정"
         >
-          <div
-            style={{
-              width: '380px',
-              height: '529px',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <div className={cn('modal-wrapper')}>
             <div className={cn('profile-image-edit')}>
               <Icon.ProfileIcon
                 width="86"
@@ -50,6 +41,7 @@ export default function ProfileEditModal({
               한줄소개
               <textarea placeholder="한줄소개를 입력하세요 (?자제한)" />{' '}
             </div>
+            <div className={cn('flex-grow-div')}></div>
             <div className={cn('edit-button')}>
               <DefaultButton
                 onClick={() => {
