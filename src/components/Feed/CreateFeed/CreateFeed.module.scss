@@ -25,6 +25,7 @@
       gap: 8px;
       @media (min-width: 768px) {
         width: 100%;
+        gap: 12px;
       }
       .create-feed-text {
         width: 100%;
@@ -43,5 +44,8 @@
     }
   }
   .create-feed-button {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 30px;
   }
 }

@@ -20,14 +20,16 @@ export default function CreateFeed() {
           <div className={cn('create-feed-addImage')}>이미지 업로드 영역</div>
         </div>
       </div>
-      <DefaultButton
-        buttonType="submit"
-        color="primary-01"
-        onClick={() => console.log('피드 등록!')}
-        size="medium"
-      >
-        등록하기
-      </DefaultButton>
+      <div className={cn('create-feed-button')}>
+        <DefaultButton
+          buttonType="submit"
+          color="primary-01"
+          onClick={() => console.log('피드 등록!')}
+          size="medium"
+        >
+          등록
+        </DefaultButton>
+      </div>
     </div>
   );
 }

@@ -39,21 +39,12 @@
     box-shadow: 0px 4px 4px 0px #00000040;
   }
 
-  @media (min-width: 1200px) {
-    // 버튼 사이즈
+  @media (min-width: 360px) {
     &.large {
-      width: 320px;
+      width: 100%;
     }
 
     &.medium {
-      width: 100px;
-    }
-
-    &.small {
-      width: 85px;
-    }
-
-    &.modal {
       width: 100%;
     }
   }
@@ -71,13 +62,22 @@
       width: 85px;
     }
   }
-
-  @media (min-width: 360px) {
+  
+  @media (min-width: 1200px) {
+    // 버튼 사이즈
     &.large {
-      width: 100%;
+      width: 320px;
     }
 
     &.medium {
+      width: 100px;
+    }
+
+    &.small {
+      width: 85px;
+    }
+
+    &.modal {
       width: 100%;
     }
   }
