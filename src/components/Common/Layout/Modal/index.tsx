@@ -5,6 +5,13 @@ import * as Icon from '@/components/Common/IconCollection/index';
 
 const cn = classNames.bind(styles);
 
+interface ModalType {
+  children: ReactNode;
+  title: string;
+  currentValue: boolean;
+  handleClick: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 /**
  * 모달 레이웃 컴포넌트
  * @param {Object} props - 컴포넌트에 전달되는 props
@@ -14,13 +21,6 @@ const cn = classNames.bind(styles);
  * @param {React.Dispatch<React.SetStateAction<boolean>>} props.handleClick - X 아이콘 클릭시 모달을 닫아주기 위한 setState 함수
  * @returns {JSX.Element} 모달 레이아웃 JSX
  */
-
-interface ModalType {
-  children: ReactNode;
-  title: string;
-  currentValue: boolean;
-  handleClick: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
 export default function Modal({
   children,

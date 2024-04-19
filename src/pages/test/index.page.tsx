@@ -1,21 +1,28 @@
 import * as Icon from '@/components/Common/IconCollection';
+import ContentContainer from '@/components/Common/ContentContainer';
+import PostList from '@/components/Post/PostList';
 import { useState } from 'react';
+import FeedCardList from '@/components/Feed/FeedCardList';
 
 export default function TestPage() {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedOption, setSelectedOption] = useState<
+    'feed' | 'post' | 'scrap'
+  >('feed');
+  const [selectedSort, setSelectedSort] = useState<
+    'all' | 'followed' | 'myGeneration'
+  >('all');
   return (
-    <div
-      style={{
-        position: 'fixed',
-        left: '400px',
-        top: '120px',
-        padding: '20px',
-        border: '1px solid #ccc',
-      }}
-    >
-      <p>
-        Sample <br /> <br />
-      </p>
+    <div>
+      <ContentContainer
+        selectedOption={selectedOption}
+        setSelectedOption={setSelectedOption}
+      >
+        {selectedOption === 'feed' ? (
+          <FeedCardList />
+        ) : (
+          <PostList selectedSort={selectedSort} />
+        )}
+      </ContentContainer>
       <div
         style={{
           display: 'grid',
