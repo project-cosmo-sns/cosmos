@@ -11,6 +11,7 @@ import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import styles from './PostDetail.module.scss';
 import { Tag, mockData } from './mockData';
+import Markdown from '@/components/Post/Markdown';
 
 function CommentInput() {
   return (
@@ -92,7 +93,7 @@ export default function PostDetailPage() {
         )}
       </div>
       <div className={cn('divide-line')} />
-      <div className={cn('content')}>{content}</div>
+      <Markdown className={cn('content')} content={content} />
       <div className={cn('hashtag-container')}>
         {tags.map((tag: Tag) => (
           <HashTag key={tag.id} tag={tag} />
