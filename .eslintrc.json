@@ -68,7 +68,7 @@
       },
       {
         "selector": "function",
-        "format": ["PascalCase"]
+        "format": ["PascalCase", "camelCase"]
       }
     ],
 
