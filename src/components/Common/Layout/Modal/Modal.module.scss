@@ -8,7 +8,7 @@
   background: rgba(0, 0, 0, 0.6);
   z-index: 1;
 
-  .modal-layout-wrapper { 
+  .modal-layout-wrapper {
     display: flex;
     position: relative;
     flex-direction: column;
@@ -23,7 +23,7 @@
       left: 20px;
     }
     @media (min-width: 768px) {
-      border-radius: 10px; 
+      border-radius: 10px;
       height: auto;
       width: 614px;
     }
