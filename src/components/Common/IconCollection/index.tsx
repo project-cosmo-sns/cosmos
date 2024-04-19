@@ -598,9 +598,9 @@ export function ScrapIcon({ fill = '#a8a8a8', ...props }: IconCollectionType) {
       <path
         d="M20.75 2.66667V21.6644L12.9707 16.4782C12.3829 16.0863 11.6171 16.0863 11.0293 16.4782L3.25 21.6644V2.66667C3.25 2.31986 3.39682 1.96826 3.68974 1.69487C3.98557 1.41876 4.40414 1.25 4.85714 1.25H19.1429C19.5959 1.25 20.0144 1.41876 20.3103 1.69487C20.6032 1.96826 20.75 2.31986 20.75 2.66667Z"
         stroke={fill}
-        stroke-width="2.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </IconTemplate>
   );
