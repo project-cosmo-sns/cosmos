@@ -1,53 +1,29 @@
-import ContentContainer from '@/components/Common/ContentContainer';
-import Modal from '@/components/Common/Layout/Modal';
-import { useState } from 'react';
 import * as Icon from '@/components/Common/IconCollection';
-import CreateFeed from '@/components/Feed/CreateFeed';
-import FeedCardList from '@/components/Feed/FeedCardList';
+import { useState } from 'react';
 
 export default function TestPage() {
-  const [selectedOption, setSelectedOption] = useState<
-    'post' | 'feed' | 'scrap'
-  >('feed');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
   return (
-    <>
+    <div
+      style={{
+        position: 'fixed',
+        left: '400px',
+        top: '120px',
+        padding: '20px',
+        border: '1px solid #ccc',
+      }}
+    >
+      <p>
+        Sample <br /> <br />
+      </p>
       <div
         style={{
-          background: '#f3f3f3',
-          width: '100%',
-          height: '100vh',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          gap: '10px',
         }}
       >
-        <ContentContainer
-          selectedOption={selectedOption}
-          setSelectedOption={setSelectedOption}
-          isMyProfile
-        >
-          {selectedOption === 'feed' && <FeedCardList />}
-        </ContentContainer>
-      </div>
-      <div
-        style={{
-          position: 'fixed',
-          left: '800px',
-          top: '30px',
-          padding: '20px',
-          border: '1px solid #ccc',
-        }}
-      >
-        <p>
-          Sample <br /> <br />
-        </p>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: '1fr 1fr',
-            gap: '10px',
-          }}
-        >
-          {/* <Icon.AddIcon fill="#511264" />
+        {/* <Icon.AddIcon fill="#511264" />
           <Icon.AddImageIcon />
           <Icon.BackIcon />
           <Icon.BellIcon />
@@ -81,8 +57,7 @@ export default function TestPage() {
           <Icon.UpIcon />
           <Icon.UserIcon />
           <Icon.XIcon /> */}
-        </div>
       </div>
-    </>
+    </div>
   );
 }

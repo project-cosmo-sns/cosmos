@@ -1,12 +1,13 @@
 import classNames from 'classnames/bind';
 import { CommentIcon, EmojiIcon, EyeIcon } from '../IconCollection';
 import styles from './ReactionContainer.module.scss';
+import { MouseEvent } from 'react';
 
 interface ReactionContainerProps {
   emoji: number;
   commentsCount: number;
   views: number;
-  handleEmojiClick?: () => void;
+  handleEmojiClick?: (e: MouseEvent<HTMLButtonElement>) => void;
 }
 
 /**

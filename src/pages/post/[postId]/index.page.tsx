@@ -1,3 +1,4 @@
+import AuthorProfile from '@/components/Common/AuthorProfile';
 import CommentCard from '@/components/Common/CommentCard';
 import {
   BackIcon,
@@ -5,9 +6,9 @@ import {
   EditIcon,
 } from '@/components/Common/IconCollection';
 import ReactionContainer from '@/components/Common/ReactionContainer';
-import AuthorProfile from '@/components/Common/AuthorProfile';
 import HashTag from '@/components/Post/HashTag';
 import classNames from 'classnames/bind';
+import { useRouter } from 'next/router';
 import styles from './PostDetail.module.scss';
 import { Tag, mockData } from './mockData';
 
@@ -19,6 +20,7 @@ function CommentInput() {
         gap: '4px',
         width: '100%',
         gridTemplateColumns: '3fr 1fr',
+        marginTop: '20px',
       }}
     >
       <input
@@ -43,6 +45,8 @@ function CommentInput() {
 
 export default function PostDetailPage() {
   const cn = classNames.bind(styles);
+  const router = useRouter();
+  // 임시로 데이터 하나로 테스트. 추후 query.id 값을 이용해 post 불러와서 사용
   const {
     category,
     title,
@@ -53,7 +57,7 @@ export default function PostDetailPage() {
     emoji,
     views,
     comments,
-  } = mockData;
+  } = mockData[0];
   // author.id === userId 일 때 true
   const isMyPost = true;
 
@@ -62,29 +66,28 @@ export default function PostDetailPage() {
 
   return (
     <div className={cn('wrapper')}>
-      <div className={cn('back')}>
-        <BackIcon width="18" height="18" />
-      </div>
+      <BackIcon
+        width="18"
+        height="18"
+        className={cn('back')}
+        onClick={() => router.back()}
+      />
       <span className={cn('category')}>{category}</span>
       <span className={cn('title')}>{title}</span>
       <div className={cn('header')}>
         <AuthorProfile author={author} createdAt={formattedCreatedAt} />
         {isMyPost && (
           <div className={cn('edit')}>
-            <button
-              type="button"
-              aria-label="수정"
-              onClick={() => console.log('포스트 수정')}
-            >
-              <EditIcon width="18" height="18" />
-            </button>
-            <button
-              type="button"
-              aria-label="삭제"
-              onClick={() => console.log('포스트 삭제')}
-            >
-              <DeleteIcon width="18" height="18" />
-            </button>
+            <EditIcon
+              width="18"
+              height="18"
+              onClick={() => console.log('포스트 수정페이지로 이동')}
+            />
+            <DeleteIcon
+              width="18"
+              height="18"
+              onClick={() => console.log('포스트 삭제하시겠습니까 모달 on')}
+            />
           </div>
         )}
       </div>

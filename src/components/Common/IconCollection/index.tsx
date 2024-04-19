@@ -1,3 +1,4 @@
+import { MouseEvent } from 'react';
 import IconTemplate from './IconTemplate';
 
 export interface IconCollectionType {
@@ -5,6 +6,7 @@ export interface IconCollectionType {
   height?: string;
   fill?: string;
   className?: string;
+  onClick?: (e: MouseEvent<SVGSVGElement, globalThis.MouseEvent>) => void;
 }
 
 /**
