@@ -14,27 +14,22 @@ import {
 const cn = classNames.bind(styles);
 
 export default function SideBar() {
-  const [isPopOver, setIsPopOver] = useState({
-    add: false,
-    bell: false,
-  });
+  const [activePopover, setActivePopover] = useState<'add' | 'bell' | null>(
+    null,
+  );
 
   const togglePopOver = (
     e: React.MouseEvent<HTMLElement>,
     popOverType: 'add' | 'bell',
   ) => {
     e.stopPropagation();
-    setIsPopOver((prevState) => ({
-      ...prevState,
-      [popOverType]: !prevState[popOverType],
-    }));
+    setActivePopover((prevPopover) =>
+      prevPopover === popOverType ? null : popOverType,
+    );
   };
 
   const handleClosePopOver = () => {
-    setIsPopOver({
-      add: false,
-      bell: false,
-    });
+    setActivePopover(null);
   };
 
   return (
@@ -48,14 +43,18 @@ export default function SideBar() {
           onClick={(e) => togglePopOver(e, 'add')}
         >
           <AddIcon fill="#9747FF" />
-          {isPopOver.add && <AddContentPopOver onClose={handleClosePopOver} />}
+          {activePopover === 'add' && (
+            <AddContentPopOver onClose={handleClosePopOver} />
+          )}
         </div>
         <div
           className={cn('icon-box')}
           onClick={(e) => togglePopOver(e, 'bell')}
         >
           <BellIcon />
-          {isPopOver.bell && <Notification onClose={handleClosePopOver} />}
+          {activePopover === 'bell' && (
+            <Notification onClose={handleClosePopOver} />
+          )}
         </div>
         <Link href="/profile">
           <UserIcon />
