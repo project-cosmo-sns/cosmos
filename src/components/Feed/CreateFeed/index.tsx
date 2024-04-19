@@ -23,8 +23,8 @@ export default function CreateFeed() {
       <DefaultButton
         buttonType="submit"
         color="primary-01"
-        size="medium"
         onClick={() => console.log('피드 등록!')}
+        size="medium"
       >
         등록하기
       </DefaultButton>
