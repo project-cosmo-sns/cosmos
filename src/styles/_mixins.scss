@@ -1,0 +1,11 @@
+@mixin flex-arrange($justify: center, $align: center) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin font-style($size, $color: $black-01, $weight: 600) {
+  font-size: $size;
+  color: $color;
+  font-weight: $weight;
+}

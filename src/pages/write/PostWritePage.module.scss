@@ -1,0 +1,24 @@
+.wrapper {
+  @include flex-arrange;
+  flex-direction: column;
+  width: 100%;
+  gap: 40px;
+  padding: 20px;
+  background: $gray-02;
+
+  @include font-style(2rem, $black-01, 700);
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    width: 614px;
+    padding: 30px;
+    border-radius: 10px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .wrapper {
+    width: 740px;
+  }
+}
