@@ -1,4 +1,5 @@
 import ContentContainer from '@/components/Common/ContentContainer';
+import Notification from '@/components/Common/Layout/Notification';
 import { useState } from 'react';
 import * as Icon from '@/components/Common/IconCollection';
 
@@ -17,6 +18,7 @@ export default function TestPage() {
           padding: '20px',
         }}
       >
+        <Notification />
         <ContentContainer
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}

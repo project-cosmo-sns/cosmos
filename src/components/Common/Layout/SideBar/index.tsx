@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import Link from 'next/link';
 import { useState, useRef } from 'react';
 import AddContentPopOver from '../../AddContentPopOver';
-import UseOutSideClick from '@/hooks/UseOutSideClick';
+import useOutSideClick from '@/hooks/useOutSideClick';
 import {
   HomeIcon,
   BellIcon,
@@ -21,7 +21,7 @@ export default function SideBar() {
     setIsPopOver(!isPopOver);
   };
 
-  UseOutSideClick({ ref: popOverRef, callback: () => setIsPopOver(false) });
+  useOutSideClick({ ref: popOverRef, callback: () => setIsPopOver(false) });
 
   return (
     <div className={cn('sideBar-container')}>
