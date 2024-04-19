@@ -1,22 +1,26 @@
 .wrapper {
-  @include flex-arrange;
+  @include flex-arrange(center, flex-start);
   flex-direction: column;
+  position: relative;
+}
+
+.category-container {
+  padding: 12px 20px;
+  position: sticky;
+  width: 100%;
+  top: 0;
   background-color: $gray-02;
+  z-index: 1;
+}
+
+.post-container {
+  display: flex;
+  flex-direction: column;
   gap: 6px;
 }
 
-.category {
-  @include flex-arrange(center, flex-start);
-  width: 100%;
-  padding: 0 20px 6px;
-}
-
 @media (min-width: 768px) {
-  .wrapper {
-    gap: 12px;
-  }
-
-  .category {
-    padding: 0;
+  .post-container {
+    padding: 0 24px 24px;
   }
 }
