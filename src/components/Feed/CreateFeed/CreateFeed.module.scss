@@ -1,0 +1,38 @@
+.create-feed-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px 6px;
+  .create-feed-wrapper {
+    display: flex;
+    .create-feed-user {
+      @include flex-arrange;
+      position: relative;
+      background-color: $gray-01;
+      width: 40px;
+      height: 40px;
+      border-radius: 100px;
+    }
+    .create-feed-content {
+      .create-feed-text {
+        width: 624px;
+        height: 104px;
+        background-color: beige;
+        text-indent: 16px;
+        padding-top: 16px;
+        @include font-style(1.6rem);
+
+        &::placeholder{
+          
+        }
+      }
+      .create-feed-addImage {
+        width: 624px;
+        height: 104px;
+        background-color: aqua;
+      }
+    }
+  }
+  .create-feed-button {
+  }
+}

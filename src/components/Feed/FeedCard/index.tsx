@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import TermBadge from '@/components/Common/Badge/TermBadge';
 import styles from './FeedCard.module.scss';
 import classNames from 'classnames/bind';
 
@@ -32,12 +33,12 @@ export default function FeedCard({
       <div className={cn('feed-card-wrapper')}>
         <div className={cn('feed-card-user')}>
           <div className={cn('user-image')}>
-            <Image fill src="/icon/profile.svg" alt="user-profile" />
+            <Image fill src="/images/profile.svg" alt="user-profile" />
           </div>
           <div className={cn('user-wrapper')}>
             <div className={cn('info')}>
               <div className={cn('name')}>코스모스</div>
-              <div className={cn('term')}>3기</div>
+              <TermBadge term={3} />
             </div>
             <div className={cn('createdAt')}>2024.4.11</div>
           </div>
@@ -50,7 +51,7 @@ export default function FeedCard({
                 <Image
                   width={18}
                   height={18}
-                  src="/icon/emoji.svg"
+                  src="/images/emoji.svg"
                   alt="emoji"
                 />
                 <span>3</span>
@@ -61,7 +62,7 @@ export default function FeedCard({
                 <Image
                   width={18}
                   height={18}
-                  src="/icon/comment.svg"
+                  src="/images/comment.svg"
                   alt="comment"
                 />
                 <span>3</span>
@@ -69,7 +70,7 @@ export default function FeedCard({
             </div>
             <div className={cn('interaction-eye')}>
               <div className={cn('eye-wrapper')}>
-                <Image width={18} height={18} src="/icon/eye.svg" alt="eye" />
+                <Image width={18} height={18} src="/images/eye.svg" alt="eye" />
                 <span>3</span>
               </div>
             </div>
