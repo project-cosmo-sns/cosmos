@@ -1,0 +1,28 @@
+.layout-container {
+  min-height: 100vh;
+  background: $gray-01;
+
+  .layout-contnet {
+    @include flex-arrange(flex-start, center);
+    padding-top: 65px;
+    flex-direction: column;
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 76px 30px 614px 30px 1fr;
+    display: grid;
+    grid-template-rows: 109px auto;
+    .layout-navigaionBar,
+    .layout-contnet {
+      grid-column: 4 / 5;
+      padding: 0;
+    }
+
+    .layout-sideBar {
+      grid-column: 2 / 3;
+    }
+  }
+  @media (min-width: 1200px) {
+    grid-template-columns: 1fr 76px 30px 740px 30px 1fr;
+  }
+}

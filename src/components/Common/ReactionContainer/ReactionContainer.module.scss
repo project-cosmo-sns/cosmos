@@ -1,0 +1,24 @@
+.wrapper {
+  display: flex;
+  gap: 4px;
+  width: 100%;
+}
+
+.reaction {
+  @include flex-arrange;
+  @include font-style(1.2rem, $gray-01, 500);
+  border-radius: 5px;
+  gap: 8px;
+  width: 100%;
+  padding: 6px 35px;
+}
+
+.emoji {
+  &:hover {
+    background-color: $gray-03;
+  }
+
+  &:active {
+    background-color: $gray-02;
+  }
+}

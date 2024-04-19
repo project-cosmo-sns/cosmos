@@ -1,13 +1,13 @@
 .content-list {
+  @include flex-arrange(flex-start, center);
+  @include font-style(1.6rem, $black-01, 600);
+  width: 100%;
   height: 40px;
-  padding: 0 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  padding: 0 10px 0 20px;
+  gap: 12px;
   list-style: none;
-  font-size: 1.4rem;
   cursor: pointer;
-}
-.content-list:hover {
-  background-color: $gray-03;
+  &:hover {
+    background-color: $gray-03;
+  }
 }
