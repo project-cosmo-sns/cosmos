@@ -1,6 +1,7 @@
 import ContentContainer from '@/components/Common/ContentContainer';
 import { useState } from 'react';
 import * as Icon from '@/components/Common/IconCollection';
+import CreateFeed from '@/components/Feed/CreateFeed';
 
 export default function TestPage() {
   const [selectedOption, setSelectedOption] = useState<
@@ -79,6 +80,9 @@ export default function TestPage() {
           <Icon.UserIcon />
           <Icon.XIcon />
         </div>
+      </div>
+      <div>
+        <CreateFeed />
       </div>
     </>
   );
