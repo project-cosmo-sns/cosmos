@@ -1,22 +1,21 @@
 import styles from './ProfileHeader.module.scss';
 import classNames from 'classnames/bind';
-import Image from 'next/image';
+import { useState } from 'react';
+import * as Icon from '@/components/Common/IconCollection';
 import Link from 'next/link';
 import DefaultButton from '../../Common/Buttons/DefaultButton';
 import ClassBadge from '@/components/Common/ClassBadge';
+import ProfileEditModal from '../ProfileEditModal';
 
 const cn = classNames.bind(styles);
 
 export default function ProfileHeader() {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   return (
     <div className={cn('header-container')}>
       <div>
-        <Image
-          src="/icon/profile.svg"
-          width={86}
-          height={86}
-          alt="프로필 아이콘"
-        />
+        <Icon.ProfileIcon width="86" height="86" />
       </div>
       <div className={cn('profile-information')}>
         <div className={cn('profile-name-section')}>
@@ -37,28 +36,28 @@ export default function ProfileHeader() {
           소개가 없습니다.
         </div>
       </div>
-      <div className={cn('profile-setting-button')}>
-        {/* {'회원임?' ? (
+
+      {/* {'회원임?' ? (
           <Link href="/설정모달띄우기">
             <Image
               src="/icon/setting.svg"
               width={18}
               height={18}
               alt="설정 아이콘"
-            />
-          </Link>
-        ) : (
-          <button type='button' onClick={인증모달띄우기}>
-            인증하기
-          </button>
-        )} */}
-        <Image
-          src="/icon/setting.svg"
-          width={18}
-          height={18}
-          alt="설정 아이콘"
-        />
+              />
+              </Link>
+            ) : (
+              <button type='button' onClick={인증모달띄우기}>
+              인증하기
+              </button>
+            )} */}
+      <div
+        onClick={() => setIsModalOpen(!isModalOpen)}
+        className={cn('profile-setting-button')}
+      >
+        <Icon.SettingIcon width="18" height="18" />
       </div>
+      <ProfileEditModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
     </div>
   );
 }
