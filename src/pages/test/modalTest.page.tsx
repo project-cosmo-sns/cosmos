@@ -17,6 +17,7 @@ export default function TestPage() {
         >
           <div
             style={{
+              width: '360px',
               height: '300px',
               display: 'flex',
               justifyContent: 'center',

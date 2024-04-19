@@ -26,32 +26,40 @@ export default function ProfileEditModal({
         >
           <div
             style={{
-              height: '300px',
+              width: '380px',
+              height: '529px',
               display: 'flex',
+              flexDirection: 'column',
               justifyContent: 'center',
               alignItems: 'center',
             }}
           >
-            <div>
-              <Icon.XIcon width="18" height="18" />
-              프로필 수정
-              <Icon.ProfileIcon width="86" height="86" />
-              <Icon.CameraIcon width="28" height="28" />
-              이름
-              <ClassBadge />
-              한줄소개
-              <textarea>한줄소개를 입력하세요(?자제한)</textarea>{' '}
-              <div className={cn('edit-button')}>
-                <DefaultButton
-                  onClick={() => {
-                    console.log('수정하기클릭');
-                  }}
-                  size="modal"
-                  color="$primary-01"
-                >
-                  수정하기
-                </DefaultButton>
+            <div className={cn('profile-image-edit')}>
+              <Icon.ProfileIcon
+                width="86"
+                height="86"
+                className={cn('profile-image')}
+              />
+              <div className={cn('camera-image')}>
+                <Icon.CameraIcon width="14" height="14" />
               </div>
+            </div>
+            <div className={cn('name')}>이름</div>
+            <ClassBadge />
+            <div className={cn('introduce')}>
+              한줄소개
+              <textarea placeholder="한줄소개를 입력하세요 (?자제한)" />{' '}
+            </div>
+            <div className={cn('edit-button')}>
+              <DefaultButton
+                onClick={() => {
+                  console.log('수정하기클릭');
+                }}
+                size="modal"
+                color="$primary-01"
+              >
+                수정하기
+              </DefaultButton>
             </div>
           </div>
         </Modal>

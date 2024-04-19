@@ -42,7 +42,7 @@
     }
     .modal-layout-component {
       @include flex-arrange;
-      background-color: $gray-01;
+      background-color: $white-01;
       flex-grow: 1;
     }
   }

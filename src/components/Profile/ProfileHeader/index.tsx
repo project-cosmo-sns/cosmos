@@ -25,10 +25,10 @@ export default function ProfileHeader() {
         </div>
         <div className={cn('profile-following-section')}>
           <div>
-            <span>팔로워</span>팔로워 수
+            <span>팔로워</span>100
           </div>
           <div>
-            <span>팔로잉</span>팔로잉 수
+            <span>팔로잉</span>100
           </div>
         </div>
         <div className={cn('profile-intruduce-section')}>

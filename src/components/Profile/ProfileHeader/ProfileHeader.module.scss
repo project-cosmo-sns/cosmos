@@ -7,6 +7,9 @@
     border-radius: 10px;
     opacity: 0px;
     padding: 20px 30px;
+    margin-bottom: 12px;
+    justify-content: space-between;
+    position: relative;
   }
 
   .profile-information {
@@ -15,7 +18,8 @@
     gap: 15px;
     margin-top: 3px;
     margin-left: 20px;
-    margin-right: 285px;
+    position: absolute;
+    left: 136px;
   }
 
   .profile-name-section {
@@ -43,6 +47,10 @@
 
   .profile-setting-button {
     cursor: pointer;
+    margin: 0;
+    margin-right: 30px;
+    position: absolute; /* 이 부분을 추가 */
+    right: 0; /* 이 부분을 추가 */
 
     button {
       width: 94px;
