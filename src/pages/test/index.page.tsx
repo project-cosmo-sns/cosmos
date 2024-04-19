@@ -1,37 +1,17 @@
-import ContentContainer from '@/components/Common/ContentContainer';
+import * as Icon from '@/components/Common/IconCollection';
 import Modal from '@/components/Common/Layout/Modal';
 import { useState } from 'react';
-import * as Icon from '@/components/Common/IconCollection';
 
 export default function TestPage() {
-  const [selectedOption, setSelectedOption] = useState<
-    'post' | 'feed' | 'scrap'
-  >('feed');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   return (
     <>
       <div
         style={{
-          background: '#f3f3f3',
-          width: '100%',
-          height: '100vh',
-          padding: '20px',
-        }}
-      >
-        <ContentContainer
-          selectedOption={selectedOption}
-          setSelectedOption={setSelectedOption}
-          isMyProfile
-        >
-          컨텐츠 내용
-        </ContentContainer>
-      </div>
-      <div
-        style={{
           position: 'fixed',
-          left: '800px',
-          top: '30px',
+          left: '400px',
+          top: '120px',
           padding: '20px',
           border: '1px solid #ccc',
         }}
