@@ -1,7 +1,7 @@
 import { CategoryType } from '@/@types/type';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
-import CategoryFlag from '../CategoryFlag';
+import CategoryList from '../CategoryList';
 import styles from './PostEditor.module.scss';
 
 export default function PostEditor() {
@@ -9,29 +9,14 @@ export default function PostEditor() {
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryType>('공지사항');
 
-  // 임시로 배열로 추가. 추후 카테고리 키 값 정해지면 객체로 수정 예정
-  const CATEGORY_LIST: CategoryType[] = [
-    '공지사항',
-    '이벤트',
-    '특강',
-    '정보공유',
-    '오늘의 질문',
-  ];
-
   return (
     <div className={cn('wrapper')}>
       <div className={cn('container')}>
         <span className={cn('subtitle')}>카테고리 선택</span>
-        <div className={cn('category-box')}>
-          {CATEGORY_LIST.map((category) => (
-            <CategoryFlag
-              key={category}
-              category={category}
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-            />
-          ))}
-        </div>
+        <CategoryList
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
       </div>
       <div className={cn('container')}>
         <span className={cn('subtitle')}>글 작성</span>

@@ -12,9 +12,15 @@
   @include flex-arrange;
   @include font-style(1.2rem, $gray-01, 500);
   gap: 6px;
+  cursor: pointer;
 }
 
 .container {
   display: flex;
+  gap: 24px;
+}
+
+.edit {
+  @include flex-arrange(space-between, center);
   gap: 24px;
 }
