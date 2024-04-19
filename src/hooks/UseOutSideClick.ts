@@ -22,5 +22,5 @@ export default function useOutSideClick({
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
-  }, []);
+  }, [ref, callback]);
 }
