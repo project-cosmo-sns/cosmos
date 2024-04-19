@@ -8,20 +8,28 @@
   background: rgba(0, 0, 0, 0.6);
   z-index: 1;
 
-  .modal-layout-wrapper {
+  .modal-layout-wrapper { 
     display: flex;
     position: relative;
     flex-direction: column;
     gap: 12px;
-    width: 740px;
     background-color: $white-01;
+    height: 100vh;
+    width: 100vw;
     padding: {
       top: 50px;
       bottom: 30px;
       right: 20px;
       left: 20px;
     }
-    border-radius: 10px;
+    @media (min-width: 768px) {
+      border-radius: 10px; 
+      height: auto;
+      width: 614px;
+    }
+    @media (min-width: 1200px) {
+      width: 740px;
+    }
     .modal-layout-x {
       position: absolute;
       cursor: pointer;
@@ -35,6 +43,7 @@
     .modal-layout-component {
       @include flex-arrange;
       background-color: $gray-01;
+      flex-grow: 1;
     }
   }
 }
