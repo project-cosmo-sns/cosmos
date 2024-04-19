@@ -93,16 +93,7 @@ export default function TestPage() {
             handleClick={setIsModalOpen}
             title="피드 생성"
           >
-            <div
-              style={{
-                height: '600px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <span>모달 컴포넌트</span>
-            </div>
+            <CreateFeed />
           </Modal>
         )}
       </div>

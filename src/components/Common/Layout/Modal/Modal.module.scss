@@ -41,8 +41,7 @@
       margin: 0 auto;
     }
     .modal-layout-component {
-      @include flex-arrange;
-      background-color: $gray-01;
+      padding: 0 auto;
       flex-grow: 1;
     }
   }
