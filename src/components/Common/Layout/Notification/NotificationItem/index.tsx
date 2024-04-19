@@ -1,17 +1,45 @@
 import classNames from 'classnames/bind';
 import styles from './NotificationItem.module.scss';
 import { ProfileIcon } from '@/components/Common/IconCollection';
+import Image from 'next/image';
 
 const cn = classNames.bind(styles);
 
-// 알림 오는 텍스트 분류 : 게시물 반응 / 팔로우 / 댓글
-export default function NotificationItem() {
+// 임시 타입
+type Notification = {
+  author: {
+    nickname: string;
+    profileImage: string | null;
+  };
+  text: string;
+  createdAt: string;
+  isRead: boolean;
+};
+
+type NotificationItemProps = {
+  data: Notification;
+};
+
+export default function NotificationItem({ data }: NotificationItemProps) {
+  const {
+    author: { nickname, profileImage },
+    text,
+    createdAt,
+    isRead,
+  } = data;
   return (
-    <li className={cn('notification-item')}>
-      <ProfileIcon />
+    // 날짜 관련은 데이터 들어오는것 보고...! 추가로 수정하겠습니다
+    <div className={cn('notification-item')}>
+      {profileImage ? (
+        <Image src="profileImage" alt="프로필 이미지" />
+      ) : (
+        <ProfileIcon width="54" height="54" />
+      )}
       <p>
-        (멤버이름)님이 회원님의 피드에 반응을 남겼습니다. <span>시간표시</span>
+        <strong>{nickname}</strong>님이 {text} 했습니다.
+        <span>{createdAt}</span>
       </p>
-    </li>
+      <span className={cn('notification-dot', { isRead })} />
+    </div>
   );
 }

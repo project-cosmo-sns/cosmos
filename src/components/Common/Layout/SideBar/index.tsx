@@ -39,7 +39,7 @@ export default function SideBar() {
           <HomeIcon />
         </Link>
         <div
-          className={cn('icon-box')}
+          className={cn('icon-box', 'add-icon')}
           onClick={(e) => togglePopOver(e, 'add')}
         >
           <AddIcon fill="#9747FF" />
