@@ -1,3 +1,7 @@
+.content-list-wrapper {
+  width: 170px;
+}
+
 .content-list {
   @include flex-arrange(flex-start, center);
   @include font-style(1.6rem, $black-01, 600);

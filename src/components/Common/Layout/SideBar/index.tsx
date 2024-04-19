@@ -23,17 +23,20 @@ export default function SideBar() {
   const toggleAddPopOver = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     setIsAddPopOver(!isAddPopOver);
+    setIsBellPopOver(false);
   };
 
   const toggleBellPopOver = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     setIsBellPopOver(!isBellPopOver);
+    setIsAddPopOver(false);
   };
 
   useOutSideClick({
     ref: addPopOverRef,
     callback: () => setIsAddPopOver(false),
   });
+
   useOutSideClick({
     ref: bellPopOverRef,
     callback: () => setIsBellPopOver(false),
@@ -45,24 +48,14 @@ export default function SideBar() {
         <Link href="/">
           <HomeIcon />
         </Link>
-        <button
-          type="button"
-          aria-label="Add"
-          onClick={toggleAddPopOver}
-          className={cn('icon-button')}
-        >
+        <div onClick={toggleAddPopOver}>
           <AddIcon fill="#9747FF" />
-        </button>
-        {isAddPopOver && <AddContentPopOver popOverRef={addPopOverRef} />}
-        <button
-          type="button"
-          aria-label="Bell"
-          onClick={toggleBellPopOver}
-          className={cn('icon-button')}
-        >
+          {isAddPopOver && <AddContentPopOver popOverRef={addPopOverRef} />}
+        </div>
+        <div onClick={toggleBellPopOver}>
           <BellIcon />
-        </button>
-        {isBellPopOver && <Notification popOverRef={bellPopOverRef} />}
+          {isBellPopOver && <Notification popOverRef={bellPopOverRef} />}
+        </div>
         <Link href="/profile">
           <UserIcon />
         </Link>

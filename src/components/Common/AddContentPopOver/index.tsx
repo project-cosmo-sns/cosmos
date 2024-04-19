@@ -12,13 +12,13 @@ const cn = classNames.bind(styles);
 export default function AddContentPopOver({ popOverRef }: PopOverProps) {
   return (
     <PopOver popOverRef={popOverRef}>
-      <ul>
+      <ul className={cn('content-list-wrapper')}>
         <li className={cn('content-list')}>
-          <FeedIcon />
+          <FeedIcon width="18" height="18" />
           <span>피드 작성하기</span>
         </li>
         <li className={cn('content-list')}>
-          <PostIcon />
+          <PostIcon width="18" height="18" />
           <span>포스트 작성하기</span>
         </li>
       </ul>
