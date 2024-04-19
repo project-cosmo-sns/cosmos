@@ -47,6 +47,7 @@ export default function ProfileEditModal({
                 onClick={() => {
                   console.log('수정하기클릭');
                 }}
+                buttonType="submit"
                 size="modal"
                 color="$primary-01"
               >
