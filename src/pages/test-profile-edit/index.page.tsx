@@ -3,6 +3,7 @@ import Image from 'next/image';
 import classNames from 'classnames/bind';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import ClassBadge from '@/components/Common/ClassBadge';
+import * as Icon from '@/components/Common/IconCollection';
 
 const cn = classNames.bind(styles);
 
@@ -16,7 +17,9 @@ export default function ProfileEdit() {
         width={86}
         height={86}
         alt="프로필 아이콘"
-      />{' '}
+      />
+      <Icon.ProfileIcon width="86" height="86" />
+      <Icon.CameraIcon width="28" height="28" />
       <Image
         src="/icon/camera.svg"
         width={28}
