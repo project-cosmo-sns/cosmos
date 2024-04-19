@@ -6,9 +6,11 @@
   border-radius: 5px;
   color: $white-01;
   position: absolute;
-  animation: fadeout 6s;
   display: flex;
   align-items: center;
+  gap: 20px;
+
+  animation: fadeout 5s;
 
   @keyframes fadeout {
     0% {

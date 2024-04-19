@@ -9,17 +9,36 @@ import {
   BellIcon,
   UserIcon,
   AddIcon,
+  WarnIcon,
 } from '@/components/Common/IconCollection';
+import Toast from '@/components/Common/Toast';
+import { useRouter } from 'next/router';
 
 const cn = classNames.bind(styles);
 export default function SideBar() {
   const [isPopOver, setIsPopOver] = useState(false);
+  const [toast, setToast] = useState(false);
   const popOverRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   const popOverClick = (e: React.MouseEvent<HTMLElement>) => {
     e.stopPropagation();
     setIsPopOver(!isPopOver);
   };
+
+  const profileClick = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    const getlocalStorage = localStorage?.getItem('id');
+    if (getlocalStorage) {
+      router.push('/profile');
+    } else {
+      setToast(true);
+      setTimeout(() => {
+        setToast(false);
+      }, 5000);
+    }
+  };
+  // 인증여부를 조건을 예비로 로컬스토리지로 했습니다. api나오면 바꿀예정
 
   UseOutSideClick({ ref: popOverRef, callback: () => setIsPopOver(false) });
 
@@ -34,9 +53,10 @@ export default function SideBar() {
         </button>
         {isPopOver && <AddContentPopOver popOverRef={popOverRef} />}
         <BellIcon />
-        <Link href="/profile">
+        <Link href="/profile" onClick={profileClick}>
           <UserIcon />
         </Link>
+        {toast && <Toast icon={WarnIcon} text="인증 대기중입니다." />}
       </div>
     </div>
   );
