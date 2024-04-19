@@ -17,10 +17,12 @@ export default function PostList({ selectedSort }: PostListProps) {
 
   return (
     <div className={cn('wrapper')}>
-      <CategoryList
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+      <div className={cn('category')}>
+        <CategoryList
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+      </div>
       {mockData.map((postData) => (
         <PostPreview key={postData.id} postData={postData} />
       ))}

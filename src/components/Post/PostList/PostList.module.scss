@@ -5,8 +5,18 @@
   gap: 6px;
 }
 
+.category {
+  @include flex-arrange(center, flex-start);
+  width: 100%;
+  padding: 0 20px 6px;
+}
+
 @media (min-width: 768px) {
   .wrapper {
     gap: 12px;
+  }
+
+  .category {
+    padding: 0;
   }
 }
