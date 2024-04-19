@@ -15,7 +15,7 @@ export default function ProfileHeader() {
       <div className={cn('profile-image')}>
         <Icon.ProfileIcon width="86" height="86" />
       </div>
-      <div className={cn('profile-middle-section')}></div>
+      <div className={cn('profile-middle-section')} />
       <div className={cn('profile-information')}>
         <div className={cn('profile-name-section')}>
           {/* {'회원임?' ? '최유정' : '게스트'} */}

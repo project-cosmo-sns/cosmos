@@ -17,7 +17,7 @@ export default function ProfileEditModal({
   setIsOpen,
 }: ProfileEditModalProps) {
   return (
-    <>
+    <div>
       {isOpen && (
         <Modal
           currentValue={isOpen}
@@ -41,7 +41,7 @@ export default function ProfileEditModal({
               한줄소개
               <textarea placeholder="한줄소개를 입력하세요 (?자제한)" />{' '}
             </div>
-            <div className={cn('flex-grow-div')}></div>
+            <div className={cn('flex-grow-div')}> </div>
             <div className={cn('edit-button')}>
               <DefaultButton
                 onClick={() => {
@@ -56,6 +56,6 @@ export default function ProfileEditModal({
           </div>
         </Modal>
       )}
-    </>
+    </div>
   );
 }
