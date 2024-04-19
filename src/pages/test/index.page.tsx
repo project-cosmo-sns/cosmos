@@ -1,6 +1,3 @@
-import ContentContainer from '@/components/Common/ContentContainer';
-import Notification from '@/components/Common/Layout/Notification';
-import { useState } from 'react';
 import * as Icon from '@/components/Common/IconCollection';
 import Modal from '@/components/Common/Layout/Modal';
 import { useState } from 'react';
@@ -10,22 +7,6 @@ export default function TestPage() {
 
   return (
     <>
-      <div
-        style={{
-          background: '#f3f3f3',
-          width: '100%',
-          height: '100vh',
-          padding: '20px',
-        }}
-      >
-        <ContentContainer
-          selectedOption={selectedOption}
-          setSelectedOption={setSelectedOption}
-          isMyProfile
-        >
-          컨텐츠 내용
-        </ContentContainer>
-      </div>
       <div
         style={{
           position: 'fixed',

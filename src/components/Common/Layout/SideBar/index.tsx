@@ -1,10 +1,9 @@
 import styles from './SideBar.module.scss';
 import classNames from 'classnames/bind';
 import Link from 'next/link';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import AddContentPopOver from '../../AddContentPopOver';
 import Notification from '@/components/Common/Layout/Notification';
-import useOutSideClick from '@/hooks/useOutSideClick';
 import {
   HomeIcon,
   BellIcon,
@@ -15,32 +14,28 @@ import {
 const cn = classNames.bind(styles);
 
 export default function SideBar() {
-  const [isAddPopOver, setIsAddPopOver] = useState(false);
-  const [isBellPopOver, setIsBellPopOver] = useState(false);
-  const addPopOverRef = useRef<HTMLDivElement>(null);
-  const bellPopOverRef = useRef<HTMLDivElement>(null);
-
-  const toggleAddPopOver = (e: React.MouseEvent<HTMLElement>) => {
-    e.stopPropagation();
-    setIsAddPopOver(!isAddPopOver);
-    setIsBellPopOver(false);
-  };
-
-  const toggleBellPopOver = (e: React.MouseEvent<HTMLElement>) => {
-    e.stopPropagation();
-    setIsBellPopOver(!isBellPopOver);
-    setIsAddPopOver(false);
-  };
-
-  useOutSideClick({
-    ref: addPopOverRef,
-    callback: () => setIsAddPopOver(false),
+  const [isPopOver, setIsPopOver] = useState({
+    add: false,
+    bell: false,
   });
 
-  useOutSideClick({
-    ref: bellPopOverRef,
-    callback: () => setIsBellPopOver(false),
-  });
+  const togglePopOver = (
+    e: React.MouseEvent<HTMLElement>,
+    popOverType: 'add' | 'bell',
+  ) => {
+    e.stopPropagation();
+    setIsPopOver((prevState) => ({
+      ...prevState,
+      [popOverType]: !prevState[popOverType],
+    }));
+  };
+
+  const handleClosePopOver = () => {
+    setIsPopOver({
+      add: false,
+      bell: false,
+    });
+  };
 
   return (
     <div className={cn('sideBar-container')}>
@@ -48,13 +43,19 @@ export default function SideBar() {
         <Link href="/">
           <HomeIcon />
         </Link>
-        <div onClick={toggleAddPopOver}>
+        <div
+          className={cn('icon-box')}
+          onClick={(e) => togglePopOver(e, 'add')}
+        >
           <AddIcon fill="#9747FF" />
-          {isAddPopOver && <AddContentPopOver popOverRef={addPopOverRef} />}
+          {isPopOver.add && <AddContentPopOver onClose={handleClosePopOver} />}
         </div>
-        <div onClick={toggleBellPopOver}>
+        <div
+          className={cn('icon-box')}
+          onClick={(e) => togglePopOver(e, 'bell')}
+        >
           <BellIcon />
-          {isBellPopOver && <Notification popOverRef={bellPopOverRef} />}
+          {isPopOver.bell && <Notification onClose={handleClosePopOver} />}
         </div>
         <Link href="/profile">
           <UserIcon />

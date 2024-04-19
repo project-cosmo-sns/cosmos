@@ -2,13 +2,12 @@ import PopOver from '@/components/Common/PopOverBox';
 import NotificationItem from './NotificationItem';
 
 type PopOverProps = {
-  popOverRef: React.RefObject<HTMLDivElement>;
+  onClose: () => void;
 };
 
-export default function Notification({ popOverRef }: PopOverProps) {
-  // 예상 데이터...를 잘 모르겠음.
+export default function Notification({ onClose }: PopOverProps) {
   return (
-    <PopOver popOverRef={popOverRef}>
+    <PopOver onClose={onClose}>
       <ul>
         <NotificationItem />
         <NotificationItem />

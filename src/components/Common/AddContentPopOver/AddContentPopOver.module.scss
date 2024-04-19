@@ -1,17 +1,21 @@
-.content-list-wrapper {
-  width: 170px;
+.add-popover {
+  left: 90px;
 }
 
-.content-list {
-  @include flex-arrange(flex-start, center);
-  @include font-style(1.6rem, $black-01, 600);
-  width: 100%;
-  height: 40px;
-  padding: 0 10px 0 20px;
-  gap: 12px;
-  list-style: none;
-  cursor: pointer;
-  &:hover {
-    background-color: $gray-03;
+.content-list-wrapper {
+  width: 170px;
+
+  .content-list {
+    @include flex-arrange(flex-start, center);
+    @include font-style(1.6rem, $black-01, 600);
+    width: 100%;
+    height: 40px;
+    padding: 0 10px 0 20px;
+    gap: 12px;
+    list-style: none;
+    cursor: pointer;
+    &:hover {
+      background-color: $gray-03;
+    }
   }
 }
