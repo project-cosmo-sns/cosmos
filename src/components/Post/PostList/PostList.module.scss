@@ -1,0 +1,12 @@
+.wrapper {
+  @include flex-arrange;
+  flex-direction: column;
+  background-color: $gray-02;
+  gap: 6px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    gap: 12px;
+  }
+}

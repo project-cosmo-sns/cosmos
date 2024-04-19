@@ -67,6 +67,9 @@
 
 .content {
   padding: 12px 0;
+
+  overflow-y: scroll;
+  height: 75vh;
 }
 
 @media (min-width: 768px) {

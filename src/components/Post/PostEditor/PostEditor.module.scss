@@ -29,12 +29,6 @@
   @include font-style(1.6rem, $black-01, 700);
 }
 
-.category-box {
-  @include flex-arrange(center, flex-start);
-  flex-wrap: wrap;
-  gap: 6px;
-}
-
 .editor {
   width: 100%;
   height: 420px;

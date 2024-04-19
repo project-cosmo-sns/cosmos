@@ -1,0 +1,7 @@
+.category-box {
+  @include flex-arrange(flex-start, center);
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 6px;
+  padding-bottom: 20px;
+}

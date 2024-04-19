@@ -1,0 +1,27 @@
+.wrapper {
+  @include flex-arrange(center, flex-start);
+  flex-direction: column;
+  padding: 20px 20px 12px;
+  background-color: $white-01;
+  gap: 20px;
+  cursor: pointer;
+
+  &:hover {
+    // 포스트 카드에 hover시 스타일 미정이라 임시로 추가. 추후 삭제 or 수정 예정
+    transform: scale(1.01);
+    transition: transform 0.2s ease-in-out;
+  }
+}
+
+.content {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    border-radius: 10px;
+  }
+}
