@@ -11,21 +11,14 @@ const cn = classNames.bind(styles);
 
 type props = {
   imageFile: string | null;
-  feedImage: boolean;
-  profileImage: boolean;
-  certifyImage: boolean;
+  type: string | undefined;
 };
 
-export default function RenderImageLabelContent({
-  imageFile,
-  feedImage,
-  profileImage,
-  certifyImage,
-}: props) {
+export default function RenderImageLabel({ imageFile, type }: props) {
   if (imageFile) {
     return <Image src={imageFile} layout="fill" alt="image" />;
   }
-  if (certifyImage) {
+  if (type === 'certify') {
     return (
       <>
         <AddImageIcon width="65" height="55" />
@@ -33,7 +26,7 @@ export default function RenderImageLabelContent({
       </>
     );
   }
-  if (feedImage) {
+  if (type === 'feed') {
     return (
       <>
         <AddImageIcon width="18" height="18" />
@@ -41,7 +34,7 @@ export default function RenderImageLabelContent({
       </>
     );
   }
-  if (profileImage) {
+  if (type === 'profile') {
     return (
       <>
         <ProfileIcon width="86" height="86" />

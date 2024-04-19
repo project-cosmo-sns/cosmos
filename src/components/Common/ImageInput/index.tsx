@@ -1,7 +1,9 @@
 import styles from './ImageInput.module.scss';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
-import RenderImageLabelContent from './RenderImageLabel';
+import RenderImageLabel from './RenderImageLabel';
+
+const cn = classNames.bind(styles);
 
 /**
  * ImageInput component
@@ -11,13 +13,10 @@ import RenderImageLabelContent from './RenderImageLabel';
  * profile 타입은 profile 아이콘이 크게 나오고, 카메라 아이콘이 나오도록 설정했습니다.
  */
 
-const cn = classNames.bind(styles);
-
 export default function ImageInput({ type }: { type?: string }) {
   const [imageFile, setImageFile] = useState<string | null>(null);
   const feedImage = type === 'feed';
   const profileImage = type === 'profile';
-  const certifyImage = type === 'certify';
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
@@ -32,12 +31,7 @@ export default function ImageInput({ type }: { type?: string }) {
   return (
     <div className={cn('image-container', { feedImage, profileImage })}>
       <label className={cn('image-label')} htmlFor="file">
-        <RenderImageLabelContent
-          imageFile={imageFile}
-          feedImage={feedImage}
-          profileImage={profileImage}
-          certifyImage={certifyImage}
-        />
+        <RenderImageLabel imageFile={imageFile} type={type} />
       </label>
       <input
         className={cn('image-input')}
