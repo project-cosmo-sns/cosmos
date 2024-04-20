@@ -10,6 +10,7 @@ import {
   followingData,
 } from '@/components/Profile/FollowList/FollowMockData';
 import AuthForm from '@/components/Profile/AuthForm';
+import LoginModal from '@/components/Common/LoginModal';
 
 export default function TestPage() {
   const [selectedOption, setSelectedOption] = useState<
@@ -24,9 +25,12 @@ export default function TestPage() {
     follower: false,
     following: false,
     authForm: false,
+    login: false,
   });
 
-  const toggleModla = (type: 'follower' | 'following' | 'authForm') => {
+  const toggleModla = (
+    type: 'follower' | 'following' | 'authForm' | 'login',
+  ) => {
     setFollowModal({
       ...followModal,
       [type]: !followModal[type],
@@ -116,10 +120,10 @@ export default function TestPage() {
           <FollowList
             followListProps={{
               title: '팔로워',
-              handleClick: () => toggleModla('follower'),
+              toggleModal: () => toggleModla('follower'),
               followData: followerData,
               isFollow: false,
-              modalOpen: followModal.follower,
+              modalVisible: followModal.follower,
             }}
           />
         )}
@@ -131,10 +135,10 @@ export default function TestPage() {
           <FollowList
             followListProps={{
               title: '팔로잉',
-              handleClick: () => toggleModla('following'),
+              toggleModal: () => toggleModla('following'),
               followData: followingData,
               isFollow: true,
-              modalOpen: followModal.following,
+              modalVisible: followModal.following,
             }}
           />
         )}
@@ -144,8 +148,18 @@ export default function TestPage() {
         </button>
         {followModal.authForm && (
           <AuthForm
-            modalOpen={followModal.authForm}
-            handleClick={() => toggleModla('authForm')}
+            modalVisible={followModal.authForm}
+            toggleModal={() => toggleModla('authForm')}
+          />
+        )}
+        <br />
+        <button type="button" onClick={() => toggleModla('login')}>
+          회원가입 모달 테스트
+        </button>
+        {followModal.login && (
+          <LoginModal
+            modalVisible={followModal.login}
+            toggleModal={() => toggleModla('login')}
           />
         )}
       </div>

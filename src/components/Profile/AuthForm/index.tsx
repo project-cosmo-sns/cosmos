@@ -4,20 +4,23 @@ import classNames from 'classnames/bind';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import ImageInput from '@/components/Common/ImageInput';
 import CommentInput from '@/components/Common/CommentInput';
+import { ModalPropsType } from '@/@types/type';
 
 const cn = classNames.bind(styles);
 
-type AuthFormProps = {
-  modalOpen: boolean;
-  handleClick: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export default function AuthForm({ modalOpen, handleClick }: AuthFormProps) {
+export default function AuthForm({
+  modalVisible,
+  toggleModal,
+}: ModalPropsType) {
   const submitClick = () => {
     console.log('제출완료!');
   };
   return (
-    <Modal title="회원인증" modalVisible={modalOpen} toggleModal={handleClick}>
+    <Modal
+      title="회원인증"
+      modalVisible={modalVisible}
+      toggleModal={toggleModal}
+    >
       <form className={cn('authForm-container')}>
         <div className={cn('auth-generation')}>
           <h2>기수</h2>

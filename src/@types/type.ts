@@ -9,3 +9,8 @@ export type CategoryType =
   | '특강'
   | '정보공유'
   | '오늘의 질문';
+
+export type ModalPropsType = {
+  modalVisible: boolean;
+  toggleModal: React.Dispatch<React.SetStateAction<boolean>>;
+};
