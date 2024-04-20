@@ -1,9 +1,9 @@
 import styles from './SideBar.module.scss';
 import classNames from 'classnames/bind';
 import Link from 'next/link';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import AddContentPopOver from '../../AddContentPopOver';
-import useOutSideClick from '@/hooks/useOutSideClick';
+import Notification from '@/components/Common/Layout/Notification';
 import {
   HomeIcon,
   BellIcon,
@@ -16,24 +16,23 @@ import Toast from '@/components/Common/Toast';
 const cn = classNames.bind(styles);
 
 export default function SideBar() {
-  const [isPopOver, setIsPopOver] = useState(false);
-  const [toast, setToast] = useState(false);
-  const popOverRef = useRef<HTMLDivElement>(null);
+  const [activePopover, setActivePopover] = useState<'add' | 'bell' | null>(
+    null,
+  );
 
-  const popOverClick = (e: React.MouseEvent<HTMLElement>) => {
+  const togglePopOver = (
+    e: React.MouseEvent<HTMLElement>,
+    popOverType: 'add' | 'bell',
+  ) => {
     e.stopPropagation();
-    setIsPopOver(!isPopOver);
+    setActivePopover((prevPopover) =>
+      prevPopover === popOverType ? null : popOverType,
+    );
   };
 
-  const profileClick = (e: React.MouseEvent<HTMLElement>) => {
-    setToast(true);
-    setTimeout(() => {
-      setToast(false);
-    }, 5000);
+  const handleClosePopOver = () => {
+    setActivePopover(null);
   };
-  // 일단은 이렇게 사용하고 데이터 연결하고 나중에 수정
-
-  useOutSideClick({ ref: popOverRef, callback: () => setIsPopOver(false) });
 
   return (
     <div className={cn('sideBar-container')}>
@@ -41,15 +40,28 @@ export default function SideBar() {
         <Link href="/">
           <HomeIcon />
         </Link>
-        <button type="button" aria-label="Close" onClick={popOverClick}>
+        <div
+          className={cn('icon-box', 'add-icon')}
+          onClick={(e) => togglePopOver(e, 'add')}
+        >
           <AddIcon fill="#9747FF" />
-        </button>
-        {isPopOver && <AddContentPopOver popOverRef={popOverRef} />}
-        <BellIcon />
-        <Link href="/profile" onClick={profileClick}>
+          {activePopover === 'add' && (
+            <AddContentPopOver onClose={handleClosePopOver} />
+          )}
+        </div>
+        <div
+          className={cn('icon-box')}
+          onClick={(e) => togglePopOver(e, 'bell')}
+        >
+          <BellIcon />
+          {activePopover === 'bell' && (
+            <Notification onClose={handleClosePopOver} />
+          )}
+        </div>
+        <Link href="/profile">
           <UserIcon />
         </Link>
-        {toast && <Toast icon={WarnIcon} text="인증 대기중입니다." />}
+        {/* {toast && <Toast icon={WarnIcon} text="인증 대기중입니다." />} */}
       </div>
     </div>
   );

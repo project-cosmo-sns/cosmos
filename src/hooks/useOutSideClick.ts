@@ -6,8 +6,7 @@ import { useOutSideClickProps } from '@/@types/type';
  * @param {React.RefObject<HTMLDivElement>} ref- 감지할 요소의 ref
  * @param {() => void} callback - 감지되었을 때 실행할 콜백
  */
-
-export default function UseOutSideClick({
+export default function useOutSideClick({
   ref,
   callback,
 }: useOutSideClickProps) {
@@ -22,5 +21,5 @@ export default function UseOutSideClick({
     return () => {
       document.removeEventListener('click', handleClickOutside);
     };
-  }, []);
+  }, [ref, callback]);
 }
