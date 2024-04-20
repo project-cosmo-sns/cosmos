@@ -53,6 +53,10 @@
     padding: 15px 20px;
     resize: none;
   }
+
+  .textareaActive {
+    @include font-style(1.4rem);
+  }
 }
 
 .flex-grow-div {
