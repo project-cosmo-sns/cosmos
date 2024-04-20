@@ -1,3 +1,16 @@
+const MOCKDATA2 = [
+  {
+    userImage: '',
+    userName: 'JohnDoe',
+    term: 1,
+    date: '2024-04-19',
+    contents: 'Just another day at work!',
+    emojiCount: 3,
+    commentCount: 10,
+    eyeCount: 50,
+  },
+];
+
 const MOCKDATA = [
   {
     userImage: '',
@@ -182,4 +195,4 @@ const MOCKDATA = [
   // },
 ];
 
-export default MOCKDATA;
+export { MOCKDATA, MOCKDATA2 };

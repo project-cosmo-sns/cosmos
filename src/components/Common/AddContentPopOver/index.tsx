@@ -32,8 +32,8 @@ export default function AddContentPopOver({ popOverRef }: PopOverProps) {
       </ul>
       {isModalOpen && (
         <Modal
-          currentValue={isModalOpen}
-          handleClick={setIsModalOpen}
+          modalVisible={isModalOpen}
+          toggleModal={setIsModalOpen}
           title="피드 생성"
         >
           <CreateFeed />

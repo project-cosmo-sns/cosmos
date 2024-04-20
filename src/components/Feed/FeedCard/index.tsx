@@ -1,7 +1,8 @@
 import Image from 'next/image';
+import { Dispatch, SetStateAction } from 'react';
 import TermBadge from '@/components/Common/Badge/TermBadge';
-import styles from './FeedCard.module.scss';
 import classNames from 'classnames/bind';
+import styles from './FeedCard.module.scss';
 
 interface FeedCardTypes {
   userImage: string;
@@ -12,6 +13,8 @@ interface FeedCardTypes {
   emojiCount: number;
   commentCount: number;
   eyeCount: number;
+  modalVisible?: boolean;
+  toggleModal?: Dispatch<SetStateAction<boolean>>;
 }
 
 const cn = classNames.bind(styles);
@@ -25,9 +28,14 @@ export default function FeedCard({
   emojiCount = 0,
   commentCount = 0,
   eyeCount = 0,
+  modalVisible = false,
+  toggleModal,
 }: FeedCardTypes) {
   return (
-    <div className={cn('feed-card-container')}>
+    <div
+      onClick={() => toggleModal && toggleModal(!modalVisible)}
+      className={cn('feed-card-container')}
+    >
       <div className={cn('feed-card-wrapper')}>
         <div className={cn('feed-card-user')}>
           <div className={cn('user-image')}>

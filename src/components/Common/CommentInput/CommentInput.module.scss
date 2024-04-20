@@ -1,8 +1,20 @@
+@mixin COMMENT_INPUT_SIZE_SMALL {
+  width: 231px;
+  height: 48px;
+  flex-shrink: 0;
+}
+@mixin COMMENT_INPUT_SIZE_MEDIUM {
+  width: 433px;
+}
+@mixin COMMENT_INPUT_SIZE_LARGE {
+  width: 559px;
+}
+
 .comment-input {
   @include COMMENT_INPUT_SIZE_SMALL;
   border: none;
   flex-shrink: 0;
-  background-color: $gray-03;
+  background-color: $gray-03; 
   border-radius: 5px;
   text-indent: 1rem;
   font-size: 1.6rem;
