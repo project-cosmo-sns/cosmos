@@ -6,7 +6,6 @@
   width: 100%;
   height: auto;
   padding: 0 20px;
-
   margin-bottom: 12px;
   align-items: start;
   position: relative;
@@ -30,23 +29,18 @@
 }
 
 .profile-following-section {
+  @include font-style(1.4rem, 600, $black-02);
   display: flex;
-  font-size: 1.4rem;
-  font-weight: 600;
   gap: 20px;
-  color: $black-02;
 
   span {
-    color: $black-03;
-    font-weight: 500;
+    @include font-style(500, $black-03);
     margin-right: 8px;
   }
 }
 
 .profile-introduce-section {
-  color: $black-01;
-  font-size: 1.4rem;
-  font-weight: 500;
+  @include font-style(1.4rem, 500, $black-01);
   border-top: 1px solid $gray-01;
   padding: 20px;
   grid-column: 1 / -1;

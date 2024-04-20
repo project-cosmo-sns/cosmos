@@ -1,3 +1,19 @@
+@mixin font-style($font-size, $font-weight, $color) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  color: $color;
+}
+
+@mixin flex-arrage(
+  $display: flex,
+  $justify-content: center,
+  $align-items: center
+) {
+  display: $display;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+
 .modal-wrapper {
   width: 380px;
   height: auto;
@@ -18,7 +34,7 @@
 }
 
 .camera-image {
-  display: flex;
+  @include flex-arrage;
   position: absolute;
   z-index: 2;
   left: 58px;
@@ -28,8 +44,6 @@
   height: 28px;
   border-radius: 50%;
   border: 1px solid $gray-02;
-  align-items: center;
-  justify-content: center;
   cursor: pointer;
 }
 
@@ -41,7 +55,6 @@
 .introduce {
   font-weight: 700;
   margin-top: 60px;
-  // margin-bottom: auto;
 
   textarea {
     display: flex;
