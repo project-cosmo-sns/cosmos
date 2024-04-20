@@ -16,6 +16,10 @@
     img {
       cursor: pointer;
     }
+
+    .icon-box {
+      cursor: pointer;
+    }
   }
 
   @media (min-width: 768px) {
@@ -26,14 +30,15 @@
     padding: 30px 0;
     position: relative;
     position: fixed;
-    z-index: 1;
-
+    z-index: 99;
     top: 110px;
+
     .icon-wrapper {
       flex-direction: column;
-    }
-    .icon-wrapper :nth-child(2) {
-      order: 1;
+
+      .add-icon {
+        order: 1;
+      }
     }
   }
 }
