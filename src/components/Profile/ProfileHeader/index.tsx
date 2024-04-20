@@ -1,14 +1,24 @@
 import styles from './ProfileHeader.module.scss';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
 import * as Icon from '@/components/Common/IconCollection';
 import ClassBadge from '@/components/Common/ClassBadge';
-import ProfileEditModal from '../ProfileEditModal';
+import { MemberDataType } from '@/pages/profile/mockData';
+
+interface ProfileHeaderProps {
+  memberData: MemberDataType[];
+  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 const cn = classNames.bind(styles);
 
-export default function ProfileHeader() {
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+export default function ProfileHeader({
+  memberData,
+  setIsModalOpen,
+}: ProfileHeaderProps) {
+  // currentUserId는 토큰?으로 받아옴?
+  const currentUserId = '0'; //임시 ID
+  const member =
+    memberData && memberData.find((user) => user.id === currentUserId);
 
   return (
     <div className={cn('header-container')}>
@@ -18,8 +28,7 @@ export default function ProfileHeader() {
       <div className={cn('profile-middle-section')} />
       <div className={cn('profile-information')}>
         <div className={cn('profile-name-section')}>
-          {/* {'회원임?' ? '최유정' : '게스트'} */}
-          최유정
+          {member ? member.nickname : '게스트'}
           <ClassBadge />
         </div>
         <div className={cn('profile-following-section')}>
@@ -32,31 +41,28 @@ export default function ProfileHeader() {
         </div>
       </div>
       <div className={cn('profile-introduce-section')}>
-        {/* {'데이터있음?' ? '나는 짱정이다' : '소개가 없습니다.'} */}
-        소개가 없습니다.
+        {member ? member.introduce : '소개가 없습니다.'}
       </div>
 
-      {/* {'회원임?' ? (
-          <Link href="/설정모달띄우기">
-            <Image
-              src="/icon/setting.svg"
-              width={18}
-              height={18}
-              alt="설정 아이콘"
-              />
-              </Link>
-            ) : (
-              <button type='button' onClick={인증모달띄우기}>
-              인증하기
-              </button>
-            )} */}
-      <div
-        onClick={() => setIsModalOpen(!isModalOpen)}
-        className={cn('profile-setting-button')}
-      >
-        <Icon.SettingIcon width="18" height="18" />
-      </div>
-      <ProfileEditModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+      {member ? (
+        <div
+          onClick={() => setIsModalOpen((prev) => !prev)}
+          className={cn('profile-setting-button')}
+        >
+          <Icon.SettingIcon width="18" height="18" />
+        </div>
+      ) : (
+        <div className={cn('profile-setting-button')}>
+          <button
+            type="button"
+            onClick={() => {
+              console.log('인증모달띄우기');
+            }}
+          >
+            인증하기
+          </button>
+        </div>
+      )}
     </div>
   );
 }

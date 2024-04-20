@@ -4,10 +4,12 @@ import ClassBadge from '@/components/Common/ClassBadge';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import classNames from 'classnames/bind';
 import styles from './ProfileEditModal.module.scss';
+import { MemberDataType } from '@/pages/profile/mockData';
 
 interface ProfileEditModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  memberData: MemberDataType[];
 }
 
 const cn = classNames.bind(styles);
@@ -15,6 +17,7 @@ const cn = classNames.bind(styles);
 export default function ProfileEditModal({
   isOpen,
   setIsOpen,
+  memberData,
 }: ProfileEditModalProps) {
   return (
     <div>

@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
-import ProfileHeader from '@/components/Profile/ProfileHeader';
-import ProfileEditModal from '@/components/Profile/ProfileEditModal';
+import ProfileHeader from '../ProfileHeader';
+import ProfileEditModal from '../ProfileEditModal';
 import { MemberDataType, memberMockData } from '@/pages/profile/mockData';
-import Home from '../index.page';
 
 export default function MemberDataContainer() {
   const [memberData, setMemberData] = useState<MemberDataType[]>([]);
@@ -27,7 +26,6 @@ export default function MemberDataContainer() {
           />
         </>
       )}
-      <Home />
     </div>
   );
 }
