@@ -4,3 +4,8 @@
   background: $primary-02;
   border-radius: 100px;
 }
+
+.waiting {
+  @extend .generation-container;
+  @include color($gray-03, $black-03);
+}
