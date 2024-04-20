@@ -1,8 +1,14 @@
 import * as Icon from '@/components/Common/IconCollection';
+import Modal from '@/components/Common/Layout/Modal';
+import FollowList from '@/components/Profile/FollowList';
 import ContentContainer from '@/components/Common/ContentContainer';
 import PostList from '@/components/Post/PostList';
-import { useState } from 'react';
 import FeedCardList from '@/components/Feed/FeedCardList';
+import { useState } from 'react';
+import {
+  followerData,
+  followingData,
+} from '@/components/Profile/FollowList/FollowMockData';
 
 export default function TestPage() {
   const [selectedOption, setSelectedOption] = useState<
@@ -11,6 +17,19 @@ export default function TestPage() {
   const [selectedSort, setSelectedSort] = useState<
     'all' | 'followed' | 'myGeneration'
   >('all');
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const [followModal, setFollowModal] = useState({
+    follower: false,
+    following: false,
+  });
+
+  const toggleModla = (type: 'follower' | 'following') => {
+    setFollowModal({
+      ...followModal,
+      [type]: !followModal[type],
+    });
+  };
   return (
     <div>
       <ContentContainer
@@ -64,6 +83,59 @@ export default function TestPage() {
           <Icon.UpIcon />
           <Icon.UserIcon />
           <Icon.XIcon /> */}
+      </div>
+      <div>
+        <button type="button" onClick={() => setIsModalOpen(!isModalOpen)}>
+          on/off
+        </button>
+        {isModalOpen && (
+          <Modal
+            modalVisible={isModalOpen}
+            toggleModal={setIsModalOpen}
+            title="피드 생성"
+          >
+            <div
+              style={{
+                height: '600px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <span>모달 컴포넌트</span>
+            </div>
+          </Modal>
+        )}
+        <br />
+        <button type="button" onClick={() => toggleModla('follower')}>
+          팔로워
+        </button>
+        {followModal.follower && (
+          <FollowList
+            followListProps={{
+              title: '팔로워',
+              handleClick: () => toggleModla('follower'),
+              followData: followerData,
+              isFollow: false,
+              modalOpen: followModal.follower,
+            }}
+          />
+        )}
+        <br />
+        <button type="button" onClick={() => toggleModla('following')}>
+          팔로잉
+        </button>
+        {followModal.following && (
+          <FollowList
+            followListProps={{
+              title: '팔로잉',
+              handleClick: () => toggleModla('following'),
+              followData: followingData,
+              isFollow: true,
+              modalOpen: followModal.following,
+            }}
+          />
+        )}
       </div>
     </div>
   );
