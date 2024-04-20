@@ -1,15 +1,14 @@
 import AuthorProfile from '@/components/Common/AuthorProfile';
+import ActionButtons from '@/components/Common/Buttons/ActionButtons';
 import CommentCard from '@/components/Common/CommentCard';
-import {
-  BackIcon,
-  DeleteIcon,
-  EditIcon,
-} from '@/components/Common/IconCollection';
+import { BackIcon } from '@/components/Common/IconCollection';
+import Modal from '@/components/Common/Layout/Modal';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import HashTag from '@/components/Post/HashTag';
 import MarkdownContent from '@/components/Post/Markdown';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import styles from './PostDetail.module.scss';
 import { Tag, mockData } from './mockData';
 
@@ -44,9 +43,12 @@ function CommentInput() {
   );
 }
 
+const cn = classNames.bind(styles);
+
 export default function PostDetailPage() {
-  const cn = classNames.bind(styles);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const router = useRouter();
+  const { postId } = router.query;
   // 임시로 데이터 하나로 테스트. 추후 query.id 값을 이용해 post 불러와서 사용
   const {
     category,
@@ -66,59 +68,61 @@ export default function PostDetailPage() {
   const formattedCreatedAt = createdAt.slice(0, 10);
 
   return (
-    <div className={cn('wrapper')}>
-      <BackIcon
-        width="18"
-        height="18"
-        className={cn('back')}
-        onClick={() => router.back()}
-      />
-      <span className={cn('category')}>{category}</span>
-      <span className={cn('title')}>{title}</span>
-      <div className={cn('header')}>
-        <AuthorProfile author={author} createdAt={formattedCreatedAt} />
-        {isMyPost && (
-          <div className={cn('edit')}>
-            <EditIcon
-              width="18"
-              height="18"
-              onClick={() => console.log('포스트 수정페이지로 이동')}
-            />
-            <DeleteIcon
-              width="18"
-              height="18"
-              onClick={() => console.log('포스트 삭제하시겠습니까 모달 on')}
-            />
-          </div>
-        )}
+    <>
+      {isDeleteModalOpen && (
+        <Modal
+          title="삭제 모달"
+          modalVisible={isDeleteModalOpen}
+          toggleModal={setIsDeleteModalOpen}
+        >
+          <div>하이</div>
+        </Modal>
+      )}
+      <div className={cn('wrapper')}>
+        <BackIcon
+          width="18"
+          height="18"
+          className={cn('back')}
+          onClick={() => router.back()}
+        />
+        <span className={cn('category')}>{category}</span>
+        <span className={cn('title')}>{title}</span>
+        <div className={cn('header')}>
+          <AuthorProfile author={author} createdAt={formattedCreatedAt} />
+          <ActionButtons
+            isButtonShow={isMyPost}
+            handleClickEdit={() => router.push(`post/${postId}/edit`)}
+            handleClickDelete={() => setIsDeleteModalOpen(true)}
+          />
+        </div>
+        <div className={cn('divide-line')} />
+        <MarkdownContent className={cn('markdown-content')} content={content} />
+        <div className={cn('hashtag-container')}>
+          {tags.map((tag: Tag) => (
+            <HashTag key={tag.id} tag={tag} />
+          ))}
+        </div>
+        <ReactionContainer
+          emoji={emoji}
+          commentsCount={comments.length}
+          views={views}
+          handleEmojiClick={() =>
+            console.log('이모지 모달 열기 or 좋아요만 하려면 이모지 토글')
+          }
+        />
+        {/* 아래 CommentInput 추후 CommentInput 컴포넌트 완성되면 대체 예정 */}
+        <CommentInput />
+        <div className={cn('comment-container')}>
+          {comments.map((comment, index) => (
+            <div key={comment.id}>
+              <CommentCard comment={comment} />
+              {index === comments.length - 1 || (
+                <div className={cn('divide-line')} />
+              )}
+            </div>
+          ))}
+        </div>
       </div>
-      <div className={cn('divide-line')} />
-      <MarkdownContent className={cn('markdown-content')} content={content} />
-      <div className={cn('hashtag-container')}>
-        {tags.map((tag: Tag) => (
-          <HashTag key={tag.id} tag={tag} />
-        ))}
-      </div>
-      <ReactionContainer
-        emoji={emoji}
-        commentsCount={comments.length}
-        views={views}
-        handleEmojiClick={() =>
-          console.log('이모지 모달 열기 or 좋아요만 하려면 이모지 토글')
-        }
-      />
-      {/* 아래 CommentInput 추후 CommentInput 컴포넌트 완성되면 대체 예정 */}
-      <CommentInput />
-      <div className={cn('comment-container')}>
-        {comments.map((comment, index) => (
-          <div key={comment.id}>
-            <CommentCard comment={comment} />
-            {index === comments.length - 1 || (
-              <div className={cn('divide-line')} />
-            )}
-          </div>
-        ))}
-      </div>
-    </div>
+    </>
   );
 }
