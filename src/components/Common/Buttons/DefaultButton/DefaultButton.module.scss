@@ -33,6 +33,7 @@
     box-shadow: 0px 4px 4px 0px #00000040;
   }
 
+  // 버튼 타입
   &.large {
     width: 100%;
   }
@@ -44,45 +45,24 @@
   &.small {
     width: 85px;
   }
-
-  @media (min-width: 768px) {
-    &.medium {
-      width: 100px;
-    }
-  }
-
-  @media (min-width: 1200px) {
-    // 버튼 사이즈
-    &.large {
-      width: 320px;
-    }
-  }
 }
 
 @media (min-width: 768px) {
-  .default-button {
-    &.large {
-      width: 100%;
-    }
+  &.large {
+    width: 100%;
+  }
 
-    &.medium {
-      width: 100px;
-    }
+  &.medium {
+    width: 100px;
+  }
 
-    &.small {
-      width: 85px;
-    }
+  &.small {
+    width: 85px;
   }
 }
 
-@media (min-width: 360px) {
-  .default-button {
-    &.large {
-      width: 100%;
-    }
-
-    &.medium {
-      width: 100%;
-    }
+@media (min-width: 1200px) {
+  &.large {
+    width: 320px;
   }
 }

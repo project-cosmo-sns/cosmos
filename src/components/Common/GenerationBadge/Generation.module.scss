@@ -1,0 +1,6 @@
+.generation-container {
+  @include font-style(1.2rem, $primary-01, 600);
+  padding: 7px 10px;
+  background: $primary-02;
+  border-radius: 100px;
+}

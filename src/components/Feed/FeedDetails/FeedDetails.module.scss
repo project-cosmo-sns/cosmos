@@ -1,0 +1,14 @@
+.feed-details-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.feed-details-wrapper {
+  display: flex;
+}
+.divide-line {
+  width: 100%;
+  height: 1px;
+  background-color: $gray-02;
+  margin: 16px 0;
+}

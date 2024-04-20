@@ -9,7 +9,9 @@ import {
   BellIcon,
   UserIcon,
   AddIcon,
+  WarnIcon,
 } from '@/components/Common/IconCollection';
+import Toast from '@/components/Common/Toast';
 
 const cn = classNames.bind(styles);
 
@@ -59,6 +61,7 @@ export default function SideBar() {
         <Link href="/profile">
           <UserIcon />
         </Link>
+        {/* {toast && <Toast icon={WarnIcon} text="인증 대기중입니다." />} */}
       </div>
     </div>
   );

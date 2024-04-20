@@ -6,7 +6,7 @@
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 1;
+  z-index: 99999;
 
   .modal-layout-wrapper {
     display: flex;
@@ -43,6 +43,7 @@
     .modal-layout-component {
       @include flex-arrange;
       background-color: $white-01;
+      padding: 0 auto;
       flex-grow: 1;
     }
   }
