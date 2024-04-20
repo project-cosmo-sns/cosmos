@@ -1,10 +1,5 @@
-@mixin button-color($button-color, $font-color) {
-  background-color: $button-color;
-  color: $font-color;
-}
-
 .default-button {
-  @include button-color($primary-01, $white-01);
+  @include color($primary-01, $white-01);
   width: 320px;
   height: 48px;
   font-size: 1.6rem;
@@ -17,23 +12,23 @@
 
   // 버튼 컬러들 (추후 추가 가능)
   &.primary-01 {
-    @include button-color($primary-01, $white-01);
+    @include color($primary-01, $white-01);
   }
 
   &.primary-02 {
-    @include button-color($primary-02, $primary-01);
+    @include color($primary-02, $primary-01);
   }
 
   &.gray-02 {
-    @include button-color($gray-02, $white-01);
+    @include color($gray-02, $white-01);
   }
 
   &.red-01 {
-    @include button-color($red-01, $white-01);
+    @include color($red-01, $white-01);
   }
 
   &.white-01 {
-    @include button-color($white-01, $primary-01);
+    @include color($white-01, $primary-01);
     border: 1px solid #9747ff;
     box-shadow: 0px 4px 4px 0px #00000040;
   }
