@@ -48,21 +48,25 @@
 }
 
 @media (min-width: 768px) {
-  &.large {
-    width: 100%;
-  }
+  .default-button {
+    &.large {
+      width: 100%;
+    }
 
-  &.medium {
-    width: 100px;
-  }
+    &.medium {
+      width: 100px;
+    }
 
-  &.small {
-    width: 85px;
+    &.small {
+      width: 85px;
+    }
   }
 }
 
 @media (min-width: 1200px) {
-  &.large {
-    width: 320px;
+  .default-button {
+    &.large {
+      width: 320px;
+    }
   }
 }

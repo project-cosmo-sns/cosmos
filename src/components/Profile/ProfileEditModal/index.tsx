@@ -23,8 +23,8 @@ export default function ProfileEditModal({
     <div>
       {isOpen && (
         <Modal
-          currentValue={isOpen}
-          handleClick={setIsOpen}
+          modalVisible={isOpen}
+          toggleModal={setIsOpen}
           title="프로필 수정"
         >
           <div className={cn('modal-wrapper')}>

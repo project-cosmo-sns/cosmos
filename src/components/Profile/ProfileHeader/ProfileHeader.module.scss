@@ -15,6 +15,16 @@
 .profile-image {
   grid-row: 1;
   margin: 20px;
+  width: 86px;
+  height: 86px;
+  border-radius: 70%;
+  overflow: hidden;
+
+  Image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
 
 .profile-information {
@@ -26,6 +36,11 @@
   font-weight: 700;
   margin: auto 0;
   margin-bottom: 12px;
+  align-items: center;
+}
+
+.generation-badge {
+  margin-left: 6px;
 }
 
 .profile-following-section {
@@ -88,9 +103,7 @@
   .profile-information {
     grid-column: 2;
     grid-row: 1 / 3;
-    margin-top: 3px;
     margin-left: 20px;
-    padding-top: 3px;
     gap: 30px;
   }
 
@@ -100,7 +113,7 @@
     color: $gray-01;
     border-top: none;
     padding: 20px;
-    padding-bottom: 7px;
+    padding-bottom: 2px;
   }
 
   .profile-setting-button {
