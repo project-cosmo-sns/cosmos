@@ -22,7 +22,7 @@ export default function ProfileEditModal({
   memberData,
 }: ProfileEditModalProps) {
   // currentUserId는 토큰?으로 받아옴?
-  const currentUserId = '1'; //임시 ID
+  const currentUserId = '1'; // 임시 ID
   const member =
     memberData && memberData.find((user) => user.id === currentUserId);
 

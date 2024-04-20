@@ -17,7 +17,7 @@ export default function ProfileHeader({
   setIsModalOpen,
 }: ProfileHeaderProps) {
   // currentUserId는 토큰?으로 받아옴?
-  const currentUserId = '1'; //임시 ID
+  const currentUserId = '1'; // 임시 ID
   const member =
     memberData && memberData.find((user) => user.id === currentUserId);
 
@@ -45,6 +45,7 @@ export default function ProfileHeader({
         </div>
         <div className={cn('profile-following-section')}>
           <div>
+            {/* 팔로워/팔로잉 데이터.length-1이 팔로워수 */}
             <span>팔로워</span>100
           </div>
           <div>
