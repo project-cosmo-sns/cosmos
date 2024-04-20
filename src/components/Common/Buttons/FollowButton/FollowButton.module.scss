@@ -1,19 +1,17 @@
-@media (min-width: 1200px) {
-  .follow-button {
-    font-size: 1.4rem;
-    font-weight: 600;
-    width: 72px;
-    height: 32px;
-    border-radius: 5px;
-    border: none;
-    opacity: 0px;
-    color: $white-01;
-    background-color: $black-01;
-    cursor: pointer;
+.follow-button {
+  font-size: 1.4rem;
+  font-weight: 600;
+  width: 72px;
+  height: 32px;
+  border-radius: 5px;
+  border: none;
+  opacity: 0px;
+  color: $white-01;
+  background-color: $black-01;
+  cursor: pointer;
 
-    &.isActive {
-      color: $black-02;
-      background-color: $gray-02;
-    }
+  &.isActive {
+    color: $black-02;
+    background-color: $gray-02;
   }
 }

@@ -1,0 +1,25 @@
+.follow-wrapper {
+  @include flex-arrange(space-between, center);
+  padding-top: 16px;
+
+  .follow-info {
+    @include flex-arrange(center);
+    gap: 20px;
+
+    span {
+      @include font-style(1.4rem, $black-01, 600);
+    }
+  }
+
+  .delete-button {
+    @include font-style(1.4rem, $white-01, 600);
+    width: 72px;
+    height: 32px;
+    background: $black-01;
+    border-radius: 5px;
+  }
+
+  img {
+    border-radius: 50%;
+  }
+}
