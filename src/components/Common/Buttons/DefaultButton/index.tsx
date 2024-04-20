@@ -28,6 +28,6 @@ export default function DefaultButton({
       className={cn('default-button', size, color)}
     >
       {children}
-    </button> 
+    </button>
   );
 }
