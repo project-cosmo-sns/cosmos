@@ -2,7 +2,7 @@ import Image from 'next/image';
 import styles from './Follow.module.scss';
 import classNames from 'classnames/bind';
 import { FollowType } from '../FollowMockData';
-import Generation from '../Generation';
+import GenerationBadge from '@/components/Common/GenerationBadge';
 import FollowButton from '@/components/Common/Buttons/FollowButton';
 
 const cn = classNames.bind(styles);
@@ -23,7 +23,7 @@ export default function Follow({
       <div className={cn('follow-info')}>
         <Image src={image} alt="profile" width={40} height={40} />
         <span>{name}</span>
-        <Generation generationInfo={generation} />
+        <GenerationBadge generationInfo={generation} />
       </div>
       {isFollow ? (
         <FollowButton onClick={followClick} />

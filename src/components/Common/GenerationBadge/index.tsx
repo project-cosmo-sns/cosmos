@@ -6,7 +6,7 @@ type GenerationType = {
 };
 
 const cn = classNames.bind(styles);
-export default function Generation({ generationInfo }: GenerationType) {
+export default function GenerationBadge({ generationInfo }: GenerationType) {
   const generationColor = [
     '#FFB6C1 ',
     '#a8a8a8',
