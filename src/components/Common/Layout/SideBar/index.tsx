@@ -12,9 +12,9 @@ import {
   WarnIcon,
 } from '@/components/Common/IconCollection';
 import Toast from '@/components/Common/Toast';
-import { useRouter } from 'next/router';
 
 const cn = classNames.bind(styles);
+
 export default function SideBar() {
   const [isPopOver, setIsPopOver] = useState(false);
   const [toast, setToast] = useState(false);
