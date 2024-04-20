@@ -1,0 +1,85 @@
+.modal-wrapper {
+  width: 380px;
+  height: auto;
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-image-edit {
+  position: relative;
+  margin-bottom: 12px;
+  margin-top: 40px;
+}
+
+.profile-image {
+  z-index: 1;
+}
+
+.camera-image {
+  @include flex-arrange;
+  position: absolute;
+  z-index: 2;
+  left: 58px;
+  top: 58px;
+  background-color: $white-01;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid $gray-02;
+  cursor: pointer;
+}
+
+.name {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.introduce {
+  font-weight: 700;
+  margin-top: 60px;
+
+  textarea {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    height: 93px;
+    background-color: $gray-03;
+    color: $gray-01;
+    font-weight: 600;
+    margin-top: 12px;
+    border-radius: 5px;
+    padding: 15px 20px;
+    resize: none;
+  }
+
+  .textareaActive {
+    @include font-style(1.4rem);
+  }
+}
+
+.flex-grow-div {
+  flex-grow: 1;
+  height: auto;
+  min-height: 20px;
+}
+
+.edit-button {
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .edit-button {
+    margin-bottom: 30px;
+  }
+
+  .introduce {
+    margin-bottom: 20px;
+
+    textarea {
+      margin-bottom: 0;
+    }
+  }
+}

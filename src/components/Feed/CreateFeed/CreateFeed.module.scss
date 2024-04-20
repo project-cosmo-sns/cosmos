@@ -1,0 +1,50 @@
+.create-feed-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  .create-feed-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    gap: 12px;
+    height: 100%;
+    @media (min-width: 768px) {
+      flex-direction: row;
+    }
+    .create-feed-user {
+      @include flex-arrange;
+      position: relative;
+      background-color: $gray-01;
+      width: 44px;
+      height: 44px;
+      border-radius: 100px;
+    }
+    .create-feed-content {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      @media (min-width: 768px) {
+        width: 100%;
+        gap: 12px;
+      }
+      .create-feed-text {
+        width: 100%;
+        height: 200px;
+        background-color: $gray-03;
+        text-indent: 16px;
+        padding-top: 16px;
+        border-radius: 5px;
+        @include font-style(1.6rem);
+      }
+      .create-feed-addImage {
+        width: 100%;
+        height: 102px;
+      }
+    }
+  }
+  .create-feed-button {
+    display: flex;
+    flex-direction: row-reverse;
+    margin-top: 30px;
+  }
+}

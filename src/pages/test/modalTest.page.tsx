@@ -11,12 +11,13 @@ export default function TestPage() {
       </button>
       {isModalOpen && (
         <Modal
-          currentValue={isModalOpen}
-          handleClick={setIsModalOpen}
+          modalVisible={isModalOpen}
+          toggleModal={setIsModalOpen}
           title="피드 생성"
         >
           <div
             style={{
+              width: '360px',
               height: '300px',
               display: 'flex',
               justifyContent: 'center',
