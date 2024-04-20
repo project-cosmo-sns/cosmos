@@ -11,14 +11,6 @@
     }
   }
 
-  .delete-button {
-    @include font-style(1.4rem, $white-01, 600);
-    width: 72px;
-    height: 32px;
-    background: $black-01;
-    border-radius: 5px;
-  }
-
   img {
     border-radius: 50%;
   }

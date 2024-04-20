@@ -25,13 +25,7 @@ export default function Follow({
         <span>{name}</span>
         <GenerationBadge generationInfo={generation} />
       </div>
-      {isFollow ? (
-        <FollowButton onClick={followClick} />
-      ) : (
-        <button type="button" className={cn('delete-button')}>
-          삭제
-        </button>
-      )}
+      <FollowButton onClick={followClick} isFollow={isFollow} />
     </div>
   );
 }
