@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent } from 'react';
 
 export interface IconTemplateProps {
   width?: string;
@@ -6,6 +6,7 @@ export interface IconTemplateProps {
   viewBox?: string;
   className?: string;
   children: React.ReactNode;
+  onClick?: (e: MouseEvent<SVGSVGElement, globalThis.MouseEvent>) => void;
 }
 
 export default function IconTemplate({
@@ -14,6 +15,7 @@ export default function IconTemplate({
   viewBox = '0 0 24 24',
   className,
   children,
+  onClick,
 }: IconTemplateProps) {
   return (
     <svg
@@ -23,6 +25,9 @@ export default function IconTemplate({
       viewBox={viewBox}
       fill="none"
       className={className}
+      onClick={onClick}
+      /* 임시로 인라인 스타일로 지정. 추후 변경 */
+      style={onClick && { cursor: 'pointer' }}
     >
       {children}
     </svg>

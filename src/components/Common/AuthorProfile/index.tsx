@@ -1,4 +1,4 @@
-import { Author } from '@/pages/post/[id]/mockData';
+import { Author } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import styles from './AuthorProfile.module.scss';

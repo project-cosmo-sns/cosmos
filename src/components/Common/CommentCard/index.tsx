@@ -1,8 +1,8 @@
 import AuthorProfile from '@/components/Common/AuthorProfile';
-import { Comment } from '@/pages/post/[id]/mockData';
+import { Comment } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
 import styles from './CommentCard.module.scss';
-import { DeleteIcon, EditIcon, LikeIcon } from '../IconCollection';
+import { DeleteIcon, EditIcon, LikeIcon, LikedIcon } from '../IconCollection';
 
 interface CommentCardProps {
   comment: Comment;
@@ -10,7 +10,8 @@ interface CommentCardProps {
 
 export default function CommentCard({ comment }: CommentCardProps) {
   const cn = classNames.bind(styles);
-  const { id, author, createdAt, content, reactionCount } = comment;
+  const { author, createdAt, content, reactionCount, likedByCurrentUser } =
+    comment;
   // author.id === userId 일 때 true
   const isMyComment = true;
 
@@ -22,27 +23,31 @@ export default function CommentCard({ comment }: CommentCardProps) {
       <div className={cn('header')}>
         <AuthorProfile author={author} createdAt={formattedCreatedAt} />
         <div className={cn('container')}>
-          <div className={cn('like')}>
-            <LikeIcon width="18" height="18" />
+          <div
+            className={cn('like')}
+            onClick={() => console.log('!likedByCurrentUser 요청 보내기')}
+          >
+            {likedByCurrentUser ? (
+              <LikedIcon width="18" height="18" />
+            ) : (
+              <LikeIcon width="18" height="18" />
+            )}
             {reactionCount}
           </div>
           {isMyComment && (
-            <>
-              <button
-                type="button"
-                aria-label="수정"
+            <div className={cn('edit')}>
+              <EditIcon
+                width="18"
+                height="18"
                 onClick={() => console.log('댓글 수정')}
-              >
-                <EditIcon width="18" height="18" />
-              </button>
-              <button
-                type="button"
-                aria-label="삭제"
-                onClick={() => console.log('댓글 삭제')}
-              >
-                <DeleteIcon width="18" height="18" />
-              </button>
-            </>
+              />
+
+              <DeleteIcon
+                width="18"
+                height="18"
+                onClick={() => console.log('포스트 삭제하시겠습니까 모달 on')}
+              />
+            </div>
           )}
         </div>
       </div>
