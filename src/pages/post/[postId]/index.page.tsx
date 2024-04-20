@@ -7,11 +7,11 @@ import {
 } from '@/components/Common/IconCollection';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import HashTag from '@/components/Post/HashTag';
+import MarkdownContent from '@/components/Post/Markdown';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import styles from './PostDetail.module.scss';
 import { Tag, mockData } from './mockData';
-import Markdown from '@/components/Post/Markdown';
 
 function CommentInput() {
   return (
@@ -93,7 +93,7 @@ export default function PostDetailPage() {
         )}
       </div>
       <div className={cn('divide-line')} />
-      <Markdown className={cn('content')} content={content} />
+      <MarkdownContent className={cn('markdown-content')} content={content} />
       <div className={cn('hashtag-container')}>
         {tags.map((tag: Tag) => (
           <HashTag key={tag.id} tag={tag} />

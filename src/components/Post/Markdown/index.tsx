@@ -1,8 +1,23 @@
-interface MarkdownProps {
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeRaw from 'rehype-raw';
+
+interface MarkdownContentProps {
   className: string;
   content: string;
 }
 
-export default function Markdown({ className, content }: MarkdownProps) {
-  return <div className={className}>{content}</div>;
+export default function MarkdownContent({
+  className,
+  content,
+}: MarkdownContentProps) {
+  return (
+    <Markdown
+      className={className}
+      remarkPlugins={[remarkGfm]}
+      rehypePlugins={[rehypeRaw]}
+    >
+      {content}
+    </Markdown>
+  );
 }

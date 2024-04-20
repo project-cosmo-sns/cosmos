@@ -44,15 +44,23 @@
   margin: 16px 0;
 }
 
-.content {
-  margin-bottom: 16px;
+.markdown-content {
+  margin-bottom: 40px;
+
+  a {
+    color: $primary-01;
+  }
+
+  li {
+    list-style: inside;
+  }
 }
 
 .hashtag-container {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
-  margin-bottom: 16px;
+  margin-bottom: 32px;
 }
 
 .comment-container {
