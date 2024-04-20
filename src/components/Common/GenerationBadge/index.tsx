@@ -22,7 +22,7 @@ export default function GenerationBadge({ generationInfo }: GenerationType) {
     backgroundColor: selectColor,
   };
 
-  return (  
+  return (
     <div className={cn('generation-container')} style={generationStyle}>
       {generationInfo}기
     </div>
