@@ -6,6 +6,7 @@ import {
   followerData,
   followingData,
 } from '@/components/Profile/FollowList/FollowMockData';
+import AuthForm from '@/components/Profile/AuthForm';
 
 export default function TestPage() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -13,9 +14,10 @@ export default function TestPage() {
   const [followModal, setFollowModal] = useState({
     follower: false,
     following: false,
+    authForm: false,
   });
 
-  const toggleModla = (type: 'follower' | 'following') => {
+  const toggleModla = (type: 'follower' | 'following' | 'authForm') => {
     setFollowModal({
       ...followModal,
       [type]: !followModal[type],
@@ -129,6 +131,16 @@ export default function TestPage() {
               isFollow: true,
               modalOpen: followModal.following,
             }}
+          />
+        )}
+        <br />
+        <button type="button" onClick={() => toggleModla('authForm')}>
+          회원인증
+        </button>
+        {followModal.authForm && (
+          <AuthForm
+            modalOpen={followModal.authForm}
+            handleClick={() => toggleModla('authForm')}
           />
         )}
       </div>
