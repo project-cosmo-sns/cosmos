@@ -2,7 +2,7 @@ import styles from './Generation.module.scss';
 import classNames from 'classnames/bind';
 
 type GenerationType = {
-  generationInfo: number;
+  generationInfo: number | undefined;
 };
 
 const cn = classNames.bind(styles);
@@ -15,6 +15,10 @@ export default function GenerationBadge({ generationInfo }: GenerationType) {
     '#FFE4B5',
     '#FFA07A ',
   ];
+
+  if (generationInfo === undefined) {
+    return <div className={cn('waiting')}>대기중</div>;
+  }
 
   const colorIndex = generationInfo - 1;
   const selectColor = generationColor[colorIndex];
