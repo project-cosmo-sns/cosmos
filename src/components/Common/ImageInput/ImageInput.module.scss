@@ -14,6 +14,9 @@
     span {
       @include font-style(1.2rem, $gray-01, 600);
     }
+    img {
+      border-radius: 5px;
+    }
   }
   .image-input {
     display: none;

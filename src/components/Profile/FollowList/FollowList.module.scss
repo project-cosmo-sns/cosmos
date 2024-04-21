@@ -1,4 +1,7 @@
 .follow-container {
-  width: 320px;
+  width: 360px;
   background: $white-01;
+  @media (min-width: 768px) {
+    width: 380px;
+  }
 }
