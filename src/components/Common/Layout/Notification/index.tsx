@@ -3,6 +3,8 @@ import classNames from 'classnames/bind';
 import PopOver from '@/components/Common/PopOverBox';
 import NotificationItem from './NotificationItem';
 import { SettingIcon } from '../../IconCollection';
+import { useState } from 'react';
+import NotificationModal from './NotificationModal';
 
 type PopOverProps = {
   onClose: () => void;
@@ -11,6 +13,8 @@ type PopOverProps = {
 const cn = classNames.bind(styles);
 
 export default function Notification({ onClose }: PopOverProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const mockData = [
     {
       id: 1,
@@ -72,10 +76,17 @@ export default function Notification({ onClose }: PopOverProps) {
   return (
     <PopOver onClose={onClose} className={cn('notification-popover')}>
       <h2>알림</h2>
-      <SettingIcon className={cn('setting-icon')} />
+      <SettingIcon
+        className={cn('setting-icon')}
+        onClick={() => setIsModalOpen(true)}
+      />
+
       {mockData.map((notification) => (
         <NotificationItem key={notification.id} data={notification} />
       ))}
+      {isModalOpen && (
+        <NotificationModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+      )}
     </PopOver>
   );
 }
