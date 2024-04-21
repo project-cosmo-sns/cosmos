@@ -1,5 +1,4 @@
 .popOver-container {
-  max-width: 360px;
   margin: 0;
   padding: 10px 0;
   position: absolute;
@@ -10,5 +9,6 @@
 
   @media (min-width: 768px) {
     bottom: -64px;
+    max-width: 360px;
   }
 }
