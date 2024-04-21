@@ -6,8 +6,8 @@ interface ContentContainerProps {
   children: React.ReactNode;
   selectedOption: 'feed' | 'post' | 'scrap';
   setSelectedOption: (args: 'feed' | 'post' | 'scrap') => void;
-  selectedSort?: 'all' | 'followed' | 'myGeneration';
-  setSelectedSort?: (args: 'all' | 'followed' | 'myGeneration') => void;
+  selectedSort: 'all' | 'followed' | 'myGeneration';
+  setSelectedSort: (args: 'all' | 'followed' | 'myGeneration') => void;
   isMyProfile?: boolean;
 }
 
@@ -66,13 +66,12 @@ export default function ContentContainer({
           )}
           <div className={cn('active', { [selectedOption]: selectedOption })} />
         </div>
-        {selectedSort && setSelectedSort && (
+        <div className={cn('filter-container')}>
           <SortDropdown
-            onSortAll={() => setSelectedSort('all')}
-            onSortFollow={() => setSelectedSort('followed')}
-            onSortMyGen={() => setSelectedSort('myGeneration')}
+            selectedSort={selectedSort}
+            setSelectedSort={setSelectedSort}
           />
-        )}
+        </div>
       </div>
       <div className={cn('divide-line')} />
       <div className={cn('content', { 'profile-content': isMyProfile })}>

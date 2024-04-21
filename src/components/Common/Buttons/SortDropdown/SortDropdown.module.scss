@@ -1,6 +1,5 @@
 .wrapper {
   z-index: 2;
-  margin-right: 20px;
 }
 
 .dropdown-expand-button {
@@ -47,6 +46,7 @@
   height: 32px;
   border: none;
   padding: 12px 15px;
+  z-index: 2;
 
   &:not(:last-child) {
     border-bottom: none;
