@@ -3,15 +3,14 @@ import classNames from 'classnames/bind';
 import Modal from '@/components/Common/Layout/Modal';
 import { FollowType } from './FollowMockData';
 import Follow from './Follow';
+import { ModalPropsType } from '@/@types/type';
 
 const cn = classNames.bind(styles);
 
 type FollowListType = {
-  followListProps: {
+  followListProps: ModalPropsType & {
     title: string;
-    handleClick: React.Dispatch<React.SetStateAction<boolean>>;
     followData: FollowType[];
-    modalOpen: boolean;
     isFollow: boolean;
   };
 };
@@ -28,11 +27,11 @@ type FollowListType = {
  */
 
 export default function FollowList({ followListProps }: FollowListType) {
-  const { title, handleClick, followData, isFollow, modalOpen } =
+  const { title, toggleModal, followData, isFollow, modalVisible } =
     followListProps;
 
   return (
-    <Modal title={title} toggleModal={handleClick} modalVisible={modalOpen}>
+    <Modal title={title} toggleModal={toggleModal} modalVisible={modalVisible}>
       <div className={cn('follow-container')}>
         {followData.map((follow) => (
           <Follow key={follow.id} isFollow={isFollow} {...follow} />
