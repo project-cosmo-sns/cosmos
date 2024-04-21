@@ -29,17 +29,40 @@
 .markdown-content {
   margin-bottom: 40px;
   font-size: 1.6rem;
+  line-height: 2rem;
 
+  h1,
+  h2,
+  h3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
   a {
     color: $primary-01;
   }
 
-  li {
-    list-style: inside;
+  ul {
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    margin-left: 0;
+    padding-left: 2.4rem;
+    list-style-type: disc;
+    line-height: 2.4rem;
+
+    ul {
+      list-style-type: circle;
+      ul {
+        list-style-type: square;
+      }
+    }
   }
 
   code {
     font-size: 1.2rem;
+  }
+
+  p {
+    display: inline-block;
   }
 }
 

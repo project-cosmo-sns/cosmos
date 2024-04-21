@@ -35,7 +35,7 @@ export default function TestPage() {
       <ContentContainer
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
-        keyword="ㅇ"
+        keyword="이유연"
       >
         {selectedOption === 'hashtag' ? <>해시태그</> : <>유저</>}
       </ContentContainer>
