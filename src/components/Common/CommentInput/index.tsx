@@ -1,4 +1,5 @@
 import DefaultButton from '../Buttons/DefaultButton';
+import Input from '../Input';
 import styles from './CommentInput.module.scss';
 import classNames from 'classnames/bind';
 
@@ -15,12 +16,7 @@ export default function CommentInput({
 }: CommentInputTypes) {
   return (
     <div className={cn('wrapper')}>
-      <input
-        className={cn('comment-input')}
-        type="text"
-        name="commentInput"
-        placeholder={placeholder}
-      />
+      <Input placeholder={placeholder} />
       <DefaultButton onClick={handleClick} size="small" color="purple">
         등록
       </DefaultButton>

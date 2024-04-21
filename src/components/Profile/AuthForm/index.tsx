@@ -1,10 +1,10 @@
-import Modal from '@/components/Common/Layout/Modal';
-import styles from './AuthForm.module.scss';
-import classNames from 'classnames/bind';
+import { ModalPropsType } from '@/@types/type';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import ImageInput from '@/components/Common/ImageInput';
-import CommentInput from '@/components/Common/CommentInput';
-import { ModalPropsType } from '@/@types/type';
+import Input from '@/components/Common/Input';
+import Modal from '@/components/Common/Layout/Modal';
+import classNames from 'classnames/bind';
+import styles from './AuthForm.module.scss';
 
 const cn = classNames.bind(styles);
 
@@ -24,7 +24,7 @@ export default function AuthForm({
       <form className={cn('authForm-container')}>
         <div className={cn('auth-generation')}>
           <h2>기수</h2>
-          <CommentInput placeholder="기수를 입력하세요. ex) 3" />
+          <Input placeholder="기수를 입력하세요. ex) 3" />
         </div>
         <div className={cn('auth-image')}>
           <h2>스프린터 인증</h2>

@@ -3,19 +3,3 @@
   width: 100%;
   gap: 8px;
 }
-
-.comment-input {
-  border: none;
-  flex-grow: 1;
-  font-size: 1.6rem;
-  background-color: $gray-03;
-  border-radius: 5px;
-  padding: 15px 16px;
-}
-
-.comment-input::placeholder {
-  color: $gray-01;
-  font-weight: 600;
-  line-height: normal;
-  text-align: left;
-}
