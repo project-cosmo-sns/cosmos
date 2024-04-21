@@ -1,6 +1,8 @@
-import ContentContainer from '@/components/Common/ContentContainer';
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 
-export default SearchResultPage(){
+export default function SearchResultPage() {
+  const searchParams = useSearchParams();
+  const search = searchParams.get('query');
 
+  return <h1>search : {search}</h1>;
 }

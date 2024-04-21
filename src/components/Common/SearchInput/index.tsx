@@ -17,9 +17,11 @@ export default function SearchInput() {
   };
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' && search.trim() !== '') {
       console.log('검색 엔터', search);
       router.push(`/search?query=${encodeURIComponent(search)}`);
+    } else if (e.key === 'Enter') {
+      console.log('검색어 비어있음');
     }
   };
 
