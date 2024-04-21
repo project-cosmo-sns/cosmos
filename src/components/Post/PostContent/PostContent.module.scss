@@ -41,18 +41,35 @@
     color: $primary-01;
   }
 
-  ul {
+  .task-list-item {
+    list-style: none;
+  }
+
+  ul,
+  ol {
     margin-top: 0.3em;
     margin-bottom: 0.3em;
     margin-left: 0;
     padding-left: 2.4rem;
-    list-style-type: disc;
     line-height: 2.4rem;
+  }
 
+  ul {
+    list-style-type: disc;
     ul {
       list-style-type: circle;
       ul {
         list-style-type: square;
+      }
+    }
+  }
+
+  ol {
+    list-style-type: auto;
+    ol {
+      list-style: lower-alpha;
+      ol {
+        list-style: lower-roman;
       }
     }
   }
