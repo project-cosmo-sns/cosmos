@@ -1,11 +1,10 @@
 import CommentCard from '@/components/Common/CommentCard';
-import styles from './FeedDetails.module.scss';
+import CommentInput from '@/components/Common/CommentInput';
+import { mockData } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
 import FeedCard from '../FeedCard';
-import CommentInput from '@/components/Common/CommentInput';
-import DefaultButton from '@/components/Common/Buttons/DefaultButton';
-import { mockData } from '@/pages/post/[postId]/mockData';
 import { MOCKDATA2 } from '../FeedCardList/mockData';
+import styles from './FeedDetails.module.scss';
 
 export default function FeedDetails() {
   const cn = classNames.bind(styles);
@@ -42,17 +41,10 @@ export default function FeedDetails() {
         commentCount={commentCount}
         eyeCount={eyeCount}
       />
-      <div className={cn('feed-details-wrapper')}>
-        <CommentInput placeholder="댓글을 입력해주세요" />
-        <DefaultButton
-          buttonType="submit"
-          size="small"
-          onClick={() => console.log('등록')}
-          color="primary-01"
-        >
-          등록
-        </DefaultButton>
-      </div>
+      <CommentInput
+        placeholder="댓글을 입력하세요"
+        handleClick={() => console.log('등록')}
+      />
       <div>
         {comments.map((comment, index) => (
           <div key={comment.id}>
