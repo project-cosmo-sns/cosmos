@@ -11,19 +11,18 @@ interface PostEditorProps {
 const cn = classNames.bind(styles);
 
 export default function PostEditor({ postId }: PostEditorProps) {
-  // 임시로 기본값 mockData로 추가함.
+  // 임시로 기본값 postId와 같은 포스트 mockData에서 불러옴. 추후 요청해서 받아오도록 수정
   const [titleValue, setTitleValue] = useState('');
   const [contentValue, setContentValue] = useState('');
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryType>('공지사항');
 
-  console.log(postId);
-
   useEffect(() => {
     if (postId) {
-      setSelectedCategory(mockData[0].category);
-      setTitleValue(mockData[0].title);
-      setContentValue(mockData[0].content);
+      const postData = mockData.filter((data) => data.id === postId)[0];
+      setSelectedCategory(postData.category);
+      setTitleValue(postData.title);
+      setContentValue(postData.content);
     }
   }, [postId]);
 
