@@ -1,0 +1,29 @@
+.toggle {
+  width: 42px;
+  height: 24px;
+  background-color: $gray-02;
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.3s;
+
+  &-checked {
+    background-color: $black-01;
+  }
+
+  .toggle-button {
+    display: block;
+    width: 18px;
+    height: 18px;
+    background-color: $white-01;
+    border-radius: 50%;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    transition: transform 0.3s;
+  }
+
+  &-checked .toggle-button {
+    transform: translateX(18px);
+  }
+}
