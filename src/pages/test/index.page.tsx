@@ -1,3 +1,5 @@
+import { ContainerOptionType } from '@/@types/type';
+import ContentContainer from '@/components/Common/ContentContainer';
 import Modal from '@/components/Common/Layout/Modal';
 import LoginModal from '@/components/Common/LoginModal';
 import AuthForm from '@/components/Profile/AuthForm';
@@ -9,7 +11,10 @@ import {
 import { useState } from 'react';
 
 export default function TestPage() {
+  const [selectedOption, setSelectedOption] =
+    useState<ContainerOptionType>('hashtag');
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const [followModal, setFollowModal] = useState({
     follower: false,
     following: false,
@@ -27,77 +32,86 @@ export default function TestPage() {
   };
   return (
     <div>
-      <button type="button" onClick={() => setIsModalOpen(!isModalOpen)}>
-        on/off
-      </button>
-      {isModalOpen && (
-        <Modal
-          modalVisible={isModalOpen}
-          toggleModal={setIsModalOpen}
-          title="피드 생성"
-        >
-          <div
-            style={{
-              height: '600px',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
+      <ContentContainer
+        selectedOption={selectedOption}
+        setSelectedOption={setSelectedOption}
+        keyword="ㅇ"
+      >
+        {selectedOption === 'hashtag' ? <>해시태그</> : <>유저</>}
+      </ContentContainer>
+      <div>
+        <button type="button" onClick={() => setIsModalOpen(!isModalOpen)}>
+          on/off
+        </button>
+        {isModalOpen && (
+          <Modal
+            modalVisible={isModalOpen}
+            toggleModal={setIsModalOpen}
+            title="피드 생성"
           >
-            <span>모달 컴포넌트</span>
-          </div>
-        </Modal>
-      )}
-      <br />
-      <button type="button" onClick={() => toggleModla('follower')}>
-        팔로워
-      </button>
-      {followModal.follower && (
-        <FollowList
-          followListProps={{
-            title: '팔로워',
-            toggleModal: () => toggleModla('follower'),
-            followData: followerData,
-            isFollow: false,
-            modalVisible: followModal.follower,
-          }}
-        />
-      )}
-      <br />
-      <button type="button" onClick={() => toggleModla('following')}>
-        팔로잉
-      </button>
-      {followModal.following && (
-        <FollowList
-          followListProps={{
-            title: '팔로잉',
-            toggleModal: () => toggleModla('following'),
-            followData: followingData,
-            isFollow: true,
-            modalVisible: followModal.following,
-          }}
-        />
-      )}
-      <br />
-      <button type="button" onClick={() => toggleModla('authForm')}>
-        회원인증
-      </button>
-      {followModal.authForm && (
-        <AuthForm
-          modalVisible={followModal.authForm}
-          toggleModal={() => toggleModla('authForm')}
-        />
-      )}
-      <br />
-      <button type="button" onClick={() => toggleModla('login')}>
-        회원가입 모달 테스트
-      </button>
-      {followModal.login && (
-        <LoginModal
-          modalVisible={followModal.login}
-          toggleModal={() => toggleModla('login')}
-        />
-      )}
+            <div
+              style={{
+                height: '600px',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              <span>모달 컴포넌트</span>
+            </div>
+          </Modal>
+        )}
+        <br />
+        <button type="button" onClick={() => toggleModla('follower')}>
+          팔로워
+        </button>
+        {followModal.follower && (
+          <FollowList
+            followListProps={{
+              title: '팔로워',
+              toggleModal: () => toggleModla('follower'),
+              followData: followerData,
+              isFollow: false,
+              modalVisible: followModal.follower,
+            }}
+          />
+        )}
+        <br />
+        <button type="button" onClick={() => toggleModla('following')}>
+          팔로잉
+        </button>
+        {followModal.following && (
+          <FollowList
+            followListProps={{
+              title: '팔로잉',
+              toggleModal: () => toggleModla('following'),
+              followData: followingData,
+              isFollow: true,
+              modalVisible: followModal.following,
+            }}
+          />
+        )}
+        <br />
+        <button type="button" onClick={() => toggleModla('authForm')}>
+          회원인증
+        </button>
+        {followModal.authForm && (
+          <AuthForm
+            modalVisible={followModal.authForm}
+            toggleModal={() => toggleModla('authForm')}
+          />
+        )}
+        <br />
+        <button type="button" onClick={() => toggleModla('login')}>
+          회원가입 모달 테스트
+        </button>
+        {followModal.login && (
+          <LoginModal
+            modalVisible={followModal.login}
+            toggleModal={() => toggleModla('login')}
+          />
+        )}
+      </div>
     </div>
   );
 }

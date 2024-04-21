@@ -26,9 +26,28 @@
   @include font-style(1.6rem, $gray-01, 700);
   height: 100%;
 
-  &.active-text {
+  &.feed {
     color: $black-01;
     transition: 0.15s color ease-in-out;
+  }
+
+  &.post {
+    color: $black-01;
+    transition: 0.15s color ease-in-out;
+  }
+
+  &.scrap {
+    color: $black-01;
+    transition: 0.15s color ease-in-out;
+  }
+
+  &.hashtag {
+    color: $black-01;
+    transition: 0.15s color ease-in-out;
+  }
+
+  &.user {
+    transform: translateX(90px);
   }
 }
 
@@ -51,6 +70,15 @@
 
   &.scrap {
     transform: translateX(143.5px);
+  }
+
+  &.hashtag {
+    width: 70px;
+    transform: translateX(-8px);
+  }
+
+  &.user {
+    transform: translateX(90px);
   }
 }
 

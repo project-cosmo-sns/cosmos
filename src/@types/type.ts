@@ -7,3 +7,10 @@ export type ModalPropsType = {
   modalVisible: boolean;
   toggleModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
+
+export type ContainerOptionType =
+  | 'feed'
+  | 'post'
+  | 'scrap'
+  | 'hashtag'
+  | 'user';
