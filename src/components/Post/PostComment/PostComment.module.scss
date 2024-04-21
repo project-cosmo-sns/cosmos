@@ -1,0 +1,19 @@
+.wrapper {
+  @include flex-arrange(center, flex-start);
+  flex-direction: column;
+  width: 100%;
+}
+
+.comment-container {
+  margin: 20px 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.divide-line {
+  width: 100%;
+  height: 1px;
+  background-color: $gray-02;
+  margin: 16px 0;
+}

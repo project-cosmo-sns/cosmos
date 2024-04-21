@@ -1,17 +1,31 @@
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import { Comment } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
+import { useState } from 'react';
+import ActionButtons from '../Buttons/ActionButtons';
+import { LikeIcon, LikedIcon } from '../IconCollection';
+import Modal from '../Layout/Modal';
 import styles from './CommentCard.module.scss';
-import { DeleteIcon, EditIcon, LikeIcon, LikedIcon } from '../IconCollection';
 
 interface CommentCardProps {
   comment: Comment;
 }
 
+const cn = classNames.bind(styles);
+
 export default function CommentCard({ comment }: CommentCardProps) {
-  const cn = classNames.bind(styles);
   const { author, createdAt, content, reactionCount, likedByCurrentUser } =
     comment;
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isCommentEditing, setIsCommentEditing] = useState(false);
+  const [commentValue, setCommentValue] = useState(content);
+
+  // 댓글 좋아요 버튼 및 숫자 임시로 테스트하기 위해 상태 추가. 추후 삭제 에정
+  const [tmpLikedByCurrentUser, setlTmpLikedByCurrentUser] =
+    useState(likedByCurrentUser);
+  const [tmpReactionCount, setTmpReactionCount] = useState(reactionCount);
+
   // author.id === userId 일 때 true
   const isMyComment = true;
 
@@ -23,35 +37,75 @@ export default function CommentCard({ comment }: CommentCardProps) {
       <div className={cn('header')}>
         <AuthorProfile author={author} createdAt={formattedCreatedAt} />
         <div className={cn('container')}>
+          {/* 임시 tmpLikedByCurrentUser 상태 */}
           <div
             className={cn('like')}
-            onClick={() => console.log('!likedByCurrentUser 요청 보내기')}
+            onClick={() => {
+              setlTmpLikedByCurrentUser((prev) => !prev);
+              setTmpReactionCount((prev) =>
+                tmpLikedByCurrentUser ? prev - 1 : prev + 1,
+              );
+            }}
           >
-            {likedByCurrentUser ? (
+            {tmpLikedByCurrentUser ? (
               <LikedIcon width="18" height="18" />
             ) : (
               <LikeIcon width="18" height="18" />
             )}
-            {reactionCount}
+            {/* 임시 tmpReactionCount 상태 */}
+            {tmpReactionCount}
           </div>
-          {isMyComment && (
-            <div className={cn('edit')}>
-              <EditIcon
-                width="18"
-                height="18"
-                onClick={() => console.log('댓글 수정')}
-              />
-
-              <DeleteIcon
-                width="18"
-                height="18"
-                onClick={() => console.log('포스트 삭제하시겠습니까 모달 on')}
-              />
-            </div>
+          <ActionButtons
+            isButtonShow={isMyComment}
+            handleClickEdit={() => {
+              setIsCommentEditing((prev) => !prev);
+              setCommentValue(content);
+            }}
+            handleClickDelete={() => {
+              setIsDeleteModalOpen(true);
+            }}
+          />
+          {isDeleteModalOpen && (
+            <Modal
+              title="삭제 모달"
+              modalVisible={isDeleteModalOpen}
+              toggleModal={setIsDeleteModalOpen}
+            >
+              <div>하이</div>
+            </Modal>
           )}
         </div>
       </div>
-      <div className={cn('content')}>{content}</div>
+      <div className={cn('content')}>
+        {isCommentEditing ? (
+          // 댓글 수정창 디자인 없어서 임시로 만들어둠. 추후 수정예정
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+              gap: '4px',
+            }}
+          >
+            <textarea
+              value={commentValue}
+              onChange={(event) => setCommentValue(event.target.value)}
+            />
+            <button
+              type="button"
+              style={{
+                padding: '4px 20px  ',
+                borderRadius: '5px',
+                backgroundColor: '#304030',
+              }}
+            >
+              수정
+            </button>
+          </div>
+        ) : (
+          content
+        )}
+      </div>
     </div>
   );
 }
