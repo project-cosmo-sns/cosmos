@@ -3,7 +3,6 @@
   flex-direction: column;
   flex-shrink: 0;
   width: 100%;
-  height: 100%;
   background: $gray-02;
   backdrop-filter: blur(15px);
 }
@@ -80,6 +79,10 @@
   &.user {
     transform: translateX(90px);
   }
+}
+
+.active-text {
+  color: $black-01;
 }
 
 .divide-line {

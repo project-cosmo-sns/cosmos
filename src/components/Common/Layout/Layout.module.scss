@@ -3,7 +3,7 @@
   background: $gray-01;
   overflow: visible;
 
-  .layout-contnet {
+  .layout-content {
     @include flex-arrange(flex-start, center);
     padding-top: 65px;
     flex-direction: column;
@@ -14,7 +14,7 @@
     display: grid;
     grid-template-rows: 109px auto;
     .layout-navigaionBar,
-    .layout-contnet {
+    .layout-content {
       grid-column: 4 / 5;
       padding: 0;
     }

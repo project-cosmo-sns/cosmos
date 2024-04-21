@@ -1,7 +1,7 @@
 import {
-  mockData,
   CategoryType,
   PostData,
+  mockData,
 } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
@@ -42,6 +42,12 @@ export default function PostList({
     return postData.filter((post) => post.author.id === userId);
   };
 
+  const filteredPostList = filterPosts(
+    isMyProfile ? filterMyPost(mockData) : mockData,
+    selectedSort,
+    selectedCategory,
+  );
+
   return (
     <div className={cn('wrapper')}>
       <div className={cn('category-container')}>
@@ -52,13 +58,13 @@ export default function PostList({
       </div>
       <div className={cn('post-container')}>
         {/* 임시로 내 프로필에서는 filterMyPost함수 사용. 추후 수정 */}
-        {filterPosts(
-          isMyProfile ? filterMyPost(mockData) : mockData,
-          selectedSort,
-          selectedCategory,
-        ).map((postData) => (
-          <PostPreview key={postData.id} postData={postData} />
-        ))}
+        {filteredPostList.length ? (
+          filteredPostList.map((postData) => (
+            <PostPreview key={postData.id} postData={postData} />
+          ))
+        ) : (
+          <div className={cn('no-post')}>포스트가 없습니다</div>
+        )}
       </div>
     </div>
   );

@@ -12,19 +12,17 @@ export default function Home() {
   >('all');
 
   return (
-    <div>
-      <ContentContainer
-        selectedOption={selectedOption}
-        setSelectedOption={setSelectedOption}
-        selectedSort={selectedSort}
-        setSelectedSort={setSelectedSort}
-      >
-        {selectedOption === 'feed' ? (
-          <FeedCardList />
-        ) : (
-          <PostList selectedSort={selectedSort} />
-        )}
-      </ContentContainer>
-    </div>
+    <ContentContainer
+      selectedOption={selectedOption}
+      setSelectedOption={setSelectedOption}
+      selectedSort={selectedSort}
+      setSelectedSort={setSelectedSort}
+    >
+      {selectedOption === 'feed' ? (
+        <FeedCardList />
+      ) : (
+        <PostList selectedSort={selectedSort} />
+      )}
+    </ContentContainer>
   );
 }

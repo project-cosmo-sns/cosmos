@@ -31,7 +31,7 @@ export default function TestPage() {
     });
   };
   return (
-    <div>
+    <div style={{ width: '100%' }}>
       <ContentContainer
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}

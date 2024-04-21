@@ -2,6 +2,7 @@ import { Author } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import styles from './AuthorProfile.module.scss';
+import TermBadge from '../Badge/TermBadge';
 
 interface AuthorProfileProps {
   author: Author;
@@ -32,7 +33,7 @@ export default function AuthorProfile({
         {nickname}
       </button>
       <span className={cn('created-at')}>{createdAt}</span>
-      <div className={cn('generation-badge')}>{generation}기</div>
+      <TermBadge term={generation} />
     </div>
   );
 }
