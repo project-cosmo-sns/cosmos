@@ -6,10 +6,14 @@ import PostPreview from '../PostPreview';
 import styles from './PostList.module.scss';
 
 interface PostListProps {
+  isMyProfile?: boolean;
   selectedSort: 'all' | 'followed' | 'myGeneration';
 }
 
-export default function PostList({ selectedSort }: PostListProps) {
+export default function PostList({
+  isMyProfile = false,
+  selectedSort,
+}: PostListProps) {
   const cn = classNames.bind(styles);
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryType>('공지사항');

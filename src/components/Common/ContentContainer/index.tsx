@@ -64,7 +64,9 @@ export default function ContentContainer({
         <div className={cn('dropdown')}>팔로우</div>
       </div>
       <div className={cn('divide-line')} />
-      <div className={cn('content')}>{children}</div>
+      <div className={cn('content', { 'profile-content': isMyProfile })}>
+        {children}
+      </div>
     </div>
   );
 }

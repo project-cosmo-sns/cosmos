@@ -67,7 +67,11 @@
 
 .content {
   overflow-y: scroll;
-  height: 84vh;
+  height: 78vh;
+
+  &.profile-content {
+    height: 60vh;
+  }
 }
 
 @media (min-width: 768px) {
