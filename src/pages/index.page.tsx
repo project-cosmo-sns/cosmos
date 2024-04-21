@@ -1,4 +1,5 @@
 import ContentContainer from '@/components/Common/ContentContainer';
+import FeedCardList from '@/components/Feed/FeedCardList';
 import PostList from '@/components/Post/PostList';
 import { useState } from 'react';
 
@@ -15,9 +16,11 @@ export default function Home() {
       <ContentContainer
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
+        selectedSort={selectedSort}
+        setSelectedSort={setSelectedSort}
       >
         {selectedOption === 'feed' ? (
-          <div>feed</div>
+          <FeedCardList />
         ) : (
           <PostList selectedSort={selectedSort} />
         )}

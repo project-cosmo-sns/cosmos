@@ -1,10 +1,13 @@
 import classNames from 'classnames/bind';
 import styles from './ContentContainer.module.scss';
+import SortDropdown from '../Buttons/SortDropdown';
 
 interface ContentContainerProps {
   children: React.ReactNode;
   selectedOption: 'feed' | 'post' | 'scrap';
   setSelectedOption: (args: 'feed' | 'post' | 'scrap') => void;
+  selectedSort?: 'all' | 'followed' | 'myGeneration';
+  setSelectedSort?: (args: 'all' | 'followed' | 'myGeneration') => void;
   isMyProfile?: boolean;
 }
 
@@ -17,10 +20,13 @@ interface ContentContainerProps {
  * @param {boolean} [props.isMyProfile=false] - 내 프로필인지 여부를 나타내는 플래그. true이면 스크랩 옵션까지 표시됩니다.
  * @returns {JSX.Element} ContentContainer 컴포넌트의 JSX 요소
  */
+
 export default function ContentContainer({
   children,
   selectedOption,
   setSelectedOption,
+  selectedSort,
+  setSelectedSort,
   isMyProfile = false,
 }: ContentContainerProps) {
   const cn = classNames.bind(styles);
@@ -60,8 +66,13 @@ export default function ContentContainer({
           )}
           <div className={cn('active', { [selectedOption]: selectedOption })} />
         </div>
-        {/* 추후 dropdown 컴포넌트로 변경 예정 */}
-        <div className={cn('dropdown')}>팔로우</div>
+        {selectedSort && setSelectedSort && (
+          <SortDropdown
+            onSortAll={() => setSelectedSort('all')}
+            onSortFollow={() => setSelectedSort('followed')}
+            onSortMyGen={() => setSelectedSort('myGeneration')}
+          />
+        )}
       </div>
       <div className={cn('divide-line')} />
       <div className={cn('content', { 'profile-content': isMyProfile })}>

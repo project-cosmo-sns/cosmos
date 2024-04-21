@@ -1,17 +1,17 @@
 import classNames from 'classnames/bind';
-import styles from './SortDropdown.module.scss';
-import Image from 'next/image';
 import { useState } from 'react';
+import { DownIcon, UpIcon } from '../../IconCollection';
+import styles from './SortDropdown.module.scss';
 import SortDropdownType from './SortDropdownType';
 
+const cn = classNames.bind(styles);
+
 /**
- * @param {function} onSortAll : 전체 버튼 클릭 시 동작할 로직
- * @param {function} onSortFollow : 팔로우 클릭 시 동작할 로직
- * @param {function} onSortMyGen : 내 기수 버튼 클릭 시 동작할 로직
+ * @param {Function} onSortAll : 전체 버튼 클릭 시 동작할 로직
+ * @param {Function} onSortFollow : 팔로우 클릭 시 동작할 로직
+ * @param {Function} onSortMyGen : 내 기수 버튼 클릭 시 동작할 로직
  * @returns button
  */
-
-const cn = classNames.bind(styles);
 
 export default function SortDropdown({
   onSortFollow,
@@ -45,7 +45,7 @@ export default function SortDropdown({
   };
 
   return (
-    <div>
+    <div className={cn('wrapper')}>
       <button
         type="button"
         onClick={sortExpandHandler}
@@ -54,23 +54,12 @@ export default function SortDropdown({
         {sortType}
         <div className={cn('icon-container')}>
           {isExpanded ? (
-            <Image
-              src="/icon/up.svg"
-              width={18}
-              height={18}
-              alt="접는 아이콘"
-            />
+            <UpIcon className={cn('dropdown-arrow')} width="18" height="18" />
           ) : (
-            <Image
-              src="/icon/down.svg"
-              width={18}
-              height={18}
-              alt="펼치는 아이콘"
-            />
+            <DownIcon className={cn('dropdown-arrow')} width="18" height="18" />
           )}
         </div>
       </button>
-
       {isExpanded && (
         <div
           onClick={sortExpandHandler}
