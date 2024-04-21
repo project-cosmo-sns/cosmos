@@ -1,5 +1,4 @@
-import { CategoryType } from '@/@types/type';
-import { mockData } from '@/pages/post/[postId]/mockData';
+import { mockData, CategoryType } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import CategoryList from '../CategoryList';

@@ -6,6 +6,13 @@ export interface Author {
   profileImageUrl?: string;
 }
 
+export type CategoryType =
+  | '공지사항'
+  | '이벤트'
+  | '특강'
+  | '정보공유'
+  | '오늘의 질문';
+
 export interface Comment {
   id: string;
   createdAt: string;
@@ -23,7 +30,7 @@ export interface Tag {
 
 export interface PostData {
   id: string;
-  category: string;
+  category: CategoryType;
   title: string;
   author: Author;
   createdAt: string;
@@ -37,8 +44,8 @@ export interface PostData {
 const mockData: PostData[] = [
   {
     id: 'postId1',
-    category: '공지사항',
-    title: '공지사항 입니다.',
+    category: '정보공유',
+    title: '마크다운 테스트 입니다.',
     author: {
       id: 'tmpuserId',
       nickname: '코스모스',

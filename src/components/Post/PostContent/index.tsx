@@ -45,7 +45,7 @@ export default function PostContent({ isMyPost, postData }: PostContentProps) {
         <AuthorProfile author={author} createdAt={formattedCreatedAt} />
         <ActionButtons
           isButtonShow={isMyPost}
-          handleClickEdit={() => router.push(`post/${postId}/edit`)}
+          handleClickEdit={() => router.push(`/write?postId=${postId}`)}
           handleClickDelete={() => setIsDeleteModalOpen(true)}
         />
         {isDeleteModalOpen && (
