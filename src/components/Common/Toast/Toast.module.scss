@@ -1,0 +1,26 @@
+.toast-container {
+  width: 270px;
+  height: 60px;
+  padding: 18px 30px;
+  background: $black-01;
+  border-radius: 5px;
+  color: $white-01;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+
+  animation: fadeout 5s;
+
+  @keyframes fadeout {
+    0% {
+      opacity: 1;
+    }
+    40% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+}

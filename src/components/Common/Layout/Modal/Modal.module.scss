@@ -1,0 +1,50 @@
+.modal-layout-container {
+  @include flex-arrange;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 99999;
+
+  .modal-layout-wrapper {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    gap: 12px;
+    background-color: $white-01;
+    height: 100vh;
+    width: 100vw;
+    padding: {
+      top: 50px;
+      bottom: 30px;
+      right: 20px;
+      left: 20px;
+    }
+    @media (min-width: 768px) {
+      border-radius: 10px;
+      height: auto;
+      width: 614px;
+    }
+    @media (min-width: 1200px) {
+      width: 740px;
+    }
+    .modal-layout-x {
+      position: absolute;
+      cursor: pointer;
+      top: 20px;
+      right: 20px;
+    }
+    .modal-layout-title {
+      @include font-style(2rem, $black-01, 700);
+      margin: 0 auto;
+    }
+    .modal-layout-component {
+      @include flex-arrange;
+      background-color: $white-01;
+      padding: 0 auto;
+      flex-grow: 1;
+    }
+  }
+}

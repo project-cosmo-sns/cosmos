@@ -1,0 +1,79 @@
+@font-face {
+  font-family: 'Pretendard';
+  src:
+    local('Pretendard-Thin'),
+    url('/fonts/Pretendard-Thin.woff2') format('woff2'),
+    url('/fonts/Pretendard-Thin.woff') format('woff');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src:
+    local('Pretendard-ExtraLight'),
+    url('/fonts/Pretendard-ExtraLight.woff2') format('woff2'),
+    url('/fonts/Pretendard-ExtraLight.woff') format('woff');
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src:
+    local('Pretendard-Light'),
+    url('/fonts/Pretendard-Light.woff2') format('woff2'),
+    url('/fonts/Pretendard-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src:
+    local('Pretendard-Regular'),
+    url('/fonts/Pretendard-Regular.woff2') format('woff2'),
+    url('/fonts/Pretendard-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src:
+    local('Pretendard-Medium'),
+    url('/fonts/Pretendard-Medium.woff2') format('woff2'),
+    url('/fonts/Pretendard-Medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src:
+    local('Pretendard-SemiBold'),
+    url('/fonts/Pretendard-SemiBold.woff2') format('woff2'),
+    url('/fonts/Pretendard-SemiBold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src:
+    local('Pretendard-Bold'),
+    url('/fonts/Pretendard-Bold.woff2') format('woff2'),
+    url('/fonts/Pretendard-Bold.woff') format('woff');
+  font-weight: 700; /* Bold 폰트의 font-weight */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Pretendard';
+  src:
+    local('Pretendard-ExtraBold'),
+    url('/fonts/Pretendard-ExtraBold.woff2') format('woff2'),
+    url('/fonts/Pretendard-ExtraBold.woff') format('woff');
+  font-weight: 800;
+  font-style: normal;
+}

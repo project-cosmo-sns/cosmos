@@ -1,0 +1,25 @@
+.follow-button {
+  font-size: 1.4rem;
+  font-weight: 600;
+  width: 72px;
+  height: 32px;
+  border-radius: 5px;
+  border: none;
+  opacity: 0px;
+  color: $white-01;
+  background-color: $black-01;
+  cursor: pointer;
+
+  &.isActive {
+    color: $black-02;
+    background-color: $gray-02;
+  }
+}
+
+.delete-button {
+  @include font-style(1.4rem, $white-01, 600);
+  width: 72px;
+  height: 32px;
+  background: $black-01;
+  border-radius: 5px;
+}

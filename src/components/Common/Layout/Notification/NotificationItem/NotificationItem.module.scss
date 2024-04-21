@@ -1,0 +1,33 @@
+.notification-item {
+  @include flex-arrange(flex-start, center);
+  gap: 6px;
+  margin-bottom: 12px;
+  line-height: 1.5em;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  p {
+    span {
+      padding-left: 5px;
+      color: $gray-01;
+    }
+  }
+
+  .notification-dot {
+    display: block;
+    min-width: 12px;
+    min-height: 12px;
+    background: $primary-01;
+    border-radius: 50%;
+
+    &.isRead {
+      background: transparent;
+    }
+  }
+}

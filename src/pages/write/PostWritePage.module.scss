@@ -1,0 +1,44 @@
+.wrapper {
+  @include flex-arrange(flex-start, flex-start);
+  flex-direction: column;
+  width: 100%;
+  gap: 40px;
+  padding: 20px;
+  background: $white-01;
+
+  overflow-y: scroll;
+  height: 75vh;
+
+  position: relative;
+
+  @include font-style(2rem, $black-01, 700);
+}
+
+.back {
+  position: absolute;
+  top: 30px;
+  bottom: 20px;
+}
+
+.title {
+  margin: 5rem 0 8px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    width: 614px;
+    padding: 30px;
+    border-radius: 10px;
+  }
+
+  .back {
+    top: 40px;
+    left: 30px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .wrapper {
+    width: 740px;
+  }
+}

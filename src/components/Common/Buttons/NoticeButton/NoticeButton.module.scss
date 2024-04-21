@@ -1,0 +1,22 @@
+@media (min-width: 1200px) {
+  .notice-button {
+    font-size: 1.4rem;
+    font-weight: 600;
+    top: 26px;
+    left: 20px;
+    width: 89px;
+    height: 32px;
+    gap: 10px;
+    border-radius: 100px;
+    border: none;
+    opacity: 0px;
+    color: $white-01;
+    background-color: $black-01;
+    cursor: pointer;
+
+    &.isActive {
+      color: $black-01;
+      background-color: $gray-03;
+    }
+  }
+}

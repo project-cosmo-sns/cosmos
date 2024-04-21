@@ -1,0 +1,48 @@
+.image-container {
+  width: 320px;
+  height: 170px;
+  .image-label {
+    @include flex-arrange(center, center);
+    width: 100%;
+    height: 100%;
+    position: relative;
+    flex-direction: column;
+    background: $gray-03;
+    border-radius: 5px;
+    gap: 10px;
+    cursor: pointer;
+    span {
+      @include font-style(1.2rem, $gray-01, 600);
+    }
+    img {
+      border-radius: 5px;
+    }
+  }
+  .image-input {
+    display: none;
+  }
+}
+
+.feedImage {
+  @extend .image-container;
+  width: 110px;
+  height: 110px;
+}
+
+.profileImage {
+  width: 86px;
+  height: 86px;
+  .image-label {
+    border-radius: 50%;
+  }
+  .camera-container {
+    @include flex-arrange(center, center);
+    width: 28px;
+    height: 28px;
+    background: $white-01;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+}

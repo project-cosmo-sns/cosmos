@@ -1,0 +1,39 @@
+.wrapper {
+  @include flex-arrange;
+  flex-direction: column;
+  width: 100%;
+  gap: 40px;
+}
+
+.container {
+  @include flex-arrange(center, flex-start);
+  width: 100%;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  border-radius: 5px;
+  background: $gray-03;
+  padding: 12px 20px;
+}
+
+.title {
+  height: 48px;
+}
+
+.subtitle {
+  @include font-style(1.6rem, $black-01, 700);
+}
+
+.editor {
+  width: 100%;
+  height: 420px;
+  resize: none;
+  border-radius: 5px;
+  padding: 15px 20px;
+  background: $gray-03;
+}
