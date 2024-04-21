@@ -3,13 +3,6 @@ export type useOutSideClickProps = {
   callback: () => void;
 };
 
-export type CategoryType =
-  | '공지사항'
-  | '이벤트'
-  | '특강'
-  | '정보공유'
-  | '오늘의 질문';
-
 export type ModalPropsType = {
   modalVisible: boolean;
   toggleModal: React.Dispatch<React.SetStateAction<boolean>>;
