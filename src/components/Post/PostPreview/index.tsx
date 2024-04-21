@@ -5,6 +5,7 @@ import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import styles from './PostPreview.module.scss';
 import { MouseEvent } from 'react';
+import { MARKDOWN_SYMBOL_REGEX } from '@/constants/regexPattern';
 
 interface PostPreviewProps {
   postData: PostData;
@@ -37,7 +38,9 @@ export default function PostPreview({ postData }: PostPreviewProps) {
       onClick={() => router.push(`/post/${postId}`)}
     >
       <AuthorProfile author={author} createdAt={formattedCreatedAt} />
-      <div className={cn('content')}>{content}</div>
+      <div className={cn('content')}>
+        {content.replace(MARKDOWN_SYMBOL_REGEX, '').trim()}
+      </div>
       <ReactionContainer
         emoji={emoji}
         commentsCount={comments.length}
