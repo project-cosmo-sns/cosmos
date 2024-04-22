@@ -10,18 +10,22 @@ export default function SearchInput() {
   const [search, setSearch] = useState<string>('');
   const router = useRouter();
 
-  const handleSearchChange = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => {
-    setSearch(value);
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const handleSearch = () => {
+    if (search.trim() !== '') {
+      console.log('검색', search);
+      router.push(`/search?query=${encodeURIComponent(search)}`);
+    } else {
+      console.log('검색어 비어있음');
+    }
   };
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && search.trim() !== '') {
-      console.log('검색 엔터', search);
-      router.push(`/search?query=${encodeURIComponent(search)}`);
-    } else if (e.key === 'Enter') {
-      console.log('검색어 비어있음');
+    if (e.key === 'Enter') {
+      handleSearch();
     }
   };
 
@@ -31,10 +35,10 @@ export default function SearchInput() {
         type="text"
         placeholder="검색"
         value={search}
-        onChange={handleSearchChange}
+        onChange={handleInputChange}
         onKeyPress={handleKeyPress}
       />
-      <GlassIcon className={cn('search-icon')} />
+      <GlassIcon className={cn('search-icon')} onClick={handleSearch} />
     </div>
   );
 }
