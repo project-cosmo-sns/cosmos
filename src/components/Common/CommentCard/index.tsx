@@ -75,6 +75,8 @@ export default function CommentCard({ comment }: CommentCardProps) {
               title="삭제 모달"
               modalVisible={isDeleteModalOpen}
               toggleModal={setIsDeleteModalOpen}
+              cssComponentDisplay={cn('')}
+              cssModalSize={cn('')}
             >
               <div>하이</div>
             </Modal>

@@ -33,6 +33,8 @@ export default function ProfileEditModal({
           modalVisible={isOpen}
           toggleModal={setIsOpen}
           title="프로필 수정"
+          cssComponentDisplay={cn('')}
+          cssModalSize={cn('')}
         >
           <div className={cn('modal-wrapper')}>
             <div className={cn('profile-image-edit')}>

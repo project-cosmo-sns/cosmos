@@ -1,4 +1,4 @@
-.modal-layout-container {
+.container {
   @include flex-arrange;
   position: fixed;
   top: 0;
@@ -8,42 +8,42 @@
   background: rgba(0, 0, 0, 0.6);
   z-index: 99999;
 
-  .modal-layout-wrapper {
+  .wrapper {
     display: flex;
     position: relative;
     flex-direction: column;
-    gap: 12px;
     background-color: $white-01;
-    height: 100vh;
-    width: 100vw;
+    width: 100%;
+    height: 100%;
     padding: {
-      top: 50px;
+      top: 30px;
       bottom: 30px;
       right: 20px;
       left: 20px;
     }
     @media (min-width: 768px) {
       border-radius: 10px;
-      height: auto;
-      width: 614px;
     }
-    @media (min-width: 1200px) {
-      width: 740px;
-    }
-    .modal-layout-x {
+
+    .x {
       position: absolute;
       cursor: pointer;
       top: 20px;
       right: 20px;
     }
-    .modal-layout-title {
+
+    .title {
       @include font-style(2rem, $black-01, 700);
       margin: 0 auto;
+      flex-shrink: 0;
+      padding: {
+        top: 10px;
+        bottom: 30px;
+      }
     }
-    .modal-layout-component {
-      @include flex-arrange;
+
+    .component {
       background-color: $white-01;
-      padding: 0 auto;
       flex-grow: 1;
     }
   }

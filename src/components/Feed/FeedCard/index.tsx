@@ -15,6 +15,7 @@ interface FeedCardTypes {
   eyeCount: number;
   modalVisible?: boolean;
   toggleModal?: Dispatch<SetStateAction<boolean>>;
+  hasPadding: boolean;
 }
 
 const cn = classNames.bind(styles);
@@ -30,14 +31,15 @@ export default function FeedCard({
   eyeCount = 0,
   modalVisible = false,
   toggleModal,
+  hasPadding,
 }: FeedCardTypes) {
   return (
     <div
       onClick={() => toggleModal && toggleModal(!modalVisible)}
-      className={cn('feed-card-container')}
+      className={cn('container', hasPadding && 'padding')}
     >
-      <div className={cn('feed-card-wrapper')}>
-        <div className={cn('feed-card-user')}>
+      <div className={cn('wrapper')}>
+        <div className={cn('user')}>
           <div className={cn('user-image')}>
             <Image
               fill
@@ -53,8 +55,8 @@ export default function FeedCard({
             <div className={cn('createdAt')}>{date}</div>
           </div>
         </div>
-        <div className={cn('feed-card-content')}>{content}</div>
-        <div className={cn('feed-card-interaction')}>
+        <div className={cn('content')}>{content}</div>
+        <div className={cn('interaction')}>
           <div className={cn('interaction-wrapper')}>
             <div className={cn('interaction-emoji')}>
               <div className={cn('emoji-wrapper')}>

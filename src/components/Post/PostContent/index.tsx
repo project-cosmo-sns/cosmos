@@ -53,6 +53,8 @@ export default function PostContent({ isMyPost, postData }: PostContentProps) {
             title="삭제 모달"
             modalVisible={isDeleteModalOpen}
             toggleModal={setIsDeleteModalOpen}
+            cssComponentDisplay={cn('')}
+            cssModalSize={cn('')}
           >
             <div>하이</div>
           </Modal>
