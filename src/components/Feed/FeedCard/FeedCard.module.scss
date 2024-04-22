@@ -1,19 +1,8 @@
-@mixin FEED_CARD_SIZE_SMALL {
-  width: 360px;
-}
-@mixin FEED_CARD_SIZE_MEDIUM {
-  width: 566px;
-}
-@mixin FEED_CARD_SIZE_LARGE {
-  width: 692px;
-}
-
 .padding {
   padding: 16px;
 }
 
 .container {
-  @include FEED_CARD_SIZE_SMALL;
   @include flex-arrange;
   border-radius: 10px;
   width: 100%;

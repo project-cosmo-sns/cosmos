@@ -3,6 +3,12 @@ import { Dispatch, SetStateAction } from 'react';
 import TermBadge from '@/components/Common/Badge/TermBadge';
 import classNames from 'classnames/bind';
 import styles from './FeedCard.module.scss';
+import {
+  CommentIcon,
+  EmojiIcon,
+  EyeIcon,
+  ProfileIcon,
+} from '@/components/Common/IconCollection';
 
 interface FeedCardTypes {
   userImage: string;
@@ -41,11 +47,7 @@ export default function FeedCard({
       <div className={cn('wrapper')}>
         <div className={cn('user')}>
           <div className={cn('user-image')}>
-            <Image
-              fill
-              src={userImage || '/images/profile.svg'}
-              alt="user-profile"
-            />
+            <ProfileIcon />
           </div>
           <div className={cn('user-wrapper')}>
             <div className={cn('info')}>
@@ -60,29 +62,19 @@ export default function FeedCard({
           <div className={cn('interaction-wrapper')}>
             <div className={cn('interaction-emoji')}>
               <div className={cn('emoji-wrapper')}>
-                <Image
-                  width={18}
-                  height={18}
-                  src="/images/emoji.svg"
-                  alt="emoji"
-                />
+                <EmojiIcon width="18" height="18" />
                 <span>{emojiCount}</span>
               </div>
             </div>
             <div className={cn('interaction-comment')}>
               <div className={cn('comment-wrapper')}>
-                <Image
-                  width={18}
-                  height={18}
-                  src="/images/comment.svg"
-                  alt="comment"
-                />
+                <CommentIcon width="18" height="18" />
                 <span>{commentCount}</span>
               </div>
             </div>
             <div className={cn('interaction-eye')}>
               <div className={cn('eye-wrapper')}>
-                <Image width={18} height={18} src="/images/eye.svg" alt="eye" />
+                <EyeIcon width="18" height="18" />
                 <span>{eyeCount}</span>
               </div>
             </div>
