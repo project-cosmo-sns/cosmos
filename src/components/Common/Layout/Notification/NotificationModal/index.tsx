@@ -23,7 +23,8 @@ export default function NotificationModal({
       title="알림 설정"
       modalVisible={isOpen}
       toggleModal={setIsOpen}
-      className={cn('notification-modal')}
+      cssComponentDisplay={cn('')}
+      cssModalSize={cn('')}
     >
       <div className={cn('notification-modal-wrapper')}>
         {/* 모달 내 style 설정 때문에 임시로 감쌀 div 하나 추가. 추후 개선되면 삭제 예정 */}
