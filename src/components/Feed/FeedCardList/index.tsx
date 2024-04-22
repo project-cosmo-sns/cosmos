@@ -11,7 +11,7 @@ export default function FeedCardList() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   return (
     <>
-      <div className={cn('feed-card-list-container')}>
+      <div className={cn('container')}>
         {MOCKDATA.map(
           ({
             term,

@@ -30,7 +30,7 @@ export default function FeedDetails() {
     eyeCount,
   } = MOCKDATA2[0];
   return (
-    <div className={cn('feed-details-container')}>
+    <div className={cn('container')}>
       <FeedCard
         userImage={userImage}
         userName={userName}
