@@ -36,6 +36,10 @@
       @include font-style(2rem, $black-01, 700);
       margin: 0 auto;
       flex-shrink: 0;
+      padding: {
+        top: 10px;
+        bottom: 30px;
+      };
     }
 
     .component {
