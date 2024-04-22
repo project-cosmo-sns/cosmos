@@ -11,7 +11,6 @@
 .container {
   @include FEED_CARD_SIZE_SMALL;
   @include flex-arrange;
-  padding: 16px;
   border-radius: 10px;
   width: 100%;
   background-color: $white-01;

@@ -5,7 +5,7 @@ import * as Icon from '@/components/Common/IconCollection/index';
 
 interface ModalType {
   children: ReactNode;
-  title: string;
+  title?: string;
   modalVisible: boolean;
   className?: string;
   toggleModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -30,15 +30,17 @@ export default function Modal({
 }: ModalType) {
   const cn = classNames.bind(styles);
   return (
-    <div className={cn('modal-layout-container', className)}>
-      <div className={cn('modal-layout-wrapper')}>
+    <div className={cn('container', className)}>
+      <div className={cn('wrapper')}>
         <div role="presentation" onClick={() => toggleModal(!modalVisible)}>
-          <Icon.XIcon className={cn('modal-layout-x')} width="18" height="18" />
+          <Icon.XIcon className={cn('x')} width="18" height="18" />
         </div>
-        <div className={cn('modal-layout-title')}>
-          <span>{title}</span>
-        </div>
-        <div className={cn('modal-layout-component')}>{children}</div>
+        {title && (
+          <div className={cn('title')}>
+            <span>{title}</span>
+          </div>
+        )}
+        <div className={cn('component')}>{children}</div>
       </div>
     </div>
   );
