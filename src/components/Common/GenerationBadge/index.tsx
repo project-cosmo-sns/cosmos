@@ -8,12 +8,12 @@ type GenerationType = {
 const cn = classNames.bind(styles);
 export default function GenerationBadge({ generationInfo }: GenerationType) {
   const generationColor = [
-    '#FFB6C1 ',
-    '#a8a8a8',
-    '#E6E6FA',
-    '#F0E68C',
-    '#FFE4B5',
-    '#FFA07A ',
+    '#FFEAEA ',
+    '#FFE1CC',
+    '#FFF1BE',
+    '#DDF2C8',
+    '#D5EEFF',
+    '#F0E4FF ',
   ];
 
   if (generationInfo === undefined) {
