@@ -1,6 +1,7 @@
 .follow-wrapper {
   @include flex-arrange(space-between, center);
   padding-top: 16px;
+  width: 320px;
 
   .follow-info {
     @include flex-arrange(center);

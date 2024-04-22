@@ -21,11 +21,11 @@ export default function AuthForm({
       title="회원인증"
       modalVisible={modalVisible}
       toggleModal={toggleModal}
-      cssComponentDisplay={cn('')}
-      cssModalSize={cn('')}
+      cssModalSize={cn('auth-container')}
+      cssComponentDisplay={cn('auth-wrapper')}
     >
       <form
-        className={cn('authForm-container')}
+        className={cn('auth-Form')}
         onSubmit={handleSubmit((data) => console.log(data))}
       >
         <div className={cn('auth-generation')}>
