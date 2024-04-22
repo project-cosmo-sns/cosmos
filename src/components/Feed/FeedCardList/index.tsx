@@ -40,17 +40,14 @@ export default function FeedCardList() {
           ),
         )}
       </div>
-      <div>
-        {isModalOpen && (
-          <Modal
-            title=""
-            toggleModal={setIsModalOpen}
-            modalVisible={isModalOpen}
-          >
-            <FeedDetails />
-          </Modal>
-        )}
-      </div>
+      <Modal
+        toggleModal={setIsModalOpen}
+        modalVisible={isModalOpen}
+        cssModalSize={cn('feed-detail-modalSize')}
+        cssComponentDisplay={cn('feed-detail-componentDisplay')}
+      >
+        <FeedDetails />
+      </Modal>
     </>
   );
 }

@@ -13,8 +13,8 @@
     position: relative;
     flex-direction: column;
     background-color: $white-01;
-    height: 100vh;
-    width: 100vw;
+    width: 100%;
+    height: 100%;
     padding: {
       top: 30px;
       bottom: 30px;
@@ -23,27 +23,23 @@
     }
     @media (min-width: 768px) {
       border-radius: 10px;
-      height: auto;
-      width: 614px;
     }
-    @media (min-width: 1200px) {
-      width: 740px;
-    }
+
     .x {
       position: absolute;
       cursor: pointer;
       top: 20px;
       right: 20px;
     }
+
     .title {
       @include font-style(2rem, $black-01, 700);
       margin: 0 auto;
       flex-shrink: 0;
     }
+
     .component {
-      @include flex-arrange;
       background-color: $white-01;
-      padding: 0 auto;
       flex-grow: 1;
     }
   }
