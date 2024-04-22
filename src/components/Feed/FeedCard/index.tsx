@@ -15,6 +15,7 @@ interface FeedCardTypes {
   eyeCount: number;
   modalVisible?: boolean;
   toggleModal?: Dispatch<SetStateAction<boolean>>;
+  hasPadding: boolean;
 }
 
 const cn = classNames.bind(styles);
@@ -30,11 +31,12 @@ export default function FeedCard({
   eyeCount = 0,
   modalVisible = false,
   toggleModal,
+  hasPadding,
 }: FeedCardTypes) {
   return (
     <div
       onClick={() => toggleModal && toggleModal(!modalVisible)}
-      className={cn('container')}
+      className={cn('container', hasPadding && 'padding')}
     >
       <div className={cn('wrapper')}>
         <div className={cn('user')}>

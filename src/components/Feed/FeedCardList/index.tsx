@@ -35,6 +35,7 @@ export default function FeedCardList() {
               eyeCount={eyeCount}
               modalVisible={isModalOpen}
               toggleModal={setIsModalOpen}
+              hasPadding
             />
           ),
         )}

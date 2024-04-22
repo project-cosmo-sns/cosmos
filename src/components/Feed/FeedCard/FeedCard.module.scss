@@ -8,6 +8,10 @@
   width: 692px;
 }
 
+.padding {
+  padding: 16px;
+}
+
 .container {
   @include FEED_CARD_SIZE_SMALL;
   @include flex-arrange;
