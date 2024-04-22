@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import styles from './Modal.module.scss';
 import classNames from 'classnames/bind';
 import * as Icon from '@/components/Common/IconCollection/index';
+import ModalPortal from './ModalPortal';
 
 interface ModalType {
   children: ReactNode;
@@ -38,26 +39,28 @@ export default function Modal({
   return (
     <div>
       {modalVisible && (
-        <div className={cn('container', className)}>
-          <div className={cn(cssModalSize)}>
-            <div className={cn('wrapper')}>
-              <div
-                role="presentation"
-                onClick={() => toggleModal(!modalVisible)}
-              >
-                <Icon.XIcon className={cn('x')} width="18" height="18" />
-              </div>
-              {title && (
-                <div className={cn('title')}>
-                  <span>{title}</span>
+        <ModalPortal>
+          <div className={cn('container', className)}>
+            <div className={cn(cssModalSize)}>
+              <div className={cn('wrapper')}>
+                <div
+                  role="presentation"
+                  onClick={() => toggleModal(!modalVisible)}
+                >
+                  <Icon.XIcon className={cn('x')} width="18" height="18" />
                 </div>
-              )}
-              <div className={cn('component', cssComponentDisplay)}>
-                {children}
+                {title && (
+                  <div className={cn('title')}>
+                    <span>{title}</span>
+                  </div>
+                )}
+                <div className={cn('component', cssComponentDisplay)}>
+                  {children}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </ModalPortal>
       )}
     </div>
   );
