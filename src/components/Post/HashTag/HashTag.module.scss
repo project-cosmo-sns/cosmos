@@ -7,28 +7,9 @@
   border-radius: 5px;
 }
 
-// 태그 컬러 미정이라 임시로 색상 지정
-.red {
-  color: rgb(223, 105, 105);
-  background: rgb(246, 203, 203);
-}
-
-.orange {
-  color: rgb(215, 116, 35);
-  background: rgb(241, 213, 189);
-}
-
-.yellow {
-  color: rgb(196, 141, 15);
-  background: rgb(255, 237, 196);
-}
-
-.green {
-  color: rgb(87, 113, 87);
-  background: rgb(198, 222, 199);
-}
-
-.blue {
-  color: rgb(67, 92, 115);
-  background: rgb(190, 211, 231);
+@each $hashtag, $colors in $hashtag-colors {
+  .#{$hashtag} {
+    background-color: nth($colors, 1);
+    color: nth($colors, 2);
+  }
 }
