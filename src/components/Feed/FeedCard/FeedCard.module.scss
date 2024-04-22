@@ -10,88 +10,9 @@
   .wrapper {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     width: 100%;
     gap: 15px;
-    .user {
-      display: flex;
-      gap: 3px;
-      .user-image {
-        @include flex-arrange;
-        position: relative;
-        background-color: $gray-01;
-        width: 40px;
-        height: 40px;
-        border-radius: 100px;
-      }
-      .user-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        .info {
-          display: flex;
-          align-items: center;
-          gap: 5px;
-          .name {
-            font-size: 1.4rem;
-          }
-        }
-        .createdAt {
-          font-size: 1.2rem;
-          color: $black-03;
-        }
-      }
-    }
-    .interaction {
-      .interaction-wrapper {
-        display: flex;
-        justify-content: space-between;
-        border-radius: 5px;
-        .interaction-emoji {
-          @include flex-arrange;
-          flex-grow: 1;
-          .emoji-wrapper {
-            display: flex;
-            align-items: center;
-            font-size: 1.2rem;
-            gap: 8px;
-            color: $gray-01;
-          }
-          &:hover {
-            background-color: $gray-03;
-          }
-        }
-        .interaction-comment {
-          @include flex-arrange;
-          flex-grow: 1;
-          border-radius: 5px;
-          .comment-wrapper {
-            display: flex;
-            align-items: center;
-            font-size: 1.2rem;
-            gap: 8px;
-            color: $gray-01;
-          }
-          &:hover {
-            background-color: $gray-03;
-          }
-        }
-        .interaction-eye {
-          @include flex-arrange;
-          flex-grow: 1;
-          border-radius: 5px;
-          .eye-wrapper {
-            display: flex;
-            align-items: center;
-            font-size: 1.2rem;
-            gap: 8px;
-            color: $gray-01;
-          }
-          &:hover {
-            background-color: $gray-03;
-          }
-        }
-      }
-    }
   }
   transition: transform 0.15s ease-in-out;
 
