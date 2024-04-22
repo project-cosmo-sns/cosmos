@@ -37,7 +37,7 @@ export default function Modal({
 }: ModalType) {
   const cn = classNames.bind(styles);
   return (
-    <div>
+    <div className="Modal">
       {modalVisible && (
         <ModalPortal>
           <div className={cn('container', className)}>
