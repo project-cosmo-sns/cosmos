@@ -25,6 +25,7 @@ export default function NotificationModal({
       toggleModal={setIsOpen}
       cssComponentDisplay={cn('')}
       cssModalSize={cn('')}
+      className={cn('notification-modal')}
     >
       <div className={cn('notification-modal-wrapper')}>
         {/* 모달 내 style 설정 때문에 임시로 감쌀 div 하나 추가. 추후 개선되면 삭제 예정 */}

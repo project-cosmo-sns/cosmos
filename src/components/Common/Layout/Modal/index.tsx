@@ -10,6 +10,7 @@ interface ModalType {
   toggleModal: React.Dispatch<React.SetStateAction<boolean>>;
   cssModalSize: string;
   cssComponentDisplay: string;
+  className?: string;
 }
 
 /**
@@ -31,12 +32,13 @@ export default function Modal({
   modalVisible,
   cssModalSize,
   cssComponentDisplay,
+  className,
 }: ModalType) {
   const cn = classNames.bind(styles);
   return (
     <div>
       {modalVisible && (
-        <div className={cn('container')}>
+        <div className={cn('container', className)}>
           <div className={cn(cssModalSize)}>
             <div className={cn('wrapper')}>
               <div
