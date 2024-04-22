@@ -1,18 +1,12 @@
-import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
-import TermBadge from '@/components/Common/Badge/TermBadge';
 import classNames from 'classnames/bind';
 import styles from './FeedCard.module.scss';
+import AuthorProfile from '@/components/Common/AuthorProfile';
+import ReactionContainer from '@/components/Common/ReactionContainer';
+import { FeedData } from '../FeedCardList/mockData';
 
 interface FeedCardTypes {
-  userImage: string;
-  userName: string;
-  term: number;
-  date: string;
-  content: string;
-  emojiCount: number;
-  commentCount: number;
-  eyeCount: number;
+  feedData: FeedData;
   modalVisible?: boolean;
   toggleModal?: Dispatch<SetStateAction<boolean>>;
   hasPadding: boolean;
@@ -21,73 +15,26 @@ interface FeedCardTypes {
 const cn = classNames.bind(styles);
 
 export default function FeedCard({
-  userImage = '',
-  userName = '코스모스',
-  term = 0,
-  date = '2024.4.11',
-  content = '',
-  emojiCount = 0,
-  commentCount = 0,
-  eyeCount = 0,
+  feedData,
   modalVisible = false,
   toggleModal,
   hasPadding,
 }: FeedCardTypes) {
+  const { author, createdAt, content, reactionCount, commentsCount, eyeCount } =
+    feedData;
   return (
     <div
       onClick={() => toggleModal && toggleModal(!modalVisible)}
       className={cn('container', hasPadding && 'padding')}
     >
       <div className={cn('wrapper')}>
-        <div className={cn('user')}>
-          <div className={cn('user-image')}>
-            <Image
-              fill
-              src={userImage || '/images/profile.svg'}
-              alt="user-profile"
-            />
-          </div>
-          <div className={cn('user-wrapper')}>
-            <div className={cn('info')}>
-              <div className={cn('name')}>{userName}</div>
-              <TermBadge term={term} />
-            </div>
-            <div className={cn('createdAt')}>{date}</div>
-          </div>
-        </div>
+        <AuthorProfile author={author} createdAt={createdAt} />
         <div className={cn('content')}>{content}</div>
-        <div className={cn('interaction')}>
-          <div className={cn('interaction-wrapper')}>
-            <div className={cn('interaction-emoji')}>
-              <div className={cn('emoji-wrapper')}>
-                <Image
-                  width={18}
-                  height={18}
-                  src="/images/emoji.svg"
-                  alt="emoji"
-                />
-                <span>{emojiCount}</span>
-              </div>
-            </div>
-            <div className={cn('interaction-comment')}>
-              <div className={cn('comment-wrapper')}>
-                <Image
-                  width={18}
-                  height={18}
-                  src="/images/comment.svg"
-                  alt="comment"
-                />
-                <span>{commentCount}</span>
-              </div>
-            </div>
-            <div className={cn('interaction-eye')}>
-              <div className={cn('eye-wrapper')}>
-                <Image width={18} height={18} src="/images/eye.svg" alt="eye" />
-                <span>{eyeCount}</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ReactionContainer
+          emoji={reactionCount}
+          commentsCount={commentsCount}
+          views={eyeCount}
+        />
       </div>
     </div>
   );
