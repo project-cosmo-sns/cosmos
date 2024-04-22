@@ -5,6 +5,8 @@ import Input from '@/components/Common/Input';
 import Modal from '@/components/Common/Layout/Modal';
 import classNames from 'classnames/bind';
 import styles from './AuthForm.module.scss';
+import { useForm } from 'react-hook-form';
+import { generationRegex } from '@/utils/generationRegex';
 
 const cn = classNames.bind(styles);
 
@@ -12,19 +14,27 @@ export default function AuthForm({
   modalVisible,
   toggleModal,
 }: ModalPropsType) {
-  const submitClick = () => {
-    console.log('제출완료!');
-  };
+  const { register, handleSubmit } = useForm();
+
   return (
     <Modal
       title="회원인증"
       modalVisible={modalVisible}
       toggleModal={toggleModal}
     >
-      <form className={cn('authForm-container')}>
+      <form
+        className={cn('authForm-container')}
+        onSubmit={handleSubmit((data) => console.log(data))}
+      >
         <div className={cn('auth-generation')}>
           <h2>기수</h2>
-          <Input placeholder="기수를 입력하세요. ex) 3" />
+          <Input
+            type="text"
+            placeholder="기수를 입력하세요. ex) 3"
+            register={register('generation', {
+              required: '기수를 입력하세요.',
+            })}
+          />
         </div>
         <div className={cn('auth-image')}>
           <h2>스프린터 인증</h2>
@@ -35,7 +45,7 @@ export default function AuthForm({
           buttonType="button"
           size="modal"
           color="primary-01"
-          onClick={submitClick}
+          onClick={handleSubmit((data) => console.log(data))}
         >
           제출
         </DefaultButton>
