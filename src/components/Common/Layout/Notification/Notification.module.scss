@@ -1,16 +1,40 @@
 .notification-popover {
-  width: 360px;
-  height: 648px;
   overflow-y: scroll;
   padding: 30px 20px;
-  top: -40px;
-  left: 90px;
-  z-index: 9999;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 999;
+  border-radius: 0;
+
+  @media (min-width: 768px) {
+    width: 360px;
+    height: 648px;
+    top: -40px;
+    left: 90px;
+    border-radius: 10px;
+  }
+
+  .notification-close {
+    position: absolute;
+    left: 20px;
+    top: 32px;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
+  }
 
   .setting-icon {
     position: absolute;
     right: 20px;
-    top: 20px;
+    top: 27px;
+
+    @media (min-width: 48rem) {
+      top: 20px;
+    }
   }
 
   h2 {

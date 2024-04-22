@@ -1,16 +1,32 @@
 .notification-modal {
-  transform: translate(-27.2vw, -11.6vh);
+  text-align: center;
+
+  @media (min-width: 768px) {
+    transform: translate(-27.2vw, -11.6vh);
+  }
 
   .notification-modal-wrapper {
-    margin-top: 30px;
-    display: flex;
+    margin-top: 40px;
+    width: 100%;
+    height: 100%;
+    @include flex-arrange(space-between, center);
     flex-direction: column;
-    align-items: center;
-    gap: 20px;
+
+    .notification-modal-container {
+      @include flex-arrange(flex-start, center);
+      flex-direction: column;
+      gap: 25px;
+      width: 100%;
+
+      @media (min-width: 768px) {
+        width: 50%;
+        margin: 0 auto 30px;
+      }
+    }
   }
 
   .notification-modal-item {
-    width: 30%;
+    width: 100%;
     @include flex-arrange(space-between, center);
 
     h3 {
