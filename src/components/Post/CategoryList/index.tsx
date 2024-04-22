@@ -1,4 +1,4 @@
-import { CategoryType } from '@/@types/type';
+import { CategoryType } from '@/pages/post/[postId]/mockData';
 import CategoryFlag from '../CategoryFlag';
 import classNames from 'classnames/bind';
 import styles from './CategoryList.module.scss';

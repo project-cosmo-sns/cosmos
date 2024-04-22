@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.edit-button {
+  padding: 4px 20px;
+  border-radius: 5px;
+  background-color: $primary-01;
+  color: $white-01;
+}

@@ -1,7 +1,13 @@
-.feed-details-container {
+.wrapper {
+  @include flex-arrange(center, flex-start);
+  flex-direction: column;
+  width: 100%;
+}
+
+.comment-container {
+  margin: 20px 0;
   display: flex;
   flex-direction: column;
-  gap: 20px;
   width: 100%;
 }
 

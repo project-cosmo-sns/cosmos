@@ -1,6 +1,15 @@
 import classNames from 'classnames/bind';
 import styles from './DefaultButton.module.scss';
-import DefaultButtonType from './DefaultButtonType';
+
+interface DefaultButtonType {
+  children: string;
+  buttonType?: 'button' | 'submit';
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  size: 'small' | 'medium' | 'large' | 'modal';
+  color: string;
+}
+
+const cn = classNames.bind(styles);
 
 /**
  *
@@ -11,8 +20,6 @@ import DefaultButtonType from './DefaultButtonType';
  * @param {string} color : 버튼 색상 설정 (컬러 변수 값 입력 ex)'primary-01')
  * @returns button
  */
-
-const cn = classNames.bind(styles);
 
 export default function DefaultButton({
   children,

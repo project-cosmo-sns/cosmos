@@ -1,5 +1,5 @@
 .wrapper {
-  @include flex-arrange(flex-start, flex-start);
+  @include flex-arrange(flex-start, flex-end);
   flex-direction: column;
   width: 100%;
   gap: 40px;
@@ -7,7 +7,7 @@
   background: $white-01;
 
   overflow-y: scroll;
-  height: 75vh;
+  height: 84vh;
 
   position: relative;
 
@@ -16,12 +16,19 @@
 
 .back {
   position: absolute;
-  top: 30px;
-  bottom: 20px;
+  top: 33px;
+  left: 20px;
 }
 
 .title {
-  margin: 5rem 0 8px;
+  margin: 1rem 0 8px;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.button-container {
+  width: 100%;
 }
 
 @media (min-width: 768px) {
@@ -32,8 +39,12 @@
   }
 
   .back {
-    top: 40px;
+    top: 43px;
     left: 30px;
+  }
+
+  .button-container {
+    width: 156px;
   }
 }
 

@@ -1,0 +1,4 @@
+.edit {
+  @include flex-arrange(space-between, center);
+  gap: 24px;
+}

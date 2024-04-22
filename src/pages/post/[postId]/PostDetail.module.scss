@@ -4,9 +4,11 @@
   padding: 20px;
   width: 100%;
   background-color: $white-01;
+  gap: 12px;
 
-  height: 75vh;
+  height: 84vh;
   overflow-y: scroll;
+  overflow-x: hidden;
 
   position: relative;
 }
@@ -15,51 +17,6 @@
   position: absolute;
   top: 30px;
   bottom: 20px;
-}
-
-.category {
-  @include font-style(1.6rem, $gray-01, 500);
-  margin: 5rem 0 8px;
-}
-
-.title {
-  @include font-style(2.4rem, $black-01, 700);
-  margin-bottom: 20px;
-}
-
-.header {
-  @include flex-arrange(space-between, center);
-  width: 100%;
-}
-
-.edit {
-  @include flex-arrange(space-between, center);
-  gap: 24px;
-}
-
-.divide-line {
-  width: 100%;
-  height: 1px;
-  background-color: $gray-02;
-  margin: 16px 0;
-}
-
-.content {
-  margin-bottom: 16px;
-}
-
-.hashtag-container {
-  display: flex;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-bottom: 16px;
-}
-
-.comment-container {
-  margin: 20px 0;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
 }
 
 @media (min-width: 768px) {
