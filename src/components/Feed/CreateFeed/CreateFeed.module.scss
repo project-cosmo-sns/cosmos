@@ -32,6 +32,9 @@
         padding-top: 16px;
         border-radius: 5px;
         @include font-style(1.6rem);
+        @media (min-width: 768px) {
+          height: 104px;
+        }
       }
 
       .addImage {
