@@ -8,19 +8,22 @@
   width: 692px;
 }
 
-.feed-card-container {
+.padding {
+  padding: 16px;
+}
+
+.container {
   @include FEED_CARD_SIZE_SMALL;
   @include flex-arrange;
-  padding: 16px;
   border-radius: 10px;
   width: 100%;
   background-color: $white-01;
-  .feed-card-wrapper {
+  .wrapper {
     display: flex;
     flex-direction: column;
     width: 100%;
     gap: 15px;
-    .feed-card-user {
+    .user {
       display: flex;
       gap: 3px;
       .user-image {
@@ -49,7 +52,7 @@
         }
       }
     }
-    .feed-card-interaction {
+    .interaction {
       .interaction-wrapper {
         display: flex;
         justify-content: space-between;

@@ -23,6 +23,8 @@ export default function NotificationModal({
       title="알림 설정"
       modalVisible={isOpen}
       toggleModal={setIsOpen}
+      cssComponentDisplay={cn('')}
+      cssModalSize={cn('')}
       className={cn('notification-modal')}
     >
       <div className={cn('notification-modal-wrapper')}>

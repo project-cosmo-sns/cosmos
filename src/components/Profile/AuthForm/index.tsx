@@ -21,6 +21,8 @@ export default function AuthForm({
       title="회원인증"
       modalVisible={modalVisible}
       toggleModal={toggleModal}
+      cssComponentDisplay={cn('')}
+      cssModalSize={cn('')}
     >
       <form
         className={cn('authForm-container')}

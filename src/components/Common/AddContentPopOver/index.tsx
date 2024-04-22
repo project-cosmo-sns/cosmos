@@ -30,15 +30,15 @@ export default function AddContentPopOver({ onClose }: PopOverProps) {
           <span>포스트 작성하기</span>
         </li>
       </ul>
-      {isModalOpen && (
-        <Modal
-          modalVisible={isModalOpen}
-          toggleModal={setIsModalOpen}
-          title="피드 생성"
-        >
-          <CreateFeed />
-        </Modal>
-      )}
+      <Modal
+        title="피드 생성"
+        modalVisible={isModalOpen}
+        toggleModal={setIsModalOpen}
+        cssModalSize={cn('create-feed-modalSize')}
+        cssComponentDisplay={cn('')}
+      >
+        <CreateFeed />
+      </Modal>
     </PopOver>
   );
 }

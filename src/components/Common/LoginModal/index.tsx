@@ -16,6 +16,8 @@ export default function LoginModal({
       title="타이틀 안나오기"
       modalVisible={modalVisible}
       toggleModal={toggleModal}
+      cssComponentDisplay={cn('')}
+      cssModalSize={cn('')}
     >
       <div className={cn('login-container')}>
         <LogoIcon width="105" height="30" />

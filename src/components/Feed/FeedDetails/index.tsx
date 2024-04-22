@@ -30,7 +30,7 @@ export default function FeedDetails() {
     eyeCount,
   } = MOCKDATA2[0];
   return (
-    <div className={cn('feed-details-container')}>
+    <div className={cn('container')}>
       <FeedCard
         userImage={userImage}
         userName={userName}
@@ -40,6 +40,7 @@ export default function FeedDetails() {
         emojiCount={emojiCount}
         commentCount={commentCount}
         eyeCount={eyeCount}
+        hasPadding={false}
       />
       <CommentInput
         placeholder="댓글을 입력하세요"
