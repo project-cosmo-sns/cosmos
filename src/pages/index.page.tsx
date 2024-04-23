@@ -1,5 +1,6 @@
 import { ContainerOptionType } from '@/@types/type';
 import ContentContainer from '@/components/Common/ContentContainer';
+import TodayQuestion from '@/components/Common/TodayQuestion';
 import FeedCardList from '@/components/Feed/FeedCardList';
 import PostList from '@/components/Post/PostList';
 import { useState } from 'react';
@@ -12,7 +13,8 @@ export default function Home() {
   >('all');
 
   return (
-    <div>
+    <>
+      <TodayQuestion />
       <ContentContainer
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
@@ -25,7 +27,6 @@ export default function Home() {
           <PostList selectedSort={selectedSort} />
         )}
       </ContentContainer>
-      <div id="modal-root">/</div>
-    </div>
+    </>
   );
 }
