@@ -12,33 +12,15 @@ export default function FeedCardList() {
   return (
     <>
       <div className={cn('container')}>
-        {MOCKDATA.map(
-          ({
-            term,
-            userImage,
-            userName,
-            date,
-            content,
-            emojiCount,
-            commentCount,
-            eyeCount,
-          }) => (
-            <FeedCard
-              key={term}
-              userImage={userImage}
-              userName={userName}
-              term={term}
-              date={date}
-              content={content}
-              emojiCount={emojiCount}
-              commentCount={commentCount}
-              eyeCount={eyeCount}
-              modalVisible={isModalOpen}
-              toggleModal={setIsModalOpen}
-              hasPadding
-            />
-          ),
-        )}
+        {MOCKDATA.map((feed) => (
+          <FeedCard
+            key={feed.id}
+            feedData={feed}
+            modalVisible={isModalOpen}
+            toggleModal={setIsModalOpen}
+            hasPadding
+          />
+        ))}
       </div>
       <Modal
         toggleModal={setIsModalOpen}

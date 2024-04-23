@@ -1,0 +1,32 @@
+.wrapper {
+  @include flex-arrange(center, flex-start);
+  flex-direction: column;
+  position: relative;
+  padding-top: 20px;
+}
+
+.category-container {
+  padding: 12px 20px;
+  position: sticky;
+  width: 100%;
+  top: 0;
+  background-color: $gray-02;
+  z-index: 1;
+}
+
+.post-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.no-post {
+  @include flex-arrange;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .post-container {
+    padding: 0 24px 24px;
+  }
+}

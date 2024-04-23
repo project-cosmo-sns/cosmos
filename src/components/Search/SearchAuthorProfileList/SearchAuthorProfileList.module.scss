@@ -1,0 +1,11 @@
+.wrapper {
+  display: grid;
+  padding: 26px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 25px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    padding: 32px;
+  }
+}
