@@ -8,22 +8,24 @@ type GenerationType = {
 const cn = classNames.bind(styles);
 export default function GenerationBadge({ generationInfo }: GenerationType) {
   const generationColor = [
-    '#FFEAEA ',
-    '#FFE1CC',
-    '#FFF1BE',
-    '#DDF2C8',
-    '#D5EEFF',
-    '#F0E4FF ',
+    ['#FFEAEA', '#FF5151'],
+    ['#FFE1CC', '#FF7512'],
+    ['#FFF1BE', '#E2B000'],
+    ['#DDF2C8', '#65C900'],
+    ['#D5EEFF', '#0098FF'],
+    ['#F0E4FF', '#9747FF'],
   ];
 
   if (generationInfo === undefined) {
     return <div className={cn('waiting')}>대기중</div>;
   }
 
-  const colorIndex = generationInfo - 1;
-  const selectColor = generationColor[colorIndex];
+  const colorIndex = (generationInfo - 1) % generationColor.length;
+  const [backgroundColor, color] = generationColor[colorIndex];
+
   const generationStyle = {
-    backgroundColor: selectColor,
+    backgroundColor,
+    color,
   };
 
   return (
