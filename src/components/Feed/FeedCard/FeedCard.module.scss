@@ -15,7 +15,9 @@
     gap: 15px;
   }
   transition: transform 0.15s ease-in-out;
+}
 
+.container-hover {
   &:hover {
     transform: scale(1.01);
   }

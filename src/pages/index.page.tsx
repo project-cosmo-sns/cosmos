@@ -27,6 +27,7 @@ export default function Home() {
           <PostList selectedSort={selectedSort} />
         )}
       </ContentContainer>
+      <div id="modal-root">[]</div>
     </>
   );
 }

@@ -10,6 +10,7 @@ interface FeedCardTypes {
   modalVisible?: boolean;
   toggleModal?: Dispatch<SetStateAction<boolean>>;
   hasPadding: boolean;
+  hasHover: boolean;
 }
 
 const cn = classNames.bind(styles);
@@ -19,13 +20,18 @@ export default function FeedCard({
   modalVisible = false,
   toggleModal,
   hasPadding,
+  hasHover,
 }: FeedCardTypes) {
   const { author, createdAt, content, reactionCount, commentsCount, eyeCount } =
     feedData;
   return (
     <div
       onClick={() => toggleModal && toggleModal(!modalVisible)}
-      className={cn('container', hasPadding && 'padding')}
+      className={cn(
+        'container',
+        hasPadding && 'padding',
+        hasHover && 'container-hover',
+      )}
     >
       <div className={cn('wrapper')}>
         <AuthorProfile author={author} createdAt={createdAt} />

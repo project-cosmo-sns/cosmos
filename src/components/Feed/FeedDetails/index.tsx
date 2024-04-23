@@ -11,7 +11,7 @@ export default function FeedDetails() {
   const { comments } = mockData[0];
   return (
     <div className={cn('container')}>
-      <FeedCard feedData={MOCKDATA2[0]} hasPadding={false} />
+      <FeedCard feedData={MOCKDATA2[0]} hasPadding={false} hasHover={false} />
       <CommentInput
         placeholder="댓글을 입력하세요"
         handleClick={() => console.log('등록')}

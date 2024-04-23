@@ -19,6 +19,7 @@ export default function FeedCardList() {
             modalVisible={isModalOpen}
             toggleModal={setIsModalOpen}
             hasPadding
+            hasHover
           />
         ))}
       </div>
