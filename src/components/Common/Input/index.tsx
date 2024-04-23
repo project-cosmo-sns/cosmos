@@ -2,12 +2,15 @@ import classNames from 'classnames/bind';
 import styles from './Input.module.scss';
 import { HTMLAttributes } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
+import React from 'react';
 
 interface InputProps extends HTMLAttributes<HTMLInputElement> {
   register?: UseFormRegisterReturn;
   placeholder?: string;
   type?: string;
   children?: React.ReactNode;
+  accept?: string;
+  name?: string;
 }
 
 const cn = classNames.bind(styles);

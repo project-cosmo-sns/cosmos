@@ -28,6 +28,7 @@ export default function ImageInput({ type }: { type?: string }) {
       reader.readAsDataURL(file);
     }
   };
+
   return (
     <div className={cn('image-container', { feedImage, profileImage })}>
       <label className={cn('image-label')} htmlFor="file">
