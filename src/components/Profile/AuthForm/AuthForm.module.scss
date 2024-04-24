@@ -1,37 +1,42 @@
-.authForm-container {
-  width: 360px;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  padding: 20px 20px;
+.auth-container {
+  width: 100%;
+  height: 100%;
 
-  h2 {
-    @include font-style(1.6rem, $black-01, 700);
-  }
+  .auth-wrapper {
+    @include flex-arrange(center, flex-start);
+    h2 {
+      @include font-style(1.6rem, $black-01, 700);
+    }
 
-  .auth-generation {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    .auth-Form {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      .auth-generation {
+        height: 100px;
 
-    input {
-      width: 100%;
-      height: 48px;
-      background: $gray-03;
-      border-radius: 5px;
+        h2 {
+          margin-bottom: 12px;
+        }
+
+        small {
+          color: red;
+        }
+      }
+
+      .auth-image {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        span {
+          @include font-style(1.2rem, $gray-01, 500);
+        }
+      }
     }
   }
-  .auth-image {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    span {
-      @include font-style(1.2rem, $gray-01, 500);
-    }
-  }
+
   @media (min-width: 768px) {
     width: 380px;
-    padding-left: 30px;
-    padding-right: 30px;
+    height: auto;
   }
 }
