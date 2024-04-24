@@ -13,18 +13,17 @@ export default function LoginModal({
 }: ModalPropsType) {
   return (
     <Modal
-      title="타이틀 안나오기"
       modalVisible={modalVisible}
       toggleModal={toggleModal}
-      cssComponentDisplay={cn('')}
-      cssModalSize={cn('')}
+      cssModalSize={cn('login-container')}
+      cssComponentDisplay={cn('login-wrapper')}
     >
-      <div className={cn('login-container')}>
+      <div className={cn('header-wrapper')}>
         <LogoIcon width="105" height="30" />
         <h2>코스모스에 오신 것을 환영합니다!🙌</h2>
         <div className={cn('oauth-Wrapper')}>
-          <LoginButton text="구글 로그인/회원가입" icon={<GoogleIcon />} />
-          <LoginButton text="깃허브 로그인/회원가입" icon={<GitHubIcon />} />
+          <LoginButton text="구글 로그인/ 회원가입" icon={<GoogleIcon />} />
+          <LoginButton text="깃허브 로그인/ 회원가입" icon={<GitHubIcon />} />
         </div>
       </div>
     </Modal>
