@@ -3,15 +3,29 @@ import styels from './CreateFeed.module.scss';
 import classNames from 'classnames/bind';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import ImageInput from '@/components/Common/ImageInput';
+import { ProfileIcon } from '@/components/Common/IconCollection';
 
-const cn = classNames.bind(styels);
+interface CreatedFeedTypes {
+  profileImage: string;
+}
 
-export default function CreateFeed() {
+/**
+ * CreatedFeed component
+ * @param {string} profileImage - 로그인한 유저의 프로필 url을 받아 화면에 출력합니다.
+ * @return {JSX.Element} 글작성 인풋과 이미지 추가하는 인풋을 포함하는 CreatedFeed 컴포넌트 입니다.
+ */
+
+export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
+  const cn = classNames.bind(styels);
   return (
     <div className={cn('container')}>
       <div className={cn('wrapper')}>
         <div className={cn('user')}>
-          <Image fill src="/images/profile.svg" alt="user-profile" />
+          {profileImage ? (
+            <Image fill src={profileImage} alt="user-profile" />
+          ) : (
+            <ProfileIcon />
+          )}
         </div>
         <div className={cn('content')}>
           <textarea className={cn('text')} placeholder="글을 작성해보세요" />

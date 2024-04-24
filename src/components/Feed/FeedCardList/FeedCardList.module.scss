@@ -6,9 +6,11 @@
     top: 16px;
     bottom: 16px;
   }
-  padding: {
-    left: 20px;
-    right: 20px;
+  @media (min-width: 768px) {
+    padding: {
+      left: 20px;
+      right: 20px;
+    }
   }
 }
 .feed-detail-modalSize {

@@ -4,7 +4,6 @@
 
 .container {
   @include flex-arrange;
-  border-radius: 10px;
   width: 100%;
   background-color: $white-01;
   .wrapper {
@@ -20,5 +19,9 @@
 .container-hover {
   &:hover {
     transform: scale(1.01);
+  }
+
+  @media (min-width: 768px) {
+    border-radius: 10px;
   }
 }
