@@ -1,19 +1,14 @@
-import { ModalPropsType } from '@/@types/type';
+import { ModalPropsType, AuthFormProps } from '@/@types/type';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import ImageInput from '@/components/Common/ImageInput';
 import Input from '@/components/Common/Input';
 import Modal from '@/components/Common/Layout/Modal';
 import classNames from 'classnames/bind';
 import styles from './AuthForm.module.scss';
-import { SubmitHandler, useForm, FieldValues } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { generationRegex } from '@/utils/generationRegex';
 
 const cn = classNames.bind(styles);
-
-interface AuthFormProps {
-  generation: string;
-  image: string;
-}
 
 export default function AuthForm({
   modalVisible,
@@ -22,6 +17,7 @@ export default function AuthForm({
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<AuthFormProps>();
 
@@ -43,18 +39,23 @@ export default function AuthForm({
             type="text"
             placeholder="기수를 입력하세요. ex) 3"
             register={register('generation', {
-              required: '기수를 입력하세요.',
+              required: '기수를 입력해주세요.',
               pattern: {
                 value: generationRegex,
-                message: '숫자만 입력 가능합니다.',
+                message: '숫자만 입력 해주세요.',
               },
             })}
           />
+          {errors.generation && <small>{errors.generation.message}</small>}
         </div>
         <div className={cn('auth-image')}>
           <h2>스프린터 인증</h2>
           <span>코드잇 프로필 페이지 또는 수료증을 업로드해 주세요</span>
-          <ImageInput type="certify" />
+          <ImageInput
+            type="certify"
+            watch={watch}
+            register={register('image')}
+          />
         </div>
         <DefaultButton
           buttonType="button"
