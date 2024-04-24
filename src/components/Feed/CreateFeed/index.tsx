@@ -28,12 +28,8 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
     handleSubmit,
     formState: { errors },
     watch,
-    getValues,
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-
-  console.log(getValues('feedContent'));
-
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <div className={cn('wrapper')}>
@@ -57,8 +53,11 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
           {errors.feedContent && (
             <span className={cn('error')}>{errors.feedContent.message}</span>
           )}
+          <span className={cn('limit')}>
+            {watch('feedContent') && watch('feedContent').length}/300
+          </span>
           <div className={cn('addImage')}>
-            <ImageInput type="feed" {...register('feedImage')} />
+            <input type="file" {...register('feedImage')} />
           </div>
         </div>
       </div>

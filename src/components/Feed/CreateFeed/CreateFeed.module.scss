@@ -23,21 +23,28 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-
+      position: relative;
       .text {
         width: 100%;
         background-color: $gray-03;
-        // text-indent: 16px;
         padding: 16px;
         border-radius: 5px;
         @include font-style(1.6rem);
-        @media (min-width: 768px) {
-          height: 104px;
-        }
       }
       .error {
+        position: absolute;
+        right: 16px;
+        bottom: 99px;
         font-size: 1.1rem;
         color: #ed1c24;
+        padding-left: 16px;
+      }
+      .limit {
+        position: absolute;
+        right: 16px;
+        bottom: 90px;
+        font-size: 1.1rem;
+        color: $gray-01;
         padding-left: 16px;
       }
 
