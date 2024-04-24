@@ -1,6 +1,5 @@
 import Modal from '@/components/Common/Layout/Modal';
 import * as Icon from '@/components/Common/IconCollection';
-import ClassBadge from '@/components/Common/ClassBadge';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import classNames from 'classnames/bind';
 import styles from './ProfileEditModal.module.scss';
@@ -33,8 +32,8 @@ export default function ProfileEditModal({
           modalVisible={isOpen}
           toggleModal={setIsOpen}
           title="프로필 수정"
-          cssComponentDisplay={cn('')}
-          cssModalSize={cn('')}
+          cssComponentDisplay={cn('profile-edit-modal')}
+          cssModalSize={cn('380px')}
         >
           <div className={cn('modal-wrapper')}>
             <div className={cn('profile-image-edit')}>

@@ -3,6 +3,10 @@ import ProfileHeader from '@/components/Profile/ProfileHeader';
 import ProfileEditModal from '@/components/Profile/ProfileEditModal';
 import { MemberDataType, memberMockData } from '@/pages/profile/mockData';
 import Home from '../index.page';
+import classNames from 'classnames/bind';
+import styles from './MemberDataContainer.module.scss';
+
+const cn = classNames.bind(styles);
 
 export default function MemberDataContainer() {
   const [memberData, setMemberData] = useState<MemberDataType[]>([]);
@@ -13,7 +17,7 @@ export default function MemberDataContainer() {
   }, []);
 
   return (
-    <div>
+    <div id={cn('modal-root')}>
       {memberData && (
         <>
           <ProfileHeader
