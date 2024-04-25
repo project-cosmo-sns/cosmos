@@ -4,7 +4,8 @@ import styels from './CreateFeed.module.scss';
 import classNames from 'classnames/bind';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import ImageInput from '@/components/Common/ImageInput';
-import { ProfileIcon } from '@/components/Common/IconCollection';
+import { CloseIcon, ProfileIcon } from '@/components/Common/IconCollection';
+import { useEffect, useState } from 'react';
 
 interface CreatedFeedTypes {
   profileImage: string;
@@ -26,10 +27,34 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
   const {
     register,
     handleSubmit,
+    setValue,
+    getValues,
     formState: { errors },
     watch,
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+  const [imagePreview, setImagePreview] = useState<string[]>([]);
+
+  const images = watch('feedImage');
+
+  useEffect(() => {
+    if (images && images.length > 0) {
+      console.log(images, '-----images-----');
+      let urlList = [];
+      for (let i = 0; i < images.length; i += 1) {
+        const file: Blob | MediaSource = new Blob([images[i]]);
+        const createdUrl = URL.createObjectURL(file);
+        urlList.push(createdUrl);
+      }
+      setImagePreview([...imagePreview, ...urlList]);
+    }
+  }, [images]);
+
+  const filterImage = (index: number) => {
+    // setValue('feedImage', 'update');
+    setImagePreview(imagePreview.filter((el, i) => i !== index));
+  };
+
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <div className={cn('wrapper')}>
@@ -57,7 +82,34 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
             {watch('feedContent') && watch('feedContent').length}/300
           </span>
           <div className={cn('addImage')}>
-            <input type="file" {...register('feedImage')} />
+            <div className={cn('image-wrapper')}>
+              <label htmlFor="feedImage" className={cn('file-label')}>
+                <span className={cn('label-text')}>이미지 업로드</span>
+              </label>
+              {imagePreview &&
+                imagePreview.map((item, index) => (
+                  <div key={index} className={cn('preview-wrapper')}>
+                    <CloseIcon
+                      className={cn('close')}
+                      onClick={() => {
+                        filterImage(index);
+                      }}
+                    />
+                    <img
+                      className={cn('file-preview')}
+                      src={item}
+                      alt="image_item"
+                    />
+                  </div>
+                ))}
+              <input
+                className={cn('file-input')}
+                id="feedImage"
+                type="file"
+                multiple
+                {...register('feedImage')}
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -65,7 +117,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
         <DefaultButton
           buttonType="submit"
           color="primary-01"
-          onClick={() => console.log('피드 등록!')}
+          onClick={() => console.log(getValues('feedImage'))}
           size="medium"
         >
           등록
