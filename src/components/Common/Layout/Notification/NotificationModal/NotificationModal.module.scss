@@ -1,22 +1,33 @@
 .notification-modal {
   text-align: center;
 
-  .notification-modal-wrapper {
-    margin-top: 10px;
-    width: 380px;
+  .notification {
+    width: 100%;
     height: 100%;
+
+    @media (min-width: 768px) {
+      width: 380px;
+      height: auto;
+    }
+  }
+
+  .notification-modal-wrapper {
     @include flex-arrange(space-between, center);
     flex-direction: column;
+    margin-top: 10px;
+    width: 100%;
+    height: 100%;
 
     .notification-modal-container {
       @include flex-arrange(flex-start, center);
       flex-direction: column;
       gap: 25px;
       width: 100%;
-      padding: 0 30px;
+      padding: 0 30px 20px;
 
       @media (min-width: 768px) {
         margin: 0 auto 30px;
+        padding-bottom: 0;
       }
     }
   }
