@@ -7,6 +7,7 @@ import {
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import CategoryList from '../CategoryList';
+import HashTagInput from '../HashTag/HashTagInput';
 import styles from './PostEditor.module.scss';
 
 interface PostEditorProps {
@@ -61,10 +62,7 @@ export default function PostEditor({ postId, setData }: PostEditorProps) {
       </div>
       <div className={cn('container')}>
         <span className={cn('subtitle')}>해시태그 입력</span>
-        <input
-          className={cn('input', 'hashtag')}
-          placeholder="#태그 입력 (최대 5개)"
-        />
+        <HashTagInput hashtags={hashtags} setHashtags={setHashtags} />
       </div>
     </div>
   );
