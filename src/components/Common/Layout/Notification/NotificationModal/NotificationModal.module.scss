@@ -1,10 +1,6 @@
 .notification-modal {
   text-align: center;
 
-  @media (min-width: 768px) {
-    transform: translate(-27.2vw, -11.6vh);
-  }
-
   .notification-modal-wrapper {
     margin-top: 40px;
     width: 100%;
