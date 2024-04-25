@@ -31,8 +31,14 @@ export default function FollowList({ followListProps }: FollowListType) {
     followListProps;
 
   return (
-    <Modal title={title} toggleModal={toggleModal} modalVisible={modalVisible}>
-      <div className={cn('follow-container')}>
+    <Modal
+      title={title}
+      toggleModal={toggleModal}
+      modalVisible={modalVisible}
+      cssModalSize={cn('follow-container')}
+      cssComponentDisplay={cn('follow-wrapper')}
+    >
+      <div>
         {followData.map((follow) => (
           <Follow key={follow.id} isFollow={isFollow} {...follow} />
         ))}

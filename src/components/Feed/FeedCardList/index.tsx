@@ -11,45 +11,25 @@ export default function FeedCardList() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   return (
     <>
-      <div className={cn('feed-card-list-container')}>
-        {MOCKDATA.map(
-          ({
-            term,
-            userImage,
-            userName,
-            date,
-            content,
-            emojiCount,
-            commentCount,
-            eyeCount,
-          }) => (
-            <FeedCard
-              key={term}
-              userImage={userImage}
-              userName={userName}
-              term={term}
-              date={date}
-              content={content}
-              emojiCount={emojiCount}
-              commentCount={commentCount}
-              eyeCount={eyeCount}
-              modalVisible={isModalOpen}
-              toggleModal={setIsModalOpen}
-            />
-          ),
-        )}
-      </div>
-      <div>
-        {isModalOpen && (
-          <Modal
-            title=""
-            toggleModal={setIsModalOpen}
+      <div className={cn('container')}>
+        {MOCKDATA.map((feed) => (
+          <FeedCard
+            key={feed.id}
+            feedData={feed}
             modalVisible={isModalOpen}
-          >
-            <FeedDetails />
-          </Modal>
-        )}
+            toggleModal={setIsModalOpen}
+            hasPadding
+          />
+        ))}
       </div>
+      <Modal
+        toggleModal={setIsModalOpen}
+        modalVisible={isModalOpen}
+        cssModalSize={cn('feed-detail-modalSize')}
+        cssComponentDisplay={cn('feed-detail-componentDisplay')}
+      >
+        <FeedDetails />
+      </Modal>
     </>
   );
 }

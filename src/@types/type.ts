@@ -14,3 +14,8 @@ export type ContainerOptionType =
   | 'scrap'
   | 'hashtag'
   | 'user';
+
+export interface AuthFormProps {
+  generation: string;
+  image: string;
+}

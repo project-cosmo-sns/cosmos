@@ -8,22 +8,19 @@ const cn = classNames.bind(styels);
 
 export default function CreateFeed() {
   return (
-    <div className={cn('create-feed-container')}>
-      <div className={cn('create-feed-wrapper')}>
-        <div className={cn('create-feed-user')}>
+    <div className={cn('container')}>
+      <div className={cn('wrapper')}>
+        <div className={cn('user')}>
           <Image fill src="/images/profile.svg" alt="user-profile" />
         </div>
-        <div className={cn('create-feed-content')}>
-          <textarea
-            className={cn('create-feed-text')}
-            placeholder="글을 작성해보세요"
-          />
-          <div className={cn('create-feed-addImage')}>
+        <div className={cn('content')}>
+          <textarea className={cn('text')} placeholder="글을 작성해보세요" />
+          <div className={cn('addImage')}>
             <ImageInput type="feed" />
           </div>
         </div>
       </div>
-      <div className={cn('create-feed-button')}>
+      <div className={cn('button')}>
         <DefaultButton
           buttonType="submit"
           color="primary-01"

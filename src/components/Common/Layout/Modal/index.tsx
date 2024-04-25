@@ -2,13 +2,16 @@ import { ReactNode } from 'react';
 import styles from './Modal.module.scss';
 import classNames from 'classnames/bind';
 import * as Icon from '@/components/Common/IconCollection/index';
+import ModalPortal from './ModalPortal';
 
 interface ModalType {
   children: ReactNode;
-  title: string;
+  title?: string;
   modalVisible: boolean;
-  className?: string;
   toggleModal: React.Dispatch<React.SetStateAction<boolean>>;
+  cssModalSize: string;
+  cssComponentDisplay: string;
+  className?: string;
 }
 
 /**
@@ -18,6 +21,8 @@ interface ModalType {
  * @param {string} props.title - 모달 제목
  * @param {boolean} props.modalVisible - 상위 컴포넌트의 모달 on/off 여부 변수
  * @param {React.Dispatch<React.SetStateAction<boolean>>} props.toggleModal - X 아이콘 클릭시 모달을 닫아주기 위한 setState 함수
+ * @param {string} props.cssModalSize - Modal 컴포넌트의 상위 컴포넌트에서 className={cn('example01')} 을 추가하여 모달 사이즈를 설정
+ * @param {string} props.cssComponentDisplay - Modal 컴포넌트의 상위 컴포넌트에서 className={cn('example01')} 을 추가하여 모달 내부 컴포넌트의 위치 설정
  * @returns {JSX.Element} 모달 레이아웃 JSX
  */
 
@@ -26,20 +31,37 @@ export default function Modal({
   title,
   toggleModal,
   modalVisible,
+  cssModalSize,
+  cssComponentDisplay,
   className,
 }: ModalType) {
   const cn = classNames.bind(styles);
   return (
-    <div className={cn('modal-layout-container', className)}>
-      <div className={cn('modal-layout-wrapper')}>
-        <div role="presentation" onClick={() => toggleModal(!modalVisible)}>
-          <Icon.XIcon className={cn('modal-layout-x')} width="18" height="18" />
-        </div>
-        <div className={cn('modal-layout-title')}>
-          <span>{title}</span>
-        </div>
-        <div className={cn('modal-layout-component')}>{children}</div>
-      </div>
+    <div className="Modal">
+      {modalVisible && (
+        <ModalPortal>
+          <div className={cn('container', className)}>
+            <div className={cn(cssModalSize)}>
+              <div className={cn('wrapper')}>
+                <div
+                  role="presentation"
+                  onClick={() => toggleModal(!modalVisible)}
+                >
+                  <Icon.XIcon className={cn('x')} width="18" height="18" />
+                </div>
+                {title && (
+                  <div className={cn('title')}>
+                    <span>{title}</span>
+                  </div>
+                )}
+                <div className={cn('component', cssComponentDisplay)}>
+                  {children}
+                </div>
+              </div>
+            </div>
+          </div>
+        </ModalPortal>
+      )}
     </div>
   );
 }
