@@ -64,7 +64,7 @@ export default function PostContent({ isMyPost, postData }: PostContentProps) {
       <MarkdownContent className={cn('markdown-content')} content={content} />
       <div className={cn('hashtag-container')}>
         {tags.map((tag: Tag) => (
-          <HashTag key={tag.id} tag={tag} />
+          <HashTag key={`${tag.name}`} tag={tag} />
         ))}
       </div>
       <ReactionContainer
