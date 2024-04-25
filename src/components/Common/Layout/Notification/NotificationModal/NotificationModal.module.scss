@@ -2,8 +2,8 @@
   text-align: center;
 
   .notification-modal-wrapper {
-    margin-top: 40px;
-    width: 100%;
+    margin-top: 10px;
+    width: 380px;
     height: 100%;
     @include flex-arrange(space-between, center);
     flex-direction: column;
@@ -13,9 +13,9 @@
       flex-direction: column;
       gap: 25px;
       width: 100%;
+      padding: 0 30px;
 
       @media (min-width: 768px) {
-        width: 50%;
         margin: 0 auto 30px;
       }
     }
