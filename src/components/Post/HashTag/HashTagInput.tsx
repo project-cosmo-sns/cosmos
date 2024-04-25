@@ -31,7 +31,7 @@ export default function HashTagInput({
       }
       // 해시태그 중복값 및 한글, 영어, 숫자 외 값 입력 시 hashtag 배열에 추가하지 않고 입력값 초기화
       if (
-        hashtags.some((tag) => tag.name === trimmedTagValue) ||
+        hashtags.some((tag) => tag.name === `#${trimmedTagValue}`) ||
         regex.test(trimmedTagValue)
       ) {
         setTagValue('');
