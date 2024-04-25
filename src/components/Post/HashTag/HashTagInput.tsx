@@ -41,7 +41,7 @@ export default function HashTagInput({
       const randomNumber = Math.floor(Math.random() * 5 + 1);
       setHashtags([
         ...hashtags,
-        { name: trimmedTagValue, color: `hashtag${randomNumber}` },
+        { name: `#${trimmedTagValue}`, color: `hashtag${randomNumber}` },
       ]);
       setTagValue('');
     }
