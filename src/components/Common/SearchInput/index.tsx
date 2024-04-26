@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import styles from './SearchInput.module.scss';
 import { ChangeEvent, KeyboardEvent, useState } from 'react';
-import { GlassIcon } from '@/components/Common/IconCollection';
+import { GlassIcon, CloseIcon } from '@/components/Common/IconCollection';
 import { useRouter } from 'next/router';
 
 const cn = classNames.bind(styles);
@@ -28,6 +28,10 @@ export default function SearchInput() {
     }
   };
 
+  const handleSearchClear = () => {
+    setSearch('');
+  };
+
   return (
     <div className={cn('search-container')}>
       <input
@@ -37,6 +41,13 @@ export default function SearchInput() {
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
       />
+      {search && (
+        <CloseIcon
+          className={cn('clear-icon')}
+          onClick={handleSearchClear}
+          fill="#ccc"
+        />
+      )}
       <GlassIcon className={cn('search-icon')} onClick={handleSearch} />
     </div>
   );
