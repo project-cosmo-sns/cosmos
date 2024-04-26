@@ -11,6 +11,10 @@ export default function LoginModal({
   modalVisible,
   toggleModal,
 }: ModalPropsType) {
+  const githubClick = () => {
+    window.location.assign('https://api-local.cosmo-sns.com/auth/github/login');
+  };
+
   return (
     <Modal
       modalVisible={modalVisible}
@@ -23,7 +27,11 @@ export default function LoginModal({
         <h2>코스모스에 오신 것을 환영합니다!🙌</h2>
         <div className={cn('oauth-wrapper')}>
           <LoginButton text="구글 로그인/ 회원가입" icon={<GoogleIcon />} />
-          <LoginButton text="깃허브 로그인/ 회원가입" icon={<GitHubIcon />} />
+          <LoginButton
+            text="깃허브 로그인/ 회원가입"
+            icon={<GitHubIcon />}
+            onClick={githubClick}
+          />
         </div>
       </div>
     </Modal>

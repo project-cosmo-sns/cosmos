@@ -12,6 +12,10 @@ import {
   WarnIcon,
 } from '@/components/Common/IconCollection';
 import Toast from '@/components/Common/Toast';
+import LoginModal from '../../LoginModal';
+import { useRouter } from 'next/router';
+import { useCookies } from 'react-cookie';
+import { getCookie } from '@/utils/Cookies';
 
 const cn = classNames.bind(styles);
 
@@ -19,6 +23,17 @@ export default function SideBar() {
   const [activePopover, setActivePopover] = useState<'add' | 'bell' | null>(
     null,
   );
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const router = useRouter();
+
+  const profileClick = () => {
+    if (getCookie('SESSIONID')) {
+      router.push('/profile');
+      return;
+    }
+    setModalVisible(!modalVisible);
+  };
 
   const togglePopOver = (
     e: React.MouseEvent<HTMLElement>,
@@ -58,9 +73,12 @@ export default function SideBar() {
             <Notification onClose={handleClosePopOver} />
           )}
         </div>
-        <Link href="/profile">
-          <UserIcon />
-        </Link>
+        {/* <Link href="/profile"> */}
+        <UserIcon onClick={profileClick} />
+        {modalVisible && (
+          <LoginModal modalVisible={modalVisible} toggleModal={profileClick} />
+        )}
+        {/* </Link> */}
         {/* {toast && <Toast icon={WarnIcon} text="인증 대기중입니다." />} */}
       </div>
     </div>
