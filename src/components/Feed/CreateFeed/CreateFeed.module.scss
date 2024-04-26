@@ -58,16 +58,25 @@
           display: flex;
           gap: 12px;
 
-          .preview-wrapper {
+          .preview-container {
             position: relative;
-            height: 102px;
-            border-radius: 5px;
-            @media (min-width: 768px) {
-              height: 110px;
+            .preview-wrapper {
+              width: 102px;
+              height: 102px;
+              border-radius: 5px;
+              overflow: hidden;
+
+              @media (min-width: 768px) {
+                width: 110px;
+                height: 110px;
+              }
+
+              .file-preview {
+                width: 100%;
+                height: 100%;
+              }
             }
-            .file-preview {
-              height: 100%;
-            }
+
             .close {
               position: absolute;
               right: -10px;

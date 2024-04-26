@@ -1,11 +1,15 @@
 import Image from 'next/image';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import {
+  useForm,
+  SubmitHandler,
+  Controller,
+  UseFormSetValue,
+} from 'react-hook-form';
 import styels from './CreateFeed.module.scss';
 import classNames from 'classnames/bind';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
-import ImageInput from '@/components/Common/ImageInput';
 import { CloseIcon, ProfileIcon } from '@/components/Common/IconCollection';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 interface CreatedFeedTypes {
   profileImage: string;
@@ -13,7 +17,7 @@ interface CreatedFeedTypes {
 
 interface Inputs {
   feedContent: string;
-  feedImage: string;
+  feedImage: File[];
 }
 
 /**
@@ -29,34 +33,43 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
     handleSubmit,
     setValue,
     getValues,
+    control,
     formState: { errors },
     watch,
   } = useForm<Inputs>();
-  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
-  const [imagePreview, setImagePreview] = useState<string[]>([]);
+  const [images, setImages] = useState<File[]>([]);
 
-  const images = watch('feedImage');
-
-  useEffect(() => {
+  const tempFnc = () => {
     if (images && images.length > 0) {
-      console.log(images, '-----images-----');
       let urlList = [];
       for (let i = 0; i < images.length; i += 1) {
         const file: Blob | MediaSource = new Blob([images[i]]);
         const createdUrl = URL.createObjectURL(file);
         urlList.push(createdUrl);
       }
-      setImagePreview([...imagePreview, ...urlList]);
+      return [...urlList];
     }
-  }, [images]);
+    return [];
+  };
+
+  const imagePreview = tempFnc();
+  console.log(imagePreview, '-----imagePreview------');
+  console.log(images, '-----images------');
 
   const filterImage = (index: number) => {
-    // setValue('feedImage', 'update');
-    setImagePreview(imagePreview.filter((el, i) => i !== index));
+    const filteredImages = images.filter((el, i) => i !== index);
+    setImages(filteredImages);
+    setValue('feedImage', filteredImages);
   };
 
   return (
-    <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={cn('container')}
+      onSubmit={(e) => {
+        e.preventDefault();
+        console.log(getValues(), '-----데이터----');
+      }}
+    >
       <div className={cn('wrapper')}>
         <div className={cn('user')}>
           {profileImage ? (
@@ -83,32 +96,48 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
           </span>
           <div className={cn('addImage')}>
             <div className={cn('image-wrapper')}>
+              <Controller
+                control={control}
+                name="feedImage"
+                render={({ field: { onChange } }) => (
+                  <input
+                    className={cn('file-input')}
+                    id="feedImage"
+                    type="file"
+                    multiple
+                    onChange={(event) => {
+                      const fileList = event.target.files
+                        ? Array.from(event.target.files)
+                        : [];
+                      const currentImageValue = [...images, ...fileList];
+                      console.log(event.target.files, '-----타입-----');
+                      setValue('feedImage', currentImageValue);
+                      setImages(currentImageValue);
+                    }}
+                  />
+                )}
+              />
               <label htmlFor="feedImage" className={cn('file-label')}>
                 <span className={cn('label-text')}>이미지 업로드</span>
               </label>
               {imagePreview &&
                 imagePreview.map((item, index) => (
-                  <div key={index} className={cn('preview-wrapper')}>
+                  <div key={index} className={cn('preview-container')}>
                     <CloseIcon
                       className={cn('close')}
                       onClick={() => {
                         filterImage(index);
                       }}
                     />
-                    <img
-                      className={cn('file-preview')}
-                      src={item}
-                      alt="image_item"
-                    />
+                    <div className={cn('preview-wrapper')}>
+                      <img
+                        className={cn('file-preview')}
+                        src={item}
+                        alt="image_item"
+                      />
+                    </div>
                   </div>
                 ))}
-              <input
-                className={cn('file-input')}
-                id="feedImage"
-                type="file"
-                multiple
-                {...register('feedImage')}
-              />
             </div>
           </div>
         </div>
@@ -117,7 +146,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
         <DefaultButton
           buttonType="submit"
           color="primary-01"
-          onClick={() => console.log(getValues('feedImage'))}
+          onClick={() => console.log('')}
           size="medium"
         >
           등록
