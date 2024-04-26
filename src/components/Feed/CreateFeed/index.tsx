@@ -7,7 +7,7 @@ import { CloseIcon, ProfileIcon } from '@/components/Common/IconCollection';
 import { useState } from 'react';
 
 interface CreatedFeedTypes {
-  profileImage: string;
+  profileImage?: string;
 }
 
 interface Inputs {
