@@ -1,10 +1,5 @@
 import Image from 'next/image';
-import {
-  useForm,
-  SubmitHandler,
-  Controller,
-  UseFormSetValue,
-} from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import styels from './CreateFeed.module.scss';
 import classNames from 'classnames/bind';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
@@ -39,7 +34,12 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
   } = useForm<Inputs>();
   const [images, setImages] = useState<File[]>([]);
 
-  const tempFnc = () => {
+  /**
+   * 제어컴포넌트인 이미지 업로드 input이 onChange 이벤가 일어나면 setImages 세터함수가 실행되어
+   * 컴포넌트가 재랜더링 됩니다. 아래 반환문의 조건부 렌더링이 실행되면서 업로드한 이미지들의 url을 생성해 이미지 프리뷰를
+   * 보여주게 됩니다
+   */
+  const updateImageUrls = () => {
     if (images && images.length > 0) {
       let urlList = [];
       for (let i = 0; i < images.length; i += 1) {
@@ -52,10 +52,11 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
     return [];
   };
 
-  const imagePreview = tempFnc();
-  console.log(imagePreview, '-----imagePreview------');
-  console.log(images, '-----images------');
-
+  const imagePreview = updateImageUrls();
+  /**
+   * CloseIcon을 클릭하면 filterImage 함수가 실행됩니다.
+   * @param {number} index - useState images 배열의 index는 이미지를 업로드할때 등록되는 index와 같습니다. useState images 배열을 순회하면서 클릭한 이미지의 index를 제외한 나머지 요소를 반환합니다.
+   */
   const filterImage = (index: number) => {
     const filteredImages = images.filter((el, i) => i !== index);
     setImages(filteredImages);
@@ -110,7 +111,6 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
                         ? Array.from(event.target.files)
                         : [];
                       const currentImageValue = [...images, ...fileList];
-                      console.log(event.target.files, '-----타입-----');
                       setValue('feedImage', currentImageValue);
                       setImages(currentImageValue);
                     }}
