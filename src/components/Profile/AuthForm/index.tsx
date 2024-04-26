@@ -25,7 +25,7 @@ export default function AuthForm({
 
   return (
     <Modal
-      title="회원인증"
+      title="스프린터 인증"
       modalVisible={modalVisible}
       toggleModal={toggleModal}
       cssModalSize={cn('auth-container')}
@@ -39,10 +39,10 @@ export default function AuthForm({
             type="text"
             placeholder="기수를 입력하세요. ex) 3"
             register={register('generation', {
-              required: '기수를 입력해주세요.',
+              required: '기수를 입력해 주세요.',
               pattern: {
                 value: generationRegex,
-                message: '숫자만 입력 해주세요.',
+                message: '숫자만 입력해 주세요.',
               },
             })}
           />

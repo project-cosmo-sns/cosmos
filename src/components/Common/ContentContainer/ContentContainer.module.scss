@@ -98,10 +98,10 @@
 
 .content {
   overflow-y: scroll;
-  height: 78vh;
+  height: 68vh;
 
   &.profile-content {
-    height: 60vh;
+    height: 54vh;
   }
 }
 
@@ -117,6 +117,14 @@
 
   .dropdown {
     margin-right: 24px;
+  }
+
+  .content {
+    height: 66vh;
+
+    &.profile-content {
+      height: 60vh;
+    }
   }
 }
 

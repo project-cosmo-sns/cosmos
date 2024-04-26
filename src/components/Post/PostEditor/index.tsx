@@ -1,19 +1,28 @@
-import { CategoryType, mockData } from '@/pages/post/[postId]/mockData';
+import {
+  CategoryType,
+  PostData,
+  Tag,
+  mockData,
+} from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import CategoryList from '../CategoryList';
+import HashTagInput from '../HashTag/HashTagInput';
 import styles from './PostEditor.module.scss';
 
 interface PostEditorProps {
   postId: string;
+  setData: (args: PostData) => void;
 }
 
 const cn = classNames.bind(styles);
 
-export default function PostEditor({ postId }: PostEditorProps) {
+export default function PostEditor({ postId, setData }: PostEditorProps) {
   // 임시로 기본값 postId와 같은 포스트 mockData에서 불러옴. 추후 요청해서 받아오도록 수정
   const [titleValue, setTitleValue] = useState('');
   const [contentValue, setContentValue] = useState('');
+  const [hashtags, setHashtags] = useState<Tag[]>([]);
+
   const [selectedCategory, setSelectedCategory] =
     useState<CategoryType>('공지사항');
 
@@ -23,6 +32,7 @@ export default function PostEditor({ postId }: PostEditorProps) {
       setSelectedCategory(postData.category);
       setTitleValue(postData.title);
       setContentValue(postData.content);
+      setHashtags(postData.tags);
     }
   }, [postId]);
 
@@ -52,10 +62,7 @@ export default function PostEditor({ postId }: PostEditorProps) {
       </div>
       <div className={cn('container')}>
         <span className={cn('subtitle')}>해시태그 입력</span>
-        <input
-          className={cn('input', 'hashtag')}
-          placeholder="#태그 입력 (최대 5개)"
-        />
+        <HashTagInput hashtags={hashtags} setHashtags={setHashtags} />
       </div>
     </div>
   );
