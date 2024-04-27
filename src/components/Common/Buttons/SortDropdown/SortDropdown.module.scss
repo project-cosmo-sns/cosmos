@@ -1,53 +1,66 @@
-@media (min-width: 1200px) {
-  .dropdown-expand-button {
-    color: $black-01;
-    background-color: $gray-03;
-    width: 84px;
-    height: 32px;
-    border-radius: 5px;
-    border: none;
-    font-size: 1.3rem;
-    font-weight: 600;
-    text-align: left;
-    padding-left: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.wrapper {
+  z-index: 2;
+}
+
+.dropdown-expand-button {
+  @include flex-arrange(space-between, center);
+  @include font-style(1.3rem, $black-01, 600);
+
+  background-color: $gray-03;
+  width: 84px;
+  height: 32px;
+  border-radius: 5px;
+  border: none;
+
+  padding-left: 15px;
+  padding-right: 8px;
+  position: relative;
+}
+
+.expanded-dropdown-container {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+
+  margin-top: 4px;
+}
+
+.icon-container {
+  display: inline-flex;
+}
+
+.dropdown-arrow {
+  border-radius: 5px;
+  transition: background-color 0.1s ease-in-out;
+  &:hover {
+    background-color: $gray-02;
+  }
+}
+
+.expanded-dropdown-list {
+  @include font-style(1.3rem, $black-01, 600);
+  @include flex-arrange(flex-start, center);
+
+  background-color: $gray-03;
+  width: 84px;
+  height: 32px;
+  border: none;
+  padding: 12px 15px;
+  z-index: 2;
+
+  &:not(:last-child) {
+    border-bottom: none;
   }
 
-  .expanded-dropdown-container {
-    display: flex;
-    flex-direction: column;
+  &:hover {
+    background-color: $gray-02;
   }
+}
 
-  .icon-container {
-    display: inline-flex;
-  }
+.first-item {
+  border-radius: 5px 5px 0 0;
+}
 
-  .expanded-dropdown-list {
-    display: flex;
-    color: $black-01;
-    background-color: $gray-03;
-    width: 84px;
-    height: 32px;
-    border: none;
-    font-size: 1.3rem;
-    font-weight: 600;
-    padding-left: 15px;
-    padding-top: 8px;
-
-    &:not(:last-child) {
-      border-bottom: none;
-    }
-  }
-
-  .first-item {
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-  }
-
-  .last-item {
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-  }
+.last-item {
+  border-radius: 0 0 5px 5px;
 }

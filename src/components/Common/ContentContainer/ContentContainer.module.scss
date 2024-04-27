@@ -3,7 +3,6 @@
   flex-direction: column;
   flex-shrink: 0;
   width: 100%;
-  height: 100%;
   background: $gray-02;
   backdrop-filter: blur(15px);
 }
@@ -26,9 +25,28 @@
   @include font-style(1.6rem, $gray-01, 700);
   height: 100%;
 
-  &.active-text {
+  &.feed {
     color: $black-01;
     transition: 0.15s color ease-in-out;
+  }
+
+  &.post {
+    color: $black-01;
+    transition: 0.15s color ease-in-out;
+  }
+
+  &.scrap {
+    color: $black-01;
+    transition: 0.15s color ease-in-out;
+  }
+
+  &.hashtag {
+    color: $black-01;
+    transition: 0.15s color ease-in-out;
+  }
+
+  &.user {
+    transform: translateX(90px);
   }
 }
 
@@ -52,6 +70,19 @@
   &.scrap {
     transform: translateX(143.5px);
   }
+
+  &.hashtag {
+    width: 70px;
+    transform: translateX(-8px);
+  }
+
+  &.user {
+    transform: translateX(90px);
+  }
+}
+
+.active-text {
+  color: $black-01;
 }
 
 .divide-line {
@@ -67,7 +98,15 @@
 
 .content {
   overflow-y: scroll;
-  height: 75vh;
+  height: 68vh;
+
+  &.profile-content {
+    height: 54vh;
+  }
+}
+
+.filter-container {
+  margin-right: 20px;
 }
 
 @media (min-width: 768px) {
@@ -78,6 +117,14 @@
 
   .dropdown {
     margin-right: 24px;
+  }
+
+  .content {
+    height: 66vh;
+
+    &.profile-content {
+      height: 60vh;
+    }
   }
 }
 

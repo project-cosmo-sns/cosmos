@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './CategoryFlag.module.scss';
-import { CategoryType } from '@/@types/type';
+import { CategoryType } from '@/pages/post/[postId]/mockData';
 
 interface CategoryFlag {
   category: CategoryType;

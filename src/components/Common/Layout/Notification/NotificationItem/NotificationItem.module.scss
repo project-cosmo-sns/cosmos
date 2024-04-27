@@ -1,8 +1,12 @@
 .notification-item {
-  @include flex-arrange(flex-start, center);
-  gap: 6px;
+  @include flex-arrange(space-between, center);
+  gap: 12px;
   margin-bottom: 12px;
   line-height: 1.5em;
+
+  @media (min-width: 768px) {
+    gap: 6px;
+  }
 
   &:last-child {
     margin-bottom: 0;
@@ -13,6 +17,7 @@
   }
 
   p {
+    width: 100%;
     span {
       padding-left: 5px;
       color: $gray-01;

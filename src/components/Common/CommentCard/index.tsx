@@ -1,57 +1,98 @@
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import { Comment } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
+import { useState } from 'react';
+import ActionButtons from '../Buttons/ActionButtons';
+import { LikeIcon, LikedIcon } from '../IconCollection';
+import Modal from '../Layout/Modal';
 import styles from './CommentCard.module.scss';
-import { DeleteIcon, EditIcon, LikeIcon, LikedIcon } from '../IconCollection';
+import EditComment from './EditComment';
 
 interface CommentCardProps {
   comment: Comment;
 }
 
+const cn = classNames.bind(styles);
+
 export default function CommentCard({ comment }: CommentCardProps) {
-  const cn = classNames.bind(styles);
-  const { author, createdAt, content, reactionCount, likedByCurrentUser } =
-    comment;
+  const {
+    author,
+    createdAt,
+    content,
+    reactionCount: likeCount,
+    likedByCurrentUser,
+  } = comment;
+
+  const [commentValue, setCommentValue] = useState(content);
+  const [isCommentEditing, setIsCommentEditing] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
+  // 댓글 좋아요 버튼 및 숫자 임시로 테스트하기 위해 상태 추가. 추후 삭제 에정
+  const [isLiked, setIsLiked] = useState(likedByCurrentUser);
+  const [reactionCount, setReactionCount] = useState(likeCount);
+
   // author.id === userId 일 때 true
   const isMyComment = true;
 
   // 날짜 형식 정해지면 삭제 or 변경 예정
   const formattedCreatedAt = createdAt.slice(0, 10);
 
+  const handleClickEditComment = () => {
+    setIsCommentEditing((prev) => !prev);
+    setCommentValue(content);
+  };
+
+  const handleClickDeleteComment = () => {
+    setIsDeleteModalOpen(true);
+  };
+
+  // 임시 댓글 좋아요 클릭 함수. 추후 댓글 좋아요 요청보내고 받아온 값으로 바꾸도록 수정 예정
+  const handleClickLikeComment = () => {
+    setIsLiked((prev) => !prev);
+    setReactionCount((prev) => (isLiked ? prev - 1 : prev + 1));
+  };
+
   return (
     <div className={cn('wrapper')}>
       <div className={cn('header')}>
         <AuthorProfile author={author} createdAt={formattedCreatedAt} />
         <div className={cn('container')}>
-          <div
-            className={cn('like')}
-            onClick={() => console.log('!likedByCurrentUser 요청 보내기')}
-          >
-            {likedByCurrentUser ? (
+          <div className={cn('like')} onClick={handleClickLikeComment}>
+            {isLiked ? (
               <LikedIcon width="18" height="18" />
             ) : (
               <LikeIcon width="18" height="18" />
             )}
             {reactionCount}
           </div>
-          {isMyComment && (
-            <div className={cn('edit')}>
-              <EditIcon
-                width="18"
-                height="18"
-                onClick={() => console.log('댓글 수정')}
-              />
-
-              <DeleteIcon
-                width="18"
-                height="18"
-                onClick={() => console.log('포스트 삭제하시겠습니까 모달 on')}
-              />
-            </div>
+          <ActionButtons
+            isButtonShow={isMyComment}
+            handleClickEdit={handleClickEditComment}
+            handleClickDelete={handleClickDeleteComment}
+          />
+          {isDeleteModalOpen && (
+            <Modal
+              title="삭제 모달"
+              modalVisible={isDeleteModalOpen}
+              toggleModal={setIsDeleteModalOpen}
+              cssComponentDisplay={cn('')}
+              cssModalSize={cn('')}
+            >
+              <div>하이</div>
+            </Modal>
           )}
         </div>
       </div>
-      <div className={cn('content')}>{content}</div>
+      <div className={cn('content')}>
+        {isCommentEditing ? (
+          <EditComment
+            commentValue={commentValue}
+            setCommentValue={setCommentValue}
+          />
+        ) : (
+          content
+        )}
+      </div>
     </div>
   );
 }

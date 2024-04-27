@@ -1,11 +1,10 @@
-.feed-details-container {
+.container {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
 }
-.feed-details-wrapper {
-  display: flex;
-}
+
 .divide-line {
   width: 100%;
   height: 1px;

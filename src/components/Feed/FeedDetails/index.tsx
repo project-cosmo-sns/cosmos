@@ -1,58 +1,25 @@
 import CommentCard from '@/components/Common/CommentCard';
-import styles from './FeedDetails.module.scss';
+import CommentInput from '@/components/Common/CommentInput';
+import { mockData } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
 import FeedCard from '../FeedCard';
-import CommentInput from '@/components/Common/CommentInput';
-import DefaultButton from '@/components/Common/Buttons/DefaultButton';
-import { mockData } from '@/pages/post/[postId]/mockData';
 import { MOCKDATA2 } from '../FeedCardList/mockData';
+import styles from './FeedDetails.module.scss';
+
+/**
+ * @return {JSX.Element} FeedDetails - 추후에 변경 예정입니다. 피드 리스트에서 특정 피드를 클릭한다면 클리한 피드의 아이디를 통해 데이터를 요청해 화면에 보여줍니다.
+ */
 
 export default function FeedDetails() {
   const cn = classNames.bind(styles);
-  const {
-    category,
-    title,
-    author,
-    createdAt,
-    content,
-    tags,
-    emoji,
-    views,
-    comments,
-  } = mockData[0];
-  const {
-    userImage,
-    userName,
-    term,
-    date,
-    contents,
-    emojiCount,
-    commentCount,
-    eyeCount,
-  } = MOCKDATA2[0];
+  const { comments } = mockData[0];
   return (
-    <div className={cn('feed-details-container')}>
-      <FeedCard
-        userImage={userImage}
-        userName={userName}
-        term={term}
-        date={date}
-        content={contents}
-        emojiCount={emojiCount}
-        commentCount={commentCount}
-        eyeCount={eyeCount}
+    <div className={cn('container')}>
+      <FeedCard feedData={MOCKDATA2[0]} hasPadding={false} hasHover={false} />
+      <CommentInput
+        placeholder="댓글을 입력하세요"
+        handleClick={() => console.log('등록')}
       />
-      <div className={cn('feed-details-wrapper')}>
-        <CommentInput placeholder="댓글을 입력해주세요" />
-        <DefaultButton
-          buttonType="submit"
-          size="small"
-          onClick={() => console.log('등록')}
-          color="primary-01"
-        >
-          등록
-        </DefaultButton>
-      </div>
       <div>
         {comments.map((comment, index) => (
           <div key={comment.id}>

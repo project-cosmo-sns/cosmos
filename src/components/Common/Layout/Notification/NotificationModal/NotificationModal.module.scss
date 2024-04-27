@@ -1,16 +1,39 @@
 .notification-modal {
-  transform: translate(-27.2vw, -11.6vh);
+  text-align: center;
+
+  .notification {
+    width: 100%;
+    height: 100%;
+
+    @media (min-width: 768px) {
+      width: 380px;
+      height: auto;
+    }
+  }
 
   .notification-modal-wrapper {
-    margin-top: 30px;
-    display: flex;
+    @include flex-arrange(space-between, center);
     flex-direction: column;
-    align-items: center;
-    gap: 20px;
+    margin-top: 10px;
+    width: 100%;
+    height: 100%;
+
+    .notification-modal-container {
+      @include flex-arrange(flex-start, center);
+      flex-direction: column;
+      gap: 25px;
+      width: 100%;
+      padding: 0 30px 20px;
+
+      @media (min-width: 768px) {
+        margin: 0 auto 30px;
+        padding-bottom: 0;
+      }
+    }
   }
 
   .notification-modal-item {
-    width: 30%;
+    width: 100%;
     @include flex-arrange(space-between, center);
 
     h3 {

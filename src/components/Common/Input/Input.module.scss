@@ -1,0 +1,13 @@
+.wrapper {
+  width: 100%;
+}
+
+.input {
+  border: none;
+  width: 100%;
+  flex-grow: 1;
+  font-size: 1.6rem;
+  background-color: $gray-03;
+  border-radius: 5px;
+  padding: 15px 16px;
+}

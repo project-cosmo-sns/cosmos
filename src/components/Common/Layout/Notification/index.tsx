@@ -2,7 +2,7 @@ import styles from './Notification.module.scss';
 import classNames from 'classnames/bind';
 import PopOver from '@/components/Common/PopOverBox';
 import NotificationItem from './NotificationItem';
-import { SettingIcon } from '../../IconCollection';
+import { BackIcon, SettingIcon } from '../../IconCollection';
 import { useState } from 'react';
 import NotificationModal from './NotificationModal';
 
@@ -75,6 +75,12 @@ export default function Notification({ onClose }: PopOverProps) {
 
   return (
     <PopOver onClose={onClose} className={cn('notification-popover')}>
+      <BackIcon
+        className={cn('notification-close')}
+        width="18"
+        height="18"
+        onClick={onClose}
+      />
       <h2>알림</h2>
       <SettingIcon
         className={cn('setting-icon')}

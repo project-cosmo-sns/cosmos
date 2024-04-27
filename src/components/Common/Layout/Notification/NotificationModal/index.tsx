@@ -16,27 +16,33 @@ export default function NotificationModal({
   setIsOpen,
 }: NotificationModalProps) {
   const handleButtonClick = () => {
-    console.log('댓글 등록 클릭');
+    console.log('알림 설정 완료 클릭');
   };
+
+  // 사용자의 알림 값 불러오기가 필요함
   return (
     <Modal
       title="알림 설정"
       modalVisible={isOpen}
       toggleModal={setIsOpen}
+      cssComponentDisplay={cn('')}
+      cssModalSize={cn('notification')}
       className={cn('notification-modal')}
     >
       <div className={cn('notification-modal-wrapper')}>
-        <div className={cn('notification-modal-item')}>
-          <h3>댓글</h3>
-          <ToggleButton />
-        </div>
-        <div className={cn('notification-modal-item')}>
-          <h3>이모지</h3>
-          <ToggleButton />
-        </div>
-        <div className={cn('notification-modal-item')}>
-          <h3>팔로우</h3>
-          <ToggleButton />
+        <div className={cn('notification-modal-container')}>
+          <div className={cn('notification-modal-item')}>
+            <h3>댓글</h3>
+            <ToggleButton />
+          </div>
+          <div className={cn('notification-modal-item')}>
+            <h3>이모지</h3>
+            <ToggleButton />
+          </div>
+          <div className={cn('notification-modal-item')}>
+            <h3>팔로우</h3>
+            <ToggleButton />
+          </div>
         </div>
         <DefaultButton
           onClick={handleButtonClick}

@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
+import { MouseEvent } from 'react';
 import { CommentIcon, EmojiIcon, EyeIcon } from '../IconCollection';
 import styles from './ReactionContainer.module.scss';
-import { MouseEvent } from 'react';
 
 interface ReactionContainerProps {
   emoji: number;

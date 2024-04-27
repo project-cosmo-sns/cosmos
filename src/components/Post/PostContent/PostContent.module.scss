@@ -1,0 +1,91 @@
+.wrapper {
+  @include flex-arrange(center, flex-start);
+  flex-direction: column;
+  width: 100%;
+}
+
+.category {
+  @include font-style(1.6rem, $gray-01, 500);
+  margin: 5rem 0 8px;
+}
+
+.title {
+  @include font-style(2.4rem, $black-01, 700);
+  margin-bottom: 20px;
+}
+
+.header {
+  @include flex-arrange(space-between, center);
+  width: 100%;
+}
+
+.divide-line {
+  width: 100%;
+  height: 1px;
+  background-color: $gray-02;
+  margin: 16px 0;
+}
+
+.markdown-content {
+  margin-bottom: 40px;
+  font-size: 1.6rem;
+  line-height: 2rem;
+
+  h1,
+  h2,
+  h3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  a {
+    color: $primary-01;
+  }
+
+  .task-list-item {
+    list-style: none;
+  }
+
+  ul,
+  ol {
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    margin-left: 0;
+    padding-left: 2.4rem;
+    line-height: 2.4rem;
+  }
+
+  ul {
+    list-style-type: disc;
+    ul {
+      list-style-type: circle;
+      ul {
+        list-style-type: square;
+      }
+    }
+  }
+
+  ol {
+    list-style-type: auto;
+    ol {
+      list-style: lower-alpha;
+      ol {
+        list-style: lower-roman;
+      }
+    }
+  }
+
+  code {
+    font-size: 1.2rem;
+  }
+
+  p {
+    display: inline-block;
+  }
+}
+
+.hashtag-container {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}

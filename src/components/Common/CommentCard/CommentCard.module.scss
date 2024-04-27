@@ -24,3 +24,14 @@
   @include flex-arrange(space-between, center);
   gap: 24px;
 }
+
+.content {
+  textarea {
+    width: 100%;
+    font-size: 1.6rem;
+    resize: none;
+    border-radius: 4px;
+    background-color: $gray-03;
+    padding: 8px;
+  }
+}

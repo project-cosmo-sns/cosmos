@@ -1,27 +1,54 @@
 import classNames from 'classnames/bind';
 import styles from './SearchInput.module.scss';
-import { ChangeEvent, useState } from 'react';
-import { GlassIcon } from '@/components/Common/IconCollection';
+import { ChangeEvent, KeyboardEvent, useState } from 'react';
+import { GlassIcon, CloseIcon } from '@/components/Common/IconCollection';
+import { useRouter } from 'next/router';
 
 const cn = classNames.bind(styles);
 
 export default function SearchInput() {
   const [search, setSearch] = useState<string>('');
+  const router = useRouter();
 
-  const handleSearchChange = ({
-    target: { value },
-  }: ChangeEvent<HTMLInputElement>) => {
-    setSearch(value);
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
   };
+
+  const handleSearch = () => {
+    if (search.trim() !== '') {
+      router.push(`/search?query=${encodeURIComponent(search)}`);
+    } else {
+      console.log('검색어 비어있음');
+    }
+  };
+
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
+  const handleSearchClear = () => {
+    setSearch('');
+  };
+
   return (
     <div className={cn('search-container')}>
       <input
         type="text"
         placeholder="검색"
         value={search}
-        onChange={handleSearchChange}
+        onChange={handleInputChange}
+        onKeyPress={handleKeyPress}
       />
-      <GlassIcon className={cn('search-icon')} />
+      {search && (
+        <CloseIcon
+          className={cn('clear-icon')}
+          onClick={handleSearchClear}
+          fill="#ccc"
+        />
+      )}
+      <GlassIcon className={cn('search-icon')} onClick={handleSearch} />
     </div>
   );
 }
