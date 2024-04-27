@@ -1,7 +1,7 @@
 import { Author } from '@/pages/post/[postId]/mockData';
 
 export interface FeedData {
-  id: string;
+  id: number;
   author: Author;
   createdAt: string;
   content: string;
@@ -12,7 +12,7 @@ export interface FeedData {
 
 const MOCKDATA = [
   {
-    id: 'feedId1',
+    id: 0,
     author: {
       id: 'tempUserId1',
       nickname: 'Kim Tonggae',
@@ -26,7 +26,7 @@ const MOCKDATA = [
     eyeCount: 50,
   },
   {
-    id: 'feedId2',
+    id: 1,
     author: {
       id: 'tempUserId2',
       nickname: 'Alice Smith',
@@ -40,7 +40,7 @@ const MOCKDATA = [
     eyeCount: 35,
   },
   {
-    id: 'feedId3',
+    id: 2,
     author: {
       id: 'tempUserId3',
       nickname: 'John Doe',
@@ -53,7 +53,7 @@ const MOCKDATA = [
     eyeCount: 65,
   },
   {
-    id: 'feedId4',
+    id: 3,
     author: {
       id: 'tempUserId4',
       nickname: 'Emily Johnson',
@@ -66,7 +66,7 @@ const MOCKDATA = [
     eyeCount: 20,
   },
   {
-    id: 'feedId5',
+    id: 4,
     author: {
       id: 'tempUserId5',
       nickname: 'David Lee',
@@ -80,7 +80,7 @@ const MOCKDATA = [
     eyeCount: 40,
   },
   {
-    id: 'feedId6',
+    id: 5,
     author: {
       id: 'tempUserId6',
       nickname: 'Sophia Rodriguez',
@@ -94,7 +94,7 @@ const MOCKDATA = [
     eyeCount: 25,
   },
   {
-    id: 'feedId7',
+    id: 6,
     author: {
       id: 'tempUserId7',
       nickname: 'Michael Brown',
@@ -108,21 +108,4 @@ const MOCKDATA = [
   },
 ];
 
-const MOCKDATA2 = [
-  {
-    id: 'feedId1',
-    author: {
-      id: 'tempUserId1',
-      nickname: '김똥개',
-      generation: 3,
-    },
-    createdAt: '2024-04-19',
-    content:
-      '위워크에서 아이폰 충전기 정품 케이블 보신 분 있나요? 분실한 거 같아요..!!',
-    reactionCount: 3,
-    commentsCount: 10,
-    eyeCount: 50,
-  },
-];
-
-export { MOCKDATA, MOCKDATA2 };
+export { MOCKDATA };

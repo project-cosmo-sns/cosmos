@@ -33,7 +33,7 @@ export default function FeedList() {
         cssModalSize={cn('feed-detail-modalSize')}
         cssComponentDisplay={cn('feed-detail-componentDisplay')}
       >
-        <FeedDetails />
+        <FeedDetails MOCKDATA={MOCKDATA} />
       </Modal>
     </>
   );

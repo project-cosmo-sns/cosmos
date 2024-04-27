@@ -4,6 +4,7 @@ import styles from './FeedCard.module.scss';
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import { FeedData } from '../FeedList/mockData';
+import { useRouter } from 'next/router';
 
 interface FeedCardTypes {
   feedData: FeedData;
@@ -30,11 +31,22 @@ export default function FeedCard({
   hasHover,
 }: FeedCardTypes) {
   const cn = classNames.bind(styles);
-  const { author, createdAt, content, reactionCount, commentsCount, eyeCount } =
-    feedData;
+  const router = useRouter();
+  const {
+    id,
+    author,
+    createdAt,
+    content,
+    reactionCount,
+    commentsCount,
+    eyeCount,
+  } = feedData;
   return (
     <div
-      onClick={() => toggleModal && toggleModal(!modalVisible)}
+      onClick={async () => {
+        await router.push(`?id=${id}`);
+        toggleModal && toggleModal(!modalVisible);
+      }}
       className={cn(
         'container',
         hasPadding && 'padding',
