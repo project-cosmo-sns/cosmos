@@ -1,24 +1,31 @@
 import React, { useEffect } from 'react';
-import axios from '@/api/axios';
+import { customAxios } from '@/api/axios';
+import { useRouter } from 'next/router';
+import axios from 'axios';
+
+const instances = axios.create({
+  baseURL: 'https://api-local.cosmo-sns.com',
+  withCredentials: true,
+});
 
 export default function Redirect() {
-  useEffect(() => {
-    const fetchGitHub = async (code: string) => {
-      try {
-        const response = await axios.post(`/auth/github/redirect?code=${code}`);
-        console.log(response);
-      } catch (error) {
-        console.error('요청 실패:', error);
-      }
-    };
-
-    const code = new URLSearchParams(window.location.search).get('code');
-    console.log(code);
-
-    if (code) {
-      fetchGitHub(code);
+  const router = useRouter();
+  const fetchGitHub = async (code: string) => {
+    try {
+      const res = await instances.post(`/auth/github/redirect?code=${code}`);
+      console.log(res);
+    } catch (error) {
+      console.error('요청 실패:', error);
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    if (router.query.code) {
+      fetchGitHub(router.query.code as string);
+    }
+  }, [router]);
+
+  console.log(router.query.code);
 
   return <div>Redirect</div>;
 }

@@ -6,6 +6,175 @@ export interface FollowType {
   isFollow?: boolean;
 }
 
+export interface MemberType {
+  id: number;
+  nickname: string;
+  profile_image_url: string;
+  generation: number;
+  introduce: string;
+  is_comment_notification: boolean;
+  is_emoji_notification: boolean;
+  is_follow_notification: boolean;
+  is_authorized: boolean;
+  deleted_at: string | null;
+  created_at: string;
+  updated_at: string;
+  sessionId: string;
+}
+
+export const memberData: MemberType[] = [
+  {
+    id: 1,
+    nickname: '박지은',
+    profile_image_url: 'https://randomuser.me/api/portraits/women/1.jpg',
+    generation: 6,
+    introduce: '안녕하세요, 박지은입니다.',
+    is_comment_notification: true,
+    is_emoji_notification: false,
+    is_follow_notification: true,
+    is_authorized: true,
+    deleted_at: null,
+    created_at: '2024-04-26T00:00:00Z',
+    updated_at: '2024-04-26T00:00:00Z',
+    sessionId: 'A3A5D',
+  },
+  {
+    id: 2,
+    nickname: '김민준',
+    profile_image_url: 'https://randomuser.me/api/portraits/men/2.jpg',
+    generation: 4,
+    introduce: '안녕하세요, 김민준입니다.',
+    is_comment_notification: false,
+    is_emoji_notification: true,
+    is_follow_notification: true,
+    is_authorized: false,
+    deleted_at: null,
+    created_at: '2024-04-26T00:00:00Z',
+    updated_at: '2024-04-26T00:00:00Z',
+    sessionId: 'B4B7E',
+  },
+  {
+    id: 3,
+    nickname: '이서연',
+    profile_image_url: 'https://randomuser.me/api/portraits/women/3.jpg',
+    generation: 1,
+    introduce: '안녕하세요, 이서연입니다.',
+    is_comment_notification: true,
+    is_emoji_notification: true,
+    is_follow_notification: false,
+    is_authorized: true,
+    deleted_at: null,
+    created_at: '2024-04-26T00:00:00Z',
+    updated_at: '2024-04-26T00:00:00Z',
+    sessionId: 'C8C1F',
+  },
+  {
+    id: 4,
+    nickname: '정민서',
+    profile_image_url: 'https://randomuser.me/api/portraits/women/4.jpg',
+    generation: 5,
+    introduce: '안녕하세요, 정민서입니다.',
+    is_comment_notification: false,
+    is_emoji_notification: false,
+    is_follow_notification: false,
+    is_authorized: true,
+    deleted_at: null,
+    created_at: '2024-04-26T00:00:00Z',
+    updated_at: '2024-04-26T00:00:00Z',
+    sessionId: 'D9D2A',
+  },
+  {
+    id: 5,
+    nickname: '이민수',
+    profile_image_url: 'https://randomuser.me/api/portraits/men/5.jpg',
+    generation: 2,
+    introduce: '안녕하세요, 이민수입니다.',
+    is_comment_notification: true,
+    is_emoji_notification: false,
+    is_follow_notification: true,
+    is_authorized: false,
+    deleted_at: null,
+    created_at: '2024-04-26T00:00:00Z',
+    updated_at: '2024-04-26T00:00:00Z',
+    sessionId: 'E7E8B',
+  },
+  {
+    id: 6,
+    nickname: '최현우',
+    profile_image_url: 'https://randomuser.me/api/portraits/men/6.jpg',
+    generation: 6,
+    introduce: '안녕하세요, 최현우입니다.',
+    is_comment_notification: true,
+    is_emoji_notification: true,
+    is_follow_notification: false,
+    is_authorized: true,
+    deleted_at: null,
+    created_at: '2024-04-26T00:00:00Z',
+    updated_at: '2024-04-26T00:00:00Z',
+    sessionId: 'F6F4C',
+  },
+  {
+    id: 7,
+    nickname: '김윤아',
+    profile_image_url: 'https://randomuser.me/api/portraits/women/7.jpg',
+    generation: 2,
+    introduce: '안녕하세요, 김윤아입니다.',
+    is_comment_notification: false,
+    is_emoji_notification: true,
+    is_follow_notification: true,
+    is_authorized: false,
+    deleted_at: null,
+    created_at: '2024-04-26T00:00:00Z',
+    updated_at: '2024-04-26T00:00:00Z',
+    sessionId: 'G5G2H',
+  },
+  {
+    id: 8,
+    nickname: '박예은',
+    profile_image_url: 'https://randomuser.me/api/portraits/women/8.jpg',
+    generation: 4,
+    introduce: '안녕하세요, 박예은입니다.',
+    is_comment_notification: true,
+    is_emoji_notification: false,
+    is_follow_notification: false,
+    is_authorized: false,
+    deleted_at: null,
+    created_at: '2024-04-26T00:00:00Z',
+    updated_at: '2024-04-26T00:00:00Z',
+    sessionId: 'A15A8',
+  },
+  {
+    id: 9,
+    nickname: '이다현',
+    profile_image_url: 'https://randomuser.me/api/portraits/women/9.jpg',
+    generation: 1,
+    introduce: '안녕하세요, 이다현입니다.',
+    is_comment_notification: false,
+    is_emoji_notification: true,
+    is_follow_notification: false,
+    is_authorized: true,
+    deleted_at: null,
+    created_at: '2024-04-26T00:00:00Z',
+    updated_at: '2024-04-26T00:00:00Z',
+    sessionId: 'B16B9',
+  },
+  {
+    id: 10,
+    nickname: '박서아',
+    profile_image_url: 'https://randomuser.me/api/portraits/women/10.jpg',
+    generation: 3,
+    introduce: '안녕하세요, 박서아입니다.',
+    is_comment_notification: true,
+    is_emoji_notification: false,
+    is_follow_notification: true,
+    is_authorized: true,
+    deleted_at: null,
+    created_at: '2024-04-26T00:00:00Z',
+    updated_at: '2024-04-26T00:00:00Z',
+    sessionId: 'C17C0',
+  },
+];
+
 export const followerData: FollowType[] = [
   {
     id: 1,

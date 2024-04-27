@@ -14,8 +14,9 @@ import {
 import Toast from '@/components/Common/Toast';
 import LoginModal from '../../LoginModal';
 import { useRouter } from 'next/router';
-import { useCookies } from 'react-cookie';
 import { getCookie } from '@/utils/Cookies';
+import { memberData } from '@/components/Profile/FollowList/FollowMockData';
+import Image from 'next/image';
 
 const cn = classNames.bind(styles);
 
@@ -26,9 +27,10 @@ export default function SideBar() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const router = useRouter();
+  const sessionId = getCookie('sessionId');
 
   const profileClick = () => {
-    if (getCookie('SESSIONID')) {
+    if (sessionId) {
       router.push('/profile');
       return;
     }
@@ -73,12 +75,10 @@ export default function SideBar() {
             <Notification onClose={handleClosePopOver} />
           )}
         </div>
-        {/* <Link href="/profile"> */}
         <UserIcon onClick={profileClick} />
         {modalVisible && (
           <LoginModal modalVisible={modalVisible} toggleModal={profileClick} />
         )}
-        {/* </Link> */}
         {/* {toast && <Toast icon={WarnIcon} text="인증 대기중입니다." />} */}
       </div>
     </div>

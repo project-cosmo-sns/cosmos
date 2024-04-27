@@ -11,7 +11,7 @@ export default function LoginModal({
   modalVisible,
   toggleModal,
 }: ModalPropsType) {
-  const githubClick = () => {
+  const githubClick = async () => {
     window.location.assign('https://api-local.cosmo-sns.com/auth/github/login');
   };
 
