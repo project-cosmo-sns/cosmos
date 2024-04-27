@@ -23,23 +23,95 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-
+      position: relative;
       .text {
         width: 100%;
-        height: 200px;
         background-color: $gray-03;
-        text-indent: 16px;
-        padding-top: 16px;
+        padding: 16px;
         border-radius: 5px;
         @include font-style(1.6rem);
-        @media (min-width: 768px) {
-          height: 104px;
-        }
+      }
+      .error {
+        position: absolute;
+        right: 16px;
+        bottom: 99px;
+        font-size: 1.1rem;
+        color: #ed1c24;
+        padding-left: 16px;
+      }
+      .limit {
+        position: absolute;
+        right: 16px;
+        bottom: 90px;
+        font-size: 1.1rem;
+        color: $gray-01;
+        padding-left: 16px;
       }
 
       .addImage {
         width: 100%;
         height: 102px;
+
+        .image-wrapper {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          gap: 12px;
+
+          .preview-container {
+            position: relative;
+            .preview-wrapper {
+              width: 102px;
+              height: 102px;
+              border-radius: 5px;
+              overflow: hidden;
+
+              @media (min-width: 768px) {
+                width: 110px;
+                height: 110px;
+              }
+
+              .file-preview {
+                width: 100%;
+                height: 100%;
+              }
+            }
+
+            .close {
+              position: absolute;
+              right: -10px;
+              top: -10px;
+              z-index: 1;
+            }
+          }
+
+          .file-label {
+            @include flex-arrange;
+            background-color: $gray-03;
+            width: 110px;
+            border-radius: 5px;
+            cursor: pointer;
+
+            .label-text {
+              color: $gray-01;
+              font-size: 1.2rem;
+              display: inline;
+            }
+
+            .current-upload-image {
+              width: 100%;
+              height: 100%;
+            }
+          }
+          .file-input {
+            position: absolute;
+            width: 0;
+            height: 0;
+            padding: 0;
+            overflow: hidden;
+            border: 0;
+          }
+        }
       }
 
       @media (min-width: 768px) {

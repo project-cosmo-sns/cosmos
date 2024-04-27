@@ -8,7 +8,7 @@ interface ModalType {
   children: ReactNode;
   title?: string;
   modalVisible: boolean;
-  toggleModal: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleModal?: React.Dispatch<React.SetStateAction<boolean>>;
   cssModalSize: string;
   cssComponentDisplay: string;
   className?: string;
@@ -45,7 +45,7 @@ export default function Modal({
               <div className={cn('wrapper')}>
                 <div
                   role="presentation"
-                  onClick={() => toggleModal(!modalVisible)}
+                  onClick={() => toggleModal && toggleModal(!modalVisible)}
                 >
                   <Icon.XIcon className={cn('x')} width="18" height="18" />
                 </div>
