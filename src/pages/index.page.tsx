@@ -1,7 +1,7 @@
 import { ContainerOptionType } from '@/@types/type';
 import ContentContainer from '@/components/Common/ContentContainer';
 import TodayQuestion from '@/components/Common/TodayQuestion';
-import FeedCardList from '@/components/Feed/FeedCardList';
+import FeedList from '@/components/Feed/FeedList';
 import PostList from '@/components/Post/PostList';
 import { useState } from 'react';
 
@@ -22,7 +22,7 @@ export default function Home() {
         setSelectedSort={setSelectedSort}
       >
         {selectedOption === 'feed' ? (
-          <FeedCardList />
+          <FeedList />
         ) : (
           <PostList selectedSort={selectedSort} />
         )}

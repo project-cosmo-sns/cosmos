@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import styles from './FeedCard.module.scss';
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
-import { FeedData } from '../FeedCardList/mockData';
+import { FeedData } from '../FeedList/mockData';
 
 interface FeedCardTypes {
   feedData: FeedData;

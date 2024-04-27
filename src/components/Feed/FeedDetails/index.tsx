@@ -3,7 +3,7 @@ import CommentInput from '@/components/Common/CommentInput';
 import { mockData } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
 import FeedCard from '../FeedCard';
-import { MOCKDATA2 } from '../FeedCardList/mockData';
+import { MOCKDATA2 } from '../FeedList/mockData';
 import styles from './FeedDetails.module.scss';
 
 /**
