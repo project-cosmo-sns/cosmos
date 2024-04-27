@@ -24,13 +24,16 @@
       flex-direction: column;
       gap: 8px;
       position: relative;
+
       .text {
         width: 100%;
         background-color: $gray-03;
         padding: 16px;
         border-radius: 5px;
+        resize: none;
         @include font-style(1.6rem);
       }
+
       .error {
         position: absolute;
         right: 16px;
@@ -39,6 +42,7 @@
         color: #ed1c24;
         padding-left: 16px;
       }
+
       .limit {
         position: absolute;
         right: 16px;

@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from 'react';
+import Image from 'next/image';
 import classNames from 'classnames/bind';
 import styles from './FeedCard.module.scss';
 import AuthorProfile from '@/components/Common/AuthorProfile';
@@ -11,7 +12,7 @@ interface FeedCardTypes {
   modalVisible?: boolean;
   toggleModal?: Dispatch<SetStateAction<boolean>>;
   hasPadding: boolean;
-  hasHover: boolean;
+  forDetails: boolean;
 }
 
 /**
@@ -28,7 +29,7 @@ export default function FeedCard({
   modalVisible = false,
   toggleModal,
   hasPadding,
-  hasHover,
+  forDetails,
 }: FeedCardTypes) {
   const cn = classNames.bind(styles);
   const router = useRouter();
@@ -37,6 +38,7 @@ export default function FeedCard({
     author,
     createdAt,
     content,
+    images,
     reactionCount,
     commentsCount,
     eyeCount,
@@ -50,12 +52,31 @@ export default function FeedCard({
       className={cn(
         'container',
         hasPadding && 'padding',
-        hasHover && 'container-hover',
+        forDetails && 'container-hover',
       )}
     >
       <div className={cn('wrapper')}>
-        <AuthorProfile author={author} createdAt={createdAt} />
-        <div className={cn('content')}>{content}</div>
+        <div className={cn('user-content')}>
+          <div className={cn('profile-content-wrapper')}>
+            <AuthorProfile author={author} createdAt={createdAt} />
+            <div className={cn('content')}>{content}</div>
+          </div>
+          {images && (
+            <div className={cn('upload-image-wrapper')}>
+              <div className={cn('upload-image')}>
+                <Image
+                  fill
+                  objectFit="cover"
+                  src={images[0].imageUrl}
+                  alt="feedImage"
+                />
+              </div>
+              {images.length > 1 && (
+                <span className={cn('extra-stuff')}>+ {images.length - 1}</span>
+              )}
+            </div>
+          )}
+        </div>
         <ReactionContainer
           emoji={reactionCount}
           commentsCount={commentsCount}

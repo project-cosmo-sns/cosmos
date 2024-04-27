@@ -23,7 +23,7 @@ export default function FeedList() {
             modalVisible={isModalOpen}
             toggleModal={setIsModalOpen}
             hasPadding
-            hasHover
+            forDetails
           />
         ))}
       </div>

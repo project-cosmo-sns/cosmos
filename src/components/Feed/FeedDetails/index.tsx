@@ -25,7 +25,7 @@ export default function FeedDetails({ MOCKDATA }: FeedDetailsTypes) {
       <FeedCard
         feedData={MOCKDATA[Number(query.id)]}
         hasPadding={false}
-        hasHover={false}
+        forDetails={false}
       />
       <CommentInput
         placeholder="댓글을 입력하세요"
