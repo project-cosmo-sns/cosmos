@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames/bind';
 import styles from './FeedCard.module.scss';
@@ -6,8 +6,6 @@ import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import { FeedData } from '../FeedList/mockData';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
-import Modal from '@/components/Common/Layout/Modal';
 
 interface FeedCardTypes {
   feedData: FeedData;
@@ -45,12 +43,9 @@ export default function FeedCard({
     commentsCount,
     eyeCount,
   } = feedData;
+  const [emojiVisible, setEmojiVisible] = useState<boolean>(false);
   return (
     <div
-      onClick={async () => {
-        await router.push(`?id=${id}`);
-        toggleModal && toggleModal(!modalVisible);
-      }}
       className={cn(
         'container',
         hasPadding && 'padding',
@@ -58,7 +53,13 @@ export default function FeedCard({
       )}
     >
       <div className={cn('wrapper')}>
-        <div className={cn('user-content')}>
+        <div
+          className={cn('user-content')}
+          onClick={async () => {
+            await router.push(`?id=${id}`);
+            toggleModal && toggleModal(!modalVisible);
+          }}
+        >
           <div className={cn('profile-content-wrapper')}>
             <AuthorProfile author={author} createdAt={createdAt} />
             <div className={cn('content')}>{content}</div>
@@ -83,6 +84,8 @@ export default function FeedCard({
           emoji={reactionCount}
           commentsCount={commentsCount}
           views={eyeCount}
+          emojiVisible={emojiVisible}
+          handleEmojiClick={setEmojiVisible}
         />
       </div>
     </div>
