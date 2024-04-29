@@ -6,6 +6,8 @@ import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import { FeedData } from '../FeedList/mockData';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+import Modal from '@/components/Common/Layout/Modal';
 
 interface FeedCardTypes {
   feedData: FeedData;

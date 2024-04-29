@@ -24,7 +24,7 @@ const MOCKDATA = [
     },
     createdAt: '2024-04-19',
     content:
-      'Has anyone seen a genuine iPhone charger cable on WeWork? I think I lost it..!!',
+      '좋은 글이 있어서 공유 드립니다! https://developer.mozilla.org/ko/docs/Web/CSS/object-fit',
     images: [
       {
         imageUrl:
