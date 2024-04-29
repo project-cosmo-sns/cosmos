@@ -26,7 +26,7 @@ export default function ProfileHeader({
       <div className={cn('profile-image')}>
         {member ? (
           <Image
-            src={member.profile_img}
+            src={member.imageUrl}
             alt="프로필 이미지"
             width="86"
             height="86"

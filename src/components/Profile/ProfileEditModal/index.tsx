@@ -6,6 +6,10 @@ import styles from './ProfileEditModal.module.scss';
 import { MemberDataType } from '@/pages/profile/mockData';
 import Image from 'next/image';
 import GenerationBadge from '@/components/Common/GenerationBadge';
+import ImageInput from '@/components/Common/ImageInput';
+import { AuthFormProps, ModalPropsType } from '@/@types/type';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 
 interface ProfileEditModalProps {
   isOpen: boolean;
@@ -22,8 +26,18 @@ export default function ProfileEditModal({
 }: ProfileEditModalProps) {
   // currentUserId는 토큰?으로 받아옴?
   const currentUserId = '1'; // 임시 ID
+  const { register, handleSubmit, watch, setValue } = useForm<AuthFormProps>();
+
+  const onSubmit: SubmitHandler<AuthFormProps> = (data) => console.log(data);
+
   const member =
     memberData && memberData.find((user) => user.id === currentUserId);
+
+  useEffect(() => {
+    if (member) {
+      setValue('image', member.imageUrl);
+    }
+  }, [member, setValue]);
 
   return (
     <div>
@@ -35,21 +49,30 @@ export default function ProfileEditModal({
           cssComponentDisplay={cn('profile-edit-modal')}
           cssModalSize={cn('380px')}
         >
-          <div className={cn('modal-wrapper')}>
+          <form
+            className={cn('profile-edit-Form')}
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <div className={cn('profile-image-edit')}>
-              {member ? (
+              <ImageInput
+                type="profile"
+                watch={watch}
+                register={register('image')}
+              />
+              {/* {member ? (
+               설정한프로필이미지출력
+              ) : (
                 <Image
                   src={member.profile_img}
                   alt="프로필 이미지"
                   width="86"
                   height="86"
                 />
-              ) : (
                 <Icon.ProfileIcon width="86" height="86" />
               )}
               <div className={cn('camera-image')}>
                 <Icon.CameraIcon width="14" height="14" />
-              </div>
+              </div> */}
             </div>
             <div className={cn('name')}>{member?.nickname}</div>
             <GenerationBadge generationInfo={member?.generation} />
@@ -79,7 +102,7 @@ export default function ProfileEditModal({
                 수정하기
               </DefaultButton>
             </div>
-          </div>
+          </form>
         </Modal>
       )}
     </div>
