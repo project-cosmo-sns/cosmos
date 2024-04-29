@@ -17,7 +17,7 @@ export default function MemberDataContainer() {
   }, []);
 
   return (
-    <div id={cn('modal-root')}>
+    <div>
       {memberData && (
         <>
           <ProfileHeader
