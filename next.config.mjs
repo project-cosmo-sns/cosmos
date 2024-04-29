@@ -1,9 +1,10 @@
 /** @type {import('next').NextConfig} */
 import path from 'path';
+import removeImports from 'next-remove-imports';
 
 const dirname = path.dirname(new URL(import.meta.url).pathname);
 
-const nextConfig = {
+const nextConfig = removeImports({
   images: {
     remotePatterns: [
       {
@@ -18,6 +19,6 @@ const nextConfig = {
     includePaths: [path.join(dirname, 'styles')],
     prependData: `@import "src/styles/_variables.scss"; @import "src/styles/_mixins.scss";`,
   },
-};
+});
 
 export default nextConfig;

@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import CategoryList from '../CategoryList';
 import HashTagInput from '../HashTag/HashTagInput';
 import styles from './PostEditor.module.scss';
+import MarkdownEditor from '../MarkdownEditor';
 
 interface PostEditorProps {
   postId: string;
@@ -53,6 +54,7 @@ export default function PostEditor({ postId, setData }: PostEditorProps) {
           onChange={(event) => setTitleValue(event.target.value)}
           placeholder="제목을 입력하세요"
         />
+        <MarkdownEditor />
         <textarea
           className={cn('editor')}
           value={contentValue}

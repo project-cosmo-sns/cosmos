@@ -4,6 +4,7 @@ import { CookiesProvider } from 'react-cookie';
 import '@/styles/globals.scss';
 import Layout from '@/components/Common/Layout';
 import Head from 'next/head';
+import '@uiw/react-md-editor/markdown-editor.css';
 
 export default function App({ Component, pageProps }: AppProps) {
   const useLayout = !pageProps.noLayout;
