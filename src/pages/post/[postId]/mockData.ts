@@ -23,7 +23,6 @@ export interface Comment {
 }
 
 export interface Tag {
-  id: number;
   name: string;
   color: string;
 }
@@ -112,11 +111,11 @@ def hello():
   - [ ] Task 2
 `,
     tags: [
-      { id: 1, name: '#코스모스', color: 'red' },
-      { id: 2, name: '#포스트', color: 'orange' },
-      { id: 3, name: '#해시태그', color: 'yellow' },
-      { id: 4, name: '#예시', color: 'green' },
-      { id: 5, name: '#입니다', color: 'blue' },
+      { name: '#코스모스', color: 'hashtag1' },
+      { name: '#포스트', color: 'hashtag2' },
+      { name: '#해시태그', color: 'hashtag3' },
+      { name: '#예시', color: 'hashtag4' },
+      { name: '#입니다', color: 'hashtag5' },
     ],
     emoji: 3,
     views: 5,
@@ -177,11 +176,11 @@ def hello():
 <br/><br/>
 `,
     tags: [
-      { id: 1, name: '#코스모스', color: 'red' },
-      { id: 2, name: '#포스트', color: 'orange' },
-      { id: 3, name: '#해시태그', color: 'yellow' },
-      { id: 4, name: '#예시', color: 'green' },
-      { id: 5, name: '#입니다', color: 'blue' },
+      { name: '#코스모스', color: 'hashtag1' },
+      { name: '#포스트', color: 'hashtag2' },
+      { name: '#해시태그', color: 'hashtag3' },
+      { name: '#예시', color: 'hashtag4' },
+      { name: '#입니다', color: 'hashtag5' },
     ],
     emoji: 3,
     views: 5,
@@ -241,11 +240,11 @@ def hello():
 
 `,
     tags: [
-      { id: 1, name: '#코스모스', color: 'red' },
-      { id: 2, name: '#포스트', color: 'orange' },
-      { id: 3, name: '#해시태그', color: 'yellow' },
-      { id: 4, name: '#예시', color: 'green' },
-      { id: 5, name: '#입니다', color: 'blue' },
+      { name: '#코스모스', color: 'hashtag1' },
+      { name: '#포스트', color: 'hashtag2' },
+      { name: '#해시태그', color: 'hashtag3' },
+      { name: '#예시', color: 'hashtag4' },
+      { name: '#입니다', color: 'hashtag5' },
     ],
     emoji: 3,
     views: 5,
@@ -299,11 +298,11 @@ def hello():
 [3차 오프라인 행사 신청서](https://forms.gle/UYN8kTK32XueXLwS7)를 제출하고 DM 부탁드려요!
 `,
     tags: [
-      { id: 1, name: '#코스모스', color: 'red' },
-      { id: 2, name: '#포스트', color: 'orange' },
-      { id: 3, name: '#해시태그', color: 'yellow' },
-      { id: 4, name: '#예시', color: 'green' },
-      { id: 5, name: '#입니다', color: 'blue' },
+      { name: '#코스모스', color: 'hashtag1' },
+      { name: '#포스트', color: 'hashtag2' },
+      { name: '#해시태그', color: 'hashtag3' },
+      { name: '#예시', color: 'hashtag4' },
+      { name: '#입니다', color: 'hashtag5' },
     ],
     emoji: 3,
     views: 5,
@@ -364,11 +363,11 @@ def hello():
 <br/><br/>
 `,
     tags: [
-      { id: 1, name: '#코스모스', color: 'red' },
-      { id: 2, name: '#포스트', color: 'orange' },
-      { id: 3, name: '#해시태그', color: 'yellow' },
-      { id: 4, name: '#예시', color: 'green' },
-      { id: 5, name: '#입니다', color: 'blue' },
+      { name: '#코스모스', color: 'hashtag1' },
+      { name: '#포스트', color: 'hashtag2' },
+      { name: '#해시태그', color: 'hashtag3' },
+      { name: '#예시', color: 'hashtag4' },
+      { name: '#입니다', color: 'hashtag5' },
     ],
     emoji: 3,
     views: 5,
@@ -427,11 +426,11 @@ def hello():
 <br/><br/>
 `,
     tags: [
-      { id: 1, name: '#코스모스', color: 'red' },
-      { id: 2, name: '#포스트', color: 'orange' },
-      { id: 3, name: '#해시태그', color: 'yellow' },
-      { id: 4, name: '#예시', color: 'green' },
-      { id: 5, name: '#입니다', color: 'blue' },
+      { name: '#코스모스', color: 'hashtag1' },
+      { name: '#포스트', color: 'hashtag2' },
+      { name: '#해시태그', color: 'hashtag3' },
+      { name: '#예시', color: 'hashtag4' },
+      { name: '#입니다', color: 'hashtag5' },
     ],
     emoji: 3,
     views: 5,
