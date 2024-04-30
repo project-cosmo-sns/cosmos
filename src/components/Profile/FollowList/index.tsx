@@ -1,7 +1,7 @@
 import styles from './FollowList.module.scss';
 import classNames from 'classnames/bind';
 import Modal from '@/components/Common/Layout/Modal';
-import { FollowType } from './FollowMockData';
+import { FollowType } from '@/utils/MemberMockData';
 import Follow from './Follow';
 import { ModalPropsType } from '@/@types/type';
 
