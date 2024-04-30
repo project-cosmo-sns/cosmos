@@ -7,12 +7,11 @@
   border: none;
   opacity: 0px;
   color: $white-01;
-  background-color: $black-01;
+  background-color: $black-03;
   cursor: pointer;
 
   &.isActive {
-    color: $black-02;
-    background-color: $gray-02;
+    background-color: $primary-01;
   }
 }
 
@@ -20,6 +19,6 @@
   @include font-style(1.4rem, $white-01, 600);
   width: 72px;
   height: 32px;
-  background: $black-01;
+  background: $black-03;
   border-radius: 5px;
 }

@@ -26,7 +26,7 @@ export default function AddContentPopOver({ onClose }: PopOverProps) {
           <span>피드 작성하기</span>
         </li>
         <li className={cn('content-list')}>
-          <PostIcon width="18" height="18" fill="#363636" />
+          <PostIcon width="18" height="18" />
           <span>포스트 작성하기</span>
         </li>
       </ul>
