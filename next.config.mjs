@@ -13,6 +13,11 @@ const nextConfig = removeImports({})({
       },
     ],
   },
+  transpilePackages: [
+    '@uiw/react-markdown-preview',
+    '@uiw/react-md-editor',
+    'rehype-prism-plus',
+  ],
   reactStrictMode: true,
   pageExtensions: ['page.tsx', 'page.ts', 'page.jsx', 'page.js'],
   sassOptions: {
