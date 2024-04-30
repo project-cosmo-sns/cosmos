@@ -4,7 +4,7 @@ import removeImports from 'next-remove-imports';
 
 const dirname = path.dirname(new URL(import.meta.url).pathname);
 
-const nextConfig = removeImports({
+const nextConfig = removeImports({})({
   images: {
     remotePatterns: [
       {

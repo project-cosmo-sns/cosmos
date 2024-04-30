@@ -1,16 +1,20 @@
 import dynamic from 'next/dynamic';
-import { useState } from 'react';
 
+interface MarkdownEditorProps {
+  content: string | undefined;
+  setContent: (args: string | undefined) => void;
+}
 const MDEditor = dynamic(() => import('@uiw/react-md-editor'), { ssr: false });
 
-export default function MarkdownEditor() {
-  const [value, setValue] = useState<string | undefined>();
-
+export default function MarkdownEditor({
+  content,
+  setContent,
+}: MarkdownEditorProps) {
   return (
     <div>
       <MDEditor
-        value={value}
-        onChange={setValue}
+        value={content}
+        onChange={setContent}
         preview="edit"
         height={500}
         textareaProps={{
