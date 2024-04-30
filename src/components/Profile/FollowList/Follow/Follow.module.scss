@@ -8,7 +8,7 @@
     gap: 20px;
 
     span {
-      @include font-style(1.4rem, $black-01, 600);
+      @include font-style(1.4rem, $white-01, 600);
     }
   }
 

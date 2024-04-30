@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styles from './Follow.module.scss';
 import classNames from 'classnames/bind';
-import { FollowType } from '../FollowMockData';
+import { FollowType } from '@/utils/MemberMockData';
 import GenerationBadge from '@/components/Common/GenerationBadge';
 import FollowButton from '@/components/Common/Buttons/FollowButton';
 

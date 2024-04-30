@@ -1,13 +1,9 @@
 import { ContainerOptionType } from '@/@types/type';
 import ContentContainer from '@/components/Common/ContentContainer';
-import Modal from '@/components/Common/Layout/Modal';
 import LoginModal from '@/components/Common/LoginModal';
 import AuthForm from '@/components/Profile/AuthForm';
 import FollowList from '@/components/Profile/FollowList';
-import {
-  followerData,
-  followingData,
-} from '@/components/Profile/FollowList/FollowMockData';
+import { followerData, followingData } from '@/utils/MemberMockData';
 import { useState } from 'react';
 
 export default function TestPage() {
