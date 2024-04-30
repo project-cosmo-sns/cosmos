@@ -24,11 +24,11 @@ export default function AuthForm({
 
   const router = useRouter();
 
-  const onSubmit: SubmitHandler<AuthFormProps> = (data) =>{ 
+  const onSubmit: SubmitHandler<AuthFormProps> = (data) => {
     localStorage.setItem('generation', data.generation);
     router.push('/');
     console.log(data);
-  }
+  };
 
   return (
     <Modal
