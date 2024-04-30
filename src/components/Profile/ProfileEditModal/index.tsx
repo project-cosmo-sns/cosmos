@@ -87,6 +87,7 @@ export default function ProfileEditModal({
             <div className={cn('name')}>{member?.nickname}</div>
             <GenerationBadge generationInfo={member?.generation} />
             <div className={cn('introduce')}>
+              한줄소개
               {member?.introduce ? (
                 <textarea
                   defaultValue={member.introduce}

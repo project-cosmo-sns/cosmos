@@ -1,4 +1,5 @@
 .profile-edit-Form {
+  @include font-style(1.6rem, $white-01, 700);
   width: 380px;
   height: auto;
   min-height: 360px;
@@ -46,8 +47,8 @@
     flex-direction: column;
     width: 320px;
     height: 93px;
-    background-color: $gray-03;
-    color: $gray-01;
+    background-color: $black-03;
+    color: $gray-01 !important;
     font-weight: 600;
     margin-top: 12px;
     border-radius: 5px;
@@ -56,7 +57,7 @@
   }
 
   .textareaActive {
-    @include font-style(1.4rem);
+    @include font-style(1.4rem, $white-01, 600);
   }
 }
 
