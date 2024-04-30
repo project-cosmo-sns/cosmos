@@ -41,7 +41,7 @@ export function AddIcon({ fill = 'black', ...props }: IconCollectionType) {
 }
 
 export function AddImageIcon({
-  fill = '#767676',
+  fill = '#C2C7D9',
   ...props
 }: IconCollectionType) {
   return (
@@ -331,7 +331,7 @@ export function EyeIcon({ fill = '#a8a8a8', ...props }: IconCollectionType) {
   );
 }
 
-export function FeedIcon({ fill = '#363636', ...props }: IconCollectionType) {
+export function FeedIcon({ fill = '#FFFFFF', ...props }: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -543,7 +543,7 @@ export function LinkIcon({ fill = '#767676', ...props }: IconCollectionType) {
   );
 }
 
-export function PostIcon({ fill = '#363636', ...props }: IconCollectionType) {
+export function PostIcon({ fill = '#FFFFFF', ...props }: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path

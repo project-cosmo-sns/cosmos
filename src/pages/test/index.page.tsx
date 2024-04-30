@@ -76,7 +76,7 @@ export default function TestPage() {
       )}
       <br />
       <button type="button" onClick={() => toggleModla('login')}>
-        회원가입 모달 테스트
+        회원가입 모달 테스트 
       </button>
       {followModal.login && (
         <LoginModal

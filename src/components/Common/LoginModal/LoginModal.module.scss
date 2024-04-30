@@ -9,7 +9,7 @@
       margin-top: 20px;
       gap: 10px;
       h2 {
-        @include font-style(1.2rem, $black-03, 500);
+        @include font-style(1.2rem, $gray-02, 500);
         margin-bottom: 30px;
       }
       .oauth-wrapper {

@@ -70,7 +70,7 @@ export default function AuthForm({
           color="primary-01"
           onClick={handleSubmit(onSubmit)}
         >
-          제출
+          신청하기
         </DefaultButton>
       </form>
     </Modal>

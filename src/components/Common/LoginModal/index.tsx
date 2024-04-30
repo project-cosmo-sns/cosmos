@@ -29,7 +29,7 @@ export default function LoginModal({
           <LoginButton text="구글 로그인/ 회원가입" icon={<GoogleIcon />} />
           <LoginButton
             text="깃허브 로그인/ 회원가입"
-            icon={<GitHubIcon />}
+            icon={<GitHubIcon fill='#FFFFFF' />}
             onClick={githubClick}
           />
         </div>
