@@ -7,6 +7,7 @@ import classNames from 'classnames/bind';
 import styles from './AuthForm.module.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { generationRegex } from '@/utils/generationRegex';
+import { useRouter } from 'next/router';
 
 const cn = classNames.bind(styles);
 
@@ -21,7 +22,13 @@ export default function AuthForm({
     formState: { errors },
   } = useForm<AuthFormProps>();
 
-  const onSubmit: SubmitHandler<AuthFormProps> = (data) => console.log(data);
+  const router = useRouter();
+
+  const onSubmit: SubmitHandler<AuthFormProps> = (data) =>{ 
+    localStorage.setItem('generation', data.generation);
+    router.push('/');
+    console.log(data);
+  }
 
   return (
     <Modal

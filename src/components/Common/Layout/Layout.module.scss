@@ -1,7 +1,9 @@
 .layout-container {
   min-height: 100vh;
-  background: $gray-01;
   overflow: visible;
+  background-image: url('/images/cosmos.png');
+  background-size: cover;
+  background-repeat: no-repeat;
 
   .layout-content {
     @include flex-arrange(flex-start, center);

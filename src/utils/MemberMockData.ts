@@ -300,3 +300,147 @@ export const followingData: FollowType[] = [
     generation: 4,
   },
 ];
+
+
+
+
+
+
+// export interface FollowType {
+//   id: number;
+//   follower_member_id: number;
+//   following_member_id: number;
+//   created_at: string;
+//   updated_at: string;
+//   isFollow?: boolean;
+// }
+
+
+// export const followData: FollowType[] = [
+//   {
+//     id: 1,
+//     follower_member_id: 2,
+//     following_member_id: 1,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 2,
+//     follower_member_id: 3,
+//     following_member_id: 1,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 3,
+//     follower_member_id: 4,
+//     following_member_id: 1,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 4,
+//     follower_member_id: 5,
+//     following_member_id: 1,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 5,
+//     follower_member_id: 6,
+//     following_member_id: 1,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 6,
+//     follower_member_id: 7,
+//     following_member_id: 1,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 7,
+//     follower_member_id: 8,
+//     following_member_id: 1,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 8,
+//     follower_member_id: 9,
+//     following_member_id: 1,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 9,
+//     follower_member_id: 10,
+//     following_member_id: 1,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 10,
+//     follower_member_id: 1,
+//     following_member_id: 2,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 11,
+//     follower_member_id: 1,
+//     following_member_id: 3,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 12,
+//     follower_member_id: 1,
+//     following_member_id: 4,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 13,
+//     follower_member_id: 1,
+//     following_member_id: 5,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 14,
+//     follower_member_id: 1,
+//     following_member_id: 6,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 15,
+//     follower_member_id: 1,
+//     following_member_id: 7,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 16,
+//     follower_member_id: 1,
+//     following_member_id: 8,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 17,
+//     follower_member_id: 1,
+//     following_member_id: 9,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+//   {
+//     id: 18,
+//     follower_member_id: 1,
+//     following_member_id: 10,
+//     created_at: '2024-04-26T00:00:00Z',
+//     updated_at: '2024-04-26T00:00:00Z',
+//   },
+// ];

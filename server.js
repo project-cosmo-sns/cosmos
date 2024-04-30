@@ -2,7 +2,7 @@ const https = require('https');
 const { parse } = require('url');
 const next = require('next');
 const fs = require('fs');
-const hostname = 'localhost';
+const hostname = 'local.cosmo-sns.com';
 const port = 3000;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });

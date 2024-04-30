@@ -6,18 +6,18 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-instance.interceptors.request.use(
-  (config) => {
-    const sessionId = getCookie('sessionId');
-    if (sessionId) {
-      config.headers.Cookie = `sessionId=${sessionId}`;
-    }
-    return config;
-  },
-  (error) => {
-    console.log(error);
-    return Promise.reject(error);
-  },
-);
+// instance.interceptors.request.use(
+//   (config) => {
+//     const sessionId = getCookie('sessionId');
+//     if (sessionId) {
+//       config.headers.Cookie = `sessionId=${sessionId}`;
+//     }
+//     return config;
+//   },
+//   (error) => {
+//     console.log(error);
+//     return Promise.reject(error);
+//   },
+// );
 
 export default instance;
