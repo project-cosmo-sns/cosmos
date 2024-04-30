@@ -62,7 +62,7 @@ export default function ProfileHeader({
           onClick={() => setIsModalOpen((prev) => !prev)}
           className={cn('profile-setting-button')}
         >
-          <Icon.SettingIcon width="18" height="18" />
+          <Icon.SettingIcon width="18" height="18" fill="#C2C7D9" />
         </div>
       ) : (
         <div className={cn('profile-setting-button')}>

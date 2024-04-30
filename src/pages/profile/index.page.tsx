@@ -39,7 +39,7 @@ export default function MemberDataContainer() {
   };
 
   return (
-    <div>
+    <div className={cn('content')}>
       {memberData && (
         <>
           <ProfileHeader
