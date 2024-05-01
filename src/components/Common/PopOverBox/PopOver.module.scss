@@ -2,12 +2,12 @@
   @include glass-02;
   margin: 0;
   padding: 0;
-  position: absolute;
+  position: fixed;
   border-radius: 10px;
   z-index: 999;
+  border: none;
 
   @media (min-width: 768px) {
-    bottom: -64px;
     max-width: 360px;
   }
 }

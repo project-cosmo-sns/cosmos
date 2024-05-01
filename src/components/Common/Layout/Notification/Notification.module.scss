@@ -14,8 +14,8 @@
   @media (min-width: 768px) {
     width: 360px;
     height: 648px;
-    top: -40px;
-    left: 90px;
+    top: 100px;
+    left: 605px;
     border-radius: 10px;
   }
 
@@ -41,6 +41,7 @@
 
   h2 {
     @include font-style(20px, $black-01, 700);
+    color: $white-01;
     text-align: center;
     margin-bottom: 40px;
   }

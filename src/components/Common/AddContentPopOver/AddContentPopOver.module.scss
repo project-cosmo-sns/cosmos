@@ -1,6 +1,12 @@
 .add-popover {
-  bottom: 70px;
-  left: 90px;
+  bottom: 86px;
+  left: 70px;
+
+  @media (min-width: 768px) {
+    bottom: unset;
+    top: 282px;
+    left: 614px;
+  }
 }
 
 .content-list-wrapper {
