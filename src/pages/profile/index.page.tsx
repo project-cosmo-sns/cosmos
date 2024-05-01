@@ -58,7 +58,7 @@ export default function MemberDataContainer() {
         setSelectedOption={setSelectedOption}
         selectedSort={selectedSort}
         setSelectedSort={setSelectedSort}
-        isMyProfile={true}
+        isMyProfile
       >
         {renderContent()}
       </ContentContainer>
