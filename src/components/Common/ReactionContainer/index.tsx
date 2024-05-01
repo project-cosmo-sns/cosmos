@@ -39,14 +39,27 @@ export default function ReactionContainer({
   views,
   handleEmojiClick,
   emojiVisible,
-  forDetails = false,
+  forDetails,
 }: ReactionContainerProps) {
   const cn = classNames.bind(styles);
   const [hasReaction, setHasReaction] = useState(false);
   return (
-    <div className={cn('wrapper')}>
+    <div className={cn('wrapper', forDetails && 'details-wrapper')}>
       {forDetails ? (
-        <p>디테일 전용</p>
+        <EmojiBundle
+          forDetails={forDetails}
+          emojiVisible={emojiVisible}
+          handleEmojiClick={handleEmojiClick}
+          toggleHasReaction={setHasReaction}
+          className={cn('details-emoji-bundler')}
+        >
+          <EmojiHeartIcon />
+          <EmojiThumbsUpIcon />
+          <EmojiLaughIcon />
+          <EmojiSadIcon />
+          <EmojiCheckIcon />
+          <EmojiMeIcon />
+        </EmojiBundle>
       ) : (
         <button
           type="button"

@@ -12,7 +12,7 @@ interface FeedCardTypes {
   modalVisible?: boolean;
   toggleModal?: Dispatch<SetStateAction<boolean>>;
   hasPadding: boolean;
-  forDetails: boolean;
+  forDetails?: boolean;
 }
 
 /**
@@ -49,7 +49,7 @@ export default function FeedCard({
       className={cn(
         'container',
         hasPadding && 'padding',
-        forDetails && 'container-hover',
+        forDetails || 'container-hover',
       )}
     >
       <div className={cn('wrapper')}>
@@ -86,6 +86,7 @@ export default function FeedCard({
           views={eyeCount}
           emojiVisible={emojiVisible}
           handleEmojiClick={setEmojiVisible}
+          forDetails={forDetails}
         />
       </div>
     </div>

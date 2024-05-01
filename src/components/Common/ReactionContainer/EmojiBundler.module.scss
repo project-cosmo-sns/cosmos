@@ -12,10 +12,38 @@
       display: inline-block;
       border-radius: 10px;
       padding: 8px 8px;
+      cursor: pointer;
 
       &:hover {
         background-color: #585c6d;
       }
     }
+  }
+}
+
+.forDetails {
+  .details-wrapper {
+    display: flex;
+    gap: 4px;
+  }
+
+  .details-item-wrapper {
+    padding: 4px 9px;
+    background-color: #212531;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+
+  .details-item {
+    width: 30px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    color: $white-01;
   }
 }
