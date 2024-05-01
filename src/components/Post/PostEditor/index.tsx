@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import CategoryList from '../CategoryList';
 import HashTagInput from '../HashTag/HashTagInput';
 import styles from './PostEditor.module.scss';
+import MarkdownEditor from '../MarkdownEditor';
 
 interface PostEditorProps {
   postId: string;
@@ -20,7 +21,7 @@ const cn = classNames.bind(styles);
 export default function PostEditor({ postId, setData }: PostEditorProps) {
   // 임시로 기본값 postId와 같은 포스트 mockData에서 불러옴. 추후 요청해서 받아오도록 수정
   const [titleValue, setTitleValue] = useState('');
-  const [contentValue, setContentValue] = useState('');
+  const [contentValue, setContentValue] = useState<string | undefined>();
   const [hashtags, setHashtags] = useState<Tag[]>([]);
 
   const [selectedCategory, setSelectedCategory] =
@@ -53,12 +54,7 @@ export default function PostEditor({ postId, setData }: PostEditorProps) {
           onChange={(event) => setTitleValue(event.target.value)}
           placeholder="제목을 입력하세요"
         />
-        <textarea
-          className={cn('editor')}
-          value={contentValue}
-          onChange={(event) => setContentValue(event.target.value)}
-          placeholder="글을 작성해보세요"
-        />
+        <MarkdownEditor content={contentValue} setContent={setContentValue} />
       </div>
       <div className={cn('container')}>
         <span className={cn('subtitle')}>해시태그 입력</span>

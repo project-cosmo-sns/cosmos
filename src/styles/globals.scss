@@ -74,6 +74,30 @@ textarea {
   }
 }
 
+.w-md-editor {
+  border-radius: 5px !important;
+  background-color: #585c6d !important;
+  --md-editor-box-shadow-color: transparent !important;
+  color: white !important;
+  line-height: 150%;
+
+  &-toolbar {
+    border-radius: 5px 5px 0 0 !important;
+    background-color: #585c6d !important;
+
+    ul {
+      display: flex;
+      align-items: center;
+      padding-right: 12px !important;
+    }
+  }
+
+  a {
+    color: $primary-02;
+    text-decoration: dashed;
+  }
+}
+
 textarea::placeholder,
 input::placeholder {
   @include font-style(1.6rem, $gray-01, 600);
