@@ -744,22 +744,22 @@ export function WarnIcon({ fill = '#FFC700', ...props }: IconCollectionType) {
       <path
         d="M9.36333 2.25822L1.25653 15.7919C1.08938 16.0813 1.00094 16.4095 1.00001 16.7438C0.999072 17.078 1.08567 17.4067 1.25119 17.6971C1.41671 17.9874 1.65538 18.2294 1.94346 18.3989C2.23153 18.5684 2.55897 18.6596 2.8932 18.6632H19.1068C19.441 18.6596 19.7685 18.5684 20.0565 18.3989C20.3446 18.2294 20.5833 17.9874 20.7488 17.6971C20.9143 17.4067 21.0009 17.078 21 16.7438C20.9991 16.4095 20.9106 16.0813 20.7435 15.7919L12.6367 2.25822C12.466 1.97693 12.2258 1.74436 11.9391 1.58296C11.6524 1.42155 11.329 1.33676 11 1.33676C10.671 1.33676 10.3476 1.42155 10.0609 1.58296C9.7742 1.74436 9.53395 1.97693 9.36333 2.25822Z"
         stroke="#FFC700"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
         stroke-linejoin="round"
       />
       <path
         d="M11 7.17785V11.0063"
         stroke="#FFC700"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
         stroke-linejoin="round"
       />
       <path
         d="M11 14.8348H11.01"
         stroke="#FFC700"
-        stroke-width="2"
-        stroke-linecap="round"
+        strokeWidth="2"
+        strokeLinecap="round"
         stroke-linejoin="round"
       />
     </IconTemplate>
@@ -863,7 +863,7 @@ export function EmojiHeartIcon({ ...props }: IconCollectionType) {
       <path
         d="M6.45917 11.9875C6.72416 12.1354 7.043 12.1272 7.30641 11.9766C9.0812 10.9624 12.1652 8.62746 13.3764 5.59456C15.1542 1.64566 10.98 -1.5066 8.09506 0.760615C7.79416 0.997116 7.41578 1.26779 7.15539 1.5242C7.03765 1.64013 6.83016 1.65195 6.70797 1.54075C6.3656 1.22927 5.83055 0.829717 5.48695 0.597243C3.02751 -1.06673 -1.44752 1.12667 0.461368 5.80789C1.16064 7.90914 4.49294 10.8902 6.45917 11.9875Z"
         fill="url(#paint6_radial_1319_15396)"
-        fill-opacity="0.6"
+        fillOpacity="0.6"
       />
       <path
         d="M6.80078 2.74467V6.1241C6.80078 6.57226 7.34346 6.78471 7.62287 6.43427C8.48725 5.35001 9.18442 4.03156 8.40637 2.95459C8.10808 2.54169 7.53658 2.27715 7.06964 2.36131C6.89494 2.39279 6.80078 2.56715 6.80078 2.74467Z"
@@ -880,7 +880,7 @@ export function EmojiHeartIcon({ ...props }: IconCollectionType) {
       <path
         d="M3.57451 0.646111C3.98992 0.641056 4.326 0.581651 4.32517 0.513427C4.32434 0.445203 3.98691 0.393995 3.5715 0.39905C3.15609 0.404105 2.82001 0.46351 2.82084 0.531734C2.82167 0.599958 3.1591 0.651166 3.57451 0.646111Z"
         fill="#FF93BA"
-        fill-opacity="0.5"
+        fillOpacity="0.5"
       />
       <path
         d="M6.27531 2.4576L6.43014 7.53466C3.0248 4.2222 2.36998 1.89604 3.67488 1.37409C4.91322 0.878766 5.90387 1.68366 6.27531 2.4576Z"
@@ -899,9 +899,9 @@ export function EmojiHeartIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(6.78895 0.31385) rotate(90) scale(11.3847 12.0869)"
         >
-          <stop stop-color="#FC0000" />
-          <stop offset="0.527969" stop-color="#FF3B79" />
-          <stop offset="1" stop-color="#F724B3" />
+          <stop stopColor="#FC0000" />
+          <stop offset="0.527969" stopColor="#FF3B79" />
+          <stop offset="1" stopColor="#F724B3" />
         </radialGradient>
         <radialGradient
           id="paint1_radial_1319_15396"
@@ -911,8 +911,8 @@ export function EmojiHeartIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(10.3266 3.15178) rotate(134.402) scale(10.5329 19.729)"
         >
-          <stop offset="0.797874" stop-color="#C82092" stop-opacity="0" />
-          <stop offset="0.908039" stop-color="#C82092" />
+          <stop offset="0.797874" stopColor="#C82092" stopOpacity="0" />
+          <stop offset="0.908039" stopColor="#C82092" />
         </radialGradient>
         <radialGradient
           id="paint2_radial_1319_15396"
@@ -922,8 +922,8 @@ export function EmojiHeartIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.8267 6.33447) rotate(-158.663) scale(11.2681 15.929)"
         >
-          <stop offset="0.40984" stop-color="#B91D43" stop-opacity="0" />
-          <stop offset="0.833898" stop-color="#B91D43" />
+          <stop offset="0.40984" stopColor="#B91D43" stopOpacity="0" />
+          <stop offset="0.833898" stopColor="#B91D43" />
         </radialGradient>
         <radialGradient
           id="paint3_radial_1319_15396"
@@ -933,8 +933,8 @@ export function EmojiHeartIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(6.62916 4.36651) rotate(90) scale(9.80697)"
         >
-          <stop offset="0.671096" stop-color="#FF7AF2" stop-opacity="0" />
-          <stop offset="0.933555" stop-color="#FFBCE6" />
+          <stop offset="0.671096" stopColor="#FF7AF2" stopOpacity="0" />
+          <stop offset="0.933555" stopColor="#FFBCE6" />
         </radialGradient>
         <linearGradient
           id="paint4_linear_1319_15396"
@@ -944,8 +944,8 @@ export function EmojiHeartIcon({ ...props }: IconCollectionType) {
           y2="10.2376"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.694491" stop-color="#FF7AF2" stop-opacity="0" />
-          <stop offset="0.933555" stop-color="#FFBCE6" />
+          <stop offset="0.694491" stopColor="#FF7AF2" stopOpacity="0" />
+          <stop offset="0.933555" stopColor="#FFBCE6" />
         </linearGradient>
         <linearGradient
           id="paint5_linear_1319_15396"
@@ -955,8 +955,8 @@ export function EmojiHeartIcon({ ...props }: IconCollectionType) {
           y2="10.9591"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.694491" stop-color="#FF7AF2" stop-opacity="0" />
-          <stop offset="0.933555" stop-color="#FFBCE6" />
+          <stop offset="0.694491" stopColor="#FF7AF2" stopOpacity="0" />
+          <stop offset="0.933555" stopColor="#FFBCE6" />
         </linearGradient>
         <radialGradient
           id="paint6_radial_1319_15396"
@@ -966,8 +966,8 @@ export function EmojiHeartIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.00957 3.91091) rotate(164.618) scale(8.52676 9.00504)"
         >
-          <stop offset="0.802083" stop-color="#FF73A6" stop-opacity="0" />
-          <stop offset="1" stop-color="#FF93BA" />
+          <stop offset="0.802083" stopColor="#FF73A6" stopOpacity="0" />
+          <stop offset="1" stopColor="#FF93BA" />
         </radialGradient>
         <radialGradient
           id="paint7_radial_1319_15396"
@@ -977,8 +977,8 @@ export function EmojiHeartIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.6781 1.57617) rotate(128.737) scale(3.61157 4.80245)"
         >
-          <stop stop-color="#FF7383" />
-          <stop offset="1" stop-color="#FF7383" stop-opacity="0" />
+          <stop stopColor="#FF7383" />
+          <stop offset="1" stopColor="#FF7383" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint8_radial_1319_15396"
@@ -988,8 +988,8 @@ export function EmojiHeartIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(7.01834 4.37818) rotate(-135.591) scale(6.2837 11.1546)"
         >
-          <stop stop-color="#FF6274" />
-          <stop offset="1" stop-color="#FF6274" stop-opacity="0" />
+          <stop stopColor="#FF6274" />
+          <stop offset="1" stopColor="#FF6274" stopOpacity="0" />
         </radialGradient>
       </defs>
     </IconTemplate>
@@ -1112,8 +1112,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           y2="17.2255"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFDDBE" />
-          <stop offset="1" stop-color="#E7AFA8" />
+          <stop stopColor="#FFDDBE" />
+          <stop offset="1" stopColor="#E7AFA8" />
         </linearGradient>
         <radialGradient
           id="paint1_radial_1319_15438"
@@ -1123,8 +1123,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(7.20783 0.775321) rotate(138.814) scale(2.01799 1.57451)"
         >
-          <stop stop-color="#FFE6C7" />
-          <stop offset="1" stop-color="#FFE6C7" stop-opacity="0" />
+          <stop stopColor="#FFE6C7" />
+          <stop offset="1" stopColor="#FFE6C7" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint2_radial_1319_15438"
@@ -1134,8 +1134,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(2.98238 7.57115) rotate(133.564) scale(4.03602 2.92375)"
         >
-          <stop stop-color="#F2C0A5" />
-          <stop offset="1" stop-color="#F2C0A5" stop-opacity="0" />
+          <stop stopColor="#F2C0A5" />
+          <stop offset="1" stopColor="#F2C0A5" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint3_radial_1319_15438"
@@ -1145,8 +1145,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.18054 8.0562) rotate(135.794) scale(5.82037 3.58811)"
         >
-          <stop stop-color="#DDA895" />
-          <stop offset="1" stop-color="#DDA895" stop-opacity="0" />
+          <stop stopColor="#DDA895" />
+          <stop offset="1" stopColor="#DDA895" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint4_radial_1319_15438"
@@ -1156,8 +1156,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(3.05153 17.3723) rotate(-62.6117) scale(8.02721 14.2723)"
         >
-          <stop stop-color="#C08494" />
-          <stop offset="1" stop-color="#C08494" stop-opacity="0" />
+          <stop stopColor="#C08494" />
+          <stop offset="1" stopColor="#C08494" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint5_radial_1319_15438"
@@ -1167,8 +1167,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.34013 10.2221) rotate(180) scale(8.45841 13.0179)"
         >
-          <stop offset="0.863834" stop-color="#EDB29B" stop-opacity="0" />
-          <stop offset="1" stop-color="#EDB29B" />
+          <stop offset="0.863834" stopColor="#EDB29B" stopOpacity="0" />
+          <stop offset="1" stopColor="#EDB29B" />
         </radialGradient>
         <radialGradient
           id="paint6_radial_1319_15438"
@@ -1178,8 +1178,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(7.32272 5.05633) rotate(38.8999) scale(0.850665 1.12026)"
         >
-          <stop stop-color="#FFDBBA" />
-          <stop offset="1" stop-color="#FFDBBA" stop-opacity="0" />
+          <stop stopColor="#FFDBBA" />
+          <stop offset="1" stopColor="#FFDBBA" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint7_linear_1319_15438"
@@ -1189,8 +1189,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           y2="13.9351"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#B57895" />
-          <stop offset="1" stop-color="#B57895" stop-opacity="0" />
+          <stop stopColor="#B57895" />
+          <stop offset="1" stopColor="#B57895" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint8_linear_1319_15438"
@@ -1200,8 +1200,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           y2="14.975"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#B5755F" />
-          <stop offset="1" stop-color="#B3748D" />
+          <stop stopColor="#B5755F" />
+          <stop offset="1" stopColor="#B3748D" />
         </linearGradient>
         <linearGradient
           id="paint9_linear_1319_15438"
@@ -1211,8 +1211,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           y2="6.40879"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD8BA" />
-          <stop offset="1" stop-color="#ECB9A3" />
+          <stop stopColor="#FFD8BA" />
+          <stop offset="1" stopColor="#ECB9A3" />
         </linearGradient>
         <radialGradient
           id="paint10_radial_1319_15438"
@@ -1222,8 +1222,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(6.981 7.3612) scale(3.60791 1.44713)"
         >
-          <stop stop-color="#DFA995" />
-          <stop offset="1" stop-color="#DFA995" stop-opacity="0" />
+          <stop stopColor="#DFA995" />
+          <stop offset="1" stopColor="#DFA995" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint11_radial_1319_15438"
@@ -1233,8 +1233,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(7.33374 7.81347) rotate(-142.633) scale(1.26386 0.845993)"
         >
-          <stop stop-color="#CA8C6F" />
-          <stop offset="1" stop-color="#CA8C6F" stop-opacity="0" />
+          <stop stopColor="#CA8C6F" />
+          <stop offset="1" stopColor="#CA8C6F" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint12_linear_1319_15438"
@@ -1244,8 +1244,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           y2="5.97613"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFE7CA" />
-          <stop offset="1" stop-color="#FFE7CA" stop-opacity="0" />
+          <stop stopColor="#FFE7CA" />
+          <stop offset="1" stopColor="#FFE7CA" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint13_linear_1319_15438"
@@ -1255,8 +1255,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           y2="13.6005"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FECEB7" />
-          <stop offset="1" stop-color="#DAA59E" />
+          <stop stopColor="#FECEB7" />
+          <stop offset="1" stopColor="#DAA59E" />
         </linearGradient>
         <radialGradient
           id="paint14_radial_1319_15438"
@@ -1266,8 +1266,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(7.85804 15.1425) scale(4.46915 0.847294)"
         >
-          <stop stop-color="#BF8196" />
-          <stop offset="1" stop-color="#BF8196" stop-opacity="0" />
+          <stop stopColor="#BF8196" />
+          <stop offset="1" stopColor="#BF8196" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint15_radial_1319_15438"
@@ -1277,8 +1277,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(7.62864 12.6) scale(3.66438 0.823886)"
         >
-          <stop stop-color="#B57767" />
-          <stop offset="1" stop-color="#B57767" stop-opacity="0" />
+          <stop stopColor="#B57767" />
+          <stop offset="1" stopColor="#B57767" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint16_linear_1319_15438"
@@ -1288,8 +1288,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           y2="13.195"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD2C1" />
-          <stop offset="1" stop-color="#FFD2C1" stop-opacity="0" />
+          <stop stopColor="#FFD2C1" />
+          <stop offset="1" stopColor="#FFD2C1" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint17_linear_1319_15438"
@@ -1299,8 +1299,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           y2="11.3512"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFDDC1" />
-          <stop offset="1" stop-color="#E5B1A3" />
+          <stop stopColor="#FFDDC1" />
+          <stop offset="1" stopColor="#E5B1A3" />
         </linearGradient>
         <radialGradient
           id="paint18_radial_1319_15438"
@@ -1310,8 +1310,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(7.5898 12.9749) scale(5.01865 1.78532)"
         >
-          <stop offset="0.139674" stop-color="#CA8E96" />
-          <stop offset="1" stop-color="#CA8E96" stop-opacity="0" />
+          <stop offset="0.139674" stopColor="#CA8E96" />
+          <stop offset="1" stopColor="#CA8E96" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint19_radial_1319_15438"
@@ -1321,8 +1321,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.03668 10.0114) scale(2.58821 1.05066)"
         >
-          <stop stop-color="#BB7E6C" />
-          <stop offset="1" stop-color="#BB7E6C" stop-opacity="0" />
+          <stop stopColor="#BB7E6C" />
+          <stop offset="1" stopColor="#BB7E6C" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint20_linear_1319_15438"
@@ -1332,8 +1332,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           y2="11.0886"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFE2C9" />
-          <stop offset="1" stop-color="#FFE2C9" stop-opacity="0" />
+          <stop stopColor="#FFE2C9" />
+          <stop offset="1" stopColor="#FFE2C9" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint21_linear_1319_15438"
@@ -1343,8 +1343,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           y2="8.89286"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFDFBF" />
-          <stop offset="1" stop-color="#E2AE9C" />
+          <stop stopColor="#FFDFBF" />
+          <stop offset="1" stopColor="#E2AE9C" />
         </linearGradient>
         <radialGradient
           id="paint22_radial_1319_15438"
@@ -1354,8 +1354,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(7.86726 10.481) scale(4.40712 2.04564)"
         >
-          <stop stop-color="#D39797" />
-          <stop offset="1" stop-color="#D39797" stop-opacity="0" />
+          <stop stopColor="#D39797" />
+          <stop offset="1" stopColor="#D39797" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint23_linear_1319_15438"
@@ -1365,8 +1365,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           y2="8.3482"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFE8CA" />
-          <stop offset="1" stop-color="#FFE8CA" stop-opacity="0" />
+          <stop stopColor="#FFE8CA" />
+          <stop offset="1" stopColor="#FFE8CA" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint24_radial_1319_15438"
@@ -1376,8 +1376,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(4.04879 2.21681) rotate(90) scale(3.44617 1.3601)"
         >
-          <stop stop-color="#E0A892" />
-          <stop offset="1" stop-color="#E0A892" stop-opacity="0" />
+          <stop stopColor="#E0A892" />
+          <stop offset="1" stopColor="#E0A892" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint25_linear_1319_15438"
@@ -1387,8 +1387,8 @@ export function EmojiThumbsUpIcon({ ...props }: IconCollectionType) {
           y2="1.87174"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFE7CA" />
-          <stop offset="1" stop-color="#FFE7CA" stop-opacity="0" />
+          <stop stopColor="#FFE7CA" />
+          <stop offset="1" stopColor="#FFE7CA" stopOpacity="0" />
         </linearGradient>
       </defs>
     </IconTemplate>
@@ -1408,14 +1408,14 @@ export function EmojiCheckIcon({ ...props }: IconCollectionType) {
       <path
         d="M13.1523 1.25488V12.7437"
         stroke="url(#paint2_linear_1319_15423)"
-        stroke-width="0.855891"
-        stroke-linecap="round"
+        strokeWidth="0.855891"
+        strokeLinecap="round"
       />
       <path
         d="M1.73926 0.910156H12.6787"
         stroke="url(#paint3_linear_1319_15423)"
-        stroke-width="0.855891"
-        stroke-linecap="round"
+        strokeWidth="0.855891"
+        strokeLinecap="round"
       />
       <path
         d="M5.82472 10.5148C5.63227 10.5148 5.43986 10.4428 5.29285 10.2984L2.40776 7.46507C2.11408 7.17663 2.11408 6.7088 2.40776 6.42036C2.70144 6.13197 3.17785 6.13197 3.47153 6.42036L5.82472 8.73138L10.9483 3.69971C11.242 3.4113 11.7184 3.4113 12.0121 3.69971C12.3058 3.9881 12.3058 4.45599 12.0121 4.74438L6.3566 10.2984C6.20994 10.4428 6.01718 10.5148 5.82472 10.5148Z"
@@ -1434,8 +1434,8 @@ export function EmojiCheckIcon({ ...props }: IconCollectionType) {
           y2="18.4962"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#5AD98F" />
-          <stop offset="1" stop-color="#51C685" />
+          <stop stopColor="#5AD98F" />
+          <stop offset="1" stopColor="#51C685" />
         </linearGradient>
         <radialGradient
           id="paint1_radial_1319_15423"
@@ -1445,8 +1445,8 @@ export function EmojiCheckIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(12.8857 1.05157) rotate(136.771) scale(1.07703 1.25795)"
         >
-          <stop stop-color="#80FFB3" />
-          <stop offset="1" stop-color="#80FFB3" stop-opacity="0" />
+          <stop stopColor="#80FFB3" />
+          <stop offset="1" stopColor="#80FFB3" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint2_linear_1319_15423"
@@ -1456,8 +1456,8 @@ export function EmojiCheckIcon({ ...props }: IconCollectionType) {
           y2="-nan"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#74FCA8" />
-          <stop offset="1" stop-color="#61DB90" />
+          <stop stopColor="#74FCA8" />
+          <stop offset="1" stopColor="#61DB90" />
         </linearGradient>
         <linearGradient
           id="paint3_linear_1319_15423"
@@ -1467,8 +1467,8 @@ export function EmojiCheckIcon({ ...props }: IconCollectionType) {
           y2="-nan"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#66F39D" />
-          <stop offset="1" stop-color="#60E496" />
+          <stop stopColor="#66F39D" />
+          <stop offset="1" stopColor="#60E496" />
         </linearGradient>
       </defs>
     </IconTemplate>
@@ -1601,37 +1601,37 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
       <path
         d="M4.27014 1.27206C4.25399 0.585871 4.79714 0.0165063 5.48338 0.000351007C6.16957 -0.0157991 6.73891 0.527373 6.75507 1.21357L6.76685 1.71411C6.98593 1.32756 7.40627 1.07217 7.88121 1.08609C8.56554 1.10616 9.10376 1.67781 9.08256 2.36215L8.95105 6.60934L9.69728 5.6836C10.1455 5.12758 10.9593 5.0395 11.5161 5.4868C12.0742 5.93519 12.1625 6.75129 11.7132 7.30864L11.3927 7.7063L11.3896 7.71088C11.095 8.08826 10.4917 8.86094 9.73484 10.1103C9.49071 10.4766 9.27858 10.8677 9.06687 11.2582C8.76491 11.8151 8.46372 12.3705 8.07147 12.8502C7.29174 13.8116 6.10099 14.4261 4.76669 14.4261C3.14869 14.4261 1.7417 13.5225 1.0229 12.1924L1.02051 12.1965C0.365328 11.0228 0.26886 9.72447 0.236704 9.02908L0.166161 7.77272C0.162209 7.74051 0.159503 7.70789 0.158104 7.67481L0.00109927 3.97589C-0.0268946 3.31631 0.483174 2.758 1.1426 2.72643C1.51901 2.70842 1.86319 2.86585 2.09592 3.12673L2.07173 2.40344C2.04949 1.73875 2.57029 1.18189 3.23497 1.15965C3.66895 1.14513 4.05693 1.36209 4.28023 1.69942L4.27014 1.27206Z"
         fill="url(#paint25_radial_1319_15483)"
-        fill-opacity="0.6"
+        fillOpacity="0.6"
       />
       <path
         d="M11.0618 6.5166C10.6788 6.89965 9.74702 7.94068 9.08398 9.04073"
         stroke="url(#paint26_linear_1319_15483)"
-        stroke-width="1.75128"
-        stroke-linecap="round"
+        strokeWidth="1.75128"
+        strokeLinecap="round"
       />
       <path
         d="M2.33533 6.39258C2.18526 6.56941 1.67612 7.08391 1.38672 7.37332"
         stroke="url(#paint27_linear_1319_15483)"
-        stroke-width="0.583758"
-        stroke-linecap="round"
+        strokeWidth="0.583758"
+        strokeLinecap="round"
       />
       <path
         d="M3.42871 6.08815C3.76638 5.95952 4.29374 5.70547 4.53812 5.52539"
         stroke="url(#paint28_linear_1319_15483)"
-        stroke-width="0.583758"
-        stroke-linecap="round"
+        strokeWidth="0.583758"
+        strokeLinecap="round"
       />
       <path
         d="M5.31738 5.66113C5.63092 5.82191 6.16147 5.95856 6.49764 5.88515"
         stroke="url(#paint29_linear_1319_15483)"
-        stroke-width="0.583758"
-        stroke-linecap="round"
+        strokeWidth="0.583758"
+        strokeLinecap="round"
       />
       <path
         d="M8.25977 7.52622C8.39642 7.32526 8.63756 6.92328 8.74211 6.80273"
         stroke="url(#paint30_linear_1319_15483)"
-        stroke-width="0.583758"
-        stroke-linecap="round"
+        strokeWidth="0.583758"
+        strokeLinecap="round"
       />
       <path
         d="M8.75735 6.803C7.85698 6.79657 6.99411 6.26169 6.71541 6.03125C6.50961 7.14385 7.35318 7.96865 7.78464 8.20182L8.75735 6.803Z"
@@ -1646,8 +1646,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(10.7193 7.96756) rotate(162.242) scale(10.487 16.0174)"
         >
-          <stop offset="0.817521" stop-color="#DAA394" stop-opacity="0" />
-          <stop offset="1" stop-color="#DAA394" />
+          <stop offset="0.817521" stopColor="#DAA394" stopOpacity="0" />
+          <stop offset="1" stopColor="#DAA394" />
         </radialGradient>
         <radialGradient
           id="paint1_radial_1319_15483"
@@ -1657,8 +1657,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(6.70074 3.00789) rotate(103.477) scale(12.8389 8.84604)"
         >
-          <stop offset="0.750766" stop-color="#C18396" stop-opacity="0" />
-          <stop offset="1" stop-color="#C18396" />
+          <stop offset="0.750766" stopColor="#C18396" stopOpacity="0" />
+          <stop offset="1" stopColor="#C18396" />
         </radialGradient>
         <radialGradient
           id="paint2_radial_1319_15483"
@@ -1668,8 +1668,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.02645 14.2214) rotate(-117.268) scale(4.42301 5.56281)"
         >
-          <stop stop-color="#FBC5B8" />
-          <stop offset="1" stop-color="#FBC5B8" stop-opacity="0" />
+          <stop stopColor="#FBC5B8" />
+          <stop offset="1" stopColor="#FBC5B8" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint3_radial_1319_15483"
@@ -1679,8 +1679,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(5.14428 3.07061) rotate(90.3653) scale(11.679 8.04496)"
         >
-          <stop offset="0.927083" stop-color="#BB7D95" stop-opacity="0" />
-          <stop offset="0.987027" stop-color="#BB7D95" />
+          <stop offset="0.927083" stopColor="#BB7D95" stopOpacity="0" />
+          <stop offset="0.987027" stopColor="#BB7D95" />
         </radialGradient>
         <radialGradient
           id="paint4_radial_1319_15483"
@@ -1690,8 +1690,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.2542 8.27508) rotate(-144.525) scale(0.888437 3.80459)"
         >
-          <stop stop-color="#E3B3A6" />
-          <stop offset="1" stop-color="#E3B3A6" stop-opacity="0" />
+          <stop stopColor="#E3B3A6" />
+          <stop offset="1" stopColor="#E3B3A6" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint5_linear_1319_15483"
@@ -1701,8 +1701,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="4.70465"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F9BAA2" />
-          <stop offset="1" stop-color="#F9BAA2" stop-opacity="0" />
+          <stop stopColor="#F9BAA2" />
+          <stop offset="1" stopColor="#F9BAA2" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint6_linear_1319_15483"
@@ -1712,8 +1712,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="5.60317"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint7_radial_1319_15483"
@@ -1723,8 +1723,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(0.873679 2.52143) rotate(73.6238) scale(1.27005 3.1714)"
         >
-          <stop stop-color="#DDAB8F" />
-          <stop offset="1" stop-color="#DDAB8F" stop-opacity="0" />
+          <stop stopColor="#DDAB8F" />
+          <stop offset="1" stopColor="#DDAB8F" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint8_linear_1319_15483"
@@ -1734,8 +1734,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="3.82"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E7AA8E" />
-          <stop offset="1" stop-color="#E7AA8E" stop-opacity="0" />
+          <stop stopColor="#E7AA8E" />
+          <stop offset="1" stopColor="#E7AA8E" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint9_linear_1319_15483"
@@ -1745,8 +1745,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="4.21307"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E2A486" />
-          <stop offset="1" stop-color="#E2A486" stop-opacity="0" />
+          <stop stopColor="#E2A486" />
+          <stop offset="1" stopColor="#E2A486" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint10_linear_1319_15483"
@@ -1756,8 +1756,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="4.9399"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.405208" stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop offset="0.405208" stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint11_radial_1319_15483"
@@ -1767,8 +1767,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(2.94497 0.903759) rotate(77.9639) scale(1.72451 3.05804)"
         >
-          <stop stop-color="#D8B19A" />
-          <stop offset="1" stop-color="#D8B19A" stop-opacity="0" />
+          <stop stopColor="#D8B19A" />
+          <stop offset="1" stopColor="#D8B19A" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint12_linear_1319_15483"
@@ -1778,8 +1778,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="3.15186"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#DC9F80" />
-          <stop offset="1" stop-color="#DC9F80" stop-opacity="0" />
+          <stop stopColor="#DC9F80" />
+          <stop offset="1" stopColor="#DC9F80" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint13_linear_1319_15483"
@@ -1789,8 +1789,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="3.34049"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F7BB9C" />
-          <stop offset="1" stop-color="#F7BB9C" stop-opacity="0" />
+          <stop stopColor="#F7BB9C" />
+          <stop offset="1" stopColor="#F7BB9C" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint14_linear_1319_15483"
@@ -1800,8 +1800,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="5.06502"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.347826" stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop offset="0.347826" stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint15_radial_1319_15483"
@@ -1811,8 +1811,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(6.90808 4.61627) rotate(-116.651) scale(4.99647 5.86457)"
         >
-          <stop offset="0.869582" stop-color="#D6AC94" stop-opacity="0" />
-          <stop offset="1" stop-color="#D6AC94" />
+          <stop offset="0.869582" stopColor="#D6AC94" stopOpacity="0" />
+          <stop offset="1" stopColor="#D6AC94" />
         </radialGradient>
         <linearGradient
           id="paint16_linear_1319_15483"
@@ -1822,8 +1822,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="4.38468"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E4A38A" />
-          <stop offset="1" stop-color="#E4A38A" stop-opacity="0" />
+          <stop stopColor="#E4A38A" />
+          <stop offset="1" stopColor="#E4A38A" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint17_linear_1319_15483"
@@ -1833,8 +1833,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="5.44614"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint18_radial_1319_15483"
@@ -1844,8 +1844,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(9.23367 6.33952) rotate(-108.542) scale(5.54126 5.98275)"
         >
-          <stop offset="0.87772" stop-color="#E5B090" stop-opacity="0" />
-          <stop offset="1" stop-color="#E5B090" />
+          <stop offset="0.87772" stopColor="#E5B090" stopOpacity="0" />
+          <stop offset="1" stopColor="#E5B090" />
         </radialGradient>
         <radialGradient
           id="paint19_radial_1319_15483"
@@ -1855,8 +1855,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(9.28063 6.0954) rotate(37.5041) scale(0.871484 2.71353)"
         >
-          <stop stop-color="#E8A987" />
-          <stop offset="1" stop-color="#E8A987" stop-opacity="0" />
+          <stop stopColor="#E8A987" />
+          <stop offset="1" stopColor="#E8A987" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint20_linear_1319_15483"
@@ -1866,8 +1866,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="7.49422"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint21_radial_1319_15483"
@@ -1877,8 +1877,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.427 6.11974) rotate(129.971) scale(1.4266 1.00404)"
         >
-          <stop stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint22_radial_1319_15483"
@@ -1888,8 +1888,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.8905 1.45091) rotate(130.365) scale(1.42805 1.54205)"
         >
-          <stop stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint23_radial_1319_15483"
@@ -1899,8 +1899,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(6.60551 0.17241) rotate(112.533) scale(1.38417 1.46597)"
         >
-          <stop offset="0.32493" stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop offset="0.32493" stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint24_radial_1319_15483"
@@ -1910,8 +1910,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(3.54527 1.99496) rotate(122.8) scale(0.728134 0.852077)"
         >
-          <stop stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint25_radial_1319_15483"
@@ -1921,8 +1921,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(1.42351 3.57268) rotate(120.411) scale(0.725464 0.783371)"
         >
-          <stop stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint26_linear_1319_15483"
@@ -1932,8 +1932,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="10.0014"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFCEB9" />
-          <stop offset="1" stop-color="#FFCEB9" stop-opacity="0" />
+          <stop stopColor="#FFCEB9" />
+          <stop offset="1" stopColor="#FFCEB9" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint27_linear_1319_15483"
@@ -1943,8 +1943,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="7.92923"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD6C0" />
-          <stop offset="1" stop-color="#FFD6C0" stop-opacity="0" />
+          <stop stopColor="#FFD6C0" />
+          <stop offset="1" stopColor="#FFD6C0" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint28_linear_1319_15483"
@@ -1954,8 +1954,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="6.53823"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD6C0" />
-          <stop offset="1" stop-color="#FFD6C0" stop-opacity="0" />
+          <stop stopColor="#FFD6C0" />
+          <stop offset="1" stopColor="#FFD6C0" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint29_linear_1319_15483"
@@ -1965,8 +1965,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="6.1194"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD6C0" />
-          <stop offset="1" stop-color="#FFD6C0" stop-opacity="0" />
+          <stop stopColor="#FFD6C0" />
+          <stop offset="1" stopColor="#FFD6C0" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint30_linear_1319_15483"
@@ -1976,8 +1976,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           y2="7.57212"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD6C0" />
-          <stop offset="1" stop-color="#FFD6C0" stop-opacity="0" />
+          <stop stopColor="#FFD6C0" />
+          <stop offset="1" stopColor="#FFD6C0" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint31_radial_1319_15483"
@@ -1987,8 +1987,8 @@ export function EmojiMeIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.84579 6.77892) rotate(144.625) scale(1.97185 2.80602)"
         >
-          <stop stop-color="#FFD0BA" />
-          <stop offset="1" stop-color="#FFD0BA" stop-opacity="0" />
+          <stop stopColor="#FFD0BA" />
+          <stop offset="1" stopColor="#FFD0BA" stopOpacity="0" />
         </radialGradient>
       </defs>
     </IconTemplate>
@@ -2120,37 +2120,37 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
       <path
         d="M4.27014 1.27206C4.25399 0.585871 4.79714 0.0165063 5.48338 0.000351007C6.16957 -0.0157991 6.73891 0.527373 6.75507 1.21357L6.76685 1.71411C6.98593 1.32756 7.40627 1.07217 7.88121 1.08609C8.56554 1.10616 9.10376 1.67781 9.08256 2.36215L8.95105 6.60934L9.69728 5.6836C10.1455 5.12758 10.9593 5.0395 11.5161 5.4868C12.0742 5.93519 12.1625 6.75129 11.7132 7.30864L11.3927 7.7063L11.3896 7.71088C11.095 8.08826 10.4917 8.86094 9.73484 10.1103C9.49071 10.4766 9.27858 10.8677 9.06687 11.2582C8.76491 11.8151 8.46372 12.3705 8.07147 12.8502C7.29174 13.8116 6.10099 14.4261 4.76669 14.4261C3.14869 14.4261 1.7417 13.5225 1.0229 12.1924L1.02051 12.1965C0.365328 11.0228 0.26886 9.72447 0.236704 9.02908L0.166161 7.77272C0.162209 7.74051 0.159503 7.70789 0.158104 7.67481L0.00109927 3.97589C-0.0268946 3.31631 0.483174 2.758 1.1426 2.72643C1.51901 2.70842 1.86319 2.86585 2.09592 3.12673L2.07173 2.40344C2.04949 1.73875 2.57029 1.18189 3.23497 1.15965C3.66895 1.14513 4.05693 1.36209 4.28023 1.69942L4.27014 1.27206Z"
         fill="url(#paint25_radial_1319_15483)"
-        fill-opacity="0.6"
+        fillOpacity="0.6"
       />
       <path
         d="M11.0618 6.5166C10.6788 6.89965 9.74702 7.94068 9.08398 9.04073"
         stroke="url(#paint26_linear_1319_15483)"
-        stroke-width="1.75128"
-        stroke-linecap="round"
+        strokeWidth="1.75128"
+        strokeLinecap="round"
       />
       <path
         d="M2.33533 6.39258C2.18526 6.56941 1.67612 7.08391 1.38672 7.37332"
         stroke="url(#paint27_linear_1319_15483)"
-        stroke-width="0.583758"
-        stroke-linecap="round"
+        strokeWidth="0.583758"
+        strokeLinecap="round"
       />
       <path
         d="M3.42871 6.08815C3.76638 5.95952 4.29374 5.70547 4.53812 5.52539"
         stroke="url(#paint28_linear_1319_15483)"
-        stroke-width="0.583758"
-        stroke-linecap="round"
+        strokeWidth="0.583758"
+        strokeLinecap="round"
       />
       <path
         d="M5.31738 5.66113C5.63092 5.82191 6.16147 5.95856 6.49764 5.88515"
         stroke="url(#paint29_linear_1319_15483)"
-        stroke-width="0.583758"
-        stroke-linecap="round"
+        strokeWidth="0.583758"
+        strokeLinecap="round"
       />
       <path
         d="M8.25977 7.52622C8.39642 7.32526 8.63756 6.92328 8.74211 6.80273"
         stroke="url(#paint30_linear_1319_15483)"
-        stroke-width="0.583758"
-        stroke-linecap="round"
+        strokeWidth="0.583758"
+        strokeLinecap="round"
       />
       <path
         d="M8.75735 6.803C7.85698 6.79657 6.99411 6.26169 6.71541 6.03125C6.50961 7.14385 7.35318 7.96865 7.78464 8.20182L8.75735 6.803Z"
@@ -2165,8 +2165,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(10.7193 7.96756) rotate(162.242) scale(10.487 16.0174)"
         >
-          <stop offset="0.817521" stop-color="#DAA394" stop-opacity="0" />
-          <stop offset="1" stop-color="#DAA394" />
+          <stop offset="0.817521" stopColor="#DAA394" stopOpacity="0" />
+          <stop offset="1" stopColor="#DAA394" />
         </radialGradient>
         <radialGradient
           id="paint1_radial_1319_15483"
@@ -2176,8 +2176,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(6.70074 3.00789) rotate(103.477) scale(12.8389 8.84604)"
         >
-          <stop offset="0.750766" stop-color="#C18396" stop-opacity="0" />
-          <stop offset="1" stop-color="#C18396" />
+          <stop offset="0.750766" stopColor="#C18396" stopOpacity="0" />
+          <stop offset="1" stopColor="#C18396" />
         </radialGradient>
         <radialGradient
           id="paint2_radial_1319_15483"
@@ -2187,8 +2187,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.02645 14.2214) rotate(-117.268) scale(4.42301 5.56281)"
         >
-          <stop stop-color="#FBC5B8" />
-          <stop offset="1" stop-color="#FBC5B8" stop-opacity="0" />
+          <stop stopColor="#FBC5B8" />
+          <stop offset="1" stopColor="#FBC5B8" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint3_radial_1319_15483"
@@ -2198,8 +2198,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(5.14428 3.07061) rotate(90.3653) scale(11.679 8.04496)"
         >
-          <stop offset="0.927083" stop-color="#BB7D95" stop-opacity="0" />
-          <stop offset="0.987027" stop-color="#BB7D95" />
+          <stop offset="0.927083" stopColor="#BB7D95" stopOpacity="0" />
+          <stop offset="0.987027" stopColor="#BB7D95" />
         </radialGradient>
         <radialGradient
           id="paint4_radial_1319_15483"
@@ -2209,8 +2209,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.2542 8.27508) rotate(-144.525) scale(0.888437 3.80459)"
         >
-          <stop stop-color="#E3B3A6" />
-          <stop offset="1" stop-color="#E3B3A6" stop-opacity="0" />
+          <stop stopColor="#E3B3A6" />
+          <stop offset="1" stopColor="#E3B3A6" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint5_linear_1319_15483"
@@ -2220,8 +2220,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="4.70465"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F9BAA2" />
-          <stop offset="1" stop-color="#F9BAA2" stop-opacity="0" />
+          <stop stopColor="#F9BAA2" />
+          <stop offset="1" stopColor="#F9BAA2" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint6_linear_1319_15483"
@@ -2231,8 +2231,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="5.60317"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint7_radial_1319_15483"
@@ -2242,8 +2242,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(0.873679 2.52143) rotate(73.6238) scale(1.27005 3.1714)"
         >
-          <stop stop-color="#DDAB8F" />
-          <stop offset="1" stop-color="#DDAB8F" stop-opacity="0" />
+          <stop stopColor="#DDAB8F" />
+          <stop offset="1" stopColor="#DDAB8F" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint8_linear_1319_15483"
@@ -2253,8 +2253,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="3.82"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E7AA8E" />
-          <stop offset="1" stop-color="#E7AA8E" stop-opacity="0" />
+          <stop stopColor="#E7AA8E" />
+          <stop offset="1" stopColor="#E7AA8E" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint9_linear_1319_15483"
@@ -2264,8 +2264,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="4.21307"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E2A486" />
-          <stop offset="1" stop-color="#E2A486" stop-opacity="0" />
+          <stop stopColor="#E2A486" />
+          <stop offset="1" stopColor="#E2A486" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint10_linear_1319_15483"
@@ -2275,8 +2275,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="4.9399"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.405208" stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop offset="0.405208" stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint11_radial_1319_15483"
@@ -2286,8 +2286,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(2.94497 0.903759) rotate(77.9639) scale(1.72451 3.05804)"
         >
-          <stop stop-color="#D8B19A" />
-          <stop offset="1" stop-color="#D8B19A" stop-opacity="0" />
+          <stop stopColor="#D8B19A" />
+          <stop offset="1" stopColor="#D8B19A" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint12_linear_1319_15483"
@@ -2297,8 +2297,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="3.15186"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#DC9F80" />
-          <stop offset="1" stop-color="#DC9F80" stop-opacity="0" />
+          <stop stopColor="#DC9F80" />
+          <stop offset="1" stopColor="#DC9F80" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint13_linear_1319_15483"
@@ -2308,8 +2308,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="3.34049"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F7BB9C" />
-          <stop offset="1" stop-color="#F7BB9C" stop-opacity="0" />
+          <stop stopColor="#F7BB9C" />
+          <stop offset="1" stopColor="#F7BB9C" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint14_linear_1319_15483"
@@ -2319,8 +2319,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="5.06502"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.347826" stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop offset="0.347826" stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint15_radial_1319_15483"
@@ -2330,8 +2330,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(6.90808 4.61627) rotate(-116.651) scale(4.99647 5.86457)"
         >
-          <stop offset="0.869582" stop-color="#D6AC94" stop-opacity="0" />
-          <stop offset="1" stop-color="#D6AC94" />
+          <stop offset="0.869582" stopColor="#D6AC94" stopOpacity="0" />
+          <stop offset="1" stopColor="#D6AC94" />
         </radialGradient>
         <linearGradient
           id="paint16_linear_1319_15483"
@@ -2341,8 +2341,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="4.38468"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E4A38A" />
-          <stop offset="1" stop-color="#E4A38A" stop-opacity="0" />
+          <stop stopColor="#E4A38A" />
+          <stop offset="1" stopColor="#E4A38A" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint17_linear_1319_15483"
@@ -2352,8 +2352,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="5.44614"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint18_radial_1319_15483"
@@ -2363,8 +2363,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(9.23367 6.33952) rotate(-108.542) scale(5.54126 5.98275)"
         >
-          <stop offset="0.87772" stop-color="#E5B090" stop-opacity="0" />
-          <stop offset="1" stop-color="#E5B090" />
+          <stop offset="0.87772" stopColor="#E5B090" stopOpacity="0" />
+          <stop offset="1" stopColor="#E5B090" />
         </radialGradient>
         <radialGradient
           id="paint19_radial_1319_15483"
@@ -2374,8 +2374,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(9.28063 6.0954) rotate(37.5041) scale(0.871484 2.71353)"
         >
-          <stop stop-color="#E8A987" />
-          <stop offset="1" stop-color="#E8A987" stop-opacity="0" />
+          <stop stopColor="#E8A987" />
+          <stop offset="1" stopColor="#E8A987" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint20_linear_1319_15483"
@@ -2385,8 +2385,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="7.49422"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint21_radial_1319_15483"
@@ -2396,8 +2396,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.427 6.11974) rotate(129.971) scale(1.4266 1.00404)"
         >
-          <stop stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint22_radial_1319_15483"
@@ -2407,8 +2407,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.8905 1.45091) rotate(130.365) scale(1.42805 1.54205)"
         >
-          <stop stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint23_radial_1319_15483"
@@ -2418,8 +2418,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(6.60551 0.17241) rotate(112.533) scale(1.38417 1.46597)"
         >
-          <stop offset="0.32493" stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop offset="0.32493" stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint24_radial_1319_15483"
@@ -2429,8 +2429,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(3.54527 1.99496) rotate(122.8) scale(0.728134 0.852077)"
         >
-          <stop stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint25_radial_1319_15483"
@@ -2440,8 +2440,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(1.42351 3.57268) rotate(120.411) scale(0.725464 0.783371)"
         >
-          <stop stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint26_linear_1319_15483"
@@ -2451,8 +2451,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="10.0014"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFCEB9" />
-          <stop offset="1" stop-color="#FFCEB9" stop-opacity="0" />
+          <stop stopColor="#FFCEB9" />
+          <stop offset="1" stopColor="#FFCEB9" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint27_linear_1319_15483"
@@ -2462,8 +2462,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="7.92923"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD6C0" />
-          <stop offset="1" stop-color="#FFD6C0" stop-opacity="0" />
+          <stop stopColor="#FFD6C0" />
+          <stop offset="1" stopColor="#FFD6C0" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint28_linear_1319_15483"
@@ -2473,8 +2473,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="6.53823"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD6C0" />
-          <stop offset="1" stop-color="#FFD6C0" stop-opacity="0" />
+          <stop stopColor="#FFD6C0" />
+          <stop offset="1" stopColor="#FFD6C0" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint29_linear_1319_15483"
@@ -2484,8 +2484,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="6.1194"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD6C0" />
-          <stop offset="1" stop-color="#FFD6C0" stop-opacity="0" />
+          <stop stopColor="#FFD6C0" />
+          <stop offset="1" stopColor="#FFD6C0" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint30_linear_1319_15483"
@@ -2495,8 +2495,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           y2="7.57212"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD6C0" />
-          <stop offset="1" stop-color="#FFD6C0" stop-opacity="0" />
+          <stop stopColor="#FFD6C0" />
+          <stop offset="1" stopColor="#FFD6C0" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint31_radial_1319_15483"
@@ -2506,8 +2506,8 @@ export function EmojiLaughIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.84579 6.77892) rotate(144.625) scale(1.97185 2.80602)"
         >
-          <stop stop-color="#FFD0BA" />
-          <stop offset="1" stop-color="#FFD0BA" stop-opacity="0" />
+          <stop stopColor="#FFD0BA" />
+          <stop offset="1" stopColor="#FFD0BA" stopOpacity="0" />
         </radialGradient>
       </defs>
     </IconTemplate>
@@ -2639,37 +2639,37 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
       <path
         d="M4.27014 1.27206C4.25399 0.585871 4.79714 0.0165063 5.48338 0.000351007C6.16957 -0.0157991 6.73891 0.527373 6.75507 1.21357L6.76685 1.71411C6.98593 1.32756 7.40627 1.07217 7.88121 1.08609C8.56554 1.10616 9.10376 1.67781 9.08256 2.36215L8.95105 6.60934L9.69728 5.6836C10.1455 5.12758 10.9593 5.0395 11.5161 5.4868C12.0742 5.93519 12.1625 6.75129 11.7132 7.30864L11.3927 7.7063L11.3896 7.71088C11.095 8.08826 10.4917 8.86094 9.73484 10.1103C9.49071 10.4766 9.27858 10.8677 9.06687 11.2582C8.76491 11.8151 8.46372 12.3705 8.07147 12.8502C7.29174 13.8116 6.10099 14.4261 4.76669 14.4261C3.14869 14.4261 1.7417 13.5225 1.0229 12.1924L1.02051 12.1965C0.365328 11.0228 0.26886 9.72447 0.236704 9.02908L0.166161 7.77272C0.162209 7.74051 0.159503 7.70789 0.158104 7.67481L0.00109927 3.97589C-0.0268946 3.31631 0.483174 2.758 1.1426 2.72643C1.51901 2.70842 1.86319 2.86585 2.09592 3.12673L2.07173 2.40344C2.04949 1.73875 2.57029 1.18189 3.23497 1.15965C3.66895 1.14513 4.05693 1.36209 4.28023 1.69942L4.27014 1.27206Z"
         fill="url(#paint25_radial_1319_15483)"
-        fill-opacity="0.6"
+        fillOpacity="0.6"
       />
       <path
         d="M11.0618 6.5166C10.6788 6.89965 9.74702 7.94068 9.08398 9.04073"
         stroke="url(#paint26_linear_1319_15483)"
-        stroke-width="1.75128"
-        stroke-linecap="round"
+        strokeWidth="1.75128"
+        strokeLinecap="round"
       />
       <path
         d="M2.33533 6.39258C2.18526 6.56941 1.67612 7.08391 1.38672 7.37332"
         stroke="url(#paint27_linear_1319_15483)"
-        stroke-width="0.583758"
-        stroke-linecap="round"
+        strokeWidth="0.583758"
+        strokeLinecap="round"
       />
       <path
         d="M3.42871 6.08815C3.76638 5.95952 4.29374 5.70547 4.53812 5.52539"
         stroke="url(#paint28_linear_1319_15483)"
-        stroke-width="0.583758"
-        stroke-linecap="round"
+        strokeWidth="0.583758"
+        strokeLinecap="round"
       />
       <path
         d="M5.31738 5.66113C5.63092 5.82191 6.16147 5.95856 6.49764 5.88515"
         stroke="url(#paint29_linear_1319_15483)"
-        stroke-width="0.583758"
-        stroke-linecap="round"
+        strokeWidth="0.583758"
+        strokeLinecap="round"
       />
       <path
         d="M8.25977 7.52622C8.39642 7.32526 8.63756 6.92328 8.74211 6.80273"
         stroke="url(#paint30_linear_1319_15483)"
-        stroke-width="0.583758"
-        stroke-linecap="round"
+        strokeWidth="0.583758"
+        strokeLinecap="round"
       />
       <path
         d="M8.75735 6.803C7.85698 6.79657 6.99411 6.26169 6.71541 6.03125C6.50961 7.14385 7.35318 7.96865 7.78464 8.20182L8.75735 6.803Z"
@@ -2684,8 +2684,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(10.7193 7.96756) rotate(162.242) scale(10.487 16.0174)"
         >
-          <stop offset="0.817521" stop-color="#DAA394" stop-opacity="0" />
-          <stop offset="1" stop-color="#DAA394" />
+          <stop offset="0.817521" stopColor="#DAA394" stopOpacity="0" />
+          <stop offset="1" stopColor="#DAA394" />
         </radialGradient>
         <radialGradient
           id="paint1_radial_1319_15483"
@@ -2695,8 +2695,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(6.70074 3.00789) rotate(103.477) scale(12.8389 8.84604)"
         >
-          <stop offset="0.750766" stop-color="#C18396" stop-opacity="0" />
-          <stop offset="1" stop-color="#C18396" />
+          <stop offset="0.750766" stopColor="#C18396" stopOpacity="0" />
+          <stop offset="1" stopColor="#C18396" />
         </radialGradient>
         <radialGradient
           id="paint2_radial_1319_15483"
@@ -2706,8 +2706,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.02645 14.2214) rotate(-117.268) scale(4.42301 5.56281)"
         >
-          <stop stop-color="#FBC5B8" />
-          <stop offset="1" stop-color="#FBC5B8" stop-opacity="0" />
+          <stop stopColor="#FBC5B8" />
+          <stop offset="1" stopColor="#FBC5B8" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint3_radial_1319_15483"
@@ -2717,8 +2717,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(5.14428 3.07061) rotate(90.3653) scale(11.679 8.04496)"
         >
-          <stop offset="0.927083" stop-color="#BB7D95" stop-opacity="0" />
-          <stop offset="0.987027" stop-color="#BB7D95" />
+          <stop offset="0.927083" stopColor="#BB7D95" stopOpacity="0" />
+          <stop offset="0.987027" stopColor="#BB7D95" />
         </radialGradient>
         <radialGradient
           id="paint4_radial_1319_15483"
@@ -2728,8 +2728,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.2542 8.27508) rotate(-144.525) scale(0.888437 3.80459)"
         >
-          <stop stop-color="#E3B3A6" />
-          <stop offset="1" stop-color="#E3B3A6" stop-opacity="0" />
+          <stop stopColor="#E3B3A6" />
+          <stop offset="1" stopColor="#E3B3A6" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint5_linear_1319_15483"
@@ -2739,8 +2739,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="4.70465"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F9BAA2" />
-          <stop offset="1" stop-color="#F9BAA2" stop-opacity="0" />
+          <stop stopColor="#F9BAA2" />
+          <stop offset="1" stopColor="#F9BAA2" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint6_linear_1319_15483"
@@ -2750,8 +2750,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="5.60317"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint7_radial_1319_15483"
@@ -2761,8 +2761,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(0.873679 2.52143) rotate(73.6238) scale(1.27005 3.1714)"
         >
-          <stop stop-color="#DDAB8F" />
-          <stop offset="1" stop-color="#DDAB8F" stop-opacity="0" />
+          <stop stopColor="#DDAB8F" />
+          <stop offset="1" stopColor="#DDAB8F" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint8_linear_1319_15483"
@@ -2772,8 +2772,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="3.82"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E7AA8E" />
-          <stop offset="1" stop-color="#E7AA8E" stop-opacity="0" />
+          <stop stopColor="#E7AA8E" />
+          <stop offset="1" stopColor="#E7AA8E" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint9_linear_1319_15483"
@@ -2783,8 +2783,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="4.21307"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E2A486" />
-          <stop offset="1" stop-color="#E2A486" stop-opacity="0" />
+          <stop stopColor="#E2A486" />
+          <stop offset="1" stopColor="#E2A486" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint10_linear_1319_15483"
@@ -2794,8 +2794,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="4.9399"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.405208" stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop offset="0.405208" stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint11_radial_1319_15483"
@@ -2805,8 +2805,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(2.94497 0.903759) rotate(77.9639) scale(1.72451 3.05804)"
         >
-          <stop stop-color="#D8B19A" />
-          <stop offset="1" stop-color="#D8B19A" stop-opacity="0" />
+          <stop stopColor="#D8B19A" />
+          <stop offset="1" stopColor="#D8B19A" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint12_linear_1319_15483"
@@ -2816,8 +2816,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="3.15186"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#DC9F80" />
-          <stop offset="1" stop-color="#DC9F80" stop-opacity="0" />
+          <stop stopColor="#DC9F80" />
+          <stop offset="1" stopColor="#DC9F80" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint13_linear_1319_15483"
@@ -2827,8 +2827,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="3.34049"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#F7BB9C" />
-          <stop offset="1" stop-color="#F7BB9C" stop-opacity="0" />
+          <stop stopColor="#F7BB9C" />
+          <stop offset="1" stopColor="#F7BB9C" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint14_linear_1319_15483"
@@ -2838,8 +2838,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="5.06502"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0.347826" stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop offset="0.347826" stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint15_radial_1319_15483"
@@ -2849,8 +2849,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(6.90808 4.61627) rotate(-116.651) scale(4.99647 5.86457)"
         >
-          <stop offset="0.869582" stop-color="#D6AC94" stop-opacity="0" />
-          <stop offset="1" stop-color="#D6AC94" />
+          <stop offset="0.869582" stopColor="#D6AC94" stopOpacity="0" />
+          <stop offset="1" stopColor="#D6AC94" />
         </radialGradient>
         <linearGradient
           id="paint16_linear_1319_15483"
@@ -2860,8 +2860,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="4.38468"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#E4A38A" />
-          <stop offset="1" stop-color="#E4A38A" stop-opacity="0" />
+          <stop stopColor="#E4A38A" />
+          <stop offset="1" stopColor="#E4A38A" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint17_linear_1319_15483"
@@ -2871,8 +2871,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="5.44614"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint18_radial_1319_15483"
@@ -2882,8 +2882,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(9.23367 6.33952) rotate(-108.542) scale(5.54126 5.98275)"
         >
-          <stop offset="0.87772" stop-color="#E5B090" stop-opacity="0" />
-          <stop offset="1" stop-color="#E5B090" />
+          <stop offset="0.87772" stopColor="#E5B090" stopOpacity="0" />
+          <stop offset="1" stopColor="#E5B090" />
         </radialGradient>
         <radialGradient
           id="paint19_radial_1319_15483"
@@ -2893,8 +2893,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(9.28063 6.0954) rotate(37.5041) scale(0.871484 2.71353)"
         >
-          <stop stop-color="#E8A987" />
-          <stop offset="1" stop-color="#E8A987" stop-opacity="0" />
+          <stop stopColor="#E8A987" />
+          <stop offset="1" stopColor="#E8A987" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint20_linear_1319_15483"
@@ -2904,8 +2904,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="7.49422"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FBC4B2" />
-          <stop offset="1" stop-color="#FBC4B2" stop-opacity="0" />
+          <stop stopColor="#FBC4B2" />
+          <stop offset="1" stopColor="#FBC4B2" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint21_radial_1319_15483"
@@ -2915,8 +2915,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(11.427 6.11974) rotate(129.971) scale(1.4266 1.00404)"
         >
-          <stop stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint22_radial_1319_15483"
@@ -2926,8 +2926,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.8905 1.45091) rotate(130.365) scale(1.42805 1.54205)"
         >
-          <stop stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint23_radial_1319_15483"
@@ -2937,8 +2937,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(6.60551 0.17241) rotate(112.533) scale(1.38417 1.46597)"
         >
-          <stop offset="0.32493" stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop offset="0.32493" stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint24_radial_1319_15483"
@@ -2948,8 +2948,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(3.54527 1.99496) rotate(122.8) scale(0.728134 0.852077)"
         >
-          <stop stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <radialGradient
           id="paint25_radial_1319_15483"
@@ -2959,8 +2959,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(1.42351 3.57268) rotate(120.411) scale(0.725464 0.783371)"
         >
-          <stop stop-color="#FFD7C0" />
-          <stop offset="1" stop-color="#FFD7C0" stop-opacity="0" />
+          <stop stopColor="#FFD7C0" />
+          <stop offset="1" stopColor="#FFD7C0" stopOpacity="0" />
         </radialGradient>
         <linearGradient
           id="paint26_linear_1319_15483"
@@ -2970,8 +2970,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="10.0014"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFCEB9" />
-          <stop offset="1" stop-color="#FFCEB9" stop-opacity="0" />
+          <stop stopColor="#FFCEB9" />
+          <stop offset="1" stopColor="#FFCEB9" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint27_linear_1319_15483"
@@ -2981,8 +2981,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="7.92923"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD6C0" />
-          <stop offset="1" stop-color="#FFD6C0" stop-opacity="0" />
+          <stop stopColor="#FFD6C0" />
+          <stop offset="1" stopColor="#FFD6C0" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint28_linear_1319_15483"
@@ -2992,8 +2992,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="6.53823"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD6C0" />
-          <stop offset="1" stop-color="#FFD6C0" stop-opacity="0" />
+          <stop stopColor="#FFD6C0" />
+          <stop offset="1" stopColor="#FFD6C0" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint29_linear_1319_15483"
@@ -3003,8 +3003,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="6.1194"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD6C0" />
-          <stop offset="1" stop-color="#FFD6C0" stop-opacity="0" />
+          <stop stopColor="#FFD6C0" />
+          <stop offset="1" stopColor="#FFD6C0" stopOpacity="0" />
         </linearGradient>
         <linearGradient
           id="paint30_linear_1319_15483"
@@ -3014,8 +3014,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           y2="7.57212"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#FFD6C0" />
-          <stop offset="1" stop-color="#FFD6C0" stop-opacity="0" />
+          <stop stopColor="#FFD6C0" />
+          <stop offset="1" stopColor="#FFD6C0" stopOpacity="0" />
         </linearGradient>
         <radialGradient
           id="paint31_radial_1319_15483"
@@ -3025,8 +3025,8 @@ export function EmojiSadIcon({ ...props }: IconCollectionType) {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(8.84579 6.77892) rotate(144.625) scale(1.97185 2.80602)"
         >
-          <stop stop-color="#FFD0BA" />
-          <stop offset="1" stop-color="#FFD0BA" stop-opacity="0" />
+          <stop stopColor="#FFD0BA" />
+          <stop offset="1" stopColor="#FFD0BA" stopOpacity="0" />
         </radialGradient>
       </defs>
     </IconTemplate>
