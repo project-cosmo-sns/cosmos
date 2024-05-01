@@ -20,6 +20,7 @@ interface ReactionContainerProps {
   views: number;
   handleEmojiClick?: Dispatch<SetStateAction<boolean>>;
   emojiVisible?: boolean;
+  forDetails?: boolean;
 }
 
 /**
@@ -38,19 +39,29 @@ export default function ReactionContainer({
   views,
   handleEmojiClick,
   emojiVisible,
+  forDetails = false,
 }: ReactionContainerProps) {
   const cn = classNames.bind(styles);
   const [hasReaction, setHasReaction] = useState(false);
   return (
     <div className={cn('wrapper')}>
-      <button
-        type="button"
-        className={cn('reaction', 'emoji')}
-        onClick={() => handleEmojiClick && handleEmojiClick(!emojiVisible)}
-      >
-        {hasReaction ? <p>반응 남김</p> : <EmojiIcon width="18" height="18" />}
-        {emoji}
-      </button>
+      {forDetails ? (
+        <p>디테일 전용</p>
+      ) : (
+        <button
+          type="button"
+          className={cn('reaction', 'emoji')}
+          onClick={() => handleEmojiClick && handleEmojiClick(!emojiVisible)}
+        >
+          {hasReaction ? (
+            <p>반응 남김</p>
+          ) : (
+            <EmojiIcon width="18" height="18" />
+          )}
+          {emoji}
+        </button>
+      )}
+
       <button type="button" className={cn('reaction', 'comment')}>
         <CommentIcon width="18" height="18" />
         {commentsCount}
