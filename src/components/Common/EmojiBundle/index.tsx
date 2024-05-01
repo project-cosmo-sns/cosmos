@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import { Dispatch, SetStateAction, Children } from 'react';
-import styles from './EmojiBundler.module.scss';
+import styles from './EmojiBundle.module.scss';
 
 interface EmojiBundleTypes {
   children: JSX.Element[];

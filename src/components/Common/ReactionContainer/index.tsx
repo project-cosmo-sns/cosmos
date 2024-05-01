@@ -12,7 +12,7 @@ import {
   EmojiMeIcon,
 } from '../IconCollection';
 import styles from './ReactionContainer.module.scss';
-import EmojiBundle from './EmojiBundle';
+import EmojiBundle from '../EmojiBundle';
 
 interface ReactionContainerProps {
   emoji: number;
