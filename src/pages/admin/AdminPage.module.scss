@@ -1,0 +1,46 @@
+.wrapper {
+  @include flex-arrange(flex-start);
+  @include glass-01;
+  color: $white-01;
+  flex-direction: column;
+  position: relative;
+  width: 740px;
+  height: 638px;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.title {
+  @include glass-01;
+  @include flex-arrange(center);
+  @include font-style(1.8rem, $white-01, 700);
+  width: 100%;
+  border-bottom: $glass-edge-01;
+  padding: 20px;
+  margin: 12px;
+  border-radius: 10px;
+}
+
+.list-header {
+  display: flex;
+  gap: 130px;
+  border-bottom: $glass-edge-01;
+  width: 100%;
+  padding: 0 14px 14px;
+}
+
+.list {
+  display: flex;
+  gap: 115px;
+  align-items: flex-start;
+  border-radius: 10px;
+  background: $glass-01;
+  backdrop-filter: blur(25px);
+  margin: 20px auto;
+  width: 100%;
+  padding: 20px;
+
+  button {
+    border-radius: 10px;
+  }
+}
