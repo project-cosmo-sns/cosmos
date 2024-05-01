@@ -9,23 +9,25 @@
   position: sticky;
   width: 100%;
   top: 0;
-  background-color: $gray-02;
   z-index: 1;
 }
 
 .post-container {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  width: 100%;
 }
 
 .no-post {
   @include flex-arrange;
   width: 100%;
+  color: $white-01;
 }
 
 @media (min-width: 768px) {
   .post-container {
     padding: 0 24px 24px;
+    gap: 12px;
   }
 }

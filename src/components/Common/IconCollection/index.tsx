@@ -68,7 +68,7 @@ export function AddImageIcon({
   );
 }
 
-export function BackIcon({ fill = '#505050', ...props }: IconCollectionType) {
+export function BackIcon({ fill = '#C2C7D9', ...props }: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path

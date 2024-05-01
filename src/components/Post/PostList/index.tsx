@@ -19,19 +19,22 @@ export default function PostList({
   selectedSort,
 }: PostListProps) {
   const cn = classNames.bind(styles);
-  const [selectedCategory, setSelectedCategory] =
-    useState<CategoryType>('공지사항');
+  const [selectedCategory, setSelectedCategory] = useState<
+    CategoryType | '전체'
+  >('공지사항');
 
   // 임시로 분류하는 함수 추가. 추후 정렬, 카테고리 옵션에 맞는 데이터 불러오는 요청으로 수정 예정
   const filterPosts = (
     postData: PostData[],
     sort: 'all' | 'followed' | 'myGeneration',
-    category: CategoryType,
+    category: CategoryType | '전체',
   ) => {
     let filteredPosts = postData;
 
     if (sort === 'followed') filteredPosts = [mockData[0], mockData[1]];
     if (sort === 'myGeneration') filteredPosts = [mockData[2], mockData[3]];
+
+    if (category === '전체') return filteredPosts;
 
     return filteredPosts.filter((post) => post.category === category);
   };
