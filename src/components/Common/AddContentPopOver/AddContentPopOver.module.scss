@@ -4,7 +4,9 @@
 }
 
 .content-list-wrapper {
+  @include glass-02;
   width: 170px;
+  border-radius: 10px;
 
   .content-list {
     @include flex-arrange(flex-start, center);

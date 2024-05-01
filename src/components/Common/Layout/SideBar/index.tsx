@@ -79,10 +79,10 @@ export default function SideBar() {
           )}
         </div>
         <UserIcon onClick={profileClick} />
-        {modalVisible && (
-          <LoginModal modalVisible={modalVisible} toggleModal={profileClick} />
-        )}
       </div>
+      {modalVisible && (
+        <LoginModal modalVisible={modalVisible} toggleModal={profileClick} />
+      )}
     </div>
   );
 }
