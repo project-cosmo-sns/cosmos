@@ -1,17 +1,15 @@
 .wrapper {
   @include flex-arrange(flex-start, flex-end);
+  @include glass-02(none);
   flex-direction: column;
   width: 100%;
   gap: 40px;
   padding: 20px;
-  background: $white-01;
-
-  overflow-y: scroll;
-  height: 84vh;
 
   position: relative;
 
-  @include font-style(2rem, $black-01, 700);
+  @include font-style(2rem, $white-01, 700);
+  // @include font-style(2rem, $white, 700); 로 수정 예정
 }
 
 .back {
@@ -36,6 +34,7 @@
     width: 614px;
     padding: 30px;
     border-radius: 10px;
+    border: $glass-edge-01;
   }
 
   .back {

@@ -15,14 +15,14 @@
   color: $font-color;
 }
 
-@mixin glass-01($color: $glass-01, $blur: 15px, $edge: $glass-edge-01) {
-  background-color: $color;
-  backdrop-filter: blur($blur);
-  border: $glass-edge-01;
+@mixin glass-01($edge: $glass-edge-01) {
+  background-color: $glass-01;
+  backdrop-filter: blur(15px);
+  border: $edge;
 }
 
-@mixin glass-02($color: $glass-02, $blur: 15px, $edge: $glass-edge-01) {
-  background-color: $color;
-  backdrop-filter: blur($blur);
-  border: $glass-edge-01;
+@mixin glass-02($edge: $glass-edge-01) {
+  background-color: $glass-02;
+  backdrop-filter: blur(15px);
+  border: $edge;
 }

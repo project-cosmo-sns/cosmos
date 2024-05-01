@@ -4,8 +4,8 @@ import classNames from 'classnames/bind';
 import styles from './CategoryList.module.scss';
 
 interface CategoryListProps {
-  selectedCategory: CategoryType;
-  setSelectedCategory: (args: CategoryType) => void;
+  selectedCategory: CategoryType | '전체';
+  setSelectedCategory: (args: CategoryType | '전체') => void;
 }
 
 export default function CategoryList({
@@ -23,6 +23,11 @@ export default function CategoryList({
   ];
   return (
     <div className={cn('category-box')}>
+      <CategoryFlag
+        category="전체"
+        selectedCategory={selectedCategory}
+        setSelectedCategory={setSelectedCategory}
+      />
       {CATEGORY_LIST.map((category) => (
         <CategoryFlag
           key={category}

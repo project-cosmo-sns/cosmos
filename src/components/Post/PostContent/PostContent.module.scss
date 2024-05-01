@@ -10,7 +10,8 @@
 }
 
 .title {
-  @include font-style(2.4rem, $black-01, 700);
+  @include font-style(1.6rem, $white-01, 700);
+  // @include font-style(1.6rem, $white, 700); 로 수정 예정
   margin-bottom: 20px;
 }
 
@@ -27,6 +28,7 @@
 }
 
 .markdown-content {
+  color: $gray-03;
   margin-bottom: 40px;
   font-size: 1.6rem;
   line-height: 2rem;
