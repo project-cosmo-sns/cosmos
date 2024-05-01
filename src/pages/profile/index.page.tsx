@@ -26,10 +26,11 @@ export default function MemberDataContainer() {
     setMemberData(memberMockData);
   }, []);
 
-  const filterMyPost = (feedData: FeedData[]) => {
-    const userId = 'feedId1';
-    return feedData.filter((feed) => feed.author.id === userId);
-  };
+  // 프로필 페이지에서 내 게시물 거르는 코드 나오기 전 임시 코드
+  // const MyFeeds = (feedData: FeedData[]) => {
+  //   const userId = 'feedId1';
+  //   return feedData.filter((feed) => feed.author.id === userId);
+  // };
 
   const renderContent = () => {
     switch (selectedOption) {
