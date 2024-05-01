@@ -33,18 +33,6 @@ export default function ProfileEditModal({
   const member =
     memberData && memberData.find((user) => user.id === currentUserId);
 
-  // useEffect(() => {
-  //   if (profileImage && profileImage.length > 0) {
-  //     setPreviewImage(profileImage)
-  //   }
-  // })
-
-  // useEffect(() => {
-  //   if (member) {
-  //     setValue('image', member?.imageUrl);
-  //   }
-  // }, [member, setValue]);
-
   useEffect(() => {
     if (member && member.imageUrl) {
       setPreviewImage(member.imageUrl);

@@ -9,6 +9,7 @@ import { ContainerOptionType } from '@/@types/type';
 import FeedCardList from '@/components/Feed/FeedCardList';
 import PostList from '@/components/Post/PostList';
 import ScrapList from '@/components/Common/ScrapList';
+import { FeedData } from '@/components/Feed/FeedCardList/mockData';
 
 const cn = classNames.bind(styles);
 
@@ -25,12 +26,17 @@ export default function MemberDataContainer() {
     setMemberData(memberMockData);
   }, []);
 
+  const filterMyPost = (feedData: FeedData[]) => {
+    const userId = 'feedId1';
+    return feedData.filter((feed) => feed.author.id === userId);
+  };
+
   const renderContent = () => {
     switch (selectedOption) {
       case 'feed':
         return <FeedCardList />;
       case 'post':
-        return <PostList selectedSort={selectedSort} />;
+        return <PostList selectedSort={selectedSort} isMyProfile />;
       case 'scrap':
         return <ScrapList />;
       default:

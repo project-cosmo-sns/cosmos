@@ -13,6 +13,7 @@ import FeedDetails from '../FeedDetails';
 export default function FeedCardList() {
   const cn = classNames.bind(styles);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   return (
     <>
       <div className={cn('container')}>
