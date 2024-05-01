@@ -26,12 +26,12 @@
       position: relative;
 
       .text {
+        @include font-style(1.6rem);
         width: 100%;
-        background-color: $gray-03;
+        background-color: $black-03;
         padding: 16px;
         border-radius: 5px;
         resize: none;
-        @include font-style(1.6rem);
       }
 
       .error {
@@ -91,7 +91,7 @@
 
           .file-label {
             @include flex-arrange;
-            background-color: $gray-03;
+            background-color: $black-03;
             width: 110px;
             border-radius: 5px;
             cursor: pointer;

@@ -4,9 +4,7 @@
 
 .container {
   @include flex-arrange;
-  @include glass-01;
   width: 100%;
-  border: none;
 
   .wrapper {
     display: flex;
@@ -56,6 +54,9 @@
 }
 
 .container-hover {
+  @include glass-01;
+  border: none;
+  
   &:hover {
     transform: scale(1.01);
   }

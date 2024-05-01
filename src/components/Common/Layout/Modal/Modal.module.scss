@@ -9,7 +9,7 @@
   z-index: 99999;
 
   .wrapper {
-    @include glass-01;
+    @include glass-02;
     display: flex;
     position: relative;
     flex-direction: column;
@@ -43,7 +43,6 @@
     }
 
     .component {
-      background-color: $white-01;
       flex-grow: 1;
     }
   }
