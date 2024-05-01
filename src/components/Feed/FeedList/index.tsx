@@ -28,6 +28,7 @@ export default function FeedList() {
         ))}
       </div>
       <Modal
+        title="피드생성"
         toggleModal={setIsModalOpen}
         modalVisible={isModalOpen}
         cssModalSize={cn('feed-detail-modalSize')}

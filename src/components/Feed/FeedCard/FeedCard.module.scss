@@ -4,8 +4,10 @@
 
 .container {
   @include flex-arrange;
+  @include glass-01;
   width: 100%;
-  background-color: $white-01;
+  border: none;
+
   .wrapper {
     display: flex;
     flex-direction: column;
@@ -16,6 +18,7 @@
       display: flex;
       justify-content: space-between;
       gap: 12px;
+      color: $white-01;
 
       .profile-content-wrapper {
         display: flex;
