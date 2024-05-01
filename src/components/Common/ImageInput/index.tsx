@@ -12,6 +12,7 @@ interface ImageInputProps {
   type?: string;
   watch?: UseFormWatch<AuthFormProps> | undefined;
   register?: UseFormRegisterReturn;
+  initialImageUrl?: string;
 }
 
 /**
@@ -26,7 +27,12 @@ interface ImageInputProps {
  * authForm에서 사용 예시
  */
 
-export default function ImageInput({ type, watch, register }: ImageInputProps) {
+export default function ImageInput({
+  type,
+  watch,
+  register,
+  initialImageUrl,
+}: ImageInputProps) {
   const [imageFile, setImageFile] = useState<string | null>(null);
   const feedImage = type === 'feed';
   const profileImage = type === 'profile';
@@ -34,6 +40,10 @@ export default function ImageInput({ type, watch, register }: ImageInputProps) {
   const uploadedImage = watch?.('image');
 
   useEffect(() => {
+    if (initialImageUrl) {
+      setImageFile(initialImageUrl);
+    }
+
     let url: string | null = null;
 
     if (uploadedImage && uploadedImage.length > 0) {
@@ -46,7 +56,7 @@ export default function ImageInput({ type, watch, register }: ImageInputProps) {
         URL.revokeObjectURL(url);
       }
     };
-  }, [uploadedImage]);
+  }, [uploadedImage, initialImageUrl]);
 
   return (
     <div className={cn('image-container', { feedImage, profileImage })}>
