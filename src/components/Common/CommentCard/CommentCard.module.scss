@@ -26,6 +26,8 @@
 }
 
 .content {
+  color: $white-01;
+  // color: $white 로 수정 예정;
   textarea {
     width: 100%;
     font-size: 1.6rem;
