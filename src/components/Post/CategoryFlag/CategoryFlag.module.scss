@@ -1,14 +1,14 @@
 .category {
   @include flex-arrange;
-  @include font-style(1.4rem, $black-01, 600);
+  @include font-style(1.4rem, $gray-02, 600);
   height: 32px;
   padding: 7px 20px;
   gap: 10px;
   border-radius: 100px;
-  background: $gray-03;
+  background: $black-02;
 
   &.selected {
-    background: $black-01;
+    background: $primary-01;
     color: $white-01;
   }
 }

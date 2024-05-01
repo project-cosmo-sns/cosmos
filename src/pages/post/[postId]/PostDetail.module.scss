@@ -1,14 +1,10 @@
 .wrapper {
+  @include glass-02(none);
   @include flex-arrange(flex-start, flex-start);
   flex-direction: column;
   padding: 20px;
   width: 100%;
-  background-color: $white-01;
   gap: 12px;
-
-  height: 84vh;
-  overflow-y: scroll;
-  overflow-x: hidden;
 
   position: relative;
 }
@@ -23,7 +19,7 @@
   .wrapper {
     width: 614px;
     border-radius: 10px;
-    backdrop-filter: blur(15px);
+    border: $glass-edge-01;
     padding: 30px;
   }
 
