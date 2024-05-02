@@ -1,10 +1,10 @@
+import fetchData from '@/api/fetchData';
 import { Tag } from '@/pages/post/[postId]/mockData';
+import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import React, { useState } from 'react';
 import HashTag from '.';
 import styles from './HashTagInput.module.scss';
-import { useMutation, useQuery } from '@tanstack/react-query';
-import fetchData from '@/api/fetchData';
 
 interface HashTagInputProps {
   hashtags: Tag[];
