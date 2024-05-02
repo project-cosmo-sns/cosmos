@@ -22,11 +22,11 @@ export default function AddContentPopOver({ onClose }: PopOverProps) {
           className={cn('content-list')}
           onClick={() => setIsModalOpen(true)}
         >
-          <FeedIcon width="18" height="18" fill='#FFFFFF'/>
+          <FeedIcon width="18" height="18" fill="#FFFFFF" />
           <span>피드 작성하기</span>
         </li>
         <li className={cn('content-list')}>
-          <PostIcon width="18" height="18" fill='#FFFFFF'/>
+          <PostIcon width="18" height="18" fill="#FFFFFF" />
           <span>포스트 작성하기</span>
         </li>
       </ul>
