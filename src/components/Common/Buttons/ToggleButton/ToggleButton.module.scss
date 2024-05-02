@@ -1,21 +1,21 @@
 .toggle {
   width: 42px;
   height: 24px;
-  background-color: $gray-02;
+  background-color: $black-02;
   border-radius: 15px;
   position: relative;
   cursor: pointer;
   transition: transform 0.3s;
 
   &-checked {
-    background-color: $black-01;
+    background-color: $primary-01;
   }
 
   .toggle-button {
     display: block;
     width: 18px;
     height: 18px;
-    background-color: $white-01;
+    background-color: $gray-01;
     border-radius: 50%;
     position: absolute;
     left: 3px;
@@ -24,6 +24,7 @@
   }
 
   &-checked .toggle-button {
+    background: $white-01;
     transform: translateX(18px);
   }
 }
