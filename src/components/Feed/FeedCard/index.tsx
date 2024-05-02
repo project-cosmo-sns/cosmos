@@ -1,9 +1,10 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import classNames from 'classnames/bind';
 import styles from './FeedCard.module.scss';
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import { FeedData } from '../FeedCardList/mockData';
+import Modal from '@/components/Common/Layout/Modal';
 
 interface FeedCardTypes {
   feedData: FeedData;
@@ -30,6 +31,7 @@ export default function FeedCard({
   hasHover,
 }: FeedCardTypes) {
   const cn = classNames.bind(styles);
+  const [moreModalOpen, setMoreModalOpen] = useState(false);
   const { author, createdAt, content, reactionCount, commentsCount, eyeCount } =
     feedData;
   return (
@@ -49,6 +51,25 @@ export default function FeedCard({
           commentsCount={commentsCount}
           views={eyeCount}
         />
+        {hasPadding || (
+          <div>
+            <button
+              type="button"
+              onClick={() => setMoreModalOpen(!moreModalOpen)}
+            >
+              모달 생성
+            </button>
+            <Modal
+              title="임시모달"
+              cssModalSize={cn('')}
+              cssComponentDisplay={cn('')}
+              modalVisible={moreModalOpen}
+              toggleModal={setMoreModalOpen}
+            >
+              <div>테스트 모달</div>
+            </Modal>
+          </div>
+        )}
       </div>
     </div>
   );
