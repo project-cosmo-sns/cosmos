@@ -4,6 +4,6 @@
   gap: 12px;
 
   .nickname {
-    @include font-style(16px, $black-01, 700);
+    @include font-style(16px, $white-01, 700);
   }
 }

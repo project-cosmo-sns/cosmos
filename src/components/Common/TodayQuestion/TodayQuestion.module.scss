@@ -1,9 +1,7 @@
 .question-container {
+  @include glass-01;
   width: 100%;
-  height: 50px;
-  overflow: hidden;
   padding: 16px 24px;
-  background: $gray-02;
   margin-bottom: 8px;
   position: relative;
   transition: 0.3s all;
@@ -12,39 +10,31 @@
     margin-bottom: 12px;
   }
 
-  &.toggled {
-    height: auto;
+  .question-title {
+    @include flex-arrange(flex-start, center);
+
+    .viewmore-icon {
+      opacity: 0.7;
+      width: 18px;
+      height: 18px;
+    }
 
     @media (min-width: 768px) {
-      height: 78px;
-    }
-
-    h3 {
-      opacity: 1;
-    }
-  }
-
-  .question-title {
-    @include flex-arrange(space-between, center);
-    .toggle-icon {
-      cursor: pointer;
-      display: none;
-
-      @media (min-width: 768px) {
-        display: block;
+      @include flex-arrange(space-between, center);
+      .viewmore-icon {
+        opacity: 1;
+        width: auto;
+        height: auto;
       }
     }
-
     strong {
-      @include font-style(14px, $black-03);
+      @include font-style(14px, $gray-02);
     }
   }
 
   h3 {
-    opacity: 0;
-    transition: 0.3s all;
     margin-top: 4px;
-    @include font-style(16px, $black-01, 700);
+    @include font-style(16px, $white-01, 700);
   }
 
   @media (min-width: 768px) {
