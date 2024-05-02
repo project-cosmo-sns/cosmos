@@ -2,8 +2,8 @@ import axios from '@/api/axios';
 
 export default async function githubLogin(code: string) {
   try {
-    const res = axios.post(`/auth/github/redirect?code=${code}`);
-    if (await res) {
+    const res = await axios.post(`/auth/github/redirect?code=${code}`);
+    if (res) {
       window.opener.location.reload();
       window.close();
     }

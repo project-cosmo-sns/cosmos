@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import githubLogin from '@/api/useGithubLogin';
-import { set } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 
 export async function getStaticProps() {
@@ -14,10 +13,19 @@ export async function getStaticProps() {
 
 export default function Redirect() {
   const router = useRouter();
+  const { mutate } = useMutation({
+    mutationFn: githubLogin,
+    onSuccess: () => {
+      localStorage.setItem('token', '123');
+    },
+    onError: (error) => {
+      console.error('요청 실패:', error);
+    },
+  });
 
   useEffect(() => {
     if (router.query.code) {
-      githubLogin(router.query.code as string);
+      mutate(router.query.code as string);
     }
   }, [router.query.code]);
 

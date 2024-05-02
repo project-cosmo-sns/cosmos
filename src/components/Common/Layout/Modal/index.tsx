@@ -53,7 +53,6 @@ export default function Modal({
                     className={cn('x')}
                     width="18"
                     height="18"
-                    onClick={() => router.push('/')}
                   />
                 </div>
                 {title && (
