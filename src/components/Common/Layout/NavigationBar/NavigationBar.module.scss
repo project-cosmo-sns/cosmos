@@ -6,8 +6,8 @@
   position: fixed;
   z-index: 1;
   background-image: url(/images/cosmos.png);
-  
-  .navigaionBar-wrapper{
+
+  .navigaionBar-wrapper {
     width: 100%;
     @include flex-arrange(space-between, center);
   }

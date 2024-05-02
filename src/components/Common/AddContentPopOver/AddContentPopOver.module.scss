@@ -24,7 +24,7 @@
     list-style: none;
     cursor: pointer;
 
-    .post-span{
+    .post-span {
       @include font-style(1.6rem, $white-01, 600);
     }
 
