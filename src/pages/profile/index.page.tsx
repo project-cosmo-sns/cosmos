@@ -6,7 +6,7 @@ import classNames from 'classnames/bind';
 import styles from './MemberDataContainer.module.scss';
 import ContentContainer from '@/components/Common/ContentContainer';
 import { ContainerOptionType } from '@/@types/type';
-import FeedCardList from '@/components/Feed/FeedCardList';
+import FeedList from '@/components/Feed/FeedList';
 import PostList from '@/components/Post/PostList';
 import ScrapList from '@/components/Common/ScrapList';
 
@@ -28,7 +28,7 @@ export default function MemberDataContainer() {
   const renderContent = () => {
     switch (selectedOption) {
       case 'feed':
-        return <FeedCardList />;
+        return <FeedList />;
       case 'post':
         return <PostList selectedSort={selectedSort} />;
       case 'scrap':

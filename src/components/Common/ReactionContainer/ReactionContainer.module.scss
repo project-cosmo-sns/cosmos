@@ -2,6 +2,12 @@
   display: flex;
   gap: 4px;
   width: 100%;
+  position: relative;
+
+  .forDeatils {
+    position: relative;
+    background-color: red;
+  }
 }
 
 .reaction {
@@ -17,4 +23,17 @@
   &:hover {
     background-color: $black-02;
   }
+}
+
+.details-wrapper {
+  display: flex;
+
+  .reaction {
+    width: auto;
+    padding: 0;
+  }
+}
+
+.details-emoji-bundler {
+  flex-grow: 1;
 }

@@ -2,6 +2,7 @@ import styles from './PopOver.module.scss';
 import classNames from 'classnames/bind';
 import useOutSideClick from '@/hooks/useOutSideClick';
 import { useRef } from 'react';
+import ReactDOM from 'react-dom';
 
 const cn = classNames.bind(styles);
 
@@ -23,6 +24,7 @@ export default function PopOver({
   onClose,
 }: PopOverProps) {
   const popOverRef = useRef<HTMLDivElement>(null);
+  const portalContainer = document.getElementById('popover-root');
 
   useOutSideClick({
     ref: popOverRef,
@@ -33,13 +35,16 @@ export default function PopOver({
     e.stopPropagation();
   };
 
-  return (
+  if (!portalContainer) return null;
+
+  return ReactDOM.createPortal(
     <div
       ref={popOverRef}
       className={cn('popOver-container', className)}
       onClick={handleInnerClick}
     >
       {children}
-    </div>
+    </div>,
+    portalContainer,
   );
 }

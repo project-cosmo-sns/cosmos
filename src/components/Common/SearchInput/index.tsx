@@ -48,7 +48,11 @@ export default function SearchInput() {
           fill="#ccc"
         />
       )}
-      <GlassIcon className={cn('search-icon')} onClick={handleSearch} />
+      <GlassIcon
+        className={cn('search-icon')}
+        onClick={handleSearch}
+        fill="#fff"
+      />
     </div>
   );
 }

@@ -85,6 +85,7 @@ export default function Notification({ onClose }: PopOverProps) {
       <SettingIcon
         className={cn('setting-icon')}
         onClick={() => setIsModalOpen(true)}
+        fill="#C2C7D9"
       />
 
       {mockData.map((notification) => (
