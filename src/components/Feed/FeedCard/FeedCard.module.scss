@@ -5,18 +5,58 @@
 .container {
   @include flex-arrange;
   width: 100%;
-  background-color: $white-01;
+
   .wrapper {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     width: 100%;
     gap: 15px;
+
+    .user-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      color: $white-01;
+
+      .profile-content-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        align-items: flex-start;
+      }
+
+      .upload-image-wrapper {
+        position: relative;
+        box-shadow: 5px 6px 10px $gray-01;
+
+        .upload-image {
+          position: relative;
+          width: 102px;
+          height: 102px;
+          flex-shrink: 0;
+          border-radius: 5px;
+          overflow: hidden;
+        }
+
+        .extra-stuff {
+          position: absolute;
+          @include font-style(1.3rem, $white-01);
+          background: rgba(0, 0, 0, 0.6);
+          padding: 4px;
+          right: -5px;
+          bottom: -5px;
+          border-radius: 5px;
+        }
+      }
+    }
   }
   transition: transform 0.15s ease-in-out;
 }
 
 .container-hover {
+  @include glass-01;
+  border: none;
+
   &:hover {
     transform: scale(1.01);
   }
