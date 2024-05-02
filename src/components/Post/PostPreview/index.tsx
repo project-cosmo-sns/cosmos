@@ -49,7 +49,6 @@ export default function PostPreview({ postData }: PostPreviewProps) {
         emoji={emoji}
         commentsCount={comments.length}
         views={views}
-        handleEmojiClick={handleEmojiClick}
       />
     </div>
   );
