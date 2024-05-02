@@ -4,10 +4,12 @@ import {
   mockData,
 } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CategoryList from '../CategoryList';
 import PostPreview from '../PostPreview';
 import styles from './PostList.module.scss';
+import { useQuery } from '@tanstack/react-query';
+import fetchData from '@/api/fetchData';
 
 interface PostListProps {
   isMyProfile?: boolean;

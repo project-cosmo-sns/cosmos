@@ -3,6 +3,8 @@ import classNames from 'classnames/bind';
 import React, { useState } from 'react';
 import HashTag from '.';
 import styles from './HashTagInput.module.scss';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import fetchData from '@/api/fetchData';
 
 interface HashTagInputProps {
   hashtags: Tag[];
@@ -16,6 +18,18 @@ export default function HashTagInput({
   setHashtags,
 }: HashTagInputProps) {
   const [tagValue, setTagValue] = useState<string>('');
+  const [recommendValue, setRecommendValue] = useState<string[] | undefined>();
+
+  const { data, isPending, isSuccess, isError } = useQuery<{
+    tagName: string[];
+  }>({
+    queryKey: ['hashtag', tagValue],
+    queryFn: () =>
+      fetchData({
+        param: `/post/search/hashTag?searchWord=${tagValue}`,
+      }),
+    enabled: !!tagValue,
+  });
 
   const handleAddHashtag = (event: React.KeyboardEvent<HTMLInputElement>) => {
     event.preventDefault();
@@ -53,6 +67,16 @@ export default function HashTagInput({
     setHashtags(updatedHashtags);
   };
 
+  const handleSearchHashtag = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setTagValue(event.target.value);
+    if (isSuccess) {
+      const { tagName } = data;
+      if (tagName) {
+        setRecommendValue(tagName);
+      }
+    }
+  };
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Backspace' && !tagValue.length) {
       const updatedHashtags = [...hashtags];
@@ -79,11 +103,12 @@ export default function HashTagInput({
       <input
         className={cn('hashtag-input')}
         placeholder={hashtags.length ? '' : '#태그 입력 (최대 5개)'}
-        onChange={(event) => setTagValue(event.target.value)}
+        onChange={handleSearchHashtag}
         value={tagValue}
         onKeyDown={handleKeyDown}
         onKeyUp={handleKeyUp}
       />
+      {recommendValue?.length && <div>{recommendValue}</div>}
     </div>
   );
 }
