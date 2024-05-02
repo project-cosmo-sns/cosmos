@@ -2,7 +2,7 @@ import axios from 'axios';
 import { getCookie } from '@/utils/Cookies';
 
 const instance = axios.create({
-  baseURL: 'https://api-local.cosmo-sns.com',
+  baseURL: 'https://api-local.cosmo-sns.com/',
   withCredentials: true,
 });
 

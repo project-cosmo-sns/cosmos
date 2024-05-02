@@ -5,14 +5,16 @@ import classNames from 'classnames/bind';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import { CloseIcon, ProfileIcon } from '@/components/Common/IconCollection';
 import { useState } from 'react';
+import { postFeed } from './api';
+import { FeedType } from './type';
 
 interface CreatedFeedTypes {
   profileImage?: string;
 }
 
 interface Inputs {
-  feedContent: string;
-  feedImage: File[];
+  content: string;
+  // feedImage: File[];
 }
 
 /**
@@ -52,25 +54,28 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
     return [];
   };
 
+  const onSubmit = async (data: FeedType) => {
+    console.log(data, '------data------');
+    try {
+      await postFeed(data);
+    } catch (error) {
+      console.log(error, '------error------');
+    }
+  };
+
   const imagePreview = updateImageUrls();
   /**
    * CloseIcon을 클릭하면 filterImage 함수가 실행됩니다.
    * @param {number} index - useState images 배열의 index는 이미지를 업로드할때 등록되는 index와 같습니다. useState images 배열을 순회하면서 클릭한 이미지의 index를 제외한 나머지 요소를 반환합니다.
    */
-  const filterImage = (index: number) => {
-    const filteredImages = images.filter((el, i) => i !== index);
-    setImages(filteredImages);
-    setValue('feedImage', filteredImages);
-  };
+  // const filterImage = (index: number) => {
+  //   const filteredImages = images.filter((el, i) => i !== index);
+  //   setImages(filteredImages);
+  //   setValue('feedImage', filteredImages);
+  // };
 
   return (
-    <form
-      className={cn('container')}
-      onSubmit={(e) => {
-        e.preventDefault();
-        console.log(getValues(), '-----데이터----');
-      }}
-    >
+    <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <div className={cn('wrapper')}>
         <Image
           className={cn('profile-image')}
@@ -86,19 +91,19 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
             rows={5}
             maxLength={300}
             placeholder="글을 작성해보세요"
-            {...register('feedContent', {
+            {...register('content', {
               required: '게시글을 작성해주세요',
             })}
           />
-          {errors.feedContent && (
-            <span className={cn('error')}>{errors.feedContent.message}</span>
+          {errors.content && (
+            <span className={cn('error')}>{errors.content.message}</span>
           )}
           <span className={cn('limit')}>
-            {watch('feedContent') && watch('feedContent').length}/300
+            {watch('content') && watch('content').length}/300
           </span>
           <div className={cn('addImage')}>
             <div className={cn('image-wrapper')}>
-              <Controller
+              {/* <Controller
                 control={control}
                 name="feedImage"
                 render={({ field: { onChange } }) => (
@@ -117,19 +122,19 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
                     }}
                   />
                 )}
-              />
+              /> */}
               <label htmlFor="feedImage" className={cn('file-label')}>
                 <span className={cn('label-text')}>이미지 업로드</span>
               </label>
               {imagePreview &&
                 imagePreview.map((item, index) => (
                   <div key={index} className={cn('preview-container')}>
-                    <CloseIcon
+                    {/* <CloseIcon
                       className={cn('close')}
                       onClick={() => {
                         filterImage(index);
                       }}
-                    />
+                    /> */}
                     <div className={cn('preview-wrapper')}>
                       <img
                         className={cn('file-preview')}
