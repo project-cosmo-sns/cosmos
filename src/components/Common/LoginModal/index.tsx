@@ -12,7 +12,11 @@ export default function LoginModal({
   toggleModal,
 }: ModalPropsType) {
   const githubClick = async () => {
-    window.location.assign('https://api-local.cosmo-sns.com/auth/github/login');
+    window.open(
+      'https://api-local.cosmo-sns.com/auth/github/login',
+      'github-login',
+      'width=600, height=600',
+    );
   };
 
   return (

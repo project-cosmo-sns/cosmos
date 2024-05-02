@@ -6,14 +6,14 @@
   position: fixed;
   z-index: 1;
   background-image: url(/images/cosmos.png);
-  background-size: cover;
+  // background-size: cover;
 
   @media (min-width: 768px) {
-    max-width: 614px;
+    width: 614px;
     height: 109px;
     padding: 45px 0 0 0;
   }
   @media (min-width: 1200px) {
-    max-width: 740px;
+    width: 740px;
   }
 }

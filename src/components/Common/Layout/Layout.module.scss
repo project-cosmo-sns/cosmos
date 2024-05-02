@@ -4,6 +4,7 @@
   background-image: url('/images/cosmos.png');
   background-size: cover;
   background-attachment: fixed;
+  padding-bottom: 45px;
 
   .layout-content {
     @include flex-arrange(flex-start, center);
@@ -15,17 +16,23 @@
     grid-template-columns: 1fr 76px 30px 614px 30px 1fr;
     display: grid;
     grid-template-rows: 109px auto;
-    .layout-navigaionBar,
     .layout-content {
       grid-column: 4 / 5;
       padding: 0;
     }
+    .layout-navigaionBar {
+      grid-column: 4 / 5;
+    }
 
     .layout-sideBar {
-      grid-column: 2 / 3;
+      grid-column: 2;
+      grid-row: 2;
     }
   }
   @media (min-width: 1200px) {
     grid-template-columns: 1fr 76px 30px 740px 30px 1fr;
+    .layout-navigaionBar {
+      grid-column: 4 / 5;
+    }
   }
 }
