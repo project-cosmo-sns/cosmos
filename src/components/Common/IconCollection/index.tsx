@@ -581,6 +581,25 @@ export function ProfileIcon({
   );
 }
 
+export function ProfileIconDark({
+  fill = '#c2c7d9',
+  ...props
+}: IconCollectionType) {
+  return (
+    <IconTemplate width="36" height="36" viewBox="0 0 36 36" {...props}>
+      <rect width="36" height="36" rx="18" fill={fill} />
+      <path
+        d="M23.7605 24.527V22.4842C23.7605 21.4006 23.4524 20.3613 22.9038 19.5951C22.3553 18.8289 21.6113 18.3984 20.8355 18.3984H14.9855C14.2098 18.3984 13.4658 18.8289 12.9173 19.5951C12.3687 20.3613 12.0605 21.4006 12.0605 22.4842V24.527"
+        fill="#212531"
+      />
+      <path
+        d="M17.9104 17.1898C19.5258 17.1898 20.8354 15.8803 20.8354 14.2648C20.8354 12.6494 19.5258 11.3398 17.9104 11.3398C16.2949 11.3398 14.9854 12.6494 14.9854 14.2648C14.9854 15.8803 16.2949 17.1898 17.9104 17.1898Z"
+        fill="#212531"
+      />
+    </IconTemplate>
+  );
+}
+
 export function RightIcon({ fill = '#767676', ...props }: IconCollectionType) {
   return (
     <IconTemplate {...props}>
