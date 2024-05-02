@@ -7,7 +7,7 @@ const instance = axios.create({
   withCredentials: true,
 });
 
-// instance.interceptors.request.use(
+// instance.interceptors.reque st.use(
 //   (config) => {
 //     const sessionId = getCookie('sessionId');
 //     if (sessionId) {

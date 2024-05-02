@@ -24,6 +24,10 @@
     list-style: none;
     cursor: pointer;
 
+    .post-span{
+      @include font-style(1.6rem, $white-01, 600);
+    }
+
     &:hover {
       background-color: $glass-01;
     }

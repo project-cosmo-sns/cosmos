@@ -1,9 +1,7 @@
 .layout-container {
   min-height: 100vh;
+  width: 100%;
   overflow: visible;
-  background-image: url('/images/cosmos.png');
-  background-size: cover;
-  background-attachment: fixed;
   padding-bottom: 45px;
 
   .layout-content {
@@ -21,7 +19,7 @@
       padding: 0;
     }
     .layout-navigaionBar {
-      grid-column: 4 / 5;
+      grid-column: 1 / 7;
     }
 
     .layout-sideBar {
@@ -31,8 +29,5 @@
   }
   @media (min-width: 1200px) {
     grid-template-columns: 1fr 76px 30px 740px 30px 1fr;
-    .layout-navigaionBar {
-      grid-column: 4 / 5;
-    }
   }
 }

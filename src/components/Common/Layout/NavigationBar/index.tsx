@@ -9,10 +9,12 @@ const cn = classNames.bind(styles);
 export default function NavigaionBar() {
   return (
     <div className={cn('navigaionBar-container')}>
-      <Link href="/">
-        <LogoIcon width="105" height="30" />
-      </Link>
-      <SearchInput />
+      <div className={cn('navigaionBar-wrapper')}>
+        <Link href="/">
+          <LogoIcon width="105" height="30" />
+        </Link>
+        <SearchInput />
+      </div>
     </div>
   );
 }
