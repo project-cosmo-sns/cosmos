@@ -4,6 +4,7 @@ import Modal from '../Layout/Modal';
 import { ModalPropsType } from '@/@types/type';
 import { GitHubIcon, GoogleIcon, LogoIcon } from '../IconCollection';
 import LoginButton from '@/components/Common/Buttons/LoginButton';
+import { baseURL } from '@/api/axios';
 
 const cn = classNames.bind(styles);
 
@@ -11,11 +12,15 @@ export default function LoginModal({
   modalVisible,
   toggleModal,
 }: ModalPropsType) {
+  
   const githubClick = async () => {
+    let popupX = window.innerWidth / 2 - 300;
+    let popupY = window.innerHeight / 2 - 300;
+
     window.open(
-      'https://api-local.cosmo-sns.com/auth/github/login',
+      `${baseURL}/auth/github/login`,
       'github-login',
-      'width=600, height=600',
+      `width=600, height=600, top=${popupY}, left=${popupX}`,
     );
   };
 

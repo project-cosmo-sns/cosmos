@@ -3,7 +3,6 @@ import styles from './Modal.module.scss';
 import classNames from 'classnames/bind';
 import * as Icon from '@/components/Common/IconCollection/index';
 import ModalPortal from './ModalPortal';
-import { useRouter } from 'next/router';
 
 interface ModalType {
   children: ReactNode;
@@ -37,7 +36,6 @@ export default function Modal({
   className,
 }: ModalType) {
   const cn = classNames.bind(styles);
-  const router = useRouter();
   return (
     <div className="Modal">
       {modalVisible && (

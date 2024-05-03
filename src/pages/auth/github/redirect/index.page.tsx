@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import githubLogin from '@/api/useGithubLogin';
+import githubLogin from '@/api/GithubLogin';
 import { useMutation } from '@tanstack/react-query';
 
 export async function getStaticProps() {
@@ -29,5 +29,5 @@ export default function Redirect() {
     }
   }, [router.query.code]);
 
-  return <div>redirect 이동중</div>;
+  return <div>redirect 이동중~~</div>;
 }
