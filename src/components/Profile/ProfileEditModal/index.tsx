@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 interface ProfileEditModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  memberData: MemberDataType[];
+  memberData: MemberDataType;
 }
 
 const cn = classNames.bind(styles);
@@ -30,14 +30,14 @@ export default function ProfileEditModal({
 
   const onSubmit: SubmitHandler<AuthFormProps> = (data) => console.log(data);
 
-  const member =
-    memberData && memberData.find((user) => user.id === currentUserId);
+  // const member =
+  //   memberData && memberData.find((user) => user.id === currentUserId);
 
   useEffect(() => {
-    if (member && member.imageUrl) {
-      setPreviewImage(member.imageUrl);
+    if (memberData && memberData.profileImageUrl) {
+      setPreviewImage(memberData.profileImageUrl);
     }
-  }, [member]);
+  }, [memberData]);
 
   // 이미지 업로드 가능 시 넣을 코드 임시로
   // useEffect(() => {
@@ -72,16 +72,16 @@ export default function ProfileEditModal({
                 initialImageUrl={previewImage}
               />
             </div>
-            <div className={cn('name')}>{member?.nickname}</div>
-            <GenerationBadge generationInfo={member?.generation} />
+            <div className={cn('name')}>{memberData?.nickname}</div>
+            <GenerationBadge generationInfo={memberData?.generation} />
             <div className={cn('introduce')}>
               한줄소개
-              {member?.introduce ? (
+              {memberData?.introduce ? (
                 <textarea
-                  defaultValue={member.introduce}
+                  defaultValue={memberData.introduce}
                   autoComplete="on"
                   className={cn('textarea', {
-                    textareaActive: member?.introduce,
+                    textareaActive: memberData?.introduce,
                   })}
                 />
               ) : (

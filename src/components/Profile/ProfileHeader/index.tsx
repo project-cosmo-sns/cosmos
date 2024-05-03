@@ -9,7 +9,7 @@ import FollowList from '../FollowList';
 import { followerData, followingData } from '@/utils/MemberMockData';
 
 interface ProfileHeaderProps {
-  memberData: MemberDataType[];
+  memberData: MemberDataType;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
@@ -20,9 +20,9 @@ export default function ProfileHeader({
   setIsModalOpen,
 }: ProfileHeaderProps) {
   // currentUserId는 토큰?으로 받아옴?
-  const currentUserId = '1'; // 임시 ID
-  const member =
-    memberData && memberData.find((user) => user.id === currentUserId);
+  // const currentUserId = '1'; // 임시 ID
+  // const member =
+  //   memberData && memberData.find((user) => user.id === currentUserId);
   const [followModal, setFollowModal] = useState({
     follower: false,
     following: false,
@@ -38,9 +38,9 @@ export default function ProfileHeader({
   return (
     <div className={cn('header-container')}>
       <div className={cn('profile-image')}>
-        {member ? (
+        {memberData ? (
           <Image
-            src={member.imageUrl}
+            src={memberData.profileImageUrl}
             alt="프로필 이미지"
             width="86"
             height="86"
@@ -52,16 +52,15 @@ export default function ProfileHeader({
       <div className={cn('profile-middle-section')} />
       <div className={cn('profile-information')}>
         <div className={cn('profile-name-section')}>
-          {member ? member.nickname : '게스트'}
+          {memberData ? memberData.nickname : '게스트'}
           <div className={cn('generation-badge')}>
-            <GenerationBadge generationInfo={member?.generation} />
+            <GenerationBadge generationInfo={memberData?.generation} />
           </div>
         </div>
         <div className={cn('profile-following-section')}>
-          {/* 팔로워/팔로잉 데이터.length-1이 팔로워수 */}
           <button type="button" onClick={() => toggleModal('follower')}>
             <span>팔로워</span>
-            {followerData.length}
+            {memberData.followerCount}
           </button>
           {followModal.follower && (
             <FollowList
@@ -76,7 +75,7 @@ export default function ProfileHeader({
           )}
           <button type="button" onClick={() => toggleModal('following')}>
             <span>팔로잉</span>
-            {followingData.length}
+            {memberData.followingCount}
           </button>
           {followModal.following && (
             <FollowList
@@ -92,9 +91,9 @@ export default function ProfileHeader({
         </div>
       </div>
       <div className={cn('profile-introduce-section')}>
-        {member ? member.introduce : '소개가 없습니다.'}
+        {memberData ? memberData.introduce : '소개가 없습니다.'}
       </div>
-      {member ? (
+      {memberData ? (
         <div
           onClick={() => setIsModalOpen((prev) => !prev)}
           className={cn('profile-setting-button')}

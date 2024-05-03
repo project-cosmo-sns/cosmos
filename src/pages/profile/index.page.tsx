@@ -9,12 +9,14 @@ import { ContainerOptionType } from '@/@types/type';
 import FeedList from '@/components/Feed/FeedList';
 import PostList from '@/components/Post/PostList';
 import ScrapList from '@/components/Common/ScrapList';
-import { FeedData } from '@/components/Feed/FeedCardList/mockData';
+import fetchData from '@/api/fetchData';
+import { useQuery } from '@tanstack/react-query';
+import { FeedData } from '@/components/Feed/FeedList/mockData';
 
 const cn = classNames.bind(styles);
 
 export default function MemberDataContainer() {
-  const [memberData, setMemberData] = useState<MemberDataType[]>([]);
+  const [memberData, setMemberData] = useState<MemberDataType | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
@@ -22,15 +24,39 @@ export default function MemberDataContainer() {
     'all' | 'followed' | 'myGeneration'
   >('all');
 
-  useEffect(() => {
-    setMemberData(memberMockData);
-  }, []);
+  const memberId = 1; // 예시용 ID, 실제로는 동적으로 가져올 수 있음
 
-  // 프로필 페이지에서 내 게시물 거르는 코드 나오기 전 임시 코드
-  // const MyFeeds = (feedData: FeedData[]) => {
-  //   const userId = 'feedId1';
-  //   return feedData.filter((feed) => feed.author.id === userId);
-  // };
+  // 리액트쿼리 이용 GET 해옴
+  // const { data, isPending, isSuccess, isError } =
+  //   useQuery<MemberDataType | null>({
+  //     queryKey: ['memberData', memberId],
+  //     queryFn: () => {
+  //       // memberId가 존재하면 '/profile/{memberId}', 아니면 '/profile/mine'
+  //       const endpoint = memberId ? `/profile/${memberId}` : '/profile/mine';
+  //       return fetchData({ param: endpoint });
+  //     },
+  //   });
+
+  // useEffect(() => {
+  //   if (data) {
+  //     // const targetId=data.memberId
+  //     // const targetMemberData = Array.isArray(data) ? data.find(member => member.id === targetId) : null;
+  //     setMemberData(data);
+  //     // 추가적인 작업 실행
+  //   }
+  // }, [data]);
+
+  useEffect(() => {
+    const targetId = 1;
+    const targetMemberData = memberMockData.find(
+      (member) => member.memberId === targetId,
+    );
+    if (targetMemberData !== undefined) {
+      setMemberData(targetMemberData);
+    } else {
+      setMemberData(null);
+    }
+  }, []);
 
   const renderContent = () => {
     switch (selectedOption) {

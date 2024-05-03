@@ -1,18 +1,22 @@
 export interface MemberDataType {
-  id: string;
-  imageUrl: string;
+  memberId: number;
   nickname: string;
   generation: number;
+  profileImageUrl: string;
   introduce: string;
+  followerCount: number;
+  followingCount: number;
 }
 
 const memberMockData: MemberDataType[] = [
   {
-    id: '1',
-    imageUrl: '/images/like.svg',
+    memberId: 1,
     nickname: '짱정이',
     generation: 3,
-    introduce: '저는 짱정이입니다. 코딩 잘하고 싶어요.',
+    profileImageUrl: '/images/like.svg',
+    introduce: '졸려요',
+    followerCount: 5,
+    followingCount: 5,
   },
 ];
 
