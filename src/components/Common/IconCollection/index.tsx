@@ -1,5 +1,6 @@
 import { MouseEvent } from 'react';
 import IconTemplate from './IconTemplate';
+import variables from '@/styles/export.module.scss';
 
 export interface IconCollectionType {
   width?: string;
@@ -20,7 +21,10 @@ export interface IconCollectionType {
  * @returns {JSX.Element} SVG 태그 아이콘
  */
 
-export function AddIcon({ fill = 'black', ...props }: IconCollectionType) {
+export function AddIcon({
+  fill = variables.primary01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <circle cx="12" cy="12" r="12" fill={fill} />
@@ -41,7 +45,7 @@ export function AddIcon({ fill = 'black', ...props }: IconCollectionType) {
 }
 
 export function AddImageIcon({
-  fill = '#767676',
+  fill = variables.gray02,
   ...props
 }: IconCollectionType) {
   return (
@@ -68,7 +72,10 @@ export function AddImageIcon({
   );
 }
 
-export function BackIcon({ fill = '#505050', ...props }: IconCollectionType) {
+export function BackIcon({
+  fill = variables.gray02,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -87,7 +94,10 @@ export function BackIcon({ fill = '#505050', ...props }: IconCollectionType) {
   );
 }
 
-export function BellIcon({ fill = 'black', ...props }: IconCollectionType) {
+export function BellIcon({
+  fill = variables.white01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate viewBox="0 0 23 24" {...props}>
       <path
@@ -106,7 +116,10 @@ export function BellIcon({ fill = 'black', ...props }: IconCollectionType) {
   );
 }
 
-export function CameraIcon({ fill = '#767676', ...props }: IconCollectionType) {
+export function CameraIcon({
+  fill = variables.black03,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate viewBox="0 0 24 20" {...props}>
       <path
@@ -125,7 +138,10 @@ export function CameraIcon({ fill = '#767676', ...props }: IconCollectionType) {
   );
 }
 
-export function CheckIcon({ fill = '#363636', ...props }: IconCollectionType) {
+export function CheckIcon({
+  fill = variables.black01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -138,7 +154,10 @@ export function CheckIcon({ fill = '#363636', ...props }: IconCollectionType) {
   );
 }
 
-export function CloseIcon({ fill = '#363636', ...props }: IconCollectionType) {
+export function CloseIcon({
+  fill = variables.black01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <rect width="24" height="24" rx="12" fill={fill} />
@@ -159,7 +178,7 @@ export function CloseIcon({ fill = '#363636', ...props }: IconCollectionType) {
 }
 
 export function CommentIcon({
-  fill = '#a8a8a8',
+  fill = variables.gray01,
   ...props
 }: IconCollectionType) {
   return (
@@ -174,7 +193,10 @@ export function CommentIcon({
   );
 }
 
-export function DeleteIcon({ fill = '#a8a8a8', ...props }: IconCollectionType) {
+export function DeleteIcon({
+  fill = variables.gray01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate viewBox="0 0 23 24" {...props}>
       <path
@@ -206,7 +228,7 @@ export function DeleteIcon({ fill = '#a8a8a8', ...props }: IconCollectionType) {
 }
 
 export function DoubleLeftIcon({
-  fill = '#767676',
+  fill = variables.black03,
   ...props
 }: IconCollectionType) {
   return (
@@ -228,7 +250,7 @@ export function DoubleLeftIcon({
 }
 
 export function DoubleRightIcon({
-  fill = '#767676',
+  fill = variables.black03,
   ...props
 }: IconCollectionType) {
   return (
@@ -249,7 +271,10 @@ export function DoubleRightIcon({
   );
 }
 
-export function DownIcon({ fill = '#767676', ...props }: IconCollectionType) {
+export function DownIcon({
+  fill = variables.black03,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -262,7 +287,10 @@ export function DownIcon({ fill = '#767676', ...props }: IconCollectionType) {
   );
 }
 
-export function EditIcon({ fill = '#a8a8a8', ...props }: IconCollectionType) {
+export function EditIcon({
+  fill = variables.gray01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -312,7 +340,10 @@ export function EmojiIcon({ fill = '#a8a8a8', ...props }: IconCollectionType) {
   );
 }
 
-export function EyeIcon({ fill = '#a8a8a8', ...props }: IconCollectionType) {
+export function EyeIcon({
+  fill = variables.gray01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -331,7 +362,10 @@ export function EyeIcon({ fill = '#a8a8a8', ...props }: IconCollectionType) {
   );
 }
 
-export function FeedIcon({ fill = '#363636', ...props }: IconCollectionType) {
+export function FeedIcon({
+  fill = variables.white01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -357,7 +391,7 @@ export function FeedIcon({ fill = '#363636', ...props }: IconCollectionType) {
 }
 
 export function FollowedIcon({
-  fill = '#505050',
+  fill = variables.black02,
   ...props
 }: IconCollectionType) {
   return (
@@ -385,7 +419,7 @@ export function FollowedIcon({
 }
 
 export function FollowingIcon({
-  fill = '#505050',
+  fill = variables.black02,
   ...props
 }: IconCollectionType) {
   return (
@@ -418,7 +452,10 @@ export function FollowingIcon({
   );
 }
 
-export function GlassIcon({ fill = 'black', ...props }: IconCollectionType) {
+export function GlassIcon({
+  fill = variables.white01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -437,7 +474,10 @@ export function GlassIcon({ fill = 'black', ...props }: IconCollectionType) {
   );
 }
 
-export function HomeIcon({ fill = 'black', ...props }: IconCollectionType) {
+export function HomeIcon({
+  fill = variables.white01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate viewBox="0 0 23 24" {...props}>
       <path
@@ -456,7 +496,10 @@ export function HomeIcon({ fill = 'black', ...props }: IconCollectionType) {
   );
 }
 
-export function KebabIcon({ fill = '#a8a8a8', ...props }: IconCollectionType) {
+export function KebabIcon({
+  fill = variables.gray01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -481,7 +524,10 @@ export function KebabIcon({ fill = '#a8a8a8', ...props }: IconCollectionType) {
   );
 }
 
-export function LeftIcon({ fill = '#767676', ...props }: IconCollectionType) {
+export function LeftIcon({
+  fill = variables.black03,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -494,7 +540,10 @@ export function LeftIcon({ fill = '#767676', ...props }: IconCollectionType) {
   );
 }
 
-export function LikeIcon({ fill = '#a8a8a8', ...props }: IconCollectionType) {
+export function LikeIcon({
+  fill = variables.gray01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -507,7 +556,10 @@ export function LikeIcon({ fill = '#a8a8a8', ...props }: IconCollectionType) {
   );
 }
 
-export function LikedIcon({ fill = '#FF5151', ...props }: IconCollectionType) {
+export function LikedIcon({
+  fill = variables.pink01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate viewBox="0 0 24 22" {...props}>
       <path
@@ -524,7 +576,10 @@ export function LikedIcon({ fill = '#FF5151', ...props }: IconCollectionType) {
   );
 }
 
-export function LinkIcon({ fill = '#767676', ...props }: IconCollectionType) {
+export function LinkIcon({
+  fill = variables.black03,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -543,7 +598,10 @@ export function LinkIcon({ fill = '#767676', ...props }: IconCollectionType) {
   );
 }
 
-export function PostIcon({ fill = '#363636', ...props }: IconCollectionType) {
+export function PostIcon({
+  fill = variables.white01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -600,7 +658,10 @@ export function ProfileIconDark({
   );
 }
 
-export function RightIcon({ fill = '#767676', ...props }: IconCollectionType) {
+export function RightIcon({
+  fill = variables.black03,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -613,7 +674,10 @@ export function RightIcon({ fill = '#767676', ...props }: IconCollectionType) {
   );
 }
 
-export function ScrapIcon({ fill = '#a8a8a8', ...props }: IconCollectionType) {
+export function ScrapIcon({
+  fill = variables.gray01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -628,7 +692,7 @@ export function ScrapIcon({ fill = '#a8a8a8', ...props }: IconCollectionType) {
 }
 
 export function ScrapedIcon({
-  fill = '#9747FF',
+  fill = variables.purple01,
   ...props
 }: IconCollectionType) {
   return (
@@ -642,7 +706,7 @@ export function ScrapedIcon({
 }
 
 export function SettingIcon({
-  fill = '#767676',
+  fill = variables.gray02,
   ...props
 }: IconCollectionType) {
   return (
@@ -663,7 +727,10 @@ export function SettingIcon({
   );
 }
 
-export function ShareIcon({ fill = '#767676', ...props }: IconCollectionType) {
+export function ShareIcon({
+  fill = variables.black03,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate viewBox="0 0 22 24" {...props}>
       <path
@@ -706,7 +773,10 @@ export function ShareIcon({ fill = '#767676', ...props }: IconCollectionType) {
   );
 }
 
-export function UpIcon({ fill = '#767676', ...props }: IconCollectionType) {
+export function UpIcon({
+  fill = variables.black03,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate {...props}>
       <path
@@ -719,7 +789,10 @@ export function UpIcon({ fill = '#767676', ...props }: IconCollectionType) {
   );
 }
 
-export function UserIcon({ fill = 'black', ...props }: IconCollectionType) {
+export function UserIcon({
+  fill = variables.white01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate viewBox="0 0 22 24" {...props}>
       <path
@@ -738,7 +811,10 @@ export function UserIcon({ fill = 'black', ...props }: IconCollectionType) {
   );
 }
 
-export function XIcon({ fill = '#363636', ...props }: IconCollectionType) {
+export function XIcon({
+  fill = variables.white01,
+  ...props
+}: IconCollectionType) {
   return (
     <IconTemplate viewBox="0 0 18 18" {...props}>
       <path
