@@ -5,9 +5,11 @@
   margin-bottom: 8px;
   position: relative;
   transition: 0.3s all;
+  border-width: 0px;
 
   @media (min-width: 768px) {
     margin-bottom: 12px;
+    border-width: 1px;
   }
 
   .question-title {
