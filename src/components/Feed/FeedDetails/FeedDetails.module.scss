@@ -11,3 +11,12 @@
   background-color: $gray-02;
   margin: 16px 0;
 }
+
+.empty-comment {
+  @include flex-arrange;
+  height: 100px;
+
+  .message {
+    @include font-style(2rem, $gray-02, 600)
+  }
+}
