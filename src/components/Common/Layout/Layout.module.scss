@@ -10,11 +10,6 @@
     flex-direction: column;
   }
 
-  .layout-sideBar {
-    position: relative;
-    height: auto;
-  }
-
   @media (min-width: 768px) {
     grid-template-columns: 1fr 76px 30px 614px 30px 1fr;
     display: grid;
@@ -28,8 +23,15 @@
     }
 
     .layout-sideBar {
+      position: relative;
       grid-column: 2;
       grid-row: 2;
+      height: 268px;
+
+      .popover-box {
+        position: fixed;
+        z-index: 10;
+      }
     }
   }
   @media (min-width: 1200px) {
