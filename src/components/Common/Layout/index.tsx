@@ -14,7 +14,7 @@ export default function Layout({ children }: layoutProps) {
     <div className={cn('layout-container')}>
       <div className={cn('layout-sideBar')}>
         <SideBar />
-        <div id="popover-root" />
+        <div id="popover-box" />
       </div>
       <div className={cn('layout-navigaionBar')}>
         <NavigaionBar />

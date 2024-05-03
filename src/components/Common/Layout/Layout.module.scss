@@ -10,6 +10,11 @@
     flex-direction: column;
   }
 
+  .layout-sideBar {
+    position: relative;
+    height: auto;
+  }
+
   @media (min-width: 768px) {
     grid-template-columns: 1fr 76px 30px 614px 30px 1fr;
     display: grid;
