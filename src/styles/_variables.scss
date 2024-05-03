@@ -45,3 +45,26 @@ $hashtag-colors: (
     #9747ff,
   ),
 );
+
+:export {
+  primary01: $primary-01;
+  primary02: $primary-02;
+
+  black01: $black-01;
+  black02: $black-02;
+  black03: $black-03;
+
+  gray01: $gray-01;
+  gray02: $gray-02;
+  gray03: $gray-03;
+
+  white01: $white-01;
+  white02: $white-02;
+
+  red01: $red-01;
+
+  glass01: $glass-01;
+  glass02: $glass-02;
+
+  glassEdge01: $glass-edge-01;
+}
