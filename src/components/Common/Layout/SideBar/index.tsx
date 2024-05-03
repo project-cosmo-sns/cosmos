@@ -58,7 +58,7 @@ export default function SideBar() {
     <div className={cn('sideBar-container')}>
       <div className={cn('icon-wrapper')}>
         <Link href="/">
-          <HomeIcon />
+          <HomeIcon fill="#FFFFFF" />
         </Link>
         <div
           className={cn('icon-box', 'add-icon')}
@@ -73,16 +73,14 @@ export default function SideBar() {
           className={cn('icon-box')}
           onClick={(e) => togglePopOver(e, 'bell')}
         >
-          <BellIcon />
+          <BellIcon fill="#FFFFFF" />
           {activePopover === 'bell' && (
             <Notification onClose={handleClosePopOver} />
           )}
         </div>
-        <UserIcon onClick={profileClick} />
-        {modalVisible && (
-          <LoginModal modalVisible={modalVisible} toggleModal={profileClick} />
-        )}
+        <UserIcon fill="#FFFFFF" onClick={profileClick} />
       </div>
+      <LoginModal modalVisible={modalVisible} toggleModal={profileClick} />
     </div>
   );
 }
