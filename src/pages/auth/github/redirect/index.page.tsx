@@ -1,28 +1,33 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import axios from 'axios';
+import githubLogin from '@/api/GithubLogin';
+import { useMutation } from '@tanstack/react-query';
 
-const instances = axios.create({
-  baseURL: 'https://api-local.cosmo-sns.com',
-  withCredentials: true,
-});
+export async function getStaticProps() {
+  return {
+    props: {
+      noLayout: true,
+    },
+  };
+}
 
 export default function Redirect() {
   const router = useRouter();
-  const fetchGitHub = async (code: string) => {
-    try {
-      const res = await instances.post(`/auth/github/redirect?code=${code}`);
-      console.log(res);
-    } catch (error) {
+  const { mutate } = useMutation({
+    mutationFn: githubLogin,
+    onSuccess: () => {
+      localStorage.setItem('token', '123');
+    },
+    onError: (error) => {
       console.error('요청 실패:', error);
-    }
-  };
+    },
+  });
 
   useEffect(() => {
     if (router.query.code) {
-      fetchGitHub(router.query.code as string);
+      mutate(router.query.code as string);
     }
-  }, [router]);
+  }, [router.query.code]);
 
-  return <div>Redirect</div>;
+  return <div>redirect 이동중~~</div>;
 }
