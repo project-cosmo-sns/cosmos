@@ -1,6 +1,5 @@
 import { MouseEvent } from 'react';
 import IconTemplate from './IconTemplate';
-import variables from '@/styles/_variables.scss';
 
 export interface IconCollectionType {
   width?: string;
