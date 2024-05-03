@@ -12,7 +12,6 @@ export default function LoginModal({
   modalVisible,
   toggleModal,
 }: ModalPropsType) {
-  
   const githubClick = async () => {
     let popupX = window.innerWidth / 2 - 300;
     let popupY = window.innerHeight / 2 - 300;
