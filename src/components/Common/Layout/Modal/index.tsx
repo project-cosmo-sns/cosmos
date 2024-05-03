@@ -49,7 +49,15 @@ export default function Modal({
                   role="presentation"
                   onClick={() => toggleModal && toggleModal(!modalVisible)}
                 >
-                  <Icon.XIcon className={cn('x')} width="18" height="18" />
+                  <Icon.XIcon
+                    className={cn('x')}
+                    width="18"
+                    height="18"
+                    onClick={() => {
+                      toggleModal && toggleModal(!modalVisible);
+                      router.push('/');
+                    }}
+                  />
                 </div>
                 {title && (
                   <div className={cn('title')}>

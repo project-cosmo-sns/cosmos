@@ -9,10 +9,19 @@ import Toast from '@/components/Common/Toast';
 import { CheckIcon } from '@/components/Common/IconCollection';
 import styles from '@/styles/Home.module.scss';
 import classNames from 'classnames/bind';
+import { getFeedList } from '@/components/Feed/FeedList/api';
 
-const cn = classNames.bind(styles);
+export const getServerSideProps = async () => {
+  const feedData = await getFeedList();
+  return {
+    props: {
+      feedData: feedData.data,
+    },
+  };
+};
 
-export default function Home() {
+export default function Home({ feedData }) {
+  const cn = classNames.bind(styles);
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
   const [selectedSort, setSelectedSort] = useState<
@@ -41,7 +50,7 @@ export default function Home() {
         setSelectedSort={setSelectedSort}
       >
         {selectedOption === 'feed' ? (
-          <FeedList />
+          <FeedList feedList={feedData} />
         ) : (
           <PostList selectedSort={selectedSort} />
         )}

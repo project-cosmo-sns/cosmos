@@ -5,8 +5,9 @@ import styles from './FeedCard.module.scss';
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import Modal from '@/components/Common/Layout/Modal';
-import { FeedData } from '../FeedList/mockData';
 import { useRouter } from 'next/router';
+import { useForm } from 'react-hook-form';
+import { deleteFeed, editFeed } from './api';
 
 interface FeedCardTypes {
   feedData: FeedData;
@@ -14,6 +15,7 @@ interface FeedCardTypes {
   toggleModal?: Dispatch<SetStateAction<boolean>>;
   hasPadding: boolean;
   forDetails?: boolean;
+  index: number;
 }
 
 /**
@@ -25,6 +27,10 @@ interface FeedCardTypes {
  * @return {JSX.Element} FeedCard - 사용자 프로필, 사용자가 생성한 내용, 감정을 남길수 있는 컴포넌트 포함된 컴포넌트입니다.
  */
 
+interface Edits {
+  feedContent: string;
+}
+
 export default function FeedCard({
   feedData,
   modalVisible = false,
@@ -33,19 +39,29 @@ export default function FeedCard({
   forDetails,
 }: FeedCardTypes) {
   const cn = classNames.bind(styles);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Edits>();
   const [moreModalOpen, setMoreModalOpen] = useState(false);
   const router = useRouter();
   const {
-    id,
-    author,
-    createdAt,
+    commentCount,
     content,
-    images,
-    reactionCount,
-    commentsCount,
-    eyeCount,
-  } = feedData;
+    createdAt,
+    emojiCount,
+    id,
+    viewCount,
+    imageUrls,
+  } = feedData.feed;
   const [emojiVisible, setEmojiVisible] = useState<boolean>(false);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const onSubmit = (data) => {
+    setIsEdit(false);
+    editFeed(id, data, imageUrls);
+  };
+
   return (
     <div
       className={cn(
@@ -58,46 +74,95 @@ export default function FeedCard({
         <div
           className={cn('user-content')}
           onClick={async () => {
-            await router.push(`?id=${id}`);
-            toggleModal && toggleModal(!modalVisible);
+            if (!forDetails) {
+              await router.push(`?feedId=${id}`);
+              toggleModal && toggleModal(!modalVisible);
+            }
           }}
         >
           <div className={cn('profile-content-wrapper')}>
-            <AuthorProfile author={author} createdAt={createdAt} />
-            <div className={cn('content')}>{content}</div>
+            <AuthorProfile author={feedData.writer} createdAt={createdAt} />
+            {isEdit ? (
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <textarea
+                  defaultValue={content}
+                  className={cn('text')}
+                  placeholder="글을 작성해보세요."
+                  {...register('feedContent', {
+                    required: '게시글을 작성해주세요',
+                  })}
+                />
+                {errors.feedContent && (
+                  <span className={cn('error')}>
+                    {errors.feedContent.message}
+                  </span>
+                )}
+                <button type="submit">편집완료</button>
+              </form>
+            ) : (
+              <div className={cn('content')}>{content}</div>
+            )}
           </div>
-          {images && (
+          {!!imageUrls?.length && (
             <div className={cn('upload-image-wrapper')}>
               <div className={cn('upload-image')}>
                 <Image
                   fill
                   objectFit="cover"
-                  src={images[0].imageUrl}
+                  src={`/${imageUrls[0]}`}
                   alt="feedImage"
                 />
               </div>
-              {images.length > 1 && (
-                <span className={cn('extra-stuff')}>+ {images.length - 1}</span>
+              {imageUrls.length > 1 && (
+                <span className={cn('extra-stuff')}>
+                  + {imageUrls.length - 1}
+                </span>
               )}
             </div>
           )}
         </div>
         <ReactionContainer
-          emoji={reactionCount}
-          commentsCount={commentsCount}
-          views={eyeCount}
+          emoji={emojiCount}
+          commentsCount={commentCount}
+          views={viewCount}
           emojiVisible={emojiVisible}
           handleEmojiClick={setEmojiVisible}
           forDetails={forDetails}
         />
         {hasPadding || (
           <div>
-            <button
-              type="button"
-              onClick={() => setMoreModalOpen(!moreModalOpen)}
-            >
-              모달 생성
-            </button>
+            {isEdit ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setIsEdit(false);
+                  console.log('편집 상태 false로 변경');
+                }}
+              >
+                취소하기
+              </button>
+            ) : (
+              <div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsEdit(true);
+                    console.log('편집상태 true로 변경');
+                  }}
+                >
+                  편집하기
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    console.log('삭제하기');
+                    deleteFeed(id);
+                  }}
+                >
+                  삭제하기
+                </button>
+              </div>
+            )}
             <Modal
               title="임시모달"
               cssModalSize={cn('')}

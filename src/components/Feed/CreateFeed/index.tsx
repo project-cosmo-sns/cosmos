@@ -55,7 +55,6 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
   };
 
   const onSubmit = async (data: FeedType) => {
-    console.log(data, '------data------');
     try {
       await postFeed(data);
     } catch (error) {
