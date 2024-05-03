@@ -8,8 +8,8 @@ import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import CategoryList from '../CategoryList';
 import HashTagInput from '../HashTag/HashTagInput';
-import styles from './PostEditor.module.scss';
 import MarkdownEditor from '../MarkdownEditor';
+import styles from './PostEditor.module.scss';
 
 interface PostEditorProps {
   postId: string;
@@ -24,8 +24,9 @@ export default function PostEditor({ postId, setData }: PostEditorProps) {
   const [contentValue, setContentValue] = useState<string | undefined>();
   const [hashtags, setHashtags] = useState<Tag[]>([]);
 
-  const [selectedCategory, setSelectedCategory] =
-    useState<CategoryType>('공지사항');
+  const [selectedCategory, setSelectedCategory] = useState<
+    CategoryType | '전체'
+  >('공지사항');
 
   useEffect(() => {
     if (postId) {

@@ -72,13 +72,14 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
       }}
     >
       <div className={cn('wrapper')}>
-        <div className={cn('user')}>
-          {profileImage ? (
-            <Image fill src={profileImage} alt="user-profile" />
-          ) : (
-            <ProfileIcon />
-          )}
-        </div>
+        <Image
+          className={cn('profile-image')}
+          src={profileImage || '/images/profile.svg'}
+          alt="profile_image"
+          width={40}
+          height={40}
+          onClick={() => console.log('프로필모달 열기')}
+        />
         <div className={cn('content')}>
           <textarea
             className={cn('text')}

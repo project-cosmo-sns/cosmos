@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './NotificationItem.module.scss';
-import { ProfileIcon } from '@/components/Common/IconCollection';
+import { ProfileIconDark } from '@/components/Common/IconCollection';
 import Image from 'next/image';
 
 const cn = classNames.bind(styles);
@@ -33,7 +33,7 @@ export default function NotificationItem({ data }: NotificationItemProps) {
       {profileImage ? (
         <Image src="profileImage" alt="프로필 이미지" />
       ) : (
-        <ProfileIcon width="54" height="54" />
+        <ProfileIconDark width="54" height="54" />
       )}
       <p>
         <strong>{nickname}</strong>님이 {text} 했습니다.

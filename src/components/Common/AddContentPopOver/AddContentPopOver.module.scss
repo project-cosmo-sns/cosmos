@@ -1,10 +1,18 @@
 .add-popover {
-  bottom: 70px;
-  left: 90px;
+  bottom: 86px;
+  left: 70px;
+
+  @media (min-width: 768px) {
+    bottom: unset;
+    top: 282px;
+    left: 614px;
+  }
 }
 
 .content-list-wrapper {
+  @include glass-02;
   width: 170px;
+  border-radius: 10px;
 
   .content-list {
     @include flex-arrange(flex-start, center);
@@ -15,6 +23,10 @@
     gap: 12px;
     list-style: none;
     cursor: pointer;
+
+    .post-span {
+      @include font-style(1.6rem, $white-01, 600);
+    }
 
     &:hover {
       background-color: $glass-01;

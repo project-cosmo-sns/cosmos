@@ -1,19 +1,34 @@
 .navigaionBar-container {
   @include flex-arrange(space-between, center);
   width: 100%;
-  height: 60px;
+  height: 65px;
   padding: 0 10px;
   position: fixed;
   z-index: 1;
   background-image: url(/images/cosmos.png);
-  background-size: cover;
+
+  .navigaionBar-wrapper {
+    width: 100%;
+    @include flex-arrange(space-between, center);
+  }
 
   @media (min-width: 768px) {
-    max-width: 614px;
+    @include flex-arrange;
+    width: 100%;
     height: 109px;
     padding: 45px 0 0 0;
+    padding-left: 80px;
+
+    .navigaionBar-wrapper {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 614px;
+    }
   }
   @media (min-width: 1200px) {
-    max-width: 740px;
+    .navigaionBar-wrapper {
+      width: 740px;
+    }
   }
 }
