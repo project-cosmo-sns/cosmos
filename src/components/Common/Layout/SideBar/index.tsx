@@ -1,7 +1,7 @@
 import styles from './SideBar.module.scss';
 import classNames from 'classnames/bind';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddContentPopOver from '../../AddContentPopOver';
 import Notification from '@/components/Common/Layout/Notification';
 import {
@@ -12,6 +12,8 @@ import {
 } from '@/components/Common/IconCollection';
 import LoginModal from '../../LoginModal';
 import { useRouter } from 'next/router';
+import getProfileImage from '@/api/getProfileImage';
+import Image from 'next/image';
 
 const cn = classNames.bind(styles);
 /**
@@ -27,13 +29,12 @@ export default function SideBar() {
     null,
   );
   const [modalVisible, setModalVisible] = useState(false);
+  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
 
   const router = useRouter();
-  const getToken =
-    typeof window !== 'undefined' ? localStorage.getItem('token') : null;
 
   const profileClick = () => {
-    if (getToken) {
+    if (profileImageUrl) {
       router.push('/profile');
       return;
     }
@@ -53,6 +54,14 @@ export default function SideBar() {
   const handleClosePopOver = () => {
     setActivePopover(null);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const profileimage = await getProfileImage();
+      setProfileImageUrl(profileimage);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className={cn('sideBar-container')}>
@@ -78,7 +87,17 @@ export default function SideBar() {
             <Notification onClose={handleClosePopOver} />
           )}
         </div>
-        <UserIcon fill="#FFFFFF" onClick={profileClick} />
+        {profileImageUrl ? (
+          <Image
+            src={profileImageUrl}
+            alt="profile"
+            width={24}
+            height={24}
+            onClick={profileClick}
+          />
+        ) : (
+          <UserIcon fill="#FFFFFF" onClick={profileClick} />
+        )}
       </div>
       <LoginModal modalVisible={modalVisible} toggleModal={profileClick} />
     </div>
