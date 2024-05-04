@@ -1,16 +1,12 @@
 import classNames from 'classnames/bind';
 import { Dispatch, SetStateAction, useState } from 'react';
-import {
-  CommentIcon,
-  EmojiIcon,
-  EyeIcon,
-  EmojiHeartIcon,
-  EmojiThumbsUpIcon,
-  EmojiLaughIcon,
-  EmojiSadIcon,
-  EmojiCheckIcon,
-  EmojiMeIcon,
-} from '../IconCollection';
+import { CommentIcon, EmojiIcon, EyeIcon } from '../IconCollection';
+import EmojiHeartIcon from '../EmojiCollection/EmojiHeartIcon';
+import EmojiThumbsUpIcon from '../EmojiCollection/EmojiThumbsUpIcon';
+import EmojiLaughIcon from '../EmojiCollection/EmojiLaughIcon';
+import EmojiSadIcon from '../EmojiCollection/EmojiSadIcon';
+import EmojiCheckIcon from '../EmojiCollection/EmojiCheckIcon';
+import EmojiMeIcon from '../EmojiCollection/EmojiMeIcon';
 import styles from './ReactionContainer.module.scss';
 import EmojiBundle from '../EmojiBundle';
 
