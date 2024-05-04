@@ -109,9 +109,10 @@ export default function FeedCard({
             <div className={cn('upload-image-wrapper')}>
               <div className={cn('upload-image')}>
                 <Image
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   fill
-                  objectFit="cover"
-                  src={`/${imageUrls[0]}`}
+                  style={{ objectFit: 'cover' }}
+                  src={`${imageUrls[0]}`}
                   alt="feedImage"
                 />
               </div>
