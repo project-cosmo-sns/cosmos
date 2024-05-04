@@ -1,11 +1,10 @@
 .add-popover {
-  bottom: 86px;
-  left: 70px;
+  left: 90px;
+  bottom: 78px;
 
   @media (min-width: 768px) {
     bottom: unset;
-    top: 282px;
-    left: 614px;
+    top: 200px;
   }
 }
 
