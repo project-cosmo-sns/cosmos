@@ -1,18 +1,32 @@
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import classNames from 'classnames/bind';
 import { ContainerOptionType } from '@/@types/type';
 import ContentContainer from '@/components/Common/ContentContainer';
 import TodayQuestion from '@/components/Common/TodayQuestion';
 import FeedList from '@/components/Feed/FeedList';
 import PostList from '@/components/Post/PostList';
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import Toast from '@/components/Common/Toast';
 import { CheckIcon } from '@/components/Common/IconCollection';
 import styles from '@/styles/Home.module.scss';
-import classNames from 'classnames/bind';
+import { getFeedList } from '@/components/Feed/FeedList/api';
+import { FeedListType, FeedDetailType } from '../components/Feed/types';
 
-const cn = classNames.bind(styles);
+export const getServerSideProps = async () => {
+  const feedList: FeedListType = await getFeedList();
+  return {
+    props: {
+      feedList: feedList.data,
+    },
+  };
+};
 
-export default function Home() {
+interface HomePropsType {
+  feedList: FeedDetailType[];
+}
+
+export default function Home({ feedList }: HomePropsType) {
+  const cn = classNames.bind(styles);
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
   const [selectedSort, setSelectedSort] = useState<
@@ -41,7 +55,7 @@ export default function Home() {
         setSelectedSort={setSelectedSort}
       >
         {selectedOption === 'feed' ? (
-          <FeedList />
+          <FeedList feedList={feedList} />
         ) : (
           <PostList selectedSort={selectedSort} />
         )}
