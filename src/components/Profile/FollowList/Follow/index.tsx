@@ -21,6 +21,7 @@ export default function Follow({
   memberId,
   isFollow,
 }: FollowType) {
+  
   const followClick = () => {
     console.log('팔로우!');
   };

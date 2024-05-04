@@ -9,6 +9,7 @@ import {
   BellIcon,
   UserIcon,
   AddIcon,
+  ProfileIcon,
 } from '@/components/Common/IconCollection';
 import LoginModal from '../../LoginModal';
 import { useRouter } from 'next/router';
@@ -36,10 +37,10 @@ export default function SideBar() {
   const router = useRouter();
 
   const profileClick = () => {
-    // if (userImage) {
-    router.push('/profile');
-    //   return;
-    // }
+    if (userImage) {
+      router.push('/profile');
+      return;
+    }
     setModalVisible(!modalVisible);
   };
 
@@ -57,14 +58,16 @@ export default function SideBar() {
     setActivePopover(null);
   };
 
-  // const { data } = useQuery({
-  //   queryKey: ['profileImage'],
-  //   queryFn: getProfileImage,
-  // });
+  const { data } = useQuery({
+    queryKey: ['profileImage'],
+    queryFn: getProfileImage,
+  });
 
-  // useEffect(() => {
-  //   setUserImage(data ?? null);
-  // }, [data]);
+  console.log(userImage);
+
+  useEffect(() => {
+    setUserImage(data ?? null);
+  }, [data]);
 
   return (
     <div className={cn('sideBar-container')}>
@@ -90,7 +93,7 @@ export default function SideBar() {
             <Notification onClose={handleClosePopOver} />
           )}
         </div>
-        {/* {userImage ? (
+        {userImage ? (
           <Image
             src={userImage}
             alt="profile"
@@ -98,11 +101,15 @@ export default function SideBar() {
             height={27}
             onClick={profileClick}
           />
-        ) : ( */}
-        <UserIcon fill="#FFFFFF" onClick={profileClick} />
-        {/* )} */}
+        ) : (
+          <UserIcon fill="#FFFFFF" onClick={profileClick} />
+        )}
       </div>
-      {/* <LoginModal modalVisible={modalVisible} toggleModal={profileClick} /> */}
+      <LoginModal modalVisible={modalVisible} toggleModal={profileClick} />
     </div>
   );
 }
+
+// 로그인 여부는 프로필 아이콘이 바뀌는 것으로, 
+// 로그인이 안되어있을 때 사람모양 아이콘이었다가.
+// 로그인이 되어있을 때 userImage null이면 사람모양 아이콘, 아니면 프로필 이미지
