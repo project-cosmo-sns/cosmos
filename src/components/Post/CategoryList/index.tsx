@@ -1,7 +1,7 @@
+import { CATEGORY_LIST } from '@/constants/categoryList';
 import classNames from 'classnames/bind';
 import CategoryFlag from '../CategoryFlag';
 import styles from './CategoryList.module.scss';
-import { CATEGORY_LIST } from '@/constants/categoryList';
 
 interface CategoryListProps {
   selectedCategory: string;
