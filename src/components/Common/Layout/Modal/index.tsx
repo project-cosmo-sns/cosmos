@@ -15,6 +15,8 @@ interface ModalType {
   className?: string;
 }
 
+const cn = classNames.bind(styles);
+
 /**
  * 모달 레이아웃 컴포넌트
  * @param {Object} props - 컴포넌트에 전달되는 props
@@ -36,7 +38,6 @@ export default function Modal({
   cssComponentDisplay,
   className,
 }: ModalType) {
-  const cn = classNames.bind(styles);
   const router = useRouter();
   return (
     <div className="Modal">

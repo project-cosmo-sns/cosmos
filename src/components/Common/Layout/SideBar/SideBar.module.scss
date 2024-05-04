@@ -10,13 +10,12 @@
   left: 50%;
   transform: translate(-50%);
   border-radius: 70px;
-  margin: 0 20px 12px 0;
 
   .icon-wrapper {
     @include flex-arrange(space-between, center);
     width: 100%;
     padding: 0 20px;
-    position: relative;
+
     img {
       cursor: pointer;
     }
@@ -38,7 +37,6 @@
     transform: unset;
     top: 110px;
     margin: 0;
-
     .icon-wrapper {
       flex-direction: column;
       .add-icon {
