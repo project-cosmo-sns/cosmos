@@ -1,18 +1,21 @@
 .sideBar-container {
-  width: 100%;
+  @include glass-01;
+  width: calc(100% - 20px);
   height: 72px;
   padding: 12px 24px;
-  background: $gray-02;
   display: flex;
   position: fixed;
-  z-index: 1;
+  z-index: 9999;
   bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+  border-radius: 70px;
 
   .icon-wrapper {
     @include flex-arrange(space-between, center);
     width: 100%;
     padding: 0 20px;
-    position: relative;
+
     img {
       cursor: pointer;
     }
@@ -25,14 +28,15 @@
   @media (min-width: 768px) {
     width: 76px;
     height: 268px;
-    border-radius: 70px;
     backdrop-filter: blur(15px);
     padding: 30px 0;
     position: relative;
     position: fixed;
     z-index: 99;
+    left: unset;
+    transform: unset;
     top: 110px;
-
+    margin: 0;
     .icon-wrapper {
       flex-direction: column;
       .add-icon {

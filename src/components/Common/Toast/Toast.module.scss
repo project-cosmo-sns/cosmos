@@ -1,14 +1,16 @@
 .toast-container {
+  @include font-style(1.6rem, $white-01, 500);
   width: 270px;
   height: 60px;
-  padding: 18px 30px;
+  padding: 18px 20px;
   background: $black-01;
   border-radius: 5px;
-  color: $white-01;
   position: absolute;
   display: flex;
   align-items: center;
   gap: 20px;
+  top: 0px;
+  right: 0;
 
   animation: fadeout 5s;
 

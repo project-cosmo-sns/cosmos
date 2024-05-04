@@ -1,13 +1,26 @@
 import classNames from 'classnames/bind';
-import { MouseEvent } from 'react';
-import { CommentIcon, EmojiIcon, EyeIcon } from '../IconCollection';
+import { Dispatch, SetStateAction, useState } from 'react';
+import {
+  CommentIcon,
+  EmojiIcon,
+  EyeIcon,
+  EmojiHeartIcon,
+  EmojiThumbsUpIcon,
+  EmojiLaughIcon,
+  EmojiSadIcon,
+  EmojiCheckIcon,
+  EmojiMeIcon,
+} from '../IconCollection';
 import styles from './ReactionContainer.module.scss';
+import EmojiBundle from '../EmojiBundle';
 
 interface ReactionContainerProps {
   emoji: number;
   commentsCount: number;
   views: number;
-  handleEmojiClick?: (e: MouseEvent<HTMLButtonElement>) => void;
+  handleEmojiClick?: Dispatch<SetStateAction<boolean>>;
+  emojiVisible?: boolean;
+  forDetails?: boolean;
 }
 
 /**
@@ -25,19 +38,43 @@ export default function ReactionContainer({
   commentsCount,
   views,
   handleEmojiClick,
+  emojiVisible,
+  forDetails,
 }: ReactionContainerProps) {
   const cn = classNames.bind(styles);
-
+  const [hasReaction, setHasReaction] = useState(false);
   return (
-    <div className={cn('wrapper')}>
-      <button
-        type="button"
-        className={cn('reaction', 'emoji')}
-        onClick={handleEmojiClick}
-      >
-        <EmojiIcon width="18" height="18" />
-        {emoji}
-      </button>
+    <div className={cn('wrapper', forDetails && 'details-wrapper')}>
+      {forDetails ? (
+        <EmojiBundle
+          forDetails={forDetails}
+          emojiVisible={emojiVisible}
+          handleEmojiClick={handleEmojiClick}
+          toggleHasReaction={setHasReaction}
+          className={cn('details-emoji-bundler')}
+        >
+          <EmojiHeartIcon />
+          <EmojiThumbsUpIcon />
+          <EmojiLaughIcon />
+          <EmojiSadIcon />
+          <EmojiCheckIcon />
+          <EmojiMeIcon />
+        </EmojiBundle>
+      ) : (
+        <button
+          type="button"
+          className={cn('reaction', 'emoji')}
+          onClick={() => handleEmojiClick && handleEmojiClick(!emojiVisible)}
+        >
+          {hasReaction ? (
+            <p>반응 남김</p>
+          ) : (
+            <EmojiIcon width="18" height="18" />
+          )}
+          {emoji}
+        </button>
+      )}
+
       <button type="button" className={cn('reaction', 'comment')}>
         <CommentIcon width="18" height="18" />
         {commentsCount}
@@ -46,6 +83,20 @@ export default function ReactionContainer({
         <EyeIcon width="18" height="18" />
         {views}
       </button>
+      {emojiVisible && (
+        <EmojiBundle
+          emojiVisible={emojiVisible}
+          handleEmojiClick={handleEmojiClick}
+          toggleHasReaction={setHasReaction}
+        >
+          <EmojiHeartIcon />
+          <EmojiThumbsUpIcon />
+          <EmojiLaughIcon />
+          <EmojiSadIcon />
+          <EmojiCheckIcon />
+          <EmojiMeIcon />
+        </EmojiBundle>
+      )}
     </div>
   );
 }

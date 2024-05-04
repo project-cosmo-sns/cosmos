@@ -3,9 +3,9 @@ import styles from './CategoryFlag.module.scss';
 import { CategoryType } from '@/pages/post/[postId]/mockData';
 
 interface CategoryFlag {
-  category: CategoryType;
-  selectedCategory: CategoryType;
-  setSelectedCategory: (args: CategoryType) => void;
+  category: CategoryType | '전체';
+  selectedCategory: CategoryType | '전체';
+  setSelectedCategory: (args: CategoryType | '전체') => void;
 }
 
 export default function CategoryFlag({

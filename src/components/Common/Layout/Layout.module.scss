@@ -1,7 +1,8 @@
 .layout-container {
   min-height: 100vh;
-  background: $gray-01;
+  width: 100%;
   overflow: visible;
+  padding-bottom: 45px;
 
   .layout-content {
     @include flex-arrange(flex-start, center);
@@ -13,14 +14,17 @@
     grid-template-columns: 1fr 76px 30px 614px 30px 1fr;
     display: grid;
     grid-template-rows: 109px auto;
-    .layout-navigaionBar,
     .layout-content {
       grid-column: 4 / 5;
       padding: 0;
     }
+    .layout-navigaionBar {
+      grid-column: 1 / 7;
+    }
 
     .layout-sideBar {
-      grid-column: 2 / 3;
+      grid-column: 2;
+      grid-row: 2;
     }
   }
   @media (min-width: 1200px) {

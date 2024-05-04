@@ -60,7 +60,9 @@ export default function ContentContainer({
           <div className={cn('active', { [selectedOption]: selectedOption })} />
         </div>
         <div className={cn('filter-container')}>
-          {keyword && <span>{keyword} 검색 결과</span>}
+          {keyword && (
+            <span className={cn('keyword-text')}>{keyword} 검색 결과</span>
+          )}
           {selectedSort && setSelectedSort && (
             <SortDropdown
               selectedSort={selectedSort}

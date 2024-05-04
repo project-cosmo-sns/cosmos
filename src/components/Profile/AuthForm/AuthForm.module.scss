@@ -5,7 +5,7 @@
   .auth-wrapper {
     @include flex-arrange(center, flex-start);
     h2 {
-      @include font-style(1.6rem, $black-01, 700);
+      @include font-style(1.6rem, $white-01, 700);
     }
 
     .auth-Form {

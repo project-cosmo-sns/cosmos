@@ -3,6 +3,7 @@
   gap: 12px;
   margin-bottom: 12px;
   line-height: 1.5em;
+  color: $white-01;
 
   @media (min-width: 768px) {
     gap: 6px;
@@ -20,7 +21,7 @@
     width: 100%;
     span {
       padding-left: 5px;
-      color: $gray-01;
+      color: rgba(160, 165, 187, 1);
     }
   }
 

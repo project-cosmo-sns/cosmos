@@ -1,12 +1,13 @@
 import Modal from '@/components/Common/Layout/Modal';
-import * as Icon from '@/components/Common/IconCollection';
-import ClassBadge from '@/components/Common/ClassBadge';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import classNames from 'classnames/bind';
 import styles from './ProfileEditModal.module.scss';
 import { MemberDataType } from '@/pages/profile/mockData';
-import Image from 'next/image';
 import GenerationBadge from '@/components/Common/GenerationBadge';
+import ImageInput from '@/components/Common/ImageInput';
+import { AuthFormProps, ModalPropsType } from '@/@types/type';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { useEffect, useState } from 'react';
 
 interface ProfileEditModalProps {
   isOpen: boolean;
@@ -23,8 +24,43 @@ export default function ProfileEditModal({
 }: ProfileEditModalProps) {
   // currentUserId는 토큰?으로 받아옴?
   const currentUserId = '1'; // 임시 ID
+
+  const [previewImage, setPreviewImage] = useState('');
+  const { register, handleSubmit, watch } = useForm<AuthFormProps>();
+
+  const onSubmit: SubmitHandler<AuthFormProps> = (data) => console.log(data);
+
   const member =
     memberData && memberData.find((user) => user.id === currentUserId);
+
+  // useEffect(() => {
+  //   if (profileImage && profileImage.length > 0) {
+  //     setPreviewImage(profileImage)
+  //   }
+  // })
+
+  // useEffect(() => {
+  //   if (member) {
+  //     setValue('image', member?.imageUrl);
+  //   }
+  // }, [member, setValue]);
+
+  useEffect(() => {
+    if (member && member.imageUrl) {
+      setPreviewImage(member.imageUrl);
+    }
+  }, [member]);
+
+  // 이미지 업로드 가능 시 넣을 코드 임시로
+  // useEffect(() => {
+  //   if (profileImage && profileImage.length > 0) {
+  //     const fileReader = new FileReader();
+  //     fileReader.onload = () => {
+  //       setPreviewImage(fileReader.result.toString());
+  //     };
+  //     fileReader.readAsDataURL(profileImage[0]);
+  //   }
+  // }, [profileImage]);
 
   return (
     <div>
@@ -33,28 +69,25 @@ export default function ProfileEditModal({
           modalVisible={isOpen}
           toggleModal={setIsOpen}
           title="프로필 수정"
-          cssComponentDisplay={cn('')}
-          cssModalSize={cn('')}
+          cssComponentDisplay={cn('profile-edit-modal')}
+          cssModalSize={cn('380px')}
         >
-          <div className={cn('modal-wrapper')}>
+          <form
+            className={cn('profile-edit-Form')}
+            onSubmit={handleSubmit(onSubmit)}
+          >
             <div className={cn('profile-image-edit')}>
-              {member ? (
-                <Image
-                  src={member.profile_img}
-                  alt="프로필 이미지"
-                  width="86"
-                  height="86"
-                />
-              ) : (
-                <Icon.ProfileIcon width="86" height="86" />
-              )}
-              <div className={cn('camera-image')}>
-                <Icon.CameraIcon width="14" height="14" />
-              </div>
+              <ImageInput
+                type="profile"
+                watch={watch}
+                register={register('image')}
+                initialImageUrl={previewImage}
+              />
             </div>
             <div className={cn('name')}>{member?.nickname}</div>
             <GenerationBadge generationInfo={member?.generation} />
             <div className={cn('introduce')}>
+              한줄소개
               {member?.introduce ? (
                 <textarea
                   defaultValue={member.introduce}
@@ -80,7 +113,7 @@ export default function ProfileEditModal({
                 수정하기
               </DefaultButton>
             </div>
-          </div>
+          </form>
         </Modal>
       )}
     </div>

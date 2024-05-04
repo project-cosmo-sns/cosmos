@@ -1,16 +1,18 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
+import Image from 'next/image';
 import classNames from 'classnames/bind';
 import styles from './FeedCard.module.scss';
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
-import { FeedData } from '../FeedCardList/mockData';
+import { FeedData } from '../FeedList/mockData';
+import { useRouter } from 'next/router';
 
 interface FeedCardTypes {
   feedData: FeedData;
   modalVisible?: boolean;
   toggleModal?: Dispatch<SetStateAction<boolean>>;
   hasPadding: boolean;
-  hasHover: boolean;
+  forDetails?: boolean;
 }
 
 /**
@@ -27,27 +29,64 @@ export default function FeedCard({
   modalVisible = false,
   toggleModal,
   hasPadding,
-  hasHover,
+  forDetails,
 }: FeedCardTypes) {
   const cn = classNames.bind(styles);
-  const { author, createdAt, content, reactionCount, commentsCount, eyeCount } =
-    feedData;
+  const router = useRouter();
+  const {
+    id,
+    author,
+    createdAt,
+    content,
+    images,
+    reactionCount,
+    commentsCount,
+    eyeCount,
+  } = feedData;
+  const [emojiVisible, setEmojiVisible] = useState<boolean>(false);
   return (
     <div
-      onClick={() => toggleModal && toggleModal(!modalVisible)}
       className={cn(
         'container',
         hasPadding && 'padding',
-        hasHover && 'container-hover',
+        forDetails || 'container-hover',
       )}
     >
       <div className={cn('wrapper')}>
-        <AuthorProfile author={author} createdAt={createdAt} />
-        <div className={cn('content')}>{content}</div>
+        <div
+          className={cn('user-content')}
+          onClick={async () => {
+            await router.push(`?id=${id}`);
+            toggleModal && toggleModal(!modalVisible);
+          }}
+        >
+          <div className={cn('profile-content-wrapper')}>
+            <AuthorProfile author={author} createdAt={createdAt} />
+            <div className={cn('content')}>{content}</div>
+          </div>
+          {images && (
+            <div className={cn('upload-image-wrapper')}>
+              <div className={cn('upload-image')}>
+                <Image
+                  fill
+                  objectFit="cover"
+                  src={images[0].imageUrl}
+                  alt="feedImage"
+                />
+              </div>
+              {images.length > 1 && (
+                <span className={cn('extra-stuff')}>+ {images.length - 1}</span>
+              )}
+            </div>
+          )}
+        </div>
         <ReactionContainer
           emoji={reactionCount}
           commentsCount={commentsCount}
           views={eyeCount}
+          emojiVisible={emojiVisible}
+          handleEmojiClick={setEmojiVisible}
+          forDetails={forDetails}
         />
       </div>
     </div>

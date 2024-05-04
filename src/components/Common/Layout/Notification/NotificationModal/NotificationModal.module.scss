@@ -37,7 +37,7 @@
     @include flex-arrange(space-between, center);
 
     h3 {
-      @include font-style(16px);
+      @include font-style(16px, $white-01);
     }
   }
 }

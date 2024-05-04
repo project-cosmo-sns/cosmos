@@ -1,8 +1,8 @@
 .wrapper {
   @include flex-arrange(center, flex-start);
+  @include glass-01(none);
   flex-direction: column;
   padding: 20px 20px 12px;
-  background-color: $white-01;
   gap: 20px;
   cursor: pointer;
   transition: transform 0.15s ease-in-out;
@@ -13,7 +13,23 @@
   }
 }
 
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  @include font-style(1.6rem, $white-01, 700);
+  // @include font-style(1.6rem, $white, 700); 로 수정 예정
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
 .content {
+  color: $gray-03;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;

@@ -1,11 +1,11 @@
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
+import { MARKDOWN_SYMBOL_REGEX } from '@/constants/regexPattern';
 import { PostData } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
-import styles from './PostPreview.module.scss';
 import { MouseEvent } from 'react';
-import { MARKDOWN_SYMBOL_REGEX } from '@/constants/regexPattern';
+import styles from './PostPreview.module.scss';
 
 interface PostPreviewProps {
   postData: PostData;
@@ -18,6 +18,7 @@ export default function PostPreview({ postData }: PostPreviewProps) {
     id: postId,
     author,
     createdAt,
+    title,
     content,
     emoji,
     comments,
@@ -38,14 +39,16 @@ export default function PostPreview({ postData }: PostPreviewProps) {
       onClick={() => router.push(`/post/${postId}`)}
     >
       <AuthorProfile author={author} createdAt={formattedCreatedAt} />
-      <div className={cn('content')}>
-        {content.replace(MARKDOWN_SYMBOL_REGEX, '').trim()}
+      <div className={cn('content-wrapper')}>
+        <div className={cn('title')}>{title}</div>
+        <div className={cn('content')}>
+          {content.replace(MARKDOWN_SYMBOL_REGEX, '').trim()}
+        </div>
       </div>
       <ReactionContainer
         emoji={emoji}
         commentsCount={comments.length}
         views={views}
-        handleEmojiClick={handleEmojiClick}
       />
     </div>
   );

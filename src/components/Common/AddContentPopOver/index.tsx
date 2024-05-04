@@ -5,6 +5,7 @@ import PopOver from '../PopOverBox';
 import Modal from '@/components/Common/Layout/Modal';
 import { PostIcon, FeedIcon } from '@/components/Common/IconCollection';
 import CreateFeed from '@/components/Feed/CreateFeed';
+import Link from 'next/link';
 
 type PopOverProps = {
   onClose: () => void;
@@ -22,12 +23,14 @@ export default function AddContentPopOver({ onClose }: PopOverProps) {
           className={cn('content-list')}
           onClick={() => setIsModalOpen(true)}
         >
-          <FeedIcon width="18" height="18" />
+          <FeedIcon width="18" height="18" fill="#FFFFFF" />
           <span>피드 작성하기</span>
         </li>
         <li className={cn('content-list')}>
-          <PostIcon width="18" height="18" fill="#363636" />
-          <span>포스트 작성하기</span>
+          <PostIcon width="18" height="18" fill="#FFFFFF" />
+          <Link href="/write">
+            <span className={cn('post-span')}>포스트 작성하기</span>
+          </Link>
         </li>
       </ul>
       <Modal
