@@ -7,6 +7,7 @@ import { LikeIcon, LikedIcon } from '../IconCollection';
 import Modal from '../Layout/Modal';
 import styles from './CommentCard.module.scss';
 import EditComment from './EditComment';
+import getElapsedTime from '@/utils/getElaspedTime';
 
 interface CommentCardProps {
   comment: Comment;
@@ -34,8 +35,7 @@ export default function CommentCard({ comment }: CommentCardProps) {
   // author.id === userId 일 때 true
   const isMyComment = true;
 
-  // 날짜 형식 정해지면 삭제 or 변경 예정
-  const formattedCreatedAt = createdAt.slice(0, 10);
+  const formattedCreatedAt = getElapsedTime(createdAt);
 
   const handleClickEditComment = () => {
     setIsCommentEditing((prev) => !prev);

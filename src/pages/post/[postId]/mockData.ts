@@ -43,7 +43,7 @@ const mockData: PostData[] = [
       nickname: '코스모스',
       generation: 3,
     },
-    createdAt: '2024-04-15T17:29:56',
+    createdAt: '2024-05-01T08:58:29.000Z',
     content: `# Markdown Example
     
     마크다운 문법 테스트 본문
@@ -115,7 +115,7 @@ def hello():
     comments: [
       {
         id: 'tmpcommentId2',
-        createdAt: '2024-04-18T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId',
           nickname: '코스모스',
@@ -128,7 +128,7 @@ def hello():
       },
       {
         id: 'tmpcommentId2',
-        createdAt: '2024-04-17T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId2',
           nickname: 'cosmos',
@@ -149,7 +149,7 @@ def hello():
       nickname: '코스모스',
       generation: 3,
     },
-    createdAt: '2024-04-15T17:29:56',
+    createdAt: '2024-05-02T08:58:29.000Z',
     content: `## 🕺 스프린터 브이로그 주인공 모집  💃
 <br/>
 @스프린터
@@ -180,7 +180,7 @@ def hello():
     comments: [
       {
         id: 'tmpcommentId1',
-        createdAt: '2024-04-18T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId4',
           nickname: '코스모스',
@@ -193,7 +193,7 @@ def hello():
       },
       {
         id: 'tmpcommentId2',
-        createdAt: '2024-04-17T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId2',
           nickname: 'cosmos',
@@ -214,7 +214,7 @@ def hello():
       nickname: '코스모스',
       generation: 3,
     },
-    createdAt: '2024-04-15T17:29:56',
+    createdAt: '2024-04-02T08:58:29.000Z',
     content: `## 📢 심화 프로젝트 발표 세션 및 수료식 일정 안내
 @스프린터  파트4 주요일정에 대해 안내드립니다
 
@@ -244,7 +244,7 @@ def hello():
     comments: [
       {
         id: 'tmpcommentId1',
-        createdAt: '2024-04-18T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId2',
           nickname: '코스모스',
@@ -257,7 +257,7 @@ def hello():
       },
       {
         id: 'tmpcommentId1',
-        createdAt: '2024-04-17T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId2',
           nickname: 'cosmos',
@@ -278,7 +278,7 @@ def hello():
       nickname: '코스모스',
       generation: 3,
     },
-    createdAt: '2024-04-15T17:29:56',
+    createdAt: '2024-05-04T13:58:29.000Z',
     content: `## 3차 오프라인 행사 안내
 스프린터분들과 중급 프로젝트 회포를 풀 수 있는 시간이 되길 바라며,
 3차 오프라인 행사 안내 드립니다(보고 싶어요 여러분😍 )!
@@ -302,7 +302,7 @@ def hello():
     comments: [
       {
         id: 'tmpcommentId1',
-        createdAt: '2024-04-18T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId',
           nickname: '코스모스',
@@ -315,7 +315,7 @@ def hello():
       },
       {
         id: 'tmpcommentId2',
-        createdAt: '2024-04-17T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId2',
           nickname: 'cosmos',
@@ -336,7 +336,7 @@ def hello():
       nickname: '코스모스',
       generation: 3,
     },
-    createdAt: '2024-04-15T17:29:56',
+    createdAt: '2024-05-02T08:58:29.000Z',
     content: `## 🕺 스프린터 브이로그 주인공 모집  💃
 <br/>
 @스프린터
@@ -367,7 +367,7 @@ def hello():
     comments: [
       {
         id: 'tmpcommentId1',
-        createdAt: '2024-04-18T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId',
           nickname: '코스모스',
@@ -380,7 +380,7 @@ def hello():
       },
       {
         id: 'tmpcommentId2',
-        createdAt: '2024-04-17T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId2',
           nickname: 'cosmos',
@@ -401,7 +401,7 @@ def hello():
       nickname: '코스모스',
       generation: 3,
     },
-    createdAt: '2024-04-15T17:29:56',
+    createdAt: '2024-05-02T08:58:29.000Z',
     content: `## 💸 최종 프로젝트 AWS 비용 지원 안내
 <br>
 안녕하세요. @백엔드 @디자이너 @스프린터  여러분!
@@ -430,7 +430,7 @@ def hello():
     comments: [
       {
         id: 'tmpcommentId1',
-        createdAt: '2024-04-18T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId',
           nickname: '코스모스',
@@ -443,7 +443,7 @@ def hello():
       },
       {
         id: 'tmpcommentId2',
-        createdAt: '2024-04-17T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId2',
           nickname: 'cosmos',

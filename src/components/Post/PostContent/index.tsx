@@ -9,6 +9,7 @@ import { useState } from 'react';
 import HashTag from '../HashTag';
 import MarkdownContent from '../Markdown';
 import styles from './PostContent.module.scss';
+import getElapsedTime from '@/utils/getElaspedTime';
 
 interface PostContentProps {
   isMyPost: boolean;
@@ -34,8 +35,7 @@ export default function PostContent({ isMyPost, postData }: PostContentProps) {
     comments,
   } = postData;
 
-  // 날짜 형식 정해지면 삭제 or 변경 예정
-  const formattedCreatedAt = createdAt.slice(0, 10);
+  const formattedCreatedAt = getElapsedTime(createdAt);
 
   return (
     <div className={cn('wrapper')}>
