@@ -10,17 +10,22 @@ import { CheckIcon } from '@/components/Common/IconCollection';
 import styles from '@/styles/Home.module.scss';
 import classNames from 'classnames/bind';
 import { getFeedList } from '@/components/Feed/FeedList/api';
+import { FeedListType, FeedDetailType } from '@/components/Feed/types';
 
 export const getServerSideProps = async () => {
-  const feedData = await getFeedList();
+  const feedList: FeedListType = await getFeedList();
   return {
     props: {
-      feedData: feedData.data,
+      feedList: feedList.data,
     },
   };
 };
 
-export default function Home({ feedData }) {
+interface HomePropsType {
+  feedList: FeedDetailType[];
+}
+
+export default function Home({ feedList }: HomePropsType) {
   const cn = classNames.bind(styles);
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
@@ -50,7 +55,7 @@ export default function Home({ feedData }) {
         setSelectedSort={setSelectedSort}
       >
         {selectedOption === 'feed' ? (
-          <FeedList feedList={feedData} />
+          <FeedList feedList={feedList} />
         ) : (
           <PostList selectedSort={selectedSort} />
         )}
