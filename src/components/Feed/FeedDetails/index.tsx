@@ -33,20 +33,18 @@ export default function FeedDetails() {
     };
 
     fetchFeedDetails();
-    fetchFeedComments();
+    // fetchFeedComments();
   }, []);
 
+  console.log(commentList, '------코멘트 리스트------');
   return (
     <div className={cn('container')}>
       <FeedCard feedData={feed} hasPadding={false} forDetails />
-      <CommentInput
-        placeholder="댓글을 입력하세요"
-        handleClick={() => console.log('등록')}
-      />
+      <CommentInput placeholder="댓글을 입력하세요" feedId={feedId} />
       {commentList.length ? (
         commentList.map((comment, index) => (
           <div key={comment.id}>
-            <CommentCard comment={comment} />
+            <CommentCard comment={comment.comment} />
             {index === commentList.length - 1 || (
               <div className={cn('divide-line')} />
             )}

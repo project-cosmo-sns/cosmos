@@ -16,7 +16,7 @@ export default function FeedList({ feedList }) {
   return (
     <>
       <div className={cn('container')}>
-        {feedList.map((item, i) => (
+        {feedList.map((item) => (
           <FeedCard
             key={item.feed.id}
             feedData={item}
@@ -24,7 +24,6 @@ export default function FeedList({ feedList }) {
             toggleModal={setIsModalOpen}
             hasPadding
             forDetails={false}
-            index={i}
           />
         ))}
       </div>
