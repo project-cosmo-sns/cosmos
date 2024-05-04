@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction, useState } from 'react';
 import Image from 'next/image';
+import { Dispatch, SetStateAction, useState } from 'react';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';

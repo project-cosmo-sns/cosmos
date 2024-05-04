@@ -1,11 +1,14 @@
 import CommentCard from '@/components/Common/CommentCard';
 import CommentInput from '@/components/Common/CommentInput';
 import classNames from 'classnames/bind';
-import FeedCard from '../FeedCard';
-import styles from './FeedDetails.module.scss';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { getFeedCommentList, getFeedDetails } from './api';
+import FeedCard from '@/components/Feed/FeedCard/index';
+import {
+  getFeedCommentList,
+  getFeedDetails,
+} from '@/components/Feed/FeedDetails/api';
+import styles from './FeedDetails.module.scss';
 import { FeedDetailType, CommentDetailType } from '../types';
 
 /**
