@@ -1,3 +1,16 @@
+.scroll-top {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: $primary-01;
+
+  @include flex-arrange;
+  cursor: pointer;
+}
+
 .wrapper {
   @include glass-01(none);
   display: flex;
@@ -151,10 +164,21 @@
   .up {
     top: 108px;
   }
+
+  .scroll-top {
+    bottom: 80px;
+    right: 30px;
+    width: 72px;
+    height: 72px;
+  }
 }
 
 @media (min-width: 1200px) {
   .wrapper {
     width: 740px;
+  }
+
+  .scroll-top {
+    right: 40px;
   }
 }

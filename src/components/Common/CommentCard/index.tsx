@@ -1,5 +1,6 @@
 import AuthorProfile from '@/components/Common/AuthorProfile';
-import { Comment } from '@/pages/post/[postId]/mockData';
+import { CommentDetailType } from '@/components/Feed/types';
+import getElapsedTime from '@/utils/getElaspedTime';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import ActionButtons from '../Buttons/ActionButtons';
@@ -7,7 +8,6 @@ import { LikeIcon, LikedIcon } from '../IconCollection';
 import Modal from '../Layout/Modal';
 import styles from './CommentCard.module.scss';
 import EditComment from './EditComment';
-import { CommentDetailType } from '@/components/Feed/types';
 
 const cn = classNames.bind(styles);
 
