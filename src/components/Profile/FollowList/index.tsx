@@ -57,7 +57,7 @@ export default function FollowList({ followListProps }: FollowListType) {
       cssComponentDisplay={cn('follow-wrapper')}
     >
       <div>
-        {followingData.map((follow:FollowData) => (
+        {followingData.map((follow: FollowData) => (
           <Follow
             key={follow.followingInfo.memberId}
             isFollow={isFollow}
