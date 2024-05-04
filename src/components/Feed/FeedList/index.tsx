@@ -12,7 +12,11 @@ import { FeedDetailType } from '../types';
 export default function FeedList({ feedList }: { feedList: FeedDetailType[] }) {
   const cn = classNames.bind(styles);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-
+  const [feedId, setFeedId] = useState<number>(0);
+  const handleClick = (selectedFeedId: number) => {
+    setFeedId(selectedFeedId);
+    setIsModalOpen(!isModalOpen);
+  };
   return (
     <>
       <div className={cn('container')}>
@@ -24,6 +28,7 @@ export default function FeedList({ feedList }: { feedList: FeedDetailType[] }) {
             toggleModal={setIsModalOpen}
             hasPadding
             forDetails={false}
+            onClick={() => handleClick(item.feed.id)}
           />
         ))}
       </div>
@@ -33,7 +38,7 @@ export default function FeedList({ feedList }: { feedList: FeedDetailType[] }) {
         cssModalSize={cn('feed-detail-modalSize')}
         cssComponentDisplay={cn('feed-detail-componentDisplay')}
       >
-        <FeedDetails />
+        <FeedDetails feedId={feedId} />
       </Modal>
     </>
   );
