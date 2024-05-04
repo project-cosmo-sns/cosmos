@@ -29,3 +29,28 @@ export interface FeedListType {
     hasNextPage: boolean;
   };
 }
+
+export interface Comment {
+  content: string;
+  createdAt: string;
+  heartCount: number;
+  id: number;
+  isHearted: boolean;
+}
+
+export interface CommentDetailType {
+  writer: Writer;
+  comment: Comment;
+}
+
+export interface CommentListType {
+  data: CommentDetailType[];
+  meta: {
+    page: number;
+    take: number;
+    totalCount: number;
+    pageCount: number;
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
+  };
+}

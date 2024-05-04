@@ -1,21 +1,27 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import Image from 'next/image';
 import classNames from 'classnames/bind';
-import styles from './FeedCard.module.scss';
+import { useRouter } from 'next/router';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import Modal from '@/components/Common/Layout/Modal';
-import { useRouter } from 'next/router';
-import { useForm } from 'react-hook-form';
-import { deleteFeed, editFeed } from './api';
+import { deleteFeed, editFeed } from '@/components/Feed/FeedCard/api';
+import styles from './FeedCard.module.scss';
+import { FeedDetailType } from '../types';
 
 interface FeedCardTypes {
-  feedData: FeedData;
+  feedData: FeedDetailType;
   modalVisible?: boolean;
   toggleModal?: Dispatch<SetStateAction<boolean>>;
   hasPadding: boolean;
   forDetails?: boolean;
 }
+interface Edits {
+  feedContent: string;
+}
+
+const cn = classNames.bind(styles);
 
 /**
  * @param {FeedData} feedData - 서버사이드 렌더링, getServerSideProps에서 getFeedList 요청에서 받아온 데이터입니다.
@@ -26,10 +32,6 @@ interface FeedCardTypes {
  * @return {JSX.Element} FeedCard - 사용자 프로필, 사용자가 생성한 내용, 감정을 남길수 있는 컴포넌트 포함된 컴포넌트입니다.
  */
 
-interface Edits {
-  feedContent: string;
-}
-
 export default function FeedCard({
   feedData,
   modalVisible = false,
@@ -37,26 +39,27 @@ export default function FeedCard({
   hasPadding,
   forDetails,
 }: FeedCardTypes) {
-  const cn = classNames.bind(styles);
+  const [emojiVisible, setEmojiVisible] = useState<boolean>(false);
+  const [moreModalOpen, setMoreModalOpen] = useState(false);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Edits>();
-  const [moreModalOpen, setMoreModalOpen] = useState(false);
-  const router = useRouter();
+
   const {
-    commentCount,
-    content,
-    createdAt,
-    emojiCount,
     id,
+    content,
     viewCount,
+    commentCount,
+    emojiCount,
+    createdAt,
     imageUrls,
   } = feedData.feed;
-  const [emojiVisible, setEmojiVisible] = useState<boolean>(false);
-  const [isEdit, setIsEdit] = useState<boolean>(false);
-  const onSubmit = (data) => {
+
+  const onSubmit: SubmitHandler<Edits> = (data) => {
     setIsEdit(false);
     editFeed(id, data, imageUrls);
   };
