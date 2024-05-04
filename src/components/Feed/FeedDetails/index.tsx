@@ -1,7 +1,6 @@
 import CommentCard from '@/components/Common/CommentCard';
 import CommentInput from '@/components/Common/CommentInput';
 import classNames from 'classnames/bind';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import FeedCard from '@/components/Feed/FeedCard/index';
 import {
@@ -35,9 +34,6 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
     },
   });
   const [commentList, setCommentList] = useState<CommentDetailType[]>([]);
-  const router = useRouter();
-  const { query } = router;
-  // const feedId: number = Number(query.feedId);
 
   useEffect(() => {
     const fetchFeedDetails = async () => {

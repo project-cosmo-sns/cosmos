@@ -1,12 +1,11 @@
 import Image from 'next/image';
 import { Dispatch, SetStateAction, useState } from 'react';
 import classNames from 'classnames/bind';
-import { useRouter } from 'next/router';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import Modal from '@/components/Common/Layout/Modal';
-import { deleteFeed, editFeed } from '@/components/Feed/FeedCard/api';
+import { deleteFeed, editFeed, Edits } from '@/components/Feed/FeedCard/api';
 import styles from './FeedCard.module.scss';
 import { FeedDetailType } from '../types';
 
@@ -17,9 +16,6 @@ interface FeedCardTypes {
   hasPadding: boolean;
   forDetails?: boolean;
   onClick?: () => void;
-}
-interface Edits {
-  feedContent: string;
 }
 
 const cn = classNames.bind(styles);
@@ -35,8 +31,6 @@ const cn = classNames.bind(styles);
 
 export default function FeedCard({
   feedData,
-  modalVisible = false,
-  toggleModal,
   hasPadding,
   forDetails,
   onClick,
@@ -44,7 +38,6 @@ export default function FeedCard({
   const [emojiVisible, setEmojiVisible] = useState<boolean>(false);
   const [moreModalOpen, setMoreModalOpen] = useState(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -75,16 +68,7 @@ export default function FeedCard({
       )}
     >
       <div className={cn('wrapper')}>
-        <div
-          className={cn('user-content')}
-          onClick={onClick}
-          // onClick={async () => {
-          //   if (!forDetails) {
-          //     await router.push(`?feedId=${id}`);
-          //     toggleModal && toggleModal(!modalVisible);
-          //   }
-          // }}
-        >
+        <div className={cn('user-content')} onClick={onClick}>
           <div className={cn('profile-content-wrapper')}>
             <AuthorProfile author={feedData.writer} createdAt={createdAt} />
             {isEdit ? (
