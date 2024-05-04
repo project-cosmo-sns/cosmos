@@ -6,13 +6,6 @@ export interface Author {
   profileImageUrl?: string;
 }
 
-export type CategoryType =
-  | '공지사항'
-  | '이벤트'
-  | '특강'
-  | '정보공유'
-  | '오늘의 질문';
-
 export interface Comment {
   id: string;
   createdAt: string;
@@ -29,7 +22,7 @@ export interface Tag {
 
 export interface PostData {
   id: string;
-  category: CategoryType;
+  category: string;
   title: string;
   author: Author;
   createdAt: string;
