@@ -19,7 +19,7 @@ export default function CommentCard({
   const commentData = comment.comment;
   const writerData = comment.writer;
 
-  const { content, createdAt, heartCount: likeCount, isHearted } = commentData;
+  const { content, createdAt, heartCount, isHearted } = commentData;
   const { generation, nickname, profileImageUrl } = writerData;
 
   const [commentValue, setCommentValue] = useState(content);
@@ -28,7 +28,7 @@ export default function CommentCard({
 
   // 댓글 좋아요 버튼 및 숫자 임시로 테스트하기 위해 상태 추가. 추후 삭제 에정
   const [isLiked, setIsLiked] = useState(isHearted);
-  const [reactionCount, setReactionCount] = useState(likeCount);
+  const [reactionCount, setReactionCount] = useState(heartCount);
 
   // author.id === userId 일 때 true
   const isMyComment = true;
