@@ -16,6 +16,7 @@ interface FeedCardTypes {
   toggleModal?: Dispatch<SetStateAction<boolean>>;
   hasPadding: boolean;
   forDetails?: boolean;
+  onClick?: () => void;
 }
 interface Edits {
   feedContent: string;
@@ -38,6 +39,7 @@ export default function FeedCard({
   toggleModal,
   hasPadding,
   forDetails,
+  onClick,
 }: FeedCardTypes) {
   const [emojiVisible, setEmojiVisible] = useState<boolean>(false);
   const [moreModalOpen, setMoreModalOpen] = useState(false);
@@ -75,12 +77,13 @@ export default function FeedCard({
       <div className={cn('wrapper')}>
         <div
           className={cn('user-content')}
-          onClick={async () => {
-            if (!forDetails) {
-              await router.push(`?feedId=${id}`);
-              toggleModal && toggleModal(!modalVisible);
-            }
-          }}
+          onClick={onClick}
+          // onClick={async () => {
+          //   if (!forDetails) {
+          //     await router.push(`?feedId=${id}`);
+          //     toggleModal && toggleModal(!modalVisible);
+          //   }
+          // }}
         >
           <div className={cn('profile-content-wrapper')}>
             <AuthorProfile author={feedData.writer} createdAt={createdAt} />
