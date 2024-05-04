@@ -12,8 +12,10 @@ import {
 } from '@/components/Common/IconCollection';
 import LoginModal from '../../LoginModal';
 import { useRouter } from 'next/router';
-import getProfileImage from '@/api/getProfileImage';
-import Image from 'next/image';
+import getProfileImage from '@/api/ProfileImage';
+import Image, { StaticImageData } from 'next/image';
+import { useQuery } from '@tanstack/react-query';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 const cn = classNames.bind(styles);
 /**
@@ -29,15 +31,15 @@ export default function SideBar() {
     null,
   );
   const [modalVisible, setModalVisible] = useState(false);
-  const [profileImageUrl, setProfileImageUrl] = useState<string | null>(null);
+  const [userImage, setUserImage] = useState<string | null>(null);
 
   const router = useRouter();
 
   const profileClick = () => {
-    if (profileImageUrl) {
-      router.push('/profile');
-      return;
-    }
+    // if (userImage) {
+    router.push('/profile');
+    //   return;
+    // }
     setModalVisible(!modalVisible);
   };
 
@@ -55,13 +57,14 @@ export default function SideBar() {
     setActivePopover(null);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const profileimage = await getProfileImage();
-      setProfileImageUrl(profileimage);
-    };
-    fetchData();
-  }, []);
+  // const { data } = useQuery({
+  //   queryKey: ['profileImage'],
+  //   queryFn: getProfileImage,
+  // });
+
+  // useEffect(() => {
+  //   setUserImage(data ?? null);
+  // }, [data]);
 
   return (
     <div className={cn('sideBar-container')}>
@@ -87,19 +90,19 @@ export default function SideBar() {
             <Notification onClose={handleClosePopOver} />
           )}
         </div>
-        {profileImageUrl ? (
+        {/* {userImage ? (
           <Image
-            src={profileImageUrl}
+            src={userImage}
             alt="profile"
-            width={24}
-            height={24}
+            width={27}
+            height={27}
             onClick={profileClick}
           />
-        ) : (
-          <UserIcon fill="#FFFFFF" onClick={profileClick} />
-        )}
+        ) : ( */}
+        <UserIcon fill="#FFFFFF" onClick={profileClick} />
+        {/* )} */}
       </div>
-      <LoginModal modalVisible={modalVisible} toggleModal={profileClick} />
+      {/* <LoginModal modalVisible={modalVisible} toggleModal={profileClick} /> */}
     </div>
   );
 }

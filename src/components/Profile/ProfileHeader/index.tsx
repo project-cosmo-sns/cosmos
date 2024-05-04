@@ -6,7 +6,6 @@ import GenerationBadge from '@/components/Common/GenerationBadge';
 import Image from 'next/image';
 import { useState } from 'react';
 import FollowList from '../FollowList';
-import { followerData, followingData } from '@/utils/MemberMockData';
 
 interface ProfileHeaderProps {
   memberData: MemberDataType[];
@@ -59,7 +58,7 @@ export default function ProfileHeader({
         </div>
         <div className={cn('profile-following-section')}>
           {/* 팔로워/팔로잉 데이터.length-1이 팔로워수 */}
-          <button type="button" onClick={() => toggleModal('follower')}>
+          {/* <button type="button" onClick={() => toggleModal('follower')}>
             <span>팔로워</span>
             {followerData.length}
           </button>
@@ -73,17 +72,17 @@ export default function ProfileHeader({
                 modalVisible: followModal.follower,
               }}
             />
-          )}
+          )} */}
           <button type="button" onClick={() => toggleModal('following')}>
             <span>팔로잉</span>
-            {followingData.length}
+            {/* {followingData.length} */}
           </button>
           {followModal.following && (
             <FollowList
               followListProps={{
                 title: '팔로잉',
                 toggleModal: () => toggleModal('following'),
-                followData: followingData,
+                // followData: followingData,
                 isFollow: true,
                 modalVisible: followModal.following,
               }}
