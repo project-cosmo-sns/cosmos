@@ -8,6 +8,7 @@
   border: none;
 
   @media (min-width: 768px) {
+    position: absolute;
     max-width: 360px;
   }
 }
