@@ -1,11 +1,11 @@
-import { Author } from '@/pages/post/[postId]/mockData';
+import { Writer } from '@/components/Feed/types';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import styles from './AuthorProfile.module.scss';
 import TermBadge from '../Badge/TermBadge';
 
 interface AuthorProfileProps {
-  author: Author;
+  author: Writer;
   createdAt: string;
 }
 

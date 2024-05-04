@@ -3,7 +3,7 @@ import { Author } from '@/pages/post/[postId]/mockData';
 interface Image {
   imageUrl: string;
 }
-export interface FeedData {
+interface FeedData {
   id: number;
   author: Author;
   createdAt: string;
@@ -14,7 +14,7 @@ export interface FeedData {
   eyeCount: number;
 }
 
-const MOCKDATA = [
+const MOCKDATA: FeedData[] = [
   {
     id: 0,
     author: {

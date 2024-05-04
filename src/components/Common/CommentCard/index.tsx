@@ -7,29 +7,28 @@ import { LikeIcon, LikedIcon } from '../IconCollection';
 import Modal from '../Layout/Modal';
 import styles from './CommentCard.module.scss';
 import EditComment from './EditComment';
-
-interface CommentCardProps {
-  comment: Comment;
-}
+import { CommentDetailType } from '@/components/Feed/types';
 
 const cn = classNames.bind(styles);
 
-export default function CommentCard({ comment }: CommentCardProps) {
-  const {
-    author,
-    createdAt,
-    content,
-    reactionCount: likeCount,
-    likedByCurrentUser,
-  } = comment;
+export default function CommentCard({
+  comment,
+}: {
+  comment: CommentDetailType;
+}) {
+  const commentData = comment.comment;
+  const writerData = comment.writer;
+
+  const { content, createdAt, heartCount, isHearted } = commentData;
+  const { generation, nickname, profileImageUrl } = writerData;
 
   const [commentValue, setCommentValue] = useState(content);
   const [isCommentEditing, setIsCommentEditing] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   // 댓글 좋아요 버튼 및 숫자 임시로 테스트하기 위해 상태 추가. 추후 삭제 에정
-  const [isLiked, setIsLiked] = useState(likedByCurrentUser);
-  const [reactionCount, setReactionCount] = useState(likeCount);
+  const [isLiked, setIsLiked] = useState(isHearted);
+  const [reactionCount, setReactionCount] = useState(heartCount);
 
   // author.id === userId 일 때 true
   const isMyComment = true;
@@ -55,7 +54,7 @@ export default function CommentCard({ comment }: CommentCardProps) {
   return (
     <div className={cn('wrapper')}>
       <div className={cn('header')}>
-        <AuthorProfile author={author} createdAt={formattedCreatedAt} />
+        <AuthorProfile author={comment.writer} createdAt={formattedCreatedAt} />
         <div className={cn('container')}>
           <div className={cn('like')} onClick={handleClickLikeComment}>
             {isLiked ? (

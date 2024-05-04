@@ -24,7 +24,7 @@ export default function PopOver({
   onClose,
 }: PopOverProps) {
   const popOverRef = useRef<HTMLDivElement>(null);
-  const portalContainer = document.getElementById('popover-root');
+  const portalContainer = document.getElementById('popover-box');
 
   useOutSideClick({
     ref: popOverRef,
