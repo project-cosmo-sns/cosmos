@@ -3,16 +3,34 @@ import classNames from 'classnames/bind';
 import FeedDetails from '@/components/Feed/FeedDetails/index';
 import FeedCard from '@/components/Feed/FeedCard/index';
 import Modal from '@/components/Common/Layout/Modal';
-import styles from './FeedList.module.scss';
-import { FeedDetailType } from '../types';
-/**
- * @return {JSX.Element} FeedCardList - 추후에 변경 예정입니다. 지금은 목데이터를 화면에 출력하지만 변경한다면 상위 컴포넌트에서 피드 데이터를 받아서 뿌려줄 예정입니다.
- */
+import styles from '@/components/Feed/FeedList/FeedList.module.scss';
+import { FeedDetailType } from '@/components/Feed/types';
+import { MemberDataType } from '@/pages/profile/types';
 
-export default function FeedList({ feedList }: { feedList: FeedDetailType[] }) {
+interface MyFeedListType {
+  memberData: MemberDataType;
+  feedList: FeedDetailType[];
+}
+
+export default function MyFeedList({ feedList, memberData }: MyFeedListType) {
   const cn = classNames.bind(styles);
+
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [feedId, setFeedId] = useState<number>(0);
+
+  // 현재 사용자의 아이디 (memberData를 profile페이지에서 넘겨줄것)
+  const currentUserId = memberData.memberId;
+
+  // !!!!!!!!! 콘솔 찍어보니 이 값이 undefined라서 filter가 안됨.
+  // 현재 memberData에는 memberId 값이 없음. 내 id 값이 없어서 일단 기다려보기로
+  console.log('memberData : ', memberData);
+
+  // 내가 작성한 피드만 필터링
+  const myFeeds = feedList.filter((feed) => feed.writer.id === currentUserId);
+  // console.log('feedList : ', feedList);
+  // console.log('myFeeds : ', myFeeds);
+  // console.log('currentUserId : ', currentUserId);
+
   const handleClick = (selectedFeedId: number) => {
     setFeedId(selectedFeedId);
     setIsModalOpen(!isModalOpen);
@@ -21,7 +39,7 @@ export default function FeedList({ feedList }: { feedList: FeedDetailType[] }) {
   return (
     <>
       <div className={cn('container')}>
-        {feedList?.map((item) => (
+        {myFeeds?.map((item) => (
           <FeedCard
             key={item.feed.id}
             feedData={item}

@@ -2,7 +2,7 @@ import Modal from '@/components/Common/Layout/Modal';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import classNames from 'classnames/bind';
 import styles from './ProfileEditModal.module.scss';
-import { MemberDataType } from '@/pages/profile/mockData';
+import { MemberDataType } from '@/pages/profile/types';
 import GenerationBadge from '@/components/Common/GenerationBadge';
 import ImageInput from '@/components/Common/ImageInput';
 import { AuthFormProps, ModalPropsType } from '@/@types/type';
@@ -12,7 +12,7 @@ import { useEffect, useState } from 'react';
 interface ProfileEditModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  memberData: MemberDataType[];
+  memberData: MemberDataType;
 }
 
 const cn = classNames.bind(styles);
@@ -22,34 +22,16 @@ export default function ProfileEditModal({
   setIsOpen,
   memberData,
 }: ProfileEditModalProps) {
-  // currentUserId는 토큰?으로 받아옴?
-  const currentUserId = '1'; // 임시 ID
-
   const [previewImage, setPreviewImage] = useState('');
   const { register, handleSubmit, watch } = useForm<AuthFormProps>();
 
   const onSubmit: SubmitHandler<AuthFormProps> = (data) => console.log(data);
 
-  const member =
-    memberData && memberData.find((user) => user.id === currentUserId);
-
-  // useEffect(() => {
-  //   if (profileImage && profileImage.length > 0) {
-  //     setPreviewImage(profileImage)
-  //   }
-  // })
-
-  // useEffect(() => {
-  //   if (member) {
-  //     setValue('image', member?.imageUrl);
-  //   }
-  // }, [member, setValue]);
-
   useEffect(() => {
-    if (member && member.imageUrl) {
-      setPreviewImage(member.imageUrl);
+    if (memberData && memberData.profileImageUrl) {
+      setPreviewImage(memberData.profileImageUrl);
     }
-  }, [member]);
+  }, [memberData]);
 
   // 이미지 업로드 가능 시 넣을 코드 임시로
   // useEffect(() => {
@@ -84,16 +66,19 @@ export default function ProfileEditModal({
                 initialImageUrl={previewImage}
               />
             </div>
-            <div className={cn('name')}>{member?.nickname}</div>
-            <GenerationBadge generationInfo={member?.generation} />
+            <div className={cn('name')}>{memberData?.nickname}</div>
+            <GenerationBadge
+              generationInfo={memberData?.generation}
+              isAuthorized={memberData?.isAuthorized}
+            />
             <div className={cn('introduce')}>
               한줄소개
-              {member?.introduce ? (
+              {memberData?.introduce ? (
                 <textarea
-                  defaultValue={member.introduce}
+                  defaultValue={memberData.introduce}
                   autoComplete="on"
                   className={cn('textarea', {
-                    textareaActive: member?.introduce,
+                    textareaActive: memberData?.introduce,
                   })}
                 />
               ) : (
