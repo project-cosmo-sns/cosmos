@@ -4,10 +4,11 @@ import { CommentListType } from '@/components/Feed/types';
 import PostComment from '@/components/Post/PostComment';
 import PostContent from '@/components/Post/PostContent';
 import { PostDetailType } from '@/components/Post/types';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import styles from './PostDetail.module.scss';
+import { useEffect } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -15,7 +16,7 @@ export default function PostDetailPage() {
   const router = useRouter();
   const { postId } = router.query;
 
-  const { data: postData } = useQuery<PostDetailType>({
+  const { data: postData, isSuccess } = useQuery<PostDetailType>({
     queryKey: ['postData', postId],
     queryFn: () =>
       fetchData({
@@ -32,6 +33,18 @@ export default function PostDetailPage() {
       }),
     enabled: !!postId,
   });
+
+  const { mutate } = useMutation({
+    mutationFn: () =>
+      fetchData({
+        param: `/post/${postId}/view-count/increase`,
+        method: 'post',
+      }),
+  });
+
+  useEffect(() => {
+    if (postId && isSuccess) mutate();
+  }, [postId, isSuccess]);
 
   return (
     postData && (
