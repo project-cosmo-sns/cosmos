@@ -59,8 +59,8 @@ export async function fetchMemberData(context: GetServerSidePropsContext) {
     return {
       props: {
         feedList: feedList.data,
-        postList: postList,
-        memberData: memberData, // 현재 로그인한 사용자 또는 조회된 사용자의 데이터
+        postList,
+        memberData, // 현재 로그인한 사용자 또는 조회된 사용자의 데이터
       },
     };
   } catch (error) {
