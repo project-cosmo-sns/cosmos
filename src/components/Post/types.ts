@@ -12,15 +12,12 @@ export interface HashTagType {
   color: HASH_TAG_COLOR_CODE;
 }
 
-export interface HashTagRequestType extends HashTagType {
-  hashTagId: number | null;
-}
-
 export interface PostRequestType {
+  postId?: number;
   category: string;
   title: string;
   content: string;
-  hashTags: HashTagRequestType[];
+  hashTags: HashTagType[];
 }
 
 export interface PostType {
@@ -66,7 +63,7 @@ export interface PostDetailType {
   postDetail: {
     writer: WriterType;
     post: PostType;
-    hashTag: HashTagType[];
+    hashTags: HashTagType[];
     emoji: EmojiType[];
   };
 }
