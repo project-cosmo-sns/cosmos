@@ -3,37 +3,52 @@ import { useSearchParams } from 'next/navigation';
 import ContentContainer from '@/components/Common/ContentContainer';
 import SearchAuthorProfileList from '@/components/Search/SearchAuthorProfileList';
 import SearchList from '@/components/Search/SearchList';
-import { useState } from 'react';
-import instance from '@/api/axios';
+import { useState, useEffect } from 'react';
+import { getSearchList } from '@/components/Search/api';
 
-// 흠.... 쿼리값 어떻게 놓을지 고민해야됨 + 전역화
-
-export async function getSearchList() {
-  const feedData = await instance.get('/search/post/hash-tag?');
-  return feedData.data;
-}
-
-export const getServerSideProps = async () => {
-  const searchList = await getSearchList();
-  return {
-    props: {
-      feedList: searchList.data,
-    },
-  };
-};
+// serverside 임시 주석
+// export const getServerSideProps = async ({ query }: any) => {
+//   const { keyword } = query;
+//   const searchList = await getSearchList(keyword);
+//   return {
+//     props: {
+//       searchList: searchList.data,
+//     },
+//   };
+// };
 
 export default function SearchResultPage() {
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('hashtag');
+  const [searchList, setSearchList] = useState(null);
+
   const searchParams = useSearchParams();
   const search = searchParams.get('query');
   const keyword = search || '';
 
+  useEffect(() => {
+    if (keyword) {
+      const fetchData = async () => {
+        try {
+          const result = await getSearchList(keyword);
+          setSearchList(result.data);
+        } catch (error) {
+          console.error(
+            '검색 결과를 가져오는 동안 오류가 발생했습니다:',
+            error,
+          );
+        }
+      };
+
+      fetchData();
+    }
+  }, [keyword]);
+
   let searchResultComponent;
-  if (keyword) {
+  if (searchList) {
     searchResultComponent =
       selectedOption === 'hashtag' ? (
-        <SearchList selectedSort="all" />
+        <SearchList selectedSort="all" data={searchList} />
       ) : (
         <SearchAuthorProfileList />
       );
