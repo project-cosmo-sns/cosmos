@@ -33,7 +33,7 @@ export default function AuthorProfile({
         >
           {nickname}
         </button>
-        {/* <GenerationBadge generationInfo={generation} /> */}
+        <GenerationBadge generationInfo={generation} />
       </div>
       <span className={cn('created-at')}>{createdAt}</span>
     </div>
