@@ -9,14 +9,13 @@ import {
   BellIcon,
   UserIcon,
   AddIcon,
-  ProfileIcon,
+  ProfileIconDark,
 } from '@/components/Common/IconCollection';
 import LoginModal from '../../LoginModal';
 import { useRouter } from 'next/router';
 import getProfileImage from '@/api/ProfileImage';
-import Image, { StaticImageData } from 'next/image';
+import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 const cn = classNames.bind(styles);
 
@@ -90,9 +89,8 @@ export default function SideBar() {
             <Notification onClose={handleClosePopOver} />
           )}
         </div>
-        {/* {!isLogin ? (
-          <UserIcon fill="#FFFFFF" onClick={profileClick} />
-        ) : userImage ? (
+        {!isLogin && <UserIcon fill="#FFFFFF" onClick={profileClick} />}
+        {isLogin && userImage && (
           <Image
             src={userImage}
             alt="profile"
@@ -100,9 +98,8 @@ export default function SideBar() {
             height={27}
             onClick={profileClick}
           />
-        ) : (
-          <ProfileIcon onClick={profileClick} />
-        )} */}
+        )}
+        {isLogin && !userImage && <ProfileIconDark onClick={profileClick} />}
       </div>
       <LoginModal modalVisible={modalVisible} toggleModal={profileClick} />
     </div>

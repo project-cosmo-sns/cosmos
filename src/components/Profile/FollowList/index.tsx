@@ -4,7 +4,6 @@ import Modal from '@/components/Common/Layout/Modal';
 import Follow from './Follow';
 import { ModalPropsType } from '@/@types/type';
 import { useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
 import {
   getMyFollowingData,
   getMyFollowerData,
@@ -37,12 +36,10 @@ export default function FollowList({ followListProps }: FollowListType) {
   const { title, toggleModal, isFollow, followData, modalVisible } =
     followListProps;
 
-  const myFollowInfo =
-    followData === 'following' ? getMyFollowingData : getMyFollowerData;
-
   const { data: followDataResults = [] } = useQuery({
     queryKey: [followData],
-    queryFn: () => myFollowInfo(),
+    queryFn: () =>
+      followData === 'following' ? getMyFollowingData() : getMyFollowerData(),
   });
 
   return (
