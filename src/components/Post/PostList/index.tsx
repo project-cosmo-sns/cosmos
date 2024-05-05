@@ -1,8 +1,4 @@
-import {
-  CategoryType,
-  PostData,
-  mockData,
-} from '@/pages/post/[postId]/mockData';
+import { PostData, mockData } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import CategoryList from '../CategoryList';
@@ -19,15 +15,15 @@ export default function PostList({
   selectedSort,
 }: PostListProps) {
   const cn = classNames.bind(styles);
-  const [selectedCategory, setSelectedCategory] = useState<
-    CategoryType | '전체'
-  >('공지사항');
+  const [selectedCategory, setSelectedCategory] = useState<string | '전체'>(
+    '전체',
+  );
 
   // 임시로 분류하는 함수 추가. 추후 정렬, 카테고리 옵션에 맞는 데이터 불러오는 요청으로 수정 예정
   const filterPosts = (
     postData: PostData[],
     sort: 'all' | 'followed' | 'myGeneration',
-    category: CategoryType | '전체',
+    category: string | '전체',
   ) => {
     let filteredPosts = postData;
 

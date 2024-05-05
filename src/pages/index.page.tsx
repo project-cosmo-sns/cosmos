@@ -25,8 +25,9 @@ interface HomePropsType {
   feedList: FeedDetailType[];
 }
 
+const cn = classNames.bind(styles);
+
 export default function Home({ feedList }: HomePropsType) {
-  const cn = classNames.bind(styles);
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
   const [selectedSort, setSelectedSort] = useState<
