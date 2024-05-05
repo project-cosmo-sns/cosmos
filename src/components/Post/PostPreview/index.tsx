@@ -5,7 +5,9 @@ import { PostData } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { MouseEvent } from 'react';
+import HashTag from '../HashTag';
 import styles from './PostPreview.module.scss';
+import getElapsedTime from '@/utils/getElaspedTime';
 
 interface PostPreviewProps {
   postData: PostData;
@@ -22,11 +24,11 @@ export default function PostPreview({ postData }: PostPreviewProps) {
     content,
     emoji,
     comments,
+    tags,
     views,
   } = postData;
 
-  // 날짜 형식 정해지면 삭제 or 변경 예정
-  const formattedCreatedAt = createdAt.slice(0, 10);
+  const formattedCreatedAt = getElapsedTime(createdAt);
 
   const handleEmojiClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -44,6 +46,11 @@ export default function PostPreview({ postData }: PostPreviewProps) {
         <div className={cn('content')}>
           {content.replace(MARKDOWN_SYMBOL_REGEX, '').trim()}
         </div>
+      </div>
+      <div className={cn('hashtag-container')}>
+        {tags.map((tag) => (
+          <HashTag key={tag.name} tag={tag} />
+        ))}
       </div>
       <ReactionContainer
         emoji={emoji}

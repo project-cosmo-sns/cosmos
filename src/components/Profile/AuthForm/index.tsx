@@ -6,8 +6,8 @@ import Modal from '@/components/Common/Layout/Modal';
 import classNames from 'classnames/bind';
 import styles from './AuthForm.module.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { generationRegex } from '@/utils/generationRegex';
 import { useRouter } from 'next/router';
+import { generationRegex } from '@/constants/generationRegex';
 
 const cn = classNames.bind(styles);
 

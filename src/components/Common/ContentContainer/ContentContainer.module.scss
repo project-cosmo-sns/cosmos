@@ -1,9 +1,23 @@
+.scroll-top {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: $primary-01;
+
+  @include flex-arrange;
+  cursor: pointer;
+}
+
 .wrapper {
   @include glass-01(none);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
   width: 100%;
+  position: relative;
 }
 
 .header {
@@ -12,12 +26,35 @@
   height: 50px;
 }
 
+.header-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .post-type {
   display: flex;
   gap: 40px;
   height: 100%;
   margin-left: 30px;
   position: relative;
+}
+
+.up {
+  position: sticky;
+  top: 65px;
+  z-index: 3;
+  background: linear-gradient(to right, #171a27, #282c3e);
+
+  transition: top 0.5s ease-in-out;
+}
+
+.down {
+  position: sticky;
+  top: -10px;
+  z-index: 3;
+  background: linear-gradient(to right, #171a27, #282c3e);
+
+  transition: top 0.5s ease-in-out;
 }
 
 .option {
@@ -119,13 +156,32 @@
     border: $glass-edge-01;
   }
 
+  .header-container {
+    border-radius: 10px 10px 0 0;
+  }
+
   .dropdown {
     margin-right: 24px;
+  }
+
+  .up {
+    top: 108px;
+  }
+
+  .scroll-top {
+    bottom: 80px;
+    right: 30px;
+    width: 72px;
+    height: 72px;
   }
 }
 
 @media (min-width: 1200px) {
   .wrapper {
     width: 740px;
+  }
+
+  .scroll-top {
+    right: 40px;
   }
 }
