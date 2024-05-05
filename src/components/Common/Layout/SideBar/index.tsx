@@ -19,13 +19,6 @@ import { useQuery } from '@tanstack/react-query';
 import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 
 const cn = classNames.bind(styles);
-/**
- * 프로필 이미지에 로그인 모달 연결했습니다. 로그인 모달은 로그인이 안되어있을 때만 뜨도록 설정했습니다.
- * 로그인하면 브라우저에 저장되는 쿠키가 암호화 되어있어서 브라우저에서 확인할 수 없습니다
- * 그래서 멘토님이 로그인 여부 확인하는 api만들어주신다 하셨고
- * 일단은 예비로 로컬스토리지에 토큰을 수동으로 입력해서 로그인 여부 확인하는 방법으로 설정했습니다.
- * @returns
- */
 
 export default function SideBar() {
   const [activePopover, setActivePopover] = useState<'add' | 'bell' | null>(
@@ -33,11 +26,12 @@ export default function SideBar() {
   );
   const [modalVisible, setModalVisible] = useState(false);
   const [userImage, setUserImage] = useState<string | null>(null);
+  const [isLogin, setIsLogin] = useState(false);
 
   const router = useRouter();
 
   const profileClick = () => {
-    if (userImage) {
+    if (isLogin) {
       router.push('/profile');
       return;
     }
@@ -63,10 +57,13 @@ export default function SideBar() {
     queryFn: getProfileImage,
   });
 
-  console.log(userImage);
-
   useEffect(() => {
-    setUserImage(data ?? null);
+    if (data === undefined) {
+      setIsLogin(false);
+    }
+    if (data === null) {
+      setIsLogin(true);
+    }
   }, [data]);
 
   return (
@@ -93,7 +90,9 @@ export default function SideBar() {
             <Notification onClose={handleClosePopOver} />
           )}
         </div>
-        {userImage ? (
+        {/* {!isLogin ? (
+          <UserIcon fill="#FFFFFF" onClick={profileClick} />
+        ) : userImage ? (
           <Image
             src={userImage}
             alt="profile"
@@ -102,14 +101,10 @@ export default function SideBar() {
             onClick={profileClick}
           />
         ) : (
-          <UserIcon fill="#FFFFFF" onClick={profileClick} />
-        )}
+          <ProfileIcon onClick={profileClick} />
+        )} */}
       </div>
       <LoginModal modalVisible={modalVisible} toggleModal={profileClick} />
     </div>
   );
 }
-
-// 로그인 여부는 프로필 아이콘이 바뀌는 것으로,
-// 로그인이 안되어있을 때 사람모양 아이콘이었다가.
-// 로그인이 되어있을 때 userImage null이면 사람모양 아이콘, 아니면 프로필 이미지

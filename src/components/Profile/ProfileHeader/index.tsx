@@ -58,21 +58,21 @@ export default function ProfileHeader({
         </div>
         <div className={cn('profile-following-section')}>
           {/* 팔로워/팔로잉 데이터.length-1이 팔로워수 */}
-          {/* <button type="button" onClick={() => toggleModal('follower')}>
+          <button type="button" onClick={() => toggleModal('follower')}>
             <span>팔로워</span>
-            {followerData.length}
+            {/* {followerData.length} */}
           </button>
           {followModal.follower && (
             <FollowList
               followListProps={{
                 title: '팔로워',
                 toggleModal: () => toggleModal('follower'),
-                followData: followerData,
+                followData: 'follower',
                 isFollow: false,
                 modalVisible: followModal.follower,
               }}
             />
-          )} */}
+          )}
           <button type="button" onClick={() => toggleModal('following')}>
             <span>팔로잉</span>
             {/* {followingData.length} */}
@@ -82,7 +82,7 @@ export default function ProfileHeader({
               followListProps={{
                 title: '팔로잉',
                 toggleModal: () => toggleModal('following'),
-                // followData: followingData,
+                followData: 'following',
                 isFollow: true,
                 modalVisible: followModal.following,
               }}

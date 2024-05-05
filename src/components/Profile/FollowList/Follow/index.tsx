@@ -21,22 +21,23 @@ export default function Follow({
   memberId,
   isFollow,
 }: FollowType) {
-  const followClick = () => {
-    console.log('팔로우!');
+  const followClick = (id: number) => {
+    console.log(id);
   };
 
   return (
     <div key={memberId} className={cn('follow-wrapper')}>
       <div className={cn('follow-info')}>
-        {profileImageUrl ? (
-          <Image src={profileImageUrl} alt="profile" width={40} height={40} />
-        ) : (
-          <div>없음</div>
-        )}
+        <Image
+          src={profileImageUrl || '/images/profile.svg'}
+          alt="profile_image"
+          width={40}
+          height={40}
+        />
         <span>{nickname}</span>
         <GenerationBadge generationInfo={generation} />
       </div>
-      <FollowButton onClick={followClick} isFollow={isFollow} />
+      <FollowButton onClick={() => followClick(memberId)} isFollow={isFollow} />
     </div>
   );
 }

@@ -17,7 +17,7 @@ export default function GenerationBadge({ generationInfo }: GenerationType) {
   ];
 
   if (!generationInfo) {
-    return <div className={cn('waiting')}>대기중</div>;
+    return <div className={cn('waiting')}>미인증</div>;
   }
 
   const colorIndex = (generationInfo - 1) % generationColor.length;

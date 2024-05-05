@@ -5,7 +5,13 @@ import Follow from './Follow';
 import { ModalPropsType } from '@/@types/type';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from 'next/router';
-import { FollowData, getFollowingData } from '@/api/Follow';
+import {
+  getMyFollowingData,
+  getMyFollowerData,
+  getUserFollowerData,
+  getUserFollowingData,
+  FollowDataProps,
+} from '@/api/Follow';
 
 const cn = classNames.bind(styles);
 
@@ -13,6 +19,7 @@ type FollowListType = {
   followListProps: ModalPropsType & {
     title: string;
     isFollow: boolean;
+    followData: 'following' | 'follower';
   };
 };
 
@@ -27,26 +34,16 @@ type FollowListType = {
  */
 
 export default function FollowList({ followListProps }: FollowListType) {
-  const { title, toggleModal, isFollow, modalVisible } = followListProps;
+  const { title, toggleModal, isFollow, followData, modalVisible } =
+    followListProps;
 
-  const router = useRouter();
-  // const memberId = router.query.memberId;
+  const myFollowInfo =
+    followData === 'following' ? getMyFollowingData : getMyFollowerData;
 
-  const memberId = 3;
-
-  const { data: followingData = [] } = useQuery({
-    queryKey: ['following', memberId],
-    queryFn: () => getFollowingData(memberId),
+  const { data: followDataResults = [] } = useQuery({
+    queryKey: [followData],
+    queryFn: () => myFollowInfo(),
   });
-
-  console.log(followingData);
-
-  // const { data: followerData = [] } = useQuery({
-  //   queryKey: ['follower', memberId],
-  //   queryFn: () => getFollowerData(memberId),
-  // });
-
-  // console.log(followerData);
 
   return (
     <Modal
@@ -57,13 +54,19 @@ export default function FollowList({ followListProps }: FollowListType) {
       cssComponentDisplay={cn('follow-wrapper')}
     >
       <div>
-        {followingData.map((follow: FollowData) => (
-          <Follow
-            key={follow.followingInfo.memberId}
-            isFollow={isFollow}
-            {...follow?.followingInfo}
-          />
-        ))}
+        {followDataResults.map((follow: FollowDataProps) => {
+          const followDetailInfo =
+            followData === 'following'
+              ? follow.followingInfo
+              : follow.followerInfo;
+          return (
+            <Follow
+              key={followDetailInfo.memberId}
+              {...followDetailInfo}
+              isFollow={isFollow}
+            />
+          );
+        })}
       </div>
     </Modal>
   );
