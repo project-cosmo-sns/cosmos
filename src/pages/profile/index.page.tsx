@@ -25,9 +25,15 @@ export const getServerSideProps = async (
   const { req } = context;
   const cookies = req.headers.cookie || '';
 
+  // 다른 사용자면 (memberId값이 있으면) endpoint를 다른 사용자 페이지로
+  const memberId = context.query.memberId;
+  // https://local.cosmo-sns.com:3000/profile?memberId=1
+  const endpoint = memberId ? `profile/${memberId}` : '/profile/mine';
+  console.log(context.query);
+
   // 쿠키를 요청 헤더에 포함시켜 API 요청하기
   try {
-    const res = await instance.get('/profile/mine', {
+    const res = await instance.get(endpoint, {
       headers: {
         Cookie: cookies,
       },
@@ -80,16 +86,12 @@ export default function MemberDataContainer({
   uncertified, // 미인증
   error,
 }: MemberDataContainerPropsType) {
-  // const [memberData, setMemberData] = useState<MemberDataType>(
-  //   {} as MemberDataType,
-  // );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
   const [selectedSort, setSelectedSort] = useState<
     'all' | 'followed' | 'myGeneration'
   >('all');
-  // const [memberData, setMemberData] = useState(null);
 
   // const memberId = 1; // 예시용 ID, 실제로는 동적으로 가져올 수 있음
   // memberId가 있으면(남의프로필이면) 선택적으로 내려줄 수 있게.
