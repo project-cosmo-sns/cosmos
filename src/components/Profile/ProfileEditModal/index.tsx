@@ -2,7 +2,7 @@ import Modal from '@/components/Common/Layout/Modal';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import classNames from 'classnames/bind';
 import styles from './ProfileEditModal.module.scss';
-import { MemberDataType } from '@/pages/profile/mockData';
+import { MemberDataType } from '@/pages/profile/types';
 import GenerationBadge from '@/components/Common/GenerationBadge';
 import ImageInput from '@/components/Common/ImageInput';
 import { AuthFormProps, ModalPropsType } from '@/@types/type';

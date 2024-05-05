@@ -1,7 +1,7 @@
 import styles from './ProfileHeader.module.scss';
 import classNames from 'classnames/bind';
 import * as Icon from '@/components/Common/IconCollection';
-import { MemberDataType } from '@/pages/profile/mockData';
+import { MemberDataType } from '@/pages/profile/types';
 import GenerationBadge from '@/components/Common/GenerationBadge';
 import Image from 'next/image';
 import { useState } from 'react';
