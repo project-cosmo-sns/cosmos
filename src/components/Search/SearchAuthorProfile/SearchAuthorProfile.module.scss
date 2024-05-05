@@ -1,9 +1,49 @@
-.wrapper {
-  @include flex-arrange(center, center);
-  flex-direction: column;
-  gap: 12px;
+.search-profile {
+  @include glass-01;
+  @include flex-arrange(flex-start);
+  gap: 20px;
 
-  .nickname {
+  width: 100%;
+  padding: 30px 38px;
+  border-radius: 10px;
+  border-width: 0;
+  color: $white-01;
+
+  .profile-infomation {
+    @include flex-arrange(flex-start, flex-start);
+    gap: 12px;
+    flex-direction: column;
+
+    & > div {
+      @include flex-arrange(flex-start);
+    }
+  }
+
+  .profile-name {
     @include font-style(16px, $white-01, 700);
+    gap: 7px;
+  }
+
+  .profile-follow {
+    font-size: 14px;
+    gap: 20px;
+
+    & > div {
+      @include flex-arrange(flex-start);
+      gap: 8px;
+    }
+
+    span {
+      font-weight: 500;
+      color: $gray-02;
+    }
+
+    strong {
+      font-weight: 500;
+    }
+  }
+
+  .profile-description {
+    @include font-style(14px, $gray-01, 500);
   }
 }

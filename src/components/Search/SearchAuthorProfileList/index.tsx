@@ -46,9 +46,10 @@ export default function SearchAuthorProfileList() {
 
   return (
     <div className={cn('wrapper')}>
-      {mockData.map((author) => (
+      {/* {mockData.map((author) => (
         <SearchAuthorProfile key={author.id} author={author} />
-      ))}
+      ))} */}
+      <SearchAuthorProfile />
     </div>
   );
 }
