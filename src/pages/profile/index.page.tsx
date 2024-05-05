@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import ProfileHeader from '@/components/Profile/ProfileHeader';
 import ProfileEditModal from '@/components/Profile/ProfileEditModal';
-import { MemberDataType, memberMockData } from '@/pages/profile/mockData';
+import { MemberDataType } from '@/pages/profile/mockData';
 import classNames from 'classnames/bind';
 import styles from './MemberDataContainer.module.scss';
 import ContentContainer from '@/components/Common/ContentContainer';
@@ -26,7 +26,7 @@ export const getServerSideProps = async (
   const cookies = req.headers.cookie || '';
 
   // 다른 사용자면 (memberId값이 있으면) endpoint를 다른 사용자 페이지로
-  const memberId = context.query.memberId;
+  const { memberId } = context.query;
   // https://local.cosmo-sns.com:3000/profile?memberId=1
   const endpoint = memberId ? `profile/${memberId}` : '/profile/mine';
   console.log(context.query);
@@ -96,8 +96,6 @@ export default function MemberDataContainer({
   // const memberId = 1; // 예시용 ID, 실제로는 동적으로 가져올 수 있음
   // memberId가 있으면(남의프로필이면) 선택적으로 내려줄 수 있게.
   // 내려준 값을 쿼리값으로 넣어서 띄울 수 있게 하기
-
-  useEffect(() => {});
 
   const renderContent = () => {
     switch (selectedOption) {

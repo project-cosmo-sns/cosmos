@@ -8,11 +8,11 @@ import { useState } from 'react';
 import FollowList from '../FollowList';
 import { followerData, followingData } from '@/utils/MemberMockData';
 
-interface ProfileHeaderProps {
+export interface ProfileHeaderProps {
   memberData: MemberDataType;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   uncertified?: boolean;
-  // error?: string;
+  memberId?: string;
 }
 
 const cn = classNames.bind(styles);
@@ -20,13 +20,8 @@ const cn = classNames.bind(styles);
 export default function ProfileHeader({
   memberData,
   setIsModalOpen,
-  uncertified,
   // error,
 }: ProfileHeaderProps) {
-  // currentUserId는 토큰?으로 받아옴?
-  // const currentUserId = '1'; // 임시 ID
-  // const member =
-  //   memberData && memberData.find((user) => user.id === currentUserId);
   const [followModal, setFollowModal] = useState({
     follower: false,
     following: false,
@@ -38,10 +33,40 @@ export default function ProfileHeader({
       [type]: !followModal[type],
     });
   };
+  const renderButton = () => {
+    if (memberData.memberId) {
+      return (
+        <button
+          type="button"
+          onClick={() => console.log('팔로잉/언팔로잉 로직 처리')}
+        >
+          팔로잉
+        </button>
+      );
+    }
 
-  // if (uncertified) {
-  //   return <div>미인증사용자ㅠㅠㅠㅠㅠ</div>;
-  // }
+    if (memberData.isAuthorized) {
+      return (
+        <div
+          onClick={() => setIsModalOpen((prev) => !prev)}
+          className={cn('profile-setting-button')}
+        >
+          <Icon.SettingIcon width="18" height="18" fill="#C2C7D9" />
+        </div>
+      );
+    }
+
+    return (
+      <button
+        type="button"
+        onClick={() => {
+          console.log('인증모달띄우기');
+        }}
+      >
+        인증하기
+      </button>
+    );
+  };
 
   return (
     <div className={cn('header-container')}>
@@ -62,7 +87,10 @@ export default function ProfileHeader({
         <div className={cn('profile-name-section')}>
           {memberData ? memberData.nickname : '게스트'}
           <div className={cn('generation-badge')}>
-            <GenerationBadge generationInfo={memberData?.generation} />
+            <GenerationBadge
+              generationInfo={memberData?.generation}
+              isAuthorized={isAuthorized}
+            />
           </div>
         </div>
         <div className={cn('profile-following-section')}>
@@ -105,25 +133,8 @@ export default function ProfileHeader({
           <div className={cn('introduce-empty')}>소개가 없습니다.</div>
         )}
       </div>
-      {memberData ? (
-        <div
-          onClick={() => setIsModalOpen((prev) => !prev)}
-          className={cn('profile-setting-button')}
-        >
-          <Icon.SettingIcon width="18" height="18" fill="#C2C7D9" />
-        </div>
-      ) : (
-        <div className={cn('profile-setting-button')}>
-          <button
-            type="button"
-            onClick={() => {
-              console.log('인증모달띄우기');
-            }}
-          >
-            인증하기
-          </button>
-        </div>
-      )}
+
+      <div className={cn('profile-setting-or-following')}>{renderButton()}</div>
     </div>
   );
 }

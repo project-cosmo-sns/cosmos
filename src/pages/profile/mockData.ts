@@ -6,18 +6,19 @@ export interface MemberDataType {
   introduce: string;
   followerCount: number;
   followingCount: number;
+  isAuthorized: boolean;
 }
 
-const memberMockData: MemberDataType[] = [
-  {
-    memberId: 1,
-    nickname: '짱정이',
-    generation: 3,
-    profileImageUrl: '/images/like.svg',
-    introduce: '졸려요',
-    followerCount: 5,
-    followingCount: 5,
-  },
-];
+// const memberMockData: MemberDataType[] = [
+//   {
+//     memberId: 1,
+//     nickname: '짱정이',
+//     generation: 3,
+//     profileImageUrl: '/images/like.svg',
+//     introduce: '졸려요',
+//     followerCount: 5,
+//     followingCount: 5,
+//   },
+// ];
 
-export { memberMockData };
+// export { memberMockData };

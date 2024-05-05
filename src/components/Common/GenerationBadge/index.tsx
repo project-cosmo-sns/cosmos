@@ -3,10 +3,15 @@ import classNames from 'classnames/bind';
 
 type GenerationType = {
   generationInfo: number | undefined;
+  isAuthorized: boolean;
 };
 
 const cn = classNames.bind(styles);
-export default function GenerationBadge({ generationInfo }: GenerationType) {
+
+export default function GenerationBadge({
+  generationInfo,
+  isAuthorized,
+}: GenerationType) {
   const generationColor = [
     ['#FFEAEA', '#FF5151'],
     ['#FFE1CC', '#FF7512'],
@@ -17,21 +22,12 @@ export default function GenerationBadge({ generationInfo }: GenerationType) {
   ];
 
   // 미인증 상태 처리
-  if (generationInfo === undefined) {
+  if (!isAuthorized || generationInfo === undefined) {
     return <div className={cn('waiting')}>미인증</div>;
   }
 
   const colorIndex = (generationInfo - 1) % generationColor.length;
-  const colorInfo = generationColor[colorIndex];
-
-  // const [backgroundColor, color] = generationColor[colorIndex];
-
-  if (!colorInfo) {
-    console.log('기수정보가없당');
-    return <div className={cn('waiting')}>미인증</div>;
-  }
-
-  const [backgroundColor, color] = colorInfo;
+  const [backgroundColor, color] = generationColor[colorIndex];
   const generationStyle = {
     backgroundColor,
     color,
