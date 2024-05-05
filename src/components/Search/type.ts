@@ -1,8 +1,8 @@
 export interface Writer {
   id: number;
   nickname: string;
-  generation: number | null; // 혹은 generation?: number;
-  profileImageUrl: string | null; // 프로필 이미지 URL 혹은 null
+  generation: number | null;
+  profileImageUrl: string | null;
 }
 
 interface Post {
@@ -12,7 +12,7 @@ interface Post {
   viewCount: number;
   commentCount: number;
   emojiCount: number;
-  createdAt: string; // 날짜 및 시간 문자열
+  createdAt: string;
 }
 
 export interface SearchData {

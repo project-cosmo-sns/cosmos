@@ -28,12 +28,16 @@ export default function SearchResultPage() {
   const keyword = search || '';
 
   const loadSearchData = async () => {
-    try {
-      const result = await getSearchList(keyword);
-      setSearchList(result.data);
-    } catch (error) {
-      console.error('검색 결과 오류', error);
-    }
+    const fetchData = async () => {
+      try {
+        const result = await getSearchList(keyword);
+        setSearchList(result.data);
+      } catch (error) {
+        console.error('검색 결과 오류', error);
+      }
+    };
+
+    fetchData();
   };
 
   useEffect(() => {
@@ -51,7 +55,6 @@ export default function SearchResultPage() {
         <SearchAuthorProfileList />
       );
   } else {
-    // 이것도 컴포넌트화해서 바꿔야됨
     searchResultComponent = <p>검색 결과가 없습니다.</p>;
   }
 

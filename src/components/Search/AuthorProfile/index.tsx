@@ -2,7 +2,7 @@ import { Writer } from '../type';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import styles from './AuthorProfile.module.scss';
-import TermBadge from '@/components/Common/Badge/TermBadge';
+import GenerationBadge from '@/components/Common/GenerationBadge';
 
 interface AuthorProfileProps {
   writer: Writer;
@@ -33,7 +33,7 @@ export default function AuthorProfile({
         >
           {nickname}
         </button>
-        <TermBadge term={generation} />
+        {/* <GenerationBadge generationInfo={generation} /> */}
       </div>
       <span className={cn('created-at')}>{createdAt}</span>
     </div>

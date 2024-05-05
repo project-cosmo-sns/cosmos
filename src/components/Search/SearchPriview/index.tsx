@@ -1,11 +1,10 @@
 import AuthorProfile from '../AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import { MARKDOWN_SYMBOL_REGEX } from '@/constants/regexPattern';
-import { PostData } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
-import { MouseEvent } from 'react';
-import HashTag from '@/components/Post/HashTag';
+// import { MouseEvent } from 'react';
+// import HashTag from '@/components/Post/HashTag';
 import styles from './SearchPriview.module.scss';
 import getElapsedTime from '@/utils/getElaspedTime';
 import { SearchData } from '../type';
