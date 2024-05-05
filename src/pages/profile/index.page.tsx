@@ -40,7 +40,7 @@ export const getServerSideProps = async (
     return {
       props: {
         feedList: feedList.data,
-        memberData: memberData,
+        memberData,
       },
     };
   } catch (error) {
@@ -77,7 +77,7 @@ interface MemberDataContainerPropsType {
 export default function MemberDataContainer({
   feedList,
   memberData,
-  uncertified, //미인증
+  uncertified, // 미인증
   error,
 }: MemberDataContainerPropsType) {
   // const [memberData, setMemberData] = useState<MemberDataType>(
@@ -116,13 +116,13 @@ export default function MemberDataContainer({
 
   if (uncertified || error) {
     return (
-      <>
+      <div>
         {memberData && (
           <>
             <ProfileHeader
               memberData={memberData}
               setIsModalOpen={setIsModalOpen}
-              uncertified={true}
+              uncertified
             />
             <ContentContainer
               selectedOption={selectedOption}
@@ -135,7 +135,7 @@ export default function MemberDataContainer({
             </ContentContainer>
           </>
         )}
-      </>
+      </div>
     );
   }
 

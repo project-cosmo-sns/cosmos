@@ -12,7 +12,7 @@ interface ProfileHeaderProps {
   memberData: MemberDataType;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   uncertified?: boolean;
-  error?: string;
+  // error?: string;
 }
 
 const cn = classNames.bind(styles);
@@ -99,7 +99,11 @@ export default function ProfileHeader({
         </div>
       </div>
       <div className={cn('profile-introduce-section')}>
-        {memberData ? memberData.introduce : '소개가 없습니다.'}
+        {memberData.introduce ? (
+          memberData.introduce
+        ) : (
+          <div className={cn('introduce-empty')}>소개가 없습니다.</div>
+        )}
       </div>
       {memberData ? (
         <div
