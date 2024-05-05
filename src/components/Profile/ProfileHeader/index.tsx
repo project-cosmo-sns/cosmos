@@ -11,7 +11,6 @@ import { followerData, followingData } from '@/utils/MemberMockData';
 export interface ProfileHeaderProps {
   memberData: MemberDataType;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  uncertified?: boolean;
   memberId?: string;
 }
 
@@ -89,7 +88,7 @@ export default function ProfileHeader({
           <div className={cn('generation-badge')}>
             <GenerationBadge
               generationInfo={memberData?.generation}
-              isAuthorized={isAuthorized}
+              isAuthorized={memberData?.isAuthorized}
             />
           </div>
         </div>

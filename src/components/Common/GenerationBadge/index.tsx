@@ -27,12 +27,19 @@ export default function GenerationBadge({
   }
 
   const colorIndex = (generationInfo - 1) % generationColor.length;
-  const [backgroundColor, color] = generationColor[colorIndex];
+  // 유효한 범위 내에서 인덱스를 참조하고 있는지 확인하는 추가적인 검증 절차
+  // undefined일 경우,  배열의 범위를 벗어난 인덱스를 참조하게 될 수도 있기 때문!
+  // undefined일 경우엔 white를 기본값으로
+  const colorInfo = generationColor[colorIndex] || ['$white-01', '$black-01'];
+
+  const [backgroundColor, color] = colorInfo;
   const generationStyle = {
     backgroundColor,
     color,
   };
 
+  // 현재 가입된 admin 계정들 (우리계정ㅎ) 경우엔
+  // 인증 상태는 true지만 기수 정보가 null이라 뱃지에 기수 입력이 안됩니당..
   return (
     <div className={cn('generation-container')} style={generationStyle}>
       {generationInfo}기

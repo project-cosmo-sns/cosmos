@@ -22,16 +22,10 @@ export default function ProfileEditModal({
   setIsOpen,
   memberData,
 }: ProfileEditModalProps) {
-  // currentUserId는 토큰?으로 받아옴?
-  const currentUserId = '1'; // 임시 ID
-
   const [previewImage, setPreviewImage] = useState('');
   const { register, handleSubmit, watch } = useForm<AuthFormProps>();
 
   const onSubmit: SubmitHandler<AuthFormProps> = (data) => console.log(data);
-
-  // const member =
-  //   memberData && memberData.find((user) => user.id === currentUserId);
 
   useEffect(() => {
     if (memberData && memberData.profileImageUrl) {
@@ -73,7 +67,10 @@ export default function ProfileEditModal({
               />
             </div>
             <div className={cn('name')}>{memberData?.nickname}</div>
-            <GenerationBadge generationInfo={memberData?.generation} />
+            <GenerationBadge
+              generationInfo={memberData?.generation}
+              isAuthorized={memberData?.isAuthorized}
+            />
             <div className={cn('introduce')}>
               한줄소개
               {memberData?.introduce ? (
