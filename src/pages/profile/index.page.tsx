@@ -12,6 +12,7 @@ import ScrapList from '@/components/Common/ScrapList';
 import { fetchMemberData } from './api';
 import { GetServerSideProps } from 'next';
 import { FeedDetailType } from '@/components/Feed/types';
+import MyFeedList from '@/components/Profile/MyFeedList';
 
 const cn = classNames.bind(styles);
 
@@ -37,11 +38,38 @@ export default function MemberDataContainer({
     'all' | 'followed' | 'myGeneration'
   >('all');
 
+  if (!memberData.isAuthorized || error) {
+    return (
+      <div>
+        {memberData && (
+          <ProfileHeader
+            memberData={memberData}
+            setIsModalOpen={setIsModalOpen}
+          />
+        )}
+
+        <ContentContainer
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
+          selectedSort={selectedSort}
+          setSelectedSort={setSelectedSort}
+          isMyProfile
+        >
+          <div>미인증사용자입니다</div>
+        </ContentContainer>
+      </div>
+    );
+  }
+
+  if (!memberData) {
+    return <div>Lodading~~~~~</div>;
+  }
+
   const renderContent = () => {
     switch (selectedOption) {
       case 'feed':
         return feedList ? (
-          <FeedList feedList={feedList} />
+          <MyFeedList feedList={feedList} memberData={memberData} />
         ) : (
           '작성된 글이 없습니다.'
         );
@@ -53,35 +81,6 @@ export default function MemberDataContainer({
         return null;
     }
   };
-
-  if (!memberData.isAuthorized || error) {
-    return (
-      <div>
-        {memberData && (
-          <ProfileHeader
-            memberData={memberData}
-            setIsModalOpen={setIsModalOpen}
-          />
-        )}
-
-        {/* <MyPostList memberData={memberData} /> */}
-
-        {/* <ContentContainer
-          selectedOption={selectedOption}
-          setSelectedOption={setSelectedOption}
-          selectedSort={selectedSort}
-          setSelectedSort={setSelectedSort}
-          isMyProfile
-        >
-          {renderContent()}
-        </ContentContainer> */}
-      </div>
-    );
-  }
-
-  if (!memberData) {
-    return <div>Lodading~~~~~</div>;
-  }
 
   return (
     <div className={cn('content')}>
