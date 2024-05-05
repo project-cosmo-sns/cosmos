@@ -58,22 +58,21 @@ export default function MemberDataContainer({
     return (
       <div>
         {memberData && (
-          <>
-            <ProfileHeader
-              memberData={memberData}
-              setIsModalOpen={setIsModalOpen}
-            />
-            <ContentContainer
-              selectedOption={selectedOption}
-              setSelectedOption={setSelectedOption}
-              selectedSort={selectedSort}
-              setSelectedSort={setSelectedSort}
-              isMyProfile
-            >
-              {renderContent()}
-            </ContentContainer>
-          </>
+          <ProfileHeader
+            memberData={memberData}
+            setIsModalOpen={setIsModalOpen}
+          />
         )}
+        <MyPostList memberData={memberData} />
+        {/* <ContentContainer
+          selectedOption={selectedOption}
+          setSelectedOption={setSelectedOption}
+          selectedSort={selectedSort}
+          setSelectedSort={setSelectedSort}
+          isMyProfile
+        >
+          {renderContent()}
+        </ContentContainer> */}
       </div>
     );
   }
