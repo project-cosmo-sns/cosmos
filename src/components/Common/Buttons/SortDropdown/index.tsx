@@ -2,12 +2,13 @@ import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { DownIcon, UpIcon } from '../../IconCollection';
 import styles from './SortDropdown.module.scss';
+import { SORT_OPTION, SortType } from '@/constants/sortType';
 
 const cn = classNames.bind(styles);
 
 interface SortDropdownType {
-  selectedSort: 'all' | 'followed' | 'myGeneration';
-  setSelectedSort: (args: 'all' | 'followed' | 'myGeneration') => void;
+  selectedSort: SortType;
+  setSelectedSort: (args: SortType) => void;
 }
 
 /**
@@ -21,19 +22,13 @@ export default function SortDropdown({
   selectedSort,
   setSelectedSort,
 }: SortDropdownType) {
-  const SORT_TYPES = {
-    all: '전체',
-    followed: '팔로우',
-    myGeneration: '내 기수',
-  };
-
   const [isExpanded, setIsExpanded] = useState(false);
 
   const sortExpandHandler = () => {
     setIsExpanded(!isExpanded);
   };
 
-  const sortTypeHandler = (type: 'all' | 'followed' | 'myGeneration') => {
+  const sortTypeHandler = (type: SortType) => {
     setSelectedSort(type);
     setIsExpanded(false);
   };
@@ -45,7 +40,7 @@ export default function SortDropdown({
         onClick={sortExpandHandler}
         className={cn('dropdown-expand-button')}
       >
-        {SORT_TYPES[selectedSort]}
+        {SORT_OPTION[selectedSort]}
         <div className={cn('icon-container')}>
           {isExpanded ? (
             <UpIcon className={cn('dropdown-arrow')} width="18" height="18" />
@@ -61,15 +56,13 @@ export default function SortDropdown({
           role="button"
           tabIndex={0}
         >
-          {Object.entries(SORT_TYPES).map(([type, label], idx) => (
+          {Object.entries(SORT_OPTION).map(([type, label], idx) => (
             <button
               key={type}
-              onClick={() =>
-                sortTypeHandler(type as 'all' | 'followed' | 'myGeneration')
-              }
+              onClick={() => sortTypeHandler(type as SortType)}
               className={cn('expanded-dropdown-list', {
                 'first-item': idx === 0,
-                'last-item': idx === Object.keys(SORT_TYPES).length - 1,
+                'last-item': idx === Object.keys(SORT_OPTION).length - 1,
               })}
               type="button"
             >

@@ -2,7 +2,7 @@ import styles from './Generation.module.scss';
 import classNames from 'classnames/bind';
 
 type GenerationType = {
-  generationInfo?: number;
+  generationInfo?: number | null;
 };
 
 const cn = classNames.bind(styles);

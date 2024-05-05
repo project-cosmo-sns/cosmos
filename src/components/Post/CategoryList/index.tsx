@@ -6,6 +6,7 @@ import styles from './CategoryList.module.scss';
 interface CategoryListProps {
   selectedCategory: string;
   setSelectedCategory: (args: string) => void;
+  isPostWrite?: boolean;
 }
 
 const cn = classNames.bind(styles);
@@ -13,14 +14,17 @@ const cn = classNames.bind(styles);
 export default function CategoryList({
   selectedCategory,
   setSelectedCategory,
+  isPostWrite = false,
 }: CategoryListProps) {
   return (
     <div className={cn('category-box')}>
-      <CategoryFlag
-        category="전체"
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+      {!isPostWrite && (
+        <CategoryFlag
+          category="전체"
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+      )}
       {CATEGORY_LIST.map((category) => (
         <CategoryFlag
           key={category}
