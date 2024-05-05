@@ -10,7 +10,7 @@ const cn = classNames.bind(styles);
 export default function TermBadge({ term }: TermBadgeTypes) {
   return (
     <div className={cn('term-badge')}>
-      <span>{term}기</span>
+      {term ? <span>{term}기</span> : <span>미등록</span>}
     </div>
   );
 }

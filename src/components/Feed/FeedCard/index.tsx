@@ -1,22 +1,27 @@
-import { Dispatch, SetStateAction, useState } from 'react';
 import Image from 'next/image';
+import { Dispatch, SetStateAction, useState } from 'react';
 import classNames from 'classnames/bind';
-import styles from './FeedCard.module.scss';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
-import { FeedData } from '../FeedList/mockData';
-import { useRouter } from 'next/router';
+import Modal from '@/components/Common/Layout/Modal';
+import { deleteFeed, editFeed, Edits } from '@/components/Feed/FeedCard/api';
+import styles from './FeedCard.module.scss';
+import { FeedDetailType } from '../types';
 
 interface FeedCardTypes {
-  feedData: FeedData;
+  feedData: FeedDetailType;
   modalVisible?: boolean;
   toggleModal?: Dispatch<SetStateAction<boolean>>;
   hasPadding: boolean;
   forDetails?: boolean;
+  onClick?: () => void;
 }
 
+const cn = classNames.bind(styles);
+
 /**
- * @param {FeedData} feedData - 임시로 만든 목데이터 입니다. api 가 완성되면 교체해줄 예정입니다.
+ * @param {FeedData} feedData - 서버사이드 렌더링, getServerSideProps에서 getFeedList 요청에서 받아온 데이터입니다.
  * @param {boolean} modalVisible - 상위 컴포넌트의 모달 출력 여부 상태 변수입니다.
  * @param {Dispatch<SetStateAction<boolean>>} toggleModal - 상위 컴포넌트의 모달 출력 상태를 설정하는 세터함수입니다.
  * @param {boolean} hasPadding - 피드 상세와 피드 리스트 패딩 값이 달라 만들었습니다.
@@ -26,24 +31,34 @@ interface FeedCardTypes {
 
 export default function FeedCard({
   feedData,
-  modalVisible = false,
-  toggleModal,
   hasPadding,
   forDetails,
+  onClick,
 }: FeedCardTypes) {
-  const cn = classNames.bind(styles);
-  const router = useRouter();
+  const [emojiVisible, setEmojiVisible] = useState<boolean>(false);
+  const [moreModalOpen, setMoreModalOpen] = useState(false);
+  const [isEdit, setIsEdit] = useState<boolean>(false);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Edits>();
+
   const {
     id,
-    author,
-    createdAt,
     content,
-    images,
-    reactionCount,
-    commentsCount,
-    eyeCount,
-  } = feedData;
-  const [emojiVisible, setEmojiVisible] = useState<boolean>(false);
+    viewCount,
+    commentCount,
+    emojiCount,
+    createdAt,
+    imageUrls,
+  } = feedData.feed;
+
+  const onSubmit: SubmitHandler<Edits> = (data) => {
+    setIsEdit(false);
+    editFeed(id, data, imageUrls);
+  };
+
   return (
     <div
       className={cn(
@@ -53,41 +68,102 @@ export default function FeedCard({
       )}
     >
       <div className={cn('wrapper')}>
-        <div
-          className={cn('user-content')}
-          onClick={async () => {
-            await router.push(`?id=${id}`);
-            toggleModal && toggleModal(!modalVisible);
-          }}
-        >
+        <div className={cn('user-content')} onClick={onClick}>
           <div className={cn('profile-content-wrapper')}>
-            <AuthorProfile author={author} createdAt={createdAt} />
-            <div className={cn('content')}>{content}</div>
+            <AuthorProfile author={feedData.writer} createdAt={createdAt} />
+            {isEdit ? (
+              <form onSubmit={handleSubmit(onSubmit)}>
+                <textarea
+                  defaultValue={content}
+                  className={cn('text')}
+                  placeholder="글을 작성해보세요."
+                  {...register('feedContent', {
+                    required: '게시글을 작성해주세요',
+                  })}
+                />
+                {errors.feedContent && (
+                  <span className={cn('error')}>
+                    {errors.feedContent.message}
+                  </span>
+                )}
+                <button type="submit">편집완료</button>
+              </form>
+            ) : (
+              <div className={cn('content')}>{content}</div>
+            )}
           </div>
-          {images && (
+          {!!imageUrls?.length && (
             <div className={cn('upload-image-wrapper')}>
               <div className={cn('upload-image')}>
                 <Image
+                  sizes="(max-width: 768px) 100vw, 33vw"
                   fill
-                  objectFit="cover"
-                  src={images[0].imageUrl}
+                  style={{ objectFit: 'cover' }}
+                  src={`${imageUrls[0]}`}
                   alt="feedImage"
                 />
               </div>
-              {images.length > 1 && (
-                <span className={cn('extra-stuff')}>+ {images.length - 1}</span>
+              {imageUrls.length > 1 && (
+                <span className={cn('extra-stuff')}>
+                  + {imageUrls.length - 1}
+                </span>
               )}
             </div>
           )}
         </div>
         <ReactionContainer
-          emoji={reactionCount}
-          commentsCount={commentsCount}
-          views={eyeCount}
+          emoji={emojiCount}
+          commentsCount={commentCount}
+          views={viewCount}
           emojiVisible={emojiVisible}
           handleEmojiClick={setEmojiVisible}
           forDetails={forDetails}
         />
+        {hasPadding || (
+          <div>
+            {isEdit ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setIsEdit(false);
+                  console.log('편집 상태 false로 변경');
+                }}
+              >
+                취소하기
+              </button>
+            ) : (
+              <div>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsEdit(true);
+                    console.log('편집상태 true로 변경');
+                  }}
+                >
+                  편집하기
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    console.log('삭제하기');
+                    deleteFeed(id);
+                  }}
+                >
+                  삭제하기
+                </button>
+              </div>
+            )}
+            <Modal
+              title="임시모달"
+              cssModalSize={cn('')}
+              cssComponentDisplay={cn('')}
+              modalVisible={moreModalOpen}
+              toggleModal={setMoreModalOpen}
+            >
+              <div>테스트 모달</div>
+            </Modal>
+          </div>
+        )}
       </div>
     </div>
   );

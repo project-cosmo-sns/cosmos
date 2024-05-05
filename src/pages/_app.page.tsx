@@ -25,7 +25,6 @@ export default function App({ Component, pageProps }: AppProps) {
         </QueryProvider>
       </CookiesProvider>
       <div id="modal-root" />
-      <div id="popover-root" />
     </>
   );
 }

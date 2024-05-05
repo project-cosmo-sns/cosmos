@@ -11,11 +11,27 @@ import PostList from '@/components/Post/PostList';
 import ScrapList from '@/components/Common/ScrapList';
 import fetchData from '@/api/fetchData';
 import { useQuery } from '@tanstack/react-query';
-import { FeedData } from '@/components/Feed/FeedList/mockData';
+import { getFeedList } from '@/components/Feed/FeedList/api';
+import { FeedListType, FeedDetailType } from '@/components/Feed/types';
 
 const cn = classNames.bind(styles);
 
-export default function MemberDataContainer() {
+export const getServerSideProps = async () => {
+  const feedList: FeedListType = await getFeedList();
+  return {
+    props: {
+      feedList: feedList.data,
+    },
+  };
+};
+
+interface MemberDataContainerPropsType {
+  feedList: FeedDetailType[];
+}
+
+export default function MemberDataContainer({
+  feedList,
+}: MemberDataContainerPropsType) {
   const [memberData, setMemberData] = useState<MemberDataType | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOption, setSelectedOption] =
@@ -61,7 +77,7 @@ export default function MemberDataContainer() {
   const renderContent = () => {
     switch (selectedOption) {
       case 'feed':
-        return <FeedList />;
+        return <FeedList feedList={feedList} />;
       case 'post':
         return <PostList selectedSort={selectedSort} isMyProfile />;
       case 'scrap':
