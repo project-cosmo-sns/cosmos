@@ -1,24 +1,39 @@
-import { Author } from '@/pages/post/[postId]/mockData';
+import { Member } from '../type';
 import classNames from 'classnames/bind';
 import styles from './SearchAuthorProfile.module.scss';
 import Image from 'next/image';
 import GenerationBadge from '@/components/Common/GenerationBadge';
+import FollowButton from '../FollowButton';
 
 interface SearchAuthorProfileProps {
-  author: Author;
+  member: Member;
 }
 
 const cn = classNames.bind(styles);
 
-export default function SearchAuthorProfile() {
+export default function SearchAuthorProfile({
+  member,
+}: SearchAuthorProfileProps) {
+  const {
+    nickname,
+    generation,
+    profileImageUrl,
+    introduce,
+    followerCount,
+    followingCount,
+    isFollowing,
+    isMine,
+  } = member;
+
+  // isFollowing은 팔로우 버튼 변하는거에 따라서... 수정해서 넣어야 할것같습니다! 그래서 일단 false로 통일합니다.
+
+  console.log(isFollowing);
+
   return (
     <div className={cn('search-profile')}>
       <Image
         className={cn('profile-image')}
-        src={
-          // profileImageUrl ||
-          '/images/profile.svg'
-        }
+        src={profileImageUrl || '/images/profile.svg'}
         alt="profile_image"
         width={86}
         height={86}
@@ -26,23 +41,30 @@ export default function SearchAuthorProfile() {
       />
       <div className={cn('profile-infomation')}>
         <div className={cn('profile-name')}>
-          <h3>코스모스</h3>
-          <GenerationBadge />
+          <h3>{nickname}</h3>
+          <GenerationBadge generationInfo={generation} />
         </div>
         <div className={cn('profile-follow')}>
           <div>
             <span>팔로워</span>
-            <strong>100</strong>
+            <strong>{followerCount}</strong>
           </div>
           <div>
             <span>팔로잉</span>
-            <strong>100</strong>
+            <strong>{followingCount}</strong>
           </div>
         </div>
         <div className={cn('profile-description')}>
-          <p>소개가 없습니다.</p>
+          <p>{introduce || '소개가 없습니다.'}</p>
         </div>
       </div>
+
+      {!isMine && (
+        <FollowButton
+          onClick={() => console.log('팔로우클릭')}
+          isFollow={false}
+        />
+      )}
     </div>
   );
 }

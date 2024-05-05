@@ -2,9 +2,9 @@
   @include glass-01;
   @include flex-arrange(flex-start);
   gap: 20px;
-
   width: 100%;
   padding: 30px 38px;
+  position: relative;
   border-radius: 10px;
   border-width: 0;
   color: $white-01;
@@ -45,5 +45,11 @@
 
   .profile-description {
     @include font-style(14px, $gray-01, 500);
+  }
+
+  button {
+    position: absolute;
+    top: 30px;
+    right: 23px;
   }
 }
