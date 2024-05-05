@@ -5,6 +5,10 @@ import NotificationItem from './NotificationItem';
 import { BackIcon, SettingIcon } from '../../IconCollection';
 import { useState } from 'react';
 import NotificationModal from './NotificationModal';
+import { NotificationResult } from './type';
+import { useQuery } from '@tanstack/react-query';
+import fetchData from '@/api/fetchData';
+import LoadingSpinner from '@/components/Common/LoadingSpinner';
 
 type PopOverProps = {
   onClose: () => void;
@@ -15,63 +19,25 @@ const cn = classNames.bind(styles);
 export default function Notification({ onClose }: PopOverProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const mockData = [
-    {
-      id: 1,
-      author: {
-        id: '아이디',
-        nickname: '닉네임',
-        profileImage: null,
-      },
-      text: '무슨 텍스트가 올까요...?',
-      createdAt: '2시간 전',
-      isRead: false,
-    },
-    {
-      id: 2,
-      author: {
-        id: '아이디',
-        nickname: '닉네임',
-        profileImage: null,
-      },
-      text: '무슨 텍스트가 올까요...?',
-      createdAt: '2시간 전',
-      isRead: false,
-    },
-    {
-      id: 3,
-      author: {
-        id: '아이디',
-        nickname: '닉네임',
-        profileImage: null,
-      },
-      text: '무슨 텍스트가 올까요...?',
-      createdAt: '2시간 전',
-      isRead: false,
-    },
-    {
-      id: 4,
-      author: {
-        id: '아이디',
-        nickname: '닉네임',
-        profileImage: null,
-      },
-      text: '무슨 텍스트가 올까요...?',
-      createdAt: '2시간 전',
-      isRead: false,
-    },
-    {
-      id: 5,
-      author: {
-        id: '아이디',
-        nickname: '닉네임',
-        profileImage: null,
-      },
-      text: '무슨 텍스트가 올까요...?',
-      createdAt: '2시간 전',
-      isRead: true,
-    },
-  ];
+  const {
+    data: notification,
+    isLoading,
+    isSuccess,
+  } = useQuery<NotificationResult>({
+    queryKey: ['notification'],
+    queryFn: () =>
+      fetchData({
+        param: `/notification/list?order=DESC&page=1&take=10`,
+      }),
+  });
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (!isSuccess || !notification.data || notification.data.length === 0) {
+    return <div>알림이 없습니다.</div>;
+  }
 
   return (
     <PopOver onClose={onClose} className={cn('notification-popover')}>
@@ -88,9 +54,13 @@ export default function Notification({ onClose }: PopOverProps) {
         fill="#C2C7D9"
       />
 
-      {mockData.map((notification) => (
-        <NotificationItem key={notification.id} data={notification} />
+      {notification.data.map((notificationitem) => (
+        <NotificationItem
+          key={notificationitem.notification.id}
+          data={notificationitem}
+        />
       ))}
+
       {isModalOpen && (
         <NotificationModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
       )}

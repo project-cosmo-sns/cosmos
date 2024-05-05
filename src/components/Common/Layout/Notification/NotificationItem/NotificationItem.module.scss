@@ -1,9 +1,11 @@
 .notification-item {
   @include flex-arrange(space-between, center);
   gap: 12px;
-  margin-bottom: 12px;
+  padding: 6px 0;
   line-height: 1.5em;
   color: $white-01;
+  cursor: pointer;
+  border-radius: 10px;
 
   @media (min-width: 768px) {
     gap: 6px;
@@ -35,5 +37,9 @@
     &.isRead {
       background: transparent;
     }
+  }
+
+  &:hover {
+    background-color: $black-02;
   }
 }

@@ -2,44 +2,37 @@ import classNames from 'classnames/bind';
 import styles from './NotificationItem.module.scss';
 import { ProfileIconDark } from '@/components/Common/IconCollection';
 import Image from 'next/image';
+import { NotificationData } from '../type';
+import getElapsedTime from '@/utils/getElaspedTime';
 
 const cn = classNames.bind(styles);
 
-// 임시 타입
-type Notification = {
-  author: {
-    nickname: string;
-    profileImage: string | null;
-  };
-  text: string;
-  createdAt: string;
-  isRead: boolean;
-};
-
 type NotificationItemProps = {
-  data: Notification;
+  data: NotificationData;
 };
 
 export default function NotificationItem({ data }: NotificationItemProps) {
   const {
-    author: { nickname, profileImage },
-    text,
-    createdAt,
-    isRead,
+    sendMember,
+    notification: { content, notificationType, isConfirmed, createdAt },
   } = data;
+
+  // notificationType따른 동작 분기 처리가 필요함. 피드/팔로우...가 들어오면? 해볼까? 임시로 포스트부터 붙여보기.
+
+  const formattedCreatedAt = getElapsedTime(createdAt);
+
   return (
-    // 날짜 관련은 데이터 들어오는것 보고...! 추가로 수정하겠습니다
     <div className={cn('notification-item')}>
-      {profileImage ? (
-        <Image src="profileImage" alt="프로필 이미지" />
+      {sendMember.profileImageUrl ? (
+        <Image src={sendMember.profileImageUrl} alt="프로필 이미지" />
       ) : (
         <ProfileIconDark width="54" height="54" />
       )}
       <p>
-        <strong>{nickname}</strong>님이 {text} 했습니다.
-        <span>{createdAt}</span>
+        <strong>{content}</strong>
+        <span>{formattedCreatedAt}</span>
       </p>
-      <span className={cn('notification-dot', { isRead })} />
+      <span className={cn('notification-dot', { isConfirmed })} />
     </div>
   );
 }
