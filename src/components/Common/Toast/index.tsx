@@ -10,16 +10,24 @@ const cn = classNames.bind(styles);
  */
 
 type toastType = {
+  isVisible: boolean;
   text: string;
   icon: string | React.ElementType;
   fill?: string;
 };
 
-export default function Toast({ text, icon: Icon, fill }: toastType) {
+export default function Toast({
+  isVisible,
+  text,
+  icon: Icon,
+  fill,
+}: toastType) {
   return (
-    <div className={cn('toast-container')}>
-      <Icon fill={fill} />
-      {text}
-    </div>
+    isVisible && (
+      <div className={cn('toast-container')}>
+        <Icon fill={fill} />
+        {text}
+      </div>
+    )
   );
 }

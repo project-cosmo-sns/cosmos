@@ -18,10 +18,7 @@ export default function PostEditor({ postId, setData }: PostEditorProps) {
   const [titleValue, setTitleValue] = useState('');
   const [contentValue, setContentValue] = useState<string | undefined>();
   const [hashtags, setHashtags] = useState<Tag[]>([]);
-
-  const [selectedCategory, setSelectedCategory] = useState<string | '전체'>(
-    '전체',
-  );
+  const [selectedCategory, setSelectedCategory] = useState<string>('전체');
 
   useEffect(() => {
     if (postId) {

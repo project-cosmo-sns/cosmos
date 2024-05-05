@@ -61,13 +61,12 @@ export default function Home({ feedList }: HomePropsType) {
           <PostList selectedSort={selectedSort} />
         )}
       </ContentContainer>
-      {toastVisible && (
-        <Toast
-          text="인증 신청이 완료되었습니다"
-          icon={CheckIcon}
-          fill="#0ACF83"
-        />
-      )}
+      <Toast
+        isVisible={toastVisible}
+        text="인증 신청이 완료되었습니다"
+        icon={CheckIcon}
+        fill="#0ACF83"
+      />
     </div>
   );
 }

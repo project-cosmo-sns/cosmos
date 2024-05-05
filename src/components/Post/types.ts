@@ -1,29 +1,8 @@
 export interface WriterType {
-  id: string;
+  id: number;
   nickname: string;
   generation: number;
-  profileImageUrl: string;
-}
-
-export interface CommentType {
-  writer: WriterType;
-  id: number;
-  content: string;
-  heartCount: number;
-  isHearted: boolean;
-  createdAt: string;
-}
-
-export interface CommentListType {
-  data: CommentType[];
-  meta: {
-    page: number;
-    take: number;
-    totalCount: number;
-    pageCount: number;
-    hasPreviousPage: boolean;
-    hasNextPage: boolean;
-  };
+  profileImageUrl: string | null;
 }
 
 export interface HashTagType {
@@ -35,7 +14,7 @@ export interface HashTagRequestType extends HashTagType {
   hashTagId: number | null;
 }
 
-export interface PostRequestDataType {
+export interface PostRequestType {
   category: string;
   title: string;
   content: string;
@@ -44,6 +23,7 @@ export interface PostRequestDataType {
 
 export interface PostType {
   id: number;
+  category: string;
   title: string;
   content: string;
   viewCount: number;
@@ -52,16 +32,56 @@ export interface PostType {
   createdAt: string;
 }
 
-export interface PostDetailType {
-  postListInfo: {
-    writer: WriterType;
-    post: PostType;
-  };
-  postListHashTag: HashTagType[];
+export interface PostListInfoType {
+  writer: WriterType;
+  post: PostType;
 }
 
-export interface PostListDataType {
-  data: PostDetailType[];
+export interface PostListType {
+  data: {
+    postListInfo: PostListInfoType;
+    postListHashTag: HashTagType[];
+  }[];
+  meta: {
+    page: number;
+    take: number;
+    totalCount: number;
+    pageCount: number;
+    hasPreviousPage: boolean;
+    hasNextPage: boolean;
+  };
+}
+
+export type EmojiCode = 'HEART' | 'THUMBSUP' | 'LAUGH' | 'SAD' | 'CHECK' | 'ME';
+
+export interface EmojiType {
+  emojiCode: EmojiCode;
+  emojiCount: number;
+  isClicked: boolean;
+}
+
+export interface PostDetailType {
+  postDetail: {
+    writer: WriterType;
+    post: PostType;
+    hashTag: HashTagType[];
+    emoji: EmojiType[];
+  };
+}
+
+export interface CommentType {
+  id: number;
+  content: string;
+  heartCount: number;
+  isHearted: boolean;
+  createdAt: string;
+}
+
+export interface PostCommentListType {
+  data: {
+    writer: WriterType;
+    comment: CommentType;
+  }[];
   meta: {
     page: number;
     take: number;
