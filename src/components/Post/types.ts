@@ -31,11 +31,13 @@ export interface PostListInfoType {
   post: PostType;
 }
 
+export interface PostListDataType {
+  postListInfo: PostListInfoType;
+  postListHashTag: HashTagType[];
+}
+
 export interface PostListType {
-  data: {
-    postListInfo: PostListInfoType;
-    postListHashTag: HashTagType[];
-  }[];
+  data: PostListDataType[];
   meta: {
     page: number;
     take: number;
