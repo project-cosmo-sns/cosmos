@@ -63,7 +63,9 @@ export default function MemberDataContainer({
             setIsModalOpen={setIsModalOpen}
           />
         )}
+
         {/* <MyPostList memberData={memberData} /> */}
+
         {/* <ContentContainer
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
