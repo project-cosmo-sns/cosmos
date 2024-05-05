@@ -1,8 +1,3 @@
-// export default function MyFeedList({ feedsData }) {
-//   // 내가 쓴 글만 필터링
-//   const myFeeds = postsData.filter((feed) => feed.writer.id === currentUserId);
-// }
-
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import FeedDetails from '@/components/Feed/FeedDetails/index';
