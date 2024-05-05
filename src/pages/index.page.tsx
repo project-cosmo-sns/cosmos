@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useRouter } from 'next/router';
 import classNames from 'classnames/bind';
 import { ContainerOptionType } from '@/@types/type';
@@ -33,18 +33,7 @@ export default function Home({ feedList }: HomePropsType) {
   const [selectedSort, setSelectedSort] = useState<
     'all' | 'followed' | 'myGeneration'
   >('all');
-  const [toastVisible, setToastVisible] = useState(false);
   const router = useRouter();
-
-  useEffect(() => {
-    if (localStorage.getItem('generation')) {
-      setToastVisible(true);
-      setTimeout(() => {
-        setToastVisible(false);
-        localStorage.removeItem('generation');
-      }, 5000);
-    }
-  }, []);
 
   return (
     <div className={cn('home-container')}>
@@ -61,13 +50,11 @@ export default function Home({ feedList }: HomePropsType) {
           <PostList selectedSort={selectedSort} />
         )}
       </ContentContainer>
-      {toastVisible && (
-        <Toast
-          text="인증 신청이 완료되었습니다"
-          icon={CheckIcon}
-          fill="#0ACF83"
-        />
-      )}
+      {/* <Toast
+        text="인증 신청이 완료되었습니다"
+        icon={CheckIcon}
+        fill="#0ACF83"
+      /> */}
     </div>
   );
 }
