@@ -29,7 +29,6 @@
 .header-container {
   display: flex;
   flex-direction: column;
-  border-radius: 10px 10px 0 0;
 }
 
 .post-type {
@@ -44,7 +43,7 @@
   position: sticky;
   top: 65px;
   z-index: 3;
-  background-color: #10131aec;
+  background: linear-gradient(to right, #171a27, #282c3e);
 
   transition: top 0.5s ease-in-out;
 }
@@ -53,7 +52,7 @@
   position: sticky;
   top: -10px;
   z-index: 3;
-  background-color: #10131aec;
+  background: linear-gradient(to right, #171a27, #282c3e);
 
   transition: top 0.5s ease-in-out;
 }
@@ -155,6 +154,10 @@
     width: 614px;
     border-radius: 10px;
     border: $glass-edge-01;
+  }
+
+  .header-container {
+    border-radius: 10px 10px 0 0;
   }
 
   .dropdown {
