@@ -1,13 +1,12 @@
 import fetchData from '@/api/fetchData';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
-import { BackIcon, WarnIcon } from '@/components/Common/IconCollection';
-import Toast from '@/components/Common/Toast';
+import { BackIcon } from '@/components/Common/IconCollection';
 import PostEditor from '@/components/Post/PostEditor';
 import { PostRequestType } from '@/components/Post/types';
 import { useMutation } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styles from './PostWritePage.module.scss';
 
 const cn = classNames.bind(styles);
@@ -20,7 +19,6 @@ export default function PostWritePage() {
     content: '',
     hashTags: [],
   });
-  const [isToastVisible, setIsToastVisible] = useState(false);
 
   const { postId } = router.query;
 
@@ -50,7 +48,7 @@ export default function PostWritePage() {
 
   const handleSubmitPostData = () => {
     if (!data.title && !data.content) {
-      setIsToastVisible(true);
+      // setIsToastVisible(true);
       return;
     }
     if (postId) {
@@ -59,12 +57,6 @@ export default function PostWritePage() {
     }
     createMutate();
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (isToastVisible) setIsToastVisible(false);
-    }, 5000);
-  });
 
   return (
     <div className={cn('wrapper')}>
@@ -90,11 +82,10 @@ export default function PostWritePage() {
           {postId ? '수정하기' : '등록하기'}
         </DefaultButton>
       </div>
-      <Toast
+      {/* <Toast
         text="내용을 입력해주세요"
         icon={WarnIcon}
-        isVisible={isToastVisible}
-      />
+      /> */}
     </div>
   );
 }

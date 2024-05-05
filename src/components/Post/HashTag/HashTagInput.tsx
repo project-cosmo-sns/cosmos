@@ -1,15 +1,12 @@
 import fetchData from '@/api/fetchData';
-import { WarnIcon } from '@/components/Common/IconCollection';
-import Toast from '@/components/Common/Toast';
-import { Tag } from '@/pages/post/[postId]/mockData';
+import { HashTagType } from '@/components/Post/types';
+import { HASH_TAG_COLORS, HASH_TAG_COLOR_CODE } from '@/constants/hashTagCode';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import React, { useEffect, useState } from 'react';
 import HashTag from '.';
 import styles from './HashTagInput.module.scss';
 import HashTagRecommend from './HashTagRecommend';
-import { HashTagType } from '@/components/Post/types';
-import { HASH_TAG_COLORS, HASH_TAG_COLOR_CODE } from '@/constants/hashTagCode';
 
 interface HashTagInputProps {
   hashtags: HashTagType[];
@@ -25,7 +22,7 @@ export default function HashTagInput({
   const [tagValue, setTagValue] = useState<string>('');
   const [isToastVisible, setIsToastVisible] = useState(false);
 
-  const { data, isPending, isSuccess, isError } = useQuery<HashTagType[]>({
+  const { data, isSuccess } = useQuery<HashTagType[]>({
     queryKey: ['hashtag', tagValue],
     queryFn: () =>
       fetchData({
@@ -74,7 +71,7 @@ export default function HashTagInput({
     }
   };
 
-  // X 버튼으로 선택한 해시태그를 지우는 함수
+  // X 버튼 클릭 시 선택한 해시태그를 지우는 함수
   const handleDeleteHashtag = (name: string) => {
     const updatedHashtags = hashtags.filter((tag) => tag.tagName !== name);
     setHashtags(updatedHashtags);
@@ -128,13 +125,12 @@ export default function HashTagInput({
           handleAddHashtag={handleAddHashtag}
         />
       )}
-      <div className={cn('toast-container')}>
+      {/* <div className={cn('toast-container')}>
         <Toast
-          isVisible={isToastVisible}
           icon={WarnIcon}
           text="최대 5개의 해시태그만 추가할 수 있습니다."
         />
-      </div>
+      </div> */}
     </div>
   );
 }
