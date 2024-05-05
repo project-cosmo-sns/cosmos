@@ -1,3 +1,5 @@
+import { HASH_TAG_COLOR_CODE } from '@/constants/hashTagCode';
+
 export interface WriterType {
   id: number;
   nickname: string;
@@ -7,7 +9,7 @@ export interface WriterType {
 
 export interface HashTagType {
   tagName: string;
-  color: string;
+  color: HASH_TAG_COLOR_CODE;
 }
 
 export interface HashTagRequestType extends HashTagType {

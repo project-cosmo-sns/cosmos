@@ -7,12 +7,13 @@ import classNames from 'classnames/bind';
 import React, { useEffect, useState } from 'react';
 import HashTag from '.';
 import styles from './HashTagInput.module.scss';
-import { HashTagType } from '../types';
 import HashTagRecommend from './HashTagRecommend';
+import { HashTagType } from '@/components/Post/types';
+import { HASH_TAG_COLORS, HASH_TAG_COLOR_CODE } from '@/constants/hashTagCode';
 
 interface HashTagInputProps {
-  hashtags: Tag[];
-  setHashtags: (args: Tag[]) => void;
+  hashtags: HashTagType[];
+  setHashtags: (args: HashTagType[]) => void;
 }
 
 const cn = classNames.bind(styles);
@@ -36,11 +37,11 @@ export default function HashTagInput({
   const handleAddHashtag = ({
     event,
     name,
-    color,
+    colorCode,
   }: {
     event?: React.KeyboardEvent<HTMLInputElement>;
     name?: string;
-    color?: string;
+    colorCode?: HASH_TAG_COLOR_CODE;
   }) => {
     event?.preventDefault();
     const trimmedTagValue = tagValue.trim();
@@ -54,7 +55,7 @@ export default function HashTagInput({
       }
       // 해시태그 중복값 및 한글, 영어, 숫자 외 값 입력 시 hashtag 배열에 추가하지 않고 입력값 초기화
       if (
-        hashtags.some((tag) => tag.name === `${trimmedTagValue}`) ||
+        hashtags.some((tag) => tag.tagName === `${trimmedTagValue}`) ||
         regex.test(trimmedTagValue)
       ) {
         setTagValue('');
@@ -65,8 +66,8 @@ export default function HashTagInput({
       setHashtags([
         ...hashtags,
         {
-          name: name || `${trimmedTagValue}`,
-          color: color ? `hashtag${color}` : `hashtag${randomNumber}`,
+          tagName: name || `${trimmedTagValue}`,
+          color: colorCode || HASH_TAG_COLORS[randomNumber].code,
         },
       ]);
       setTagValue('');
@@ -74,8 +75,8 @@ export default function HashTagInput({
   };
 
   // X 버튼으로 선택한 해시태그를 지우는 함수
-  const handleDeleteHashtag = (tagName: string) => {
-    const updatedHashtags = hashtags.filter((tag) => tag.name !== tagName);
+  const handleDeleteHashtag = (name: string) => {
+    const updatedHashtags = hashtags.filter((tag) => tag.tagName !== name);
     setHashtags(updatedHashtags);
   };
 
@@ -109,7 +110,7 @@ export default function HashTagInput({
         <HashTag
           key={`${tag}${index}`}
           tag={tag}
-          handleClick={() => handleDeleteHashtag(tag.name)}
+          handleClick={() => handleDeleteHashtag(tag.tagName)}
         />
       ))}
       <input

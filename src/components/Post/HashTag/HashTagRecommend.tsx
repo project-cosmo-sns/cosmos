@@ -1,6 +1,7 @@
 import classNames from 'classnames/bind';
 import { HashTagType } from '../types';
 import styles from './HashTagRecommendProps.module.scss';
+import { HASH_TAG_COLOR_CODE } from '@/constants/hashTagCode';
 
 interface HashTagRecommendProps {
   hashTagList: HashTagType[];
@@ -8,11 +9,11 @@ interface HashTagRecommendProps {
   handleAddHashtag: ({
     event,
     name,
-    color,
+    colorCode,
   }: {
     event?: React.KeyboardEvent<HTMLInputElement>;
     name?: string;
-    color?: string;
+    colorCode?: HASH_TAG_COLOR_CODE;
   }) => void;
 }
 
@@ -31,7 +32,10 @@ export default function HashTagRecommend({
           className={cn('hashtag-container')}
           onClick={() => {
             setTagValue(hashTag.tagName);
-            handleAddHashtag({ name: hashTag.tagName, color: hashTag.color });
+            handleAddHashtag({
+              name: hashTag.tagName,
+              colorCode: hashTag.color,
+            });
           }}
         >
           # {hashTag.tagName}

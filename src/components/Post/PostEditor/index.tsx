@@ -5,6 +5,7 @@ import CategoryList from '../CategoryList';
 import HashTagInput from '../HashTag/HashTagInput';
 import MarkdownEditor from '../MarkdownEditor';
 import styles from './PostEditor.module.scss';
+import { HashTagType } from '../types';
 
 interface PostEditorProps {
   postId: string;
@@ -17,7 +18,7 @@ export default function PostEditor({ postId, setData }: PostEditorProps) {
   // 임시로 기본값 postId와 같은 포스트 mockData에서 불러옴. 추후 요청해서 받아오도록 수정
   const [titleValue, setTitleValue] = useState('');
   const [contentValue, setContentValue] = useState<string | undefined>();
-  const [hashtags, setHashtags] = useState<Tag[]>([]);
+  const [hashtags, setHashtags] = useState<HashTagType[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('전체');
 
   useEffect(() => {

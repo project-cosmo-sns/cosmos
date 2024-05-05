@@ -1,3 +1,5 @@
+import { HashTagType } from '@/components/Post/types';
+
 // 임시 데이터 및 타입
 export interface Author {
   id: string;
@@ -27,7 +29,7 @@ export interface PostData {
   author: Author;
   createdAt: string;
   content: string;
-  tags: Tag[];
+  tags: HashTagType[];
   emoji: number;
   views: number;
   comments: Comment[];
@@ -104,11 +106,11 @@ def hello():
   - [ ] Task 2
 `,
     tags: [
-      { name: '코스모스', color: 'hashtag1' },
-      { name: '포스트', color: 'hashtag2' },
-      { name: '해시태그', color: 'hashtag3' },
-      { name: '예시', color: 'hashtag4' },
-      { name: '입니다', color: 'hashtag5' },
+      { tagName: '코스모스', color: 'hashtag1' },
+      { tagName: '포스트', color: 'hashtag2' },
+      { tagName: '해시태그', color: 'hashtag3' },
+      { tagName: '예시', color: 'hashtag4' },
+      { tagName: '입니다', color: 'hashtag5' },
     ],
     emoji: 3,
     views: 5,
@@ -169,11 +171,11 @@ def hello():
 <br/><br/>
 `,
     tags: [
-      { name: '코스모스', color: 'hashtag1' },
-      { name: '포스트', color: 'hashtag2' },
-      { name: '해시태그', color: 'hashtag3' },
-      { name: '예시', color: 'hashtag4' },
-      { name: '입니다', color: 'hashtag5' },
+      { tagName: '코스모스', color: 'hashtag1' },
+      { tagName: '포스트', color: 'hashtag2' },
+      { tagName: '해시태그', color: 'hashtag3' },
+      { tagName: '예시', color: 'hashtag4' },
+      { tagName: '입니다', color: 'hashtag5' },
     ],
     emoji: 3,
     views: 5,
@@ -233,11 +235,11 @@ def hello():
 
 `,
     tags: [
-      { name: '코스모스', color: 'hashtag1' },
-      { name: '포스트', color: 'hashtag2' },
-      { name: '해시태그', color: 'hashtag3' },
-      { name: '예시', color: 'hashtag4' },
-      { name: '입니다', color: 'hashtag5' },
+      { tagName: '코스모스', color: 'hashtag1' },
+      { tagName: '포스트', color: 'hashtag2' },
+      { tagName: '해시태그', color: 'hashtag3' },
+      { tagName: '예시', color: 'hashtag4' },
+      { tagName: '입니다', color: 'hashtag5' },
     ],
     emoji: 3,
     views: 5,
@@ -291,11 +293,11 @@ def hello():
 [3차 오프라인 행사 신청서](https://forms.gle/UYN8kTK32XueXLwS7)를 제출하고 DM 부탁드려요!
 `,
     tags: [
-      { name: '코스모스', color: 'hashtag1' },
-      { name: '포스트', color: 'hashtag2' },
-      { name: '해시태그', color: 'hashtag3' },
-      { name: '예시', color: 'hashtag4' },
-      { name: '입니다', color: 'hashtag5' },
+      { tagName: '코스모스', color: 'hashtag1' },
+      { tagName: '포스트', color: 'hashtag2' },
+      { tagName: '해시태그', color: 'hashtag3' },
+      { tagName: '예시', color: 'hashtag4' },
+      { tagName: '입니다', color: 'hashtag5' },
     ],
     emoji: 3,
     views: 5,
@@ -356,11 +358,11 @@ def hello():
 <br/><br/>
 `,
     tags: [
-      { name: '코스모스', color: 'hashtag1' },
-      { name: '포스트', color: 'hashtag2' },
-      { name: '해시태그', color: 'hashtag3' },
-      { name: '예시', color: 'hashtag4' },
-      { name: '입니다', color: 'hashtag5' },
+      { tagName: '코스모스', color: 'hashtag1' },
+      { tagName: '포스트', color: 'hashtag2' },
+      { tagName: '해시태그', color: 'hashtag3' },
+      { tagName: '예시', color: 'hashtag4' },
+      { tagName: '입니다', color: 'hashtag5' },
     ],
     emoji: 3,
     views: 5,
@@ -419,11 +421,11 @@ def hello():
 <br/><br/>
 `,
     tags: [
-      { name: '코스모스', color: 'hashtag1' },
-      { name: '포스트', color: 'hashtag2' },
-      { name: '해시태그', color: 'hashtag3' },
-      { name: '예시', color: 'hashtag4' },
-      { name: '입니다', color: 'hashtag5' },
+      { tagName: '코스모스', color: 'hashtag1' },
+      { tagName: '포스트', color: 'hashtag2' },
+      { tagName: '해시태그', color: 'hashtag3' },
+      { tagName: '예시', color: 'hashtag4' },
+      { tagName: '입니다', color: 'hashtag5' },
     ],
     emoji: 3,
     views: 5,

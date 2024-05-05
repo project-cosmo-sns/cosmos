@@ -19,8 +19,8 @@ $glass-02: rgba(88, 92, 109, 0.4);
 
 $glass-edge-01: 1px solid rgba(255, 255, 255, 0.15);
 
-$pink-01: #ff5151;
-$pink-02: #ffeaea;
+$red-01: #ff5151;
+$red-02: #ffeaea;
 
 $orange-01: #ff7512;
 $orange-02: #ffe1cc;
@@ -38,27 +38,27 @@ $purple-01: #9747ff;
 $purple-02: #f0e4ff;
 
 $hashtag-colors: (
-  hashtag1: (
-    $pink-02,
-    $pink-01,
+  RED: (
+    $red-02,
+    $red-01,
   ),
-  hashtag2: (
+  ORANGE: (
     $orange-02,
     $orange-01,
   ),
-  hashtag3: (
+  YELLOW: (
     $yellow-02,
     $yellow-01,
   ),
-  hashtag4: (
+  GREEN: (
     $green-02,
     $green-01,
   ),
-  hashtag5: (
+  BLUE: (
     $blue-02,
     $blue-01,
   ),
-  hashtag6: (
+  PURPLE: (
     $purple-02,
     $purple-01,
   ),
