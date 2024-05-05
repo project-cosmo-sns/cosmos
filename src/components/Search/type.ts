@@ -33,3 +33,24 @@ export interface SearchResult {
   data: SearchData[];
   meta: Meta;
 }
+
+export interface Member {
+  id: number;
+  nickname: string;
+  generation: number | null;
+  profileImageUrl: string | null;
+  introduce: string | null;
+  followerCount: number;
+  followingCount: number;
+  isFollowing: number;
+  isMine: boolean;
+}
+
+export interface MemberData {
+  member: Member;
+}
+
+export interface SearchMemberResultData {
+  data: MemberData[];
+  meta: Meta;
+}
