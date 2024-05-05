@@ -24,14 +24,24 @@ export default function PostWritePage() {
 
   const { postId } = router.query;
 
-  const { mutate } = useMutation({
+  const { mutate: createMutate } = useMutation({
     mutationFn: () =>
       fetchData({
         param: `/post/create`,
         method: 'post',
         requestData: data,
       }),
-    onSuccess: (response) => router.push(`/post/${response.postId}`),
+    onSuccess: (response) => router.push(`/post/${response.id}`),
+  });
+
+  const { mutate: editMutate } = useMutation({
+    mutationFn: () =>
+      fetchData({
+        param: `/post/${postId}`,
+        method: 'patch',
+        requestData: data,
+      }),
+    onSuccess: () => router.push(`/post/${postId}`),
   });
 
   const mergeState = (nextState: Partial<PostRequestType>) => {
@@ -41,10 +51,13 @@ export default function PostWritePage() {
   const handleSubmitPostData = () => {
     if (!data.title && !data.content) {
       setIsToastVisible(true);
-      console.log(data);
       return;
     }
-    mutate();
+    if (postId) {
+      editMutate();
+      return;
+    }
+    createMutate();
   };
 
   useEffect(() => {
@@ -74,7 +87,7 @@ export default function PostWritePage() {
           size="large"
           color="purple"
         >
-          등록하기
+          {postId ? '수정하기' : '등록하기'}
         </DefaultButton>
       </div>
       <Toast

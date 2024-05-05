@@ -6,14 +6,10 @@ import PostPreview from '../PostPreview';
 import styles from './PostList.module.scss';
 
 interface PostListProps {
-  isMyProfile?: boolean;
   selectedSort: 'all' | 'followed' | 'myGeneration';
 }
 
-export default function PostList({
-  isMyProfile = false,
-  selectedSort,
-}: PostListProps) {
+export default function PostList({ selectedSort }: PostListProps) {
   const cn = classNames.bind(styles);
   const [selectedCategory, setSelectedCategory] = useState<string | '전체'>(
     '전체',
@@ -35,14 +31,8 @@ export default function PostList({
     return filteredPosts.filter((post) => post.category === category);
   };
 
-  const filterMyPost = (postData: PostData[]) => {
-    // 임시 유저id. 추후 조회 or 전역에서 받아올 예정
-    const userId = 'tmpuserId6';
-    return postData.filter((post) => post.author.id === userId);
-  };
-
   const filteredPostList = filterPosts(
-    isMyProfile ? filterMyPost(mockData) : mockData,
+    mockData,
     selectedSort,
     selectedCategory,
   );

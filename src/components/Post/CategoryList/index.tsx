@@ -6,7 +6,7 @@ import styles from './CategoryList.module.scss';
 interface CategoryListProps {
   selectedCategory: string;
   setSelectedCategory: (args: string) => void;
-  isPostWrite: boolean;
+  isPostWrite?: boolean;
 }
 
 const cn = classNames.bind(styles);
@@ -14,7 +14,7 @@ const cn = classNames.bind(styles);
 export default function CategoryList({
   selectedCategory,
   setSelectedCategory,
-  isPostWrite,
+  isPostWrite = false,
 }: CategoryListProps) {
   return (
     <div className={cn('category-box')}>

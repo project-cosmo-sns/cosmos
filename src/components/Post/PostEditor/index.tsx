@@ -38,7 +38,7 @@ export default function PostEditor({
       const { title, content, category } = post;
       mergeState({ title, content, category, hashTags });
     }
-  }, [postId]);
+  }, [postId, isSuccess]);
 
   useEffect(() => {
     mergeState({ category: selectedCategory });

@@ -2,7 +2,7 @@ import instance from './axios';
 
 interface FetchDataOptions<T> {
   param: string;
-  method?: 'get' | 'post' | 'put' | 'delete';
+  method?: 'get' | 'post' | 'patch' | 'delete';
   requestData?: T;
 }
 

@@ -1,11 +1,5 @@
 import { HASH_TAG_COLOR_CODE } from '@/constants/hashTagCode';
-
-export interface WriterType {
-  id: number;
-  nickname: string;
-  generation: number;
-  profileImageUrl: string | null;
-}
+import { Writer } from '../Feed/types';
 
 export interface HashTagType {
   tagName: string;
@@ -13,7 +7,7 @@ export interface HashTagType {
 }
 
 export interface PostRequestType {
-  postId?: number;
+  id?: number;
   category: string;
   title: string;
   content: string;
@@ -29,10 +23,11 @@ export interface PostType {
   commentCount: number;
   emojiCount: number;
   createdAt: string;
+  isMine: boolean;
 }
 
 export interface PostListInfoType {
-  writer: WriterType;
+  writer: Writer;
   post: PostType;
 }
 
@@ -61,7 +56,7 @@ export interface EmojiType {
 
 export interface PostDetailType {
   postDetail: {
-    writer: WriterType;
+    writer: Writer;
     post: PostType;
     hashTags: HashTagType[];
     emoji: EmojiType[];
@@ -78,7 +73,7 @@ export interface CommentType {
 
 export interface PostCommentListType {
   data: {
-    writer: WriterType;
+    writer: Writer;
     comment: CommentType;
   }[];
   meta: {
