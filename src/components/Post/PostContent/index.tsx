@@ -10,6 +10,8 @@ import HashTag from '../HashTag';
 import MarkdownContent from '../Markdown';
 import { HashTagType, PostDetailType } from '../types';
 import styles from './PostContent.module.scss';
+import { useMutation } from '@tanstack/react-query';
+import fetchData from '@/api/fetchData';
 
 interface PostContentProps {
   postData: PostDetailType;
@@ -34,6 +36,15 @@ export default function PostContent({ postData }: PostContentProps) {
     isMine,
   } = post;
 
+  const { mutate: deleteMutate } = useMutation({
+    mutationFn: () =>
+      fetchData({
+        param: `/post/${postId}`,
+        method: 'delete',
+      }),
+    onSuccess: () => router.push('/'),
+  });
+
   return (
     <div className={cn('wrapper')}>
       <span className={cn('category')}>{category}</span>
@@ -45,17 +56,20 @@ export default function PostContent({ postData }: PostContentProps) {
           handleClickEdit={() => router.push(`/write?postId=${postId}`)}
           handleClickDelete={() => setIsDeleteModalOpen(true)}
         />
-        {isDeleteModalOpen && (
-          <Modal
-            title="삭제 모달"
-            modalVisible={isDeleteModalOpen}
-            toggleModal={setIsDeleteModalOpen}
-            cssComponentDisplay={cn('')}
-            cssModalSize={cn('')}
-          >
-            <div>하이</div>
-          </Modal>
-        )}
+        <Modal
+          modalVisible={isDeleteModalOpen}
+          toggleModal={setIsDeleteModalOpen}
+          cssComponentDisplay={cn('')}
+          cssModalSize={cn('')}
+        >
+          <div>삭제하시겠습니까?</div>
+          <button type="button" onClick={() => deleteMutate()}>
+            예
+          </button>
+          <button type="button" onClick={() => setIsDeleteModalOpen(false)}>
+            아니오
+          </button>
+        </Modal>
       </div>
       <div className={cn('divide-line')} />
       <MarkdownContent className={cn('markdown-content')} content={content} />
