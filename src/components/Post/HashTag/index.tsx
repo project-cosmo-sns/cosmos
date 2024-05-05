@@ -14,7 +14,7 @@ export default function HashTag({ tag, handleClick }: HashTagProps) {
   const { name, color } = tag;
   return (
     <div className={cn('wrapper', color)}>
-      {name}
+      # {name}
       {handleClick && (
         <CloseIcon width="10" height="10" onClick={() => handleClick(name)} />
       )}

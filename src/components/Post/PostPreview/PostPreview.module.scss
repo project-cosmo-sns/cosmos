@@ -20,8 +20,8 @@
 }
 
 .title {
-  @include font-style(1.6rem, $white-01, 700);
-  // @include font-style(1.6rem, $white, 700); 로 수정 예정
+  @include font-style(2rem, $white-01, 700);
+  // @include font-style(2.0rem, $white, 700); 로 수정 예정
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -33,7 +33,13 @@
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 4;
+}
+
+.hashtag-container {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 @media (min-width: 768px) {

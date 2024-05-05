@@ -1,9 +1,4 @@
-import {
-  CategoryType,
-  PostData,
-  Tag,
-  mockData,
-} from '@/pages/post/[postId]/mockData';
+import { PostData, Tag, mockData } from '@/pages/post/[postId]/mockData';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import CategoryList from '../CategoryList';
@@ -24,9 +19,9 @@ export default function PostEditor({ postId, setData }: PostEditorProps) {
   const [contentValue, setContentValue] = useState<string | undefined>();
   const [hashtags, setHashtags] = useState<Tag[]>([]);
 
-  const [selectedCategory, setSelectedCategory] = useState<
-    CategoryType | '전체'
-  >('공지사항');
+  const [selectedCategory, setSelectedCategory] = useState<string | '전체'>(
+    '전체',
+  );
 
   useEffect(() => {
     if (postId) {
