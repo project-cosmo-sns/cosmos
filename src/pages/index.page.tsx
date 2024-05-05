@@ -43,16 +43,6 @@ export default function Home({ feedList, postList }: HomePropsType) {
   const [toastVisible, setToastVisible] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    if (localStorage.getItem('generation')) {
-      setToastVisible(true);
-      setTimeout(() => {
-        setToastVisible(false);
-        localStorage.removeItem('generation');
-      }, 5000);
-    }
-  }, []);
-
   return (
     <div className={cn('home-container')}>
       <TodayQuestion />
@@ -68,12 +58,11 @@ export default function Home({ feedList, postList }: HomePropsType) {
           <PostList postList={postList} selectedSort={selectedSort} />
         )}
       </ContentContainer>
-      <Toast
-        isVisible={toastVisible}
+      {/* <Toast
         text="인증 신청이 완료되었습니다"
         icon={CheckIcon}
         fill="#0ACF83"
-      />
+      /> */}
     </div>
   );
 }

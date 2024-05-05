@@ -2,7 +2,7 @@ import styles from './Generation.module.scss';
 import classNames from 'classnames/bind';
 
 type GenerationType = {
-  generationInfo: number | undefined;
+  generationInfo?: number | null;
 };
 
 const cn = classNames.bind(styles);
@@ -16,8 +16,8 @@ export default function GenerationBadge({ generationInfo }: GenerationType) {
     ['#F0E4FF', '#9747FF'],
   ];
 
-  if (generationInfo === undefined) {
-    return <div className={cn('waiting')}>대기중</div>;
+  if (!generationInfo) {
+    return <div className={cn('waiting')}>미인증</div>;
   }
 
   const colorIndex = (generationInfo - 1) % generationColor.length;

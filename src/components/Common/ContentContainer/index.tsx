@@ -13,7 +13,7 @@ const cn = classNames.bind(styles);
 
 interface ContentContainerProps {
   children: React.ReactNode;
-  keyword?: string;
+  keyword?: string | null;
   selectedOption: ContainerOptionType;
   setSelectedOption: (args: ContainerOptionType) => void;
   selectedSort?: SortType;

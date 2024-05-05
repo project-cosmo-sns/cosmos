@@ -18,7 +18,7 @@ export default function LoginModal({
 
     window.open(
       `${baseURL}/auth/github/login`,
-      'github-login',
+      '_blank',
       `width=600, height=600, top=${popupY}, left=${popupX}`,
     );
   };
