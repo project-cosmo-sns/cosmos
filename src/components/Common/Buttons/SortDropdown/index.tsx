@@ -48,9 +48,19 @@ export default function SortDropdown({
         {SORT_TYPES[selectedSort]}
         <div className={cn('icon-container')}>
           {isExpanded ? (
-            <UpIcon className={cn('dropdown-arrow')} width="18" height="18" />
+            <UpIcon
+              className={cn('dropdown-arrow')}
+              width="18"
+              height="18"
+              fill="#ffffff"
+            />
           ) : (
-            <DownIcon className={cn('dropdown-arrow')} width="18" height="18" />
+            <DownIcon
+              className={cn('dropdown-arrow')}
+              width="18"
+              height="18"
+              fill="#ffffff"
+            />
           )}
         </div>
       </button>

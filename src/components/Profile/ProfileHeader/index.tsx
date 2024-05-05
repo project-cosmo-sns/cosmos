@@ -11,6 +11,8 @@ import { followerData, followingData } from '@/utils/MemberMockData';
 interface ProfileHeaderProps {
   memberData: MemberDataType;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  uncertified?: boolean;
+  error?: string;
 }
 
 const cn = classNames.bind(styles);
@@ -18,6 +20,8 @@ const cn = classNames.bind(styles);
 export default function ProfileHeader({
   memberData,
   setIsModalOpen,
+  uncertified,
+  // error,
 }: ProfileHeaderProps) {
   // currentUserId는 토큰?으로 받아옴?
   // const currentUserId = '1'; // 임시 ID
@@ -35,10 +39,14 @@ export default function ProfileHeader({
     });
   };
 
+  // if (uncertified) {
+  //   return <div>미인증사용자ㅠㅠㅠㅠㅠ</div>;
+  // }
+
   return (
     <div className={cn('header-container')}>
       <div className={cn('profile-image')}>
-        {memberData ? (
+        {memberData.profileImageUrl ? (
           <Image
             src={memberData.profileImageUrl}
             alt="프로필 이미지"
@@ -60,7 +68,7 @@ export default function ProfileHeader({
         <div className={cn('profile-following-section')}>
           <button type="button" onClick={() => toggleModal('follower')}>
             <span>팔로워</span>
-            {memberData.followerCount}
+            {memberData && memberData.followerCount}
           </button>
           {followModal.follower && (
             <FollowList
@@ -75,7 +83,7 @@ export default function ProfileHeader({
           )}
           <button type="button" onClick={() => toggleModal('following')}>
             <span>팔로잉</span>
-            {memberData.followingCount}
+            {memberData && memberData.followingCount}
           </button>
           {followModal.following && (
             <FollowList

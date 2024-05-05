@@ -21,7 +21,7 @@ export default function FeedList({ feedList }: { feedList: FeedDetailType[] }) {
   return (
     <>
       <div className={cn('container')}>
-        {feedList.map((item) => (
+        {feedList?.map((item) => (
           <FeedCard
             key={item.feed.id}
             feedData={item}

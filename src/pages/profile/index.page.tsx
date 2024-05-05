@@ -10,74 +10,101 @@ import FeedList from '@/components/Feed/FeedList';
 import PostList from '@/components/Post/PostList';
 import ScrapList from '@/components/Common/ScrapList';
 import fetchData from '@/api/fetchData';
-import { useQuery } from '@tanstack/react-query';
 import { getFeedList } from '@/components/Feed/FeedList/api';
 import { FeedListType, FeedDetailType } from '@/components/Feed/types';
+import { getMyProfile } from './api';
+import { GetServerSidePropsContext } from 'next';
+import instance from '@/api/axios';
 
 const cn = classNames.bind(styles);
 
-export const getServerSideProps = async () => {
-  const feedList: FeedListType = await getFeedList();
-  return {
-    props: {
-      feedList: feedList.data,
-    },
-  };
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext,
+) => {
+  // context.req.headers.cookie를 통해 쿠키 추출
+  const { req } = context;
+  const cookies = req.headers.cookie || '';
+
+  // 쿠키를 요청 헤더에 포함시켜 API 요청하기
+  try {
+    const res = await instance.get('/profile/mine', {
+      headers: {
+        Cookie: cookies,
+      },
+    });
+    const memberData: MemberDataType = await res.data;
+
+    // const memberData: any = await getMyProfile();
+    const feedList: FeedListType = await getFeedList();
+
+    return {
+      props: {
+        feedList: feedList.data,
+        memberData: memberData,
+      },
+    };
+  } catch (error) {
+    console.error('API 호출 실패ㅠ', error);
+    //   if (error.response && error.response.status === 401) {
+    //     return {
+    //       props: {
+    //         uncertified: true,
+    //       },
+    //     };
+    //   }
+    //   return {
+    //     props: {
+    //       error: true,
+    //     },
+    //   }
+    return {
+      props: {
+        feedList: [],
+        memberData: null,
+        error: true,
+      },
+    };
+  }
 };
 
 interface MemberDataContainerPropsType {
   feedList: FeedDetailType[];
+  memberData: MemberDataType;
+  uncertified?: boolean;
+  error?: boolean; // 일단 넣어둠
 }
 
 export default function MemberDataContainer({
   feedList,
+  memberData,
+  uncertified, //미인증
+  error,
 }: MemberDataContainerPropsType) {
-  const [memberData, setMemberData] = useState<MemberDataType | null>(null);
+  // const [memberData, setMemberData] = useState<MemberDataType>(
+  //   {} as MemberDataType,
+  // );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
   const [selectedSort, setSelectedSort] = useState<
     'all' | 'followed' | 'myGeneration'
   >('all');
+  // const [memberData, setMemberData] = useState(null);
 
-  const memberId = 1; // 예시용 ID, 실제로는 동적으로 가져올 수 있음
+  // const memberId = 1; // 예시용 ID, 실제로는 동적으로 가져올 수 있음
+  // memberId가 있으면(남의프로필이면) 선택적으로 내려줄 수 있게.
+  // 내려준 값을 쿼리값으로 넣어서 띄울 수 있게 하기
 
-  // 리액트쿼리 이용 GET 해옴
-  // const { data, isPending, isSuccess, isError } =
-  //   useQuery<MemberDataType | null>({
-  //     queryKey: ['memberData', memberId],
-  //     queryFn: () => {
-  //       // memberId가 존재하면 '/profile/{memberId}', 아니면 '/profile/mine'
-  //       const endpoint = memberId ? `/profile/${memberId}` : '/profile/mine';
-  //       return fetchData({ param: endpoint });
-  //     },
-  //   });
-
-  // useEffect(() => {
-  //   if (data) {
-  //     // const targetId=data.memberId
-  //     // const targetMemberData = Array.isArray(data) ? data.find(member => member.id === targetId) : null;
-  //     setMemberData(data);
-  //     // 추가적인 작업 실행
-  //   }
-  // }, [data]);
-
-  useEffect(() => {
-    const targetId = 1;
-    const targetMemberData = memberMockData.find(
-      (member) => member.memberId === targetId,
-    );
-    if (targetMemberData !== undefined) {
-      setMemberData(targetMemberData);
-    } else {
-      setMemberData(null);
-    }
-  }, []);
+  useEffect(() => {});
 
   const renderContent = () => {
     switch (selectedOption) {
       case 'feed':
-        return <FeedList feedList={feedList} />;
+        return feedList ? (
+          <FeedList feedList={feedList} />
+        ) : (
+          '작성된 글이 없습니다.'
+        );
       case 'post':
         return <PostList selectedSort={selectedSort} isMyProfile />;
       case 'scrap':
@@ -87,10 +114,46 @@ export default function MemberDataContainer({
     }
   };
 
+  if (uncertified || error) {
+    return (
+      <>
+        {memberData && (
+          <>
+            <ProfileHeader
+              memberData={memberData}
+              setIsModalOpen={setIsModalOpen}
+              uncertified={true}
+            />
+            <ContentContainer
+              selectedOption={selectedOption}
+              setSelectedOption={setSelectedOption}
+              selectedSort={selectedSort}
+              setSelectedSort={setSelectedSort}
+              isMyProfile
+            >
+              {renderContent()}
+            </ContentContainer>
+          </>
+        )}
+      </>
+    );
+  }
+
+  if (!memberData) {
+    return <div>Lodading~~~~~</div>;
+  }
+
   return (
     <div className={cn('content')}>
       {memberData && (
         <>
+          {/* 현재는 memberData가 없으면 그냥 guest인데, 
+        어차피 guest는 프로필 접근이 불가능하다. 
+        미인증/인증 사용자만 있음 
+        -> 
+        인증 사용자인가? -> 사용자 정보 전부 출력, 세팅 버튼
+        미인증 사용자인가? -> 사용자 정보 출력, 인증하기 버튼만 나오면 됨 */}
+
           <ProfileHeader
             memberData={memberData}
             setIsModalOpen={setIsModalOpen}

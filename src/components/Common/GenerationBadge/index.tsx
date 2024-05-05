@@ -17,20 +17,28 @@ export default function GenerationBadge({ generationInfo }: GenerationType) {
   ];
 
   if (generationInfo === undefined) {
-    return <div className={cn('waiting')}>대기중</div>;
+    // 미인증?? 대기중??
+    return <div className={cn('waiting')}>미인증</div>;
   }
 
   const colorIndex = (generationInfo - 1) % generationColor.length;
-  const [backgroundColor, color] = generationColor[colorIndex];
+  // const [backgroundColor, color] = generationColor[colorIndex];
 
-  const generationStyle = {
-    backgroundColor,
-    color,
-  };
+  const colorInfo = generationColor[colorIndex];
+  if (colorInfo) {
+    const [backgroundColor, color] = colorInfo;
+    const generationStyle = {
+      backgroundColor,
+      color,
+    };
 
-  return (
-    <div className={cn('generation-container')} style={generationStyle}>
-      {generationInfo}기
-    </div>
-  );
+    return (
+      <div className={cn('generation-container')} style={generationStyle}>
+        {generationInfo}기
+      </div>
+    );
+  } else {
+    console.log('기수정보가없당');
+    return <div className={cn('waiting')}>미인증</div>;
+  }
 }

@@ -1,5 +1,5 @@
 export interface MemberDataType {
-  memberId: number;
+  memberId?: number;
   nickname: string;
   generation: number;
   profileImageUrl: string;
