@@ -103,6 +103,7 @@ textarea {
 
 .wmde-markdown {
   line-height: 240%;
+  @include markdown-style;
 }
 
 textarea::placeholder,
