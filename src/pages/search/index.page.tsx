@@ -5,6 +5,7 @@ import SearchAuthorProfileList from '@/components/Search/SearchAuthorProfileList
 import SearchList from '@/components/Search/SearchList';
 import { useState, useEffect } from 'react';
 import { getSearchList } from '@/components/Search/api';
+import { SearchData } from '@/components/Search/type';
 
 // serverside 임시 주석
 // export const getServerSideProps = async ({ query }: any) => {
@@ -20,27 +21,24 @@ import { getSearchList } from '@/components/Search/api';
 export default function SearchResultPage() {
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('hashtag');
-  const [searchList, setSearchList] = useState(null);
+  const [searchList, setSearchList] = useState<SearchData[]>([]);
 
   const searchParams = useSearchParams();
   const search = searchParams.get('query');
   const keyword = search || '';
 
+  const loadSearchData = async () => {
+    try {
+      const result = await getSearchList(keyword);
+      setSearchList(result.data);
+    } catch (error) {
+      console.error('검색 결과 오류', error);
+    }
+  };
+
   useEffect(() => {
     if (keyword) {
-      const fetchData = async () => {
-        try {
-          const result = await getSearchList(keyword);
-          setSearchList(result.data);
-        } catch (error) {
-          console.error(
-            '검색 결과를 가져오는 동안 오류가 발생했습니다:',
-            error,
-          );
-        }
-      };
-
-      fetchData();
+      loadSearchData();
     }
   }, [keyword]);
 
@@ -48,11 +46,12 @@ export default function SearchResultPage() {
   if (searchList) {
     searchResultComponent =
       selectedOption === 'hashtag' ? (
-        <SearchList selectedSort="all" data={searchList} />
+        <SearchList searchList={searchList} />
       ) : (
         <SearchAuthorProfileList />
       );
   } else {
+    // 이것도 컴포넌트화해서 바꿔야됨
     searchResultComponent = <p>검색 결과가 없습니다.</p>;
   }
 

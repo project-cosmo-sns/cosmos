@@ -1,9 +1,20 @@
-export default function SearchList() {
+import SearchPreview from '../SearchPriview';
+import { SearchData } from '../type';
+import styles from './SearchList.module.scss';
+import classNames from 'classnames/bind';
+
+interface SearchListProps {
+  searchList: SearchData[];
+}
+
+const cn = classNames.bind(styles);
+
+export default function SearchList({ searchList }: SearchListProps) {
   return (
-    <div>
-      <h1>
-        하 여기에 작성해볼텐데 막막하네요 일단 데이터 불러오기부터 해볼게요
-      </h1>
+    <div className={cn('search-list')}>
+      {searchList.map((searchData) => (
+        <SearchPreview key={searchData.post.id} searchData={searchData} />
+      ))}
     </div>
   );
 }
