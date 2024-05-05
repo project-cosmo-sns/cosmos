@@ -1,8 +1,12 @@
-import classNames from 'classnames/bind';
-import styles from './ContentContainer.module.scss';
-import SortDropdown from '../Buttons/SortDropdown';
-import OptionButton from './OptionButton';
 import { ContainerOptionType } from '@/@types/type';
+import useScrollDirection from '@/hooks/useScrollDirection';
+import classNames from 'classnames/bind';
+import SortDropdown from '../Buttons/SortDropdown';
+import styles from './ContentContainer.module.scss';
+import OptionButton from './OptionButton';
+import scrollToTop from '@/utils/scrollToTop';
+import ModalPortal from '../Layout/Modal/ModalPortal';
+import { ScrollTopIcon } from '../IconCollection';
 
 const cn = classNames.bind(styles);
 
@@ -36,45 +40,68 @@ export default function ContentContainer({
   setSelectedSort,
   isMyProfile = false,
 }: ContentContainerProps) {
+  const [scrollDirection] = useScrollDirection('up');
+
+  const handleOptionClick = (option: string) => {
+    scrollToTop();
+    setSelectedOption(option as ContainerOptionType);
+  };
+
+  const renderOptionButton = (label: string, option: string) => (
+    <OptionButton
+      label={label}
+      onClick={() => handleOptionClick(option)}
+      isActive={selectedOption === option}
+    />
+  );
+
   return (
-    <div className={cn('wrapper')}>
-      <div className={cn('header')}>
-        <div className={cn('post-type')}>
-          <OptionButton
-            label={keyword ? '해시태그' : '피드'}
-            onClick={() => setSelectedOption(keyword ? 'hashtag' : 'feed')}
-            isActive={selectedOption === (keyword ? 'hashtag' : 'feed')}
-          />
-          <OptionButton
-            label={keyword ? '사용자' : '포스트'}
-            onClick={() => setSelectedOption(keyword ? 'user' : 'post')}
-            isActive={selectedOption === (keyword ? 'user' : 'post')}
-          />
-          {isMyProfile && (
-            <OptionButton
-              label="스크랩"
-              onClick={() => setSelectedOption('scrap')}
-              isActive={selectedOption === 'scrap'}
-            />
-          )}
-          <div className={cn('active', { [selectedOption]: selectedOption })} />
+    <>
+      <div className={cn('wrapper')}>
+        <div
+          className={cn('header-container', {
+            up: scrollDirection === 'up',
+            down: scrollDirection === 'down',
+          })}
+        >
+          <div className={cn('header')}>
+            <div className={cn('post-type')}>
+              {renderOptionButton(
+                keyword ? '해시태그' : '피드',
+                keyword ? 'hashtag' : 'feed',
+              )}
+              {renderOptionButton(
+                keyword ? '사용자' : '포스트',
+                keyword ? 'user' : 'post',
+              )}
+              {isMyProfile && renderOptionButton('스크랩', 'scrap')}
+              <div
+                className={cn('active', { [selectedOption]: selectedOption })}
+              />
+            </div>
+            <div className={cn('filter-container')}>
+              {keyword && (
+                <span className={cn('keyword-text')}>{keyword} 검색 결과</span>
+              )}
+              {selectedSort && setSelectedSort && (
+                <SortDropdown
+                  selectedSort={selectedSort}
+                  setSelectedSort={setSelectedSort}
+                />
+              )}
+            </div>
+          </div>
+          <div className={cn('divide-line')} />
         </div>
-        <div className={cn('filter-container')}>
-          {keyword && (
-            <span className={cn('keyword-text')}>{keyword} 검색 결과</span>
-          )}
-          {selectedSort && setSelectedSort && (
-            <SortDropdown
-              selectedSort={selectedSort}
-              setSelectedSort={setSelectedSort}
-            />
-          )}
+        <div className={cn('content', { 'profile-content': isMyProfile })}>
+          {children}
         </div>
       </div>
-      <div className={cn('divide-line')} />
-      <div className={cn('content', { 'profile-content': isMyProfile })}>
-        {children}
-      </div>
-    </div>
+      <ModalPortal>
+        <div className={cn('scroll-top')}>
+          <ScrollTopIcon />
+        </div>
+      </ModalPortal>
+    </>
   );
 }

@@ -1,5 +1,6 @@
 import styles from './Toast.module.scss';
 import classNames from 'classnames/bind';
+import { useState, useEffect } from 'react';
 
 const cn = classNames.bind(styles);
 /**
@@ -16,10 +17,20 @@ type toastType = {
 };
 
 export default function Toast({ text, icon: Icon, fill }: toastType) {
-  return (
-    <div className={cn('toast-container')}>
-      <Icon fill={fill} />
-      {text}
-    </div>
-  );
+  const [isVisible, setIsVisible] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 3000);
+  }, []);
+
+  if (isVisible)
+    return (
+      <div className={cn('toast-container')}>
+        <Icon fill={fill} />
+        {text}
+      </div>
+    );
+  return null;
 }

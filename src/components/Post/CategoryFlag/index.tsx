@@ -1,19 +1,19 @@
 import classNames from 'classnames/bind';
 import styles from './CategoryFlag.module.scss';
-import { CategoryType } from '@/pages/post/[postId]/mockData';
 
-interface CategoryFlag {
-  category: CategoryType | '전체';
-  selectedCategory: CategoryType | '전체';
-  setSelectedCategory: (args: CategoryType | '전체') => void;
+interface CategoryFlagProps {
+  category: string;
+  selectedCategory: string;
+  setSelectedCategory: (args: string) => void;
 }
+
+const cn = classNames.bind(styles);
 
 export default function CategoryFlag({
   category,
   selectedCategory,
   setSelectedCategory,
-}: CategoryFlag) {
-  const cn = classNames.bind(styles);
+}: CategoryFlagProps) {
   const isSelected = category === selectedCategory;
 
   return (

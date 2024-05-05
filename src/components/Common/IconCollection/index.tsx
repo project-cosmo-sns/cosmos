@@ -1073,3 +1073,24 @@ export function Title3Icon({
     </IconTemplate>
   );
 }
+
+export function ScrollTopIcon({ width = '32', ...props }: IconCollectionType) {
+  return (
+    <IconTemplate viewBox="0 0 32 32" {...props}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 32 32"
+        fill="none"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M27.1952 22.052C26.6931 22.5541 25.879 22.5541 25.3769 22.052L16.0003 12.6754L6.62377 22.052C6.12167 22.5541 5.3076 22.5541 4.8055 22.052C4.30339 21.5499 4.30339 20.7358 4.8055 20.2337L15.0912 9.94802C15.5933 9.44592 16.4074 9.44592 16.9095 9.94802L27.1952 20.2337C27.6973 20.7358 27.6973 21.5499 27.1952 22.052Z"
+          fill="white"
+        />
+      </svg>
+    </IconTemplate>
+  );
+}
