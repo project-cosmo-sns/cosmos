@@ -1,0 +1,22 @@
+.wrapper {
+  @include flex-arrange;
+  @include font-style(1.2rem, $white-01, 600);
+  flex-direction: column;
+  border-radius: 5px;
+  background-color: $black-03;
+  position: absolute;
+  overflow: hidden;
+  width: 100%;
+  top: 48px;
+  left: 0;
+}
+
+.hashtag-container {
+  width: 100%;
+  padding: 12px 20px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $black-02;
+  }
+}

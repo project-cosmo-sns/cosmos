@@ -1,7 +1,7 @@
 import { ClassAttributes, HTMLAttributes } from 'react';
 import { ExtraProps } from 'react-markdown';
 import SyntaxHighlighter from 'react-syntax-highlighter/dist/cjs/prism';
-import { oneLight } from 'react-syntax-highlighter/dist/cjs/styles/prism';
+import { oneDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
 export default function CodeBlock(
   props: ClassAttributes<HTMLElement> &
@@ -15,7 +15,7 @@ export default function CodeBlock(
       PreTag="div"
       showLineNumbers
       language={match[1]}
-      style={oneLight}
+      style={oneDark}
     >
       {String(children).replace(/\n$/, '')}
     </SyntaxHighlighter>

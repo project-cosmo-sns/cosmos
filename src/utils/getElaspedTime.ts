@@ -2,7 +2,9 @@ export default function getElapsedTime(timeString: string) {
   const currentTime = new Date();
   const givenTime = new Date(timeString);
 
-  const elapsedMilliseconds = currentTime.getTime() - givenTime.getTime();
+  const OFFSET = 1000 * 60 * 60 * 9;
+  const elapsedMilliseconds =
+    currentTime.getTime() - givenTime.getTime() + OFFSET;
   const elapsedMinutes = Math.floor(elapsedMilliseconds / (1000 * 60));
 
   const MINUTE = 60;
