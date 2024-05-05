@@ -28,7 +28,6 @@ export default function PostPreview({ postData }: PostPreviewProps) {
   } = postData.postListInfo.post;
   const hashTags = postData.postListHashTag;
 
-  console.log(createdAt);
   const formattedCreatedAt = getElapsedTime(createdAt);
 
   const handleEmojiClick = (e: MouseEvent<HTMLButtonElement>) => {
