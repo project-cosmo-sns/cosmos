@@ -1,25 +1,50 @@
+import fetchData from '@/api/fetchData';
 import { BackIcon } from '@/components/Common/IconCollection';
+import { CommentListType } from '@/components/Feed/types';
 import PostComment from '@/components/Post/PostComment';
 import PostContent from '@/components/Post/PostContent';
+import { PostDetailType } from '@/components/Post/types';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import styles from './PostDetail.module.scss';
-import { PostData, mockData } from './mockData';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const cn = classNames.bind(styles);
 
 export default function PostDetailPage() {
   const router = useRouter();
   const { postId } = router.query;
-  // isMyPost는 author.id === userId 일 때 true
-  const isMyPost = true;
 
-  // 임시로 mockData에서 postId와 같은 데이터 가져옴. 추후 postId를 이용해 요청하도록 수정
-  const [postData, setPostData] = useState<PostData>();
+  const { data: postData, isSuccess } = useQuery<PostDetailType>({
+    queryKey: ['postData', postId],
+    queryFn: () =>
+      fetchData({
+        param: `/post/${postId}/detail`,
+      }),
+    enabled: !!postId,
+  });
+
+  const { data: commentData } = useQuery<CommentListType>({
+    queryKey: ['commentData', postId],
+    queryFn: () =>
+      fetchData({
+        param: `/post/${postId}/comment/list`,
+      }),
+    enabled: !!postId,
+  });
+
+  const { mutate } = useMutation({
+    mutationFn: () =>
+      fetchData({
+        param: `/post/${postId}/view-count/increase`,
+        method: 'post',
+      }),
+  });
+
   useEffect(() => {
-    setPostData(mockData.filter((data) => data.id === postId)[0]);
-  }, [postId]);
+    if (postId && isSuccess) mutate();
+  }, [postId, isSuccess]);
 
   return (
     postData && (
@@ -30,8 +55,8 @@ export default function PostDetailPage() {
           className={cn('back')}
           onClick={() => router.back()}
         />
-        <PostContent isMyPost={isMyPost} postData={postData} />
-        <PostComment postData={postData} />
+        <PostContent postData={postData} />
+        {/* <PostComment commentData={commentData} /> */}
       </div>
     )
   );

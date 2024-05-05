@@ -1,21 +1,43 @@
-export interface WriterType {
-  id: string;
-  nickname: string;
-  generation: number;
-  profileImageUrl: string;
+import { HASH_TAG_COLOR_CODE } from '@/constants/hashTagCode';
+import { Writer } from '../Feed/types';
+
+export interface HashTagType {
+  tagName: string;
+  color: HASH_TAG_COLOR_CODE;
 }
 
-export interface CommentType {
-  writer: WriterType;
-  id: number;
+export interface PostRequestType {
+  id?: number;
+  category: string;
+  title: string;
   content: string;
-  heartCount: number;
-  isHearted: boolean;
-  createdAt: string;
+  hashTags: HashTagType[];
 }
 
-export interface CommentListType {
-  data: CommentType[];
+export interface PostType {
+  id: number;
+  category: string;
+  title: string;
+  content: string;
+  viewCount: number;
+  commentCount: number;
+  emojiCount: number;
+  createdAt: string;
+  isMine: boolean;
+}
+
+export interface PostListInfoType {
+  writer: Writer;
+  post: PostType;
+}
+
+export interface PostListDataType {
+  postListInfo: PostListInfoType;
+  postListHashTag: HashTagType[];
+}
+
+export interface PostListType {
+  data: PostListDataType[];
   meta: {
     page: number;
     take: number;
@@ -26,42 +48,36 @@ export interface CommentListType {
   };
 }
 
-export interface HashTagType {
-  tagName: string;
-  color: string;
-}
+export type EmojiCode = 'HEART' | 'THUMBSUP' | 'LAUGH' | 'SAD' | 'CHECK' | 'ME';
 
-export interface HashTagRequestType extends HashTagType {
-  hashTagId: number | null;
-}
-
-export interface PostRequestDataType {
-  category: string;
-  title: string;
-  content: string;
-  hashTags: HashTagRequestType[];
-}
-
-export interface PostType {
-  id: number;
-  title: string;
-  content: string;
-  viewCount: number;
-  commentCount: number;
+export interface EmojiType {
+  emojiCode: EmojiCode;
   emojiCount: number;
-  createdAt: string;
+  isClicked: boolean;
 }
 
 export interface PostDetailType {
-  postListInfo: {
-    writer: WriterType;
+  postDetail: {
+    writer: Writer;
     post: PostType;
+    hashTags: HashTagType[];
+    emoji: EmojiType[];
   };
-  postListHashTag: HashTagType[];
 }
 
-export interface PostListDataType {
-  data: PostDetailType[];
+export interface CommentType {
+  id: number;
+  content: string;
+  heartCount: number;
+  isHearted: boolean;
+  createdAt: string;
+}
+
+export interface PostCommentListType {
+  data: {
+    writer: Writer;
+    comment: CommentType;
+  }[];
   meta: {
     page: number;
     take: number;
