@@ -1,16 +1,16 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import classNames from 'classnames/bind';
 import { ContainerOptionType } from '@/@types/type';
 import ContentContainer from '@/components/Common/ContentContainer';
+import { CheckIcon } from '@/components/Common/IconCollection';
+import Toast from '@/components/Common/Toast';
 import TodayQuestion from '@/components/Common/TodayQuestion';
 import FeedList from '@/components/Feed/FeedList';
-import PostList from '@/components/Post/PostList';
-import Toast from '@/components/Common/Toast';
-import { CheckIcon } from '@/components/Common/IconCollection';
-import styles from '@/styles/Home.module.scss';
 import { getFeedList } from '@/components/Feed/FeedList/api';
-import { FeedListType, FeedDetailType } from '../components/Feed/types';
+import PostList from '@/components/Post/PostList';
+import styles from '@/styles/Home.module.scss';
+import classNames from 'classnames/bind';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
+import { FeedDetailType, FeedListType } from '../components/Feed/types';
 
 export const getServerSideProps = async () => {
   const feedList: FeedListType = await getFeedList();

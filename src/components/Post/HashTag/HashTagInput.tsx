@@ -101,7 +101,7 @@ export default function HashTagInput({
   useEffect(() => {
     setTimeout(() => {
       if (isToastVisible) setIsToastVisible(false);
-    }, 3000);
+    }, 5000);
   });
 
   return (
