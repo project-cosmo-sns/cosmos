@@ -20,7 +20,6 @@ export default function CommentCard({
 
   const { content, createdAt, heartCount, isHearted } = commentData;
 
-  const [commentValue, setCommentValue] = useState(content);
   const [isCommentEditing, setIsCommentEditing] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
@@ -36,7 +35,7 @@ export default function CommentCard({
 
   const handleClickEditComment = () => {
     setIsCommentEditing((prev) => !prev);
-    setCommentValue(content);
+    // setCommentValue(content);
   };
 
   const handleClickDeleteComment = () => {
@@ -81,14 +80,7 @@ export default function CommentCard({
         </div>
       </div>
       <div className={cn('content')}>
-        {isCommentEditing ? (
-          <EditComment
-            commentValue={commentValue}
-            setCommentValue={setCommentValue}
-          />
-        ) : (
-          content
-        )}
+        {isCommentEditing ? <EditComment content={content} /> : content}
       </div>
     </div>
   );

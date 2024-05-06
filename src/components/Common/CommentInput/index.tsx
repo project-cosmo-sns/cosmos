@@ -22,8 +22,16 @@ export default function CommentInput({
   const { register, handleSubmit } = useForm<Comment>();
   return (
     <form className={cn('wrapper')} onSubmit={handleSubmit(onSubmit)}>
-      <Input placeholder={placeholder} register={{ ...register('comment') }} />
-      <DefaultButton buttonType="submit" size="small" color="purple">
+      <Input
+        placeholder={placeholder}
+        register={{ ...register('comment', { required: true }) }}
+      />
+      <DefaultButton
+        onClick={() => console.log('등록버튼 클릭!')}
+        buttonType="submit"
+        size="small"
+        color="purple"
+      >
         등록
       </DefaultButton>
     </form>
