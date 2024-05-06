@@ -39,7 +39,7 @@ export default function Follow({
       <FollowButton
         onClick={toggleFollow}
         isFollowButton={isFollowButton}
-        isActive={isActive} 
+        isActive={isActive}
       />
     </div>
   );
