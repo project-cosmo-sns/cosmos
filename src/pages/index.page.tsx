@@ -24,14 +24,14 @@ export const getServerSideProps = async () => {
   return {
     props: {
       feedList: feedList.data,
-      postList: postList.data,
+      postList,
     },
   };
 };
 
 interface HomePropsType {
   feedList: FeedDetailType[];
-  postList: PostListDataType[];
+  postList: PostListType;
 }
 
 const cn = classNames.bind(styles);

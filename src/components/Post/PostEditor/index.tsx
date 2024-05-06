@@ -36,6 +36,7 @@ export default function PostEditor({
     if (postId && isSuccess) {
       const { hashTags, post } = data.postDetail;
       const { title, content, category } = post;
+      setSelectedCategory(post.category);
       mergeState({ title, content, category, hashTags });
     }
   }, [postId, isSuccess]);
