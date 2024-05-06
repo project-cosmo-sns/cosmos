@@ -42,7 +42,10 @@ export default function SearchAuthorProfile({
       <div className={cn('profile-infomation')}>
         <div className={cn('profile-name')}>
           <h3>{nickname}</h3>
-          <GenerationBadge generationInfo={generation} />
+          <GenerationBadge
+            isAuthorized={!!generation}
+            generationInfo={generation}
+          />
         </div>
         <div className={cn('profile-follow')}>
           <div>

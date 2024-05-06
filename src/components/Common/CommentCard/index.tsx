@@ -1,6 +1,11 @@
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import { CommentDetailType } from '@/components/Feed/types';
 import getElapsedTime from '@/utils/getElaspedTime';
+import {
+  PatchComment,
+  EditCommentType,
+  deleteComment,
+} from '@/components/Common/CommentCard/api';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import ActionButtons from '../Buttons/ActionButtons';
@@ -13,12 +18,14 @@ const cn = classNames.bind(styles);
 
 export default function CommentCard({
   comment,
+  feedId,
 }: {
   comment: CommentDetailType;
+  feedId: number;
 }) {
   const commentData = comment.comment;
 
-  const { content, createdAt, heartCount, isHearted } = commentData;
+  const { id, content, heartCount, isHearted, createdAt } = commentData;
 
   const [isCommentEditing, setIsCommentEditing] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -34,7 +41,6 @@ export default function CommentCard({
 
   const handleClickEditComment = () => {
     setIsCommentEditing((prev) => !prev);
-    // setCommentValue(content);
   };
 
   const handleClickDeleteComment = () => {
@@ -45,6 +51,12 @@ export default function CommentCard({
   const handleClickLikeComment = () => {
     setIsLiked((prev) => !prev);
     setReactionCount((prev) => (isLiked ? prev - 1 : prev + 1));
+  };
+
+  const onSubmit = (data: EditCommentType) => {
+    PatchComment(feedId, id, data);
+    console.log('수정하기!');
+    setIsCommentEditing(false);
   };
 
   return (
@@ -73,13 +85,25 @@ export default function CommentCard({
               cssComponentDisplay={cn('')}
               cssModalSize={cn('')}
             >
-              <div>하이</div>
+              <p>정말 삭제하시겠습니까?</p>
+              <button
+                type="button"
+                onClick={() => {
+                  deleteComment(feedId, id);
+                }}
+              >
+                삭제
+              </button>
             </Modal>
           )}
         </div>
       </div>
       <div className={cn('content')}>
-        {isCommentEditing ? <EditComment content={content} /> : content}
+        {isCommentEditing ? (
+          <EditComment onSubmit={onSubmit} content={content} />
+        ) : (
+          content
+        )}
       </div>
     </div>
   );

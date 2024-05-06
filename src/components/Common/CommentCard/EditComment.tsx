@@ -5,16 +5,24 @@ import styles from './EditComment.module.scss';
 
 const cn = classNames.bind(styles);
 
-// interface
+export interface CommentEdit {
+  editedComment: string;
+}
 
-export default function EditComment({ content }: { content: string }) {
-  // const {} = useFrom()
+export default function EditComment({
+  content,
+  onSubmit,
+}: {
+  content: string;
+  onSubmit: () => void;
+}) {
+  const { register, handleSubmit } = useForm<CommentEdit>();
   return (
-    <div className={cn('wrapper')}>
-      <textarea value={content} />
-      <button type="button" className={cn('edit-button')}>
+    <form className={cn('wrapper')} onSubmit={handleSubmit(onSubmit)}>
+      <textarea defaultValue={content} {...register('editedComment')} />
+      <button type="submit" className={cn('edit-button')}>
         수정
       </button>
-    </div>
+    </form>
   );
 }

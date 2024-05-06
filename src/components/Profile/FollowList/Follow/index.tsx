@@ -10,7 +10,7 @@ export interface FollowType {
   memberId: number;
   profileImageUrl?: string;
   nickname: string;
-  generation: number;
+  generation: number | null;
   isFollow?: boolean;
 }
 
@@ -35,7 +35,10 @@ export default function Follow({
           height={40}
         />
         <span>{nickname}</span>
-        <GenerationBadge generationInfo={generation} />
+        <GenerationBadge
+          generationInfo={generation}
+          isAuthorized={!!generation}
+        />
       </div>
       <FollowButton onClick={() => followClick(memberId)} isFollow={isFollow} />
     </div>

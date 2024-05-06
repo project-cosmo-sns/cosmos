@@ -90,9 +90,7 @@ export default function SideBar() {
             <Notification onClose={handleClosePopOver} />
           )}
         </div>
-        {/* {!isLogin ? (
-          <UserIcon fill="#FFFFFF" onClick={profileClick} />
-        ) : userImage ? (
+        {isLogin && userImage ? (
           <Image
             src={userImage}
             alt="profile"
@@ -102,7 +100,8 @@ export default function SideBar() {
           />
         ) : (
           <ProfileIcon onClick={profileClick} />
-        )} */}
+        )}
+        {isLogin || <UserIcon fill="#FFFFFF" onClick={profileClick} />}
       </div>
       <LoginModal modalVisible={modalVisible} toggleModal={profileClick} />
     </div>
