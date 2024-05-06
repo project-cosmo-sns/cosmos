@@ -4,10 +4,11 @@ import { MARKDOWN_SYMBOL_REGEX } from '@/constants/regexPattern';
 import getElapsedTime from '@/utils/getElaspedTime';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
-import { MouseEvent } from 'react';
+import { MouseEvent, useState } from 'react';
 import HashTag from '../HashTag';
 import { PostListDataType } from '../types';
 import styles from './PostPreview.module.scss';
+import EmojiBundle from '@/components/Common/EmojiBundle';
 
 interface PostPreviewProps {
   postData: PostListDataType;
@@ -16,6 +17,7 @@ interface PostPreviewProps {
 export default function PostPreview({ postData }: PostPreviewProps) {
   const cn = classNames.bind(styles);
   const router = useRouter();
+  const [isEmojiVisible, setIsEmojiVisible] = useState(false);
 
   const {
     id: postId,
@@ -32,7 +34,7 @@ export default function PostPreview({ postData }: PostPreviewProps) {
 
   const handleEmojiClick = (e: MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
-    console.log('좋아요 남기기 or 이모지 팝업 뜨고 이모지 남기기');
+    setIsEmojiVisible(true);
   };
 
   return (
@@ -56,10 +58,12 @@ export default function PostPreview({ postData }: PostPreviewProps) {
         ))}
       </div>
       <ReactionContainer
-        emoji={emojiCount}
-        commentsCount={commentCount}
-        views={viewCount}
+        emojiCount={emojiCount}
+        commentCount={commentCount}
+        viewCount={viewCount}
       />
+      {/* 현재 포스트 목록에서 이모지 리스트 안내려와서 emojiList 못 전달 중이라 주석처리함 */}
+      {/* <EmojiBundle emojiList={emoji} isDetail={false} isVisible={isEmojiVisible}/> */}
     </div>
   );
 }

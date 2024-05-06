@@ -1,22 +1,11 @@
 import classNames from 'classnames/bind';
-import { Dispatch, SetStateAction, useState } from 'react';
 import { CommentIcon, EmojiIcon, EyeIcon } from '../IconCollection';
-import EmojiHeartIcon from '../EmojiCollection/EmojiHeartIcon';
-import EmojiThumbsUpIcon from '../EmojiCollection/EmojiThumbsUpIcon';
-import EmojiLaughIcon from '../EmojiCollection/EmojiLaughIcon';
-import EmojiSadIcon from '../EmojiCollection/EmojiSadIcon';
-import EmojiCheckIcon from '../EmojiCollection/EmojiCheckIcon';
-import EmojiMeIcon from '../EmojiCollection/EmojiMeIcon';
 import styles from './ReactionContainer.module.scss';
-import EmojiBundle from '../EmojiBundle';
 
 interface ReactionContainerProps {
-  emoji: number;
-  commentsCount: number;
-  views: number;
-  handleEmojiClick?: Dispatch<SetStateAction<boolean>>;
-  emojiVisible?: boolean;
-  forDetails?: boolean;
+  emojiCount: number;
+  commentCount: number;
+  viewCount: number;
 }
 
 /**
@@ -29,70 +18,27 @@ interface ReactionContainerProps {
  * @returns {JSX.Element} 리액션 컨테이너 JSX 요소
  */
 
-export default function ReactionContainer({
-  emoji,
-  commentsCount,
-  views,
-  handleEmojiClick,
-  emojiVisible,
-  forDetails,
-}: ReactionContainerProps) {
-  const cn = classNames.bind(styles);
-  const [hasReaction, setHasReaction] = useState(false);
-  return (
-    <div className={cn('wrapper', forDetails && 'details-wrapper')}>
-      {forDetails ? (
-        <EmojiBundle
-          forDetails={forDetails}
-          emojiVisible={emojiVisible}
-          handleEmojiClick={handleEmojiClick}
-          toggleHasReaction={setHasReaction}
-          className={cn('details-emoji-bundler')}
-        >
-          <EmojiHeartIcon />
-          <EmojiThumbsUpIcon />
-          <EmojiLaughIcon />
-          <EmojiSadIcon />
-          <EmojiCheckIcon />
-          <EmojiMeIcon />
-        </EmojiBundle>
-      ) : (
-        <button
-          type="button"
-          className={cn('reaction', 'emoji')}
-          onClick={() => handleEmojiClick && handleEmojiClick(!emojiVisible)}
-        >
-          {hasReaction ? (
-            <p>반응 남김</p>
-          ) : (
-            <EmojiIcon width="18" height="18" />
-          )}
-          {emoji}
-        </button>
-      )}
+const cn = classNames.bind(styles);
 
-      <button type="button" className={cn('reaction', 'comment')}>
+export default function ReactionContainer({
+  emojiCount,
+  commentCount,
+  viewCount,
+}: ReactionContainerProps) {
+  return (
+    <div className={cn('wrapper')}>
+      <div className={cn('reaction', 'emoji')}>
+        <EmojiIcon width="18" height="18" />
+        {emojiCount}
+      </div>
+      <div className={cn('reaction', 'comment')}>
         <CommentIcon width="18" height="18" />
-        {commentsCount}
-      </button>
-      <button type="button" className={cn('reaction', 'view')}>
+        {commentCount}
+      </div>
+      <div className={cn('reaction', 'view')}>
         <EyeIcon width="18" height="18" />
-        {views}
-      </button>
-      {emojiVisible && (
-        <EmojiBundle
-          emojiVisible={emojiVisible}
-          handleEmojiClick={handleEmojiClick}
-          toggleHasReaction={setHasReaction}
-        >
-          <EmojiHeartIcon />
-          <EmojiThumbsUpIcon />
-          <EmojiLaughIcon />
-          <EmojiSadIcon />
-          <EmojiCheckIcon />
-          <EmojiMeIcon />
-        </EmojiBundle>
-      )}
+        {viewCount}
+      </div>
     </div>
   );
 }

@@ -27,12 +27,13 @@ export default function PostContent({ postData }: PostContentProps) {
   const router = useRouter();
   const { postId } = router.query;
 
-  const { post, writer, hashTags, emoji } = postData.postDetail;
+  const { post, writer, emoji } = postData.postDetail;
   const {
     category,
     title,
     createdAt,
     content,
+    hashTags,
     emojiCount,
     viewCount,
     commentCount,
@@ -85,9 +86,9 @@ export default function PostContent({ postData }: PostContentProps) {
       </div>
       <EmojiBundle emojiList={emoji} isDetail />
       {/* <ReactionContainer
-        emoji={emojiCount}
-        commentsCount={commentCount}
-        views={viewCount}
+        emojiCount={emojiCount}
+        commentCount={commentCount}
+        viewCount={viewCount}
         handleEmojiClick={() =>
           console.log('이모지 모달 열기 or 좋아요만 하려면 이모지 토글')
         }

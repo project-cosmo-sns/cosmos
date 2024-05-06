@@ -6,16 +6,27 @@ import styles from './EmojiBundle.module.scss';
 interface EmojiBundleProps {
   emojiList: EmojiType[];
   isDetail: boolean;
+  isVisible?: boolean;
 }
 
 const cn = classNames.bind(styles);
 
-export default function EmojiBundle({ emojiList, isDetail }: EmojiBundleProps) {
+export default function EmojiBundle({
+  emojiList,
+  isDetail,
+  isVisible = true,
+}: EmojiBundleProps) {
   return (
-    <div className={cn('wrapper')}>
-      {emojiList.map((emoji) => (
-        <EmojiButton key={emoji.emojiCode} emoji={emoji} isDetail={isDetail} />
-      ))}
-    </div>
+    isVisible && (
+      <div className={cn('wrapper')}>
+        {emojiList.map((emoji) => (
+          <EmojiButton
+            key={emoji.emojiCode}
+            emoji={emoji}
+            isDetail={isDetail}
+          />
+        ))}
+      </div>
+    )
   );
 }

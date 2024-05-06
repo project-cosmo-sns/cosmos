@@ -15,11 +15,7 @@ export interface PostRequestType {
   hashTags: HashTagType[];
 }
 
-export interface PostType {
-  id: number;
-  category: string;
-  title: string;
-  content: string;
+export interface PostType extends PostRequestType {
   viewCount: number;
   commentCount: number;
   emojiCount: number;
@@ -53,7 +49,6 @@ export interface PostDetailType {
   postDetail: {
     writer: Writer;
     post: PostType;
-    hashTags: HashTagType[];
     emoji: EmojiType[];
   };
 }
