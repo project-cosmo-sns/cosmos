@@ -1,0 +1,10 @@
+.search-list {
+  @include flex-arrange(center, flex-start);
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 0;
+
+  @media (min-width: 768px) {
+    padding: 12px 24px;
+  }
+}

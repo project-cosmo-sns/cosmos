@@ -26,3 +26,61 @@
   backdrop-filter: blur(15px);
   border: $edge;
 }
+
+@mixin markdown-style {
+  color: $gray-03;
+  margin-bottom: 40px;
+  font-size: 1.6rem;
+  line-height: 2rem;
+
+  h1,
+  h2,
+  h3 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  a {
+    color: $primary-01;
+  }
+
+  .task-list-item {
+    list-style: none;
+  }
+
+  ul,
+  ol {
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    margin-left: 0;
+    padding-left: 2.4rem;
+    line-height: 2.4rem;
+  }
+
+  ul {
+    list-style-type: disc;
+    ul {
+      list-style-type: circle;
+      ul {
+        list-style-type: square;
+      }
+    }
+  }
+
+  ol {
+    list-style-type: auto;
+    ol {
+      list-style: lower-alpha;
+      ol {
+        list-style: lower-roman;
+      }
+    }
+  }
+
+  code {
+    font-size: 1.4rem;
+  }
+
+  p {
+    display: block;
+  }
+}
