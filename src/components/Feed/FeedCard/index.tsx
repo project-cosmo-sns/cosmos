@@ -8,6 +8,7 @@ import Modal from '@/components/Common/Layout/Modal';
 import { deleteFeed, editFeed, Edits } from '@/components/Feed/FeedCard/api';
 import styles from './FeedCard.module.scss';
 import { FeedDetailType } from '../types';
+import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
 
 interface FeedCardTypes {
   feedData: FeedDetailType;
@@ -53,8 +54,6 @@ export default function FeedCard({
     createdAt,
     imageUrls,
   } = feedData.feed;
-
-  console.log(feedData.feed, '-----피드 데이터-----');
 
   const onSubmit: SubmitHandler<Edits> = (data) => {
     setIsEdit(false);
@@ -112,6 +111,24 @@ export default function FeedCard({
               )}
             </div>
           )}
+          {forDetails && (
+            <div className={cn('icon-wrapper')}>
+              <EditIcon
+                width="18"
+                height="18"
+                onClick={() => {
+                  setIsEdit(!isEdit);
+                }}
+              />
+              <DeleteIcon
+                width="18"
+                height="18"
+                onClick={() => {
+                  deleteFeed(id);
+                }}
+              />
+            </div>
+          )}
         </div>
         <ReactionContainer
           emoji={emojiCount}
@@ -122,49 +139,15 @@ export default function FeedCard({
           forDetails={forDetails}
         />
         {hasPadding || (
-          <div>
-            {isEdit ? (
-              <button
-                type="button"
-                onClick={() => {
-                  setIsEdit(false);
-                  console.log('편집 상태 false로 변경');
-                }}
-              >
-                취소하기
-              </button>
-            ) : (
-              <div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsEdit(true);
-                    console.log('편집상태 true로 변경');
-                  }}
-                >
-                  편집하기
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    console.log('삭제하기');
-                    deleteFeed(id);
-                  }}
-                >
-                  삭제하기
-                </button>
-              </div>
-            )}
-            <Modal
-              title="임시모달"
-              cssModalSize={cn('')}
-              cssComponentDisplay={cn('')}
-              modalVisible={moreModalOpen}
-              toggleModal={setMoreModalOpen}
-            >
-              <div>테스트 모달</div>
-            </Modal>
-          </div>
+          <Modal
+            title="임시모달"
+            cssModalSize={cn('')}
+            cssComponentDisplay={cn('')}
+            modalVisible={moreModalOpen}
+            toggleModal={setMoreModalOpen}
+          >
+            <div>테스트 모달</div>
+          </Modal>
         )}
       </div>
     </div>

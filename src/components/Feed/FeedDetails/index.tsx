@@ -52,7 +52,6 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
   }, []);
 
   const onSubmit = (data: Comment) => {
-    console.log(data);
     postComment(data, feedId);
   };
 

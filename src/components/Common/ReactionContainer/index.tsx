@@ -70,15 +70,16 @@ export default function ReactionContainer({
           {emoji}
         </button>
       )}
-
-      <button type="button" className={cn('reaction', 'comment')}>
-        <CommentIcon width="18" height="18" />
-        {commentsCount}
-      </button>
-      <button type="button" className={cn('reaction', 'view')}>
-        <EyeIcon width="18" height="18" />
-        {views}
-      </button>
+      <div className={cn('icon-wrapper')}>
+        <button type="button" className={cn('reaction', 'comment')}>
+          <CommentIcon width="18" height="18" />
+          {commentsCount}
+        </button>
+        <button type="button" className={cn('reaction', 'view')}>
+          <EyeIcon width="18" height="18" />
+          {views}
+        </button>
+      </div>
       {emojiVisible && (
         <EmojiBundle
           emojiVisible={emojiVisible}

@@ -26,7 +26,6 @@ export default function CommentCard({
   feedId: number;
 }) {
   const commentData = comment.comment;
-  console.log(commentData, '------코멘트 데이터-----');
 
   const { id, content, heartCount, isHearted, createdAt } = commentData;
 
