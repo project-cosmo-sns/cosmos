@@ -2,9 +2,11 @@ import AuthorProfile from '@/components/Common/AuthorProfile';
 import { CommentDetailType } from '@/components/Feed/types';
 import getElapsedTime from '@/utils/getElaspedTime';
 import {
-  PatchComment,
   EditCommentType,
+  patchComment,
   deleteComment,
+  deleteLikeComment,
+  postLikeComment,
 } from '@/components/Common/CommentCard/api';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
@@ -24,6 +26,7 @@ export default function CommentCard({
   feedId: number;
 }) {
   const commentData = comment.comment;
+  console.log(commentData, '------코멘트 데이터-----');
 
   const { id, content, heartCount, isHearted, createdAt } = commentData;
 
@@ -54,7 +57,7 @@ export default function CommentCard({
   };
 
   const onSubmit = (data: EditCommentType) => {
-    PatchComment(feedId, id, data);
+    patchComment(feedId, id, data);
     console.log('수정하기!');
     setIsCommentEditing(false);
   };
@@ -66,9 +69,17 @@ export default function CommentCard({
         <div className={cn('container')}>
           <div className={cn('like')} onClick={handleClickLikeComment}>
             {isLiked ? (
-              <LikedIcon width="18" height="18" />
+              <LikedIcon
+                onClick={() => deleteLikeComment(feedId, id)}
+                width="18"
+                height="18"
+              />
             ) : (
-              <LikeIcon width="18" height="18" />
+              <LikeIcon
+                onClick={() => postLikeComment(feedId, id)}
+                width="18"
+                height="18"
+              />
             )}
             {reactionCount}
           </div>

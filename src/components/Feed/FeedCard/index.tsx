@@ -54,6 +54,8 @@ export default function FeedCard({
     imageUrls,
   } = feedData.feed;
 
+  console.log(feedData.feed, '-----피드 데이터-----');
+
   const onSubmit: SubmitHandler<Edits> = (data) => {
     setIsEdit(false);
     editFeed(id, data, imageUrls);
