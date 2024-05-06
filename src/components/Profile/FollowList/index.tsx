@@ -4,7 +4,6 @@ import Modal from '@/components/Common/Layout/Modal';
 import Follow from './Follow';
 import { ModalPropsType } from '@/@types/type';
 import { useQuery } from '@tanstack/react-query';
-import { useRouter } from 'next/router';
 import {
   getMyFollowingData,
   getMyFollowerData,
@@ -18,7 +17,7 @@ const cn = classNames.bind(styles);
 type FollowListType = {
   followListProps: ModalPropsType & {
     title: string;
-    isFollow: boolean;
+    isFollowButton: boolean;
     followData: 'following' | 'follower';
   };
 };
@@ -34,15 +33,13 @@ type FollowListType = {
  */
 
 export default function FollowList({ followListProps }: FollowListType) {
-  const { title, toggleModal, isFollow, followData, modalVisible } =
+  const { title, toggleModal, isFollowButton, followData, modalVisible } =
     followListProps;
-
-  const myFollowInfo =
-    followData === 'following' ? getMyFollowingData : getMyFollowerData;
 
   const { data: followDataResults = [] } = useQuery({
     queryKey: [followData],
-    queryFn: () => myFollowInfo(),
+    queryFn: () =>
+      followData === 'following' ? getMyFollowingData() : getMyFollowerData(),
   });
 
   return (
@@ -50,8 +47,8 @@ export default function FollowList({ followListProps }: FollowListType) {
       title={title}
       toggleModal={toggleModal}
       modalVisible={modalVisible}
-      cssModalSize={cn('follow-container')}
-      cssComponentDisplay={cn('follow-wrapper')}
+      cssModalSize={cn('followList-container')}
+      cssComponentDisplay={cn('followList-wrapper')}
     >
       <div>
         {followDataResults.map((follow: FollowDataProps) => {
@@ -63,7 +60,7 @@ export default function FollowList({ followListProps }: FollowListType) {
             <Follow
               key={followDetailInfo.memberId}
               {...followDetailInfo}
-              isFollow={isFollow}
+              isFollowButton={isFollowButton}
             />
           );
         })}

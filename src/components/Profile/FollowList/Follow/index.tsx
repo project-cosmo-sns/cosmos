@@ -3,6 +3,7 @@ import styles from './Follow.module.scss';
 import classNames from 'classnames/bind';
 import GenerationBadge from '@/components/Common/GenerationBadge';
 import FollowButton from '@/components/Common/Buttons/FollowButton';
+import useFollowClick from '@/hooks/useFollowClick';
 
 const cn = classNames.bind(styles);
 
@@ -10,8 +11,8 @@ export interface FollowType {
   memberId: number;
   profileImageUrl?: string;
   nickname: string;
-  generation: number | null;
-  isFollow?: boolean;
+  generation: number;
+  isFollowButton?: boolean;
 }
 
 export default function Follow({
@@ -19,11 +20,9 @@ export default function Follow({
   nickname,
   generation,
   memberId,
-  isFollow,
+  isFollowButton,
 }: FollowType) {
-  const followClick = (id: number) => {
-    console.log(id);
-  };
+  const { isActive, toggleFollow } = useFollowClick(memberId);
 
   return (
     <div key={memberId} className={cn('follow-wrapper')}>
@@ -40,7 +39,11 @@ export default function Follow({
           isAuthorized={!!generation}
         />
       </div>
-      <FollowButton onClick={() => followClick(memberId)} isFollow={isFollow} />
+      <FollowButton
+        onClick={toggleFollow}
+        isFollowButton={isFollowButton}
+        isActive={isActive}
+      />
     </div>
   );
 }

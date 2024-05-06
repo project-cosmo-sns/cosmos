@@ -1,4 +1,5 @@
 import fetchData from './fetchData';
+import { useMutation } from '@tanstack/react-query';
 
 type UserInfo = {
   memberId: number;
@@ -12,20 +13,6 @@ export type FollowDataProps = {
   followerInfo: UserInfo;
   followingInfo: UserInfo;
 };
-
-export async function getMyFollowingData() {
-  const res = await fetchData<FollowDataProps[]>({
-    param: 'follow/following/mine',
-  });
-  return res;
-}
-
-export async function getMyFollowerData() {
-  const res = await fetchData<FollowDataProps[]>({
-    param: 'follow/follower/mine',
-  });
-  return res;
-}
 
 export async function getUserFollowingData(memberId: number) {
   const res = await fetchData<FollowDataProps[]>({
@@ -41,18 +28,16 @@ export async function getUserFollowerData(memberId: number) {
   return res;
 }
 
-export async function addFollow(memberId: number) {
-  const res = await fetchData({
-    param: `/follow/${memberId}`,
-    method: 'post',
+export async function getMyFollowingData() {
+  const res = await fetchData<FollowDataProps[]>({
+    param: 'follow/following/mine',
   });
   return res;
 }
 
-export async function deleteFollow(memberId: number) {
-  const res = await fetchData({
-    param: `/follow/${memberId}`,
-    method: 'delete',
+export async function getMyFollowerData() {
+  const res = await fetchData<FollowDataProps[]>({
+    param: 'follow/follower/mine',
   });
   return res;
 }
