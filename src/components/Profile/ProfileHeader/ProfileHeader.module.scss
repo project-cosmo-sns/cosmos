@@ -132,19 +132,24 @@
     padding-bottom: 1px;
   }
 
-  .profile-setting-button {
-    position: absolute;
-    top: -20px;
-    right: 30px;
-    cursor: pointer;
+  .introduce-empty {
+    color: $gray-01;
+  }
+}
+.profile-setting-or-following {
+  position: absolute;
+  // top: -20px;
+  right: 30px;
+  cursor: pointer;
 
-    button {
-      width: 94px;
-      height: 32px;
-      border-radius: 100px;
-      background-color: $black-01;
-      color: $white-01;
-    }
+  // margin 영역까지 클릭되는거 바꿔야함...
+  button {
+    width: 94px;
+    height: 32px;
+    border-radius: 100px;
+    background-color: $black-01;
+    color: $white-01;
+    margin-top: 20px;
   }
 }
 
