@@ -5,40 +5,32 @@ import PostPreview from '@/components/Post/PostPreview';
 import { PostListDataType, PostListType } from '@/components/Post/types';
 import styles from '@/components/Post/PostList/PostList.module.scss';
 import { SortType } from '@/constants/sortType';
-import { MemberDataType } from '@/pages/profile/types';
 
-interface PostListProps {
+interface MyPostListProps {
   // selectedSort: SortType;
   postList: PostListDataType[];
-  memberData: MemberDataType; // 현재 로그인한 사용자의 ID
 }
 
 export default function MyPostList({
   // selectedSort,
   postList,
-  memberData,
-}: PostListProps) {
+}: MyPostListProps) {
   const cn = classNames.bind(styles);
-  const currentUserId = memberData.memberId;
+  // const currentUserId = memberData.memberId;
 
+  const [myPosts, setMyPosts] = useState<PostListDataType[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string | '전체'>(
     '전체',
   );
-  const [filteredPosts, setFilteredPosts] = useState<PostListDataType[]>([]);
+  // const [filteredPosts, setFilteredPosts] = useState<PostListDataType[]>([]);
 
-  // 현재 로그인한 사용자가 작성한 포스트만 필터링
+  // 현재 로그인한 사용자가 작성한 포스트만 필터링 -> 노노 필터링 필요없다.
+  // 그냥 내 작성 글 가져와서 렌더링만 하면 됨.
   useEffect(() => {
-    // postList가 배열인지 확인 후 필터
-    // memberData에 아직 memberId가 추가되지 않아 undefined가 뜸. 기다려봐야..!
     if (Array.isArray(postList)) {
-      const myPosts = postList.filter(
-        (postData) => postData.postListInfo.writer.id === currentUserId,
-      );
-      setFilteredPosts(myPosts);
+      setMyPosts(postList);
     }
-  }, [postList, currentUserId]);
-
-  console.log('memberData : ', memberData);
+  }, [postList]);
 
   return (
     <div className={cn('wrapper')}>
@@ -49,8 +41,8 @@ export default function MyPostList({
         />
       </div>
       <div className={cn('post-container')}>
-        {filteredPosts.length ? (
-          filteredPosts.map((postData) => (
+        {myPosts.length ? (
+          myPosts.map((postData) => (
             <PostPreview
               key={postData.postListInfo.post.id}
               postData={postData}
