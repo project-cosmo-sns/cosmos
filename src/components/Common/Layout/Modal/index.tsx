@@ -56,7 +56,7 @@ export default function Modal({
                     height="18"
                     onClick={() => {
                       toggleModal && toggleModal(!modalVisible);
-                      router.push('/');
+                      // router.push('/');
                     }}
                   />
                 </div>

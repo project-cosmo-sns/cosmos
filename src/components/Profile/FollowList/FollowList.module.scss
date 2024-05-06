@@ -1,9 +1,11 @@
-.follow-container {
+.followList-container {
   width: 100%;
   height: 100%;
 
-  .follow-wrapper {
+  .followList-wrapper {
     @include flex-arrange(center, flex-start);
+    // flex-direction: column;
+    // width: 100%;
   }
 
   @media (min-width: 768px) {
