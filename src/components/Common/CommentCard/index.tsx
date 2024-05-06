@@ -17,10 +17,8 @@ export default function CommentCard({
   comment: CommentDetailType;
 }) {
   const commentData = comment.comment;
-  const writerData = comment.writer;
 
   const { content, createdAt, heartCount, isHearted } = commentData;
-  const { generation, nickname, profileImageUrl } = writerData;
 
   const [commentValue, setCommentValue] = useState(content);
   const [isCommentEditing, setIsCommentEditing] = useState(false);

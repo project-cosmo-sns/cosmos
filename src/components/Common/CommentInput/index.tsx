@@ -3,28 +3,23 @@ import DefaultButton from '../Buttons/DefaultButton';
 import Input from '../Input';
 import styles from './CommentInput.module.scss';
 import classNames from 'classnames/bind';
-import { postComment } from './api';
+
+export interface Comment {
+  comment: string;
+}
 
 interface CommentInputTypes {
   placeholder: string;
-  feedId: number;
-}
-
-interface Comment {
-  comment: string;
+  onSubmit: (data: Comment) => void;
 }
 
 const cn = classNames.bind(styles);
 
 export default function CommentInput({
   placeholder,
-  feedId,
+  onSubmit,
 }: CommentInputTypes) {
   const { register, handleSubmit } = useForm<Comment>();
-  const onSubmit = (data) => {
-    console.log(data);
-    postComment(data, feedId);
-  };
   return (
     <form className={cn('wrapper')} onSubmit={handleSubmit(onSubmit)}>
       <Input placeholder={placeholder} register={{ ...register('comment') }} />

@@ -1,5 +1,5 @@
 import CommentCard from '@/components/Common/CommentCard';
-import CommentInput from '@/components/Common/CommentInput';
+import CommentInput, { Comment } from '@/components/Common/CommentInput';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import FeedCard from '@/components/Feed/FeedCard/index';
@@ -7,6 +7,7 @@ import {
   getFeedCommentList,
   getFeedDetails,
 } from '@/components/Feed/FeedDetails/api';
+import { postComment } from '@/components/Common/CommentInput/api';
 import styles from './FeedDetails.module.scss';
 import { FeedDetailType, CommentDetailType } from '../types';
 
@@ -50,10 +51,15 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
     fetchFeedComments();
   }, []);
 
+  const onSubmit = (data: Comment) => {
+    console.log(data);
+    postComment(data, feedId);
+  };
+
   return (
     <div className={cn('container')}>
       <FeedCard feedData={feed} hasPadding={false} forDetails />
-      <CommentInput placeholder="댓글을 입력하세요" feedId={feedId} />
+      <CommentInput placeholder="댓글을 입력하세요" onSubmit={onSubmit} />
       {commentList.length ? (
         commentList.map((comment, index) => (
           <div key={comment.comment.id}>
