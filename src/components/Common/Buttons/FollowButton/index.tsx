@@ -16,6 +16,7 @@ export default function FollowButton({
   isFollowButton,
   isActive,
 }: FollowButtonType) {
+  
   const handleClick = () => {
     onClick(isActive || false);
   };

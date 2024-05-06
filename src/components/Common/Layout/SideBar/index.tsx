@@ -54,11 +54,10 @@ export default function SideBar() {
   const { data: profile } = useGetProfileImage();
 
   useEffect(() => {
-    if (!profile || profile.profileImageUrl === undefined) {
+    if (profile === undefined) {
       setIsLogin(false);
       return;
     }
-
     setUserImage(profile.profileImageUrl);
     setIsLogin(true);
   }, [profile]);
