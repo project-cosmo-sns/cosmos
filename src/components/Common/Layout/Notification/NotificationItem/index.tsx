@@ -61,7 +61,7 @@ export default function NotificationItem({ data }: NotificationItemProps) {
       </div>
       {type === notificationType.CREATE_FEED_COMMENT && isModalOpen && (
         <Modal
-          toggleModal={() => setIsModalOpen(false)} // Close the modal
+          toggleModal={() => setIsModalOpen(false)}
           modalVisible={isModalOpen}
           cssModalSize={cn('feed-detail-modalSize')}
           cssComponentDisplay={cn('feed-detail-componentDisplay')}
