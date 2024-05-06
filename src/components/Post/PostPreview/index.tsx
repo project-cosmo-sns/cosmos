@@ -24,11 +24,12 @@ export default function PostPreview({ postData }: PostPreviewProps) {
     createdAt,
     title,
     content,
+    emoji,
     viewCount,
     emojiCount,
     commentCount,
+    hashTags,
   } = postData.postListInfo.post;
-  const hashTags = postData.postListHashTag;
 
   const formattedCreatedAt = getElapsedTime(createdAt);
 
@@ -62,8 +63,11 @@ export default function PostPreview({ postData }: PostPreviewProps) {
         commentCount={commentCount}
         viewCount={viewCount}
       />
-      {/* 현재 포스트 목록에서 이모지 리스트 안내려와서 emojiList 못 전달 중이라 주석처리함 */}
-      {/* <EmojiBundle emojiList={emoji} isDetail={false} isVisible={isEmojiVisible}/> */}
+      <EmojiBundle
+        emojiList={emoji}
+        isDetail={false}
+        isVisible={isEmojiVisible}
+      />
     </div>
   );
 }

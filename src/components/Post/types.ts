@@ -20,16 +20,17 @@ export interface PostType extends PostRequestType {
   commentCount: number;
   emojiCount: number;
   createdAt: string;
+  emojis: EmojiType[];
   isMine: boolean;
 }
 
-export interface PostListInfoType {
+export interface PostInfoType {
   writer: Writer;
   post: PostType;
 }
 
 export interface PostListDataType {
-  postListInfo: PostListInfoType;
+  postListInfo: PostInfoType;
   postListHashTag: HashTagType[];
 }
 
@@ -46,11 +47,7 @@ export interface PostListType {
 }
 
 export interface PostDetailType {
-  postDetail: {
-    writer: Writer;
-    post: PostType;
-    emoji: EmojiType[];
-  };
+  postDetail: PostInfoType;
 }
 
 export interface CommentType {

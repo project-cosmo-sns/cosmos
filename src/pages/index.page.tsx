@@ -1,19 +1,17 @@
 import { ContainerOptionType } from '@/@types/type';
 import fetchData from '@/api/fetchData';
 import ContentContainer from '@/components/Common/ContentContainer';
-import { CheckIcon } from '@/components/Common/IconCollection';
-import Toast from '@/components/Common/Toast';
 import TodayQuestion from '@/components/Common/TodayQuestion';
 import FeedList from '@/components/Feed/FeedList';
 import { getFeedList } from '@/components/Feed/FeedList/api';
 import PostList from '@/components/Post/PostList';
-import { PostListDataType, PostListType } from '@/components/Post/types';
+import { PostListType } from '@/components/Post/types';
+import { SortType } from '@/constants/sortType';
 import styles from '@/styles/Home.module.scss';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FeedDetailType, FeedListType } from '../components/Feed/types';
-import { SortType } from '@/constants/sortType';
 
 export const getServerSideProps = async () => {
   const feedList: FeedListType = await getFeedList();

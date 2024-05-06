@@ -1,8 +1,9 @@
+import fetchData from '@/api/fetchData';
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import ActionButtons from '@/components/Common/Buttons/ActionButtons';
+import EmojiBundle from '@/components/Common/EmojiBundle';
 import Modal from '@/components/Common/Layout/Modal';
-import ReactionContainer from '@/components/Common/ReactionContainer';
-import getElapsedTime from '@/utils/getElaspedTime';
+import { useMutation } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -10,11 +11,7 @@ import HashTag from '../HashTag';
 import MarkdownContent from '../Markdown';
 import { HashTagType, PostDetailType } from '../types';
 import styles from './PostContent.module.scss';
-import { useMutation } from '@tanstack/react-query';
-import fetchData from '@/api/fetchData';
-import EmojiButton from '@/components/Common/EmojiButton';
-import { EMOJI_ICON } from '@/constants/EmojiCode';
-import EmojiBundle from '@/components/Common/EmojiBundle';
+import { EmojiCode } from '@/@types/type';
 
 interface PostContentProps {
   postData: PostDetailType;
@@ -24,16 +21,18 @@ const cn = classNames.bind(styles);
 
 export default function PostContent({ postData }: PostContentProps) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const router = useRouter();
   const { postId } = router.query;
 
-  const { post, writer, emoji } = postData.postDetail;
+  const { post, writer } = postData.postDetail;
   const {
     category,
     title,
     createdAt,
     content,
     hashTags,
+    emojis,
     emojiCount,
     viewCount,
     commentCount,
@@ -49,7 +48,34 @@ export default function PostContent({ postData }: PostContentProps) {
     onSuccess: () => router.push('/'),
   });
 
-  console.log(emoji);
+  const { mutate: addEmojiMutate, isPending: isAddPending } = useMutation({
+    mutationFn: (emojiCode: EmojiCode) =>
+      fetchData({
+        param: `/post/${postId}/emoji`,
+        method: 'post',
+        requestData: {
+          emoji: emojiCode,
+        },
+      }),
+  });
+
+  const { mutate: deleteEmojiMutate, isPending: isDeletePending } = useMutation(
+    {
+      mutationFn: (emojiCode: EmojiCode) =>
+        fetchData({
+          param: `/post/${postId}/emoji/${emojiCode}`,
+          method: 'delete',
+        }),
+    },
+  );
+
+  const handleEmojiClick = (emojiCode: EmojiCode, isClicked: boolean) => {
+    if (isClicked) {
+      deleteEmojiMutate(emojiCode);
+      return;
+    }
+    addEmojiMutate(emojiCode);
+  };
 
   return (
     <div className={cn('wrapper')}>
@@ -84,7 +110,14 @@ export default function PostContent({ postData }: PostContentProps) {
           <HashTag key={`${tag.tagName}`} tag={tag} />
         ))}
       </div>
-      <EmojiBundle emojiList={emoji} isDetail />
+      <EmojiBundle
+        emojiList={emojis}
+        isDetail
+        handleEmojiClick={(emojiCode, isClicked) =>
+          handleEmojiClick(emojiCode, isClicked)
+        }
+        isPending={isAddPending || isDeletePending}
+      />
       {/* <ReactionContainer
         emojiCount={emojiCount}
         commentCount={commentCount}
