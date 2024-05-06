@@ -19,7 +19,17 @@ export default function CommentInput({
   placeholder,
   onSubmit,
 }: CommentInputTypes) {
-  const { register, handleSubmit } = useForm<Comment>();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting },
+  } = useForm<Comment>({
+    defaultValues: {
+      comment: '',
+    },
+  });
+
   return (
     <form className={cn('wrapper')} onSubmit={handleSubmit(onSubmit)}>
       <Input
@@ -27,7 +37,8 @@ export default function CommentInput({
         register={{ ...register('comment', { required: true }) }}
       />
       <DefaultButton
-        onClick={() => console.log('등록버튼 클릭!')}
+        disabled={isSubmitting}
+        onClick={() => console.log('댓글 전송 클릭')}
         buttonType="submit"
         size="small"
         color="purple"

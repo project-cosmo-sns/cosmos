@@ -53,6 +53,7 @@ export default function FeedCard({
     emojiCount,
     createdAt,
     imageUrls,
+    isMine,
   } = feedData.feed;
 
   const onSubmit: SubmitHandler<Edits> = (data) => {
@@ -111,7 +112,7 @@ export default function FeedCard({
               )}
             </div>
           )}
-          {forDetails && (
+          {forDetails && isMine && (
             <div className={cn('icon-wrapper')}>
               <EditIcon
                 width="18"

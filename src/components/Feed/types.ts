@@ -12,6 +12,7 @@ export interface Feed {
   emojiCount: number;
   createdAt: string;
   imageUrls: string[];
+  isMine: boolean;
 }
 export interface FeedDetailType {
   writer: Writer;
