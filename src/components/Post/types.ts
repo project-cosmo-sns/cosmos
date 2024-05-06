@@ -1,5 +1,6 @@
 import { HASH_TAG_COLOR_CODE } from '@/constants/hashTagCode';
 import { Writer } from '../Feed/types';
+import { EmojiType } from '@/@types/type';
 
 export interface HashTagType {
   tagName: string;
@@ -46,14 +47,6 @@ export interface PostListType {
     hasPreviousPage: boolean;
     hasNextPage: boolean;
   };
-}
-
-export type EmojiCode = 'HEART' | 'THUMBSUP' | 'LAUGH' | 'SAD' | 'CHECK' | 'ME';
-
-export interface EmojiType {
-  emojiCode: EmojiCode;
-  emojiCount: number;
-  isClicked: boolean;
 }
 
 export interface PostDetailType {
