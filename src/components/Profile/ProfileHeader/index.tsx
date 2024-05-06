@@ -68,7 +68,7 @@ export default function ProfileHeader({
                 title: '팔로워',
                 toggleModal: () => toggleModal('follower'),
                 followData: 'follower',
-                isFollow: false,
+                isFollowButton: false,
                 modalVisible: followModal.follower,
               }}
             />
@@ -83,7 +83,7 @@ export default function ProfileHeader({
                 title: '팔로잉',
                 toggleModal: () => toggleModal('following'),
                 followData: 'following',
-                isFollow: true,
+                isFollowButton: true,
                 modalVisible: followModal.following,
               }}
             />

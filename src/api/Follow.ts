@@ -41,23 +41,3 @@ export async function getMyFollowerData() {
   });
   return res;
 }
-
-export function useAddFollowData() {
-  return useMutation({
-    mutationFn: (memberId: number) =>
-      fetchData({
-        param: `/follow/${memberId}`,
-        method: 'post',
-      }),
-  });
-}
-
-export function useDleteFollowData() {
-  return useMutation({
-    mutationFn: (memberId: number) =>
-      fetchData({
-        param: `/follow/${memberId}`,
-        method: 'delete',
-      }),
-  });
-}

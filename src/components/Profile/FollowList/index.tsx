@@ -17,7 +17,7 @@ const cn = classNames.bind(styles);
 type FollowListType = {
   followListProps: ModalPropsType & {
     title: string;
-    isFollow: boolean;
+    isFollowButton: boolean;
     followData: 'following' | 'follower';
   };
 };
@@ -33,7 +33,7 @@ type FollowListType = {
  */
 
 export default function FollowList({ followListProps }: FollowListType) {
-  const { title, toggleModal, isFollow, followData, modalVisible } =
+  const { title, toggleModal, isFollowButton, followData, modalVisible } =
     followListProps;
 
   const { data: followDataResults = [] } = useQuery({
@@ -47,8 +47,8 @@ export default function FollowList({ followListProps }: FollowListType) {
       title={title}
       toggleModal={toggleModal}
       modalVisible={modalVisible}
-      cssModalSize={cn('follow-container')}
-      cssComponentDisplay={cn('follow-wrapper')}
+      cssModalSize={cn('followList-container')}
+      cssComponentDisplay={cn('followList-wrapper')}
     >
       <div>
         {followDataResults.map((follow: FollowDataProps) => {
@@ -60,7 +60,7 @@ export default function FollowList({ followListProps }: FollowListType) {
             <Follow
               key={followDetailInfo.memberId}
               {...followDetailInfo}
-              isFollow={isFollow}
+              isFollowButton={isFollowButton}
             />
           );
         })}

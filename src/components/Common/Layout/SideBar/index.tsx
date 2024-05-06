@@ -13,7 +13,7 @@ import {
 } from '@/components/Common/IconCollection';
 import LoginModal from '../../LoginModal';
 import { useRouter } from 'next/router';
-import getProfileImage from '@/api/ProfileImage';
+import useGetProfileImage from '@/api/ProfileImage';
 import Image from 'next/image';
 import { useQuery } from '@tanstack/react-query';
 
@@ -51,19 +51,17 @@ export default function SideBar() {
     setActivePopover(null);
   };
 
-  const { data } = useQuery({
-    queryKey: ['profileImage'],
-    queryFn: getProfileImage,
-  });
+  const { data: profile } = useGetProfileImage();
 
   useEffect(() => {
-    if (data === undefined) {
+    if (!profile || profile.profileImageUrl === undefined) {
       setIsLogin(false);
+      return;
     }
-    if (data === null) {
-      setIsLogin(true);
-    }
-  }, [data]);
+
+    setUserImage(profile.profileImageUrl);
+    setIsLogin(true);
+  }, [profile]);
 
   return (
     <div className={cn('sideBar-container')}>

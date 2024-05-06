@@ -3,7 +3,7 @@ import styles from './Follow.module.scss';
 import classNames from 'classnames/bind';
 import GenerationBadge from '@/components/Common/GenerationBadge';
 import FollowButton from '@/components/Common/Buttons/FollowButton';
-import { useAddFollowData, useDleteFollowData } from '@/api/Follow';
+import useFollowClick from '@/hooks/useFollowClick';
 
 const cn = classNames.bind(styles);
 
@@ -12,7 +12,7 @@ export interface FollowType {
   profileImageUrl?: string;
   nickname: string;
   generation: number;
-  isFollow?: boolean;
+  isFollowButton?: boolean;
 }
 
 export default function Follow({
@@ -20,18 +20,9 @@ export default function Follow({
   nickname,
   generation,
   memberId,
-  isFollow,
+  isFollowButton,
 }: FollowType) {
-  const { mutate: addFollow } = useAddFollowData();
-  const { mutate: delteFollow } = useDleteFollowData();
-
-  const followClick = (isActive: boolean) => {
-    if (isActive) {
-      delteFollow(memberId);
-      return;
-    }
-    addFollow(memberId);
-  };
+  const { isActive, toggleFollow } = useFollowClick(memberId);
 
   return (
     <div key={memberId} className={cn('follow-wrapper')}>
@@ -45,7 +36,11 @@ export default function Follow({
         <span>{nickname}</span>
         <GenerationBadge generationInfo={generation} />
       </div>
-      <FollowButton onClick={followClick} isFollow={isFollow} />
+      <FollowButton
+        onClick={toggleFollow}
+        isFollowButton={isFollowButton}
+        isActive={isActive}
+      />
     </div>
   );
 }
