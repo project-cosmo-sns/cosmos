@@ -1,49 +1,21 @@
+import { EmojiType } from '@/@types/type';
 import classNames from 'classnames/bind';
-import { Dispatch, SetStateAction, Children } from 'react';
+import EmojiButton from '../EmojiButton';
 import styles from './EmojiBundle.module.scss';
 
-interface EmojiBundleTypes {
-  children: JSX.Element[];
-  handleEmojiClick?: Dispatch<SetStateAction<boolean>>;
-  emojiVisible?: boolean;
-  toggleHasReaction: Dispatch<SetStateAction<boolean>>;
-  forDetails?: boolean;
-  className?: string;
+interface EmojiBundleProps {
+  emojiList: EmojiType[];
+  isDetail: boolean;
 }
 
-export default function EmojiBundle({
-  children,
-  handleEmojiClick,
-  emojiVisible,
-  toggleHasReaction,
-  forDetails = false,
-  className,
-}: EmojiBundleTypes) {
-  const cn = classNames.bind(styles);
+const cn = classNames.bind(styles);
+
+export default function EmojiBundle({ emojiList, isDetail }: EmojiBundleProps) {
   return (
-    <div
-      className={cn(forDetails ? 'forDetails' : 'emoji-container', className)}
-    >
-      <div className={cn('emoji-wrapper', 'details-wrapper')}>
-        {Children.map(children, (child) => (
-          <div className={cn('details-item-wrapper')}>
-            <div
-              className={cn('emoji-item', 'details-item')}
-              onClick={() => {
-                if (forDetails) {
-                  toggleHasReaction(true);
-                } else {
-                  handleEmojiClick && handleEmojiClick(!emojiVisible);
-                  toggleHasReaction(true);
-                }
-              }}
-            >
-              {child}
-              {forDetails && <p>3</p>}
-            </div>
-          </div>
-        ))}
-      </div>
+    <div className={cn('wrapper')}>
+      {emojiList.map((emoji) => (
+        <EmojiButton key={emoji.emojiCode} emoji={emoji} isDetail={isDetail} />
+      ))}
     </div>
   );
 }

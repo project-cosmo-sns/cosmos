@@ -12,6 +12,9 @@ import { HashTagType, PostDetailType } from '../types';
 import styles from './PostContent.module.scss';
 import { useMutation } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
+import EmojiButton from '@/components/Common/EmojiButton';
+import { EMOJI_ICON } from '@/constants/EmojiCode';
+import EmojiBundle from '@/components/Common/EmojiBundle';
 
 interface PostContentProps {
   postData: PostDetailType;
@@ -44,6 +47,8 @@ export default function PostContent({ postData }: PostContentProps) {
       }),
     onSuccess: () => router.push('/'),
   });
+
+  console.log(emoji);
 
   return (
     <div className={cn('wrapper')}>
@@ -78,14 +83,15 @@ export default function PostContent({ postData }: PostContentProps) {
           <HashTag key={`${tag.tagName}`} tag={tag} />
         ))}
       </div>
-      <ReactionContainer
+      <EmojiBundle emojiList={emoji} isDetail />
+      {/* <ReactionContainer
         emoji={emojiCount}
         commentsCount={commentCount}
         views={viewCount}
         handleEmojiClick={() =>
           console.log('이모지 모달 열기 or 좋아요만 하려면 이모지 토글')
         }
-      />
+      /> */}
     </div>
   );
 }

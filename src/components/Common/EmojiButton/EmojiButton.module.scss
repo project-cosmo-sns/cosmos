@@ -1,0 +1,21 @@
+.wrapper {
+  @include flex-arrange;
+  padding: 4px 9px;
+  background: $black-01;
+  flex-shrink: 0;
+  width: 48px;
+  height: 26px;
+  border-radius: 5px;
+}
+
+.container {
+  @include flex-arrange;
+  @include font-style(1.2rem, $white-01, 400);
+  width: 100%;
+  gap: 4px;
+}
+
+.clicked {
+  border: 1px solid $primary-01;
+  color: $primary-01;
+}
