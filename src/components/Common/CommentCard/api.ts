@@ -1,8 +1,5 @@
 import instance from '@/api/axios';
-
-export interface EditCommentType {
-  editedComment: string;
-}
+import { EditCommentType } from '@/@types/type';
 
 export async function patchComment(
   feedId: number,
@@ -19,7 +16,6 @@ export async function deleteComment(feedId: number, commentId: number) {
 }
 
 export async function postLikeComment(feedId: number, commentId: number) {
-  console.log(feedId, commentId, '-----라이크 보내기-----');
   await instance.post(`feed/${feedId}/comment/${commentId}/like`);
 }
 

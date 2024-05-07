@@ -63,11 +63,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
       {commentList.length ? (
         commentList.map((comment, index) => (
           <div key={comment.comment.id}>
-            <CommentCard
-              comment={comment}
-              feedId={feedId}
-              writerId={feed.writer.id}
-            />
+            <CommentCard comment={comment} feedId={feedId} />
             {index === commentList.length - 1 || (
               <div className={cn('divide-line')} />
             )}

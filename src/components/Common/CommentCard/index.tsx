@@ -2,12 +2,12 @@ import AuthorProfile from '@/components/Common/AuthorProfile';
 import { CommentDetailType } from '@/components/Feed/types';
 import getElapsedTime from '@/utils/getElaspedTime';
 import {
-  EditCommentType,
   patchComment,
   deleteComment,
   deleteLikeComment,
   postLikeComment,
 } from '@/components/Common/CommentCard/api';
+import { EditCommentType } from '@/@types/type';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import ActionButtons from '../Buttons/ActionButtons';
@@ -21,14 +21,11 @@ const cn = classNames.bind(styles);
 export default function CommentCard({
   comment,
   feedId,
-  writerId,
 }: {
   comment: CommentDetailType;
   feedId: number;
-  writerId: number;
 }) {
   const commentData = comment.comment;
-  const commentWriterId = comment.writer.id;
 
   const { id, content, heartCount, isHearted, createdAt } = commentData;
 
@@ -60,7 +57,6 @@ export default function CommentCard({
 
   const onSubmit = (data: EditCommentType) => {
     patchComment(feedId, id, data);
-    console.log('수정하기!');
     setIsCommentEditing(false);
   };
 

@@ -2,21 +2,18 @@
 import classNames from 'classnames/bind';
 import { useForm } from 'react-hook-form';
 import styles from './EditComment.module.scss';
+import { EditCommentType } from '@/@types/type';
 
 const cn = classNames.bind(styles);
-
-export interface CommentEdit {
-  editedComment: string;
-}
 
 export default function EditComment({
   content,
   onSubmit,
 }: {
   content: string;
-  onSubmit: () => void;
+  onSubmit: (data: EditCommentType) => void;
 }) {
-  const { register, handleSubmit } = useForm<CommentEdit>();
+  const { register, handleSubmit } = useForm<EditCommentType>();
   return (
     <form className={cn('wrapper')} onSubmit={handleSubmit(onSubmit)}>
       <textarea defaultValue={content} {...register('editedComment')} />

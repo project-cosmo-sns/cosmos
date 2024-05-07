@@ -19,3 +19,7 @@ export interface AuthFormProps {
   generation: string;
   image: string;
 }
+
+export interface EditCommentType {
+  editedComment: string;
+}
