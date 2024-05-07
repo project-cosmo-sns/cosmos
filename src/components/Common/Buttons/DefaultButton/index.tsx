@@ -7,6 +7,7 @@ interface DefaultButtonType {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   size: 'small' | 'medium' | 'large' | 'modal';
   color: string;
+  disabled?: boolean;
 }
 
 const cn = classNames.bind(styles);
@@ -27,12 +28,14 @@ export default function DefaultButton({
   onClick,
   size,
   color,
+  disabled,
 }: DefaultButtonType) {
   return (
     <button
       type={buttonType === 'submit' ? 'submit' : 'button'}
       onClick={onClick}
       className={cn('default-button', size, color)}
+      disabled={disabled}
     >
       {children}
     </button>

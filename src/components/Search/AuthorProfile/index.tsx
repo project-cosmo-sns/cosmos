@@ -33,7 +33,10 @@ export default function AuthorProfile({
         >
           {nickname}
         </button>
-        <GenerationBadge generationInfo={generation} />
+        <GenerationBadge
+          isAuthorized={!!generation}
+          generationInfo={generation}
+        />
       </div>
       <span className={cn('created-at')}>{createdAt}</span>
     </div>

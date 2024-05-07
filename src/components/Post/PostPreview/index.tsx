@@ -1,4 +1,4 @@
-import AuthorProfile from '@/components/Common/AuthorProfile';
+import WriterProfile from '@/components/Common/WriterProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import { MARKDOWN_SYMBOL_REGEX } from '@/constants/regexPattern';
 import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
@@ -34,14 +34,13 @@ export default function PostPreview({ postData }: PostPreviewProps) {
   const { handleEmojiClick, isAddPending, isDeletePending } =
     useSendEmojiRequest(postId as number, true);
 
-  console.log(emojis);
   return (
     <div
       className={cn('wrapper')}
       onClick={() => router.push(`/post/${postId}`)}
     >
-      <AuthorProfile
-        author={postData.postListInfo.writer}
+      <WriterProfile
+        writer={postData.postListInfo.writer}
         createdAt={formattedCreatedAt}
       />
       <div className={cn('content-wrapper')}>
@@ -56,6 +55,7 @@ export default function PostPreview({ postData }: PostPreviewProps) {
         ))}
       </div>
       <ReactionContainer
+        isPost
         emojiCount={emojiCount}
         commentCount={commentCount}
         viewCount={viewCount}
