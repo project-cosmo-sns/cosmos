@@ -1,8 +1,9 @@
 import fetchData from '@/api/fetchData';
-import AuthorProfile from '@/components/Common/AuthorProfile';
+import WriterProfile from '@/components/Common/WriterProfile';
 import ActionButtons from '@/components/Common/Buttons/ActionButtons';
 import EmojiBundle from '@/components/Common/EmojiBundle';
 import Modal from '@/components/Common/Layout/Modal';
+import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import { useMutation } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
@@ -11,8 +12,6 @@ import HashTag from '../HashTag';
 import MarkdownContent from '../Markdown';
 import { HashTagType, PostDetailType } from '../types';
 import styles from './PostContent.module.scss';
-import { EmojiCode } from '@/@types/type';
-import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 
 interface PostContentProps {
   postData: PostDetailType;
@@ -56,7 +55,7 @@ export default function PostContent({ postData }: PostContentProps) {
       <span className={cn('category')}>{category}</span>
       <span className={cn('title')}>{title}</span>
       <div className={cn('header')}>
-        <AuthorProfile author={writer} createdAt={createdAt} />
+        <WriterProfile writer={writer} createdAt={createdAt} />
         <ActionButtons
           isButtonShow={isMine}
           handleClickEdit={() => router.push(`/write?postId=${postId}`)}
@@ -89,9 +88,7 @@ export default function PostContent({ postData }: PostContentProps) {
         commentCount={commentCount}
         viewCount={viewCount}
         emojiList={emojis}
-        handleEmojiClick={(emojiCode, isClicked) =>
-          handleEmojiClick(emojiCode, isClicked)
-        }
+        handleEmojiClick={handleEmojiClick}
         isPending={isAddPending || isDeletePending}
       />
     </div>
