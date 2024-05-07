@@ -49,11 +49,11 @@ export default function SearchPreview({ searchData }: SearchPreviewProps) {
           <HashTag key={tag.name} tag={tag} />
         ))}
       </div> */}
-      <ReactionContainer
+      {/* <ReactionContainer
         emojiCount={emojiCount}
         commentCount={commentCount}
         viewCount={viewCount}
-      />
+      /> */}
     </div>
   );
 }

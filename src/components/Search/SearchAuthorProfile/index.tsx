@@ -3,7 +3,6 @@ import classNames from 'classnames/bind';
 import styles from './SearchAuthorProfile.module.scss';
 import Image from 'next/image';
 import GenerationBadge from '@/components/Common/GenerationBadge';
-import FollowButton from '../FollowButton';
 
 interface SearchAuthorProfileProps {
   member: Member;
@@ -42,7 +41,10 @@ export default function SearchAuthorProfile({
       <div className={cn('profile-infomation')}>
         <div className={cn('profile-name')}>
           <h3>{nickname}</h3>
-          <GenerationBadge generationInfo={generation} />
+          <GenerationBadge
+            isAuthorized={!!generation}
+            generationInfo={generation}
+          />
         </div>
         <div className={cn('profile-follow')}>
           <div>
@@ -59,12 +61,12 @@ export default function SearchAuthorProfile({
         </div>
       </div>
 
-      {!isMine && (
+      {/* {!isMine && (
         <FollowButton
           onClick={() => console.log('팔로우클릭')}
           isFollow={false}
         />
-      )}
+      )} */}
     </div>
   );
 }

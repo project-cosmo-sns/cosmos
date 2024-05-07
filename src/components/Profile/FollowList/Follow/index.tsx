@@ -34,7 +34,10 @@ export default function Follow({
           height={40}
         />
         <span>{nickname}</span>
-        <GenerationBadge generationInfo={generation} />
+        <GenerationBadge
+          generationInfo={generation}
+          isAuthorized={!!generation}
+        />
       </div>
       <FollowButton
         onClick={toggleFollow}

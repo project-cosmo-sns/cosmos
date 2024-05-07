@@ -11,6 +11,7 @@ interface ReactionContainerProps {
   commentCount: number;
   viewCount: number;
   emojis: EmojiType[];
+  isPost?: boolean;
   handleEmojiClick: (emojiCode: EmojiCode, isClicked: boolean) => void;
 }
 
@@ -21,6 +22,7 @@ export default function ReactionContainer({
   commentCount,
   viewCount,
   emojis,
+  isPost = false,
   handleEmojiClick,
 }: ReactionContainerProps) {
   const emojiRef = useRef(null);
@@ -41,13 +43,19 @@ export default function ReactionContainer({
   return (
     <div className={cn('wrapper')}>
       <div
-        className={cn('reaction', { clicked: emojis?.length })}
+        className={cn('reaction', {
+          clicked: emojis?.some((emoji) => emoji.isClicked === true),
+        })}
         onClick={handleOpenEmoji}
       >
         <EmojiIcon
           width="18"
           height="18"
-          fill={emojis?.length ? '#8576FF' : undefined}
+          fill={
+            emojis?.some((emoji) => emoji.isClicked === true)
+              ? '#8576FF'
+              : undefined
+          }
         />
         {emojiCount}
       </div>
@@ -55,10 +63,12 @@ export default function ReactionContainer({
         <CommentIcon width="18" height="18" />
         {commentCount}
       </div>
-      <div className={cn('reaction')}>
-        <EyeIcon width="18" height="18" />
-        {viewCount}
-      </div>
+      {isPost && (
+        <div className={cn('reaction')}>
+          <EyeIcon width="18" height="18" />
+          {viewCount}
+        </div>
+      )}
       <div ref={emojiRef}>
         <EmojiPrivewBundle
           isVisible={isEmojiVisible}

@@ -21,7 +21,6 @@ export default function FeedList({ feedList }: FeedListProps) {
     setFeedId(selectedFeedId);
     setIsModalOpen(!isModalOpen);
   };
-  console.log(feedList);
 
   return (
     <>
