@@ -4,11 +4,11 @@ import { EditCommentType } from '@/@types/type';
 import { useMutation } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
 
-export function useCommentRequest(postId: number) {
+export function useCommentRequest(postId: number, forFeeds: boolean) {
   const { mutate: postCommentMutate } = useMutation({
     mutationFn: (dataParam: Comment) =>
       fetchData<PostCommentType>({
-        param: `feed/${postId}/comment`,
+        param: `${forFeeds ? 'feed' : 'post'}/${postId}/comment/${forFeeds ? '' : 'write'}`,
         method: 'post',
         requestData: {
           content: dataParam.comment,
@@ -23,7 +23,7 @@ export function useCommentRequest(postId: number) {
   const { mutate: deleteCommentMutate } = useMutation({
     mutationFn: (commentId: number) =>
       fetchData<void>({
-        param: `feed/${postId}/comment/${commentId}`,
+        param: `${forFeeds ? 'feed' : 'post'}/${postId}/comment/${commentId}`,
         method: 'delete',
       }),
   });
@@ -35,7 +35,7 @@ export function useCommentRequest(postId: number) {
   const { mutate: postLikeCommentMutate } = useMutation({
     mutationFn: (commentId: number) =>
       fetchData<void>({
-        param: `feed/${postId}/comment/${commentId}/like`,
+        param: `${forFeeds ? 'feed' : 'post'}/${postId}/comment/${commentId}/like`,
         method: 'post',
       }),
   });
@@ -47,7 +47,7 @@ export function useCommentRequest(postId: number) {
   const { mutate: deleteLikeCommentMutate } = useMutation({
     mutationFn: (commentId: number) =>
       fetchData<void>({
-        param: `feed/${postId}/comment/${commentId}/like`,
+        param: `${forFeeds ? 'feed' : 'post'}/${postId}/comment/${commentId}/like`,
         method: 'delete',
       }),
   });
@@ -65,7 +65,7 @@ export function useCommentRequest(postId: number) {
       data: EditCommentType;
     }) =>
       fetchData({
-        param: `feed/${postId}/comment/${commentId}`,
+        param: `${forFeeds ? 'feed' : 'post'}/${postId}/comment/${commentId}/${forFeeds ? '' : 'modify'}`,
         method: 'patch',
         requestData: {
           content: data.editedComment,

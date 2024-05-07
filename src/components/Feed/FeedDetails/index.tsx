@@ -20,7 +20,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
     postLikeRequest,
     deleteLikeRequest,
     editCommentRequest,
-  } = useCommentRequest(feedId);
+  } = useCommentRequest(feedId, true);
 
   const {
     data: feedData,
