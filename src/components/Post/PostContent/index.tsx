@@ -12,6 +12,8 @@ import HashTag from '../HashTag';
 import MarkdownContent from '../Markdown';
 import { HashTagType, PostDetailType } from '../types';
 import styles from './PostContent.module.scss';
+import CommentCard from '@/components/Common/CommentCard';
+import PostComment from '../PostComment';
 
 interface PostContentProps {
   postData: PostDetailType;
@@ -91,6 +93,7 @@ export default function PostContent({ postData }: PostContentProps) {
         handleEmojiClick={handleEmojiClick}
         isPending={isAddPending || isDeletePending}
       />
+      <PostComment postId={Number(postId)} />
     </div>
   );
 }
