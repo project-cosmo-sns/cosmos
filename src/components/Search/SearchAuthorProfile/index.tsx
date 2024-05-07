@@ -3,7 +3,6 @@ import classNames from 'classnames/bind';
 import styles from './SearchAuthorProfile.module.scss';
 import Image from 'next/image';
 import GenerationBadge from '@/components/Common/GenerationBadge';
-import FollowButton from '../FollowButton';
 
 interface SearchAuthorProfileProps {
   member: Member;
@@ -57,12 +56,12 @@ export default function SearchAuthorProfile({
         </div>
       </div>
 
-      {!isMine && (
+      {/* {!isMine && (
         <FollowButton
           onClick={() => console.log('팔로우클릭')}
           isFollow={false}
         />
-      )}
+      )} */}
     </div>
   );
 }
