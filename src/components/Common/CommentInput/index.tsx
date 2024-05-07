@@ -3,32 +3,46 @@ import DefaultButton from '../Buttons/DefaultButton';
 import Input from '../Input';
 import styles from './CommentInput.module.scss';
 import classNames from 'classnames/bind';
-import { postComment } from './api';
+
+export interface Comment {
+  comment: string;
+}
 
 interface CommentInputTypes {
   placeholder: string;
-  feedId: number;
-}
-
-interface Comment {
-  comment: string;
+  onSubmit: (data: Comment) => void;
 }
 
 const cn = classNames.bind(styles);
 
 export default function CommentInput({
   placeholder,
-  feedId,
+  onSubmit,
 }: CommentInputTypes) {
-  const { register, handleSubmit } = useForm<Comment>();
-  const onSubmit = (data) => {
-    console.log(data);
-    postComment(data, feedId);
-  };
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { isSubmitting },
+  } = useForm<Comment>({
+    defaultValues: {
+      comment: '',
+    },
+  });
+
   return (
     <form className={cn('wrapper')} onSubmit={handleSubmit(onSubmit)}>
-      <Input placeholder={placeholder} register={{ ...register('comment') }} />
-      <DefaultButton buttonType="submit" size="small" color="purple">
+      <Input
+        placeholder={placeholder}
+        register={{ ...register('comment', { required: true }) }}
+      />
+      <DefaultButton
+        disabled={isSubmitting}
+        onClick={() => console.log('댓글 전송 클릭')}
+        buttonType="submit"
+        size="small"
+        color="purple"
+      >
         등록
       </DefaultButton>
     </form>
