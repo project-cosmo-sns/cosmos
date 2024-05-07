@@ -1,8 +1,8 @@
 import fetchData from '@/api/fetchData';
-import WriterProfile from '@/components/Common/WriterProfile';
 import ActionButtons from '@/components/Common/Buttons/ActionButtons';
+import DeleteModal from '@/components/Common/DeleteModal';
 import EmojiBundle from '@/components/Common/EmojiBundle';
-import Modal from '@/components/Common/Layout/Modal';
+import WriterProfile from '@/components/Common/WriterProfile';
 import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import { useMutation } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
@@ -10,10 +10,9 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import HashTag from '../HashTag';
 import MarkdownContent from '../Markdown';
+import PostComment from '../PostComment';
 import { HashTagType, PostDetailType } from '../types';
 import styles from './PostContent.module.scss';
-import CommentCard from '@/components/Common/CommentCard';
-import PostComment from '../PostComment';
 
 interface PostContentProps {
   postData: PostDetailType;
@@ -63,20 +62,11 @@ export default function PostContent({ postData }: PostContentProps) {
           handleClickEdit={() => router.push(`/write?postId=${postId}`)}
           handleClickDelete={() => setIsDeleteModalOpen(true)}
         />
-        <Modal
-          modalVisible={isDeleteModalOpen}
-          toggleModal={setIsDeleteModalOpen}
-          cssComponentDisplay={cn('')}
-          cssModalSize={cn('')}
-        >
-          <div>삭제하시겠습니까?</div>
-          <button type="button" onClick={() => deleteMutate()}>
-            예
-          </button>
-          <button type="button" onClick={() => setIsDeleteModalOpen(false)}>
-            아니오
-          </button>
-        </Modal>
+        <DeleteModal
+          isDeleteModalOpen={isDeleteModalOpen}
+          setIsDeleteModalOpen={setIsDeleteModalOpen}
+          handleDelete={deleteMutate}
+        />
       </div>
       <div className={cn('divide-line')} />
       <MarkdownContent className={cn('markdown-content')} content={content} />

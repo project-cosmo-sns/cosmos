@@ -1,0 +1,34 @@
+.wrapper {
+  @include flex-arrange;
+  @include font-style(2rem, $white-01, 700);
+  flex-direction: column;
+  padding: 30px 10px 10px;
+  gap: 40px;
+}
+
+.button-container {
+  @include flex-arrange;
+  gap: 8px;
+}
+
+.button {
+  @include font-style(1.6rem, $white-01, 700);
+  padding: 14px 50px;
+  border-radius: 5px;
+}
+
+.delete {
+  background-color: $pink-01;
+
+  &:hover {
+    background-color: $red-01;
+  }
+}
+
+.cancel {
+  background-color: $black-03;
+
+  &:hover {
+    background-color: $black-02;
+  }
+}
