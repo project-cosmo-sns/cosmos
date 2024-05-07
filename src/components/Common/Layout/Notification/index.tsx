@@ -27,7 +27,7 @@ export default function Notification({ onClose }: PopOverProps) {
     queryKey: ['notification'],
     queryFn: () =>
       fetchData({
-        param: `/notification/list?order=DESC&page=1&take=10`,
+        param: `/notification/list?order=DESC&page=1&take=20`,
       }),
   });
 
