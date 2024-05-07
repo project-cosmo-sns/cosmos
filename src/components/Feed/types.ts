@@ -37,6 +37,7 @@ export interface Comment {
   heartCount: number;
   id: number;
   isHearted: boolean;
+  isMine: boolean;
 }
 
 export interface CommentDetailType {
