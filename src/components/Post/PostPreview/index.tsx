@@ -24,7 +24,7 @@ export default function PostPreview({ postData }: PostPreviewProps) {
     createdAt,
     title,
     content,
-    emoji,
+    emojis,
     viewCount,
     emojiCount,
     commentCount,
@@ -62,11 +62,7 @@ export default function PostPreview({ postData }: PostPreviewProps) {
         emojiCount={emojiCount}
         commentCount={commentCount}
         viewCount={viewCount}
-      />
-      <EmojiBundle
-        emojiList={emoji}
-        isDetail={false}
-        isVisible={isEmojiVisible}
+        emojis={emojis}
       />
     </div>
   );

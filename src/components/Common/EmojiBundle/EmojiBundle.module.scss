@@ -1,4 +1,31 @@
 .wrapper {
+  @include flex-arrange(center, flex-start);
+  flex-direction: column;
+  gap: 20px;
+}
+
+.emoji-container {
   @include flex-arrange;
   gap: 4px;
+}
+
+.container {
+  @include flex-arrange;
+  flex-direction: row;
+  gap: 12px;
+  padding-left: 4px;
+}
+
+.reaction {
+  @include flex-arrange;
+  @include font-style(1.2rem, $gray-01, 400);
+  gap: 6px;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    @include flex-arrange(space-between, center);
+    flex-direction: row;
+    width: 100%;
+  }
 }

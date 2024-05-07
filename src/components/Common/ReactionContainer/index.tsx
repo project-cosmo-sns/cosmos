@@ -1,22 +1,16 @@
 import classNames from 'classnames/bind';
 import { CommentIcon, EmojiIcon, EyeIcon } from '../IconCollection';
 import styles from './ReactionContainer.module.scss';
+import { useState } from 'react';
+import EmojiBundle from '../EmojiBundle';
+import { EmojiType } from '@/@types/type';
 
 interface ReactionContainerProps {
   emojiCount: number;
   commentCount: number;
   viewCount: number;
+  emojis?: EmojiType[]; // 필수 prop 인데 임시로 옵셔널로 줌
 }
-
-/**
- * 이모지, 댓글, 조회수를 보여주는 컨테이너 컴포넌트
- * @param {Object} props - 컴포넌트에 전달되는 props
- * @param {string} props.emoji - 선택된 이모지
- * @param {number} props.commentsCount - 댓글 수
- * @param {number} props.views - 조회 수
- * @param {Function} props.handleEmojiClick - 이모지 클릭 이벤트 핸들러
- * @returns {JSX.Element} 리액션 컨테이너 JSX 요소
- */
 
 const cn = classNames.bind(styles);
 
@@ -24,13 +18,31 @@ export default function ReactionContainer({
   emojiCount,
   commentCount,
   viewCount,
+  emojis,
 }: ReactionContainerProps) {
+  const [isEmojiVisible, setIsEmojiVisible] = useState(false);
+
+  const handleClickEmoji = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
+    setIsEmojiVisible((prev) => !prev);
+  };
+
   return (
     <div className={cn('wrapper')}>
-      <div className={cn('reaction', 'emoji')}>
+      <div className={cn('reaction', 'emoji')} onClick={handleClickEmoji}>
         <EmojiIcon width="18" height="18" />
         {emojiCount}
       </div>
+      {isEmojiVisible && emojis && (
+        <EmojiBundle
+          commentCount={commentCount}
+          emojiList={emojis}
+          isDetail={false}
+          handleEmojiClick={() => console.log('클릭')}
+        />
+      )}
       <div className={cn('reaction', 'comment')}>
         <CommentIcon width="18" height="18" />
         {commentCount}

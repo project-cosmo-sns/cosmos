@@ -111,6 +111,8 @@ export default function PostContent({ postData }: PostContentProps) {
         ))}
       </div>
       <EmojiBundle
+        commentCount={commentCount}
+        viewCount={viewCount}
         emojiList={emojis}
         isDetail
         handleEmojiClick={(emojiCode, isClicked) =>
