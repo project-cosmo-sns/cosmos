@@ -3,13 +3,11 @@ import CommentInput, { Comment } from '@/components/Common/CommentInput';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import FeedCard from '@/components/Feed/FeedCard/index';
-import {
-  getFeedCommentList,
-  getFeedDetails,
-} from '@/components/Feed/FeedDetails/api';
+import { getFeedCommentList } from '@/components/Feed/FeedDetails/api';
 import { postComment } from '@/components/Common/CommentInput/api';
+import fetchData from '@/api/fetchData';
 import styles from './FeedDetails.module.scss';
-import { FeedDetailType, CommentDetailType } from '../types';
+import { FeedDetailType, CommentDetailType, CommentListType } from '../types';
 
 /**
  * @return {JSX.Element} FeedDetails - 추후에 변경 예정입니다. 피드 리스트에서 특정 피드를 클릭한다면 클리한 피드의 아이디를 통해 데이터를 요청해 화면에 보여줍니다.
@@ -39,13 +37,16 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
 
   useEffect(() => {
     const fetchFeedDetails = async () => {
-      const feedDetails: FeedDetailType = await getFeedDetails(feedId);
+      const feedDetails = await fetchData<FeedDetailType>({
+        param: `feed/${feedId}/detail`,
+      });
       setFeed(feedDetails);
     };
     const fetchFeedComments = async () => {
-      const feedComments: CommentDetailType[] =
-        await getFeedCommentList(feedId);
-      setCommentList(feedComments);
+      const feedComments = await fetchData<CommentListType>({
+        param: `feed/${feedId}/comment/list`,
+      });
+      setCommentList(feedComments.data);
     };
 
     fetchFeedDetails();
