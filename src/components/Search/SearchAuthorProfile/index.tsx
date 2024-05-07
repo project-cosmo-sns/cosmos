@@ -24,6 +24,8 @@ export default function SearchAuthorProfile({
     isMine,
   } = member;
 
+  console.log(isFollowing);
+
   // isFollowing은 팔로우 버튼 변하는거에 따라서... 수정해서 넣어야 할것같습니다! 그래서 일단 false로 통일합니다.
 
   return (

@@ -32,7 +32,7 @@ export default function NotificationItem({ data }: NotificationItemProps) {
 
   const handleNotificationClick = () => {
     if (type === notificationType.CREATE_POST_COMMENT) {
-      router.push(`/post/${postId}/detail`);
+      router.push(`/post/${postId}`);
     }
 
     if (type === notificationType.CREATE_FEED_COMMENT) {
