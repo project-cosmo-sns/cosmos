@@ -1,21 +1,20 @@
 import Image from 'next/image';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import classNames from 'classnames/bind';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import Modal from '@/components/Common/Layout/Modal';
 import { Edits } from '@/components/Feed/FeedCard/api';
-import styles from './FeedCard.module.scss';
-import { FeedDetailType } from '../types';
 import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
 import fetchData from '@/api/fetchData';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import WriterProfile from '@/components/Common/WriterProfile';
+import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
+import { FeedDetailType } from '../types';
+import styles from './FeedCard.module.scss';
 
 interface FeedCardTypes {
   feedData: FeedDetailType;
-  modalVisible?: boolean;
-  toggleModal?: Dispatch<SetStateAction<boolean>>;
   hasPadding: boolean;
   forDetails?: boolean;
   onClick?: () => void;
@@ -38,7 +37,6 @@ export default function FeedCard({
   forDetails,
   onClick,
 }: FeedCardTypes) {
-  const [emojiVisible, setEmojiVisible] = useState<boolean>(false);
   const [moreModalOpen, setMoreModalOpen] = useState(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const {
@@ -56,6 +54,7 @@ export default function FeedCard({
     createdAt,
     imageUrls,
     isMine,
+    emojis,
   } = feedData.feed;
 
   const queryClient = useQueryClient();
@@ -84,6 +83,9 @@ export default function FeedCard({
     setIsEdit(false);
     patchMutaion.mutate(data);
   };
+
+  const { handleEmojiClick, isAddPending, isDeletePending } =
+    useSendEmojiRequest(feedId as number, false);
 
   return (
     <div
@@ -155,11 +157,14 @@ export default function FeedCard({
             </div>
           )}
         </div>
-        {/* <ReactionContainer
+        <ReactionContainer
           emojiCount={emojiCount}
           commentCount={commentCount}
           viewCount={viewCount}
-        /> */}
+          emojis={emojis}
+          isPost={false}
+          handleEmojiClick={handleEmojiClick}
+        />
         {hasPadding || (
           <Modal
             title="임시모달"

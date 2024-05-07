@@ -1,9 +1,12 @@
+import { EmojiType } from '@/@types/type';
+
 export interface Writer {
   id: number;
   nickname: string;
   generation: number;
   profileImageUrl: string;
 }
+
 export interface Feed {
   id: number;
   content: string;
@@ -13,6 +16,7 @@ export interface Feed {
   createdAt: string;
   imageUrls: string[];
   isMine: boolean;
+  emojis: EmojiType[];
 }
 export interface FeedDetailType {
   writer: Writer;
