@@ -132,12 +132,9 @@ export default function FeedCard({
           )}
         </div>
         <ReactionContainer
-          emoji={emojiCount}
-          commentsCount={commentCount}
-          views={viewCount}
-          emojiVisible={emojiVisible}
-          handleEmojiClick={setEmojiVisible}
-          forDetails={forDetails}
+          emojiCount={emojiCount}
+          commentCount={commentCount}
+          viewCount={viewCount}
         />
         {hasPadding || (
           <Modal

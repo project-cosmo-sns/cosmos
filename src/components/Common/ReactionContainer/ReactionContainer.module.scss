@@ -46,4 +46,7 @@
 
 .details-emoji-bundler {
   flex-grow: 1;
+  .clicked {
+    color: $primary-01;
+  }
 }

@@ -73,8 +73,7 @@ export default function MemberDataContainer({
           '작성된 글이 없습니다.'
         );
       case 'post':
-        // return <PostList selectedSort={selectedSort} />;
-        return '';
+        return <>my post list</>;
       case 'scrap':
         return <ScrapList />;
       default:

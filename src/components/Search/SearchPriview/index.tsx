@@ -23,7 +23,7 @@ export default function SearchPreview({ searchData }: SearchPreviewProps) {
       id: postId,
       title,
       content,
-      viewCount: views,
+      viewCount,
       commentCount,
       emojiCount,
       createdAt,
@@ -50,9 +50,9 @@ export default function SearchPreview({ searchData }: SearchPreviewProps) {
         ))}
       </div> */}
       <ReactionContainer
-        emoji={emojiCount}
-        commentsCount={commentCount}
-        views={views}
+        emojiCount={emojiCount}
+        commentCount={commentCount}
+        viewCount={viewCount}
       />
     </div>
   );
