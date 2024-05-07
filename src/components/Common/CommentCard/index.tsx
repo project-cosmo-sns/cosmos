@@ -1,12 +1,6 @@
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import { CommentDetailType } from '@/components/Feed/types';
 import getElapsedTime from '@/utils/getElaspedTime';
-import {
-  patchComment,
-  deleteComment,
-  deleteLikeComment,
-  postLikeComment,
-} from '@/components/Common/CommentCard/api';
 import { EditCommentType } from '@/@types/type';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
@@ -18,16 +12,38 @@ import EditComment from './EditComment';
 
 const cn = classNames.bind(styles);
 
+type CommentRequestType = (postId: number, commentId: number) => void;
+
+type EditCommentRequestType = (
+  postId: number,
+  commentId: number,
+  data: EditCommentType,
+) => void;
+
 export default function CommentCard({
   comment,
-  feedId,
+  postId,
+  deleteLikeRequest,
+  postLikeRequest,
+  deleteCommentRequest,
+  editCommentRequest,
 }: {
   comment: CommentDetailType;
-  feedId: number;
+  postId: number;
+  deleteLikeRequest: CommentRequestType;
+  postLikeRequest: CommentRequestType;
+  deleteCommentRequest: CommentRequestType;
+  editCommentRequest: EditCommentRequestType;
 }) {
   const commentData = comment.comment;
 
-  const { id, content, heartCount, isHearted, createdAt } = commentData;
+  const {
+    id: commentId,
+    content,
+    heartCount,
+    isHearted,
+    createdAt,
+  } = commentData;
 
   const [isCommentEditing, setIsCommentEditing] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -56,7 +72,7 @@ export default function CommentCard({
   };
 
   const onSubmit = (data: EditCommentType) => {
-    patchComment(feedId, id, data);
+    editCommentRequest(postId, commentId, data);
     setIsCommentEditing(false);
   };
 
@@ -68,13 +84,13 @@ export default function CommentCard({
           <div className={cn('like')} onClick={handleClickLikeComment}>
             {isLiked ? (
               <LikedIcon
-                onClick={() => deleteLikeComment(feedId, id)}
+                onClick={() => deleteLikeRequest(postId, commentId)}
                 width="18"
                 height="18"
               />
             ) : (
               <LikeIcon
-                onClick={() => postLikeComment(feedId, id)}
+                onClick={() => postLikeRequest(postId, commentId)}
                 width="18"
                 height="18"
               />
@@ -98,7 +114,7 @@ export default function CommentCard({
               <button
                 type="button"
                 onClick={() => {
-                  deleteComment(feedId, id);
+                  deleteCommentRequest(postId, commentId);
                 }}
               >
                 삭제

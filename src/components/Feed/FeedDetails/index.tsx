@@ -6,6 +6,12 @@ import FeedCard from '@/components/Feed/FeedCard/index';
 import { getFeedCommentList } from '@/components/Feed/FeedDetails/api';
 import { postComment } from '@/components/Common/CommentInput/api';
 import fetchData from '@/api/fetchData';
+import {
+  patchComment,
+  deleteComment,
+  deleteLikeComment,
+  postLikeComment,
+} from '@/components/Common/CommentCard/api';
 import styles from './FeedDetails.module.scss';
 import { FeedDetailType, CommentDetailType, CommentListType } from '../types';
 import { useQuery } from '@tanstack/react-query';
@@ -79,7 +85,14 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
       {commentList.length ? (
         commentList.map((comment, index) => (
           <div key={comment.comment.id}>
-            <CommentCard comment={comment} feedId={feedId} />
+            <CommentCard
+              comment={comment}
+              postId={feedId}
+              deleteLikeRequest={deleteComment}
+              postLikeRequest={postLikeComment}
+              deleteCommentRequest={deleteLikeComment}
+              editCommentRequest={patchComment}
+            />
             {index === commentList.length - 1 || (
               <div className={cn('divide-line')} />
             )}
