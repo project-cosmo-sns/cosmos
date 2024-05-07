@@ -18,6 +18,10 @@ interface ProfileEditModalProps {
   memberData: MemberDataType;
 }
 
+export interface ProfileEditProps extends AuthFormProps {
+  introduce: string;
+}
+
 interface FileWithUploadURL extends File {
   uploadURL?: string; // uploadURL 속성을 선택적(optional)으로 추가
 }
@@ -32,67 +36,116 @@ export default function ProfileEditModal({
   const [previewImage, setPreviewImage] = useState('');
   const [introduce, setIntroduce] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [upLoadComplete, setUploadComplete] = useState(false);
+  const [uploadedImageUrl, setUploadedImageUrl] = useState('');
+  const [profileData, setProfileData] = useState<MemberDataType | null>(null);
 
   const { register, handleSubmit, watch, setValue } = useForm<AuthFormProps>();
+
+  // 기본값 설정하기
+  useEffect(() => {
+    if (memberData) {
+      if (memberData.profileImageUrl) {
+        setPreviewImage(memberData.profileImageUrl);
+      }
+      // 기존 introduce 값으로 상태 초기화
+      setIntroduce(memberData.introduce || '');
+      // 'react-hook-form'에서도 기존 값을 설정
+      setValue('introduce', memberData.introduce || '');
+    }
+  }, [memberData.introduce, setValue]);
+
+  useEffect(() => {
+    if (upLoadComplete) {
+      if (uploadedImageUrl) {
+        setImageUrl(uploadedImageUrl); // 이미지 URL 상태 업데이트
+        setValue('image', uploadedImageUrl);
+        setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
+      }
+      console.log(uploadedImageUrl);
+      setUploadComplete(false);
+    }
+  }, [upLoadComplete, uploadedImageUrl, setValue]);
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
+    // // 임시 미리보기 URL 생성
+    const tempPreviewUrl = URL.createObjectURL(file);
+    setPreviewImage(tempPreviewUrl);
 
     try {
       const uploadedImageUrl = await uploadImageToS3(file);
       console.log('Uploaded image URL:', uploadedImageUrl);
 
       if (uploadedImageUrl) {
-        setImageUrl(uploadedImageUrl); // 이미지 URL 상태 업데이트
+        // setImageUrl(uploadedImageUrl); // 이미지 URL 상태 업데이트
         // setValue('image', uploadedImageUrl);
-        setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
+        // setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
         console.log(uploadedImageUrl);
+        setUploadedImageUrl(uploadedImageUrl);
+        setUploadComplete(true);
+      } else {
+        throw new Error('Failed to upload image');
       }
     } catch (error) {
       console.error('이미지 업로드 에러 :', error);
-      setPreviewImage(''); // 에러 시 미리보기 초기화
+      // setPreviewImage(tempPreviewUrl);
     }
   };
 
   const handleIntroduceChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setIntroduce(e.target.value);
+    const newValue = e.target.value || '';
+    setIntroduce(newValue);
+    setValue('introduce', newValue);
   };
 
-  const handleProfileSubmit = async (ImageUrl: string) => {
+  const refetchProfile = async () => {
     try {
+      const fetchedProfileData = await fetchData<MemberDataType>({
+        param: '/profile/mine',
+        method: 'get',
+      });
+      setProfileData(fetchedProfileData); // 상태 업데이트
+      console.log('프로필 데이터 리패치 성공:', fetchedProfileData);
+    } catch (error) {
+      console.error('프로필 리패치 에러:', error);
+    }
+  };
+
+  const handleProfileSubmit = async (
+    profileImageUrl: string,
+    introduce: string,
+  ) => {
+    try {
+      const requestData = {
+        nickname: memberData.nickname,
+        introduce: introduce || memberData.introduce || '입력하세요', // Default to empty string if undefined or null
+        profileImageUrl: profileImageUrl || memberData.profileImageUrl || null,
+      };
+
       const response = await fetchData({
         param: '/profile/mine',
         method: 'patch',
-        requestData: {
-          nickname: memberData.nickname,
-          introduce,
-          profileImageUrl: ImageUrl,
-        },
+        requestData,
       });
 
       console.log('프로필 업데이트 성공:', response);
-      setIsOpen(false); // 프로필 업데이트 후 모달 닫기
-
-      if (!response) {
-        console.error('네트워크 응답 오류');
-      }
+      // 프로필 업데이트 후 모달 닫고 리패치 해야함
+      await refetchProfile();
+      setIsOpen(false);
     } catch (error) {
       console.error('프로필 업데이트 에러:', error);
     }
   };
 
-  useEffect(() => {
-    if (memberData && memberData.profileImageUrl) {
-      setPreviewImage(memberData.profileImageUrl);
-    }
-  }, [imageUrl]);
-
   const onSubmit: SubmitHandler<AuthFormProps> = async (data) => {
     // 폼 데이터를 사용하여 프로필 업데이트 로직 구현
-    // data.image 는 업로드 이미지 URL로 사용
-    await handleProfileSubmit(data.image);
+    console.log('introduce:', introduce);
+    await handleProfileSubmit(uploadedImageUrl, introduce);
   };
+
   return (
     <div>
       {isOpen && (
@@ -114,7 +167,7 @@ export default function ProfileEditModal({
                 register={{
                   ...register('image', { onChange: handleImageChange }),
                 }}
-                initialImageUrl={previewImage}
+                initialImageUrl={previewImage || uploadedImageUrl}
               />
             </div>
             <div className={cn('name')}>{memberData?.nickname}</div>
@@ -126,12 +179,14 @@ export default function ProfileEditModal({
               한줄소개
               {memberData?.introduce ? (
                 <textarea
-                  defaultValue={memberData.introduce}
+                  {...register('introduce', {
+                    onBlur: handleIntroduceChange,
+                  })}
+                  // value={introduce}
                   autoComplete="on"
                   className={cn('textarea', {
                     textareaActive: memberData?.introduce,
                   })}
-                  onChange={handleIntroduceChange}
                 />
               ) : (
                 <textarea placeholder="한줄소개를 입력하세요 (?자제한)" />

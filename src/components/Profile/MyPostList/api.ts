@@ -8,7 +8,9 @@ export default async function getMyPostList(
   const cookies = req.headers.cookie || '';
   const { memberId } = context.query;
 
-  const endpoint = memberId ? `profile/${memberId}/feed` : '/profile/mine/feed';
+  const endpoint = memberId
+    ? `/profile/${memberId}/post`
+    : '/profile/mine/post';
 
   const postData = await instance.get(endpoint, {
     headers: {

@@ -22,10 +22,7 @@ export default function MyPostList({
   const [selectedCategory, setSelectedCategory] = useState<string | '전체'>(
     '전체',
   );
-  // const [filteredPosts, setFilteredPosts] = useState<PostListDataType[]>([]);
 
-  // 현재 로그인한 사용자가 작성한 포스트만 필터링 -> 노노 필터링 필요없다.
-  // 그냥 내 작성 글 가져와서 렌더링만 하면 됨.
   useEffect(() => {
     if (Array.isArray(postList)) {
       setMyPosts(postList);

@@ -18,6 +18,7 @@ export type ContainerOptionType =
 export interface AuthFormProps {
   generation: string;
   image: string;
+  introduce?: string;
 }
 
 export type EmojiCode = 'HEART' | 'THUMBSUP' | 'LAUGH' | 'SAD' | 'CHECK' | 'ME';
