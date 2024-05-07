@@ -1,34 +1,26 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { updateKeyword } from '@/redux/searchSlice';
+import { updateKeyword, clearKeyword } from '@/redux/searchSlice';
 import { RootState } from '@/redux/store';
 import classNames from 'classnames/bind';
 import styles from './SearchInput.module.scss';
-import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect } from 'react';
 import { GlassIcon, CloseIcon } from '@/components/Common/IconCollection';
 import { useRouter } from 'next/router';
-import useDebounce from '@/hooks/useDebounce';
 
 const cn = classNames.bind(styles);
 
 export default function SearchInput() {
-  const [inputValue, setInputValue] = useState<string>('');
-  const debouncedValue = useDebounce(inputValue, 300);
-
   const search = useSelector((state: RootState) => state.search.keyword);
   const dispatch = useDispatch();
   const router = useRouter();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
+    dispatch(updateKeyword(e.target.value));
   };
 
-  useEffect(() => {
-    dispatch(updateKeyword(debouncedValue));
-  }, [debouncedValue, dispatch]);
-
   const handleSearch = () => {
-    if (inputValue.trim() !== '') {
-      router.push(`/search?query=${encodeURIComponent(inputValue)}`);
+    if (search.trim() !== '') {
+      router.push(`/search?query=${encodeURIComponent(search)}`);
     } else {
       router.push('/');
     }
@@ -41,17 +33,27 @@ export default function SearchInput() {
   };
 
   const handleSearchClear = () => {
-    setInputValue('');
-    dispatch(updateKeyword(''));
+    dispatch(clearKeyword());
     router.push('/');
   };
+
+  const handleToOtherPage = () => {
+    dispatch(clearKeyword());
+  };
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', handleToOtherPage);
+    return () => {
+      router.events.off('routeChangeStart', handleToOtherPage);
+    };
+  }, [router.events]);
 
   return (
     <div className={cn('search-container')}>
       <input
         type="text"
         placeholder="검색"
-        value={inputValue}
+        value={search}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
       />
