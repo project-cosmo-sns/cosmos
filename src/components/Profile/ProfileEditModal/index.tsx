@@ -76,19 +76,15 @@ export default function ProfileEditModal({
     setPreviewImage(tempPreviewUrl);
 
     try {
-      const uploadedImageUrl = await uploadImageToS3(file);
-      console.log('Uploaded image URL:', uploadedImageUrl);
+      const response = await uploadImageToS3(file);
+      console.log('Uploaded image URL:', response);
 
-      if (uploadedImageUrl) {
-        // setImageUrl(uploadedImageUrl); // 이미지 URL 상태 업데이트
-        // setValue('image', uploadedImageUrl);
-        // setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
-        console.log(uploadedImageUrl);
-        setUploadedImageUrl(uploadedImageUrl);
-        setUploadComplete(true);
-      } else {
-        throw new Error('Failed to upload image');
-      }
+      // setImageUrl(uploadedImageUrl); // 이미지 URL 상태 업데이트
+      // setValue('image', uploadedImageUrl);
+      // setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
+      console.log(uploadedImageUrl);
+      setUploadedImageUrl(response);
+      setUploadComplete(true);
     } catch (error) {
       console.error('이미지 업로드 에러 :', error);
       // setPreviewImage(tempPreviewUrl);
@@ -116,12 +112,12 @@ export default function ProfileEditModal({
 
   const handleProfileSubmit = async (
     profileImageUrl: string,
-    introduce: string,
+    newIntroduce: string,
   ) => {
     try {
       const requestData = {
         nickname: memberData.nickname,
-        introduce: introduce || memberData.introduce || '입력하세요', // Default to empty string if undefined or null
+        introduce: newIntroduce || memberData.introduce || '입력하세요',
         profileImageUrl: profileImageUrl || memberData.profileImageUrl || null,
       };
 
