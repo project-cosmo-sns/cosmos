@@ -1,3 +1,5 @@
+// searchSlice.ts
+
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface SearchState {
@@ -18,8 +20,12 @@ const searchSlice = createSlice({
     clearKeyword(state) {
       state.keyword = '';
     },
+    initializeKeyword(state) {
+      state.keyword = ''; // 검색어 초기화 액션 추가
+    },
   },
 });
 
-export const { updateKeyword, clearKeyword } = searchSlice.actions;
+export const { updateKeyword, clearKeyword, initializeKeyword } =
+  searchSlice.actions;
 export default searchSlice.reducer;
