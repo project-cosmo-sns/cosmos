@@ -16,7 +16,9 @@ import { FeedDetailType, FeedListType } from '../components/Feed/types';
 import { SortType } from '@/constants/sortType';
 
 export const getServerSideProps = async () => {
-  const feedList: FeedListType = await getFeedList();
+  const feedList = await fetchData<FeedListType>({
+    param: '/feed/list',
+  });
   const postList = await fetchData<PostListType>({
     param: `post/list`,
   });
