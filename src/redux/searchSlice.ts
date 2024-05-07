@@ -21,5 +21,5 @@ const searchSlice = createSlice({
   },
 });
 
-export const { updateKeyword } = searchSlice.actions;
+export const { updateKeyword, clearKeyword } = searchSlice.actions;
 export default searchSlice.reducer;
