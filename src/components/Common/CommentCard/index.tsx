@@ -21,11 +21,14 @@ const cn = classNames.bind(styles);
 export default function CommentCard({
   comment,
   feedId,
+  writerId,
 }: {
   comment: CommentDetailType;
   feedId: number;
+  writerId: number;
 }) {
   const commentData = comment.comment;
+  const commentWriterId = comment.writer.id;
 
   const { id, content, heartCount, isHearted, createdAt } = commentData;
 

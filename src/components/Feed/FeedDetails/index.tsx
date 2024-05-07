@@ -32,6 +32,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
       emojiCount: 0,
       createdAt: '',
       imageUrls: [],
+      isMine: false,
     },
   });
   const [commentList, setCommentList] = useState<CommentDetailType[]>([]);
@@ -62,7 +63,11 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
       {commentList.length ? (
         commentList.map((comment, index) => (
           <div key={comment.comment.id}>
-            <CommentCard comment={comment} feedId={feedId} />
+            <CommentCard
+              comment={comment}
+              feedId={feedId}
+              writerId={feed.writer.id}
+            />
             {index === commentList.length - 1 || (
               <div className={cn('divide-line')} />
             )}
