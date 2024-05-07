@@ -1,7 +1,18 @@
 import instance from '@/api/axios';
+import { GetServerSidePropsContext } from 'next/types';
 
-export async function getMyFeedList() {
-  // endpoint를 feed쪽으로 하면 잘 되는데 /profile/mine/feed는 오류남;;
-  const myFeedData = await instance.get('/feed/list');
-  return myFeedData.data;
+export default async function getMyFeedList(
+  context: GetServerSidePropsContext,
+) {
+  const { req } = context;
+  const cookies = req.headers.cookie || '';
+  const { memberId } = context.query;
+
+  const feedData = await instance.get('/profile/mine/feed', {
+    headers: {
+      Cookie: cookies,
+    },
+    // withCredentials: true,
+  });
+  return feedData.data;
 }

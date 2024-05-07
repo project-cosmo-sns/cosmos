@@ -32,6 +32,8 @@ export default function MyPostList({
     }
   }, [postList]);
 
+  console.log('postList: ', postList);
+
   return (
     <div className={cn('wrapper')}>
       <div className={cn('category-container')}>
