@@ -34,7 +34,6 @@ export default function PostContent({ postData }: PostContentProps) {
     content,
     hashTags,
     emojis,
-    emojiCount,
     viewCount,
     commentCount,
     isMine,
