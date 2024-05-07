@@ -8,6 +8,7 @@ import { postComment } from '@/components/Common/CommentInput/api';
 import fetchData from '@/api/fetchData';
 import styles from './FeedDetails.module.scss';
 import { FeedDetailType, CommentDetailType, CommentListType } from '../types';
+import { useQuery } from '@tanstack/react-query';
 
 /**
  * @return {JSX.Element} FeedDetails - 추후에 변경 예정입니다. 피드 리스트에서 특정 피드를 클릭한다면 클리한 피드의 아이디를 통해 데이터를 요청해 화면에 보여줍니다.
@@ -34,6 +35,20 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
     },
   });
   const [commentList, setCommentList] = useState<CommentDetailType[]>([]);
+
+  // const feedDetails = useQuery({
+  //   queryKey: ['feedDetails'],
+  //   queryFn: fetchData<FeedDetailType>({
+  //     param: `feed/${feedId}/detail`,
+  //   }),
+  // });
+
+  // const feedComments = useQuery({
+  //   queryKey: ['feedComments'],
+  //   queryFn: fetchData<CommentListType>({
+  //     param: `feed/${feedId}/comment/list`,
+  //   }),
+  // });
 
   useEffect(() => {
     const fetchFeedDetails = async () => {
