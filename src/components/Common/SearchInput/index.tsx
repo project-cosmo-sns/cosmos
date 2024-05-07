@@ -3,26 +3,34 @@ import { updateKeyword } from '@/redux/searchSlice';
 import { RootState } from '@/redux/store';
 import classNames from 'classnames/bind';
 import styles from './SearchInput.module.scss';
-import { ChangeEvent, KeyboardEvent } from 'react';
+import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { GlassIcon, CloseIcon } from '@/components/Common/IconCollection';
 import { useRouter } from 'next/router';
+import useDebounce from '@/hooks/useDebounce';
 
 const cn = classNames.bind(styles);
 
 export default function SearchInput() {
+  const [inputValue, setInputValue] = useState<string>('');
+  const debouncedValue = useDebounce(inputValue, 300);
+
   const search = useSelector((state: RootState) => state.search.keyword);
   const dispatch = useDispatch();
   const router = useRouter();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(updateKeyword(e.target.value));
+    setInputValue(e.target.value);
   };
 
+  useEffect(() => {
+    dispatch(updateKeyword(debouncedValue));
+  }, [debouncedValue, dispatch]);
+
   const handleSearch = () => {
-    if (search.trim() !== '') {
-      router.push(`/search?query=${encodeURIComponent(search)}`);
+    if (inputValue.trim() !== '') {
+      router.push(`/search?query=${encodeURIComponent(inputValue)}`);
     } else {
-      console.log('검색어 비어있음');
+      router.push('/');
     }
   };
 
@@ -33,7 +41,9 @@ export default function SearchInput() {
   };
 
   const handleSearchClear = () => {
+    setInputValue('');
     dispatch(updateKeyword(''));
+    router.push('/');
   };
 
   return (
@@ -41,7 +51,7 @@ export default function SearchInput() {
       <input
         type="text"
         placeholder="검색"
-        value={search}
+        value={inputValue}
         onChange={handleInputChange}
         onKeyPress={handleKeyPress}
       />

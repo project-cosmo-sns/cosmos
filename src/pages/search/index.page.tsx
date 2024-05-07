@@ -34,7 +34,7 @@ export default function SearchResultPage() {
     <ContentContainer
       selectedOption={selectedOption}
       setSelectedOption={setSelectedOption}
-      keyword={reduxKeyword}
+      keyword={reduxKeyword || '　'}
     >
       {searchResultComponent}
     </ContentContainer>
