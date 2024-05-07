@@ -33,7 +33,7 @@ export default function SearchInput() {
   };
 
   const handleSearchClear = () => {
-    dispatch(updateKeyword('')); // 검색어를 비움
+    dispatch(updateKeyword(''));
   };
 
   return (

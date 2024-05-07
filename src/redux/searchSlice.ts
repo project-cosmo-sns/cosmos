@@ -15,6 +15,9 @@ const searchSlice = createSlice({
     updateKeyword(state, action: PayloadAction<string>) {
       state.keyword = action.payload;
     },
+    clearKeyword(state) {
+      state.keyword = '';
+    },
   },
 });
 
