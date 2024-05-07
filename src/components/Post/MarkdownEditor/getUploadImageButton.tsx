@@ -1,6 +1,9 @@
 import { ICommandBase } from '@uiw/react-md-editor';
 
-export default function getUploadImageButton(): ICommandBase<string> {
+export default function getUploadImageButton(
+  previewUrl: string,
+  handleUploadImage: () => void,
+): ICommandBase<string> {
   return {
     name: 'uploadImage',
     keyCommand: 'uploadImage',
@@ -10,16 +13,20 @@ export default function getUploadImageButton(): ICommandBase<string> {
           type="button"
           aria-label="Upload Image"
           disabled={disabled}
-          onClick={() => console.log('이미지 업로드')}
+          onClick={handleUploadImage}
         >
           <img src="/images/imageIcon.svg" alt="image_upload" />
         </button>
       );
     },
-
     execute: (state, api, imageUrl) => {
-      // 이미지 삽입 코드
-      const modifyText = `![image](${imageUrl})`;
+      // const modifyText = `<img width="500" alt="image" src="${previewUrl.split('?')[0]}" />`;
+      console.log(imageUrl);
+      // api.replaceSelection(modifyText);
+      let modifyText = `#${state.selectedText}\n`;
+      if (!state.selectedText) {
+        modifyText = `'# `;
+      }
       api.replaceSelection(modifyText);
     },
   };
