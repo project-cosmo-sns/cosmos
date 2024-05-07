@@ -3,11 +3,6 @@
   gap: 4px;
   width: 100%;
   position: relative;
-
-  .forDeatils {
-    position: relative;
-    background-color: red;
-  }
 }
 
 .reaction {
@@ -19,21 +14,6 @@
   padding: 6px 35px;
 }
 
-.emoji {
-  &:hover {
-    background-color: $black-02;
-  }
-}
-
-.details-wrapper {
-  display: flex;
-
-  .reaction {
-    width: auto;
-    padding: 0;
-  }
-}
-
-.details-emoji-bundler {
-  flex-grow: 1;
+.clicked {
+  color: $primary-01;
 }

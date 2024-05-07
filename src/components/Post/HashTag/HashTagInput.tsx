@@ -3,7 +3,7 @@ import { HashTagType } from '@/components/Post/types';
 import { HASH_TAG_COLORS, HASH_TAG_COLOR_CODE } from '@/constants/hashTagCode';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import HashTag from '.';
 import styles from './HashTagInput.module.scss';
 import HashTagRecommend from './HashTagRecommend';
@@ -20,7 +20,6 @@ export default function HashTagInput({
   setHashtags,
 }: HashTagInputProps) {
   const [tagValue, setTagValue] = useState<string>('');
-  const [isToastVisible, setIsToastVisible] = useState(false);
 
   const { data, isSuccess } = useQuery<HashTagType[]>({
     queryKey: ['hashtag', tagValue],
@@ -41,12 +40,12 @@ export default function HashTagInput({
     colorCode?: HASH_TAG_COLOR_CODE;
   }) => {
     event?.preventDefault();
+
     const trimmedTagValue = tagValue.trim();
     const regex = /[^A-Za-z0-9가-힣ㄱ-ㅎㅏ-ㅣ]/;
 
     if (trimmedTagValue !== '') {
       if (hashtags.length > 4) {
-        setIsToastVisible(true);
         setTagValue('');
         return;
       }
@@ -91,21 +90,27 @@ export default function HashTagInput({
 
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' || event.key === ' ') {
-      handleAddHashtag({ event });
+      if (isSuccess && data) {
+        const foundTag = data.find((tag) => tag.tagName === tagValue);
+        if (foundTag) {
+          handleAddHashtag({
+            name: foundTag.tagName,
+            colorCode: foundTag.color,
+          });
+        } else {
+          handleAddHashtag({ event });
+        }
+      } else {
+        handleAddHashtag({ event });
+      }
     }
   };
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (isToastVisible) setIsToastVisible(false);
-    }, 5000);
-  });
 
   return (
     <div className={cn('wrapper')}>
       {hashtags.map((tag, index) => (
         <HashTag
-          key={`${tag}${index}`}
+          key={`${index}${tag.tagName}`}
           tag={tag}
           handleClick={() => handleDeleteHashtag(tag.tagName)}
         />
@@ -120,17 +125,12 @@ export default function HashTagInput({
       />
       {isSuccess && (
         <HashTagRecommend
+          className={cn('hashtag-recommend')}
           hashTagList={data}
           setTagValue={setTagValue}
           handleAddHashtag={handleAddHashtag}
         />
       )}
-      {/* <div className={cn('toast-container')}>
-        <Toast
-          icon={WarnIcon}
-          text="최대 5개의 해시태그만 추가할 수 있습니다."
-        />
-      </div> */}
     </div>
   );
 }

@@ -1,8 +1,9 @@
+import fetchData from '@/api/fetchData';
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import ActionButtons from '@/components/Common/Buttons/ActionButtons';
+import EmojiBundle from '@/components/Common/EmojiBundle';
 import Modal from '@/components/Common/Layout/Modal';
-import ReactionContainer from '@/components/Common/ReactionContainer';
-import getElapsedTime from '@/utils/getElaspedTime';
+import { useMutation } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
@@ -10,8 +11,8 @@ import HashTag from '../HashTag';
 import MarkdownContent from '../Markdown';
 import { HashTagType, PostDetailType } from '../types';
 import styles from './PostContent.module.scss';
-import { useMutation } from '@tanstack/react-query';
-import fetchData from '@/api/fetchData';
+import { EmojiCode } from '@/@types/type';
+import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 
 interface PostContentProps {
   postData: PostDetailType;
@@ -21,16 +22,18 @@ const cn = classNames.bind(styles);
 
 export default function PostContent({ postData }: PostContentProps) {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const router = useRouter();
   const { postId } = router.query;
 
-  const { post, writer, hashTags, emoji } = postData.postDetail;
+  const { post, writer } = postData.postDetail;
   const {
     category,
     title,
     createdAt,
     content,
-    emojiCount,
+    hashTags,
+    emojis,
     viewCount,
     commentCount,
     isMine,
@@ -44,6 +47,9 @@ export default function PostContent({ postData }: PostContentProps) {
       }),
     onSuccess: () => router.push('/'),
   });
+
+  const { handleEmojiClick, isAddPending, isDeletePending } =
+    useSendEmojiRequest(Number(postId), true);
 
   return (
     <div className={cn('wrapper')}>
@@ -78,13 +84,15 @@ export default function PostContent({ postData }: PostContentProps) {
           <HashTag key={`${tag.tagName}`} tag={tag} />
         ))}
       </div>
-      <ReactionContainer
-        emoji={emojiCount}
-        commentsCount={commentCount}
-        views={viewCount}
-        handleEmojiClick={() =>
-          console.log('이모지 모달 열기 or 좋아요만 하려면 이모지 토글')
+      <EmojiBundle
+        isPost
+        commentCount={commentCount}
+        viewCount={viewCount}
+        emojiList={emojis}
+        handleEmojiClick={(emojiCode, isClicked) =>
+          handleEmojiClick(emojiCode, isClicked)
         }
+        isPending={isAddPending || isDeletePending}
       />
     </div>
   );
