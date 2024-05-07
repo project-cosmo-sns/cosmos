@@ -28,7 +28,7 @@ export default function PostList({ selectedSort, postList }: PostListProps) {
           postList.data.map((postData) => (
             <PostPreview
               key={postData.postListInfo.post.id}
-              postData={postData}
+              postData={postData.postListInfo}
             />
           ))
         ) : (
