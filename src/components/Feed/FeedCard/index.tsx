@@ -131,11 +131,11 @@ export default function FeedCard({
             </div>
           )}
         </div>
-        <ReactionContainer
+        {/* <ReactionContainer
           emojiCount={emojiCount}
           commentCount={commentCount}
           viewCount={viewCount}
-        />
+        /> */}
         {hasPadding || (
           <Modal
             title="임시모달"
