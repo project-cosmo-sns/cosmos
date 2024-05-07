@@ -4,15 +4,10 @@ import classNames from 'classnames/bind';
 import FeedCard from '@/components/Feed/FeedCard/index';
 import { PostCommentType } from '@/components/Common/CommentInput/api';
 import fetchData from '@/api/fetchData';
-import {
-  patchComment,
-  deleteComment,
-  deleteLikeComment,
-  postLikeComment,
-} from '@/components/Common/CommentCard/api';
 import styles from './FeedDetails.module.scss';
 import { FeedDetailType, CommentDetailType, CommentListType } from '../types';
 import { useMutation, useQuery } from '@tanstack/react-query';
+import { EditCommentType } from '@/@types/type';
 
 /**
  * @return {JSX.Element} FeedDetails - 추후에 변경 예정입니다. 피드 리스트에서 특정 피드를 클릭한다면 클리한 피드의 아이디를 통해 데이터를 요청해 화면에 보여줍니다.
@@ -56,6 +51,87 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
       }),
   });
 
+  const deleteCommentMutate = useMutation({
+    mutationFn: ({
+      feedIdParam,
+      commentId,
+    }: {
+      feedIdParam: number;
+      commentId: number;
+    }) =>
+      fetchData<void>({
+        param: `feed/${feedIdParam}/comment/${commentId}`,
+        method: 'delete',
+      }),
+  });
+
+  const deleteCommentRequest = (feedIdParam: number, commentId: number) => {
+    deleteCommentMutate.mutate({ feedIdParam, commentId });
+  };
+
+  const postLikeCommentMutate = useMutation({
+    mutationFn: ({
+      feedIdParam,
+      commentId,
+    }: {
+      feedIdParam: number;
+      commentId: number;
+    }) =>
+      fetchData<void>({
+        param: `feed/${feedIdParam}/comment/${commentId}/like`,
+        method: 'post',
+      }),
+  });
+
+  const postLikeRequest = (feedIdParam: number, commentId: number) => {
+    postLikeCommentMutate.mutate({ feedIdParam, commentId });
+  };
+
+  const deleteLikeCommentMutate = useMutation({
+    mutationFn: ({
+      feedIdParam,
+      commentId,
+    }: {
+      feedIdParam: number;
+      commentId: number;
+    }) =>
+      fetchData<void>({
+        param: `feed/${feedIdParam}/comment/${commentId}/like`,
+        method: 'delete',
+      }),
+  });
+
+  const deleteLikeRequest = (feedIdParam: number, commentId: number) => {
+    deleteLikeCommentMutate.mutate({ feedIdParam, commentId });
+  };
+
+  const patchCommentMutate = useMutation({
+    mutationFn: ({
+      feedIdParam,
+      commentId,
+      data,
+    }: {
+      feedIdParam: number;
+      commentId: number;
+      data: EditCommentType;
+    }) =>
+      fetchData({
+        param: `feed/${feedIdParam}/comment/${commentId}`,
+        method: 'patch',
+        requestData: {
+          content: data.editedComment,
+        },
+      }),
+  });
+
+  const editCommentRequest = (
+    feedIdParam: number,
+    commentId: number,
+    data: EditCommentType,
+  ) => {
+    patchCommentMutate.mutate({ feedIdParam, commentId, data });
+  };
+
   const feed: FeedDetailType = feedData ?? {
     writer: {
       id: 0,
@@ -82,7 +158,6 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
 
   const onSubmit = (data: Comment) => {
     postCommentMutate.mutate(data);
-    console.log(data, '-----데이터-----');
   };
 
   return (
@@ -95,10 +170,10 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
             <CommentCard
               comment={comment}
               postId={feedId}
-              deleteLikeRequest={deleteComment}
-              postLikeRequest={postLikeComment}
-              deleteCommentRequest={deleteLikeComment}
-              editCommentRequest={patchComment}
+              deleteLikeRequest={deleteLikeRequest}
+              postLikeRequest={postLikeRequest}
+              deleteCommentRequest={deleteCommentRequest}
+              editCommentRequest={editCommentRequest}
             />
             {index === commentList.length - 1 || (
               <div className={cn('divide-line')} />
