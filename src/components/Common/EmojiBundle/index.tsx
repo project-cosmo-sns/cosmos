@@ -1,49 +1,59 @@
+import { EmojiCode, EmojiType } from '@/@types/type';
+import { EMOJI_CODE } from '@/constants/EmojiCode';
 import classNames from 'classnames/bind';
-import { Dispatch, SetStateAction, Children } from 'react';
+import EmojiButton from '../EmojiButton';
 import styles from './EmojiBundle.module.scss';
+import { CommentIcon, EyeIcon } from '../IconCollection';
 
-interface EmojiBundleTypes {
-  children: JSX.Element[];
-  handleEmojiClick?: Dispatch<SetStateAction<boolean>>;
-  emojiVisible?: boolean;
-  toggleHasReaction: Dispatch<SetStateAction<boolean>>;
-  forDetails?: boolean;
-  className?: string;
+interface EmojiBundleProps {
+  emojiList: EmojiType[];
+  isVisible?: boolean;
+  handleEmojiClick: (emojiCode: EmojiCode, isClicked: boolean) => void;
+  isPending?: boolean;
+  commentCount: number;
+  viewCount?: number;
+  isPost?: boolean;
 }
 
+const cn = classNames.bind(styles);
+
 export default function EmojiBundle({
-  children,
+  emojiList,
+  isVisible = true,
   handleEmojiClick,
-  emojiVisible,
-  toggleHasReaction,
-  forDetails = false,
-  className,
-}: EmojiBundleTypes) {
-  const cn = classNames.bind(styles);
+  isPending,
+  commentCount,
+  viewCount,
+  isPost = false,
+}: EmojiBundleProps) {
   return (
-    <div
-      className={cn(forDetails ? 'forDetails' : 'emoji-container', className)}
-    >
-      <div className={cn('emoji-wrapper', 'details-wrapper')}>
-        {Children.map(children, (child) => (
-          <div className={cn('details-item-wrapper')}>
-            <div
-              className={cn('emoji-item', 'details-item')}
-              onClick={() => {
-                if (forDetails) {
-                  toggleHasReaction(true);
-                } else {
-                  handleEmojiClick && handleEmojiClick(!emojiVisible);
-                  toggleHasReaction(true);
-                }
-              }}
-            >
-              {child}
-              {forDetails && <p>3</p>}
-            </div>
+    isVisible && (
+      <div className={cn('wrapper')}>
+        <div className={cn('emoji-container')}>
+          {EMOJI_CODE.map((emojiCode) => (
+            <EmojiButton
+              key={emojiCode}
+              isDetail
+              emojiCode={emojiCode}
+              emojiList={emojiList}
+              handleEmojiClick={handleEmojiClick}
+              isPending={isPending}
+            />
+          ))}
+        </div>
+        <div className={cn('container')}>
+          <div className={cn('reaction')}>
+            <CommentIcon width="18" height="18" />
+            {commentCount}
           </div>
-        ))}
+          {isPost && (
+            <div className={cn('reaction')}>
+              <EyeIcon width="18" height="18" />
+              {viewCount}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    )
   );
 }

@@ -16,6 +16,8 @@ import MyFeedList from '@/components/Profile/MyFeedList';
 import MyPostList from '@/components/Profile/MyPostList';
 import { PostListDataType } from '@/components/Post/types';
 
+import { SortType } from '@/constants/sortType';
+
 const cn = classNames.bind(styles);
 
 interface MemberDataContainerPropsType {
@@ -40,9 +42,12 @@ export default function MemberDataContainer({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
+
   // const [selectedSort, setSelectedSort] = useState<
   //   'all' | 'followed' | 'myGeneration'
   // >('all');
+
+  const [selectedSort, setSelectedSort] = useState<SortType>('ALL');
 
   // 현재는 다른 유저일 경우 인증/미인증을 알 수 없어서 전부 미인증으로 뜨는 상태.
   // api를 새로 내려받게 되면 다시 처리할 것.
@@ -97,6 +102,7 @@ export default function MemberDataContainer({
         ) : (
           '작성된 글이 없습니다.'
         );
+
       case 'scrap':
         return <ScrapList />;
       default:
