@@ -1,5 +1,5 @@
 import fetchData from './fetchData';
-import { useMutation } from '@tanstack/react-query';
+import { metaType } from '@/@types/type';
 
 type UserInfo = {
   memberId: number;
@@ -12,32 +12,19 @@ type UserInfo = {
 export type FollowDataProps = {
   followerInfo: UserInfo;
   followingInfo: UserInfo;
+  meta: metaType;
 };
 
-export async function getUserFollowingData(memberId: number) {
+export async function getMyFollowingData(page = 1) {
   const res = await fetchData<FollowDataProps[]>({
-    param: `/follow/${memberId}/following`,
+    param: `follow/following/mine?order=DESC&page=${page}&take=3`,
   });
   return res;
 }
 
-export async function getUserFollowerData(memberId: number) {
+export async function getMyFollowerData(page = 1) {
   const res = await fetchData<FollowDataProps[]>({
-    param: `/follow/${memberId}/follower`,
-  });
-  return res;
-}
-
-export async function getMyFollowingData() {
-  const res = await fetchData<FollowDataProps[]>({
-    param: 'follow/following/mine',
-  });
-  return res;
-}
-
-export async function getMyFollowerData() {
-  const res = await fetchData<FollowDataProps[]>({
-    param: 'follow/follower/mine',
+    param: `follow/follower/mine?order=DESC&page=${page}&take=3`,
   });
   return res;
 }
