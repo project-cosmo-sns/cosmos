@@ -4,6 +4,12 @@ export interface Edits {
   feedContent: string;
 }
 
+export interface EditFeedTypes {
+  feedId: number;
+  data: Edits;
+  imageUrls: string[];
+}
+
 export async function deleteFeed(feedId: number) {
   await instance.delete(`/feed/${feedId}`);
 }
