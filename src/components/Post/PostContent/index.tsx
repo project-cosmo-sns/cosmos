@@ -55,7 +55,10 @@ export default function PostContent({ postData }: PostContentProps) {
       <span className={cn('category')}>{category}</span>
       <span className={cn('title')}>{title}</span>
       <div className={cn('header')}>
-        <WriterProfile writer={writer} createdAt={createdAt} />
+        <WriterProfile
+          writer={writer}
+          createdAt={createdAt.slice(0, 10).replace(/-/g, '.')}
+        />
         <ActionButtons
           isButtonShow={isMine}
           handleClickEdit={() => router.push(`/write?postId=${postId}`)}

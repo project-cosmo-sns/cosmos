@@ -2,7 +2,6 @@ import {
   bold,
   codeBlock,
   divider,
-  image,
   italic,
   link,
   orderedListCommand,
@@ -14,6 +13,7 @@ import {
 import dynamic from 'next/dynamic';
 import { codeEdit, codePreview } from './customPreviewButton';
 import getTitleButton from './customTool';
+import getUploadImageButton from './getUploadImageButton';
 
 interface MarkdownEditorProps {
   content: string | undefined;
@@ -28,6 +28,8 @@ export default function MarkdownEditor({
   const title1 = getTitleButton(1);
   const title2 = getTitleButton(2);
   const title3 = getTitleButton(3);
+
+  const image = getUploadImageButton();
 
   return (
     <MDEditor
