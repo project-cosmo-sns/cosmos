@@ -1,4 +1,3 @@
-import AuthorProfile from '@/components/Common/AuthorProfile';
 import { CommentDetailType } from '@/components/Feed/types';
 import getElapsedTime from '@/utils/getElaspedTime';
 import { EditCommentType } from '@/@types/type';
@@ -9,6 +8,7 @@ import { LikeIcon, LikedIcon } from '../IconCollection';
 import Modal from '../Layout/Modal';
 import styles from './CommentCard.module.scss';
 import EditComment from './EditComment';
+import WriterProfile from '../WriterProfile';
 
 const cn = classNames.bind(styles);
 
@@ -79,7 +79,7 @@ export default function CommentCard({
   return (
     <div className={cn('wrapper')}>
       <div className={cn('header')}>
-        <AuthorProfile author={comment.writer} createdAt={formattedCreatedAt} />
+        <WriterProfile writer={comment.writer} createdAt={formattedCreatedAt} />
         <div className={cn('container')}>
           <div className={cn('like')} onClick={handleClickLikeComment}>
             {isLiked ? (

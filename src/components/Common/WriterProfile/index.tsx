@@ -1,40 +1,45 @@
-import { useState } from 'react';
 import { Writer } from '@/components/Feed/types';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import styles from './AuthorProfile.module.scss';
+import { useRouter } from 'next/router';
 import TermBadge from '../Badge/TermBadge';
+import styles from './WriterProfile.module.scss';
 
-interface AuthorProfileProps {
-  author: Writer;
+interface WriterProfileProps {
+  writer: Writer;
   createdAt: string;
 }
 
 const cn = classNames.bind(styles);
 
-export default function AuthorProfile({
-  author,
+export default function WriterProfile({
+  writer,
   createdAt,
-}: AuthorProfileProps) {
-  const { nickname, profileImageUrl, generation } = author;
-  const [isImageError, setIsImageError] = useState(false);
-  const profileImage = profileImageUrl || 'images/profile.svg';
+}: WriterProfileProps) {
+  const router = useRouter();
+  const { id: memberId, nickname, profileImageUrl, generation } = writer;
+
   return (
     <div className={cn('wrapper')}>
       <Image
         className={cn('profile-image')}
-        src={isImageError ? 'images/profile.svg' : profileImage}
+        src={profileImageUrl || '/images/profile.svg'}
         alt="profile_image"
         width={40}
         height={40}
-        onClick={() => console.log('프로필모달 열기')}
-        onError={() => setIsImageError(true)}
+        onClick={(event) => {
+          event.stopPropagation();
+          router.push(`/profile?memberId=${memberId}`);
+        }}
       />
       <div className={cn('info')}>
         <button
           type="button"
           className={cn('nickname')}
-          onClick={() => console.log('프로필모달 열기')}
+          onClick={(event) => {
+            event.stopPropagation();
+            router.push(`/profile?memberId=${memberId}`);
+          }}
         >
           {nickname}
         </button>
