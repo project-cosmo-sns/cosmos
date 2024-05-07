@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { updateKeyword } from '@/redux/searchSlice';
+import { RootState } from '@/redux/store';
 import classNames from 'classnames/bind';
 import styles from './SearchInput.module.scss';
 import { ChangeEvent, KeyboardEvent } from 'react';
@@ -9,12 +10,12 @@ import { useRouter } from 'next/router';
 const cn = classNames.bind(styles);
 
 export default function SearchInput() {
-  const search = useSelector((state: RootState) => state.search.keyword); // Redux 상태에서 검색어를 가져옴
-  const dispatch = useDispatch(); // useDispatch 훅을 사용하여 디스패치 함수를 가져옴
+  const search = useSelector((state: RootState) => state.search.keyword);
+  const dispatch = useDispatch();
   const router = useRouter();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatch(updateKeyword(e.target.value)); // 검색어가 변경될 때마다 Redux 상태를 업데이트
+    dispatch(updateKeyword(e.target.value));
   };
 
   const handleSearch = () => {
