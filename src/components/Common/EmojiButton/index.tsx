@@ -23,20 +23,22 @@ export default function EmojiButton({
   const Icon = EMOJI_ICON[emojiCode];
   const emojiData = emojiList.filter((emoji) => emoji.emojiCode === emojiCode);
 
-  console.log(isPending);
-
   return (
     <button
       type="button"
       className={cn('wrapper', {
         clicked: emojiData[0]?.isClicked,
+        detail: isDetail,
       })}
-      onClick={() => handleEmojiClick(emojiCode, emojiData[0]?.isClicked)}
+      onClick={(event) => {
+        event.stopPropagation();
+        handleEmojiClick(emojiCode, emojiData[0]?.isClicked);
+      }}
       disabled={isPending}
     >
       <div className={cn('container')}>
         <Icon />
-        {isDetail && emojiData.length ? emojiData[0].emojiCount : 0}
+        {isDetail && (emojiData.length ? emojiData[0].emojiCount : 0)}
       </div>
     </button>
   );

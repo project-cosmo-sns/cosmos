@@ -114,7 +114,6 @@ export default function PostContent({ postData }: PostContentProps) {
         commentCount={commentCount}
         viewCount={viewCount}
         emojiList={emojis}
-        isDetail
         handleEmojiClick={(emojiCode, isClicked) =>
           handleEmojiClick(emojiCode, isClicked)
         }

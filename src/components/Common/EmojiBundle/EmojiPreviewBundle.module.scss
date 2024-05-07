@@ -1,0 +1,11 @@
+.emoji-container {
+  display: flex;
+  position: absolute;
+  top: -48px;
+  left: 45px;
+  background-color: $black-02;
+  border-radius: 10px;
+  background: $black-02;
+  backdrop-filter: blur(15px);
+  padding: 4px;
+}

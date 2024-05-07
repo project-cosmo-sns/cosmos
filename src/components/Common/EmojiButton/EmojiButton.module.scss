@@ -1,4 +1,4 @@
-.wrapper {
+.wrapper.detail {
   @include flex-arrange;
   padding: 4px 9px;
   background: $black-01;
@@ -7,6 +7,17 @@
   height: 26px;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.wrapper {
+  display: flex;
+  padding: 8px;
+  align-items: flex-start;
+  border-radius: 5px;
+}
+
+.wrapper:hover {
+  background-color: $black-03;
 }
 
 .container {

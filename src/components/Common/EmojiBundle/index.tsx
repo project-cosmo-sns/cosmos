@@ -7,7 +7,6 @@ import { CommentIcon, EyeIcon } from '../IconCollection';
 
 interface EmojiBundleProps {
   emojiList: EmojiType[];
-  isDetail: boolean;
   isVisible?: boolean;
   handleEmojiClick: (emojiCode: EmojiCode, isClicked: boolean) => void;
   isPending?: boolean;
@@ -19,7 +18,6 @@ const cn = classNames.bind(styles);
 
 export default function EmojiBundle({
   emojiList,
-  isDetail,
   isVisible = true,
   handleEmojiClick,
   isPending,
@@ -33,7 +31,7 @@ export default function EmojiBundle({
           {EMOJI_CODE.map((emojiCode) => (
             <EmojiButton
               key={emojiCode}
-              isDetail={isDetail}
+              isDetail
               emojiCode={emojiCode}
               emojiList={emojiList}
               handleEmojiClick={handleEmojiClick}
