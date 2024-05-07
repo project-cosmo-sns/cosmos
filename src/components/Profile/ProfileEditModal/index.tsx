@@ -7,9 +7,10 @@ import GenerationBadge from '@/components/Common/GenerationBadge';
 import ImageInput from '@/components/Common/ImageInput';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import GetProfileImageUrl from './getProfileImageUrl';
+import GetProfileImageUrl from './getImageUploadUrl';
 import fetchData from '@/api/fetchData';
 import { AuthFormProps } from '@/@types/type';
+import { uploadImageToS3 } from './uploadImageToS3';
 
 interface ProfileEditModalProps {
   isOpen: boolean;
@@ -34,39 +35,31 @@ export default function ProfileEditModal({
 
   const { register, handleSubmit, watch, setValue } = useForm<AuthFormProps>();
 
-  const uploadImageAndGetUrl = async (
-    file: FileWithUploadURL,
-  ): Promise<string> => {
-    try {
-      const imageUrlResponse = await GetProfileImageUrl(file);
-      return imageUrlResponse;
-    } catch (error) {
-      console.error('Image upload error:', error);
-      return '';
-    }
-  };
-
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    setValue('image', imageUrl);
 
     try {
-      const uploadImageUrl = await uploadImageAndGetUrl(file);
-      console.log('Uploaded image URL:', imageUrl);
-      setImageUrl(uploadImageUrl); // 이미지 URL 상태 업데이트
-      setPreviewImage(URL.createObjectURL(file)); // 미리보기 이미지 설정
+      const uploadedImageUrl = await uploadImageToS3(file);
+      console.log('Uploaded image URL:', uploadedImageUrl);
+
+      if (uploadedImageUrl) {
+        setImageUrl(uploadedImageUrl); // 이미지 URL 상태 업데이트
+        // setValue('image', uploadedImageUrl);
+        setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
+        console.log(uploadedImageUrl);
+      }
     } catch (error) {
-      console.error('Image upload error:', error);
+      console.error('이미지 업로드 에러 :', error);
+      setPreviewImage(''); // 에러 시 미리보기 초기화
     }
-    // reader.readAsDataURL(file);
   };
 
   const handleIntroduceChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setIntroduce(e.target.value);
   };
 
-  const handleProfileSubmit = async () => {
+  const handleProfileSubmit = async (ImageUrl: string) => {
     try {
       const response = await fetchData({
         param: '/profile/mine',
@@ -74,17 +67,16 @@ export default function ProfileEditModal({
         requestData: {
           nickname: memberData.nickname,
           introduce,
-          profileImageUrl: imageUrl,
+          profileImageUrl: ImageUrl,
         },
       });
 
-      if (!response) {
-        console.error('네트워크 응답 오류');
-        return;
-      }
-
       console.log('프로필 업데이트 성공:', response);
       setIsOpen(false); // 프로필 업데이트 후 모달 닫기
+
+      if (!response) {
+        console.error('네트워크 응답 오류');
+      }
     } catch (error) {
       console.error('프로필 업데이트 에러:', error);
     }
@@ -94,8 +86,13 @@ export default function ProfileEditModal({
     if (memberData && memberData.profileImageUrl) {
       setPreviewImage(memberData.profileImageUrl);
     }
-  }, [memberData]);
+  }, [imageUrl]);
 
+  const onSubmit: SubmitHandler<AuthFormProps> = async (data) => {
+    // 폼 데이터를 사용하여 프로필 업데이트 로직 구현
+    // data.image 는 업로드 이미지 URL로 사용
+    await handleProfileSubmit(data.image);
+  };
   return (
     <div>
       {isOpen && (
@@ -108,7 +105,7 @@ export default function ProfileEditModal({
         >
           <form
             className={cn('profile-edit-Form')}
-            onSubmit={handleSubmit(() => handleProfileSubmit())}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <div className={cn('profile-image-edit')}>
               <ImageInput
@@ -143,9 +140,9 @@ export default function ProfileEditModal({
             <div className={cn('flex-grow-div')}> </div>
             <div className={cn('edit-button')}>
               <DefaultButton
-                onClick={() => {
-                  handleProfileSubmit();
-                }}
+                // onClick={() => {
+                //   handleProfileSubmit(imageUrl);
+                // }}
                 buttonType="submit"
                 size="modal"
                 color="$primary-01"
