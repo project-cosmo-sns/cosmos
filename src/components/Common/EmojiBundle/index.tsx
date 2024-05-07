@@ -12,6 +12,7 @@ interface EmojiBundleProps {
   isPending?: boolean;
   commentCount: number;
   viewCount?: number;
+  isPost?: boolean;
 }
 
 const cn = classNames.bind(styles);
@@ -23,6 +24,7 @@ export default function EmojiBundle({
   isPending,
   commentCount,
   viewCount,
+  isPost = false,
 }: EmojiBundleProps) {
   return (
     isVisible && (
@@ -44,10 +46,12 @@ export default function EmojiBundle({
             <CommentIcon width="18" height="18" />
             {commentCount}
           </div>
-          <div className={cn('reaction')}>
-            <EyeIcon width="18" height="18" />
-            {viewCount}
-          </div>
+          {isPost && (
+            <div className={cn('reaction')}>
+              <EyeIcon width="18" height="18" />
+              {viewCount}
+            </div>
+          )}
         </div>
       </div>
     )

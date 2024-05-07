@@ -1,14 +1,13 @@
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import { MARKDOWN_SYMBOL_REGEX } from '@/constants/regexPattern';
+import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import getElapsedTime from '@/utils/getElaspedTime';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
-import { MouseEvent, useState } from 'react';
 import HashTag from '../HashTag';
 import { PostListDataType } from '../types';
 import styles from './PostPreview.module.scss';
-import EmojiBundle from '@/components/Common/EmojiBundle';
 
 interface PostPreviewProps {
   postData: PostListDataType;
@@ -17,7 +16,6 @@ interface PostPreviewProps {
 export default function PostPreview({ postData }: PostPreviewProps) {
   const cn = classNames.bind(styles);
   const router = useRouter();
-  const [isEmojiVisible, setIsEmojiVisible] = useState(false);
 
   const {
     id: postId,
@@ -33,11 +31,10 @@ export default function PostPreview({ postData }: PostPreviewProps) {
 
   const formattedCreatedAt = getElapsedTime(createdAt);
 
-  const handleEmojiClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    setIsEmojiVisible(true);
-  };
+  const { handleEmojiClick, isAddPending, isDeletePending } =
+    useSendEmojiRequest(postId as number, true);
 
+  console.log(emojis);
   return (
     <div
       className={cn('wrapper')}
@@ -63,6 +60,7 @@ export default function PostPreview({ postData }: PostPreviewProps) {
         commentCount={commentCount}
         viewCount={viewCount}
         emojis={emojis}
+        handleEmojiClick={handleEmojiClick}
       />
     </div>
   );

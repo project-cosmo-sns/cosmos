@@ -12,6 +12,7 @@ import MarkdownContent from '../Markdown';
 import { HashTagType, PostDetailType } from '../types';
 import styles from './PostContent.module.scss';
 import { EmojiCode } from '@/@types/type';
+import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 
 interface PostContentProps {
   postData: PostDetailType;
@@ -48,34 +49,8 @@ export default function PostContent({ postData }: PostContentProps) {
     onSuccess: () => router.push('/'),
   });
 
-  const { mutate: addEmojiMutate, isPending: isAddPending } = useMutation({
-    mutationFn: (emojiCode: EmojiCode) =>
-      fetchData({
-        param: `/post/${postId}/emoji`,
-        method: 'post',
-        requestData: {
-          emoji: emojiCode,
-        },
-      }),
-  });
-
-  const { mutate: deleteEmojiMutate, isPending: isDeletePending } = useMutation(
-    {
-      mutationFn: (emojiCode: EmojiCode) =>
-        fetchData({
-          param: `/post/${postId}/emoji/${emojiCode}`,
-          method: 'delete',
-        }),
-    },
-  );
-
-  const handleEmojiClick = (emojiCode: EmojiCode, isClicked: boolean) => {
-    if (isClicked) {
-      deleteEmojiMutate(emojiCode);
-      return;
-    }
-    addEmojiMutate(emojiCode);
-  };
+  const { handleEmojiClick, isAddPending, isDeletePending } =
+    useSendEmojiRequest(Number(postId), true);
 
   return (
     <div className={cn('wrapper')}>
@@ -111,6 +86,7 @@ export default function PostContent({ postData }: PostContentProps) {
         ))}
       </div>
       <EmojiBundle
+        isPost
         commentCount={commentCount}
         viewCount={viewCount}
         emojiList={emojis}
@@ -119,14 +95,6 @@ export default function PostContent({ postData }: PostContentProps) {
         }
         isPending={isAddPending || isDeletePending}
       />
-      {/* <ReactionContainer
-        emojiCount={emojiCount}
-        commentCount={commentCount}
-        viewCount={viewCount}
-        handleEmojiClick={() =>
-          console.log('이모지 모달 열기 or 좋아요만 하려면 이모지 토글')
-        }
-      /> */}
     </div>
   );
 }
