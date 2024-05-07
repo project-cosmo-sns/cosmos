@@ -21,12 +21,12 @@ export default function PostComment({ commentData }: PostCommentProps) {
     <div className={cn('wrapper')}>
       {/* <CommentInput placeholder="댓글을 입력하세요" feedId={Number(postId)} /> */}
       <div className={cn('comment-container')}>
-        {data.map((comment, index) => (
+        {/* {data.map((comment, index) => (
           <div key={comment.comment.id}>
             <CommentCard comment={comment} />
             {index === data.length - 1 || <div className={cn('divide-line')} />}
           </div>
-        ))}
+        ))} */}
       </div>
     </div>
   );

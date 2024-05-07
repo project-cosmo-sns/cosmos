@@ -13,6 +13,7 @@ import { fetchMemberData } from './api';
 import { GetServerSideProps } from 'next';
 import { FeedDetailType } from '@/components/Feed/types';
 import MyFeedList from '@/components/Profile/MyFeedList';
+import { SortType } from '@/constants/sortType';
 
 const cn = classNames.bind(styles);
 
@@ -34,9 +35,7 @@ export default function MemberDataContainer({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
-  const [selectedSort, setSelectedSort] = useState<
-    'all' | 'followed' | 'myGeneration'
-  >('all');
+  const [selectedSort, setSelectedSort] = useState<SortType>('ALL');
 
   if (!memberData.isAuthorized || error) {
     return (
@@ -74,7 +73,7 @@ export default function MemberDataContainer({
           '작성된 글이 없습니다.'
         );
       case 'post':
-        return <PostList selectedSort={selectedSort} isMyProfile />;
+        return <>my post list</>;
       case 'scrap':
         return <ScrapList />;
       default:

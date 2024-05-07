@@ -23,7 +23,7 @@ export default function SearchPreview({ searchData }: SearchPreviewProps) {
       id: postId,
       title,
       content,
-      viewCount: views,
+      viewCount,
       commentCount,
       emojiCount,
       createdAt,
@@ -49,11 +49,11 @@ export default function SearchPreview({ searchData }: SearchPreviewProps) {
           <HashTag key={tag.name} tag={tag} />
         ))}
       </div> */}
-      <ReactionContainer
-        emoji={emojiCount}
-        commentsCount={commentCount}
-        views={views}
-      />
+      {/* <ReactionContainer
+        emojiCount={emojiCount}
+        commentCount={commentCount}
+        viewCount={viewCount}
+      /> */}
     </div>
   );
 }

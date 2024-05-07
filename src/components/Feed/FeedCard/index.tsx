@@ -2,12 +2,13 @@ import Image from 'next/image';
 import { Dispatch, SetStateAction, useState } from 'react';
 import classNames from 'classnames/bind';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import Modal from '@/components/Common/Layout/Modal';
 import { deleteFeed, editFeed, Edits } from '@/components/Feed/FeedCard/api';
 import styles from './FeedCard.module.scss';
 import { FeedDetailType } from '../types';
+import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
+import WriterProfile from '@/components/Common/WriterProfile';
 
 interface FeedCardTypes {
   feedData: FeedDetailType;
@@ -52,6 +53,7 @@ export default function FeedCard({
     emojiCount,
     createdAt,
     imageUrls,
+    isMine,
   } = feedData.feed;
 
   const onSubmit: SubmitHandler<Edits> = (data) => {
@@ -70,7 +72,7 @@ export default function FeedCard({
       <div className={cn('wrapper')}>
         <div className={cn('user-content')} onClick={onClick}>
           <div className={cn('profile-content-wrapper')}>
-            <AuthorProfile author={feedData.writer} createdAt={createdAt} />
+            <WriterProfile writer={feedData.writer} createdAt={createdAt} />
             {isEdit ? (
               <form onSubmit={handleSubmit(onSubmit)}>
                 <textarea
@@ -110,59 +112,40 @@ export default function FeedCard({
               )}
             </div>
           )}
-        </div>
-        <ReactionContainer
-          emoji={emojiCount}
-          commentsCount={commentCount}
-          views={viewCount}
-          emojiVisible={emojiVisible}
-          handleEmojiClick={setEmojiVisible}
-          forDetails={forDetails}
-        />
-        {hasPadding || (
-          <div>
-            {isEdit ? (
-              <button
-                type="button"
+          {forDetails && isMine && (
+            <div className={cn('icon-wrapper')}>
+              <EditIcon
+                width="18"
+                height="18"
                 onClick={() => {
-                  setIsEdit(false);
-                  console.log('편집 상태 false로 변경');
+                  setIsEdit(!isEdit);
                 }}
-              >
-                취소하기
-              </button>
-            ) : (
-              <div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsEdit(true);
-                    console.log('편집상태 true로 변경');
-                  }}
-                >
-                  편집하기
-                </button>
-                <button
-                  type="button"
-                  onClick={() => {
-                    console.log('삭제하기');
-                    deleteFeed(id);
-                  }}
-                >
-                  삭제하기
-                </button>
-              </div>
-            )}
-            <Modal
-              title="임시모달"
-              cssModalSize={cn('')}
-              cssComponentDisplay={cn('')}
-              modalVisible={moreModalOpen}
-              toggleModal={setMoreModalOpen}
-            >
-              <div>테스트 모달</div>
-            </Modal>
-          </div>
+              />
+              <DeleteIcon
+                width="18"
+                height="18"
+                onClick={() => {
+                  deleteFeed(id);
+                }}
+              />
+            </div>
+          )}
+        </div>
+        {/* <ReactionContainer
+          emojiCount={emojiCount}
+          commentCount={commentCount}
+          viewCount={viewCount}
+        /> */}
+        {hasPadding || (
+          <Modal
+            title="임시모달"
+            cssModalSize={cn('')}
+            cssComponentDisplay={cn('')}
+            modalVisible={moreModalOpen}
+            toggleModal={setMoreModalOpen}
+          >
+            <div>테스트 모달</div>
+          </Modal>
         )}
       </div>
     </div>

@@ -1,10 +1,10 @@
-import AuthorProfile from '@/components/Common/AuthorProfile';
+import WriterProfile from '@/components/Common/WriterProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import { MARKDOWN_SYMBOL_REGEX } from '@/constants/regexPattern';
+import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import getElapsedTime from '@/utils/getElaspedTime';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
-import { MouseEvent } from 'react';
 import HashTag from '../HashTag';
 import { PostListDataType } from '../types';
 import styles from './PostPreview.module.scss';
@@ -22,26 +22,25 @@ export default function PostPreview({ postData }: PostPreviewProps) {
     createdAt,
     title,
     content,
+    emojis,
     viewCount,
     emojiCount,
     commentCount,
+    hashTags,
   } = postData.postListInfo.post;
-  const hashTags = postData.postListHashTag;
 
   const formattedCreatedAt = getElapsedTime(createdAt);
 
-  const handleEmojiClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    console.log('좋아요 남기기 or 이모지 팝업 뜨고 이모지 남기기');
-  };
+  const { handleEmojiClick, isAddPending, isDeletePending } =
+    useSendEmojiRequest(postId as number, true);
 
   return (
     <div
       className={cn('wrapper')}
       onClick={() => router.push(`/post/${postId}`)}
     >
-      <AuthorProfile
-        author={postData.postListInfo.writer}
+      <WriterProfile
+        writer={postData.postListInfo.writer}
         createdAt={formattedCreatedAt}
       />
       <div className={cn('content-wrapper')}>
@@ -56,9 +55,12 @@ export default function PostPreview({ postData }: PostPreviewProps) {
         ))}
       </div>
       <ReactionContainer
-        emoji={emojiCount}
-        commentsCount={commentCount}
-        views={viewCount}
+        isPost
+        emojiCount={emojiCount}
+        commentCount={commentCount}
+        viewCount={viewCount}
+        emojis={emojis}
+        handleEmojiClick={handleEmojiClick}
       />
     </div>
   );

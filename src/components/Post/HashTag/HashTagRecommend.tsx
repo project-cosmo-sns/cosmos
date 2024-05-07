@@ -4,6 +4,7 @@ import styles from './HashTagRecommendProps.module.scss';
 import { HASH_TAG_COLOR_CODE } from '@/constants/hashTagCode';
 
 interface HashTagRecommendProps {
+  className: string;
   hashTagList: HashTagType[];
   setTagValue: (args: string) => void;
   handleAddHashtag: ({
@@ -20,12 +21,13 @@ interface HashTagRecommendProps {
 const cn = classNames.bind(styles);
 
 export default function HashTagRecommend({
+  className,
   hashTagList,
   setTagValue,
   handleAddHashtag,
 }: HashTagRecommendProps) {
   return (
-    <div className={cn('wrapper')}>
+    <div className={cn('wrapper', className)}>
       {hashTagList.map((hashTag) => (
         <div
           key={hashTag.tagName}

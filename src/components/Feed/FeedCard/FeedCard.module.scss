@@ -18,6 +18,11 @@
       gap: 12px;
       color: $white-01;
 
+      .icon-wrapper {
+        display: flex;
+        gap: 24px;
+      }
+
       .profile-content-wrapper {
         display: flex;
         flex-direction: column;

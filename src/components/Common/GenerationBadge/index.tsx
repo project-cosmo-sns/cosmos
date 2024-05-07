@@ -2,7 +2,7 @@ import styles from './Generation.module.scss';
 import classNames from 'classnames/bind';
 
 type GenerationType = {
-  generationInfo?: number | undefined;
+  generationInfo: number | null;
   isAuthorized: boolean;
 };
 
@@ -22,7 +22,7 @@ export default function GenerationBadge({
   ];
 
   // 미인증 상태 처리
-  if (!isAuthorized || generationInfo === undefined) {
+  if (!isAuthorized || generationInfo === null) {
     return <div className={cn('waiting')}>미인증</div>;
   }
 

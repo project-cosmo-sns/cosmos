@@ -1,5 +1,6 @@
 import { HASH_TAG_COLOR_CODE } from '@/constants/hashTagCode';
 import { Writer } from '../Feed/types';
+import { EmojiType } from '@/@types/type';
 
 export interface HashTagType {
   tagName: string;
@@ -14,25 +15,22 @@ export interface PostRequestType {
   hashTags: HashTagType[];
 }
 
-export interface PostType {
-  id: number;
-  category: string;
-  title: string;
-  content: string;
+export interface PostType extends PostRequestType {
   viewCount: number;
   commentCount: number;
   emojiCount: number;
   createdAt: string;
+  emojis: EmojiType[];
   isMine: boolean;
 }
 
-export interface PostListInfoType {
+export interface PostInfoType {
   writer: Writer;
   post: PostType;
 }
 
 export interface PostListDataType {
-  postListInfo: PostListInfoType;
+  postListInfo: PostInfoType;
   postListHashTag: HashTagType[];
 }
 
@@ -48,21 +46,8 @@ export interface PostListType {
   };
 }
 
-export type EmojiCode = 'HEART' | 'THUMBSUP' | 'LAUGH' | 'SAD' | 'CHECK' | 'ME';
-
-export interface EmojiType {
-  emojiCode: EmojiCode;
-  emojiCount: number;
-  isClicked: boolean;
-}
-
 export interface PostDetailType {
-  postDetail: {
-    writer: Writer;
-    post: PostType;
-    hashTags: HashTagType[];
-    emoji: EmojiType[];
-  };
+  postDetail: PostInfoType;
 }
 
 export interface CommentType {

@@ -1,37 +1,36 @@
 import { ContainerOptionType } from '@/@types/type';
-import fetchData from '@/api/fetchData';
+import { fetchInitialFeed } from '@/api/fetchInitialFeed';
+import { fetchInitialPost } from '@/api/fetchInitialPost';
 import ContentContainer from '@/components/Common/ContentContainer';
-import { CheckIcon } from '@/components/Common/IconCollection';
-import Toast from '@/components/Common/Toast';
 import TodayQuestion from '@/components/Common/TodayQuestion';
 import FeedList from '@/components/Feed/FeedList';
-import { getFeedList } from '@/components/Feed/FeedList/api';
 import PostList from '@/components/Post/PostList';
-import { PostListDataType, PostListType } from '@/components/Post/types';
+import { PostListType } from '@/components/Post/types';
+import { SortType } from '@/constants/sortType';
 import styles from '@/styles/Home.module.scss';
 import classNames from 'classnames/bind';
+import { GetServerSidePropsContext } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { FeedDetailType, FeedListType } from '../components/Feed/types';
-import { SortType } from '@/constants/sortType';
+import { useState } from 'react';
+import { FeedListType } from '../components/Feed/types';
 
-export const getServerSideProps = async () => {
-  const feedList: FeedListType = await getFeedList();
-  const postList = await fetchData<PostListType>({
-    param: `post/list`,
-  });
+export const getServerSideProps = async (
+  context: GetServerSidePropsContext,
+) => {
+  const feedList = await fetchInitialFeed<FeedListType>(context);
+  const postList = await fetchInitialPost<PostListType>(context);
 
   return {
     props: {
-      feedList: feedList.data,
-      postList: postList.data,
+      feedList,
+      postList,
     },
   };
 };
 
 interface HomePropsType {
-  feedList: FeedDetailType[];
-  postList: PostListDataType[];
+  feedList: { props: { response: FeedListType } };
+  postList: { props: { response: PostListType } };
 }
 
 const cn = classNames.bind(styles);
@@ -53,9 +52,12 @@ export default function Home({ feedList, postList }: HomePropsType) {
         setSelectedSort={setSelectedSort}
       >
         {selectedOption === 'feed' ? (
-          <FeedList feedList={feedList} />
+          <FeedList feedList={feedList.props.response} />
         ) : (
-          <PostList postList={postList} selectedSort={selectedSort} />
+          <PostList
+            postList={postList.props.response}
+            selectedSort={selectedSort}
+          />
         )}
       </ContentContainer>
       {/* <Toast
