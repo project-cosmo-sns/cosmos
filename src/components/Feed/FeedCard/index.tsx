@@ -5,10 +5,17 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import Modal from '@/components/Common/Layout/Modal';
-import { deleteFeed, editFeed, Edits } from '@/components/Feed/FeedCard/api';
+import { deleteFeed, Edits } from '@/components/Feed/FeedCard/api';
 import styles from './FeedCard.module.scss';
 import { FeedDetailType } from '../types';
 import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
+import fetchData from '@/api/fetchData';
+import {
+  QueryClient,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 interface FeedCardTypes {
   feedData: FeedDetailType;
@@ -46,7 +53,7 @@ export default function FeedCard({
   } = useForm<Edits>();
 
   const {
-    id,
+    id: feedId,
     content,
     viewCount,
     commentCount,
@@ -56,9 +63,31 @@ export default function FeedCard({
     isMine,
   } = feedData.feed;
 
+  const queryClient = useQueryClient();
+
+  const patchMutaion = useMutation({
+    mutationFn: (data: Edits) =>
+      fetchData<Edits>({
+        param: `/feed/${feedId}`,
+        method: 'patch',
+        requestData: data,
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['feedComments'] });
+    },
+  });
+
+  const deleteMutaion = useMutation({
+    mutationFn: () =>
+      fetchData({
+        param: `/feed/${feedId}`,
+        method: 'delete',
+      }),
+  });
+
   const onSubmit: SubmitHandler<Edits> = (data) => {
     setIsEdit(false);
-    editFeed(id, data, imageUrls);
+    patchMutaion.mutate(data);
   };
 
   return (
@@ -125,7 +154,7 @@ export default function FeedCard({
                 width="18"
                 height="18"
                 onClick={() => {
-                  deleteFeed(id);
+                  deleteMutaion.mutate();
                 }}
               />
             </div>
