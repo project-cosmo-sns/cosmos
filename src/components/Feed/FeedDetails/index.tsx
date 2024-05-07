@@ -2,7 +2,7 @@ import CommentCard from '@/components/Common/CommentCard';
 import CommentInput, { Comment } from '@/components/Common/CommentInput';
 import classNames from 'classnames/bind';
 import FeedCard from '@/components/Feed/FeedCard/index';
-import { postComment } from '@/components/Common/CommentInput/api';
+import { PostCommentType } from '@/components/Common/CommentInput/api';
 import fetchData from '@/api/fetchData';
 import {
   patchComment,
@@ -12,7 +12,7 @@ import {
 } from '@/components/Common/CommentCard/api';
 import styles from './FeedDetails.module.scss';
 import { FeedDetailType, CommentDetailType, CommentListType } from '../types';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 /**
  * @return {JSX.Element} FeedDetails - 추후에 변경 예정입니다. 피드 리스트에서 특정 피드를 클릭한다면 클리한 피드의 아이디를 통해 데이터를 요청해 화면에 보여줍니다.
@@ -45,6 +45,17 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
       }),
   });
 
+  const postCommentMutate = useMutation({
+    mutationFn: (data: Comment) =>
+      fetchData<PostCommentType>({
+        param: `feed/${feedId}/comment`,
+        method: 'post',
+        requestData: {
+          content: data.comment,
+        },
+      }),
+  });
+
   const feed: FeedDetailType = feedData ?? {
     writer: {
       id: 0,
@@ -70,7 +81,8 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
   if (isCommentDataError) return '코멘트 데이터 에러 발생!';
 
   const onSubmit = (data: Comment) => {
-    postComment(data, feedId);
+    postCommentMutate.mutate(data);
+    console.log(data, '-----데이터-----');
   };
 
   return (
