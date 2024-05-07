@@ -1,17 +1,24 @@
 import styles from './FollowList.module.scss';
 import classNames from 'classnames/bind';
 import Modal from '@/components/Common/Layout/Modal';
-import { FollowType } from '@/utils/MemberMockData';
 import Follow from './Follow';
 import { ModalPropsType } from '@/@types/type';
+import { useQuery } from '@tanstack/react-query';
+import {
+  getMyFollowingData,
+  getMyFollowerData,
+  getUserFollowerData,
+  getUserFollowingData,
+  FollowDataProps,
+} from '@/api/Follow';
 
 const cn = classNames.bind(styles);
 
 type FollowListType = {
   followListProps: ModalPropsType & {
     title: string;
-    followData: FollowType[];
-    isFollow: boolean;
+    isFollowButton: boolean;
+    followData: 'following' | 'follower';
   };
 };
 
@@ -23,25 +30,40 @@ type FollowListType = {
  * @param {boolean} modalOpen - 모달 on/off 여부 변수
  * @param {boolean} isFollow - 팔로우 버튼이 필요한지 여부/ true: 팔로우 버튼 , false: 삭제 버튼
  * @returns {JSX.Element} 팔로워 또는 팔로잉 리스트 JSX
- * mockData 예비용
  */
 
 export default function FollowList({ followListProps }: FollowListType) {
-  const { title, toggleModal, followData, isFollow, modalVisible } =
+  const { title, toggleModal, isFollowButton, followData, modalVisible } =
     followListProps;
+
+  const { data: followDataResults = [] } = useQuery({
+    queryKey: [followData],
+    queryFn: () =>
+      followData === 'following' ? getMyFollowingData() : getMyFollowerData(),
+  });
 
   return (
     <Modal
       title={title}
       toggleModal={toggleModal}
       modalVisible={modalVisible}
-      cssModalSize={cn('follow-container')}
-      cssComponentDisplay={cn('follow-wrapper')}
+      cssModalSize={cn('followList-container')}
+      cssComponentDisplay={cn('followList-wrapper')}
     >
       <div>
-        {followData.map((follow) => (
-          <Follow key={follow.id} isFollow={isFollow} {...follow} />
-        ))}
+        {followDataResults.map((follow: FollowDataProps) => {
+          const followDetailInfo =
+            followData === 'following'
+              ? follow.followingInfo
+              : follow.followerInfo;
+          return (
+            <Follow
+              key={followDetailInfo.memberId}
+              {...followDetailInfo}
+              isFollowButton={isFollowButton}
+            />
+          );
+        })}
       </div>
     </Modal>
   );

@@ -1,54 +1,66 @@
-import AuthorProfile from '@/components/Common/AuthorProfile';
+import WriterProfile from '@/components/Common/WriterProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import { MARKDOWN_SYMBOL_REGEX } from '@/constants/regexPattern';
-import { PostData } from '@/pages/post/[postId]/mockData';
+import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
+import getElapsedTime from '@/utils/getElaspedTime';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
-import { MouseEvent } from 'react';
+import HashTag from '../HashTag';
+import { PostListDataType } from '../types';
 import styles from './PostPreview.module.scss';
 
 interface PostPreviewProps {
-  postData: PostData;
+  postData: PostListDataType;
 }
 
 export default function PostPreview({ postData }: PostPreviewProps) {
   const cn = classNames.bind(styles);
   const router = useRouter();
+
   const {
     id: postId,
-    author,
     createdAt,
     title,
     content,
-    emoji,
-    comments,
-    views,
-  } = postData;
+    emojis,
+    viewCount,
+    emojiCount,
+    commentCount,
+    hashTags,
+  } = postData.postListInfo.post;
 
-  // 날짜 형식 정해지면 삭제 or 변경 예정
-  const formattedCreatedAt = createdAt.slice(0, 10);
+  const formattedCreatedAt = getElapsedTime(createdAt);
 
-  const handleEmojiClick = (e: MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
-    console.log('좋아요 남기기 or 이모지 팝업 뜨고 이모지 남기기');
-  };
+  const { handleEmojiClick, isAddPending, isDeletePending } =
+    useSendEmojiRequest(postId as number, true);
 
   return (
     <div
       className={cn('wrapper')}
       onClick={() => router.push(`/post/${postId}`)}
     >
-      <AuthorProfile author={author} createdAt={formattedCreatedAt} />
+      <WriterProfile
+        writer={postData.postListInfo.writer}
+        createdAt={formattedCreatedAt}
+      />
       <div className={cn('content-wrapper')}>
         <div className={cn('title')}>{title}</div>
         <div className={cn('content')}>
           {content.replace(MARKDOWN_SYMBOL_REGEX, '').trim()}
         </div>
       </div>
+      <div className={cn('hashtag-container')}>
+        {hashTags.map((tag) => (
+          <HashTag key={tag.tagName} tag={tag} />
+        ))}
+      </div>
       <ReactionContainer
-        emoji={emoji}
-        commentsCount={comments.length}
-        views={views}
+        isPost
+        emojiCount={emojiCount}
+        commentCount={commentCount}
+        viewCount={viewCount}
+        emojis={emojis}
+        handleEmojiClick={handleEmojiClick}
       />
     </div>
   );

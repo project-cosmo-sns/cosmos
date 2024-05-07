@@ -1,53 +1,52 @@
 import classNames from 'classnames/bind';
 import styles from './SearchAuthorProfileList.module.scss';
 import SearchAuthorProfile from '../SearchAuthorProfile';
+import { SearchMemberResultData } from '@/components/Search/type';
+import { useQuery } from '@tanstack/react-query';
+import fetchData from '@/api/fetchData';
+import NoSearchResult from '@/components/Search/NoSearchResult';
+import LoadingSpinner from '@/components/Common/LoadingSpinner';
 
 const cn = classNames.bind(styles);
 
-export default function SearchAuthorProfileList() {
-  const mockData = [
-    {
-      id: '고유값1',
-      nickname: '사용자1',
-      profileImageUrl: '',
-      generation: 3,
-    },
-    {
-      id: '고유값2',
-      nickname: '사용자2',
-      profileImageUrl: '',
-      generation: 3,
-    },
-    {
-      id: '고유값3',
-      nickname: '사용자3',
-      profileImageUrl: '',
-      generation: 3,
-    },
-    {
-      id: '고유값4',
-      nickname: '사용자4',
-      profileImageUrl: '',
-      generation: 1,
-    },
-    {
-      id: '고유값5',
-      nickname: '사용자5',
-      profileImageUrl: '',
-      generation: 2,
-    },
-    {
-      id: '고유값6',
-      nickname: '사용자6',
-      profileImageUrl: '',
-      generation: 1,
-    },
-  ];
+interface SearchAuthorProfileListProps {
+  keyword: string;
+}
+
+export default function SearchAuthorProfileList({
+  keyword,
+}: SearchAuthorProfileListProps) {
+  const {
+    data: searchProfileResult,
+    isLoading,
+    isSuccess,
+  } = useQuery<SearchMemberResultData>({
+    queryKey: ['searchProfileList', keyword],
+    queryFn: () =>
+      fetchData({
+        param: `/search/member/name?order=DESC&page=1&take=4&keyword=${keyword}`,
+      }),
+  });
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (
+    !isSuccess ||
+    !searchProfileResult.data ||
+    searchProfileResult.data.length === 0
+  ) {
+    return <NoSearchResult />;
+  }
 
   return (
     <div className={cn('wrapper')}>
-      {mockData.map((author) => (
-        <SearchAuthorProfile key={author.id} author={author} />
+      {searchProfileResult.data.map((profileData) => (
+        <SearchAuthorProfile
+          key={profileData.member.id}
+          member={profileData.member}
+        />
       ))}
     </div>
   );

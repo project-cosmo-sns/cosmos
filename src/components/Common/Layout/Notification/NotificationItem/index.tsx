@@ -2,44 +2,73 @@ import classNames from 'classnames/bind';
 import styles from './NotificationItem.module.scss';
 import { ProfileIconDark } from '@/components/Common/IconCollection';
 import Image from 'next/image';
+import { NotificationData, notificationType } from '../type';
+import getElapsedTime from '@/utils/getElaspedTime';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import Modal from '@/components/Common/Layout/Modal';
+import FeedDetails from '@/components/Feed/FeedDetails/index';
 
 const cn = classNames.bind(styles);
 
-// 임시 타입
-type Notification = {
-  author: {
-    nickname: string;
-    profileImage: string | null;
-  };
-  text: string;
-  createdAt: string;
-  isRead: boolean;
-};
-
 type NotificationItemProps = {
-  data: Notification;
+  data: NotificationData;
 };
 
 export default function NotificationItem({ data }: NotificationItemProps) {
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
   const {
-    author: { nickname, profileImage },
-    text,
-    createdAt,
-    isRead,
+    sendMember,
+    notification: {
+      content,
+      notificationType: { type, feedId, postId },
+      isConfirmed,
+      createdAt,
+    },
   } = data;
+
+  const router = useRouter();
+
+  const handleNotificationClick = () => {
+    if (type === notificationType.CREATE_POST_COMMENT) {
+      router.push(`/post/${postId}/detail`);
+    }
+
+    if (type === notificationType.CREATE_FEED_COMMENT) {
+      setIsModalOpen(true);
+    }
+  };
+
+  const formattedCreatedAt = getElapsedTime(createdAt);
+
   return (
-    // 날짜 관련은 데이터 들어오는것 보고...! 추가로 수정하겠습니다
-    <div className={cn('notification-item')}>
-      {profileImage ? (
-        <Image src="profileImage" alt="프로필 이미지" />
-      ) : (
-        <ProfileIconDark width="54" height="54" />
+    <>
+      <div
+        className={cn('notification-item')}
+        onClick={handleNotificationClick}
+      >
+        {sendMember.profileImageUrl ? (
+          <Image src={sendMember.profileImageUrl} alt="프로필 이미지" />
+        ) : (
+          <ProfileIconDark width="54" height="54" />
+        )}
+        <p>
+          <strong>{content}</strong>
+          <span>{formattedCreatedAt}</span>
+        </p>
+        <span className={cn('notification-dot', { isConfirmed })} />
+      </div>
+      {type === notificationType.CREATE_FEED_COMMENT && isModalOpen && (
+        <Modal
+          toggleModal={() => setIsModalOpen(false)}
+          modalVisible={isModalOpen}
+          cssModalSize={cn('feed-detail-modalSize')}
+          cssComponentDisplay={cn('feed-detail-componentDisplay')}
+        >
+          <FeedDetails feedId={feedId!} />
+        </Modal>
       )}
-      <p>
-        <strong>{nickname}</strong>님이 {text} 했습니다.
-        <span>{createdAt}</span>
-      </p>
-      <span className={cn('notification-dot', { isRead })} />
-    </div>
+    </>
   );
 }

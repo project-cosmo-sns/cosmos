@@ -101,6 +101,11 @@ textarea {
   }
 }
 
+.wmde-markdown {
+  line-height: 240%;
+  @include markdown-style;
+}
+
 textarea::placeholder,
 input::placeholder {
   @include font-style(1.6rem, $gray-01, 600);

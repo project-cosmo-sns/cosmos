@@ -19,29 +19,47 @@ $glass-02: rgba(88, 92, 109, 0.4);
 
 $glass-edge-01: 1px solid rgba(255, 255, 255, 0.15);
 
+$red-01: #ff5151;
+$red-02: #ffeaea;
+
+$orange-01: #ff7512;
+$orange-02: #ffe1cc;
+
+$yellow-01: #e2b000;
+$yellow-02: #fff1be;
+
+$green-01: #65c900;
+$green-02: #ddf2c8;
+
+$blue-01: #0098ff;
+$blue-02: #d5eeff;
+
+$purple-01: #9747ff;
+$purple-02: #f0e4ff;
+
 $hashtag-colors: (
-  hashtag1: (
-    #ffeaea,
-    #ff5151,
+  RED: (
+    $red-02,
+    $red-01,
   ),
-  hashtag2: (
-    #ffe1cc,
-    #ff7512,
+  ORANGE: (
+    $orange-02,
+    $orange-01,
   ),
-  hashtag3: (
-    #fff1be,
-    #e2b000,
+  YELLOW: (
+    $yellow-02,
+    $yellow-01,
   ),
-  hashtag4: (
-    #ddf2c8,
-    #65c900,
+  GREEN: (
+    $green-02,
+    $green-01,
   ),
-  hashtag5: (
-    #d5eeff,
-    #0098ff,
+  BLUE: (
+    $blue-02,
+    $blue-01,
   ),
-  hashtag6: (
-    #f0e4ff,
-    #9747ff,
+  PURPLE: (
+    $purple-02,
+    $purple-01,
   ),
 );

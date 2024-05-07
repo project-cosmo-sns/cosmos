@@ -8,6 +8,19 @@
   background: rgba(0, 0, 0, 0.6);
   z-index: 99999;
 
+  .x {
+    position: absolute;
+    cursor: pointer;
+    top: 20px;
+    right: 20px;
+    z-index: 1;
+
+    @media (min-width: 768px) {
+      top: 32px;
+      right: 30px;
+    }
+  }
+
   .wrapper {
     @include glass-02;
     display: flex;
@@ -16,20 +29,14 @@
     width: 100%;
     height: 100%;
     padding: {
-      top: 30px;
+      top: 70px;
       bottom: 30px;
       right: 20px;
       left: 20px;
     }
     @media (min-width: 768px) {
       border-radius: 10px;
-    }
-
-    .x {
-      position: absolute;
-      cursor: pointer;
-      top: 20px;
-      right: 20px;
+      padding-top: 30px;
     }
 
     .title {

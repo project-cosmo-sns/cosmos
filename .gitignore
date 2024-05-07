@@ -25,6 +25,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# env files
+.env
+
 # local env files
 .env*.local
 
@@ -41,3 +44,5 @@ next-env.d.ts
 .cert.pem
 .key.pem
 certificates
+
+.env

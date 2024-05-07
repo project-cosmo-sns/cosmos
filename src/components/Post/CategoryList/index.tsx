@@ -1,33 +1,30 @@
-import { CategoryType } from '@/pages/post/[postId]/mockData';
-import CategoryFlag from '../CategoryFlag';
+import { CATEGORY_LIST } from '@/constants/categoryList';
 import classNames from 'classnames/bind';
+import CategoryFlag from '../CategoryFlag';
 import styles from './CategoryList.module.scss';
 
 interface CategoryListProps {
-  selectedCategory: CategoryType | '전체';
-  setSelectedCategory: (args: CategoryType | '전체') => void;
+  selectedCategory: string;
+  setSelectedCategory: (args: string) => void;
+  isPostWrite?: boolean;
 }
+
+const cn = classNames.bind(styles);
 
 export default function CategoryList({
   selectedCategory,
   setSelectedCategory,
+  isPostWrite = false,
 }: CategoryListProps) {
-  const cn = classNames.bind(styles);
-  // 임시로 배열로 추가. 추후 카테고리 키 값 정해지면 객체로 수정 예정
-  const CATEGORY_LIST: CategoryType[] = [
-    '공지사항',
-    '이벤트',
-    '특강',
-    '정보공유',
-    '오늘의 질문',
-  ];
   return (
     <div className={cn('category-box')}>
-      <CategoryFlag
-        category="전체"
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-      />
+      {!isPostWrite && (
+        <CategoryFlag
+          category="전체"
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+        />
+      )}
       {CATEGORY_LIST.map((category) => (
         <CategoryFlag
           key={category}

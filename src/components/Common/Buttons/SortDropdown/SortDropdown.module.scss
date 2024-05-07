@@ -4,14 +4,11 @@
 
 .dropdown-expand-button {
   @include flex-arrange(space-between, center);
-  @include font-style(1.3rem, $black-01, 600);
-
-  background-color: $gray-03;
+  @include font-style(1.3rem, $white-01, 600);
+  border-radius: 10px;
+  border: $glass-edge-01;
   width: 84px;
   height: 32px;
-  border-radius: 5px;
-  border: none;
-
   padding-left: 15px;
   padding-right: 8px;
   position: relative;
@@ -38,10 +35,10 @@
 }
 
 .expanded-dropdown-list {
-  @include font-style(1.3rem, $black-01, 600);
+  backdrop-filter: blur(115px);
+  @include font-style(1.3rem, $white-01, 600);
   @include flex-arrange(flex-start, center);
-
-  background-color: $gray-03;
+  @include glass-02;
   width: 84px;
   height: 32px;
   border: none;

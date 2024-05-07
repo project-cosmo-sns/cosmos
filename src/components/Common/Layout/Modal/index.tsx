@@ -14,6 +14,8 @@ interface ModalType {
   className?: string;
 }
 
+const cn = classNames.bind(styles);
+
 /**
  * 모달 레이아웃 컴포넌트
  * @param {Object} props - 컴포넌트에 전달되는 props
@@ -35,20 +37,26 @@ export default function Modal({
   cssComponentDisplay,
   className,
 }: ModalType) {
-  const cn = classNames.bind(styles);
   return (
     <div className="Modal">
       {modalVisible && (
         <ModalPortal>
           <div className={cn('container', className)}>
+            <div
+              role="presentation"
+              onClick={() => toggleModal && toggleModal(!modalVisible)}
+            >
+              <Icon.XIcon
+                className={cn('x')}
+                width="18"
+                height="18"
+                onClick={() => {
+                  toggleModal && toggleModal(!modalVisible);
+                }}
+              />
+            </div>
             <div className={cn(cssModalSize)}>
               <div className={cn('wrapper')}>
-                <div
-                  role="presentation"
-                  onClick={() => toggleModal && toggleModal(!modalVisible)}
-                >
-                  <Icon.XIcon className={cn('x')} width="18" height="18" />
-                </div>
                 {title && (
                   <div className={cn('title')}>
                     <span>{title}</span>

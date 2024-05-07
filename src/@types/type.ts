@@ -19,3 +19,15 @@ export interface AuthFormProps {
   generation: string;
   image: string;
 }
+
+export interface EditCommentType {
+  editedComment: string;
+}
+
+export type EmojiCode = 'HEART' | 'THUMBSUP' | 'LAUGH' | 'SAD' | 'CHECK' | 'ME';
+
+export interface EmojiType {
+  emojiCode: EmojiCode;
+  emojiCount: number;
+  isClicked: boolean;
+}

@@ -1,20 +1,24 @@
-import { Author } from '@/pages/post/[postId]/mockData';
+import { Writer } from '@/components/Feed/types';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import styles from './AuthorProfile.module.scss';
+import { useRouter } from 'next/router';
 import TermBadge from '../Badge/TermBadge';
+import styles from './WriterProfile.module.scss';
 
-interface AuthorProfileProps {
-  author: Author;
+interface WriterProfileProps {
+  writer: Writer;
   createdAt: string;
 }
 
-export default function AuthorProfile({
-  author,
+const cn = classNames.bind(styles);
+
+export default function WriterProfile({
+  writer,
   createdAt,
-}: AuthorProfileProps) {
-  const cn = classNames.bind(styles);
-  const { nickname, profileImageUrl, generation } = author;
+}: WriterProfileProps) {
+  const router = useRouter();
+  const { id: memberId, nickname, profileImageUrl, generation } = writer;
+
   return (
     <div className={cn('wrapper')}>
       <Image
@@ -23,13 +27,19 @@ export default function AuthorProfile({
         alt="profile_image"
         width={40}
         height={40}
-        onClick={() => console.log('프로필모달 열기')}
+        onClick={(event) => {
+          event.stopPropagation();
+          router.push(`/profile?memberId=${memberId}`);
+        }}
       />
       <div className={cn('info')}>
         <button
           type="button"
           className={cn('nickname')}
-          onClick={() => console.log('프로필모달 열기')}
+          onClick={(event) => {
+            event.stopPropagation();
+            router.push(`/profile?memberId=${memberId}`);
+          }}
         >
           {nickname}
         </button>
