@@ -19,3 +19,12 @@ export interface AuthFormProps {
   generation: string;
   image: string;
 }
+
+export type metaType = {
+  page: number;
+  take: number;
+  totalCount: number;
+  pageCount: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
+};
