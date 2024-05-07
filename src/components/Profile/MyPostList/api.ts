@@ -18,5 +18,5 @@ export default async function getMyPostList(
     },
     // withCredentials: true,
   });
-  return postData.data;
+  return postData;
 }

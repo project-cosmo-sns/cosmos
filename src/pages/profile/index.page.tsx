@@ -13,16 +13,21 @@ import { fetchMemberData } from './api';
 import { GetServerSideProps } from 'next';
 import { FeedDetailType } from '@/components/Feed/types';
 import MyFeedList from '@/components/Profile/MyFeedList';
-import MyPostList from '@/components/Profile/MyPostList';
-import { PostListDataType } from '@/components/Post/types';
+// import MyPostList from '@/components/Profile/MyPostList';
+import {
+  PostInfoType,
+  PostListDataType,
+  PostListType,
+} from '@/components/Post/types';
 
 import { SortType } from '@/constants/sortType';
+import MyPostList from '@/components/Profile/MyPostList';
 
 const cn = classNames.bind(styles);
 
 interface MemberDataContainerPropsType {
   myFeedList: FeedDetailType[];
-  myPostList: PostListDataType[];
+  myPostList: PostListType;
   memberData: MemberDataType;
   error?: boolean;
 }
@@ -38,7 +43,6 @@ export default function MemberDataContainer({
   memberData,
   error,
 }: MemberDataContainerPropsType) {
-  console.log('1memberData', memberData);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
@@ -47,17 +51,11 @@ export default function MemberDataContainer({
   //   'all' | 'followed' | 'myGeneration'
   // >('all');
 
-  const [selectedSort, setSelectedSort] = useState<SortType>('ALL');
+  // const [selectedSort, setSelectedSort] = useState<SortType>('ALL');
 
   // 현재는 다른 유저일 경우 인증/미인증을 알 수 없어서 전부 미인증으로 뜨는 상태.
   // api를 새로 내려받게 되면 다시 처리할 것.
-
-  // 왜 이게 null 처리가 자꾸 되는걸까? memberData 왜 없지?
-  // 다른 사용자의 경우엔 아직 isAuthorized 값이 없어서?. -> 생겼넴;
-  // 왜 memberData가 null로 내려오는 경우가 생겼을까?
   if (!memberData || !memberData.isAuthorized || error) {
-    // ..... endpoint 바꾸니까 memberData가 잘 내려온다.
-    // 임시로 바꿔서 받아오기로 함.
     console.log('memberData: ', memberData);
     return (
       <div>
@@ -84,7 +82,7 @@ export default function MemberDataContainer({
   if (!memberData) {
     return <div>Lodading~~~~~</div>;
   }
-
+  console.log('myPostList: ', myPostList);
   const renderContent = () => {
     switch (selectedOption) {
       case 'feed':
