@@ -54,5 +54,3 @@ export default function useInfiniteScroll({
 
   return { data, fetchNextPage, hasNextPage, ref, ...rest };
 }
-
-// QueryFunction<FollowDataProps, QueryKey, unknown>

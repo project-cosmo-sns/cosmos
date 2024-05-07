@@ -28,8 +28,6 @@ type FollowListType = {
  * @param {boolean} modalOpen - 모달 on/off 여부 변수
  * @param {boolean} isFollowButton - 팔로우 버튼이 필요한지 여부/ true: 팔로우 버튼 , false: 삭제 버튼
  * @returns {JSX.Element} 팔로워 또는 팔로잉 리스트 JSX
- *
- *
  */
 
 export default function FollowList({ followListProps }: FollowListType) {
