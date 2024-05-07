@@ -11,8 +11,6 @@ export async function fetchMemberData(context: GetServerSidePropsContext) {
   const cookies = req.headers.cookie || '';
   const { memberId } = context.query;
 
-  // endpoint가 잘못됐을 가능성?
-  // 아니 get 해올 때 cookie를 포스트, 피드에도 보내야하네....
   const endpoint = memberId ? `profile/${memberId}` : '/profile/mine';
 
   try {
@@ -23,8 +21,8 @@ export async function fetchMemberData(context: GetServerSidePropsContext) {
     });
 
     const memberData: MemberDataType = await res.data;
-    // 임시로 endpoint 바꾼 상태인 데이터
     const myFeedList: FeedListType = await getMyFeedList(context);
+    // 포스트 리스트는 에러 나는중...!
     const myPostList: PostListType = await getMyPostList(context);
 
     return {

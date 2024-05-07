@@ -39,7 +39,7 @@ export default function ProfileEditModal({
   ): Promise<string> => {
     try {
       const imageUrlResponse = await GetProfileImageUrl(file);
-      return imageUrlResponse.uploadURL;
+      return imageUrlResponse;
     } catch (error) {
       console.error('Image upload error:', error);
       return '';
@@ -108,9 +108,7 @@ export default function ProfileEditModal({
         >
           <form
             className={cn('profile-edit-Form')}
-            onSubmit={handleSubmit(() =>
-              handleProfileSubmit(introduce, imageUrl),
-            )}
+            onSubmit={handleSubmit(() => handleProfileSubmit())}
           >
             <div className={cn('profile-image-edit')}>
               <ImageInput
@@ -146,7 +144,7 @@ export default function ProfileEditModal({
             <div className={cn('edit-button')}>
               <DefaultButton
                 onClick={() => {
-                  handleProfileSubmit(introduce, imageUrl);
+                  handleProfileSubmit();
                 }}
                 buttonType="submit"
                 size="modal"

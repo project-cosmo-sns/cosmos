@@ -8,7 +8,9 @@ export default async function getMyFeedList(
   const cookies = req.headers.cookie || '';
   const { memberId } = context.query;
 
-  const feedData = await instance.get('/profile/mine/feed', {
+  const endpoint = memberId ? `profile/${memberId}/feed` : '/profile/mine/feed';
+
+  const feedData = await instance.get(endpoint, {
     headers: {
       Cookie: cookies,
     },
