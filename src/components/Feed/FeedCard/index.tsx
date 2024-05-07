@@ -2,20 +2,15 @@ import Image from 'next/image';
 import { Dispatch, SetStateAction, useState } from 'react';
 import classNames from 'classnames/bind';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import AuthorProfile from '@/components/Common/AuthorProfile';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import Modal from '@/components/Common/Layout/Modal';
-import { deleteFeed, Edits } from '@/components/Feed/FeedCard/api';
+import { Edits } from '@/components/Feed/FeedCard/api';
 import styles from './FeedCard.module.scss';
 import { FeedDetailType } from '../types';
 import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
 import fetchData from '@/api/fetchData';
-import {
-  QueryClient,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import WriterProfile from '@/components/Common/WriterProfile';
 
 interface FeedCardTypes {
   feedData: FeedDetailType;
@@ -101,7 +96,7 @@ export default function FeedCard({
       <div className={cn('wrapper')}>
         <div className={cn('user-content')} onClick={onClick}>
           <div className={cn('profile-content-wrapper')}>
-            <AuthorProfile author={feedData.writer} createdAt={createdAt} />
+            <WriterProfile writer={feedData.writer} createdAt={createdAt} />
             {isEdit ? (
               <form onSubmit={handleSubmit(onSubmit)}>
                 <textarea
