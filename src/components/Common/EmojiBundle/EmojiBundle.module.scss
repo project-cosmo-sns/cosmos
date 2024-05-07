@@ -1,49 +1,31 @@
-.emoji-container {
-  background-color: #404559;
-  border-radius: 10px;
-  position: absolute;
-  top: 30px;
-  .emoji-wrapper {
-    display: inline-flex;
-    margin: 4px;
-    gap: 4px;
-    align-items: center;
-    .emoji-item {
-      display: inline-block;
-      border-radius: 10px;
-      padding: 8px 8px;
-      cursor: pointer;
-
-      &:hover {
-        background-color: #585c6d;
-      }
-    }
-  }
+.wrapper {
+  @include flex-arrange(center, flex-start);
+  flex-direction: column;
+  gap: 20px;
 }
 
-.forDetails {
-  .details-wrapper {
-    display: flex;
-    gap: 4px;
-  }
+.emoji-container {
+  @include flex-arrange;
+  gap: 4px;
+}
 
-  .details-item-wrapper {
-    padding: 4px 9px;
-    background-color: #212531;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: transform 0.2s ease-in-out;
+.container {
+  @include flex-arrange;
+  flex-direction: row;
+  gap: 12px;
+  padding-left: 4px;
+}
 
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
+.reaction {
+  @include flex-arrange;
+  @include font-style(1.2rem, $gray-01, 400);
+  gap: 6px;
+}
 
-  .details-item {
-    width: 30px;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    color: $white-01;
+@media (min-width: 768px) {
+  .wrapper {
+    @include flex-arrange(space-between, center);
+    flex-direction: row;
+    width: 100%;
   }
 }

@@ -1,3 +1,5 @@
+import { HashTagType } from '@/components/Post/types';
+
 // 임시 데이터 및 타입
 export interface Author {
   id: string;
@@ -5,13 +7,6 @@ export interface Author {
   generation: number;
   profileImageUrl?: string;
 }
-
-export type CategoryType =
-  | '공지사항'
-  | '이벤트'
-  | '특강'
-  | '정보공유'
-  | '오늘의 질문';
 
 export interface Comment {
   id: string;
@@ -29,12 +24,12 @@ export interface Tag {
 
 export interface PostData {
   id: string;
-  category: CategoryType;
+  category: string;
   title: string;
   author: Author;
   createdAt: string;
   content: string;
-  tags: Tag[];
+  tags: HashTagType[];
   emoji: number;
   views: number;
   comments: Comment[];
@@ -50,7 +45,7 @@ const mockData: PostData[] = [
       nickname: '코스모스',
       generation: 3,
     },
-    createdAt: '2024-04-15T17:29:56',
+    createdAt: '2024-05-01T08:58:29.000Z',
     content: `# Markdown Example
     
     마크다운 문법 테스트 본문
@@ -111,18 +106,18 @@ def hello():
   - [ ] Task 2
 `,
     tags: [
-      { name: '#코스모스', color: 'hashtag1' },
-      { name: '#포스트', color: 'hashtag2' },
-      { name: '#해시태그', color: 'hashtag3' },
-      { name: '#예시', color: 'hashtag4' },
-      { name: '#입니다', color: 'hashtag5' },
+      { tagName: '코스모스', color: 'RED' },
+      { tagName: '포스트', color: 'ORANGE' },
+      { tagName: '해시태그', color: 'YELLOW' },
+      { tagName: '예시', color: 'GREEN' },
+      { tagName: '입니다', color: 'BLUE' },
     ],
     emoji: 3,
     views: 5,
     comments: [
       {
         id: 'tmpcommentId2',
-        createdAt: '2024-04-18T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId',
           nickname: '코스모스',
@@ -135,7 +130,7 @@ def hello():
       },
       {
         id: 'tmpcommentId2',
-        createdAt: '2024-04-17T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId2',
           nickname: 'cosmos',
@@ -156,7 +151,7 @@ def hello():
       nickname: '코스모스',
       generation: 3,
     },
-    createdAt: '2024-04-15T17:29:56',
+    createdAt: '2024-05-02T08:58:29.000Z',
     content: `## 🕺 스프린터 브이로그 주인공 모집  💃
 <br/>
 @스프린터
@@ -176,18 +171,18 @@ def hello():
 <br/><br/>
 `,
     tags: [
-      { name: '#코스모스', color: 'hashtag1' },
-      { name: '#포스트', color: 'hashtag2' },
-      { name: '#해시태그', color: 'hashtag3' },
-      { name: '#예시', color: 'hashtag4' },
-      { name: '#입니다', color: 'hashtag5' },
+      { tagName: '코스모스', color: 'RED' },
+      { tagName: '포스트', color: 'ORANGE' },
+      { tagName: '해시태그', color: 'YELLOW' },
+      { tagName: '예시', color: 'GREEN' },
+      { tagName: '입니다', color: 'BLUE' },
     ],
     emoji: 3,
     views: 5,
     comments: [
       {
         id: 'tmpcommentId1',
-        createdAt: '2024-04-18T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId4',
           nickname: '코스모스',
@@ -200,7 +195,7 @@ def hello():
       },
       {
         id: 'tmpcommentId2',
-        createdAt: '2024-04-17T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId2',
           nickname: 'cosmos',
@@ -221,7 +216,7 @@ def hello():
       nickname: '코스모스',
       generation: 3,
     },
-    createdAt: '2024-04-15T17:29:56',
+    createdAt: '2024-04-02T08:58:29.000Z',
     content: `## 📢 심화 프로젝트 발표 세션 및 수료식 일정 안내
 @스프린터  파트4 주요일정에 대해 안내드립니다
 
@@ -240,18 +235,18 @@ def hello():
 
 `,
     tags: [
-      { name: '#코스모스', color: 'hashtag1' },
-      { name: '#포스트', color: 'hashtag2' },
-      { name: '#해시태그', color: 'hashtag3' },
-      { name: '#예시', color: 'hashtag4' },
-      { name: '#입니다', color: 'hashtag5' },
+      { tagName: '코스모스', color: 'RED' },
+      { tagName: '포스트', color: 'ORANGE' },
+      { tagName: '해시태그', color: 'YELLOW' },
+      { tagName: '예시', color: 'GREEN' },
+      { tagName: '입니다', color: 'BLUE' },
     ],
     emoji: 3,
     views: 5,
     comments: [
       {
         id: 'tmpcommentId1',
-        createdAt: '2024-04-18T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId2',
           nickname: '코스모스',
@@ -264,7 +259,7 @@ def hello():
       },
       {
         id: 'tmpcommentId1',
-        createdAt: '2024-04-17T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId2',
           nickname: 'cosmos',
@@ -285,7 +280,7 @@ def hello():
       nickname: '코스모스',
       generation: 3,
     },
-    createdAt: '2024-04-15T17:29:56',
+    createdAt: '2024-05-04T13:58:29.000Z',
     content: `## 3차 오프라인 행사 안내
 스프린터분들과 중급 프로젝트 회포를 풀 수 있는 시간이 되길 바라며,
 3차 오프라인 행사 안내 드립니다(보고 싶어요 여러분😍 )!
@@ -298,18 +293,18 @@ def hello():
 [3차 오프라인 행사 신청서](https://forms.gle/UYN8kTK32XueXLwS7)를 제출하고 DM 부탁드려요!
 `,
     tags: [
-      { name: '#코스모스', color: 'hashtag1' },
-      { name: '#포스트', color: 'hashtag2' },
-      { name: '#해시태그', color: 'hashtag3' },
-      { name: '#예시', color: 'hashtag4' },
-      { name: '#입니다', color: 'hashtag5' },
+      { tagName: '코스모스', color: 'RED' },
+      { tagName: '포스트', color: 'ORANGE' },
+      { tagName: '해시태그', color: 'YELLOW' },
+      { tagName: '예시', color: 'GREEN' },
+      { tagName: '입니다', color: 'BLUE' },
     ],
     emoji: 3,
     views: 5,
     comments: [
       {
         id: 'tmpcommentId1',
-        createdAt: '2024-04-18T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId',
           nickname: '코스모스',
@@ -322,7 +317,7 @@ def hello():
       },
       {
         id: 'tmpcommentId2',
-        createdAt: '2024-04-17T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId2',
           nickname: 'cosmos',
@@ -343,7 +338,7 @@ def hello():
       nickname: '코스모스',
       generation: 3,
     },
-    createdAt: '2024-04-15T17:29:56',
+    createdAt: '2024-05-02T08:58:29.000Z',
     content: `## 🕺 스프린터 브이로그 주인공 모집  💃
 <br/>
 @스프린터
@@ -363,18 +358,18 @@ def hello():
 <br/><br/>
 `,
     tags: [
-      { name: '#코스모스', color: 'hashtag1' },
-      { name: '#포스트', color: 'hashtag2' },
-      { name: '#해시태그', color: 'hashtag3' },
-      { name: '#예시', color: 'hashtag4' },
-      { name: '#입니다', color: 'hashtag5' },
+      { tagName: '코스모스', color: 'RED' },
+      { tagName: '포스트', color: 'ORANGE' },
+      { tagName: '해시태그', color: 'YELLOW' },
+      { tagName: '예시', color: 'GREEN' },
+      { tagName: '입니다', color: 'BLUE' },
     ],
     emoji: 3,
     views: 5,
     comments: [
       {
         id: 'tmpcommentId1',
-        createdAt: '2024-04-18T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId',
           nickname: '코스모스',
@@ -387,7 +382,7 @@ def hello():
       },
       {
         id: 'tmpcommentId2',
-        createdAt: '2024-04-17T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId2',
           nickname: 'cosmos',
@@ -408,7 +403,7 @@ def hello():
       nickname: '코스모스',
       generation: 3,
     },
-    createdAt: '2024-04-15T17:29:56',
+    createdAt: '2024-05-02T08:58:29.000Z',
     content: `## 💸 최종 프로젝트 AWS 비용 지원 안내
 <br>
 안녕하세요. @백엔드 @디자이너 @스프린터  여러분!
@@ -426,18 +421,18 @@ def hello():
 <br/><br/>
 `,
     tags: [
-      { name: '#코스모스', color: 'hashtag1' },
-      { name: '#포스트', color: 'hashtag2' },
-      { name: '#해시태그', color: 'hashtag3' },
-      { name: '#예시', color: 'hashtag4' },
-      { name: '#입니다', color: 'hashtag5' },
+      { tagName: '코스모스', color: 'RED' },
+      { tagName: '포스트', color: 'ORANGE' },
+      { tagName: '해시태그', color: 'YELLOW' },
+      { tagName: '예시', color: 'GREEN' },
+      { tagName: '입니다', color: 'BLUE' },
     ],
     emoji: 3,
     views: 5,
     comments: [
       {
         id: 'tmpcommentId1',
-        createdAt: '2024-04-18T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId',
           nickname: '코스모스',
@@ -450,7 +445,7 @@ def hello():
       },
       {
         id: 'tmpcommentId2',
-        createdAt: '2024-04-17T17:29:56',
+        createdAt: '2024-05-02T08:58:29.000Z',
         author: {
           id: 'tmpuserId2',
           nickname: 'cosmos',

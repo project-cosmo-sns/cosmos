@@ -43,6 +43,9 @@ body {
   margin: 0;
   font-family: 'Pretendard', Helvetica;
   font-size: 1.6rem;
+  background-image: url('/images/cosmos.png');
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 button {
@@ -96,6 +99,11 @@ textarea {
     color: $primary-02;
     text-decoration: dashed;
   }
+}
+
+.wmde-markdown {
+  line-height: 240%;
+  @include markdown-style;
 }
 
 textarea::placeholder,

@@ -1,42 +1,49 @@
-import {
-  CategoryType,
-  PostData,
-  Tag,
-  mockData,
-} from '@/pages/post/[postId]/mockData';
+import fetchData from '@/api/fetchData';
+import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { useEffect, useState } from 'react';
 import CategoryList from '../CategoryList';
 import HashTagInput from '../HashTag/HashTagInput';
 import MarkdownEditor from '../MarkdownEditor';
+import { PostDetailType, PostRequestType } from '../types';
 import styles from './PostEditor.module.scss';
 
 interface PostEditorProps {
   postId: string;
-  setData: (args: PostData) => void;
+  postData: PostRequestType;
+  mergeState: (args: Partial<PostRequestType>) => void;
 }
 
 const cn = classNames.bind(styles);
 
-export default function PostEditor({ postId, setData }: PostEditorProps) {
-  // 임시로 기본값 postId와 같은 포스트 mockData에서 불러옴. 추후 요청해서 받아오도록 수정
-  const [titleValue, setTitleValue] = useState('');
-  const [contentValue, setContentValue] = useState<string | undefined>();
-  const [hashtags, setHashtags] = useState<Tag[]>([]);
+export default function PostEditor({
+  postId,
+  postData,
+  mergeState,
+}: PostEditorProps) {
+  const [selectedCategory, setSelectedCategory] = useState('공지사항');
 
-  const [selectedCategory, setSelectedCategory] = useState<
-    CategoryType | '전체'
-  >('공지사항');
+  const { data, isSuccess } = useQuery<PostDetailType>({
+    queryKey: ['postData', postId],
+    queryFn: () =>
+      fetchData({
+        param: `/post/${postId}/detail`,
+      }),
+    enabled: !!postId,
+  });
 
   useEffect(() => {
-    if (postId) {
-      const postData = mockData.filter((data) => data.id === postId)[0];
-      setSelectedCategory(postData.category);
-      setTitleValue(postData.title);
-      setContentValue(postData.content);
-      setHashtags(postData.tags);
+    if (postId && isSuccess) {
+      const { post } = data.postDetail;
+      const { title, content, category, hashTags } = post;
+      setSelectedCategory(post.category);
+      mergeState({ title, content, category, hashTags });
     }
-  }, [postId]);
+  }, [postId, isSuccess]);
+
+  useEffect(() => {
+    mergeState({ category: selectedCategory });
+  }, [selectedCategory]);
 
   return (
     <div className={cn('wrapper')}>
@@ -45,21 +52,28 @@ export default function PostEditor({ postId, setData }: PostEditorProps) {
         <CategoryList
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
+          isPostWrite
         />
       </div>
       <div className={cn('container')}>
         <span className={cn('subtitle')}>글 작성</span>
         <input
           className={cn('title', 'input')}
-          value={titleValue}
-          onChange={(event) => setTitleValue(event.target.value)}
+          value={postData.title}
+          onChange={(event) => mergeState({ title: event.target.value })}
           placeholder="제목을 입력하세요"
         />
-        <MarkdownEditor content={contentValue} setContent={setContentValue} />
+        <MarkdownEditor
+          content={postData.content}
+          setContent={(args) => mergeState({ content: args })}
+        />
       </div>
       <div className={cn('container')}>
         <span className={cn('subtitle')}>해시태그 입력</span>
-        <HashTagInput hashtags={hashtags} setHashtags={setHashtags} />
+        <HashTagInput
+          hashtags={postData.hashTags}
+          setHashtags={(args) => mergeState({ hashTags: args })}
+        />
       </div>
     </div>
   );

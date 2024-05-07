@@ -18,11 +18,33 @@
       gap: 12px;
       color: $white-01;
 
+      .icon-wrapper {
+        display: flex;
+        gap: 24px;
+      }
+
       .profile-content-wrapper {
         display: flex;
         flex-direction: column;
         gap: 16px;
         align-items: flex-start;
+
+        .text {
+          @include font-style(1.6rem);
+          width: 100%;
+          background-color: $black-03;
+          padding: 16px;
+          border-radius: 5px;
+          resize: none;
+        }
+        .error {
+          position: absolute;
+          right: 16px;
+          bottom: 99px;
+          font-size: 1.1rem;
+          color: #ed1c24;
+          padding-left: 16px;
+        }
       }
 
       .upload-image-wrapper {

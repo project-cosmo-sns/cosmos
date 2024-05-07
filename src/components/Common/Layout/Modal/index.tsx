@@ -3,7 +3,6 @@ import styles from './Modal.module.scss';
 import classNames from 'classnames/bind';
 import * as Icon from '@/components/Common/IconCollection/index';
 import ModalPortal from './ModalPortal';
-import { useRouter } from 'next/router';
 
 interface ModalType {
   children: ReactNode;
@@ -14,6 +13,8 @@ interface ModalType {
   cssComponentDisplay: string;
   className?: string;
 }
+
+const cn = classNames.bind(styles);
 
 /**
  * 모달 레이아웃 컴포넌트
@@ -36,26 +37,26 @@ export default function Modal({
   cssComponentDisplay,
   className,
 }: ModalType) {
-  const cn = classNames.bind(styles);
-  const router = useRouter();
   return (
     <div className="Modal">
       {modalVisible && (
         <ModalPortal>
           <div className={cn('container', className)}>
+            <div
+              role="presentation"
+              onClick={() => toggleModal && toggleModal(!modalVisible)}
+            >
+              <Icon.XIcon
+                className={cn('x')}
+                width="18"
+                height="18"
+                onClick={() => {
+                  toggleModal && toggleModal(!modalVisible);
+                }}
+              />
+            </div>
             <div className={cn(cssModalSize)}>
               <div className={cn('wrapper')}>
-                <div
-                  role="presentation"
-                  onClick={() => toggleModal && toggleModal(!modalVisible)}
-                >
-                  <Icon.XIcon
-                    className={cn('x')}
-                    width="18"
-                    height="18"
-                    onClick={() => router.push('/')}
-                  />
-                </div>
                 {title && (
                   <div className={cn('title')}>
                     <span>{title}</span>

@@ -8,6 +8,7 @@
 
 .profile-image {
   grid-area: image;
+  cursor: pointer;
 }
 
 .info {
@@ -19,6 +20,7 @@
   @include font-style(1.4rem, $white-01, 600);
   // @include font-style(1.4rem, $white, 600); 로 변경 예정
   grid-area: nickname;
+  cursor: pointer;
   text-align: left;
 }
 
