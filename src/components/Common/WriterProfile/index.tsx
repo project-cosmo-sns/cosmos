@@ -1,9 +1,9 @@
 import { Writer } from '@/components/Feed/types';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import styles from './WriterProfile.module.scss';
-import TermBadge from '../Badge/TermBadge';
 import { useRouter } from 'next/router';
+import TermBadge from '../Badge/TermBadge';
+import styles from './WriterProfile.module.scss';
 
 interface WriterProfileProps {
   writer: Writer;

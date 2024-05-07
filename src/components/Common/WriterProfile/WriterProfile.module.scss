@@ -9,6 +9,8 @@
 .profile-image {
   grid-area: image;
   cursor: pointer;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .info {
