@@ -12,7 +12,7 @@ export default function getUploadImageButton(): ICommandBase<string> {
           disabled={disabled}
           onClick={() => console.log('이미지 업로드')}
         >
-          Upload Image
+          <img src="/images/imageIcon.svg" alt="image_upload" />
         </button>
       );
     },
