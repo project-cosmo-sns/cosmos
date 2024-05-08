@@ -1,4 +1,4 @@
-import { metaType } from '@/@types/type';
+import { EmojiType, metaType } from '@/@types/type';
 
 export interface Writer {
   id: number;
@@ -16,6 +16,7 @@ export interface Feed {
   createdAt: string;
   imageUrls: string[];
   isMine: boolean;
+  emojis: EmojiType[];
 }
 
 export interface FeedDetailType {
@@ -34,6 +35,7 @@ export interface Comment {
   heartCount: number;
   id: number;
   isHearted: boolean;
+  isMine: boolean;
 }
 
 export interface CommentDetailType {

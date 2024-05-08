@@ -43,6 +43,7 @@ export default function CommentCard({
     heartCount,
     isHearted,
     createdAt,
+    isMine,
   } = commentData;
 
   const [isCommentEditing, setIsCommentEditing] = useState(false);
@@ -97,11 +98,14 @@ export default function CommentCard({
             )}
             {reactionCount}
           </div>
-          <ActionButtons
-            isButtonShow={isMyComment}
-            handleClickEdit={handleClickEditComment}
-            handleClickDelete={handleClickDeleteComment}
-          />
+          {isMine && (
+            <ActionButtons
+              isButtonShow={isMyComment}
+              handleClickEdit={handleClickEditComment}
+              handleClickDelete={handleClickDeleteComment}
+            />
+          )}
+
           {isDeleteModalOpen && (
             <Modal
               title="삭제 모달"

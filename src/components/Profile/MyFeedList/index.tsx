@@ -27,8 +27,6 @@ export default function MyFeedList({ feedList }: MyFeedListType) {
           <FeedCard
             key={item.feed.id}
             feedData={item}
-            modalVisible={isModalOpen}
-            toggleModal={setIsModalOpen}
             hasPadding
             forDetails={false}
             onClick={() => handleClick(item.feed.id)}
