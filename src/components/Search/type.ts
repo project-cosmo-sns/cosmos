@@ -1,3 +1,5 @@
+import { PostInfoType } from '../Post/types';
+
 export interface Writer {
   id: number;
   nickname: string;
@@ -30,7 +32,7 @@ export interface Meta {
 }
 
 export interface SearchResult {
-  data: SearchData[];
+  data: PostInfoType[];
   meta: Meta;
 }
 

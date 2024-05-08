@@ -89,9 +89,9 @@ export default function HashTagInput({
   };
 
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter' || event.key === ' ') {
+    if (event.key === 'Enter' || event.code === 'Space') {
       if (isSuccess && data) {
-        const foundTag = data.find((tag) => tag.tagName === tagValue);
+        const foundTag = data.find((tag) => tag.tagName === tagValue.trim());
         if (foundTag) {
           handleAddHashtag({
             name: foundTag.tagName,
