@@ -12,7 +12,6 @@ import {
 } from '@/api/Follow';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { useRouter } from 'next/router';
-import fetchData from '@/api/fetchData';
 
 const cn = classNames.bind(styles);
 
@@ -45,8 +44,6 @@ export default function FollowList({ followListProps }: FollowListType) {
 
   const router = useRouter();
   const { memberId } = router.query;
-
-  // getMyFollowingData 멤버 아이디가 없는  내 팔로잉
 
   const fetchPageData = (page: number) => {
     if (followData === 'userFollowing' && memberId) {

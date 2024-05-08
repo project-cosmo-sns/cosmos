@@ -6,7 +6,6 @@ type UserInfo = {
   nickname: string;
   generation: number;
   profileImageUrl?: string;
-  isFollow?: boolean;
 };
 
 export type FollowDataProps = {
