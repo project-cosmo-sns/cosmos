@@ -5,6 +5,8 @@ import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { FeedListType } from '../types';
 import styles from './FeedList.module.scss';
+import fetchData from '@/api/fetchData';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 /**
  * @return {JSX.Element} FeedCardList - 추후에 변경 예정입니다. 지금은 목데이터를 화면에 출력하지만 변경한다면 상위 컴포넌트에서 피드 데이터를 받아서 뿌려줄 예정입니다.
  */
@@ -21,22 +23,36 @@ export default function FeedList({ feedList }: FeedListProps) {
     setFeedId(selectedFeedId);
     setIsModalOpen(!isModalOpen);
   };
-
+  const {
+    data: feedListData,
+    ref,
+    isFetchingNextPage,
+  } = useInfiniteScroll<FeedListType>({
+    queryKey: ['feedList'],
+    fetchFunction: (pageParam) =>
+      fetchData({
+        param: `feed/list?order=DESC&page=${pageParam}&take=10`,
+      }),
+    getNextPageParam: (lastPage) =>
+      lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
+  });
+  const feedPages = feedListData?.pages ?? [];
   return (
     <>
       <div className={cn('container')}>
-        {feedList.data?.map((item) => (
-          <FeedCard
-            key={item.feed.id}
-            feedData={item}
-            modalVisible={isModalOpen}
-            toggleModal={setIsModalOpen}
-            hasPadding
-            forDetails={false}
-            onClick={() => handleClick(item.feed.id)}
-          />
-        ))}
+        {feedPages.map((feedPage) =>
+          feedPage.data.map((feed) => (
+            <FeedCard
+              key={feed.feed.id}
+              feedData={feed}
+              hasPadding
+              forDetails={false}
+              onClick={() => handleClick(feed.feed.id)}
+            />
+          )),
+        )}
       </div>
+      {!isFetchingNextPage && <div ref={ref} />}
       <Modal
         toggleModal={setIsModalOpen}
         modalVisible={isModalOpen}
