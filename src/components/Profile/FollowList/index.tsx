@@ -7,6 +7,7 @@ import {
   getMyFollowingData,
   getMyFollowerData,
   FollowDataProps,
+  FollowResponseType,
   getUserFollowingData,
   getUserFollowerData,
 } from '@/api/Follow';
@@ -21,11 +22,6 @@ type FollowListType = {
     isFollowButton: boolean;
     followData: 'following' | 'follower' | 'userFollowing' | 'userFollower';
   };
-};
-
-type userFollowProps = {
-  id?: number;
-  page: number;
 };
 
 /**
@@ -61,17 +57,15 @@ export default function FollowList({ followListProps }: FollowListType) {
     throw new Error('Invalid followData or memberId');
   };
 
-  const {
-    data: followDataResult,
-    hasNextPage,
-    ref,
-  } = useInfiniteScroll({
-    queryKey: ['followData'],
-    fetchFunction: fetchPageData,
-    getNextPageParam: (lastPage) => {
-      return lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined;
+  const { data: followDataResult, ref } = useInfiniteScroll<FollowResponseType>(
+    {
+      queryKey: ['followData'],
+      fetchFunction: fetchPageData,
+      getNextPageParam: (lastPage) => {
+        return lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined;
+      },
     },
-  });
+  );
 
   return (
     <Modal

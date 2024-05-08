@@ -62,6 +62,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
       createdAt: '',
       imageUrls: [],
       isMine: false,
+      emojis: [],
     },
   };
   const commentList: CommentDetailType[] = commentListData?.data ?? [];
