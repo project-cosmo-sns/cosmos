@@ -1,44 +1,25 @@
-import classNames from 'classnames/bind';
-import styles from './AdminPage.module.scss';
-import DefaultButton from '@/components/Common/Buttons/DefaultButton';
+import CertificateTable from './CertificateTable';
 
-export default function AdminPage() {
-  const cn = classNames.bind(styles);
+type TableBodyProps = {
+  dataList: Data[];
+  handlePermitClick?: () => void;
+  handleDenyClick?: () => void;
+};
 
+export default function AdminPage({ dataList }: TableBodyProps) {
   return (
-    <>
-      <div className={cn('title')}>가입 승인 목록</div>
-      <div className={cn('wrapper')}>
-        <div className={cn('list-header')}>
-          <div>이름</div>
-          <div>기수</div>
-          <div>코드잇 인증</div>
-        </div>
-        <div className={cn('list')}>
-          {' '}
-          <div>김냥냥</div>
-          <div>3기</div>
-          <DefaultButton
-            size="small"
-            color="$white-01"
-            onClick={() => {
-              console.log('승인했당');
-            }}
-          >
-            수락하기
-          </DefaultButton>
-          <DefaultButton
-            size="small"
-            color="$red-01"
-            onClick={() => {
-              console.log('승인했당');
-            }}
-          >
-            거절하기
-          </DefaultButton>
-        </div>
-        <div className={cn('list')}>대기중</div>
-      </div>
-    </>
+    <tbody>
+      {dataList.map((data, index) => {
+        const { id, name, generation, certificateIamge } = data; // 관리자페이지에서
+        return (
+          <CertificateTable
+            key={id + index}
+            name={name}
+            generation={generation}
+            certificateImage={certificateIamge}
+          />
+        );
+      })}
+    </tbody>
   );
 }
