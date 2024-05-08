@@ -43,12 +43,6 @@ export default function Notification({ onClose }: PopOverProps) {
     return <div>알림이 없습니다.</div>;
   }
 
-  // 알림... 팝오버를 켰을때 보이는 알림들을 리스트 뽑아서 한꺼번에 읽음 처리 하고 싶은데 하나씩 보내게 되어있음. 고민좀 해봐야 할듯... 하나씩 읽음 처리 한다면 읽음 버튼이 있어야 하지 않을까?
-  // 본인 알림 목록에 isConfirmed이 false인게 1개라도 있으면 알림쪽에 dot 표시도 해야하는데. 이것도 고민좀하고 적용해야됨.
-  const notificationIds = notificationList.data.map(
-    (item) => item.notification.id,
-  );
-
   return (
     <PopOver onClose={onClose} className={cn('notification-popover')}>
       <BackIcon
