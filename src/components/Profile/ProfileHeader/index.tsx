@@ -31,6 +31,7 @@ export default function ProfileHeader({
       [type]: !followModal[type],
     });
   };
+
   const renderButton = () => {
     if (memberData.memberId) {
       return (
@@ -42,7 +43,6 @@ export default function ProfileHeader({
         </button>
       );
     }
-
     if (memberData.isAuthorized) {
       return (
         <div
