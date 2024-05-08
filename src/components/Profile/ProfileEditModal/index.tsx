@@ -11,6 +11,7 @@ import GetProfileImageUrl from './getImageUploadUrl';
 import fetchData from '@/api/fetchData';
 import { AuthFormProps } from '@/@types/type';
 import { uploadImageToS3 } from './uploadImageToS3';
+import router from 'next/router';
 
 interface ProfileEditModalProps {
   isOpen: boolean;
@@ -131,6 +132,7 @@ export default function ProfileEditModal({
       // 프로필 업데이트 후 모달 닫고 리패치 해야함
       await refetchProfile();
       setIsOpen(false);
+      router.reload();
     } catch (error) {
       console.error('프로필 업데이트 에러:', error);
     }
