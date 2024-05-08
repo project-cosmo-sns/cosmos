@@ -27,7 +27,7 @@ export default function FeedList({ feedList }: FeedListProps) {
     data: feedListData,
     ref,
     isFetchingNextPage,
-  } = useInfiniteScroll({
+  } = useInfiniteScroll<FeedListType>({
     queryKey: ['feedList'],
     fetchFunction: (pageParam) =>
       fetchData({
