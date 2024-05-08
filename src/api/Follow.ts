@@ -21,28 +21,28 @@ export interface FollowResponseType {
 
 export async function getMyFollowingData(page = 1) {
   const res = await fetchData<FollowResponseType>({
-    param: `follow/following/mine?order=DESC&page=${page}&take=3`,
+    param: `follow/following/mine?order=DESC&page=${page}&take=10`,
   });
   return res;
 }
 
 export async function getMyFollowerData(page = 1) {
   const res = await fetchData<FollowResponseType>({
-    param: `follow/follower/mine?order=DESC&page=${page}&take=3`,
+    param: `follow/follower/mine?order=DESC&page=${page}&take=10`,
   });
   return res;
 }
 
 export async function getUserFollowingData(memberId: number, page = 1) {
   const res = await fetchData<FollowDataProps[]>({
-    param: `follow/${memberId}/following?order=DESC&page=${page}&take=3`,
+    param: `follow/${memberId}/following?order=DESC&page=${page}&take=10`,
   });
   return res;
 }
 
 export async function getUserFollowerData(memberId: number, page = 1) {
   const res = await fetchData<FollowDataProps[]>({
-    param: `follow/${memberId}/follower?order=DESC&page=${page}&take=3`,
+    param: `follow/${memberId}/follower?order=DESC&page=${page}&take=10`,
   });
   return res;
 }
