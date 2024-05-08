@@ -7,7 +7,7 @@ import { PostListType } from '../types';
 import styles from './PostList.module.scss';
 
 interface PostListProps {
-  selectedSort: SortType;
+  selectedSort?: SortType;
   postList: PostListType;
 }
 
