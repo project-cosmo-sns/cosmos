@@ -1,4 +1,4 @@
-import { ICommandBase } from '@uiw/react-md-editor';
+import { ICommandBase, commands } from '@uiw/react-md-editor';
 
 export default function getUploadImageButton(
   previewUrl: string,
@@ -15,19 +15,9 @@ export default function getUploadImageButton(
           disabled={disabled}
           onClick={handleUploadImage}
         >
-          <img src="/images/imageIcon.svg" alt="image_upload" />
+          {commands.image.icon}
         </button>
       );
-    },
-    execute: (state, api, imageUrl) => {
-      // const modifyText = `<img width="500" alt="image" src="${previewUrl.split('?')[0]}" />`;
-      console.log(imageUrl);
-      // api.replaceSelection(modifyText);
-      let modifyText = `#${state.selectedText}\n`;
-      if (!state.selectedText) {
-        modifyText = `'# `;
-      }
-      api.replaceSelection(modifyText);
     },
   };
 }

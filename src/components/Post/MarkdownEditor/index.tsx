@@ -41,6 +41,12 @@ export default function MarkdownEditor({
 
   const { mutate } = useMutation({
     mutationFn: (file: File) => createPresinedURL(file),
+    onSuccess: (data) => {
+      const newContent = data
+        ? `${content}\n <img width="500" alt="image" src="${data.split('?')[0]}" />`
+        : content;
+      setContent(newContent);
+    },
   });
 
   const image = getUploadImageButton(previewUrl, () =>
