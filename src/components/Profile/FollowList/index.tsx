@@ -7,8 +7,12 @@ import {
   getMyFollowingData,
   getMyFollowerData,
   FollowDataProps,
+  getUserFollowingData,
+  getUserFollowerData,
 } from '@/api/Follow';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import { useRouter } from 'next/router';
+import fetchData from '@/api/fetchData';
 
 const cn = classNames.bind(styles);
 
@@ -16,8 +20,13 @@ type FollowListType = {
   followListProps: ModalPropsType & {
     title: string;
     isFollowButton: boolean;
-    followData: 'following' | 'follower';
+    followData: 'following' | 'follower' | 'userFollowing' | 'userFollower';
   };
+};
+
+type userFollowProps = {
+  id?: number;
+  page: number;
 };
 
 /**
@@ -34,10 +43,25 @@ export default function FollowList({ followListProps }: FollowListType) {
   const { title, toggleModal, isFollowButton, followData, modalVisible } =
     followListProps;
 
-  const fetchPageData = async (page: number) => {
-    return followData === 'following'
-      ? getMyFollowingData(page)
-      : getMyFollowerData(page);
+  const router = useRouter();
+  const { memberId } = router.query;
+
+  // getMyFollowingData 멤버 아이디가 없는  내 팔로잉
+
+  const fetchPageData = (page: number) => {
+    if (followData === 'userFollowing' && memberId) {
+      return getUserFollowingData(Number(memberId), page);
+    }
+    if (followData === 'userFollower' && memberId) {
+      return getUserFollowerData(Number(memberId), page);
+    }
+    if (followData === 'following' && !memberId) {
+      return getMyFollowingData(page);
+    }
+    if (followData === 'follower' && !memberId) {
+      return getMyFollowerData(page);
+    }
+    throw new Error('Invalid followData or memberId');
   };
 
   const {
@@ -52,7 +76,6 @@ export default function FollowList({ followListProps }: FollowListType) {
     },
   });
 
-  console.log(followDataResult);
   return (
     <Modal
       title={title}
@@ -65,12 +88,12 @@ export default function FollowList({ followListProps }: FollowListType) {
         {followDataResult?.pages.map((page) =>
           page.data.map((follow: FollowDataProps) => {
             const followDetailInfo =
-              followData === 'following'
+              followData === 'userFollowing' || followData === 'following'
                 ? follow.followingInfo
                 : follow.followerInfo;
             return (
               <Follow
-                key={followDetailInfo.memberId}
+                key={followDetailInfo?.memberId}
                 {...followDetailInfo}
                 isFollowButton={isFollowButton}
               />
