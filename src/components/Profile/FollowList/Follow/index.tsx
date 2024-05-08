@@ -5,8 +5,8 @@ import GenerationBadge from '@/components/Common/GenerationBadge';
 import FollowButton from '@/components/Common/Buttons/FollowButton';
 import useFollowClick from '@/hooks/useFollowClick';
 import { deleteFollow } from '@/api/Follow';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useState } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -25,11 +25,21 @@ export default function Follow({
   memberId,
   isFollowButton,
 }: FollowType) {
+  const [deletedFollowerIds, setDeletedFollowerIds] = useState<number[]>([]);
+
   const { isActive, toggleFollow } = useFollowClick(memberId);
 
   const deleteClick = async () => {
-    const res = await deleteFollow(memberId);
+    try {
+      const res = await deleteFollow(memberId);
+      setDeletedFollowerIds([...deletedFollowerIds, memberId]);
+    } catch (error) {
+      console.error('Failed to delete follower:', error);
+    }
   };
+  if (deletedFollowerIds.includes(memberId)) {
+    return null;
+  }
 
   return (
     <div key={memberId} className={cn('follow-wrapper')}>

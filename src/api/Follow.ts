@@ -34,14 +34,14 @@ export async function getMyFollowerData(page = 1) {
 }
 
 export async function getUserFollowingData(memberId: number, page = 1) {
-  const res = await fetchData<FollowDataProps[]>({
+  const res = await fetchData<FollowResponseType>({
     param: `follow/${memberId}/following?order=DESC&page=${page}&take=10`,
   });
   return res;
 }
 
 export async function getUserFollowerData(memberId: number, page = 1) {
-  const res = await fetchData<FollowDataProps[]>({
+  const res = await fetchData<FollowResponseType>({
     param: `follow/${memberId}/follower?order=DESC&page=${page}&take=10`,
   });
   return res;
