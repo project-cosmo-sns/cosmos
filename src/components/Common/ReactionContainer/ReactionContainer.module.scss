@@ -12,7 +12,9 @@
   gap: 8px;
   width: 100%;
   padding: 6px 35px;
+}
 
+.emoji {
   &:hover {
     background-color: $black-01;
   }
