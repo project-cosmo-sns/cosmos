@@ -41,7 +41,7 @@ export default function ProfileHeader({
       return (
         <FollowButton
           onClick={toggleFollow}
-          isFollowButton={true}
+          isFollowButton
           isActive={isActive}
         />
       );

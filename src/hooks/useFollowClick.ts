@@ -31,6 +31,11 @@ export default function useFollowClick(memberId: number) {
     checkFollowStatus();
   }, [memberId]);
 
+  // 팔로우 성공 후, 팔로우 상태를 다시 확인하는 함수
+  const handleSuccess = async () => {
+    await checkFollowStatus();
+  };
+
   const { mutate: addFollow } = useMutation({
     mutationFn: () =>
       fetchData({
@@ -54,11 +59,6 @@ export default function useFollowClick(memberId: number) {
       handleSuccess();
     },
   });
-
-  // 팔로우 성공 후, 팔로우 상태를 다시 확인하는 함수
-  const handleSuccess = async () => {
-    await checkFollowStatus();
-  };
 
   const toggleFollow = async () => {
     // setIsActive((prev) => !prev);
