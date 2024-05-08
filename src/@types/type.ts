@@ -18,6 +18,7 @@ export type ContainerOptionType =
 export interface AuthFormProps {
   generation: string;
   image: string;
+  introduce?: string;
 }
 
 export interface EditCommentType {

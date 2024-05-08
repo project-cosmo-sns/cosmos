@@ -1,6 +1,6 @@
 import { HASH_TAG_COLOR_CODE } from '@/constants/hashTagCode';
 import { Writer } from '../Feed/types';
-import { EmojiType } from '@/@types/type';
+import { EmojiType, metaType } from '@/@types/type';
 
 export interface HashTagType {
   tagName: string;
@@ -36,14 +36,7 @@ export interface PostListDataType {
 
 export interface PostListType {
   data: PostListDataType[];
-  meta: {
-    page: number;
-    take: number;
-    totalCount: number;
-    pageCount: number;
-    hasPreviousPage: boolean;
-    hasNextPage: boolean;
-  };
+  meta: metaType;
 }
 
 export interface PostDetailType {
@@ -63,12 +56,5 @@ export interface PostCommentListType {
     writer: Writer;
     comment: CommentType;
   }[];
-  meta: {
-    page: number;
-    take: number;
-    totalCount: number;
-    pageCount: number;
-    hasPreviousPage: boolean;
-    hasNextPage: boolean;
-  };
+  meta: metaType;
 }

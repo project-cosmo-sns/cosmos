@@ -40,3 +40,9 @@ export interface NotificationResult {
     hasNextPage: boolean;
   };
 }
+
+export interface NotificationSettingType {
+  isCommentNotification: boolean;
+  isEmojiNotification: boolean;
+  isFollowNotification: boolean;
+}

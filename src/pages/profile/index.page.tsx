@@ -13,31 +13,50 @@ import { fetchMemberData } from './api';
 import { GetServerSideProps } from 'next';
 import { FeedDetailType } from '@/components/Feed/types';
 import MyFeedList from '@/components/Profile/MyFeedList';
+// import MyPostList from '@/components/Profile/MyPostList';
+import {
+  PostInfoType,
+  PostListDataType,
+  PostListType,
+} from '@/components/Post/types';
+
 import { SortType } from '@/constants/sortType';
+import MyPostList from '@/components/Profile/MyPostList';
 
 const cn = classNames.bind(styles);
 
 interface MemberDataContainerPropsType {
-  feedList: FeedDetailType[];
+  myFeedList: FeedDetailType[];
+  myPostList: PostListType;
   memberData: MemberDataType;
   error?: boolean;
 }
-// 프로필 SSR
+
+// 프로필 SSR get 컴포넌트
 export const getServerSideProps: GetServerSideProps = async (context) => {
   return fetchMemberData(context);
 };
 
 export default function MemberDataContainer({
-  feedList,
+  myFeedList,
+  myPostList,
   memberData,
   error,
 }: MemberDataContainerPropsType) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
-  const [selectedSort, setSelectedSort] = useState<SortType>('ALL');
 
-  if (!memberData.isAuthorized || error) {
+  // const [selectedSort, setSelectedSort] = useState<
+  //   'all' | 'followed' | 'myGeneration'
+  // >('all');
+
+  // const [selectedSort, setSelectedSort] = useState<SortType>('ALL');
+
+  // 현재는 다른 유저일 경우 인증/미인증을 알 수 없어서 전부 미인증으로 뜨는 상태.
+  // api를 새로 내려받게 되면 다시 처리할 것.
+  if (!memberData || !memberData.isAuthorized || error) {
+    console.log('memberData: ', memberData);
     return (
       <div>
         {memberData && (
@@ -50,9 +69,9 @@ export default function MemberDataContainer({
         <ContentContainer
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
-          selectedSort={selectedSort}
-          setSelectedSort={setSelectedSort}
-          isMyProfile
+          // selectedSort={selectedSort}
+          // setSelectedSort={setSelectedSort}
+          // isMyProfile
         >
           <div>미인증사용자입니다</div>
         </ContentContainer>
@@ -63,17 +82,25 @@ export default function MemberDataContainer({
   if (!memberData) {
     return <div>Lodading~~~~~</div>;
   }
-
+  console.log('myPostList: ', myPostList);
   const renderContent = () => {
     switch (selectedOption) {
       case 'feed':
-        return feedList ? (
-          <MyFeedList feedList={feedList} memberData={memberData} />
+        return myFeedList ? (
+          <MyFeedList feedList={myFeedList} />
         ) : (
           '작성된 글이 없습니다.'
         );
       case 'post':
-        return <>my post list</>;
+        return myPostList ? (
+          <MyPostList
+            // selectedSort={}
+            postList={myPostList}
+          />
+        ) : (
+          '작성된 글이 없습니다.'
+        );
+
       case 'scrap':
         return <ScrapList />;
       default:
@@ -99,8 +126,8 @@ export default function MemberDataContainer({
       <ContentContainer
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
-        selectedSort={selectedSort}
-        setSelectedSort={setSelectedSort}
+        // selectedSort={selectedSort}
+        // setSelectedSort={setSelectedSort}
         isMyProfile
       >
         {renderContent()}

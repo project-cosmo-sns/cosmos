@@ -29,6 +29,7 @@
 
 .markdown-content {
   @include markdown-style;
+  max-width: 100%;
 }
 
 .hashtag-container {

@@ -3,6 +3,10 @@ import classNames from 'classnames/bind';
 import Modal from '@/components/Common/Layout/Modal';
 import ToggleButton from '@/components/Common/Buttons/ToggleButton';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
+import { useQuery } from '@tanstack/react-query';
+import fetchData from '@/api/fetchData';
+import { NotificationSettingType } from '../type';
+import LoadingSpinner from '@/components/Common/LoadingSpinner';
 
 interface NotificationModalProps {
   isOpen: boolean;
@@ -19,7 +23,22 @@ export default function NotificationModal({
     console.log('알림 설정 완료 클릭');
   };
 
-  // 사용자의 알림 값 불러오기가 필요함
+  const { data: notificationSetting, isLoading } =
+    useQuery<NotificationSettingType>({
+      queryKey: ['notificationSetting'],
+      queryFn: () =>
+        fetchData({
+          param: `/notification/setting/mine`,
+        }),
+    });
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  const { isCommentNotification, isEmojiNotification, isFollowNotification } =
+    notificationSetting as NotificationSettingType;
+
   return (
     <Modal
       title="알림 설정"
@@ -33,15 +52,15 @@ export default function NotificationModal({
         <div className={cn('notification-modal-container')}>
           <div className={cn('notification-modal-item')}>
             <h3>댓글</h3>
-            <ToggleButton />
+            <ToggleButton setting={isCommentNotification} />
           </div>
           <div className={cn('notification-modal-item')}>
             <h3>이모지</h3>
-            <ToggleButton />
+            <ToggleButton setting={isEmojiNotification} />
           </div>
           <div className={cn('notification-modal-item')}>
             <h3>팔로우</h3>
-            <ToggleButton />
+            <ToggleButton setting={isFollowNotification} />
           </div>
         </div>
         <DefaultButton

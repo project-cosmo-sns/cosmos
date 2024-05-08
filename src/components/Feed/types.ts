@@ -1,4 +1,4 @@
-import { EmojiType } from '@/@types/type';
+import { EmojiType, metaType } from '@/@types/type';
 
 export interface Writer {
   id: number;
@@ -18,6 +18,7 @@ export interface Feed {
   isMine: boolean;
   emojis: EmojiType[];
 }
+
 export interface FeedDetailType {
   writer: Writer;
   feed: Feed;
@@ -25,14 +26,7 @@ export interface FeedDetailType {
 
 export interface FeedListType {
   data: FeedDetailType[];
-  meta: {
-    page: number;
-    take: number;
-    totalCount: number;
-    pageCount: number;
-    hasPreviousPage: boolean;
-    hasNextPage: boolean;
-  };
+  meta: metaType;
 }
 
 export interface Comment {
@@ -51,12 +45,5 @@ export interface CommentDetailType {
 
 export interface CommentListType {
   data: CommentDetailType[];
-  meta: {
-    page: number;
-    take: number;
-    totalCount: number;
-    pageCount: number;
-    hasPreviousPage: boolean;
-    hasNextPage: boolean;
-  };
+  meta: metaType;
 }

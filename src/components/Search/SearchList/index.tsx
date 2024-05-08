@@ -1,4 +1,4 @@
-import SearchPreview from '../SearchPriview';
+import PostPreview from '@/components/Post/PostPreview';
 import { SearchResult } from '../type';
 import styles from './SearchList.module.scss';
 import classNames from 'classnames/bind';
@@ -37,7 +37,7 @@ export default function SearchList({ keyword }: SearchListProps) {
   return (
     <div className={cn('search-list')}>
       {searchList.data.map((searchData) => (
-        <SearchPreview key={searchData.post.id} searchData={searchData} />
+        <PostPreview key={searchData.post.id} postData={searchData} />
       ))}
     </div>
   );
