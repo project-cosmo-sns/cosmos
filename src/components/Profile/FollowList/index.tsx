@@ -7,6 +7,7 @@ import {
   getMyFollowingData,
   getMyFollowerData,
   FollowDataProps,
+  FollowResponseType,
 } from '@/api/Follow';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
@@ -44,7 +45,7 @@ export default function FollowList({ followListProps }: FollowListType) {
     data: followDataResult,
     hasNextPage,
     ref,
-  } = useInfiniteScroll({
+  } = useInfiniteScroll<FollowResponseType>({
     queryKey: ['followData'],
     fetchFunction: fetchPageData,
     getNextPageParam: (lastPage) => {
@@ -53,6 +54,7 @@ export default function FollowList({ followListProps }: FollowListType) {
   });
 
   console.log(followDataResult);
+
   return (
     <Modal
       title={title}

@@ -4,7 +4,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { FollowDataProps } from '@/api/Follow';
 
 type UseInfiniteScrollProps<T> = {
-  queryKey: string[];
+  queryKey: (string | number)[];
   fetchFunction: (page: number) => Promise<T>;
   getNextPageParam: (lastPage: T) => number | undefined;
 };
@@ -29,18 +29,17 @@ type UseInfiniteScrollProps<T> = {
  *   - pages는 각 페이지의 데이터를 포함하는 객체로 data,와 meta반환
  */
 
-export default function useInfiniteScroll({
+export default function useInfiniteScroll<T>({
   queryKey,
   fetchFunction,
   getNextPageParam,
-}: UseInfiniteScrollProps<FollowDataProps>) {
-  const { data, fetchNextPage, hasNextPage, ...rest } =
-    useInfiniteQuery<FollowDataProps>({
-      queryKey,
-      queryFn: ({ pageParam }) => fetchFunction(pageParam as number),
-      initialPageParam: 1,
-      getNextPageParam,
-    });
+}: UseInfiniteScrollProps<T>) {
+  const { data, fetchNextPage, hasNextPage, ...rest } = useInfiniteQuery<T>({
+    queryKey,
+    queryFn: ({ pageParam }) => fetchFunction(pageParam as number),
+    initialPageParam: 1,
+    getNextPageParam,
+  });
 
   const [ref, inView] = useInView({
     threshold: 1,

@@ -1,9 +1,12 @@
+import { metaType } from '@/@types/type';
+
 export interface Writer {
   id: number;
   nickname: string;
   generation: number;
   profileImageUrl: string;
 }
+
 export interface Feed {
   id: number;
   content: string;
@@ -14,6 +17,7 @@ export interface Feed {
   imageUrls: string[];
   isMine: boolean;
 }
+
 export interface FeedDetailType {
   writer: Writer;
   feed: Feed;
@@ -21,14 +25,7 @@ export interface FeedDetailType {
 
 export interface FeedListType {
   data: FeedDetailType[];
-  meta: {
-    page: number;
-    take: number;
-    totalCount: number;
-    pageCount: number;
-    hasPreviousPage: boolean;
-    hasNextPage: boolean;
-  };
+  meta: metaType;
 }
 
 export interface Comment {
@@ -46,12 +43,5 @@ export interface CommentDetailType {
 
 export interface CommentListType {
   data: CommentDetailType[];
-  meta: {
-    page: number;
-    take: number;
-    totalCount: number;
-    pageCount: number;
-    hasPreviousPage: boolean;
-    hasNextPage: boolean;
-  };
+  meta: metaType;
 }
