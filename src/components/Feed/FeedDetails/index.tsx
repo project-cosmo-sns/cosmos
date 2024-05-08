@@ -1,20 +1,12 @@
 import CommentCard from '@/components/Common/CommentCard';
-import CommentInput, { Comment } from '@/components/Common/CommentInput';
+import CommentInput from '@/components/Common/CommentInput';
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
 import FeedCard from '@/components/Feed/FeedCard/index';
-import { getFeedCommentList } from '@/components/Feed/FeedDetails/api';
-import { postComment } from '@/components/Common/CommentInput/api';
 import fetchData from '@/api/fetchData';
-import {
-  patchComment,
-  deleteComment,
-  deleteLikeComment,
-  postLikeComment,
-} from '@/components/Common/CommentCard/api';
 import styles from './FeedDetails.module.scss';
 import { FeedDetailType, CommentDetailType, CommentListType } from '../types';
 import { useQuery } from '@tanstack/react-query';
+import { useCommentRequest } from '@/hooks/useCommentRequest';
 
 /**
  * @return {JSX.Element} FeedDetails - 추후에 변경 예정입니다. 피드 리스트에서 특정 피드를 클릭한다면 클리한 피드의 아이디를 통해 데이터를 요청해 화면에 보여줍니다.
@@ -22,7 +14,39 @@ import { useQuery } from '@tanstack/react-query';
 
 export default function FeedDetails({ feedId }: { feedId: number }) {
   const cn = classNames.bind(styles);
-  const [feed, setFeed] = useState<FeedDetailType>({
+  const {
+    onSubmit,
+    deleteCommentRequest,
+    postLikeRequest,
+    deleteLikeRequest,
+    editCommentRequest,
+  } = useCommentRequest(feedId, true);
+
+  const {
+    data: feedData,
+    isPending: isFeedDataPending,
+    isError: isFeedDataError,
+  } = useQuery({
+    queryKey: ['feedDetails', feedId],
+    queryFn: ({ queryKey }) =>
+      fetchData<FeedDetailType>({
+        param: `feed/${queryKey[1]}/detail`,
+      }),
+  });
+
+  const {
+    data: commentListData,
+    isPending: isCommentDataPending,
+    isError: isCommentDataError,
+  } = useQuery({
+    queryKey: ['feedComments', feedId],
+    queryFn: ({ queryKey }) =>
+      fetchData<CommentListType>({
+        param: `feed/${queryKey[1]}/comment/list`,
+      }),
+  });
+
+  const feed: FeedDetailType = feedData ?? {
     writer: {
       id: 0,
       nickname: '',
@@ -38,45 +62,14 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
       createdAt: '',
       imageUrls: [],
       isMine: false,
+      emojis: [],
     },
-  });
-  const [commentList, setCommentList] = useState<CommentDetailType[]>([]);
-
-  // const feedDetails = useQuery({
-  //   queryKey: ['feedDetails'],
-  //   queryFn: fetchData<FeedDetailType>({
-  //     param: `feed/${feedId}/detail`,
-  //   }),
-  // });
-
-  // const feedComments = useQuery({
-  //   queryKey: ['feedComments'],
-  //   queryFn: fetchData<CommentListType>({
-  //     param: `feed/${feedId}/comment/list`,
-  //   }),
-  // });
-
-  useEffect(() => {
-    const fetchFeedDetails = async () => {
-      const feedDetails = await fetchData<FeedDetailType>({
-        param: `feed/${feedId}/detail`,
-      });
-      setFeed(feedDetails);
-    };
-    const fetchFeedComments = async () => {
-      const feedComments = await fetchData<CommentListType>({
-        param: `feed/${feedId}/comment/list`,
-      });
-      setCommentList(feedComments.data);
-    };
-
-    fetchFeedDetails();
-    fetchFeedComments();
-  }, []);
-
-  const onSubmit = (data: Comment) => {
-    postComment(data, feedId);
   };
+  const commentList: CommentDetailType[] = commentListData?.data ?? [];
+  if (isFeedDataPending) return '피드 데이터 불러오는 중...';
+  if (isFeedDataError) return '피드 데이터 에러 발생!';
+  if (isCommentDataPending) return '코멘트 데이터 불러오는 중...';
+  if (isCommentDataError) return '코멘트 데이터 에러 발생!';
 
   return (
     <div className={cn('container')}>
@@ -87,11 +80,10 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
           <div key={comment.comment.id}>
             <CommentCard
               comment={comment}
-              postId={feedId}
-              deleteLikeRequest={deleteComment}
-              postLikeRequest={postLikeComment}
-              deleteCommentRequest={deleteLikeComment}
-              editCommentRequest={patchComment}
+              deleteLikeRequest={deleteLikeRequest}
+              postLikeRequest={postLikeRequest}
+              deleteCommentRequest={deleteCommentRequest}
+              editCommentRequest={editCommentRequest}
             />
             {index === commentList.length - 1 || (
               <div className={cn('divide-line')} />

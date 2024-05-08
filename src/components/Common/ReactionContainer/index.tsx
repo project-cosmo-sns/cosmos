@@ -43,7 +43,7 @@ export default function ReactionContainer({
   return (
     <div className={cn('wrapper')}>
       <div
-        className={cn('reaction', {
+        className={cn('reaction', 'emoji', {
           clicked: emojis?.some((emoji) => emoji.isClicked === true),
         })}
         onClick={handleOpenEmoji}

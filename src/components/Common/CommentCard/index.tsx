@@ -12,24 +12,24 @@ import WriterProfile from '../WriterProfile';
 
 const cn = classNames.bind(styles);
 
-type CommentRequestType = (postId: number, commentId: number) => void;
+type CommentRequestType = (commentId: number) => void;
 
-type EditCommentRequestType = (
-  postId: number,
-  commentId: number,
-  data: EditCommentType,
-) => void;
+type EditCommentRequestType = ({
+  commentId,
+  data,
+}: {
+  commentId: number;
+  data: EditCommentType;
+}) => void;
 
 export default function CommentCard({
   comment,
-  postId,
   deleteLikeRequest,
   postLikeRequest,
   deleteCommentRequest,
   editCommentRequest,
 }: {
   comment: CommentDetailType;
-  postId: number;
   deleteLikeRequest: CommentRequestType;
   postLikeRequest: CommentRequestType;
   deleteCommentRequest: CommentRequestType;
@@ -43,6 +43,7 @@ export default function CommentCard({
     heartCount,
     isHearted,
     createdAt,
+    isMine,
   } = commentData;
 
   const [isCommentEditing, setIsCommentEditing] = useState(false);
@@ -72,7 +73,7 @@ export default function CommentCard({
   };
 
   const onSubmit = (data: EditCommentType) => {
-    editCommentRequest(postId, commentId, data);
+    editCommentRequest({ commentId, data });
     setIsCommentEditing(false);
   };
 
@@ -84,24 +85,27 @@ export default function CommentCard({
           <div className={cn('like')} onClick={handleClickLikeComment}>
             {isLiked ? (
               <LikedIcon
-                onClick={() => deleteLikeRequest(postId, commentId)}
+                onClick={() => deleteLikeRequest(commentId)}
                 width="18"
                 height="18"
               />
             ) : (
               <LikeIcon
-                onClick={() => postLikeRequest(postId, commentId)}
+                onClick={() => postLikeRequest(commentId)}
                 width="18"
                 height="18"
               />
             )}
             {reactionCount}
           </div>
-          <ActionButtons
-            isButtonShow={isMyComment}
-            handleClickEdit={handleClickEditComment}
-            handleClickDelete={handleClickDeleteComment}
-          />
+          {isMine && (
+            <ActionButtons
+              isButtonShow={isMyComment}
+              handleClickEdit={handleClickEditComment}
+              handleClickDelete={handleClickDeleteComment}
+            />
+          )}
+
           {isDeleteModalOpen && (
             <Modal
               title="삭제 모달"
@@ -114,7 +118,7 @@ export default function CommentCard({
               <button
                 type="button"
                 onClick={() => {
-                  deleteCommentRequest(postId, commentId);
+                  deleteCommentRequest(commentId);
                 }}
               >
                 삭제

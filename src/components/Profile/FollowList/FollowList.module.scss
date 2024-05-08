@@ -4,12 +4,15 @@
 
   .followList-wrapper {
     @include flex-arrange(center, flex-start);
-    // flex-direction: column;
-    // width: 100%;
+    overflow-x: hidden;
+    overflow-y: scroll;
   }
 
   @media (min-width: 768px) {
     width: 380px;
     height: auto;
+    .followList-wrapper {
+      max-height: 140px;
+    }
   }
 }

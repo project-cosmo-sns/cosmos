@@ -25,13 +25,13 @@ export default function useFollowClick(memberId: number) {
       }),
   });
 
-  const toggleFollow = () => {
+  const toggleFollow = async () => {
     setIsActive((prev) => !prev);
 
-    if (isActive) {
-      addFollow();
+    if (!isActive) {
+      await addFollow();
     } else {
-      deleteFollow();
+      await deleteFollow();
     }
   };
 

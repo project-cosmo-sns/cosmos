@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import TermBadge from '../Badge/TermBadge';
 import styles from './WriterProfile.module.scss';
+import getElapsedTime from '@/utils/getElaspedTime';
 
 interface WriterProfileProps {
   writer: Writer;
@@ -14,10 +15,12 @@ const cn = classNames.bind(styles);
 
 export default function WriterProfile({
   writer,
-  createdAt,
+  createdAt: timeString,
 }: WriterProfileProps) {
   const router = useRouter();
   const { id: memberId, nickname, profileImageUrl, generation } = writer;
+
+  const createdAt = getElapsedTime(timeString);
 
   return (
     <div className={cn('wrapper')}>

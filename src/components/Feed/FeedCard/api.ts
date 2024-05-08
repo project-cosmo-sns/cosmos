@@ -1,7 +1,13 @@
 import instance from '@/api/axios';
 
 export interface Edits {
-  feedContent: string;
+  content: string;
+  imageUrls: string[];
+}
+
+export interface EditFeedTypes {
+  feedId: number;
+  data: Edits;
 }
 
 export async function deleteFeed(feedId: number) {
@@ -14,7 +20,7 @@ export async function editFeed(
   imageUrls: string[],
 ) {
   await instance.patch(`/feed/${feedId}`, {
-    content: data.feedContent,
+    content: data.content,
     imageUrls,
   });
 }

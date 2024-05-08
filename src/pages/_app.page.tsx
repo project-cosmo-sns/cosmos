@@ -5,6 +5,8 @@ import '@/styles/globals.scss';
 import Layout from '@/components/Common/Layout';
 import Head from 'next/head';
 import '@uiw/react-md-editor/markdown-editor.css';
+import { Provider as ReduxToolkitProvider } from 'react-redux';
+import store from '@/redux/store';
 
 export default function App({ Component, pageProps }: AppProps) {
   const useLayout = !pageProps.noLayout;
@@ -15,13 +17,15 @@ export default function App({ Component, pageProps }: AppProps) {
       </Head>
       <CookiesProvider>
         <QueryProvider>
-          {useLayout ? (
-            <Layout>
+          <ReduxToolkitProvider store={store}>
+            {useLayout ? (
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            ) : (
               <Component {...pageProps} />
-            </Layout>
-          ) : (
-            <Component {...pageProps} />
-          )}
+            )}
+          </ReduxToolkitProvider>
         </QueryProvider>
       </CookiesProvider>
       <div id="modal-root" />

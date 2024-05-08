@@ -1,19 +1,20 @@
 import Image from 'next/image';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import classNames from 'classnames/bind';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ReactionContainer from '@/components/Common/ReactionContainer';
 import Modal from '@/components/Common/Layout/Modal';
-import { deleteFeed, editFeed, Edits } from '@/components/Feed/FeedCard/api';
-import styles from './FeedCard.module.scss';
-import { FeedDetailType } from '../types';
+import { Edits } from '@/components/Feed/FeedCard/api';
 import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
+import fetchData from '@/api/fetchData';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import WriterProfile from '@/components/Common/WriterProfile';
+import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
+import { FeedDetailType } from '../types';
+import styles from './FeedCard.module.scss';
 
 interface FeedCardTypes {
   feedData: FeedDetailType;
-  modalVisible?: boolean;
-  toggleModal?: Dispatch<SetStateAction<boolean>>;
   hasPadding: boolean;
   forDetails?: boolean;
   onClick?: () => void;
@@ -36,7 +37,6 @@ export default function FeedCard({
   forDetails,
   onClick,
 }: FeedCardTypes) {
-  const [emojiVisible, setEmojiVisible] = useState<boolean>(false);
   const [moreModalOpen, setMoreModalOpen] = useState(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const {
@@ -46,7 +46,7 @@ export default function FeedCard({
   } = useForm<Edits>();
 
   const {
-    id,
+    id: feedId,
     content,
     viewCount,
     commentCount,
@@ -54,12 +54,41 @@ export default function FeedCard({
     createdAt,
     imageUrls,
     isMine,
+    emojis,
   } = feedData.feed;
+
+  const queryClient = useQueryClient();
+
+  const patchMutaion = useMutation({
+    mutationFn: (data: Edits) =>
+      fetchData<Edits>({
+        param: `/feed/${feedId}`,
+        method: 'patch',
+        requestData: {
+          content: data.content,
+          imageUrls: data.imageUrls,
+        },
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['feedComments'] });
+    },
+  });
+
+  const deleteMutaion = useMutation({
+    mutationFn: () =>
+      fetchData({
+        param: `/feed/${feedId}`,
+        method: 'delete',
+      }),
+  });
 
   const onSubmit: SubmitHandler<Edits> = (data) => {
     setIsEdit(false);
-    editFeed(id, data, imageUrls);
+    patchMutaion.mutate(data);
   };
+
+  const { handleEmojiClick, isAddPending, isDeletePending } =
+    useSendEmojiRequest(feedId as number, false);
 
   return (
     <div
@@ -79,14 +108,12 @@ export default function FeedCard({
                   defaultValue={content}
                   className={cn('text')}
                   placeholder="글을 작성해보세요."
-                  {...register('feedContent', {
+                  {...register('content', {
                     required: '게시글을 작성해주세요',
                   })}
                 />
-                {errors.feedContent && (
-                  <span className={cn('error')}>
-                    {errors.feedContent.message}
-                  </span>
+                {errors.content && (
+                  <span className={cn('error')}>{errors.content.message}</span>
                 )}
                 <button type="submit">편집완료</button>
               </form>
@@ -125,17 +152,20 @@ export default function FeedCard({
                 width="18"
                 height="18"
                 onClick={() => {
-                  deleteFeed(id);
+                  deleteMutaion.mutate();
                 }}
               />
             </div>
           )}
         </div>
-        {/* <ReactionContainer
+        <ReactionContainer
           emojiCount={emojiCount}
           commentCount={commentCount}
           viewCount={viewCount}
-        /> */}
+          emojis={emojis}
+          isPost={false}
+          handleEmojiClick={handleEmojiClick}
+        />
         {hasPadding || (
           <Modal
             title="임시모달"

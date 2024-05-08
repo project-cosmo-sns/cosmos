@@ -18,6 +18,7 @@ export type ContainerOptionType =
 export interface AuthFormProps {
   generation: string;
   image: string;
+  introduce?: string;
 }
 
 export interface EditCommentType {
@@ -31,3 +32,12 @@ export interface EmojiType {
   emojiCount: number;
   isClicked: boolean;
 }
+
+export type metaType = {
+  page: number;
+  take: number;
+  totalCount: number;
+  pageCount: number;
+  hasPreviousPage: boolean;
+  hasNextPage: boolean;
+};

@@ -25,3 +25,14 @@
     width: 740px;
   }
 }
+
+.load-more {
+  @include flex-arrange;
+
+  .button {
+    width: 35px;
+    color: $white-01;
+    border: 1px solid;
+    border-radius: 5px;
+  }
+}
