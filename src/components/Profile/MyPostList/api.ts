@@ -1,4 +1,5 @@
 import instance from '@/api/axios';
+import { PostListType } from '@/components/Post/types';
 import { GetServerSidePropsContext } from 'next/types';
 
 export default async function getMyPostList(
@@ -12,7 +13,7 @@ export default async function getMyPostList(
     ? `/profile/${memberId}/post`
     : '/profile/mine/post';
 
-  const postData = await instance.get(endpoint, {
+  const postData: PostListType = await instance.get(endpoint, {
     headers: {
       Cookie: cookies,
     },

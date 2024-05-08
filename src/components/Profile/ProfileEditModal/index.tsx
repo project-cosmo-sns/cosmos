@@ -37,7 +37,7 @@ export default function ProfileEditModal({
   const [introduce, setIntroduce] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [upLoadComplete, setUploadComplete] = useState(false);
-  const [uploadedImageUrl, setUploadedImageUrl] = useState('');
+  const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
   const [profileData, setProfileData] = useState<MemberDataType | null>(null);
 
   const { register, handleSubmit, watch, setValue } = useForm<AuthFormProps>();
@@ -111,7 +111,7 @@ export default function ProfileEditModal({
   };
 
   const handleProfileSubmit = async (
-    profileImageUrl: string,
+    profileImageUrl: string | null,
     newIntroduce: string,
   ) => {
     try {

@@ -41,7 +41,7 @@ export default function MyPostList({
           postList.data.map((postData) => (
             <PostPreview
               key={postData.postListInfo.post.id}
-              postData={postData}
+              postData={postData.postListInfo}
             />
           ))
         ) : (
