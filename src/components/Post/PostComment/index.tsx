@@ -1,12 +1,11 @@
+import fetchData from '@/api/fetchData';
 import CommentCard from '@/components/Common/CommentCard';
 import CommentInput from '@/components/Common/CommentInput';
 import { CommentListType } from '@/components/Feed/types';
+import { useCommentRequest } from '@/hooks/useCommentRequest';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import classNames from 'classnames/bind';
 import styles from './PostComment.module.scss';
-import { useRouter } from 'next/router';
-import { useCommentRequest } from '@/hooks/useCommentRequest';
-import { useQuery } from '@tanstack/react-query';
-import fetchData from '@/api/fetchData';
 
 interface PostCommentProps {
   postId: number;
@@ -15,8 +14,6 @@ interface PostCommentProps {
 const cn = classNames.bind(styles);
 
 export default function PostComment({ postId }: PostCommentProps) {
-  const router = useRouter();
-
   const {
     onSubmit,
     deleteCommentRequest,
@@ -25,9 +22,15 @@ export default function PostComment({ postId }: PostCommentProps) {
     editCommentRequest,
   } = useCommentRequest(postId, false);
 
-  const { data: commentData } = useQuery<CommentListType>({
+  const { data: commentData, ref } = useInfiniteScroll<CommentListType>({
     queryKey: ['commentList', postId],
-    queryFn: () => fetchData({ param: `/post/${postId}/comment/list` }),
+    fetchFunction: (page: number) =>
+      fetchData({
+        param: `/post/${postId}/comment/list?order=DESC&page=${page}&take=10`,
+      }),
+    getNextPageParam: (lastPage) => {
+      return lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined;
+    },
   });
 
   return (
@@ -35,24 +38,28 @@ export default function PostComment({ postId }: PostCommentProps) {
       <CommentInput placeholder="댓글을 입력하세요" onSubmit={onSubmit} />
       <div className={cn('comment-container')}>
         {commentData ? (
-          commentData.data.map((comment, index) => (
-            <div key={comment.comment.id}>
-              <CommentCard
-                comment={comment}
-                deleteLikeRequest={deleteLikeRequest}
-                postLikeRequest={postLikeRequest}
-                deleteCommentRequest={deleteCommentRequest}
-                editCommentRequest={editCommentRequest}
-              />
-              {index === commentData.data.length - 1 || (
-                <div className={cn('divide-line')} />
-              )}
-            </div>
-          ))
+          commentData.pages.map((page) =>
+            page.data.map((comment, index) => (
+              <div key={comment.comment.id}>
+                <CommentCard
+                  comment={comment}
+                  deleteLikeRequest={deleteLikeRequest}
+                  postLikeRequest={postLikeRequest}
+                  deleteCommentRequest={deleteCommentRequest}
+                  editCommentRequest={editCommentRequest}
+                />
+                {/* divided line 긋는 방식 변경해야함..  */}
+                {index === page.data.length - 1 || (
+                  <div className={cn('divide-line')} />
+                )}
+              </div>
+            )),
+          )
         ) : (
           <>없어</>
         )}
       </div>
+      <div ref={ref} />
     </div>
   );
 }
