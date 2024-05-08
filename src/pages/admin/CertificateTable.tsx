@@ -3,6 +3,8 @@ import styles from './AdminPage.module.scss';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import { Certificate } from 'crypto';
 import fetchData from '@/api/fetchData';
+import TableRow from './TableRow';
+import TableCell from './TableCell';
 
 const mockCertificateData = {
   name: '최유정',
@@ -22,22 +24,6 @@ export default function CertificateTable({
   certificateImage,
 }: mockCertificateDataType) {
   const cn = classNames.bind(styles);
-
-  // TableRow.tsx
-  interface TableRowProps {
-    children: React.ReactNode;
-  }
-  const TableRow: React.FC<TableRowProps> = ({ children }) => {
-    return <div className={cn('list')}>{children}</div>;
-  };
-
-  // TableCell.tsx
-  interface TableCellProps {
-    children: React.ReactNode;
-  }
-  const TableCell: React.FC<TableCellProps> = ({ children }) => {
-    return <div className={cn('cell')}>{children}</div>;
-  };
 
   // 승인 또는 거절 동작 로직 대강~~
   const sendAcceptRequest = async () => {

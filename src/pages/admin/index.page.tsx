@@ -2,8 +2,6 @@ import CertificateTable from './CertificateTable';
 
 type TableBodyProps = {
   dataList: Data[];
-  handlePermitClick?: () => void;
-  handleDenyClick?: () => void;
 };
 
 export default function AdminPage({ dataList }: TableBodyProps) {
