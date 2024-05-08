@@ -1,3 +1,10 @@
-.image-preview {
-  background-color: black;
+.image-input {
+  display: none;
+}
+
+.input-contianer {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  color: $white-01;
 }

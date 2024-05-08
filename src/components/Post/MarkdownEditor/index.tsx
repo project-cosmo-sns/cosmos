@@ -1,3 +1,4 @@
+import { useMutation } from '@tanstack/react-query';
 import {
   bold,
   codeBlock,
@@ -10,15 +11,14 @@ import {
   table,
   unorderedListCommand,
 } from '@uiw/react-md-editor';
+import classNames from 'classnames/bind';
 import dynamic from 'next/dynamic';
+import { ChangeEvent, useCallback, useRef, useState } from 'react';
+import styles from './MarkdownEditor.module.scss';
 import { codeEdit, codePreview } from './customPreviewButton';
 import getTitleButton from './customTool';
 import getUploadImageButton from './getUploadImageButton';
-import { useMutation } from '@tanstack/react-query';
 import createPresinedURL from './handleUploadImage';
-import { ChangeEvent, useCallback, useState } from 'react';
-import classNames from 'classnames/bind';
-import styles from './MarkdownEditor.module.scss';
 
 interface MarkdownEditorProps {
   content: string | undefined;
@@ -33,7 +33,7 @@ export default function MarkdownEditor({
   setContent,
 }: MarkdownEditorProps) {
   const [previewUrl, setPreviewUrl] = useState('');
-  const [isImageUploadVisible, setIsImageUploadVisible] = useState(false);
+  const imageRef = useRef<HTMLInputElement>(null);
 
   const title1 = getTitleButton(1);
   const title2 = getTitleButton(2);
@@ -43,15 +43,15 @@ export default function MarkdownEditor({
     mutationFn: (file: File) => createPresinedURL(file),
     onSuccess: (data) => {
       const newContent = data
-        ? `${content}\n <img width="500" alt="image" src="${data.split('?')[0]}" />`
+        ? `${content}\n <img width="300" alt="image" src="${data.split('?')[0]}" />`
         : content;
       setContent(newContent);
     },
   });
 
-  const image = getUploadImageButton(previewUrl, () =>
-    setIsImageUploadVisible((prev) => !prev),
-  );
+  const image = getUploadImageButton(previewUrl, () => {
+    if (imageRef.current) imageRef.current.click();
+  });
 
   const fileCheck = useCallback((type: string) => {
     const filetype = type.split('/')[1];
@@ -106,15 +106,14 @@ export default function MarkdownEditor({
           maxLength: 5000,
         }}
       />
-      {isImageUploadVisible && (
-        <input
-          className={cn('image-input')}
-          type="file"
-          accept="image/jpeg,image/png,image/tiff"
-          id="fileUpload"
-          onChange={onSelectFile}
-        />
-      )}
+      <input
+        className={cn('image-input')}
+        type="file"
+        ref={imageRef}
+        accept="image/jpeg,image/png,image/tiff"
+        id="fileUpload"
+        onChange={onSelectFile}
+      />
     </>
   );
 }
