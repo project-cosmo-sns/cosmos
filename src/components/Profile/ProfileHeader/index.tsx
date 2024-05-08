@@ -6,6 +6,8 @@ import GenerationBadge from '@/components/Common/GenerationBadge';
 import Image from 'next/image';
 import { useState } from 'react';
 import FollowList from '../FollowList';
+import useFollowClick from '@/hooks/useFollowClick';
+import FollowButton from '@/components/Common/Buttons/FollowButton';
 
 export interface ProfileHeaderProps {
   memberData: MemberDataType;
@@ -24,6 +26,8 @@ export default function ProfileHeader({
     follower: false,
     following: false,
   });
+  const memberId = memberData?.memberId ?? 0;
+  const { isActive, toggleFollow } = useFollowClick(memberId);
 
   const toggleModal = (type: 'follower' | 'following') => {
     setFollowModal({
@@ -35,12 +39,11 @@ export default function ProfileHeader({
   const renderButton = () => {
     if (memberData.memberId) {
       return (
-        <button
-          type="button"
-          onClick={() => console.log('팔로잉/언팔로잉 로직 처리')}
-        >
-          팔로잉
-        </button>
+        <FollowButton
+          onClick={toggleFollow}
+          isFollowButton={true}
+          isActive={isActive}
+        />
       );
     }
     if (memberData.isAuthorized) {
