@@ -128,7 +128,7 @@ export default function ProfileHeader({
         </div>
       </div>
       <div className={cn('profile-introduce-section')}>
-        {memberData.introduce ? (
+        {memberData.introduce === '' ? (
           memberData.introduce
         ) : (
           <div className={cn('introduce-empty')}>소개가 없습니다.</div>

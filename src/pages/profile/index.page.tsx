@@ -6,19 +6,13 @@ import classNames from 'classnames/bind';
 import styles from './MemberDataContainer.module.scss';
 import ContentContainer from '@/components/Common/ContentContainer';
 import { ContainerOptionType } from '@/@types/type';
-import FeedList from '@/components/Feed/FeedList';
-import PostList from '@/components/Post/PostList';
 import ScrapList from '@/components/Common/ScrapList';
 import { fetchMemberData } from './api';
 import { GetServerSideProps } from 'next';
 import { FeedDetailType } from '@/components/Feed/types';
 import MyFeedList from '@/components/Profile/MyFeedList';
 // import MyPostList from '@/components/Profile/MyPostList';
-import {
-  PostInfoType,
-  PostListDataType,
-  PostListType,
-} from '@/components/Post/types';
+import { PostListType } from '@/components/Post/types';
 
 import { SortType } from '@/constants/sortType';
 import MyPostList from '@/components/Profile/MyPostList';

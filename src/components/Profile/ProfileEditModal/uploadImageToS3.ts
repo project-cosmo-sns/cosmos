@@ -1,8 +1,8 @@
 import fetchData from '@/api/fetchData';
-import GetUploadUrl from './getImageUploadUrl';
+import GetImageUploadUrl from './getImageUploadUrl';
 
 export async function uploadImageToS3(file: File) {
-  const uploadUrl = await GetUploadUrl();
+  const uploadUrl = await GetImageUploadUrl();
   if (!uploadUrl) {
     console.error('업로드 URL GET 실패');
     return null;

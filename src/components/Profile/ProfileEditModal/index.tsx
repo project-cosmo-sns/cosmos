@@ -118,7 +118,7 @@ export default function ProfileEditModal({
     try {
       const requestData = {
         nickname: memberData.nickname,
-        introduce: newIntroduce || memberData.introduce || '입력하세요',
+        introduce: newIntroduce || memberData.introduce || '',
         profileImageUrl: profileImageUrl || memberData.profileImageUrl || null,
       };
 
@@ -129,7 +129,6 @@ export default function ProfileEditModal({
       });
 
       console.log('프로필 업데이트 성공:', response);
-      // 프로필 업데이트 후 모달 닫고 리패치 해야함
       await refetchProfile();
       setIsOpen(false);
       router.reload();
