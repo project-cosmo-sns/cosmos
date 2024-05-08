@@ -64,7 +64,10 @@ export default function FeedCard({
       fetchData<Edits>({
         param: `/feed/${feedId}`,
         method: 'patch',
-        requestData: data,
+        requestData: {
+          content: data.content,
+          imageUrls: data.imageUrls,
+        },
       }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['feedComments'] });
@@ -105,14 +108,12 @@ export default function FeedCard({
                   defaultValue={content}
                   className={cn('text')}
                   placeholder="글을 작성해보세요."
-                  {...register('feedContent', {
+                  {...register('content', {
                     required: '게시글을 작성해주세요',
                   })}
                 />
-                {errors.feedContent && (
-                  <span className={cn('error')}>
-                    {errors.feedContent.message}
-                  </span>
+                {errors.content && (
+                  <span className={cn('error')}>{errors.content.message}</span>
                 )}
                 <button type="submit">편집완료</button>
               </form>
