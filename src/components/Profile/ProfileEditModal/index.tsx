@@ -55,18 +55,6 @@ export default function ProfileEditModal({
     }
   }, [memberData.introduce, setValue]);
 
-  useEffect(() => {
-    if (upLoadComplete) {
-      if (uploadedImageUrl) {
-        setImageUrl(uploadedImageUrl); // 이미지 URL 상태 업데이트
-        setValue('image', uploadedImageUrl);
-        setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
-      }
-      console.log(uploadedImageUrl);
-      setUploadComplete(false);
-    }
-  }, [upLoadComplete, uploadedImageUrl, setValue]);
-
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -84,12 +72,24 @@ export default function ProfileEditModal({
       // setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
       console.log(uploadedImageUrl);
       setUploadedImageUrl(response);
-      setUploadComplete(true);
+      // setUploadComplete(true); // 얘떠ㅐ문임
     } catch (error) {
       console.error('이미지 업로드 에러 :', error);
       // setPreviewImage(tempPreviewUrl);
     }
   };
+
+  useEffect(() => {
+    if (upLoadComplete) {
+      if (uploadedImageUrl) {
+        setImageUrl(uploadedImageUrl); // 이미지 URL 상태 업데이트
+        setValue('image', uploadedImageUrl);
+        setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
+      }
+      console.log(uploadedImageUrl);
+      setUploadComplete(false);
+    }
+  }, [upLoadComplete, uploadedImageUrl, setValue]);
 
   const handleIntroduceChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value || '';
