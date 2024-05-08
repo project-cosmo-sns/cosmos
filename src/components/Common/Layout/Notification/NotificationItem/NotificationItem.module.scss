@@ -29,18 +29,23 @@
 
   .notification-dot {
     display: block;
+    margin: 3px;
     min-width: 12px;
     min-height: 12px;
     background: $primary-01;
     border-radius: 50%;
-
-    &.isRead {
-      background: transparent;
-    }
   }
 
   &:hover {
     background-color: $black-02;
+  }
+
+  .notification-confirm {
+    @include flex-arrange();
+    min-width: 18px;
+    min-height: 18px;
+    background: $black-01;
+    border-radius: 50%;
   }
 }
 
