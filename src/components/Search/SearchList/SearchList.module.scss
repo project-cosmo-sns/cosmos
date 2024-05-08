@@ -1,5 +1,5 @@
 .search-list {
-  @include flex-arrange(center, flex-start);
+  @include flex-arrange(center, stretch);
   flex-direction: column;
   gap: 12px;
   padding: 12px 0;

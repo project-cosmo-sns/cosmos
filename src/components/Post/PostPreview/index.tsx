@@ -6,11 +6,11 @@ import getElapsedTime from '@/utils/getElaspedTime';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import HashTag from '../HashTag';
-import { PostListDataType } from '../types';
+import { PostInfoType } from '../types';
 import styles from './PostPreview.module.scss';
 
 interface PostPreviewProps {
-  postData: PostListDataType;
+  postData: PostInfoType;
 }
 
 export default function PostPreview({ postData }: PostPreviewProps) {
@@ -27,7 +27,7 @@ export default function PostPreview({ postData }: PostPreviewProps) {
     emojiCount,
     commentCount,
     hashTags,
-  } = postData.postListInfo.post;
+  } = postData.post;
 
   const formattedCreatedAt = getElapsedTime(createdAt);
 
@@ -39,10 +39,7 @@ export default function PostPreview({ postData }: PostPreviewProps) {
       className={cn('wrapper')}
       onClick={() => router.push(`/post/${postId}`)}
     >
-      <WriterProfile
-        writer={postData.postListInfo.writer}
-        createdAt={formattedCreatedAt}
-      />
+      <WriterProfile writer={postData.writer} createdAt={formattedCreatedAt} />
       <div className={cn('content-wrapper')}>
         <div className={cn('title')}>{title}</div>
         <div className={cn('content')}>

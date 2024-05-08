@@ -7,7 +7,7 @@ import { PostListType } from '../types';
 import styles from './PostList.module.scss';
 
 interface PostListProps {
-  selectedSort: SortType;
+  selectedSort?: SortType;
   postList: PostListType;
 }
 
@@ -28,7 +28,7 @@ export default function PostList({ selectedSort, postList }: PostListProps) {
           postList.data.map((postData) => (
             <PostPreview
               key={postData.postListInfo.post.id}
-              postData={postData}
+              postData={postData.postListInfo}
             />
           ))
         ) : (

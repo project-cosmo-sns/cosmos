@@ -1,14 +1,29 @@
 .search-profile {
   @include glass-01;
-  @include flex-arrange(flex-start);
   gap: 20px;
   width: 100%;
-  padding: 30px 38px;
+  padding: 20px 30px;
   position: relative;
-  border-radius: 10px;
+  border-radius: 0px;
   border-width: 0;
   color: $white-01;
+  transition: transform 0.15s ease-in-out;
 
+  &:hover {
+    // 포스트 카드에 hover시 스타일 미정이라 임시로 추가. 추후 삭제 or 수정 예정
+    transform: scale(1.01);
+  }
+
+  @media (min-width: 768px) {
+    border-radius: 10px;
+    border-width: 1px;
+  }
+
+  .profile-content {
+    @include flex-arrange(flex-start);
+    gap: 20px;
+    cursor: pointer;
+  }
   .profile-infomation {
     @include flex-arrange(flex-start, flex-start);
     gap: 12px;
@@ -16,6 +31,14 @@
 
     & > div {
       @include flex-arrange(flex-start);
+
+      &.profile-description {
+        display: none;
+
+        @media (min-width: 768px) {
+          display: unset;
+        }
+      }
     }
   }
 
@@ -44,7 +67,18 @@
   }
 
   .profile-description {
-    @include font-style(14px, $gray-01, 500);
+    @include font-style(14px, $gray-03, 500);
+  }
+
+  .profile-description-mobile {
+    margin: 20px 0 0;
+    padding-top: 20px;
+    text-align: center;
+    border-top: $glass-edge-01;
+
+    @media (min-width: 768px) {
+      display: none;
+    }
   }
 
   button {
