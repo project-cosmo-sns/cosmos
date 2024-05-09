@@ -8,6 +8,7 @@
     @include flex-arrange(flex-start, center);
     padding-top: 65px;
     flex-direction: column;
+    position: relative;
   }
 
   @media (min-width: 768px) {
