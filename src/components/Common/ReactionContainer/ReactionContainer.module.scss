@@ -3,10 +3,6 @@
   gap: 4px;
   width: 100%;
   position: relative;
-
-  .icon-wrapper {
-    display: flex;
-  }
 }
 
 .reaction {
@@ -20,33 +16,10 @@
 
 .emoji {
   &:hover {
-    background-color: $black-02;
+    background-color: $black-01;
   }
 }
 
-.details-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-
-  .reaction {
-    width: auto;
-    padding: 0;
-  }
-
-  .icon-wrapper {
-    display: flex;
-    gap: 12px;
-  }
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-  }
-}
-
-.details-emoji-bundler {
-  flex-grow: 1;
-  .clicked {
-    color: $primary-01;
-  }
+.clicked {
+  color: $primary-01;
 }

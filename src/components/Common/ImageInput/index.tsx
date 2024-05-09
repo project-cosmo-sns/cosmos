@@ -12,7 +12,7 @@ interface ImageInputProps {
   type?: string;
   watch?: UseFormWatch<AuthFormProps> | undefined;
   register?: UseFormRegisterReturn;
-  initialImageUrl?: string;
+  initialImageUrl?: string | null;
 }
 
 /**
