@@ -73,7 +73,7 @@ export default function ProfileEditModal({
       // setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
       console.log(uploadedImageUrl);
       setUploadedImageUrl(response);
-      // setUploadComplete(true); // 얘떠ㅐ문임
+      // setUploadComplete(true); // 얘때문임
     } catch (error) {
       console.error('이미지 업로드 에러 :', error);
       // setPreviewImage(tempPreviewUrl);
@@ -91,6 +91,19 @@ export default function ProfileEditModal({
       setUploadComplete(false);
     }
   }, [upLoadComplete, uploadedImageUrl, setValue]);
+
+  const handleImageDelete = async () => {
+    try {
+      const response = await fetchData({
+        param: '/profile/image/delete',
+        method: 'delete',
+        requestData: uploadedImageUrl,
+      });
+      console.log('프로필 업데이트 성공:', response);
+    } catch (error) {
+      console.error('이미지 삭제 에러 : ', error);
+    }
+  };
 
   const handleIntroduceChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value || '';
@@ -165,7 +178,13 @@ export default function ProfileEditModal({
                 }}
                 initialImageUrl={previewImage || uploadedImageUrl}
               />
-              <button className={cn('image-delete-button')}>이미지 삭제</button>
+              <button
+                className={cn('image-delete-button')}
+                type="submit"
+                onClick={handleImageDelete}
+              >
+                이미지 삭제
+              </button>
             </div>
             <div className={cn('name')}>{memberData?.nickname}</div>
             <GenerationBadge
