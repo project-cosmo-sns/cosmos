@@ -7,6 +7,8 @@ import { CloseIcon, ProfileIcon } from '@/components/Common/IconCollection';
 import { useState } from 'react';
 import { postFeed } from './api';
 import { FeedType } from './type';
+import { useQuery } from '@tanstack/react-query';
+import fetchData from '@/api/fetchData';
 
 interface CreatedFeedTypes {
   profileImage?: string;
@@ -14,7 +16,7 @@ interface CreatedFeedTypes {
 
 interface Inputs {
   content: string;
-  // feedImage: File[];
+  feedImage: string[];
 }
 
 /**
@@ -35,6 +37,21 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
     watch,
   } = useForm<Inputs>();
   const [images, setImages] = useState<File[]>([]);
+  const [urlBucket, setUrlBucket] = useState<string[]>([]);
+
+  const { refetch } = useQuery({
+    queryKey: ['signedUrl'],
+    queryFn: () =>
+      fetchData({
+        param: 'feed/image/create',
+      }),
+    enabled: false,
+  });
+
+  const getUrlFromServer = async () => {
+    const receivedUrl = await refetch();
+    console.log(receivedUrl, '------발급받은 url--------');
+  };
 
   /**
    * 제어컴포넌트인 이미지 업로드 input이 onChange 이벤가 일어나면 setImages 세터함수가 실행되어
@@ -67,11 +84,15 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
    * CloseIcon을 클릭하면 filterImage 함수가 실행됩니다.
    * @param {number} index - useState images 배열의 index는 이미지를 업로드할때 등록되는 index와 같습니다. useState images 배열을 순회하면서 클릭한 이미지의 index를 제외한 나머지 요소를 반환합니다.
    */
-  // const filterImage = (index: number) => {
-  //   const filteredImages = images.filter((el, i) => i !== index);
-  //   setImages(filteredImages);
-  //   setValue('feedImage', filteredImages);
-  // };
+  const filterImage = (index: number) => {
+    const filteredImages = images.filter((el, i) => i !== index);
+    // filterImage 순회하면서 url 발급 -> url에 파일 put 요청 -> 요청성공하면 setValueㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    filteredImages.map((item) =>
+      console.log(item, '------필터된 이미지------'),
+    );
+    setImages(filteredImages);
+    setValue('feedImage', filteredImages);
+  };
 
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
@@ -102,7 +123,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
           </span>
           <div className={cn('addImage')}>
             <div className={cn('image-wrapper')}>
-              {/* <Controller
+              <Controller
                 control={control}
                 name="feedImage"
                 render={({ field: { onChange } }) => (
@@ -116,24 +137,26 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
                         ? Array.from(event.target.files)
                         : [];
                       const currentImageValue = [...images, ...fileList];
+                      // currentImageValue를 순회하면서 url 발급 -> url에 파일 put 요청 -> 요청 성공하면 setValue 처리 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+                      currentImageValue.map(() => getUrlFromServer());
                       setValue('feedImage', currentImageValue);
                       setImages(currentImageValue);
                     }}
                   />
                 )}
-              /> */}
+              />
               <label htmlFor="feedImage" className={cn('file-label')}>
                 <span className={cn('label-text')}>이미지 업로드</span>
               </label>
               {imagePreview &&
                 imagePreview.map((item, index) => (
                   <div key={index} className={cn('preview-container')}>
-                    {/* <CloseIcon
+                    <CloseIcon
                       className={cn('close')}
                       onClick={() => {
                         filterImage(index);
                       }}
-                    /> */}
+                    />
                     <div className={cn('preview-wrapper')}>
                       <img
                         className={cn('file-preview')}
