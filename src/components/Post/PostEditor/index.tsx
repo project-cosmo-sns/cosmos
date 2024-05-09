@@ -7,6 +7,8 @@ import HashTagInput from '../HashTag/HashTagInput';
 import MarkdownEditor from '../MarkdownEditor';
 import { PostDetailType, PostRequestType } from '../types';
 import styles from './PostEditor.module.scss';
+import { CATEGORY_LIST } from '@/constants/categoryList';
+import getKeyByValue from '@/utils/getKeyByValue';
 
 interface PostEditorProps {
   postId: string;
@@ -21,7 +23,7 @@ export default function PostEditor({
   postData,
   mergeState,
 }: PostEditorProps) {
-  const [selectedCategory, setSelectedCategory] = useState('공지사항');
+  const [selectedCategory, setSelectedCategory] = useState('NOTICE');
 
   const { data, isSuccess } = useQuery<PostDetailType>({
     queryKey: ['postData', postId],
@@ -36,13 +38,19 @@ export default function PostEditor({
     if (postId && isSuccess) {
       const { post } = data.postDetail;
       const { title, content, category, hashTags } = post;
-      setSelectedCategory(post.category);
-      mergeState({ title, content, category, hashTags });
+      setSelectedCategory(getKeyByValue(CATEGORY_LIST, category)!);
+
+      mergeState({
+        title,
+        content,
+        category,
+        hashTags,
+      });
     }
   }, [postId, isSuccess]);
 
   useEffect(() => {
-    mergeState({ category: selectedCategory });
+    mergeState({ category: CATEGORY_LIST[selectedCategory] });
   }, [selectedCategory]);
 
   return (

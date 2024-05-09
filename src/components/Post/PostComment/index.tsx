@@ -22,7 +22,12 @@ export default function PostComment({ postId }: PostCommentProps) {
     editCommentRequest,
   } = useCommentRequest(postId, false);
 
-  const { data: commentData, ref } = useInfiniteScroll<CommentListType>({
+  const {
+    data: commentData,
+    ref,
+    isFetchingNextPage,
+    isPending,
+  } = useInfiniteScroll<CommentListType>({
     queryKey: ['commentList', postId],
     fetchFunction: (page: number) =>
       fetchData({
@@ -32,6 +37,8 @@ export default function PostComment({ postId }: PostCommentProps) {
       return lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined;
     },
   });
+
+  if (isPending) <>Loading...</>;
 
   return (
     <div className={cn('wrapper')}>
@@ -59,7 +66,7 @@ export default function PostComment({ postId }: PostCommentProps) {
           <>없어</>
         )}
       </div>
-      <div ref={ref} />
+      {!isFetchingNextPage && <div ref={ref} />}
     </div>
   );
 }
