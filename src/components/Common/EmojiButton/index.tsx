@@ -35,7 +35,7 @@ export default function EmojiButton({
       onClick={(event) => {
         setIsClicked((prev) => !prev);
         event.stopPropagation();
-        handleEmojiClick(emojiCode, emojiData[0]?.isClicked);
+        handleEmojiClick(emojiCode, isClicked);
       }}
       disabled={isPending}
     >

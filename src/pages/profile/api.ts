@@ -12,6 +12,7 @@ export async function fetchMemberData(context: GetServerSidePropsContext) {
   const { memberId } = context.query;
 
   const endpoint = memberId ? `profile/${memberId}` : '/profile/mine';
+  console.log('asdf');
 
   try {
     const res = await instance.get(endpoint, {
