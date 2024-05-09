@@ -19,29 +19,13 @@ const cn = classNames.bind(styles);
 export default function Notification({ onClose }: PopOverProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const {
-    data: notificationList,
-    isLoading,
-    isSuccess,
-  } = useQuery<NotificationResult>({
+  const { data: notificationList, isLoading } = useQuery<NotificationResult>({
     queryKey: ['notification'],
     queryFn: () =>
       fetchData({
         param: `/notification/list?order=DESC&page=1&take=20`,
       }),
   });
-
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-
-  if (
-    !isSuccess ||
-    !notificationList.data ||
-    notificationList.data.length === 0
-  ) {
-    return <div>알림이 없습니다.</div>;
-  }
 
   return (
     <PopOver onClose={onClose} className={cn('notification-popover')}>
@@ -58,15 +42,24 @@ export default function Notification({ onClose }: PopOverProps) {
         fill="#C2C7D9"
       />
 
-      {notificationList.data.map((notificationitem) => (
-        <NotificationItem
-          key={notificationitem.notification.id}
-          data={notificationitem}
-        />
-      ))}
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          {notificationList?.data.map((notificationitem) => (
+            <NotificationItem
+              key={notificationitem.notification.id}
+              data={notificationitem}
+            />
+          ))}
 
-      {isModalOpen && (
-        <NotificationModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+          {isModalOpen && (
+            <NotificationModal
+              isOpen={isModalOpen}
+              setIsOpen={setIsModalOpen}
+            />
+          )}
+        </>
       )}
     </PopOver>
   );
