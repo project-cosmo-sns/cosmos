@@ -22,7 +22,7 @@ export default function FollowButton({
       onClick={onClick}
       className={cn('follow-button', { isActive })}
     >
-      {isActive ? '팔로우' : '팔로잉'}
+      {isActive ? '팔로잉' : '팔로우'}
     </button>
   ) : (
     <button type="button" className={cn('delete-button')} onClick={onClick}>
