@@ -57,6 +57,11 @@ export default function NotificationItem({ data }: NotificationItemProps) {
 
   const formattedCreatedAt = getElapsedTime(createdAt);
 
+  const onErrorImg: React.ReactEventHandler<HTMLImageElement> = (e) => {
+    const target = e.target as HTMLImageElement;
+    target.src = '/images/profile.svg';
+  };
+
   return (
     <>
       <div
@@ -66,6 +71,7 @@ export default function NotificationItem({ data }: NotificationItemProps) {
         {sendMember.profileImageUrl ? (
           <Image
             src={sendMember.profileImageUrl}
+            onError={onErrorImg}
             alt="프로필 이미지"
             width={40}
             height={40}
