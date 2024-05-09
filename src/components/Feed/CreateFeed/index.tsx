@@ -11,7 +11,7 @@ import { useQuery } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
 
 interface CreatedFeedTypes {
-  profileImage?: string;
+  profileImage: string | null;
 }
 
 interface Inputs {
@@ -50,6 +50,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
 
   const getUrlFromServer = async () => {
     const receivedUrl = await refetch();
+
     console.log(receivedUrl, '------발급받은 url--------');
   };
 

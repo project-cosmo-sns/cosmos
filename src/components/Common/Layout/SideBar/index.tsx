@@ -74,7 +74,10 @@ export default function SideBar() {
         >
           <AddIcon fill="#9747FF" />
           {activePopover === 'add' && (
-            <AddContentPopOver onClose={handleClosePopOver} />
+            <AddContentPopOver
+              profileImage={userImage}
+              onClose={handleClosePopOver}
+            />
           )}
         </div>
         <div
