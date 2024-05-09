@@ -1,4 +1,5 @@
 import fetchData from '@/api/fetchData';
+import { CATEGORY_LIST } from '@/constants/categoryList';
 import { SortType } from '@/constants/sortType';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import classNames from 'classnames/bind';
@@ -7,7 +8,6 @@ import CategoryList from '../CategoryList';
 import { PostListType } from '../types';
 import styles from './PostList.module.scss';
 import PostListContent from './PostListContent';
-import { CATEGORY_LIST } from '@/constants/categoryList';
 
 interface PostListProps {
   selectedSort?: SortType;

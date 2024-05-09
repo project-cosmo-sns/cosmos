@@ -76,42 +76,47 @@ export default function PostContent() {
     } = post;
 
     return (
-      <div className={cn('wrapper')}>
-        <span className={cn('category')}>{category}</span>
-        <span className={cn('title')}>{title}</span>
-        <div className={cn('header')}>
-          <WriterProfile
-            writer={writer}
-            createdAt={createdAt.slice(0, 10).replace(/-/g, '.')}
+      <>
+        <div className={cn('wrapper')}>
+          <span className={cn('category')}>{category}</span>
+          <span className={cn('title')}>{title}</span>
+          <div className={cn('header')}>
+            <WriterProfile
+              writer={writer}
+              createdAt={createdAt.slice(0, 10).replace(/-/g, '.')}
+            />
+            <ActionButtons
+              isButtonShow={isMine}
+              handleClickEdit={() => router.push(`/write?postId=${postId}`)}
+              handleClickDelete={() => setIsDeleteModalOpen(true)}
+            />
+          </div>
+          <div className={cn('divide-line')} />
+          <MarkdownContent
+            className={cn('markdown-content')}
+            content={content}
           />
-          <ActionButtons
-            isButtonShow={isMine}
-            handleClickEdit={() => router.push(`/write?postId=${postId}`)}
-            handleClickDelete={() => setIsDeleteModalOpen(true)}
+          <div className={cn('hashtag-container')}>
+            {hashTags.map((tag: HashTagType) => (
+              <HashTag key={`${tag.tagName}`} tag={tag} />
+            ))}
+          </div>
+          <EmojiBundle
+            isPost
+            commentCount={commentCount}
+            viewCount={viewCount}
+            emojiList={emojis}
+            handleEmojiClick={handleEmojiClick}
+            isPending={isAddPending || isDeletePending}
           />
-          <DeleteModal
-            isDeleteModalOpen={isDeleteModalOpen}
-            setIsDeleteModalOpen={setIsDeleteModalOpen}
-            handleDelete={deleteMutate}
-          />
+          <PostComment postId={Number(postId)} />
         </div>
-        <div className={cn('divide-line')} />
-        <MarkdownContent className={cn('markdown-content')} content={content} />
-        <div className={cn('hashtag-container')}>
-          {hashTags.map((tag: HashTagType) => (
-            <HashTag key={`${tag.tagName}`} tag={tag} />
-          ))}
-        </div>
-        <EmojiBundle
-          isPost
-          commentCount={commentCount}
-          viewCount={viewCount}
-          emojiList={emojis}
-          handleEmojiClick={handleEmojiClick}
-          isPending={isAddPending || isDeletePending}
+        <DeleteModal
+          isDeleteModalOpen={isDeleteModalOpen}
+          setIsDeleteModalOpen={setIsDeleteModalOpen}
+          handleDelete={deleteMutate}
         />
-        <PostComment postId={Number(postId)} />
-      </div>
+      </>
     );
   }
 }

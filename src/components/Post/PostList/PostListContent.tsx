@@ -12,10 +12,12 @@ interface PostListContentProps {
 export default function PostListContent({
   postDataList,
 }: PostListContentProps) {
+  const postList = postDataList.data;
+
   return (
     <div className={cn('post-container')}>
-      {postDataList.data.length ? (
-        postDataList.data.map((post) => (
+      {postList.length ? (
+        postList.map((post) => (
           <PostPreview
             key={post.postListInfo.post.id}
             postData={post.postListInfo}

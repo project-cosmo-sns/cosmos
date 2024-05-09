@@ -6,7 +6,6 @@
 }
 
 .comment-container {
-  margin: 20px 0;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -17,4 +16,26 @@
   height: 1px;
   background-color: $gray-02;
   margin: 16px 0;
+}
+
+.comment-list {
+  padding-bottom: 20px;
+  border-bottom: 1px solid $gray-01;
+  margin-bottom: 20px;
+
+  &:first-child {
+    padding-top: 40px;
+  }
+
+  &:last-child {
+    border: none;
+    padding-bottom: 0px;
+  }
+}
+
+.no-comment {
+  @include flex-arrange;
+  width: 100%;
+  height: 200px;
+  color: $gray-01;
 }

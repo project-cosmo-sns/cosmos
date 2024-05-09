@@ -44,10 +44,10 @@ export default function PostComment({ postId }: PostCommentProps) {
     <div className={cn('wrapper')}>
       <CommentInput placeholder="댓글을 입력하세요" onSubmit={onSubmit} />
       <div className={cn('comment-container')}>
-        {commentData ? (
-          commentData.pages.map((page) =>
-            page.data.map((comment, index) => (
-              <div key={comment.comment.id}>
+        {commentData?.pages.map(({ data: commentList }, index) =>
+          commentList.length ? (
+            commentList.map((comment) => (
+              <div key={comment.comment.id} className={cn('comment-list')}>
                 <CommentCard
                   comment={comment}
                   deleteLikeRequest={deleteLikeRequest}
@@ -55,15 +55,13 @@ export default function PostComment({ postId }: PostCommentProps) {
                   deleteCommentRequest={deleteCommentRequest}
                   editCommentRequest={editCommentRequest}
                 />
-                {/* divided line 긋는 방식 변경해야함..  */}
-                {index === page.data.length - 1 || (
-                  <div className={cn('divide-line')} />
-                )}
               </div>
-            )),
-          )
-        ) : (
-          <>없어</>
+            ))
+          ) : (
+            <div key={index} className={cn('no-comment')}>
+              댓글이 없습니다.
+            </div>
+          ),
         )}
       </div>
       {!isFetchingNextPage && <div ref={ref} />}
