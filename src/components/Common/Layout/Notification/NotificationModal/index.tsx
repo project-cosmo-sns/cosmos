@@ -1,7 +1,7 @@
 import styles from './NotificationModal.module.scss';
 import classNames from 'classnames/bind';
 import Modal from '@/components/Common/Layout/Modal';
-import ToggleButton from '@/components/Common/Buttons/ToggleButton';
+import NotificationToggleButton from './NotificationToggleButton';
 import { useQuery } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
 import { NotificationSettingType } from '../type';
@@ -47,15 +47,24 @@ export default function NotificationModal({
         <div className={cn('notification-modal-container')}>
           <div className={cn('notification-modal-item')}>
             <h3>댓글</h3>
-            <ToggleButton setting={isCommentNotification} />
+            <NotificationToggleButton
+              setting={isCommentNotification}
+              type="COMMENT"
+            />
           </div>
           <div className={cn('notification-modal-item')}>
             <h3>이모지</h3>
-            <ToggleButton setting={isEmojiNotification} />
+            <NotificationToggleButton
+              setting={isEmojiNotification}
+              type="EMOJI"
+            />
           </div>
           <div className={cn('notification-modal-item')}>
             <h3>팔로우</h3>
-            <ToggleButton setting={isFollowNotification} />
+            <NotificationToggleButton
+              setting={isFollowNotification}
+              type="FOLLOW"
+            />
           </div>
         </div>
       </div>
