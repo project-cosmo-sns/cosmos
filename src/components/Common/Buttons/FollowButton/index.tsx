@@ -16,20 +16,16 @@ export default function FollowButton({
   isFollowButton,
   isActive,
 }: FollowButtonType) {
-  const handleClick = () => {
-    onClick(isActive || false);
-  };
-
   return isFollowButton === true ? (
     <button
       type="button"
-      onClick={handleClick}
+      onClick={onClick}
       className={cn('follow-button', { isActive })}
     >
       {isActive ? '팔로우' : '팔로잉'}
     </button>
   ) : (
-    <button type="button" className={cn('delete-button')}>
+    <button type="button" className={cn('delete-button')} onClick={onClick}>
       삭제
     </button>
   );

@@ -101,7 +101,7 @@ export default function ProfileHeader({
               followListProps={{
                 title: '팔로워',
                 toggleModal: () => toggleModal('follower'),
-                followData: 'follower',
+                followData: memberData.memberId ? 'userFollower' : 'follower',
                 isFollowButton: false,
                 modalVisible: followModal.follower,
               }}
@@ -116,7 +116,7 @@ export default function ProfileHeader({
               followListProps={{
                 title: '팔로잉',
                 toggleModal: () => toggleModal('following'),
-                followData: 'following',
+                followData: memberData.memberId ? 'userFollowing' : 'following',
                 isFollowButton: true,
                 modalVisible: followModal.following,
               }}
