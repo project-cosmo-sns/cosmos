@@ -2,7 +2,6 @@ import styles from './NotificationModal.module.scss';
 import classNames from 'classnames/bind';
 import Modal from '@/components/Common/Layout/Modal';
 import ToggleButton from '@/components/Common/Buttons/ToggleButton';
-import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import { useQuery } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
 import { NotificationSettingType } from '../type';
@@ -19,10 +18,6 @@ export default function NotificationModal({
   isOpen,
   setIsOpen,
 }: NotificationModalProps) {
-  const handleButtonClick = () => {
-    console.log('알림 설정 완료 클릭');
-  };
-
   const { data: notificationSetting, isLoading } =
     useQuery<NotificationSettingType>({
       queryKey: ['notificationSetting'],
@@ -63,13 +58,6 @@ export default function NotificationModal({
             <ToggleButton setting={isFollowNotification} />
           </div>
         </div>
-        <DefaultButton
-          onClick={handleButtonClick}
-          size="large"
-          color="primary-01"
-        >
-          등록하기
-        </DefaultButton>
       </div>
     </Modal>
   );
