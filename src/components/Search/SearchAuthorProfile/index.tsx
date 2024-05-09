@@ -30,7 +30,7 @@ export default function SearchAuthorProfile({
     isMine,
   } = member;
 
-  const { isActive, toggleFollow } = useFollowClick(id);
+  const { isActive, toggleFollow } = useFollowClick(id, !!isFollowing);
 
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
@@ -82,7 +82,7 @@ export default function SearchAuthorProfile({
         <FollowButton
           onClick={handleButtonClick}
           isFollowButton
-          isActive={!!isActive}
+          isActive={isActive}
         />
       )}
     </div>
