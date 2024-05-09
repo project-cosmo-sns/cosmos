@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind';
 import PostPreview from '../PostPreview';
 import { PostListType } from '../types';
-import styles from './PostListContent.module.scss';
+import styles from './PostList.module.scss';
 
 const cn = classNames.bind(styles);
 

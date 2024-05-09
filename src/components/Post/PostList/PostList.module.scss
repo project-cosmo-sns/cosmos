@@ -9,3 +9,24 @@
   width: 100%;
   z-index: 1;
 }
+
+.post-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+}
+
+.no-post {
+  @include flex-arrange;
+  width: 100%;
+  height: 540px;
+  color: $white-01;
+}
+
+@media (min-width: 768px) {
+  .post-container {
+    padding: 0 24px 24px;
+    gap: 12px;
+  }
+}
