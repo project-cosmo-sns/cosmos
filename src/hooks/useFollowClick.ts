@@ -8,7 +8,7 @@ import fetchData from '@/api/fetchData';
  * @returns {Object} 현재 팔로우 상태와 팔로우 상태를 토글하는 함수를 포함하는 객체를 반환합니다.
  */
 
-export default function useFollowClick(memberId: number) {
+export default function useFollowClick(memberId?: number) {
   const [isActive, setIsActive] = useState(false);
   const queryClient = useQueryClient();
 
@@ -28,7 +28,9 @@ export default function useFollowClick(memberId: number) {
   };
 
   useEffect(() => {
-    checkFollowStatus();
+    if (memberId) {
+      checkFollowStatus();
+    }
   }, [memberId]);
 
   // 팔로우 성공 후, 팔로우 상태를 다시 확인하는 함수

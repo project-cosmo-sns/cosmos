@@ -138,7 +138,6 @@ export default function ProfileEditModal({
   };
 
   const onSubmit: SubmitHandler<AuthFormProps> = async (data) => {
-    // 폼 데이터를 사용하여 프로필 업데이트 로직 구현
     console.log('introduce:', introduce);
     await handleProfileSubmit(uploadedImageUrl, introduce);
   };
@@ -166,12 +165,14 @@ export default function ProfileEditModal({
                 }}
                 initialImageUrl={previewImage || uploadedImageUrl}
               />
+              <button className={cn('image-delete-button')}>이미지 삭제</button>
             </div>
             <div className={cn('name')}>{memberData?.nickname}</div>
             <GenerationBadge
               generationInfo={memberData?.generation}
               isAuthorized={memberData?.isAuthorized}
             />
+
             <div className={cn('introduce')}>
               한줄소개
               {memberData?.introduce ? (

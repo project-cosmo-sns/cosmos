@@ -22,7 +22,6 @@ export async function fetchMemberData(context: GetServerSidePropsContext) {
 
     const memberData: MemberDataType = await res.data;
     const myFeedList: FeedListType = await getMyFeedList(context);
-    // 포스트 리스트는 에러 나는중...!
     const myPostList: PostListType = await getMyPostList(context);
 
     return {

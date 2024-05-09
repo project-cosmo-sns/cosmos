@@ -26,7 +26,7 @@ export default function ProfileHeader({
     follower: false,
     following: false,
   });
-  const memberId = memberData?.memberId ?? 0;
+  const memberId = memberData?.memberId;
   const { isActive, toggleFollow } = useFollowClick(memberId);
 
   const toggleModal = (type: 'follower' | 'following') => {
@@ -35,6 +35,7 @@ export default function ProfileHeader({
       [type]: !followModal[type],
     });
   };
+  console.log('memberData:', memberData);
 
   const renderButton = () => {
     if (memberData.memberId) {
