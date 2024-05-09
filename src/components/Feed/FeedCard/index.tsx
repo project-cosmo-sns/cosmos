@@ -12,6 +12,7 @@ import WriterProfile from '@/components/Common/WriterProfile';
 import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import { FeedDetailType } from '../types';
 import styles from './FeedCard.module.scss';
+import getElapsedTime from '@/utils/getElaspedTime';
 
 interface FeedCardTypes {
   feedData: FeedDetailType;
@@ -101,7 +102,10 @@ export default function FeedCard({
       <div className={cn('wrapper')}>
         <div className={cn('user-content')} onClick={onClick}>
           <div className={cn('profile-content-wrapper')}>
-            <WriterProfile writer={feedData.writer} createdAt={createdAt} />
+            <WriterProfile
+              writer={feedData.writer}
+              createdAt={getElapsedTime(createdAt)}
+            />
             {isEdit ? (
               <form onSubmit={handleSubmit(onSubmit)}>
                 <textarea
