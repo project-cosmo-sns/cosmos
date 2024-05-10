@@ -37,7 +37,9 @@ export default function EmojiButton({
       })}
       onClick={(event) => {
         setIsClicked((prev) => !prev);
-        setCurrentEmojiCount((prev) => (isClicked ? prev - 1 : prev + 1));
+        setCurrentEmojiCount((prev) =>
+          isClicked ? Number(prev) - 1 : Number(prev) + 1,
+        );
         console.log(currentEmojiCount);
         event.stopPropagation();
         handleEmojiClick(emojiCode, isClicked);
