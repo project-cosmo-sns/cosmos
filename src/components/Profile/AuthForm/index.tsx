@@ -10,6 +10,7 @@ import { useRouter } from 'next/router';
 import { generationRegex } from '@/constants/generationRegex';
 import { CheckIcon } from '@/components/Common/IconCollection';
 import { useToast } from '@/hooks/useToast';
+import { useSendAuthData, useDeleteAuthData } from '@/api/authorization';
 
 const cn = classNames.bind(styles);
 
@@ -26,12 +27,15 @@ export default function AuthForm({
 
   const router = useRouter();
   const { showToastHandler } = useToast();
+  const sendAuth = useSendAuthData();
   const onSubmit: SubmitHandler<AuthFormProps> = (data) => {
+    sendAuth(data);
     showToastHandler(
       '인증 신청이 완료되었습니다.',
       <CheckIcon fill="#0ACF83" />,
     );
     router.push('/');
+    console.log(sendAuth(data));
   };
 
   return (
