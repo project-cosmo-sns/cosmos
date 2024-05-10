@@ -52,7 +52,7 @@ export default function Home({ feedList, postList }: HomePropsType) {
           <FeedList feedList={feedList.props.response} />
         ) : (
           <PostList
-            postList={postList.props.response}
+            initialPostList={postList.props.response}
             selectedSort={selectedSort}
           />
         )}

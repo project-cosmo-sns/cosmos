@@ -28,6 +28,6 @@
 }
 
 .clicked {
-  border: 1px solid $primary-01;
+  box-shadow: 0 0 0 1px $primary-01 inset;
   color: $primary-01;
 }
