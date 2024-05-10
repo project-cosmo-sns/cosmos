@@ -38,7 +38,6 @@ export default function CommentInput({
       />
       <DefaultButton
         disabled={isSubmitting}
-        onClick={() => console.log('댓글 전송 클릭')}
         buttonType="submit"
         size="small"
         color="purple"

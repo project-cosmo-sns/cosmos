@@ -2,12 +2,17 @@
   width: 100%;
 }
 
-.input {
+.textarea {
   border: none;
   width: 100%;
-  flex-grow: 1;
+  height: 100%;
+  resize: none;
   font-size: 1.6rem;
   border-radius: 5px;
   padding: 15px 16px;
   @include color($black-03, $white-01);
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 }
