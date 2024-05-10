@@ -15,12 +15,10 @@ const cn = classNames.bind(styles);
 
 export default function WriterProfile({
   writer,
-  createdAt: timeString,
+  createdAt,
 }: WriterProfileProps) {
   const router = useRouter();
   const { id: memberId, nickname, profileImageUrl, generation } = writer;
-
-  const createdAt = getElapsedTime(timeString);
 
   return (
     <div className={cn('wrapper')}>

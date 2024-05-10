@@ -2,9 +2,11 @@
 
 import { configureStore } from '@reduxjs/toolkit';
 import searchReducer from './searchSlice';
+import toastReducer from './toastSlice';
 
 const rootReducer = {
   search: searchReducer,
+  toast: toastReducer,
 };
 
 const store = configureStore({
