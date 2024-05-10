@@ -6,6 +6,8 @@ interface DeleteModalProps {
   isDeleteModalOpen: boolean;
   setIsDeleteModalOpen: (args: boolean) => void;
   handleDelete: () => void;
+  title?: string;
+  deleteText?: string;
 }
 
 const cn = classNames.bind(styles);
@@ -14,6 +16,8 @@ export default function DeleteModal({
   isDeleteModalOpen,
   setIsDeleteModalOpen,
   handleDelete,
+  title = '삭제',
+  deleteText = '삭제하기',
 }: DeleteModalProps) {
   return (
     <Modal
@@ -23,7 +27,7 @@ export default function DeleteModal({
       cssComponentDisplay={cn()}
     >
       <div className={cn('wrapper')}>
-        <span>정말 삭제하시겠습니까?</span>
+        <span>정말 {title} 하시겠습니까?</span>
         <div className={cn('button-container')}>
           <button
             className={cn('button', 'cancel')}
@@ -37,7 +41,7 @@ export default function DeleteModal({
             type="button"
             onClick={handleDelete}
           >
-            삭제하기
+            {deleteText}
           </button>
         </div>
       </div>

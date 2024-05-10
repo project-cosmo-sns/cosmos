@@ -9,7 +9,7 @@ const cn = classNames.bind(styles);
 /**
  * @param {string} text - text 속성은 토스트에 표시할 텍스트
  * @param { React.ReactNode} icon - icon 속성은 토스트에 표시할 아이콘
- * @param {string} fill - fill 속성은 icon의 색상을 변경할 때 사용 (#0ACF83 인증완료)
+ * @param {boolean} visible - visible 속성은 토스트의 가시성을 결정
  */
 
 export default function Toast() {
