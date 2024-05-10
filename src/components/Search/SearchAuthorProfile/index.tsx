@@ -30,14 +30,19 @@ export default function SearchAuthorProfile({
     isMine,
   } = member;
 
-  const { toggleFollow } = useFollowClick(id);
+  const { isActive, toggleFollow } = useFollowClick(id, !!isFollowing);
+
+  const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
+    toggleFollow();
+  };
 
   return (
-    <div className={cn('search-profile')}>
-      <div
-        className={cn('profile-content')}
-        onClick={() => router.push(`/profile?memberId=${id}`)}
-      >
+    <div
+      className={cn('search-profile')}
+      onClick={() => router.push(`/profile?memberId=${id}`)}
+    >
+      <div className={cn('profile-content')}>
         <Image
           className={cn('profile-image')}
           src={profileImageUrl || '/images/profile.svg'}
@@ -75,9 +80,9 @@ export default function SearchAuthorProfile({
 
       {!isMine && (
         <FollowButton
-          onClick={toggleFollow}
+          onClick={handleButtonClick}
           isFollowButton
-          isActive={!isFollowing}
+          isActive={isActive}
         />
       )}
     </div>
