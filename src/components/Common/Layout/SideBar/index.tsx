@@ -13,9 +13,11 @@ import {
 } from '@/components/Common/IconCollection';
 import LoginModal from '../../LoginModal';
 import { useRouter } from 'next/router';
-import useGetProfileImage from '@/api/ProfileImage';
+import { getProfileImage } from '@/api/member';
 import Image from 'next/image';
-import { useQuery } from '@tanstack/react-query';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { login } from '@/redux/logoutSlice';
 
 const cn = classNames.bind(styles);
 
@@ -25,9 +27,11 @@ export default function SideBar() {
   );
   const [modalVisible, setModalVisible] = useState(false);
   const [userImage, setUserImage] = useState<string | null>(null);
-  const [isLogin, setIsLogin] = useState(false);
 
   const router = useRouter();
+  const isLogin = useSelector((state: RootState) => state.logout.isLoggedIn);
+
+  const dispatch = useDispatch();
 
   const profileClick = () => {
     if (isLogin) {
@@ -51,16 +55,18 @@ export default function SideBar() {
     setActivePopover(null);
   };
 
-  const { data: profile } = useGetProfileImage();
-
   useEffect(() => {
-    if (profile === undefined) {
-      setIsLogin(false);
-      return;
-    }
-    setUserImage(profile.profileImageUrl);
-    setIsLogin(true);
-  }, [profile]);
+    const fetchData = async () => {
+      try {
+        const res = await getProfileImage();
+        setUserImage(res?.profileImageUrl);
+        dispatch(login());
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className={cn('sideBar-container')}>
