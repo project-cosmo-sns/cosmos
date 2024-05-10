@@ -1,6 +1,10 @@
 import fetchData from '@/api/fetchData';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
-import { BackIcon, WarnIcon } from '@/components/Common/IconCollection';
+import {
+  BackIcon,
+  CompleteIcon,
+  WarnIcon,
+} from '@/components/Common/IconCollection';
 import PostEditor from '@/components/Post/PostEditor';
 import { PostRequestType } from '@/components/Post/types';
 import { useToast } from '@/hooks/useToast';
@@ -30,7 +34,10 @@ export default function PostWritePage() {
         method: 'post',
         requestData: data,
       }),
-    onSuccess: (response) => router.push(`/post/${response.id}`),
+    onSuccess: (response) => {
+      router.push(`/post/${response.id}`);
+      showToastHandler(`포스트 작성 완료!`, <CompleteIcon />);
+    },
   });
 
   const { mutate: editMutate } = useMutation({
@@ -40,7 +47,10 @@ export default function PostWritePage() {
         method: 'patch',
         requestData: data,
       }),
-    onSuccess: () => router.push(`/post/${postId}`),
+    onSuccess: () => {
+      router.push(`/post/${postId}`);
+      showToastHandler(`포스트 수정 완료!`, <CompleteIcon />);
+    },
   });
 
   const mergeState = (nextState: Partial<PostRequestType>) => {
@@ -53,7 +63,7 @@ export default function PostWritePage() {
         `${data.title ? '내용' : '제목'}을 입력하세요`,
         <WarnIcon fill="#ff5151" />,
       );
-      // showToastHandler('피드 작성 완료', <CheckIcon fill="#0ACF83" />);
+      // showToastHandler('피드 작성 완료', <CompleteIcon fill="#0ACF83" />);
       return;
     }
     if (postId) {
