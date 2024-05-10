@@ -2,10 +2,10 @@ import classNames from 'classnames/bind';
 import styles from './SearchAuthorProfileList.module.scss';
 import SearchAuthorProfile from '../SearchAuthorProfile';
 import { SearchMemberResultData } from '@/components/Search/type';
-import { useQuery } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
 import NoSearchResult from '@/components/Search/NoSearchResult';
 import LoadingSpinner from '@/components/Common/LoadingSpinner';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 const cn = classNames.bind(styles);
 
@@ -17,37 +17,41 @@ export default function SearchAuthorProfileList({
   keyword,
 }: SearchAuthorProfileListProps) {
   const {
-    data: searchProfileResult,
+    data: searchProfileData,
+    ref,
+    isFetchingNextPage,
     isLoading,
-    isSuccess,
-  } = useQuery<SearchMemberResultData>({
+  } = useInfiniteScroll<SearchMemberResultData>({
     queryKey: ['searchProfileList', keyword],
-    queryFn: () =>
+    fetchFunction: (pageParams) =>
       fetchData({
-        param: `/search/member/name?order=DESC&page=1&take=4&keyword=${keyword}`,
+        param: `/search/member/name?order=DESC&page=${pageParams}&take=8&keyword=${keyword}`,
       }),
+    getNextPageParam: (lastPage) =>
+      lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
+
+  const searchProfileList = searchProfileData?.pages ?? [];
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
-  if (
-    !isSuccess ||
-    !searchProfileResult.data ||
-    searchProfileResult.data.length === 0
-  ) {
+  if (searchProfileList[0].data.length === 0) {
     return <NoSearchResult />;
   }
 
   return (
     <div className={cn('wrapper')}>
-      {searchProfileResult.data.map((profileData) => (
-        <SearchAuthorProfile
-          key={profileData.member.id}
-          member={profileData.member}
-        />
-      ))}
+      {searchProfileList.map((profile) =>
+        profile.data.map((profileData) => (
+          <SearchAuthorProfile
+            key={profileData.member.id}
+            member={profileData.member}
+          />
+        )),
+      )}
+      {!isFetchingNextPage && <div ref={ref} />}
     </div>
   );
 }

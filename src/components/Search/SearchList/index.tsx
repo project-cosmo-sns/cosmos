@@ -2,10 +2,10 @@ import PostPreview from '@/components/Post/PostPreview';
 import { SearchResult } from '../type';
 import styles from './SearchList.module.scss';
 import classNames from 'classnames/bind';
-import { useQuery } from '@tanstack/react-query';
 import LoadingSpinner from '@/components/Common/LoadingSpinner';
 import NoSearchResult from '@/components/Search/NoSearchResult';
 import fetchData from '@/api/fetchData';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 interface SearchListProps {
   keyword: string;
@@ -15,30 +15,38 @@ const cn = classNames.bind(styles);
 
 export default function SearchList({ keyword }: SearchListProps) {
   const {
-    data: searchList,
+    data: searchListData,
+    ref,
+    isFetchingNextPage,
     isLoading,
-    isSuccess,
-  } = useQuery<SearchResult>({
+  } = useInfiniteScroll<SearchResult>({
     queryKey: ['searchList', keyword],
-    queryFn: () =>
+    fetchFunction: (pageParams) =>
       fetchData({
-        param: `/search/post/hash-tag?order=DESC&page=1&take=4&keyword=${keyword}`,
+        param: `/search/post/hash-tag?order=DESC&page=${pageParams}&take=4&keyword=${keyword}`,
       }),
+    getNextPageParam: (lastPage) =>
+      lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
+
+  const searchList = searchListData?.pages ?? [];
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
-  if (!isSuccess || !searchList.data || searchList.data.length === 0) {
+  if (searchList[0].data.length === 0) {
     return <NoSearchResult />;
   }
 
   return (
     <div className={cn('search-list')}>
-      {searchList.data.map((searchData) => (
-        <PostPreview key={searchData.post.id} postData={searchData} />
-      ))}
+      {searchList.map((search) =>
+        search.data.map((searchData) => (
+          <PostPreview key={searchData.post.id} postData={searchData} />
+        )),
+      )}
+      {!isFetchingNextPage && <div ref={ref} />}
     </div>
   );
 }

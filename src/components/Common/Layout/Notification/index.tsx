@@ -34,6 +34,8 @@ export default function Notification({ onClose }: PopOverProps) {
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
 
+  console.log(notificationListData);
+
   const notificationList = notificationListData?.pages ?? [];
 
   return (
