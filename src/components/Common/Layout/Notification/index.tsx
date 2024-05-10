@@ -36,8 +36,6 @@ export default function Notification({ onClose }: PopOverProps) {
 
   const notificationList = notificationListData?.pages ?? [];
 
-  console.log(notificationList);
-
   return (
     <PopOver onClose={onClose} className={cn('notification-popover')}>
       <BackIcon

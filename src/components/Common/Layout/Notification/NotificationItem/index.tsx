@@ -1,14 +1,15 @@
-import classNames from 'classnames/bind';
-import styles from './NotificationItem.module.scss';
-import { ProfileIconDark, CheckIcon } from '@/components/Common/IconCollection';
-import Image from 'next/image';
-import { NotificationData, notificationType } from '../type';
-import getElapsedTime from '@/utils/getElaspedTime';
-import { useRouter } from 'next/router';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import Image from 'next/image';
+import classNames from 'classnames/bind';
+import { ProfileIconDark, CheckIcon } from '@/components/Common/IconCollection';
 import Modal from '@/components/Common/Layout/Modal';
 import FeedDetails from '@/components/Feed/FeedDetails/index';
-import instance from '@/api/axios';
+import { notificationType, NotificationData } from '../type';
+import getElapsedTime from '@/utils/getElaspedTime';
+import styles from './NotificationItem.module.scss';
+import fetchData from '@/api/fetchData';
 
 const cn = classNames.bind(styles);
 
@@ -18,6 +19,8 @@ type NotificationItemProps = {
 
 export default function NotificationItem({ data }: NotificationItemProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const queryClient = useQueryClient();
+  const router = useRouter();
 
   const {
     sendMember,
@@ -30,20 +33,23 @@ export default function NotificationItem({ data }: NotificationItemProps) {
     },
   } = data;
 
-  const router = useRouter();
-
-  const confirmNotification = async () => {
-    try {
-      const response = await instance.post(`/notification/${id}/confirm`);
-      console.log('알림이 확인되었습니다.');
-    } catch (error) {
+  const mutation = useMutation({
+    mutationFn: () =>
+      fetchData({
+        param: `/notification/${id}/confirm`,
+        method: 'post',
+      }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['notification'] });
+    },
+    onError: (error: Error) => {
       console.error('알림 확인 중 오류가 발생했습니다.', error);
-    }
-  };
+    },
+  });
 
   const handleNotificationClick = () => {
     if (!isConfirmed) {
-      confirmNotification();
+      mutation.mutate();
     }
 
     if (type === notificationType.CREATE_POST_COMMENT) {
