@@ -78,6 +78,7 @@
 .container-hover {
   @include glass-01;
   border: none;
+  cursor: pointer;
 
   &:hover {
     transform: scale(1.01);

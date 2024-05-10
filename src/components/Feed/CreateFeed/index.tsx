@@ -1,15 +1,20 @@
 import Image from 'next/image';
-import { useForm, Controller } from 'react-hook-form';
-import styels from './CreateFeed.module.scss';
+import { File } from 'buffer';
 import classNames from 'classnames/bind';
+import { useEffect, useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import axios from 'axios';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import { CloseIcon, ProfileIcon } from '@/components/Common/IconCollection';
-import { useState } from 'react';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import fetchData from '@/api/fetchData';
+import styels from './CreateFeed.module.scss';
 import { postFeed } from './api';
 import { FeedType } from './type';
-import { useQuery } from '@tanstack/react-query';
-import fetchData from '@/api/fetchData';
 
+interface UrlType {
+  uploadURL: string;
+}
 interface CreatedFeedTypes {
   profileImage: string | null;
 }
@@ -39,7 +44,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
   const [images, setImages] = useState<File[]>([]);
   const [urlBucket, setUrlBucket] = useState<string[]>([]);
 
-  const { refetch } = useQuery({
+  const { refetch: getUrl } = useQuery<UrlType>({
     queryKey: ['signedUrl'],
     queryFn: () =>
       fetchData({
@@ -48,10 +53,55 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
     enabled: false,
   });
 
-  const getUrlFromServer = async () => {
-    const receivedUrl = await refetch();
+  const putUrlMutate = useMutation({
+    mutationFn: ({ url, file }: { url: string; file: File }) =>
+      axios({
+        method: 'put',
+        url: `${url}`,
+        data: file,
+        headers: {
+          'Access-Control-Allow-Origin': 'https://alpha.cosmo-sns.com/',
+        },
+      }),
+    onSuccess: (data) => {
+      const prev = getValues('feedImage');
+      if (data.config.url) {
+        const imageUrl = data.config.url.split('?')[0];
+        console.log(imageUrl, '-----성공 응답 url --------');
+        if (prev) {
+          setValue('feedImage', [...prev, imageUrl]);
+        } else {
+          setValue('feedImage', [imageUrl]);
+        }
+      }
+    },
+    onError: () => {
+      console.log('에러');
+    },
+  });
 
-    console.log(receivedUrl, '------발급받은 url--------');
+  const putUrl = (url: string, file: File) => {
+    putUrlMutate.mutate({ url, file });
+  };
+
+  const deleteUrlMutate = useMutation({
+    mutationFn: (url: string) =>
+      axios({
+        method: 'delete',
+        url: `${url}`,
+        headers: {
+          'Access-Control-Allow-Origin': 'https://alpha.cosmo-sns.com/',
+        },
+      }),
+    onError: () => console.log('이미지 삭제 요청 에러 '),
+    onSuccess: () => console.log('이미지 삭체 요청 성공'),
+    // s3서버에서 이미지 삭제 + 폼 벨류에서 삭제 + 미리보기 삭제;
+    // 1. 폼 벨류에서 삭제 -> 성공응답이 오면 setValue 해주기
+    // 2. 미리보기 삭제 -> setImages 해주기
+  });
+
+  const deleteImage = (url: string) => {
+    deleteUrlMutate.mutate(url);
   };
 
   /**
@@ -72,28 +122,60 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
     return [];
   };
 
+  const updateUrlBucket = async (currentImageValue: File[]) => {
+    if (currentImageValue && currentImageValue.length > 0) {
+      let urlList: string[] = [];
+
+      await Promise.all(
+        currentImageValue.map(async () => {
+          const { data } = await getUrl();
+          if (data) urlList.push(data.uploadURL);
+        }),
+      );
+      setUrlBucket([...urlBucket, ...urlList]);
+    }
+    return [];
+  };
+
   const onSubmit = async (data: FeedType) => {
     try {
       await postFeed(data);
     } catch (error) {
       console.log(error, '------error------');
     }
+    console.log(data, '------제출 데이터-----');
   };
 
   const imagePreview = updateImageUrls();
+
+  const putFileIntoURL = () => {
+    urlBucket.map((url, i) => putUrl(url, images[i]));
+  };
+
   /**
    * CloseIcon을 클릭하면 filterImage 함수가 실행됩니다.
    * @param {number} index - useState images 배열의 index는 이미지를 업로드할때 등록되는 index와 같습니다. useState images 배열을 순회하면서 클릭한 이미지의 index를 제외한 나머지 요소를 반환합니다.
    */
   const filterImage = (index: number) => {
+    console.log(index, '-----삭제되는 이미지 index------');
     const filteredImages = images.filter((el, i) => i !== index);
-    // filterImage 순회하면서 url 발급 -> url에 파일 put 요청 -> 요청성공하면 setValueㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    const filteredUrlBucket = urlBucket.filter((el, i) => i !== index);
+
     filteredImages.map((item) =>
       console.log(item, '------필터된 이미지------'),
     );
+    filteredUrlBucket.map((item) =>
+      console.log(item, '------필터된 url------'),
+    );
+
     setImages(filteredImages);
-    setValue('feedImage', filteredImages);
+    setValue('feedImage', filteredUrlBucket);
   };
+
+  useEffect(() => {
+    console.log(urlBucket, '-------발급받은 urlBucket -------');
+    putFileIntoURL();
+  }, [urlBucket]);
 
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
@@ -138,10 +220,9 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
                         ? Array.from(event.target.files)
                         : [];
                       const currentImageValue = [...images, ...fileList];
-                      // currentImageValue를 순회하면서 url 발급 -> url에 파일 put 요청 -> 요청 성공하면 setValue 처리 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-                      currentImageValue.map(() => getUrlFromServer());
-                      setValue('feedImage', currentImageValue);
+                      console.log([...fileList], '-----파일리스트----');
                       setImages(currentImageValue);
+                      // updateUrlBucket(fileList);
                     }}
                   />
                 )}
