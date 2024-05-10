@@ -116,7 +116,7 @@ export default function ProfileEditModal({
   // ==================================================
   // 이미지 삭제 mutation으로 리팩토링
   const { mutate: deleteImage } = useMutation({
-    mutationFn: () =>
+    mutationFn: async () =>
       fetchData({
         param: '/profile/image/delete',
         method: 'delete',
@@ -124,10 +124,12 @@ export default function ProfileEditModal({
           imageUrls: [memberData.profileImageUrl],
         },
       }),
+
     onSuccess: () => {
       console.log('프로필 이미지 삭제 성공');
       setPreviewImage('');
       setValue('image', '');
+      queryClient.invalidateQueries({ queryKey: ['profileData', memberData] });
     },
     onError: (error) => {
       console.error('이미지 삭제 에러 : ', error);
@@ -141,23 +143,19 @@ export default function ProfileEditModal({
       fetchData({
         param: '/profile/mine',
         method: 'patch',
-        requestData: requestData,
+        requestData,
       });
     },
     onSuccess: () => {
       console.log('프로필 업데이트 성공');
-      queryClient.invalidateQueries({ queryKey: ['profileData'] });
-      refetchProfile(); // 프로필 리패치
+      queryClient.invalidateQueries({ queryKey: ['profileData', memberData] });
+      // refetchProfile(); // 프로필 리패치
       setIsOpen(false);
     },
     onError: (error) => {
       console.error('프로필 업데이트 에러:', error);
     },
   });
-
-  const handleImageDelete = () => {
-    deleteImage();
-  };
 
   const handleIntroduceChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value || '';
@@ -168,26 +166,13 @@ export default function ProfileEditModal({
     const introduce = data.introduce || '';
     const requestData = {
       nickname: memberData.nickname,
-      introduce: introduce,
+      introduce,
       profileImageUrl: uploadedImageUrl || memberData.profileImageUrl,
     };
     updateProfile(requestData);
   };
 
   console.log('preview: ', previewImage);
-
-  const refetchProfile = async () => {
-    try {
-      const fetchedProfileData = await fetchData<MemberDataType>({
-        param: '/profile/mine',
-        method: 'get',
-      });
-      setProfileData(fetchedProfileData); // 상태 업데이트
-      console.log('프로필 데이터 리패치 성공:', fetchedProfileData);
-    } catch (error) {
-      console.error('프로필 리패치 에러:', error);
-    }
-  };
 
   // 기본값 설정하기
   useEffect(() => {
@@ -227,7 +212,7 @@ export default function ProfileEditModal({
               <button
                 className={cn('image-delete-button')}
                 type="submit"
-                onClick={handleImageDelete}
+                onClick={() => deleteImage()}
               >
                 이미지 삭제
               </button>
