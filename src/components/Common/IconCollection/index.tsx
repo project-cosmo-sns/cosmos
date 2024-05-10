@@ -841,21 +841,21 @@ export function WarnIcon({ fill = '#FFC700', ...props }: IconCollectionType) {
         stroke="#FFC700"
         strokeWidth="2"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M11 7.17785V11.0063"
         stroke="#FFC700"
         strokeWidth="2"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M11 14.8348H11.01"
         stroke="#FFC700"
         strokeWidth="2"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
     </IconTemplate>
   );

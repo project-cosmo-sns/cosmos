@@ -1,9 +1,9 @@
-import styles from './Toast.module.scss';
+import { RootState } from '@/redux/store';
+import { hideToast } from '@/redux/toastSlice';
 import classNames from 'classnames/bind';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { hideToast } from '@/redux/toastSlice';
-import { RootState } from '@/redux/store';
+import styles from './Toast.module.scss';
 
 const cn = classNames.bind(styles);
 /**
@@ -27,13 +27,11 @@ export default function Toast() {
   }, [dispatch]);
 
   return (
-    <>
-      {visible && (
-        <div className={cn('toast-container')}>
-          {icon}
-          {text}
-        </div>
-      )}
-    </>
+    visible && (
+      <div className={cn('toast-container')}>
+        {icon}
+        <span className={cn('toast-message')}>{text}</span>
+      </div>
+    )
   );
 }

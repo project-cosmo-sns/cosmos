@@ -15,6 +15,7 @@
 }
 
 .emoji {
+  cursor: pointer;
   &:hover {
     background-color: $black-01;
   }
