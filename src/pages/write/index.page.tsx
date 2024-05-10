@@ -15,7 +15,7 @@ export default function PostWritePage() {
   const router = useRouter();
   const [data, setData] = useState<PostRequestType>({
     title: '',
-    category: '',
+    category: '공지사항',
     content: '',
     hashTags: [],
   });

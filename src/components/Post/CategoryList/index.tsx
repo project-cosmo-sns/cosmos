@@ -20,12 +20,12 @@ export default function CategoryList({
     <div className={cn('category-box')}>
       {!isPostWrite && (
         <CategoryFlag
-          category="전체"
+          category="ALL"
           selectedCategory={selectedCategory}
           setSelectedCategory={setSelectedCategory}
         />
       )}
-      {CATEGORY_LIST.map((category) => (
+      {Object.keys(CATEGORY_LIST).map((category) => (
         <CategoryFlag
           key={category}
           category={category}

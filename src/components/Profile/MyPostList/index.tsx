@@ -22,9 +22,7 @@ export default function MyPostList({
   const cn = classNames.bind(styles);
   // const currentUserId = memberData.memberId;
 
-  const [selectedCategory, setSelectedCategory] = useState<string | '전체'>(
-    '전체',
-  );
+  const [selectedCategory, setSelectedCategory] = useState('ALL');
 
   console.log('postList: ', postList);
 
