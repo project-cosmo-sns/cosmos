@@ -105,6 +105,8 @@ export default function FeedCard({
       refetch,
     });
 
+  console.log(imageUrls, '------피드 상세에서 받는 이미지 url------');
+
   return (
     <div
       className={cn(
@@ -116,10 +118,44 @@ export default function FeedCard({
       <div className={cn('wrapper')}>
         <div className={cn('user-content')} onClick={onClick}>
           <div className={cn('profile-content-wrapper')}>
-            <WriterProfile
-              writer={feedData.writer}
-              createdAt={getElapsedTime(createdAt)}
-            />
+            <div className={cn('profile-content-divide')}>
+              <WriterProfile
+                writer={feedData.writer}
+                createdAt={getElapsedTime(createdAt)}
+              />
+              {forDetails && isMine && (
+                <div className={cn('icon-wrapper')}>
+                  <EditIcon
+                    width="18"
+                    height="18"
+                    onClick={() => {
+                      setIsEdit(!isEdit);
+                    }}
+                  />
+                  <DeleteIcon
+                    width="18"
+                    height="18"
+                    onClick={() => {
+                      deleteMutaion.mutate();
+                    }}
+                  />
+                </div>
+              )}
+            </div>
+            {forDetails && !!imageUrls?.length && (
+              <div className={cn('detail-upload-image-wrapper')}>
+                {imageUrls.map((url: string, index) => (
+                  <div key={index} className={cn('detail-upload-image')}>
+                    <Image
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      src={url}
+                      alt="feedImage"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
             {isEdit ? (
               <form onSubmit={handleSubmit(onSubmit)}>
                 <textarea
@@ -139,42 +175,25 @@ export default function FeedCard({
               <div className={cn('content')}>{content}</div>
             )}
           </div>
-          {!!imageUrls?.length && (
-            <div className={cn('upload-image-wrapper')}>
-              <div className={cn('upload-image')}>
-                <Image
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  fill
-                  style={{ objectFit: 'cover' }}
-                  src={`${imageUrls[0]}`}
-                  alt="feedImage"
-                />
+          {forDetails ||
+            (!!imageUrls?.length && (
+              <div className={cn('upload-image-wrapper')}>
+                <div className={cn('upload-image')}>
+                  <Image
+                    sizes="(max-width: 768px) 100vw, 33vw"
+                    fill
+                    style={{ objectFit: 'cover' }}
+                    src={`${imageUrls[0]}`}
+                    alt="feedImage"
+                  />
+                </div>
+                {imageUrls.length > 1 && (
+                  <span className={cn('extra-stuff')}>
+                    + {imageUrls.length - 1}
+                  </span>
+                )}
               </div>
-              {imageUrls.length > 1 && (
-                <span className={cn('extra-stuff')}>
-                  + {imageUrls.length - 1}
-                </span>
-              )}
-            </div>
-          )}
-          {forDetails && isMine && (
-            <div className={cn('icon-wrapper')}>
-              <EditIcon
-                width="18"
-                height="18"
-                onClick={() => {
-                  setIsEdit(!isEdit);
-                }}
-              />
-              <DeleteIcon
-                width="18"
-                height="18"
-                onClick={() => {
-                  deleteMutaion.mutate();
-                }}
-              />
-            </div>
-          )}
+            ))}
         </div>
         {forDetails ? (
           <EmojiBundle
