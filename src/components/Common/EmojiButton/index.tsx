@@ -23,32 +23,24 @@ export default function EmojiButton({
 }: EmojiButtonProps) {
   const Icon = EMOJI_ICON[emojiCode];
   const emojiData = emojiList.filter((emoji) => emoji.emojiCode === emojiCode);
-  const [isClicked, setIsClicked] = useState(emojiData[0]?.isClicked);
-  const [currentEmojiCount, setCurrentEmojiCount] = useState(
-    emojiData[0] ? emojiData[0].emojiCount : 0,
-  );
 
   return (
     <button
       type="button"
       className={cn('wrapper', {
-        clicked: isClicked,
+        clicked: emojiData[0]?.isClicked,
         detail: isDetail,
       })}
       onClick={(event) => {
-        setIsClicked((prev) => !prev);
-        setCurrentEmojiCount((prev) =>
-          isClicked ? Number(prev) - 1 : Number(prev) + 1,
-        );
-        console.log(currentEmojiCount);
+        console.log(emojiData[0]?.emojiCount);
         event.stopPropagation();
-        handleEmojiClick(emojiCode, isClicked);
+        handleEmojiClick(emojiCode, emojiData[0]?.isClicked);
       }}
       disabled={isPending}
     >
       <div className={cn('container')}>
         <Icon />
-        {isDetail && currentEmojiCount}
+        {isDetail && emojiData[0]?.emojiCount}
       </div>
     </button>
   );

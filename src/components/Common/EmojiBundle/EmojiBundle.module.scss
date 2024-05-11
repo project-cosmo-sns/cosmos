@@ -22,6 +22,10 @@
   gap: 6px;
 }
 
+.emoji {
+  cursor: pointer;
+}
+
 @media (min-width: 768px) {
   .wrapper {
     @include flex-arrange(space-between, center);
