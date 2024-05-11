@@ -1,6 +1,6 @@
 import axios from '@/api/axios';
 
-export  async function githubLogin(code: string) {
+export async function githubLogin(code: string) {
   try {
     const res = await axios.post(`/auth/github/redirect?code=${code}`);
     if (res) {
@@ -12,7 +12,7 @@ export  async function githubLogin(code: string) {
   }
 }
 
-export  async function googleLogin(code: string) {
+export async function googleLogin(code: string) {
   try {
     const res = await axios.post(`/auth/google/redirect?code=${code}`);
     if (res) {

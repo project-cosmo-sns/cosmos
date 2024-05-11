@@ -48,7 +48,11 @@ export default function LoginModal() {
     >
       <div className={cn('header-wrapper')}>
         <LogoIcon width="105" height="30" />
-        <h2>코스모스에 오신 것을 환영합니다!🙌</h2>
+        <h2>
+          코드잇 스프린터가 모인 SNS
+          <br />
+          코스모스에 오신 것을 환영합니다 🤗
+        </h2>
         <div className={cn('oauth-wrapper')}>
           <LoginButton
             text="구글 로그인/ 회원가입"
