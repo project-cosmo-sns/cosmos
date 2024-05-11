@@ -10,7 +10,6 @@ import { SortType } from '@/constants/sortType';
 import styles from '@/styles/Home.module.scss';
 import classNames from 'classnames/bind';
 import { GetServerSidePropsContext } from 'next';
-import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { FeedListType } from '../components/Feed/types';
 
@@ -39,8 +38,6 @@ export default function Home({ feedList, postList }: HomePropsType) {
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
   const [selectedSort, setSelectedSort] = useState<SortType>('ALL');
-  const [toastVisible, setToastVisible] = useState(false);
-  const router = useRouter();
 
   return (
     <div className={cn('home-container')}>
@@ -55,16 +52,11 @@ export default function Home({ feedList, postList }: HomePropsType) {
           <FeedList feedList={feedList.props.response} />
         ) : (
           <PostList
-            postList={postList.props.response}
+            initialPostList={postList.props.response}
             selectedSort={selectedSort}
           />
         )}
       </ContentContainer>
-      {/* <Toast
-        text="인증 신청이 완료되었습니다"
-        icon={CheckIcon}
-        fill="#0ACF83"
-      /> */}
     </div>
   );
 }

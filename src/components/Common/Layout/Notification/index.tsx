@@ -3,10 +3,10 @@ import classNames from 'classnames/bind';
 import PopOver from '@/components/Common/PopOverBox';
 import NotificationItem from './NotificationItem';
 import { BackIcon, SettingIcon } from '../../IconCollection';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import { useState } from 'react';
 import NotificationModal from './NotificationModal';
 import { NotificationResult } from './type';
-import { useQuery } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
 import LoadingSpinner from '@/components/Common/LoadingSpinner';
 
@@ -20,28 +20,21 @@ export default function Notification({ onClose }: PopOverProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const {
-    data: notificationList,
+    data: notificationListData,
+    ref,
+    isFetchingNextPage,
     isLoading,
-    isSuccess,
-  } = useQuery<NotificationResult>({
+  } = useInfiniteScroll<NotificationResult>({
     queryKey: ['notification'],
-    queryFn: () =>
+    fetchFunction: (pageParam) =>
       fetchData({
-        param: `/notification/list?order=DESC&page=1&take=20`,
+        param: `/notification/list?order=DESC&page=${pageParam}&take=10`,
       }),
+    getNextPageParam: (lastPage) =>
+      lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-
-  if (
-    !isSuccess ||
-    !notificationList.data ||
-    notificationList.data.length === 0
-  ) {
-    return <div>알림이 없습니다.</div>;
-  }
+  const notificationList = notificationListData?.pages ?? [];
 
   return (
     <PopOver onClose={onClose} className={cn('notification-popover')}>
@@ -58,15 +51,26 @@ export default function Notification({ onClose }: PopOverProps) {
         fill="#C2C7D9"
       />
 
-      {notificationList.data.map((notificationitem) => (
-        <NotificationItem
-          key={notificationitem.notification.id}
-          data={notificationitem}
-        />
-      ))}
-
-      {isModalOpen && (
-        <NotificationModal isOpen={isModalOpen} setIsOpen={setIsModalOpen} />
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : (
+        <>
+          {notificationList.map((notification) =>
+            notification.data.map((notificationitem) => (
+              <NotificationItem
+                key={notificationitem.notification.id}
+                data={notificationitem}
+              />
+            )),
+          )}
+          {!isFetchingNextPage && <div ref={ref} />}
+          {isModalOpen && (
+            <NotificationModal
+              isOpen={isModalOpen}
+              setIsOpen={setIsModalOpen}
+            />
+          )}
+        </>
       )}
     </PopOver>
   );

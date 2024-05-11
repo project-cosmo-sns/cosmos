@@ -2,8 +2,9 @@ const https = require('https');
 const { parse } = require('url');
 const next = require('next');
 const fs = require('fs');
-const hostname = 'local.cosmo-sns.com';
-const port = 3000;
+
+const hostname = 'alpha.cosmo-sns.com';
+const port = 443;
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
 const handle = app.getRequestHandler();

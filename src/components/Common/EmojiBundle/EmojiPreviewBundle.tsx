@@ -3,6 +3,7 @@ import { EMOJI_CODE } from '@/constants/EmojiCode';
 import classNames from 'classnames/bind';
 import EmojiButton from '../EmojiButton';
 import styles from './EmojiPreviewBundle.module.scss';
+import { useState } from 'react';
 
 interface EmojiPreviewBundleProps {
   emojiList: EmojiType[]; // 내가 눌렀는지 확인용

@@ -75,28 +75,27 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
     <div className={cn('container')}>
       <FeedCard feedData={feed} hasPadding={false} forDetails />
       <CommentInput placeholder="댓글을 입력하세요" onSubmit={onSubmit} />
-      {commentList.length ? (
-        commentList.map((comment, index) => (
-          <div key={comment.comment.id}>
-            <CommentCard
-              comment={comment}
-              deleteLikeRequest={deleteLikeRequest}
-              postLikeRequest={postLikeRequest}
-              deleteCommentRequest={deleteCommentRequest}
-              editCommentRequest={editCommentRequest}
-            />
-            {index === commentList.length - 1 || (
-              <div className={cn('divide-line')} />
-            )}
+      <div>
+        {commentList.length ? (
+          commentList.map((comment) => (
+            <div key={comment.comment.id} className={cn('comment-list')}>
+              <CommentCard
+                comment={comment}
+                deleteLikeRequest={deleteLikeRequest}
+                postLikeRequest={postLikeRequest}
+                deleteCommentRequest={deleteCommentRequest}
+                editCommentRequest={editCommentRequest}
+              />
+            </div>
+          ))
+        ) : (
+          <div className={cn('empty-comment')}>
+            <span className={cn('message')}>
+              😭 {feed.writer.nickname} 님에게 남겨진 댓글이 아직 없어요. 😭
+            </span>
           </div>
-        ))
-      ) : (
-        <div className={cn('empty-comment')}>
-          <span className={cn('message')}>
-            😭 {feed.writer.nickname} 님에게 남겨진 댓글이 아직 없어요. 😭
-          </span>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

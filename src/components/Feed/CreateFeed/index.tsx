@@ -1,20 +1,27 @@
 import Image from 'next/image';
-import { useForm, Controller } from 'react-hook-form';
-import styels from './CreateFeed.module.scss';
+import { File } from 'buffer';
 import classNames from 'classnames/bind';
+import { useEffect, useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import axios from 'axios';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import { CloseIcon, ProfileIcon } from '@/components/Common/IconCollection';
-import { useState } from 'react';
-import { postFeed } from './api';
+import { useQuery, useMutation } from '@tanstack/react-query';
+import fetchData from '@/api/fetchData';
+import styels from './CreateFeed.module.scss';
 import { FeedType } from './type';
+import { postFeed } from './api';
 
+interface UrlType {
+  uploadURL: string;
+}
 interface CreatedFeedTypes {
-  profileImage?: string;
+  profileImage: string | null;
 }
 
 interface Inputs {
   content: string;
-  // feedImage: File[];
+  feedImage: string[];
 }
 
 /**
@@ -34,7 +41,68 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
     formState: { errors },
     watch,
   } = useForm<Inputs>();
-  const [images, setImages] = useState<File[]>([]);
+  const [images, setImages] = useState<Blob[]>([]);
+  const [urlBucket, setUrlBucket] = useState<string[]>([]);
+
+  const { refetch: getUrl } = useQuery<UrlType>({
+    queryKey: ['signedUrl'],
+    queryFn: () =>
+      fetchData({
+        param: 'feed/image/create',
+      }),
+    enabled: false,
+  });
+
+  const putUrlMutate = useMutation({
+    mutationFn: ({ url, file }: { url: string; file: Blob }) =>
+      axios({
+        method: 'put',
+        url: `${url}`,
+        data: file,
+        headers: {
+          'Access-Control-Allow-Origin': 'https://alpha.cosmo-sns.com',
+        },
+      }),
+    onSuccess: (data) => {
+      const prev = getValues('feedImage');
+      if (data.config.url) {
+        const imageUrl = data.config.url.split('?')[0];
+        console.log(imageUrl, '-----성공 응답 url --------');
+        if (prev) {
+          setValue('feedImage', [...prev, imageUrl]);
+        } else {
+          setValue('feedImage', [imageUrl]);
+        }
+      }
+    },
+    onError: () => {
+      console.log('에러');
+    },
+  });
+
+  const putUrl = (url: string, file: Blob) => {
+    putUrlMutate.mutate({ url, file });
+  };
+
+  const deleteUrlMutate = useMutation({
+    mutationFn: (url: string) =>
+      axios({
+        method: 'delete',
+        url: `${url}`,
+        headers: {
+          'Access-Control-Allow-Origin': 'https://alpha.cosmo-sns.com',
+        },
+      }),
+    onError: () => console.log('이미지 삭제 요청 에러 '),
+    onSuccess: () => console.log('이미지 삭체 요청 성공'),
+    // s3서버에서 이미지 삭제 + 폼 벨류에서 삭제 + 미리보기 삭제;
+    // 1. 폼 벨류에서 삭제 -> 성공응답이 오면 setValue 해주기
+    // 2. 미리보기 삭제 -> setImages 해주기
+  });
+
+  const deleteImage = (url: string) => {
+    deleteUrlMutate.mutate(url);
+  };
 
   /**
    * 제어컴포넌트인 이미지 업로드 input이 onChange 이벤가 일어나면 setImages 세터함수가 실행되어
@@ -54,24 +122,74 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
     return [];
   };
 
-  const onSubmit = async (data: FeedType) => {
-    try {
-      await postFeed(data);
-    } catch (error) {
-      console.log(error, '------error------');
+  // const delay = (ms: number) =>
+  //   new Promise((resolve) => {
+  //     setTimeout(resolve, ms);
+  //   });
+
+  const getUrlRequest = async () => {
+    const { data } = await getUrl();
+    return data?.uploadURL;
+  };
+
+  const updateUrlBucket = async (currentImageValue: Blob[]) => {
+    let urlList: string[] = [];
+    if (currentImageValue && currentImageValue.length > 0) {
+      for (let i = 0; i < currentImageValue.length; i += 1) {
+        // eslint-disable-next-line no-await-in-loop
+        const uploadUrl = await getUrlRequest();
+        if (uploadUrl) urlList.push(uploadUrl);
+        // await delay(500);
+        // 딜레이를 빼줘도 url을 잘 받아오네요 그냥 map 함수가 원인...
+      }
+      setUrlBucket((prevUrlBucket) => [...prevUrlBucket, ...urlList]);
     }
+    return [];
+  };
+
+  // await Promise.all(
+  //   currentImageValue.map(async () => {
+  //     await delay(1000);
+  //     const { data } = await getUrl();
+  //     if (data) urlList.push(data.uploadURL);
+  //   }),
+  // );
+  // setUrlBucket((prevUrlBucket) => [...prevUrlBucket, ...urlList]);
+
+  const onSubmit = async (data: FeedType) => {
+    // try {
+    //   await postFeed(data);
+    // } catch (error) {
+    //   console.log(error, '------error------');
+    // }
+    console.log(data, '------제출 데이터-----');
   };
 
   const imagePreview = updateImageUrls();
+
+  const putFileIntoURL = () => {
+    urlBucket.map((url, i) => putUrl(url, images[i]));
+  };
+
   /**
    * CloseIcon을 클릭하면 filterImage 함수가 실행됩니다.
    * @param {number} index - useState images 배열의 index는 이미지를 업로드할때 등록되는 index와 같습니다. useState images 배열을 순회하면서 클릭한 이미지의 index를 제외한 나머지 요소를 반환합니다.
    */
-  // const filterImage = (index: number) => {
-  //   const filteredImages = images.filter((el, i) => i !== index);
-  //   setImages(filteredImages);
-  //   setValue('feedImage', filteredImages);
-  // };
+  const filterImage = (index: number) => {
+    const filteredImages = images.filter((el, i) => i !== index);
+    const filteredUrlBucket = urlBucket.filter((el, i) => i !== index);
+
+    console.log(filteredUrlBucket, '-----필터 버켓-----');
+
+    deleteImage(urlBucket[index]);
+    setImages(filteredImages);
+    setValue('feedImage', filteredUrlBucket);
+  };
+
+  useEffect(() => {
+    console.log(urlBucket, '-------발급받은 urlBucket -------');
+    putFileIntoURL();
+  }, [urlBucket]);
 
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
@@ -102,7 +220,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
           </span>
           <div className={cn('addImage')}>
             <div className={cn('image-wrapper')}>
-              {/* <Controller
+              <Controller
                 control={control}
                 name="feedImage"
                 render={({ field: { onChange } }) => (
@@ -116,24 +234,25 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
                         ? Array.from(event.target.files)
                         : [];
                       const currentImageValue = [...images, ...fileList];
-                      setValue('feedImage', currentImageValue);
+                      console.log([...fileList], '-----파일리스트----');
                       setImages(currentImageValue);
+                      updateUrlBucket(fileList);
                     }}
                   />
                 )}
-              /> */}
+              />
               <label htmlFor="feedImage" className={cn('file-label')}>
                 <span className={cn('label-text')}>이미지 업로드</span>
               </label>
               {imagePreview &&
                 imagePreview.map((item, index) => (
                   <div key={index} className={cn('preview-container')}>
-                    {/* <CloseIcon
+                    <CloseIcon
                       className={cn('close')}
                       onClick={() => {
                         filterImage(index);
                       }}
-                    /> */}
+                    />
                     <div className={cn('preview-wrapper')}>
                       <img
                         className={cn('file-preview')}

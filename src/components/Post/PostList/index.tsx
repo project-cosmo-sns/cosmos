@@ -1,19 +1,51 @@
+import fetchData from '@/api/fetchData';
+import { CATEGORY_LIST } from '@/constants/categoryList';
 import { SortType } from '@/constants/sortType';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CategoryList from '../CategoryList';
-import PostPreview from '../PostPreview';
 import { PostListType } from '../types';
 import styles from './PostList.module.scss';
+import PostListContent from './PostListContent';
 
 interface PostListProps {
   selectedSort?: SortType;
-  postList: PostListType;
+  initialPostList: PostListType;
 }
 
-export default function PostList({ selectedSort, postList }: PostListProps) {
-  const cn = classNames.bind(styles);
-  const [selectedCategory, setSelectedCategory] = useState<string>('전체');
+const cn = classNames.bind(styles);
+
+export default function PostList({
+  selectedSort,
+  initialPostList,
+}: PostListProps) {
+  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+  const queryParam = CATEGORY_LIST[selectedCategory]
+    ? `&category=${selectedCategory}`
+    : '';
+
+  const {
+    data: postListData,
+    ref,
+    refetch,
+    isFetchingNextPage,
+    isPending,
+  } = useInfiniteScroll<PostListType>({
+    queryKey: ['postList'],
+    fetchFunction: (pageParam) =>
+      fetchData({
+        param: `/post/list?order=DESC&page=${pageParam}&take=10&sortBy=${selectedSort}${queryParam}`,
+      }),
+    getNextPageParam: (lastPage) =>
+      lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
+  });
+
+  const postDataList = postListData?.pages ?? [];
+
+  useEffect(() => {
+    refetch();
+  }, [selectedCategory, selectedSort]);
 
   return (
     <div className={cn('wrapper')}>
@@ -23,18 +55,14 @@ export default function PostList({ selectedSort, postList }: PostListProps) {
           setSelectedCategory={setSelectedCategory}
         />
       </div>
-      <div className={cn('post-container')}>
-        {postList.data.length ? (
-          postList.data.map((postData) => (
-            <PostPreview
-              key={postData.postListInfo.post.id}
-              postData={postData.postListInfo}
-            />
-          ))
-        ) : (
-          <div className={cn('no-post')}>포스트가 없습니다</div>
-        )}
-      </div>
+      {isPending ? (
+        <PostListContent postDataList={initialPostList} />
+      ) : (
+        postDataList.map((post) => (
+          <PostListContent key={post.meta.page} postDataList={post} />
+        ))
+      )}
+      {!isFetchingNextPage && <div ref={ref} />}
     </div>
   );
 }

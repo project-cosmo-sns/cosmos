@@ -11,6 +11,7 @@ import GetProfileImageUrl from './getImageUploadUrl';
 import fetchData from '@/api/fetchData';
 import { AuthFormProps } from '@/@types/type';
 import { uploadImageToS3 } from './uploadImageToS3';
+import router from 'next/router';
 
 interface ProfileEditModalProps {
   isOpen: boolean;
@@ -55,18 +56,6 @@ export default function ProfileEditModal({
     }
   }, [memberData.introduce, setValue]);
 
-  useEffect(() => {
-    if (upLoadComplete) {
-      if (uploadedImageUrl) {
-        setImageUrl(uploadedImageUrl); // 이미지 URL 상태 업데이트
-        setValue('image', uploadedImageUrl);
-        setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
-      }
-      console.log(uploadedImageUrl);
-      setUploadComplete(false);
-    }
-  }, [upLoadComplete, uploadedImageUrl, setValue]);
-
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -84,12 +73,24 @@ export default function ProfileEditModal({
       // setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
       console.log(uploadedImageUrl);
       setUploadedImageUrl(response);
-      setUploadComplete(true);
+      // setUploadComplete(true); // 얘떠ㅐ문임
     } catch (error) {
       console.error('이미지 업로드 에러 :', error);
       // setPreviewImage(tempPreviewUrl);
     }
   };
+
+  useEffect(() => {
+    if (upLoadComplete) {
+      if (uploadedImageUrl) {
+        setImageUrl(uploadedImageUrl); // 이미지 URL 상태 업데이트
+        setValue('image', uploadedImageUrl);
+        setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
+      }
+      console.log(uploadedImageUrl);
+      setUploadComplete(false);
+    }
+  }, [upLoadComplete, uploadedImageUrl, setValue]);
 
   const handleIntroduceChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newValue = e.target.value || '';
@@ -117,7 +118,7 @@ export default function ProfileEditModal({
     try {
       const requestData = {
         nickname: memberData.nickname,
-        introduce: newIntroduce || memberData.introduce || '입력하세요',
+        introduce: newIntroduce || memberData.introduce || '',
         profileImageUrl: profileImageUrl || memberData.profileImageUrl || null,
       };
 
@@ -128,9 +129,9 @@ export default function ProfileEditModal({
       });
 
       console.log('프로필 업데이트 성공:', response);
-      // 프로필 업데이트 후 모달 닫고 리패치 해야함
       await refetchProfile();
       setIsOpen(false);
+      router.reload();
     } catch (error) {
       console.error('프로필 업데이트 에러:', error);
     }
