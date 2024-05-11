@@ -21,7 +21,7 @@ import getElapsedTime from '@/utils/getElaspedTime';
 import EmojiBundle from '@/components/Common/EmojiBundle';
 
 interface FeedCardTypes {
-  refetch: (
+  refetch?: (
     options?: RefetchOptions | undefined,
   ) => Promise<QueryObserverResult<FeedDetailType, Error>>;
   feedData: FeedDetailType;
