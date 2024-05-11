@@ -122,20 +122,39 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
     return [];
   };
 
-  const updateUrlBucket = async (currentImageValue: File[]) => {
-    if (currentImageValue && currentImageValue.length > 0) {
-      let urlList: string[] = [];
+  // const delay = (ms: number) =>
+  //   new Promise((resolve) => {
+  //     setTimeout(resolve, ms);
+  //   });
 
-      await Promise.all(
-        currentImageValue.map(async () => {
-          const { data } = await getUrl();
-          if (data) urlList.push(data.uploadURL);
-        }),
-      );
-      setUrlBucket([...urlBucket, ...urlList]);
+  const getUrlRequest = async () => {
+    const { data } = await getUrl();
+    return data?.uploadURL;
+  };
+
+  const updateUrlBucket = async (currentImageValue: File[]) => {
+    let urlList: string[] = [];
+    if (currentImageValue && currentImageValue.length > 0) {
+      for (let i = 0; i < currentImageValue.length; i += 1) {
+        // eslint-disable-next-line no-await-in-loop
+        const uploadUrl = await getUrlRequest();
+        if (uploadUrl) urlList.push(uploadUrl);
+        // await delay(500);
+        // 딜레이를 빼줘도 url을 잘 받아오네요 그냥 map 함수가 원인...
+      }
+      setUrlBucket((prevUrlBucket) => [...prevUrlBucket, ...urlList]);
     }
     return [];
   };
+
+  // await Promise.all(
+  //   currentImageValue.map(async () => {
+  //     await delay(1000);
+  //     const { data } = await getUrl();
+  //     if (data) urlList.push(data.uploadURL);
+  //   }),
+  // );
+  // setUrlBucket((prevUrlBucket) => [...prevUrlBucket, ...urlList]);
 
   const onSubmit = async (data: FeedType) => {
     try {
@@ -222,7 +241,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
                       const currentImageValue = [...images, ...fileList];
                       console.log([...fileList], '-----파일리스트----');
                       setImages(currentImageValue);
-                      // updateUrlBucket(fileList);
+                      updateUrlBucket(fileList);
                     }}
                   />
                 )}
