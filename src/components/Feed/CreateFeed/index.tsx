@@ -117,7 +117,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
                         : [];
                       const currentImageValue = [...images, ...fileList];
                       setValue('feedImage', currentImageValue);
-                      setImages(currentImageValue);
+                      setImages(currentIm ageValue);
                     }}
                   />
                 )}

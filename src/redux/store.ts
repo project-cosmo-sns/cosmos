@@ -4,11 +4,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import searchReducer from './searchSlice';
 import toastReducer from './toastSlice';
 import logoutSlice from './logoutSlice';
+import loginModalSlice from './loginModalSlice';
 
 const rootReducer = {
   search: searchReducer,
   toast: toastReducer,
   logout: logoutSlice,
+  loginModal: loginModalSlice,
 };
 
 const store = configureStore({
