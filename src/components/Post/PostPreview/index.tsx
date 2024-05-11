@@ -6,7 +6,7 @@ import getElapsedTime from '@/utils/getElaspedTime';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import HashTag from '../HashTag';
-import { PostDetailType, PostInfoType } from '../types';
+import { PostInfoType } from '../types';
 import styles from './PostPreview.module.scss';
 
 interface PostPreviewProps {
@@ -24,7 +24,6 @@ export default function PostPreview({ postData }: PostPreviewProps) {
     content,
     emojis,
     viewCount,
-    emojiCount,
     commentCount,
     hashTags,
   } = postData.post;
@@ -32,7 +31,7 @@ export default function PostPreview({ postData }: PostPreviewProps) {
   const formattedCreatedAt = getElapsedTime(createdAt);
 
   const { handleEmojiClick, isAddPending, isDeletePending } =
-    useSendEmojiRequest<PostDetailType>({ id: postId as number, isPost: true });
+    useSendEmojiRequest({ id: postId as number, isPost: true });
 
   return (
     <div

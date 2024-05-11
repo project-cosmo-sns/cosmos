@@ -5,7 +5,7 @@ import { useRef, useState } from 'react';
 import EmojiButton from '../EmojiButton';
 import { CommentIcon, EmojiIcon, EyeIcon } from '../IconCollection';
 import styles from './EmojiBundle.module.scss';
-import EmojiPreviewBundle from './EmojiPreviewBundle';
+import EmojiSelection from '../EmojiSelection';
 
 interface EmojiBundleProps {
   emojiList: EmojiType[];
@@ -30,6 +30,8 @@ export default function EmojiBundle({
 }: EmojiBundleProps) {
   const emojiRef = useRef(null);
   const [isEmojiVisible, setIsEmojiVisible] = useState(false);
+  const [currentEmojiList, setCurrentEmojiList] =
+    useState<EmojiType[]>(emojiList);
 
   const handleOpenEmoji = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -47,18 +49,22 @@ export default function EmojiBundle({
     isVisible && (
       <div className={cn('wrapper')}>
         <div className={cn('emoji-container')}>
-          {emojiList.length ? (
+          {currentEmojiList.length ? (
             <div className={cn('emoji-list')}>
-              {emojiList.map((emoji) => (
-                <EmojiButton
-                  key={emoji.emojiCode}
-                  isDetail
-                  emojiCode={emoji.emojiCode}
-                  emojiList={emojiList}
-                  handleEmojiClick={handleEmojiClick}
-                  isPending={isPending}
-                />
-              ))}
+              {currentEmojiList
+                .filter((emoji) => emoji.emojiCount !== 0)
+                .map((emoji) => (
+                  <EmojiButton
+                    key={emoji.emojiCode}
+                    isClickVisible
+                    isDetail
+                    emojiCode={emoji.emojiCode}
+                    emojiList={currentEmojiList}
+                    setCurrentEmojiList={setCurrentEmojiList}
+                    handleEmojiClick={handleEmojiClick}
+                    isPending={isPending}
+                  />
+                ))}
             </div>
           ) : (
             <></>
@@ -69,14 +75,14 @@ export default function EmojiBundle({
         </div>
         <div className={cn('container')}>
           <div ref={emojiRef}>
-            <EmojiPreviewBundle
+            <EmojiSelection
               isDetail
               isVisible={isEmojiVisible}
-              emojiList={emojiList}
+              emojiList={currentEmojiList}
+              setCurrentEmojiList={setCurrentEmojiList}
               handleEmojiClick={handleEmojiClick}
             />
           </div>
-
           <div className={cn('reaction')}>
             <CommentIcon width="18" height="18" />
             {commentCount}

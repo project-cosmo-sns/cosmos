@@ -97,10 +97,9 @@ export default function FeedCard({
   };
 
   const { handleEmojiClick, isAddPending, isDeletePending } =
-    useSendEmojiRequest<FeedDetailType>({
+    useSendEmojiRequest({
       id: feedId as number,
       isPost: false,
-      refetch,
     });
 
   console.log(imageUrls, '------피드 상세에서 받는 이미지 url------');

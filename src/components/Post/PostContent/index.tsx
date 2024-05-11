@@ -54,10 +54,9 @@ export default function PostContent() {
   });
 
   const { handleEmojiClick, isAddPending, isDeletePending } =
-    useSendEmojiRequest<PostDetailType>({
+    useSendEmojiRequest({
       id: Number(postId),
       isPost: true,
-      refetch,
     });
 
   useEffect(() => {
@@ -109,7 +108,6 @@ export default function PostContent() {
           </div>
           <EmojiBundle
             isPost
-            emojiCount={emojiCount}
             commentCount={commentCount}
             viewCount={viewCount}
             emojiList={emojis}
