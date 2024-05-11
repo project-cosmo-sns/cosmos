@@ -12,7 +12,7 @@ import {
   ProfileIconDark,
 } from '@/components/Common/IconCollection';
 import { useRouter } from 'next/router';
-import { getProfileImage } from '@/api/member';
+import { useGetProfileImage } from '@/api/member';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
@@ -54,18 +54,14 @@ export default function SideBar() {
     setActivePopover(null);
   };
 
+  const { data: userProfileImage } = useGetProfileImage();
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await getProfileImage();
-        setUserImage(res?.profileImageUrl);
-        dispatch(login());
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
+    if (!userProfileImage) return;
+
+    setUserImage(userProfileImage?.profileImageUrl);
+    dispatch(login());
+  }, [userProfileImage]);
 
   return (
     <div className={cn('sideBar-container')}>

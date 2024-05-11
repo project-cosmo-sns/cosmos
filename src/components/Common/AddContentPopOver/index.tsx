@@ -6,7 +6,6 @@ import Modal from '@/components/Common/Layout/Modal';
 import { PostIcon, FeedIcon } from '@/components/Common/IconCollection';
 import CreateFeed from '@/components/Feed/CreateFeed';
 import Link from 'next/link';
-import { on } from 'events';
 
 type PopOverProps = {
   onClose: () => void;

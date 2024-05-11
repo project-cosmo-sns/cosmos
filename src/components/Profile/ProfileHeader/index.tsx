@@ -8,6 +8,7 @@ import { useState } from 'react';
 import FollowList from '../FollowList';
 import useFollowClick from '@/hooks/useFollowClick';
 import FollowButton from '@/components/Common/Buttons/FollowButton';
+import AuthForm from '../AuthForm';
 
 export interface ProfileHeaderProps {
   memberData: MemberDataType;
@@ -22,6 +23,7 @@ export default function ProfileHeader({
   setIsModalOpen,
   // error,
 }: ProfileHeaderProps) {
+  const [showAuthForm, setShowAuthForm] = useState(false);
   const [followModal, setFollowModal] = useState({
     follower: false,
     following: false,
@@ -34,6 +36,10 @@ export default function ProfileHeader({
       ...followModal,
       [type]: !followModal[type],
     });
+  };
+
+  const authFormClick = () => {
+    setShowAuthForm(!showAuthForm);
   };
 
   const renderButton = () => {
@@ -58,14 +64,12 @@ export default function ProfileHeader({
     }
 
     return (
-      <button
-        type="button"
-        onClick={() => {
-          console.log('인증모달띄우기');
-        }}
-      >
-        인증하기
-      </button>
+      <>
+        <button type="button" onClick={authFormClick}>
+          인증하기
+        </button>
+        <AuthForm modalVisible={showAuthForm} toggleModal={authFormClick} />
+      </>
     );
   };
 

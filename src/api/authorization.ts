@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
 import fetchData from './fetchData';
-import { AuthFormProps } from '@/@types/type';
 
 /**
  *  회원인증 데이터 전송
@@ -11,12 +10,16 @@ interface FetchDataResponse {
   uploadURL: string;
 }
 
+type sendAuthData = {
+  generation: number;
+  image: string | null;
+};
+
 export default async function getImageUrl() {
   try {
     const response = (await fetchData({
       param: '/authorization/image/create',
     })) as FetchDataResponse;
-    console.log(response);
     const { uploadURL } = response;
     return uploadURL;
   } catch (error) {
@@ -27,7 +30,6 @@ export default async function getImageUrl() {
 
 export async function s3UploadImage(file: File) {
   const uploadUrl = await getImageUrl();
-  console.log('Received uploadUrl:', uploadUrl);
   if (!uploadUrl) {
     console.error('업로드 URL GET 실패');
     return null;
@@ -43,9 +45,7 @@ export async function s3UploadImage(file: File) {
     });
 
     if (response.ok) {
-      console.log('이미지 업로드 성공');
       return uploadUrl.split('?')[0]; // 업로드된 이미지의 S3 URL을 반환
-      // return uploadUrl;
     }
     console.error('Upload failed:', response);
     return null;
@@ -57,13 +57,13 @@ export async function s3UploadImage(file: File) {
 
 export function useSendAuthData() {
   const { mutate: sendAuth } = useMutation({
-    mutationFn: (data: AuthFormProps) =>
+    mutationFn: ({ generation, image }: sendAuthData) =>
       fetchData({
         param: '/authorization',
         method: 'post',
         requestData: {
-          generation: data.generation,
-          image: data.image,
+          generation,
+          imageUrl: image,
         },
       }),
   });
