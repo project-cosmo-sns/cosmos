@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Toast.module.scss';
-import { CheckIcon, WarnIcon } from '../IconCollection';
+import { CompleteIcon, WarnIcon } from '../IconCollection';
 
 const cn = classNames.bind(styles);
 /**
@@ -31,7 +31,7 @@ export default function Toast() {
     visible && (
       <div className={cn('toast-container')}>
         {type === 'check' ? (
-          <CheckIcon fill="#0ACF83" />
+          <CompleteIcon fill="#0ACF83" />
         ) : (
           <WarnIcon fill="#FF0000" />
         )}
