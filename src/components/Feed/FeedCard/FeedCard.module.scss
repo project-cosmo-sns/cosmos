@@ -43,6 +43,7 @@
           padding: 16px;
           border-radius: 5px;
           resize: none;
+          color: $white-01;
         }
         .error {
           position: absolute;
@@ -85,6 +86,7 @@
 .detail-upload-image-wrapper {
   display: flex;
   overflow: scroll;
+  gap: 8px;
 
   .detail-upload-image {
     position: relative;
