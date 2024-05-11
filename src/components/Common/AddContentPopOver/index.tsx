@@ -10,11 +10,15 @@ import { on } from 'events';
 
 type PopOverProps = {
   onClose: () => void;
+  profileImage: string | null;
 };
 
 const cn = classNames.bind(styles);
 
-export default function AddContentPopOver({ onClose }: PopOverProps) {
+export default function AddContentPopOver({
+  onClose,
+  profileImage,
+}: PopOverProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleCreateFeedClick = () => {
@@ -46,7 +50,7 @@ export default function AddContentPopOver({ onClose }: PopOverProps) {
         cssModalSize={cn('create-feed-modalSize')}
         cssComponentDisplay={cn('')}
       >
-        <CreateFeed />
+        <CreateFeed profileImage={profileImage} />
       </Modal>
     </PopOver>
   );

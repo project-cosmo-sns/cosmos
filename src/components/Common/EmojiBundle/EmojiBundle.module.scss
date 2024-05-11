@@ -11,15 +11,23 @@
 
 .container {
   @include flex-arrange;
+  position: relative;
   flex-direction: row;
   gap: 12px;
-  padding-left: 4px;
 }
 
 .reaction {
   @include flex-arrange;
   @include font-style(1.2rem, $gray-01, 400);
   gap: 6px;
+}
+
+.emoji {
+  cursor: pointer;
+
+  &:hover {
+    background-color: $black-01;
+  }
 }
 
 @media (min-width: 768px) {

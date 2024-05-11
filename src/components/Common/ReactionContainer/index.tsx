@@ -1,10 +1,10 @@
 import { EmojiCode, EmojiType } from '@/@types/type';
+import useOutSideClick from '@/hooks/useOutSideClick';
 import classNames from 'classnames/bind';
 import { useRef, useState } from 'react';
-import EmojiPrivewBundle from '../EmojiBundle/EmojiPreviewBundle';
+import EmojiPreviewBundle from '../EmojiBundle/EmojiPreviewBundle';
 import { CommentIcon, EmojiIcon, EyeIcon } from '../IconCollection';
 import styles from './ReactionContainer.module.scss';
-import useOutSideClick from '@/hooks/useOutSideClick';
 
 interface ReactionContainerProps {
   emojiCount: number;
@@ -70,7 +70,7 @@ export default function ReactionContainer({
         </div>
       )}
       <div ref={emojiRef}>
-        <EmojiPrivewBundle
+        <EmojiPreviewBundle
           isVisible={isEmojiVisible}
           emojiList={emojis}
           handleEmojiClick={handleEmojiClick}

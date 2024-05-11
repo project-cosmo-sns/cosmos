@@ -23,7 +23,9 @@ export default function SearchInput() {
   const handleSearch = () => {
     if (inputValue.trim() !== '') {
       dispatch(updateKeyword(inputValue));
-      router.push(`/search?query=${encodeURIComponent(inputValue)}`);
+      router.push(
+        `/search?tab=hashtag&query=${encodeURIComponent(inputValue)}`,
+      );
     } else {
       router.push('/');
     }

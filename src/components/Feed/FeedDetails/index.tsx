@@ -26,6 +26,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
     data: feedData,
     isPending: isFeedDataPending,
     isError: isFeedDataError,
+    refetch,
   } = useQuery({
     queryKey: ['feedDetails', feedId],
     queryFn: ({ queryKey }) =>
@@ -73,7 +74,12 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
 
   return (
     <div className={cn('container')}>
-      <FeedCard feedData={feed} hasPadding={false} forDetails />
+      <FeedCard
+        refetch={refetch}
+        feedData={feed}
+        hasPadding={false}
+        forDetails
+      />
       <CommentInput placeholder="댓글을 입력하세요" onSubmit={onSubmit} />
       <div>
         {commentList.length ? (

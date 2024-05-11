@@ -1,7 +1,7 @@
 .emoji-container {
   display: flex;
   position: absolute;
-  top: -48px;
+  top: -50px;
   left: 45px;
   background-color: $black-02;
   border-radius: 10px;
@@ -9,4 +9,18 @@
   backdrop-filter: blur(15px);
   padding: 4px;
   gap: 4px;
+
+  &-detail {
+    top: -55px;
+    left: -10px;
+  }
+}
+
+@media (min-width: 768px) {
+  .emoji-container {
+    &-detail {
+      top: -55px;
+      left: -100px;
+    }
+  }
 }

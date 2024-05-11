@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { DownIcon, UpIcon } from '../../IconCollection';
 import styles from './SortDropdown.module.scss';
 import { SORT_OPTION, SortType } from '@/constants/sortType';
+import scrollToTop from '@/utils/scrollToTop';
 
 const cn = classNames.bind(styles);
 
@@ -31,6 +32,7 @@ export default function SortDropdown({
   const sortTypeHandler = (type: SortType) => {
     setSelectedSort(type);
     setIsExpanded(false);
+    scrollToTop();
   };
 
   return (

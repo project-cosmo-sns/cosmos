@@ -2,7 +2,7 @@ import instance from './axios';
 
 interface FetchDataOptions<T> {
   param: string;
-  method?: 'get' | 'post' | 'patch' | 'delete';
+  method?: 'get' | 'post' | 'patch' | 'delete' | 'put';
   requestData?: T;
 }
 
@@ -23,7 +23,9 @@ export default async function fetchData<T>({
       url: param,
       method,
       data: requestData,
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
     return response.data;
   }
