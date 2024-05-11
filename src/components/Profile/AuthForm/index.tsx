@@ -21,17 +21,21 @@ export default function AuthForm({
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors },
   } = useForm<AuthFormProps>();
 
   const router = useRouter();
+
   const { showToastHandler } = useToast();
+
   const sendAuth = useSendAuthData();
+
   const onSubmit: SubmitHandler<AuthFormProps> = (data) => {
     sendAuth(data);
     showToastHandler('인증 신청이 완료되었습니다.', 'check');
-    router.push('/');
-    console.log(sendAuth(data));
+    // router.push('/');
+    console.log(data);
   };
 
   return (
