@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './Toast.module.scss';
+import { CheckIcon, WarnIcon } from '../IconCollection';
 
 const cn = classNames.bind(styles);
 /**
@@ -15,7 +16,7 @@ const cn = classNames.bind(styles);
 export default function Toast() {
   const dispatch = useDispatch();
   const visible = useSelector((state: RootState) => state.toast.visible);
-  const icon = useSelector((state: RootState) => state.toast.icon);
+  const type = useSelector((state: RootState) => state.toast.type);
   const text = useSelector((state: RootState) => state.toast.text);
 
   const hideTimeOut = setTimeout(() => {
@@ -29,7 +30,11 @@ export default function Toast() {
   return (
     visible && (
       <div className={cn('toast-container')}>
-        {icon}
+        {type === 'check' ? (
+          <CheckIcon fill="#0ACF83" />
+        ) : (
+          <WarnIcon fill="#FF0000" />
+        )}
         <span className={cn('toast-message')}>{text}</span>
       </div>
     )

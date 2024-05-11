@@ -2,13 +2,13 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface ToastState {
   text: string;
-  icon?: React.ReactNode;
+  type?: string;
   visible?: boolean;
 }
 
 const initialState: ToastState = {
   text: '',
-  icon: undefined,
+  type: '',
   visible: false,
 };
 
@@ -18,12 +18,12 @@ const toastSlice = createSlice({
   reducers: {
     showToast(state, action: PayloadAction<ToastState>) {
       state.text = action.payload.text;
-      state.icon = action.payload.icon;
+      state.type = action.payload.type;
       state.visible = true;
     },
     hideToast(state) {
       state.text = '';
-      state.icon = '';
+      state.type = '';
       state.visible = false;
     },
   },

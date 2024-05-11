@@ -1,17 +1,16 @@
 import styles from './LoginModal.module.scss';
 import classNames from 'classnames/bind';
 import Modal from '../Layout/Modal';
-import { ModalPropsType } from '@/@types/type';
 import { GitHubIcon, GoogleIcon, LogoIcon } from '../IconCollection';
 import LoginButton from '@/components/Common/Buttons/LoginButton';
 import { baseURL } from '@/api/axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { closeLoginModal } from '@/redux/loginModalSlice';
 
 const cn = classNames.bind(styles);
 
-export default function LoginModal({
-  modalVisible,
-  toggleModal,
-}: ModalPropsType) {
+export default function LoginModal() {
   const githubClick = async () => {
     let popupX = window.innerWidth / 2 - 300;
     let popupY = window.innerHeight / 2 - 300;
@@ -23,10 +22,19 @@ export default function LoginModal({
     );
   };
 
+  const isModalVisible = useSelector(
+    (state: RootState) => state.loginModal.loginModalOpen,
+  );
+
+  const dispatch = useDispatch();
+  const closedModals = () => {
+    dispatch(closeLoginModal());
+  };
+
   return (
     <Modal
-      modalVisible={modalVisible}
-      toggleModal={toggleModal}
+      modalVisible={isModalVisible}
+      toggleModal={closedModals}
       cssModalSize={cn('login-container')}
       cssComponentDisplay={cn('login-wrapper')}
     >
