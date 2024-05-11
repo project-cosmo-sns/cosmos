@@ -14,7 +14,7 @@ interface EmojiPreviewBundleProps {
 
 const cn = classNames.bind(styles);
 
-export default function EmojiPrivewBundle({
+export default function EmojiPreviewBundle({
   emojiList,
   isVisible,
   handleEmojiClick,
