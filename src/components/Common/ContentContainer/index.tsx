@@ -69,7 +69,11 @@ export default function ContentContainer({
   );
 
   useEffect(() => {
-    setSelectedOption(router.query.tab as ContainerOptionType);
+    if (router.query.tab) {
+      setSelectedOption(router.query.tab as ContainerOptionType);
+    } else {
+      setSelectedOption('feed');
+    }
   }, [router.query.tab]);
 
   return (

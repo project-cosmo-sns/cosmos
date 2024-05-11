@@ -35,7 +35,7 @@ export default function SideBar() {
 
   const profileClick = () => {
     if (isLogin) {
-      router.push('/profile');
+      router.push('/profile?tab=feed');
       return;
     }
     setModalVisible(!modalVisible);

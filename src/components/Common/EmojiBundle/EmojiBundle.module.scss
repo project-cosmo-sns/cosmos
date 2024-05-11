@@ -1,16 +1,22 @@
 .wrapper {
-  @include flex-arrange(center, flex-start);
+  @include flex-arrange(flex-start, center);
   flex-direction: column;
   gap: 20px;
 }
 
 .emoji-container {
-  @include flex-arrange;
+  @include flex-arrange(flex-start, center);
+  gap: 12px;
+}
+
+.emoji-list {
+  @include flex-arrange(flex-start, center);
   gap: 4px;
 }
 
 .container {
-  @include flex-arrange;
+  @include flex-arrange(flex-end, center);
+  width: 100%;
   position: relative;
   flex-direction: row;
   gap: 12px;
@@ -24,10 +30,6 @@
 
 .emoji {
   cursor: pointer;
-
-  &:hover {
-    background-color: $black-01;
-  }
 }
 
 @media (min-width: 768px) {

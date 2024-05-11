@@ -50,7 +50,7 @@ export default function PostContent() {
         param: `/post/${postId}`,
         method: 'delete',
       }),
-    onSuccess: () => router.push('/'),
+    onSuccess: () => router.push('/?tab=feed'),
   });
 
   const { handleEmojiClick, isAddPending, isDeletePending } =

@@ -34,7 +34,7 @@ export default function AuthForm({
       '인증 신청이 완료되었습니다.',
       <CheckIcon fill="#0ACF83" />,
     );
-    router.push('/');
+    router.push('/?tab=feed');
     console.log(sendAuth(data));
   };
 

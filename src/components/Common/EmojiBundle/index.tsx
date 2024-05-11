@@ -12,7 +12,6 @@ interface EmojiBundleProps {
   isVisible?: boolean;
   handleEmojiClick: (emojiCode: EmojiCode, isClicked: boolean) => void;
   isPending?: boolean;
-  emojiCount: number;
   commentCount: number;
   viewCount?: number;
   isPost?: boolean;
@@ -25,7 +24,6 @@ export default function EmojiBundle({
   isVisible = true,
   handleEmojiClick,
   isPending,
-  emojiCount,
   commentCount,
   viewCount,
   isPost = false,
@@ -49,16 +47,25 @@ export default function EmojiBundle({
     isVisible && (
       <div className={cn('wrapper')}>
         <div className={cn('emoji-container')}>
-          {emojiList.map((emoji) => (
-            <EmojiButton
-              key={emoji.emojiCode}
-              isDetail
-              emojiCode={emoji.emojiCode}
-              emojiList={emojiList}
-              handleEmojiClick={handleEmojiClick}
-              isPending={isPending}
-            />
-          ))}
+          {emojiList.length ? (
+            <div className={cn('emoji-list')}>
+              {emojiList.map((emoji) => (
+                <EmojiButton
+                  key={emoji.emojiCode}
+                  isDetail
+                  emojiCode={emoji.emojiCode}
+                  emojiList={emojiList}
+                  handleEmojiClick={handleEmojiClick}
+                  isPending={isPending}
+                />
+              ))}
+            </div>
+          ) : (
+            <></>
+          )}
+          <div className={cn('reaction', 'emoji')} onClick={handleOpenEmoji}>
+            <EmojiIcon width="18" height="18" />
+          </div>
         </div>
         <div className={cn('container')}>
           <div ref={emojiRef}>
@@ -69,10 +76,7 @@ export default function EmojiBundle({
               handleEmojiClick={handleEmojiClick}
             />
           </div>
-          <div className={cn('reaction', 'emoji')} onClick={handleOpenEmoji}>
-            <EmojiIcon width="18" height="18" />
-            {emojiCount}
-          </div>
+
           <div className={cn('reaction')}>
             <CommentIcon width="18" height="18" />
             {commentCount}

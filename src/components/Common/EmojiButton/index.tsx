@@ -32,7 +32,6 @@ export default function EmojiButton({
         detail: isDetail,
       })}
       onClick={(event) => {
-        console.log(emojiData[0]?.emojiCount);
         event.stopPropagation();
         handleEmojiClick(emojiCode, emojiData[0]?.isClicked);
       }}
