@@ -17,7 +17,7 @@ type ProfileData = {
 
 export async function getProfileImage() {
   const res = await fetchData<ProfileData>({
-    param: '/member/profile-image-url',
+    param: '/member/summary',
   });
   return res;
 }
