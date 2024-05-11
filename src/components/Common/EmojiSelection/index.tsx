@@ -7,6 +7,7 @@ import styles from './EmojiSelection.module.scss';
 interface EmojiSelectionProps {
   emojiList: EmojiType[]; // 내가 눌렀는지 확인용
   isVisible?: boolean; // 이모지 표시 눌렀는지 아닌지에 따라 보이고 안보이는 상태
+  setIsEmojiContainerVisible: (args: boolean) => void;
   handleEmojiClick: (emojiCode: EmojiCode, isClicked: boolean) => void; // 추가/삭제 요청
   setCurrentEmojiList: (args: EmojiType[]) => void;
   isPending?: boolean; // 펜딩 상태
@@ -18,6 +19,7 @@ const cn = classNames.bind(styles);
 export default function EmojiSelection({
   emojiList,
   isVisible,
+  setIsEmojiContainerVisible,
   handleEmojiClick,
   setCurrentEmojiList,
   isPending,
@@ -34,6 +36,7 @@ export default function EmojiSelection({
           {EMOJI_CODE.map((emojiCode) => (
             <EmojiButton
               key={emojiCode}
+              setIsEmojiContainerVisible={setIsEmojiContainerVisible}
               isClickVisible={false}
               emojiCode={emojiCode}
               emojiList={emojiList}

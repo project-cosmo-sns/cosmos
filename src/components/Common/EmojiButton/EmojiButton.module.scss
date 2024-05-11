@@ -14,10 +14,10 @@
   padding: 8px;
   align-items: flex-start;
   border-radius: 5px;
-}
 
-.wrapper:hover {
-  background-color: $black-03;
+  &:hover {
+    background-color: $black-03;
+  }
 }
 
 .container {

@@ -3,9 +3,9 @@ import useOutSideClick from '@/hooks/useOutSideClick';
 import classNames from 'classnames/bind';
 import { useRef, useState } from 'react';
 import EmojiButton from '../EmojiButton';
-import { CommentIcon, EmojiIcon, EyeIcon } from '../IconCollection';
-import styles from './EmojiBundle.module.scss';
 import EmojiSelection from '../EmojiSelection';
+import { CommentIcon, EmojiIcon, EyeIcon, PlusIcon } from '../IconCollection';
+import styles from './EmojiBundle.module.scss';
 
 interface EmojiBundleProps {
   emojiList: EmojiType[];
@@ -29,7 +29,7 @@ export default function EmojiBundle({
   isPost = false,
 }: EmojiBundleProps) {
   const emojiRef = useRef(null);
-  const [isEmojiVisible, setIsEmojiVisible] = useState(false);
+  const [isEmojiContainerVisible, setIsEmojiContainerVisible] = useState(false);
   const [currentEmojiList, setCurrentEmojiList] =
     useState<EmojiType[]>(emojiList);
 
@@ -37,12 +37,12 @@ export default function EmojiBundle({
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => {
     event.stopPropagation();
-    setIsEmojiVisible((prev) => !prev);
+    setIsEmojiContainerVisible((prev) => !prev);
   };
 
   useOutSideClick({
     ref: emojiRef,
-    callback: () => setIsEmojiVisible(false),
+    callback: () => setIsEmojiContainerVisible(false),
   });
 
   return (
@@ -70,14 +70,16 @@ export default function EmojiBundle({
             <></>
           )}
           <div className={cn('reaction', 'emoji')} onClick={handleOpenEmoji}>
-            <EmojiIcon width="18" height="18" />
+            <EmojiIcon width="14" height="14" />
+            <PlusIcon />
           </div>
         </div>
         <div className={cn('container')}>
           <div ref={emojiRef}>
             <EmojiSelection
               isDetail
-              isVisible={isEmojiVisible}
+              isVisible={isEmojiContainerVisible}
+              setIsEmojiContainerVisible={setIsEmojiContainerVisible}
               emojiList={currentEmojiList}
               setCurrentEmojiList={setCurrentEmojiList}
               handleEmojiClick={handleEmojiClick}

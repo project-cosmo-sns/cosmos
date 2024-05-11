@@ -6,7 +6,7 @@
 
 .emoji-container {
   @include flex-arrange(flex-start, center);
-  gap: 12px;
+  gap: 4px;
 }
 
 .emoji-list {
@@ -30,6 +30,14 @@
 
 .emoji {
   cursor: pointer;
+  gap: 0;
+  background-color: $black-01;
+  border-radius: 5px;
+  padding: 6px 8px 6px 12px;
+
+  &:hover {
+    background-color: $black-02;
+  }
 }
 
 @media (min-width: 768px) {

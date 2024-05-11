@@ -8,6 +8,7 @@ const cn = classNames.bind(styles);
 interface EmojiButtonProps {
   isDetail?: boolean;
   isClickVisible: boolean;
+  setIsEmojiContainerVisible?: (args: boolean) => void;
   emojiCode: EmojiCode;
   emojiList: EmojiType[];
   handleEmojiClick: (emojiCode: EmojiCode, isClicked: boolean) => void;
@@ -17,6 +18,7 @@ interface EmojiButtonProps {
 
 export default function EmojiButton({
   emojiCode,
+  setIsEmojiContainerVisible,
   isClickVisible,
   isDetail = false,
   emojiList,
@@ -68,6 +70,7 @@ export default function EmojiButton({
         event.stopPropagation();
         handleUpdateCurrentEmojiList();
         handleEmojiClick(emojiCode, emojiData[0]?.isClicked);
+        if (setIsEmojiContainerVisible) setIsEmojiContainerVisible(false);
       }}
       disabled={isPending}
     >
