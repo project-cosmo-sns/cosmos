@@ -60,7 +60,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
         url: `${url}`,
         data: file,
         headers: {
-          'Access-Control-Allow-Origin': 'https://alpha.cosmo-sns.com/',
+          'Access-Control-Allow-Origin': 'https://alpha.cosmo-sns.com',
         },
       }),
     onSuccess: (data) => {
@@ -90,7 +90,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
         method: 'delete',
         url: `${url}`,
         headers: {
-          'Access-Control-Allow-Origin': 'https://alpha.cosmo-sns.com/',
+          'Access-Control-Allow-Origin': 'https://alpha.cosmo-sns.com',
         },
       }),
     onError: () => console.log('이미지 삭제 요청 에러 '),
@@ -157,11 +157,11 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
   // setUrlBucket((prevUrlBucket) => [...prevUrlBucket, ...urlList]);
 
   const onSubmit = async (data: FeedType) => {
-    try {
-      await postFeed(data);
-    } catch (error) {
-      console.log(error, '------error------');
-    }
+    // try {
+    //   await postFeed(data);
+    // } catch (error) {
+    //   console.log(error, '------error------');
+    // }
     console.log(data, '------제출 데이터-----');
   };
 
@@ -176,17 +176,12 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
    * @param {number} index - useState images 배열의 index는 이미지를 업로드할때 등록되는 index와 같습니다. useState images 배열을 순회하면서 클릭한 이미지의 index를 제외한 나머지 요소를 반환합니다.
    */
   const filterImage = (index: number) => {
-    console.log(index, '-----삭제되는 이미지 index------');
     const filteredImages = images.filter((el, i) => i !== index);
     const filteredUrlBucket = urlBucket.filter((el, i) => i !== index);
 
-    filteredImages.map((item) =>
-      console.log(item, '------필터된 이미지------'),
-    );
-    filteredUrlBucket.map((item) =>
-      console.log(item, '------필터된 url------'),
-    );
+    console.log(filteredUrlBucket, '-----필터 버켓-----');
 
+    deleteImage(urlBucket[index]);
     setImages(filteredImages);
     setValue('feedImage', filteredUrlBucket);
   };

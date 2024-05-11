@@ -87,6 +87,7 @@
   display: flex;
   overflow: scroll;
   gap: 8px;
+  scrollbar-width: none;
 
   .detail-upload-image {
     position: relative;
@@ -94,7 +95,6 @@
     height: 212px;
     flex-shrink: 0;
     border-radius: 5px;
-    overflow: hidden;
   }
 }
 
