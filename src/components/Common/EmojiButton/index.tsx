@@ -2,6 +2,7 @@ import { EmojiCode, EmojiType } from '@/@types/type';
 import { EMOJI_ICON } from '@/constants/EmojiCode';
 import classNames from 'classnames/bind';
 import styles from './EmojiButton.module.scss';
+import { useState } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -22,17 +23,19 @@ export default function EmojiButton({
 }: EmojiButtonProps) {
   const Icon = EMOJI_ICON[emojiCode];
   const emojiData = emojiList.filter((emoji) => emoji.emojiCode === emojiCode);
+  const [isClicked, setIsClicked] = useState(emojiData[0]?.isClicked);
 
   return (
     <button
       type="button"
       className={cn('wrapper', {
-        clicked: emojiData[0]?.isClicked,
+        clicked: isClicked,
         detail: isDetail,
       })}
       onClick={(event) => {
+        setIsClicked((prev) => !prev);
         event.stopPropagation();
-        handleEmojiClick(emojiCode, emojiData[0]?.isClicked);
+        handleEmojiClick(emojiCode, isClicked);
       }}
       disabled={isPending}
     >

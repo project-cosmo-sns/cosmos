@@ -3,7 +3,7 @@ import styles from './Input.module.scss';
 import React, { HTMLAttributes } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
-interface InputProps extends HTMLAttributes<HTMLInputElement> {
+interface InputProps extends HTMLAttributes<HTMLTextAreaElement> {
   register?: UseFormRegisterReturn;
   placeholder?: string;
   type?: string;
@@ -25,8 +25,8 @@ const cn = classNames.bind(styles);
 export default function Input({ register, children, ...rest }: InputProps) {
   return (
     <div className={cn('wrapper')}>
-      <input
-        className={cn('input')}
+      <textarea
+        className={cn('textarea')}
         name="commentInput"
         {...rest}
         {...register}

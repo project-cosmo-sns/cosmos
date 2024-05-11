@@ -27,6 +27,7 @@
 
 .content {
   color: $white-01;
+  word-break: break-all;
   // color: $white 로 수정 예정;
   textarea {
     width: 100%;

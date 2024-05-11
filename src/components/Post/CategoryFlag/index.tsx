@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './CategoryFlag.module.scss';
+import { CATEGORY_LIST } from '@/constants/categoryList';
 
 interface CategoryFlagProps {
   category: string;
@@ -22,7 +23,7 @@ export default function CategoryFlag({
       className={cn('category', { selected: isSelected })}
       onClick={() => setSelectedCategory(category)}
     >
-      {category}
+      {category === 'ALL' ? '전체' : CATEGORY_LIST[category]}
     </button>
   );
 }

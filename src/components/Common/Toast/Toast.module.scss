@@ -1,18 +1,17 @@
 .toast-container {
-  @include font-style(1.6rem, $white-01, 500);
-  width: 270px;
-  height: 60px;
+  @include flex-arrange;
+  @include glass-02($edge: none);
   padding: 18px 20px;
-  background: $black-01;
   border-radius: 5px;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  position: absolute;
-  top: 0px;
-  right: 0;
 
-  animation: fadeout 5s;
+  gap: 12px;
+  position: fixed;
+  top: 78%;
+  right: 50%;
+  transform: translateX(50%);
+
+  animation: fadeout 3s linear;
+  z-index: 100;
 
   @keyframes fadeout {
     0% {
@@ -24,5 +23,17 @@
     100% {
       opacity: 0;
     }
+  }
+}
+
+.toast-message {
+  width: 100%;
+  @include font-style(1.4rem, $white-01, 500);
+}
+
+@media (min-width: 768px) {
+  .toast-container {
+    top: 120px;
+    right: 15%;
   }
 }

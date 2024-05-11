@@ -1,36 +1,37 @@
-import styles from './Toast.module.scss';
+import { RootState } from '@/redux/store';
+import { hideToast } from '@/redux/toastSlice';
 import classNames from 'classnames/bind';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import styles from './Toast.module.scss';
 
 const cn = classNames.bind(styles);
 /**
- * Toast 컴포넌트 사용시 setTimeout을 이용하여 5000ms 후에 사라지도록 하는게 좋을 것 같아요
  * @param {string} text - text 속성은 토스트에 표시할 텍스트
- * @param {string | React.ElementType} icon - icon 속성은 토스트에 표시할 아이콘
- * @param {string} fill - fill 속성은 icon의 색상을 변경할 때 사용 (#0ACF83 인증완료)
+ * @param { React.ReactNode} icon - icon 속성은 토스트에 표시할 아이콘
+ * @param {boolean} visible - visible 속성은 토스트의 가시성을 결정
  */
 
-type toastType = {
-  text: string;
-  icon: string | React.ElementType;
-  fill?: string;
-};
+export default function Toast() {
+  const dispatch = useDispatch();
+  const visible = useSelector((state: RootState) => state.toast.visible);
+  const icon = useSelector((state: RootState) => state.toast.icon);
+  const text = useSelector((state: RootState) => state.toast.text);
 
-export default function Toast({ text, icon: Icon, fill }: toastType) {
-  const [isVisible, setIsVisible] = useState(true);
+  const hideTimeOut = setTimeout(() => {
+    dispatch(hideToast());
+  }, 3000);
 
   useEffect(() => {
-    setTimeout(() => {
-      setIsVisible(false);
-    }, 3000);
-  }, []);
+    clearTimeout(hideTimeOut);
+  }, [dispatch]);
 
-  if (isVisible)
-    return (
+  return (
+    visible && (
       <div className={cn('toast-container')}>
-        <Icon fill={fill} />
-        {text}
+        {icon}
+        <span className={cn('toast-message')}>{text}</span>
       </div>
-    );
-  return null;
+    )
+  );
 }

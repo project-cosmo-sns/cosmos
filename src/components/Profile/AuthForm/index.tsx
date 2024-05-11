@@ -8,6 +8,9 @@ import styles from './AuthForm.module.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { generationRegex } from '@/constants/generationRegex';
+import { CheckIcon } from '@/components/Common/IconCollection';
+import { useToast } from '@/hooks/useToast';
+import { useSendAuthData, useDeleteAuthData } from '@/api/authorization';
 
 const cn = classNames.bind(styles);
 
@@ -23,11 +26,16 @@ export default function AuthForm({
   } = useForm<AuthFormProps>();
 
   const router = useRouter();
-
+  const { showToastHandler } = useToast();
+  const sendAuth = useSendAuthData();
   const onSubmit: SubmitHandler<AuthFormProps> = (data) => {
-    localStorage.setItem('generation', data.generation);
+    sendAuth(data);
+    showToastHandler(
+      '인증 신청이 완료되었습니다.',
+      <CheckIcon fill="#0ACF83" />,
+    );
     router.push('/');
-    console.log(data);
+    console.log(sendAuth(data));
   };
 
   return (

@@ -12,6 +12,7 @@ import WriterProfile from '@/components/Common/WriterProfile';
 import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import { FeedDetailType } from '../types';
 import styles from './FeedCard.module.scss';
+import getElapsedTime from '@/utils/getElaspedTime';
 
 interface FeedCardTypes {
   feedData: FeedDetailType;
