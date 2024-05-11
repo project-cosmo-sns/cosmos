@@ -105,7 +105,10 @@ export default function FeedCard({
         <div className={cn('user-content')} onClick={onClick}>
           <div className={cn('profile-content-wrapper')}>
             <div className={cn('profile-content-divide')}>
-              <WriterProfile writer={feedData.writer} createdAt={createdAt} />
+              <WriterProfile
+                writer={feedData.writer}
+                createdAt={getElapsedTime(createdAt)}
+              />
               {forDetails && isMine && (
                 <div className={cn('icon-wrapper')}>
                   <EditIcon

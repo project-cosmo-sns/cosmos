@@ -1,4 +1,4 @@
 export interface FeedType {
   content: string;
-  imageUrls: string[];
+  feedImage: string[];
 }

@@ -9,8 +9,8 @@ import { CloseIcon, ProfileIcon } from '@/components/Common/IconCollection';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
 import styels from './CreateFeed.module.scss';
-import { postFeed } from './api';
 import { FeedType } from './type';
+import { postFeed } from './api';
 
 interface UrlType {
   uploadURL: string;
@@ -41,7 +41,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
     formState: { errors },
     watch,
   } = useForm<Inputs>();
-  const [images, setImages] = useState<File[]>([]);
+  const [images, setImages] = useState<Blob[]>([]);
   const [urlBucket, setUrlBucket] = useState<string[]>([]);
 
   const { refetch: getUrl } = useQuery<UrlType>({
@@ -54,7 +54,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
   });
 
   const putUrlMutate = useMutation({
-    mutationFn: ({ url, file }: { url: string; file: File }) =>
+    mutationFn: ({ url, file }: { url: string; file: Blob }) =>
       axios({
         method: 'put',
         url: `${url}`,
@@ -80,7 +80,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
     },
   });
 
-  const putUrl = (url: string, file: File) => {
+  const putUrl = (url: string, file: Blob) => {
     putUrlMutate.mutate({ url, file });
   };
 
@@ -132,7 +132,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
     return data?.uploadURL;
   };
 
-  const updateUrlBucket = async (currentImageValue: File[]) => {
+  const updateUrlBucket = async (currentImageValue: Blob[]) => {
     let urlList: string[] = [];
     if (currentImageValue && currentImageValue.length > 0) {
       for (let i = 0; i < currentImageValue.length; i += 1) {
