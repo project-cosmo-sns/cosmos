@@ -10,6 +10,11 @@
     gap: 12px;
     height: 100%;
 
+    .profile-image {
+      border-radius: 50%;
+      overflow: hidden;
+    }
+
     .user {
       @include flex-arrange;
       position: relative;
