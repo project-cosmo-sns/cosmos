@@ -1,9 +1,9 @@
 export interface MemberDataType {
-  memberId?: number;
   nickname: string;
-  generation: number;
-  profileImageUrl: string;
   introduce: string;
+  profileImageUrl: string;
+  memberId?: number;
+  generation: number;
   followerCount: number;
   followingCount: number;
   isAuthorized: boolean;

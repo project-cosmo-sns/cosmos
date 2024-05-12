@@ -81,11 +81,11 @@ export default function ProfileHeader({
       return (
         <div className={cn('introduce-empty')}>인증되지 않은 사용자입니다.</div>
       );
-    } else if (memberData.introduce === '') {
-      return <div className={cn('introduce-empty')}>소개가 없습니다.</div>;
-    } else {
-      return memberData.introduce;
     }
+    if (memberData.introduce === '') {
+      return <div className={cn('introduce-empty')}>소개가 없습니다.</div>;
+    }
+    return memberData.introduce;
   }
 
   return (

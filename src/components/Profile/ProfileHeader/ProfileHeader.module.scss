@@ -81,6 +81,16 @@
   }
 }
 
+.authorization-button {
+  @include color($primary-01, $white-01);
+  @include flex-arrange;
+  width: 80px;
+  height: 32px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
 @media (min-width: 768px) {
   .header-container {
     position: relative;
@@ -126,7 +136,7 @@
 }
 .profile-setting-or-following {
   position: absolute;
-  // top: -20px;
+  top: -5px;
   right: 30px;
   cursor: pointer;
 

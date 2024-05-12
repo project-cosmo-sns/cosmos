@@ -6,20 +6,16 @@ import classNames from 'classnames/bind';
 import styles from './MemberDataContainer.module.scss';
 import ContentContainer from '@/components/Common/ContentContainer';
 import { ContainerOptionType } from '@/@types/type';
-import ScrapList from '@/components/Common/ScrapList';
 import { fetchMemberData } from './api';
 import { GetServerSideProps } from 'next';
 import { FeedDetailType } from '@/components/Feed/types';
-import MyFeedList from '@/components/Profile/MyFeedList';
-// import MyPostList from '@/components/Profile/MyPostList';
 import { PostListType } from '@/components/Post/types';
-
-import { SortType } from '@/constants/sortType';
-import MyPostList from '@/components/Profile/MyPostList';
+import ProfileContent from '@/components/Profile/ProfileContent/ProfileContent';
+import EmptyContent from '@/components/Profile/ProfileContent/EmptyContent';
 
 const cn = classNames.bind(styles);
 
-interface MemberDataContainerPropsType {
+export interface MemberDataContainerPropsType {
   myFeedList: FeedDetailType[];
   myPostList: PostListType;
   memberData: MemberDataType;
@@ -40,12 +36,7 @@ export default function MemberDataContainer({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
-
-  // const [selectedSort, setSelectedSort] = useState<
-  //   'all' | 'followed' | 'myGeneration'
-  // >('all');
-
-  // const [selectedSort, setSelectedSort] = useState<SortType>('ALL');
+  const [newMemberData, setNewMemberData] = useState(memberData);
 
   // 현재는 다른 유저일 경우 인증/미인증을 알 수 없어서 전부 미인증으로 뜨는 상태.
   // api를 새로 내려받게 되면 다시 처리할 것.
@@ -63,9 +54,6 @@ export default function MemberDataContainer({
         <ContentContainer
           selectedOption={selectedOption}
           setSelectedOption={setSelectedOption}
-          // selectedSort={selectedSort}
-          // setSelectedSort={setSelectedSort}
-          // isMyProfile
         >
           <div>미인증사용자입니다</div>
         </ContentContainer>
@@ -76,31 +64,52 @@ export default function MemberDataContainer({
   if (!memberData) {
     return <div>Lodading~~~~~</div>;
   }
-  console.log('myPostList: ', myPostList);
-  const renderContent = () => {
-    switch (selectedOption) {
-      case 'feed':
-        return myFeedList ? (
-          <MyFeedList feedList={myFeedList} />
-        ) : (
-          '작성된 글이 없습니다.'
-        );
-      case 'post':
-        return myPostList ? (
-          <MyPostList
-            // selectedSort={}
-            postList={myPostList}
-          />
-        ) : (
-          '작성된 글이 없습니다.'
-        );
 
-      case 'scrap':
-        return <ScrapList />;
-      default:
-        return null;
-    }
-  };
+  // const renderContent = () => {
+  //   switch (selectedOption) {
+  //     case 'feed':
+  //       return myFeedList ? (
+  //         <MyFeedList feedList={myFeedList} />
+  //       ) : (
+  //         '피드가 없습니다.'
+  //       );
+  //     case 'post':
+  //       return myPostList ? (
+  //         <MyPostList
+  //           // selectedSort={}
+  //           postList={myPostList}
+  //         />
+  //       ) : (
+  //         '포스트가 없습니다.'
+  //       );
+
+  //     case 'scrap':
+  //       return <ScrapList />;
+  //     default:
+  //       return null;
+  //   }
+  // };
+
+  // const EmptyContent = () => {
+  //   switch (selectedOption) {
+  //     case 'feed':
+  //       return <div className={cn('empty-content')}>피드가 없습니다.</div>;
+  //     case 'post':
+  //       return <div className={cn('empty-content')}>포스트가 없습니다.</div>;
+  //     case 'scrap':
+  //       return <div className={cn('empty-content')}>스크랩이 없습니다.</div>;
+  //     default:
+  //       return null;
+  //   }
+  // };
+
+  // const AuthorizedContent = () => {
+  //   return <>{renderContent()}</>;
+  // };
+
+  // const UnauthorizedContent = () => {
+  //   return <>{EmptyContent()}</>;
+  // };
 
   return (
     <div className={cn('content')}>
@@ -114,17 +123,25 @@ export default function MemberDataContainer({
             isOpen={isModalOpen}
             setIsOpen={setIsModalOpen}
             memberData={memberData}
+            setNewMemberData={setNewMemberData}
+            newMemberData={newMemberData}
           />
         </>
       )}
       <ContentContainer
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
-        // selectedSort={selectedSort}
-        // setSelectedSort={setSelectedSort}
         isMyProfile
       >
-        {renderContent()}
+        {!memberData.isAuthorized ? (
+          <ProfileContent
+            selectedOption={selectedOption}
+            myFeedList={myFeedList}
+            myPostList={myPostList}
+          />
+        ) : (
+          <EmptyContent selectedOption={selectedOption} />
+        )}
       </ContentContainer>
     </div>
   );

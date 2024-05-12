@@ -5,6 +5,8 @@ import RenderImageLabel from './RenderImageLabel';
 import Input from '../Input';
 import { UseFormRegisterReturn, UseFormWatch } from 'react-hook-form';
 import { AuthFormProps } from '@/@types/type';
+import * as Icon from '@/components/Common/IconCollection';
+// import defaultProfileImg from '@/public/images/profile.svg';
 
 const cn = classNames.bind(styles);
 
@@ -41,7 +43,13 @@ export default function ImageInput({
 
   useEffect(() => {
     if (initialImageUrl) {
-      setImageFile(initialImageUrl);
+      if (initialImageUrl === '') {
+        // initialImageUrl이 빈 문자열이면 기본 이미지
+        setImageFile('');
+      } else {
+        // initialImageUrl이 빈 문자열이 아니면 해당 이미지
+        setImageFile(initialImageUrl);
+      }
     }
 
     let url: string | null = null;
@@ -49,6 +57,8 @@ export default function ImageInput({
     if (uploadedImage && uploadedImage.length > 0) {
       const file: Blob | MediaSource = new Blob([uploadedImage[0]]);
       setImageFile(URL.createObjectURL(file));
+    } else if (!uploadedImage) {
+      setImageFile('');
     }
 
     return () => {

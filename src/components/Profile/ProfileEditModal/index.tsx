@@ -10,11 +10,15 @@ import { useEffect, useState } from 'react';
 import fetchData from '@/api/fetchData';
 import { AuthFormProps } from '@/@types/type';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import * as Icon from '@/components/Common/IconCollection';
 
 interface ProfileEditModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   memberData: MemberDataType;
+  setNewMemberData: (newMemberData: MemberDataType) => void;
+  newMemberData: MemberDataType;
 }
 
 interface FetchDataResponse {
@@ -24,7 +28,7 @@ interface FetchDataResponse {
 interface RequestDataProps {
   profileImageUrl: string;
   nickname: string;
-  introduce: string;
+  introduce: string | undefined;
 }
 const cn = classNames.bind(styles);
 
@@ -33,13 +37,17 @@ export default function ProfileEditModal({
   setIsOpen,
   memberData,
 }: ProfileEditModalProps) {
-  const [previewImage, setPreviewImage] = useState('');
+  const [previewImage, setPreviewImage] = useState(
+    memberData.profileImageUrl || '',
+  );
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
-  const [upLoadComplete, setUploadComplete] = useState(false);
-  const [profileData, setProfileData] = useState<MemberDataType | null>(null);
-
   const queryClient = useQueryClient();
   const { register, handleSubmit, watch, setValue } = useForm<AuthFormProps>();
+  // 프로필 이미지 상태 (이미지 URL 또는 빈 문자열)
+  const [profileImageUrl, setProfileImageUrl] = useState(
+    // '',
+    memberData.profileImageUrl,
+  );
 
   // 이 과정을 통해서는 이미지 url을 받는게 아니다.
   // 그냥 S3버킷에 업로드 가능한 pre-signed URL만 받고
@@ -74,6 +82,7 @@ export default function ProfileEditModal({
       });
       if (response.ok) {
         console.log('이미지 업로드 성공');
+        console.log('getPresignedUrl: ', uploadUrl);
         return uploadUrl.split('?')[0]; // 업로드된 이미지의 S3 URL을 반환
       }
       console.error('Upload failed:', response);
@@ -93,7 +102,6 @@ export default function ProfileEditModal({
 
     try {
       const response = await uploadFileToS3(file); // S3에 파일 업로드
-      // const cacheBustingUrl = `${uploadedImageUrl}?timestamp=${new Date().getTime()}`;
       console.log('Uploaded image URL(reponse of uploadFileToS3):', response);
       setUploadedImageUrl(response);
       console.log('업로드 성공:', uploadedImageUrl);
@@ -103,33 +111,45 @@ export default function ProfileEditModal({
   };
 
   useEffect(() => {
-    if (upLoadComplete) {
-      if (uploadedImageUrl) {
-        setValue('image', uploadedImageUrl);
-        setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
-      }
-      console.log(uploadedImageUrl);
-      setUploadComplete(false);
+    if (uploadedImageUrl) {
+      setValue('image', uploadedImageUrl);
+      setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
+      console.log(
+        'uploadedImageUrl을 preview이미지로 교체하며 이미지가 사라질 가능성 있음',
+        uploadedImageUrl,
+      );
     }
-  }, [upLoadComplete, uploadedImageUrl, setValue]);
+  }, [setValue]);
+  // uploadedImageUrl을 의존성 배열에 넣으니까 얘가 바뀔 때마다 업데이트돼서
+  // 아직 비동기 작업하느라 uploadedImageUrl에 아무것도 없을 때 바로 업데이트 돼버림.
+  // 그래서 미리보기 안뜨길래 뺐다.
 
   // ==================================================
   // 이미지 삭제 mutation으로 리팩토링
   const { mutate: deleteImage } = useMutation({
-    mutationFn: async () =>
-      fetchData({
-        param: '/profile/image/delete',
-        method: 'delete',
-        requestData: {
-          imageUrls: [memberData.profileImageUrl],
-        },
-      }),
+    mutationKey: ['profileData'],
+    mutationFn: async () => {
+      const imageUrlArray = memberData.profileImageUrl.split('/');
+      const imageName = imageUrlArray[imageUrlArray.length - 1];
+      console.log(imageName);
 
-    onSuccess: () => {
+      const response = await axios.delete(
+        `https://api-alpha.cosmo-sns.com/profile/image/delete?imageUrls[]=${encodeURIComponent(imageName)}`,
+        {
+          withCredentials: true,
+          headers: { 'Cache-Control': 'no-cache' },
+        },
+      );
+      return response.data;
+    },
+    onSuccess: (e) => {
       console.log('프로필 이미지 삭제 성공');
-      setPreviewImage('');
+      // @/public/images/profile.svg
+      setProfileImageUrl('');
+      setPreviewImage(''); // 경로 직접 설정해야함
       setValue('image', '');
-      queryClient.invalidateQueries({ queryKey: ['profileData', memberData] });
+      queryClient.invalidateQueries({ queryKey: ['profileData'] });
+      // e.stopPropagation();
     },
     onError: (error) => {
       console.error('이미지 삭제 에러 : ', error);
@@ -137,20 +157,35 @@ export default function ProfileEditModal({
   });
 
   // 프로필 업데이트 : 리액트쿼리
-  const { mutate: updateProfile } = useMutation<void, Error, RequestDataProps>({
+  const { mutate: updateProfile } = useMutation<
+    RequestDataProps,
+    Error,
+    RequestDataProps
+  >({
+    mutationKey: ['profileData'],
     mutationFn: async (requestData: RequestDataProps) => {
-      // patch할 때 보내는 정보는 nickname, image, introduce
-      fetchData({
+      const response = await fetchData({
         param: '/profile/mine',
         method: 'patch',
         requestData,
       });
+      return response;
     },
-    onSuccess: () => {
-      console.log('프로필 업데이트 성공');
-      queryClient.invalidateQueries({ queryKey: ['profileData', memberData] });
-      // refetchProfile(); // 프로필 리패치
-      setIsOpen(false);
+    onSuccess: (response: RequestDataProps) => {
+      // 패치가 안되는 이유? -> 사실 패치는 되는 것 같다. 왜? 콘솔이 찍힘.
+      // 근데 왜 안되는 것처럼 보이냐? -> 이전 값을 패치중인가봐. 이전 값이 콘솔에 찍힘.
+      // 그럼 onSuccess일 때 memberData를 업데이트 해두자
+      // 아니면 useEffect로 memberData가 변경될 때마다 새 데이터로 렌더링 되도록??
+      console.log('프로필 업데이트 성공, 업데이트 된 데이터 : ', response);
+
+      // setNewMemberData((prevData: MemberDataType) => ({
+      //   ...prevData,
+      //   ...response,
+      // })); // 클라이언트 상태 업데이트
+      setTimeout(() => {
+        queryClient.invalidateQueries({ queryKey: ['profileData'] });
+      }, 800);
+      // setIsOpen(false);
     },
     onError: (error) => {
       console.error('프로필 업데이트 에러:', error);
@@ -167,9 +202,11 @@ export default function ProfileEditModal({
     const requestData = {
       nickname: memberData.nickname,
       introduce,
-      profileImageUrl: uploadedImageUrl || memberData.profileImageUrl,
+      profileImageUrl: uploadedImageUrl || profileImageUrl,
     };
+    // uploadedImageUrl : 올라간 이미지 / 삭제된 이미지
     updateProfile(requestData);
+    console.log('requestData:', requestData);
   };
 
   console.log('preview: ', previewImage);
@@ -177,12 +214,12 @@ export default function ProfileEditModal({
   // 기본값 설정하기
   useEffect(() => {
     if (memberData.profileImageUrl) {
-      // const cacheBustingUrl = `${memberData.profileImageUrl}?timestamp=${new Date().getTime()}`;
       setPreviewImage(memberData.profileImageUrl);
-    }
-    // 'react-hook-form'에서도 기존 값을 설정
+      // } else {
+      //   setPreviewImage('');
+    } // 'react-hook-form'에서도 기존 값을 설정
     setValue('introduce', memberData.introduce || '');
-  }, [memberData, setValue]);
+  }, [memberData, setValue, previewImage]);
 
   return (
     <div>
@@ -207,7 +244,7 @@ export default function ProfileEditModal({
                     onChange: handleImageChange,
                   }),
                 }}
-                initialImageUrl={previewImage || uploadedImageUrl}
+                initialImageUrl={previewImage}
               />
               <button
                 className={cn('image-delete-button')}
@@ -237,15 +274,17 @@ export default function ProfileEditModal({
                   })}
                 />
               ) : (
-                <textarea placeholder="한줄소개를 입력하세요 (?자제한)" />
+                <textarea
+                  placeholder="한줄소개를 입력하세요 (?자제한)"
+                  {...register('introduce', {
+                    onBlur: handleIntroduceChange,
+                  })}
+                />
               )}
             </div>
             <div className={cn('flex-grow-div')}> </div>
             <div className={cn('edit-button')}>
               <DefaultButton
-                // onClick={() => {
-                //   handleProfileSubmit(uploadedImageUrl);
-                // }}
                 buttonType="submit"
                 size="modal"
                 color="$primary-01"

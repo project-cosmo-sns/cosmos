@@ -12,7 +12,10 @@ import fetchData from '@/api/fetchData';
 // export default function useFollowClick(memberId?: number) {
 //   const [isActive, setIsActive] = useState(false);
 
-export default function useFollowClick(memberId: number, isFollowing = false) {
+export default function useFollowClick(
+  memberId: number | undefined,
+  isFollowing = false,
+) {
   const [isActive, setIsActive] = useState(isFollowing);
 
   const queryClient = useQueryClient();
@@ -32,40 +35,52 @@ export default function useFollowClick(memberId: number, isFollowing = false) {
     }
   };
 
-  useEffect(() => {
-    if (memberId) {
-      checkFollowStatus();
-    }
-  }, [memberId]);
-
   // 팔로우 성공 후, 팔로우 상태를 다시 확인하는 함수
   const handleSuccess = async () => {
     await checkFollowStatus();
   };
 
   const { mutate: addFollow } = useMutation({
-    mutationFn: () =>
-      fetchData({
+    mutationFn: () => {
+      if (!memberId) return Promise.resolve();
+      return fetchData({
         param: `/follow/${memberId}`,
         method: 'post',
-      }),
+      });
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['followStatus', memberId] });
-      handleSuccess();
+      if (memberId) {
+        queryClient.invalidateQueries({ queryKey: ['followStatus', memberId] });
+        handleSuccess();
+      }
     },
   });
 
   const { mutate: deleteFollow } = useMutation({
-    mutationFn: () =>
-      fetchData({
+    mutationFn: () => {
+      if (!memberId) return Promise.resolve();
+      return fetchData({
         param: `/follow/${memberId}`,
         method: 'delete',
-      }),
+      });
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['followStatus', memberId] });
-      handleSuccess();
+      if (memberId) {
+        queryClient.invalidateQueries({ queryKey: ['followStatus', memberId] });
+        handleSuccess();
+      }
     },
   });
+
+  useEffect(() => {
+    if (memberId) {
+      checkFollowStatus();
+    }
+  }, [memberId, checkFollowStatus]);
+
+  if (!memberId) {
+    return { isActive: false, toggleFollow: () => {} };
+  }
 
   const toggleFollow = async () => {
     // setIsActive((prev) => !prev);
