@@ -162,9 +162,8 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
     const urlBox = getValues('feedImage');
     const filteredImages = images.filter((el, i) => i !== index);
     const filteredUrlBucket = urlBox.filter((el, i) => i !== index);
-    console.log(filteredUrlBucket, ' ------여긴가??-----');
 
-    // deleteImage(urlBucket[index]);
+    deleteImage(urlBucket[index]);
     setImages(filteredImages);
     setValue('feedImage', filteredUrlBucket);
     setUrlBucket(filteredUrlBucket);
@@ -227,24 +226,27 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
               <label htmlFor="feedImage" className={cn('file-label')}>
                 <span className={cn('label-text')}>이미지 업로드</span>
               </label>
-              {imagePreview &&
-                imagePreview.map((item, index) => (
-                  <div key={index} className={cn('preview-container')}>
-                    <CloseIcon
-                      className={cn('close')}
-                      onClick={() => {
-                        filterImage(index);
-                      }}
-                    />
-                    <div className={cn('preview-wrapper')}>
-                      <img
-                        className={cn('file-preview')}
-                        src={item}
-                        alt="image_item"
+              {imagePreview && (
+                <div className={cn('preview-box')}>
+                  {imagePreview.map((item, index) => (
+                    <div key={index} className={cn('preview-container')}>
+                      <CloseIcon
+                        className={cn('close')}
+                        onClick={() => {
+                          filterImage(index);
+                        }}
                       />
+                      <div className={cn('preview-wrapper')}>
+                        <img
+                          className={cn('file-preview')}
+                          src={item}
+                          alt="image_item"
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
