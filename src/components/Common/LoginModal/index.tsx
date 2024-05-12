@@ -11,15 +11,23 @@ import { closeLoginModal } from '@/redux/loginModalSlice';
 const cn = classNames.bind(styles);
 
 export default function LoginModal() {
-  const githubClick = async () => {
+  const openAuthPopup = async (authType: string) => {
     let popupX = window.innerWidth / 2 - 300;
     let popupY = window.innerHeight / 2 - 300;
 
     window.open(
-      `${baseURL}/auth/github/login`,
+      `${baseURL}/auth/${authType}/login`,
       '_blank',
       `width=600, height=600, top=${popupY}, left=${popupX}`,
     );
+  };
+
+  const githubClick = async () => {
+    await openAuthPopup('github');
+  };
+
+  const googleClick = async () => {
+    await openAuthPopup('google');
   };
 
   const isModalVisible = useSelector(
@@ -40,9 +48,17 @@ export default function LoginModal() {
     >
       <div className={cn('header-wrapper')}>
         <LogoIcon width="105" height="30" />
-        <h2>코스모스에 오신 것을 환영합니다!🙌</h2>
+        <h2>
+          코드잇 스프린터가 모인 SNS
+          <br />
+          코스모스에 오신 것을 환영합니다 🤗
+        </h2>
         <div className={cn('oauth-wrapper')}>
-          <LoginButton text="구글 로그인/ 회원가입" icon={<GoogleIcon />} />
+          <LoginButton
+            text="구글 로그인/ 회원가입"
+            icon={<GoogleIcon />}
+            onClick={googleClick}
+          />
           <LoginButton
             text="깃허브 로그인/ 회원가입"
             icon={<GitHubIcon fill="#FFFFFF" />}
