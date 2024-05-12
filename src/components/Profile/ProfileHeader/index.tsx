@@ -55,8 +55,8 @@ export default function ProfileHeader({
         />
       );
     }
-    // 테스트 시 ! 붙이기
-    if (memberData.authorizationStatus === 'ACCEPT') {
+    // 테스트 시 상태 바꿀 곳
+    if (memberData.authorizationStatus === 'NONE') {
       console.log('memberData:', memberData);
       return (
         <div className={cn('profile-setting-button')}>
@@ -66,7 +66,11 @@ export default function ProfileHeader({
     }
     return (
       <>
-        <button type="button" onClick={authFormClick}>
+        <button
+          type="button"
+          onClick={authFormClick}
+          className={cn('authorization-button')}
+        >
           인증하기
         </button>
         <AuthForm modalVisible={showAuthForm} toggleModal={authFormClick} />
