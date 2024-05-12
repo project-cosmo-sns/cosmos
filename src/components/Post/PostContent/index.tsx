@@ -26,7 +26,6 @@ export default function PostContent() {
     isSuccess,
     isPending,
     isError,
-    refetch,
   } = useQuery<PostDetailType>({
     queryKey: ['postData', postId],
     queryFn: () =>

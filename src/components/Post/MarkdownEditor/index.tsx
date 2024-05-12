@@ -33,6 +33,9 @@ export default function MarkdownEditor({
   setContent,
 }: MarkdownEditorProps) {
   const [previewUrl, setPreviewUrl] = useState('');
+  const [isPreviewClicked, setIsPreviewClicked] = useState(false);
+  const [isWriteClicked, setIsWriteClicked] = useState(false);
+
   const imageRef = useRef<HTMLInputElement>(null);
 
   const title1 = getTitleButton(1);
@@ -71,6 +74,16 @@ export default function MarkdownEditor({
     }
   }, []);
 
+  const handleClickPreview = () => {
+    setIsWriteClicked(false);
+    setIsPreviewClicked(true);
+  };
+
+  const handleClickWrite = () => {
+    setIsWriteClicked(true);
+    setIsPreviewClicked(false);
+  };
+
   return (
     <>
       <MDEditor
@@ -82,7 +95,10 @@ export default function MarkdownEditor({
         value={content}
         onChange={setContent}
         preview="edit"
-        commands={[codeEdit, codePreview]}
+        commands={[
+          codeEdit(isWriteClicked, handleClickWrite),
+          codePreview(isPreviewClicked, handleClickPreview),
+        ]}
         extraCommands={[
           title1,
           title2,
