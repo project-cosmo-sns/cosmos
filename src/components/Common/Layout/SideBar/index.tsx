@@ -11,13 +11,13 @@ import {
   AddIcon,
   ProfileIconDark,
 } from '@/components/Common/IconCollection';
-import LoginModal from '../../LoginModal';
 import { useRouter } from 'next/router';
-import { getProfileImage } from '@/api/member';
+import { useGetProfileImage } from '@/api/member';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { login } from '@/redux/logoutSlice';
+import { openLoginModal } from '@/redux/loginModalSlice';
 
 const cn = classNames.bind(styles);
 
@@ -25,7 +25,6 @@ export default function SideBar() {
   const [activePopover, setActivePopover] = useState<'add' | 'bell' | null>(
     null,
   );
-  const [modalVisible, setModalVisible] = useState(false);
   const [userImage, setUserImage] = useState<string | null>(null);
 
   const router = useRouter();
@@ -38,7 +37,7 @@ export default function SideBar() {
       router.push('/profile');
       return;
     }
-    setModalVisible(!modalVisible);
+    dispatch(openLoginModal());
   };
 
   const togglePopOver = (
@@ -55,18 +54,14 @@ export default function SideBar() {
     setActivePopover(null);
   };
 
+  const { data: userProfileImage } = useGetProfileImage();
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await getProfileImage();
-        setUserImage(res?.profileImageUrl);
-        dispatch(login());
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchData();
-  }, []);
+    if (!userProfileImage) return;
+
+    setUserImage(userProfileImage?.profileImageUrl);
+    dispatch(login());
+  }, [userProfileImage]);
 
   return (
     <div className={cn('sideBar-container')}>
@@ -107,7 +102,6 @@ export default function SideBar() {
         )}
         {isLogin && !userImage && <ProfileIconDark onClick={profileClick} />}
       </div>
-      <LoginModal modalVisible={modalVisible} toggleModal={profileClick} />
     </div>
   );
 }

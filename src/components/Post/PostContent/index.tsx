@@ -26,6 +26,7 @@ export default function PostContent() {
     isSuccess,
     isPending,
     isError,
+    refetch,
   } = useQuery<PostDetailType>({
     queryKey: ['postData', postId],
     queryFn: () =>
@@ -53,7 +54,11 @@ export default function PostContent() {
   });
 
   const { handleEmojiClick, isAddPending, isDeletePending } =
-    useSendEmojiRequest(Number(postId), true);
+    useSendEmojiRequest<PostDetailType>({
+      id: Number(postId),
+      isPost: true,
+      refetch,
+    });
 
   useEffect(() => {
     if (postId && isSuccess) mutate();
@@ -70,6 +75,7 @@ export default function PostContent() {
       content,
       hashTags,
       emojis,
+      emojiCount,
       viewCount,
       commentCount,
       isMine,
@@ -103,6 +109,7 @@ export default function PostContent() {
           </div>
           <EmojiBundle
             isPost
+            emojiCount={emojiCount}
             commentCount={commentCount}
             viewCount={viewCount}
             emojiList={emojis}

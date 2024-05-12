@@ -8,9 +8,9 @@ import styles from './AuthForm.module.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { generationRegex } from '@/constants/generationRegex';
-import { CheckIcon } from '@/components/Common/IconCollection';
 import { useToast } from '@/hooks/useToast';
-import { useSendAuthData, useDeleteAuthData } from '@/api/authorization';
+import { useSendAuthData, s3UploadImage } from '@/api/authorization';
+import { useState } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -25,17 +25,33 @@ export default function AuthForm({
     formState: { errors },
   } = useForm<AuthFormProps>();
 
+  const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
+
   const router = useRouter();
   const { showToastHandler } = useToast();
   const sendAuth = useSendAuthData();
-  const onSubmit: SubmitHandler<AuthFormProps> = (data) => {
-    sendAuth(data);
-    showToastHandler(
-      '인증 신청이 완료되었습니다.',
-      <CheckIcon fill="#0ACF83" />,
-    );
-    router.push('/');
-    console.log(sendAuth(data));
+
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const uploadedImage = await s3UploadImage(file);
+      if (uploadedImage) {
+        setUploadedImageUrl(uploadedImage);
+      }
+    }
+  };
+
+  const onSubmit: SubmitHandler<AuthFormProps> = async (data) => {
+    try {
+      await sendAuth({
+        generation: Number(data.generation),
+        image: uploadedImageUrl,
+      });
+      showToastHandler('인증 신청이 완료되었습니다.', 'check');
+      router.push('/');
+    } catch (error) {
+      console.error('인증 신청 에러: ', error);
+    }
   };
 
   return (
@@ -53,13 +69,15 @@ export default function AuthForm({
             id="generation"
             type="text"
             placeholder="기수를 입력하세요. ex) 3"
-            register={register('generation', {
-              required: '기수를 입력해 주세요.',
-              pattern: {
-                value: generationRegex,
-                message: '숫자만 입력해 주세요.',
-              },
-            })}
+            register={{
+              ...register('generation', {
+                required: '기수를 입력해 주세요.',
+                pattern: {
+                  value: generationRegex,
+                  message: '숫자만 입력해 주세요.',
+                },
+              }),
+            }}
           />
           {errors.generation && <small>{errors.generation.message}</small>}
         </div>
@@ -69,7 +87,13 @@ export default function AuthForm({
           <ImageInput
             type="certify"
             watch={watch}
-            register={register('image')}
+            register={{
+              ...register('image', {
+                onChange: (e) => {
+                  handleImageChange(e);
+                },
+              }),
+            }}
           />
         </div>
         <DefaultButton
