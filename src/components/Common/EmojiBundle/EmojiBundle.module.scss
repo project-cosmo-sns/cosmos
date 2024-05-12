@@ -1,11 +1,12 @@
 .wrapper {
-  @include flex-arrange(flex-start, center);
+  @include flex-arrange(center, flex-start);
   flex-direction: column;
   gap: 20px;
 }
 
 .emoji-container {
   @include flex-arrange(flex-start, center);
+  flex-wrap: wrap;
   gap: 4px;
 }
 
@@ -15,11 +16,12 @@
 }
 
 .container {
-  @include flex-arrange(flex-end, center);
+  @include flex-arrange(flex-start, center);
   width: 100%;
   position: relative;
   flex-direction: row;
   gap: 12px;
+  margin-left: -10px;
 }
 
 .reaction {
@@ -45,5 +47,13 @@
     @include flex-arrange(space-between, center);
     flex-direction: row;
     width: 100%;
+  }
+
+  .container {
+    @include flex-arrange(flex-end, center);
+  }
+
+  .emoji-container {
+    flex-wrap: nowrap;
   }
 }
