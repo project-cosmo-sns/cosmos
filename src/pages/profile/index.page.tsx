@@ -65,52 +65,6 @@ export default function MemberDataContainer({
     return <div>Lodading~~~~~</div>;
   }
 
-  // const renderContent = () => {
-  //   switch (selectedOption) {
-  //     case 'feed':
-  //       return myFeedList ? (
-  //         <MyFeedList feedList={myFeedList} />
-  //       ) : (
-  //         '피드가 없습니다.'
-  //       );
-  //     case 'post':
-  //       return myPostList ? (
-  //         <MyPostList
-  //           // selectedSort={}
-  //           postList={myPostList}
-  //         />
-  //       ) : (
-  //         '포스트가 없습니다.'
-  //       );
-
-  //     case 'scrap':
-  //       return <ScrapList />;
-  //     default:
-  //       return null;
-  //   }
-  // };
-
-  // const EmptyContent = () => {
-  //   switch (selectedOption) {
-  //     case 'feed':
-  //       return <div className={cn('empty-content')}>피드가 없습니다.</div>;
-  //     case 'post':
-  //       return <div className={cn('empty-content')}>포스트가 없습니다.</div>;
-  //     case 'scrap':
-  //       return <div className={cn('empty-content')}>스크랩이 없습니다.</div>;
-  //     default:
-  //       return null;
-  //   }
-  // };
-
-  // const AuthorizedContent = () => {
-  //   return <>{renderContent()}</>;
-  // };
-
-  // const UnauthorizedContent = () => {
-  //   return <>{EmptyContent()}</>;
-  // };
-
   return (
     <div className={cn('content')}>
       {memberData && (
@@ -131,9 +85,8 @@ export default function MemberDataContainer({
       <ContentContainer
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
-        isMyProfile
       >
-        {!memberData.isAuthorized ? (
+        {memberData.isAuthorized ? (
           <ProfileContent
             selectedOption={selectedOption}
             myFeedList={myFeedList}
