@@ -34,7 +34,7 @@ export default function MarkdownEditor({
 }: MarkdownEditorProps) {
   const [previewUrl, setPreviewUrl] = useState('');
   const [isPreviewClicked, setIsPreviewClicked] = useState(false);
-  const [isWriteClicked, setIsWriteClicked] = useState(false);
+  const [isWriteClicked, setIsWriteClicked] = useState(true);
 
   const imageRef = useRef<HTMLInputElement>(null);
 
