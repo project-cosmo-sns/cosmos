@@ -62,7 +62,7 @@ export default function MarkdownContent({
           src={currentImageUrl}
           alt="detail"
           style={{
-            'object-fit': 'contain',
+            objectFit: 'contain',
             width: '800px',
             maxHeight: '80vh',
             maxWidth: '80vw',
