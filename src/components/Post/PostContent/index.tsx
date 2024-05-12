@@ -26,7 +26,6 @@ export default function PostContent() {
     isSuccess,
     isPending,
     isError,
-    refetch,
   } = useQuery<PostDetailType>({
     queryKey: ['postData', postId],
     queryFn: () =>
@@ -50,14 +49,13 @@ export default function PostContent() {
         param: `/post/${postId}`,
         method: 'delete',
       }),
-    onSuccess: () => router.push('/'),
+    onSuccess: () => router.push('/?tab=feed'),
   });
 
   const { handleEmojiClick, isAddPending, isDeletePending } =
-    useSendEmojiRequest<PostDetailType>({
+    useSendEmojiRequest({
       id: Number(postId),
       isPost: true,
-      refetch,
     });
 
   useEffect(() => {
@@ -109,7 +107,6 @@ export default function PostContent() {
           </div>
           <EmojiBundle
             isPost
-            emojiCount={emojiCount}
             commentCount={commentCount}
             viewCount={viewCount}
             emojiList={emojis}

@@ -1,20 +1,12 @@
 import { EmojiCode } from '@/@types/type';
 import fetchData from '@/api/fetchData';
-import {
-  QueryObserverResult,
-  RefetchOptions,
-  useMutation,
-} from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
-export default function useSendEmojiRequest<T>({
+export default function useSendEmojiRequest({
   id,
-  refetch,
   isPost = false,
 }: {
   id: number;
-  refetch?: (
-    options?: RefetchOptions,
-  ) => Promise<QueryObserverResult<T, Error>>;
   isPost: boolean;
 }) {
   const { mutate: addEmojiMutate, isPending: isAddPending } = useMutation({
@@ -26,9 +18,6 @@ export default function useSendEmojiRequest<T>({
           emoji: emojiCode,
         },
       }),
-    onSuccess: () => {
-      if (refetch) refetch();
-    },
   });
 
   const { mutate: deleteEmojiMutate, isPending: isDeletePending } = useMutation(
@@ -38,9 +27,6 @@ export default function useSendEmojiRequest<T>({
           param: `/${isPost ? 'post' : 'feed'}/${id}/emoji/${emojiCode}`,
           method: 'delete',
         }),
-      onSuccess: () => {
-        if (refetch) refetch();
-      },
     },
   );
 

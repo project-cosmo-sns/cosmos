@@ -1,5 +1,11 @@
 .preview-button {
-  padding: 8px 12px;
+  padding: 12px;
   font-weight: 500;
+  color: $gray-01;
   cursor: pointer;
+}
+
+.clicked {
+  color: $white-01;
+  box-shadow: 0 -1px 0 $white-01 inset;
 }
