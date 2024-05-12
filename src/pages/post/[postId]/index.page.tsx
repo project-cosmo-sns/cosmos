@@ -15,7 +15,7 @@ export default function PostDetailPage() {
         width="18"
         height="18"
         className={cn('back')}
-        onClick={() => router.back()}
+        onClick={() => router.push('/?tab=post')}
       />
       <PostContent />
     </div>

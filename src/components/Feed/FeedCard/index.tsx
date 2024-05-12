@@ -1,24 +1,23 @@
-import Image from 'next/image';
-import { useState } from 'react';
-import classNames from 'classnames/bind';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import ReactionContainer from '@/components/Common/ReactionContainer';
-import Modal from '@/components/Common/Layout/Modal';
-import { Edits } from '@/components/Feed/FeedCard/api';
-import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
 import fetchData from '@/api/fetchData';
+import EmojiBundle from '@/components/Common/EmojiBundle';
+import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
+import Modal from '@/components/Common/Layout/Modal';
+import WriterProfile from '@/components/Common/WriterProfile';
+import { Edits } from '@/components/Feed/FeedCard/api';
+import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
+import getElapsedTime from '@/utils/getElaspedTime';
 import {
   QueryObserverResult,
   RefetchOptions,
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
-import WriterProfile from '@/components/Common/WriterProfile';
-import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
+import classNames from 'classnames/bind';
+import Image from 'next/image';
+import { useState } from 'react';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { FeedDetailType } from '../types';
 import styles from './FeedCard.module.scss';
-import getElapsedTime from '@/utils/getElaspedTime';
-import EmojiBundle from '@/components/Common/EmojiBundle';
 
 interface FeedCardTypes {
   refetch?: (
@@ -61,7 +60,6 @@ export default function FeedCard({
     content,
     viewCount,
     commentCount,
-    emojiCount,
     createdAt,
     imageUrls,
     isMine,
@@ -99,10 +97,9 @@ export default function FeedCard({
   };
 
   const { handleEmojiClick, isAddPending, isDeletePending } =
-    useSendEmojiRequest<FeedDetailType>({
+    useSendEmojiRequest({
       id: feedId as number,
       isPost: false,
-      refetch,
     });
 
   console.log(imageUrls, '------피드 상세에서 받는 이미지 url------');
@@ -195,25 +192,13 @@ export default function FeedCard({
               </div>
             ))}
         </div>
-        {forDetails ? (
-          <EmojiBundle
-            emojiCount={emojiCount}
-            commentCount={commentCount}
-            viewCount={viewCount}
-            emojiList={emojis}
-            handleEmojiClick={handleEmojiClick}
-            isPending={isAddPending || isDeletePending}
-          />
-        ) : (
-          <ReactionContainer
-            emojiCount={emojiCount}
-            commentCount={commentCount}
-            viewCount={viewCount}
-            emojis={emojis}
-            isPost={false}
-            handleEmojiClick={handleEmojiClick}
-          />
-        )}
+        <EmojiBundle
+          commentCount={commentCount}
+          viewCount={viewCount}
+          emojiList={emojis}
+          handleEmojiClick={handleEmojiClick}
+          isPending={isAddPending || isDeletePending}
+        />
         {hasPadding || (
           <Modal
             title="임시모달"
