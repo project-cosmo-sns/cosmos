@@ -10,7 +10,7 @@ export default function NavigaionBar() {
   return (
     <div className={cn('navigaionBar-container')}>
       <div className={cn('navigaionBar-wrapper')}>
-        <Link href="/">
+        <Link href="/?tab=feed">
           <LogoIcon width="105" height="30" />
         </Link>
         <SearchInput />

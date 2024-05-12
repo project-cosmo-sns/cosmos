@@ -1,25 +1,43 @@
 .wrapper {
-  @include flex-arrange(center, flex-start);
+  @include flex-arrange(flex-start, center);
   flex-direction: column;
   gap: 20px;
 }
 
 .emoji-container {
-  @include flex-arrange;
+  @include flex-arrange(flex-start, center);
+  gap: 4px;
+}
+
+.emoji-list {
+  @include flex-arrange(flex-start, center);
   gap: 4px;
 }
 
 .container {
-  @include flex-arrange;
+  @include flex-arrange(flex-end, center);
+  width: 100%;
+  position: relative;
   flex-direction: row;
   gap: 12px;
-  padding-left: 4px;
 }
 
 .reaction {
   @include flex-arrange;
   @include font-style(1.2rem, $gray-01, 400);
   gap: 6px;
+}
+
+.emoji {
+  cursor: pointer;
+  gap: 0;
+  background-color: $black-01;
+  border-radius: 5px;
+  padding: 6px 8px 6px 12px;
+
+  &:hover {
+    background-color: $black-02;
+  }
 }
 
 @media (min-width: 768px) {

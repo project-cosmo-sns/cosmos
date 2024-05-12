@@ -1,8 +1,13 @@
 import fetchData from '@/api/fetchData';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
-import { BackIcon } from '@/components/Common/IconCollection';
+import {
+  BackIcon,
+  CompleteIcon,
+  WarnIcon,
+} from '@/components/Common/IconCollection';
 import PostEditor from '@/components/Post/PostEditor';
 import { PostRequestType } from '@/components/Post/types';
+import { useToast } from '@/hooks/useToast';
 import { useMutation } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
@@ -13,14 +18,14 @@ const cn = classNames.bind(styles);
 
 export default function PostWritePage() {
   const router = useRouter();
+  const { postId } = router.query;
   const [data, setData] = useState<PostRequestType>({
     title: '',
     category: '공지사항',
     content: '',
     hashTags: [],
   });
-
-  const { postId } = router.query;
+  const { showToastHandler } = useToast();
 
   const { mutate: createMutate } = useMutation({
     mutationFn: () =>
@@ -29,7 +34,10 @@ export default function PostWritePage() {
         method: 'post',
         requestData: data,
       }),
-    onSuccess: (response) => router.push(`/post/${response.id}`),
+    onSuccess: (response) => {
+      router.push(`/post/${response.id}`);
+      showToastHandler(`포스트 작성 완료!`, 'check');
+    },
   });
 
   const { mutate: editMutate } = useMutation({
@@ -39,7 +47,10 @@ export default function PostWritePage() {
         method: 'patch',
         requestData: data,
       }),
-    onSuccess: () => router.push(`/post/${postId}`),
+    onSuccess: () => {
+      router.push(`/post/${postId}`);
+      showToastHandler(`포스트 수정 완료!`, 'check');
+    },
   });
 
   const mergeState = (nextState: Partial<PostRequestType>) => {
@@ -47,8 +58,9 @@ export default function PostWritePage() {
   };
 
   const handleSubmitPostData = () => {
-    if (!data.title && !data.content) {
-      // setIsToastVisible(true);
+    if (!data.title || !data.content) {
+      showToastHandler(`${data.title ? '내용' : '제목'}을 입력하세요`, 'warn');
+      // showToastHandler('피드 작성 완료', <CompleteIcon fill="#0ACF83" />);
       return;
     }
     if (postId) {
@@ -82,10 +94,6 @@ export default function PostWritePage() {
           {postId ? '수정하기' : '등록하기'}
         </DefaultButton>
       </div>
-      {/* <Toast
-        text="내용을 입력해주세요"
-        icon={WarnIcon}
-      /> */}
     </div>
   );
 }

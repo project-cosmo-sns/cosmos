@@ -2,10 +2,13 @@ import { EmojiCode } from '@/@types/type';
 import fetchData from '@/api/fetchData';
 import { useMutation } from '@tanstack/react-query';
 
-export default function useSendEmojiRequest(
-  id: number,
-  isPost: boolean = false,
-) {
+export default function useSendEmojiRequest({
+  id,
+  isPost = false,
+}: {
+  id: number;
+  isPost: boolean;
+}) {
   const { mutate: addEmojiMutate, isPending: isAddPending } = useMutation({
     mutationFn: (emojiCode: EmojiCode) =>
       fetchData({

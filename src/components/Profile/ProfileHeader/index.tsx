@@ -10,10 +10,6 @@ import useFollowClick from '@/hooks/useFollowClick';
 import FollowButton from '@/components/Common/Buttons/FollowButton';
 import AuthForm from '../AuthForm';
 import ProfilePopOver from '@/components/Common/ProfilePopOver';
-import { logout } from '@/redux/logoutSlice';
-import { useDispatch } from 'react-redux';
-import { memberLogout } from '@/api/member';
-import router from 'next/router';
 
 export interface ProfileHeaderProps {
   memberData: MemberDataType;
@@ -27,6 +23,7 @@ export default function ProfileHeader({
   memberData,
   setIsModalOpen,
 }: ProfileHeaderProps) {
+  const [showAuthForm, setShowAuthForm] = useState(false);
   const [followModal, setFollowModal] = useState({
     follower: false,
     following: false,
@@ -42,6 +39,10 @@ export default function ProfileHeader({
       ...followModal,
       [type]: !followModal[type],
     });
+  };
+
+  const authFormClick = () => {
+    setShowAuthForm(!showAuthForm);
   };
 
   const renderButton = () => {
@@ -65,13 +66,12 @@ export default function ProfileHeader({
       // 테스트용 (!memberData.isAuthorized) 으로 바꿔줘야함
     }
     return (
-      <button
-        type="button"
-        onClick={() => toggleModal('authForm')}
-        className={cn('authorization-button')}
-      >
-        인증하기
-      </button>
+      <>
+        <button type="button" onClick={authFormClick}>
+          인증하기
+        </button>
+        <AuthForm modalVisible={showAuthForm} toggleModal={authFormClick} />
+      </>
     );
   };
 

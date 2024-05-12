@@ -8,6 +8,8 @@ import scrollToTop from '@/utils/scrollToTop';
 import ModalPortal from '../Layout/Modal/ModalPortal';
 import { ScrollTopIcon } from '../IconCollection';
 import { SortType } from '@/constants/sortType';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -43,11 +45,19 @@ export default function ContentContainer({
   setSelectedSort,
   isMyProfile = false,
 }: ContentContainerProps) {
+  const router = useRouter();
   const [scrollDirection] = useScrollDirection('up');
 
   const handleOptionClick = (option: string) => {
     scrollToTop();
     setSelectedOption(option as ContainerOptionType);
+    if (router.query.query) {
+      router.push(
+        `${router.pathname}?tab=${option}&query=${router.query.query}`,
+      );
+    } else {
+      router.push(`${router.pathname}?tab=${option}`);
+    }
   };
 
   const renderOptionButton = (label: string, option: string) => (
@@ -57,6 +67,12 @@ export default function ContentContainer({
       isActive={selectedOption === option}
     />
   );
+
+  useEffect(() => {
+    setSelectedOption(
+      router.query.tab ? (router.query.tab as ContainerOptionType) : 'feed',
+    );
+  }, [router.query.tab]);
 
   return (
     <>

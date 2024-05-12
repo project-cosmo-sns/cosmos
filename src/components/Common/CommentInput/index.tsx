@@ -1,8 +1,8 @@
+import classNames from 'classnames/bind';
 import { useForm } from 'react-hook-form';
 import DefaultButton from '../Buttons/DefaultButton';
-import Input from '../Input';
+import TextArea from '../Input/Textarea';
 import styles from './CommentInput.module.scss';
-import classNames from 'classnames/bind';
 
 export interface Comment {
   comment: string;
@@ -32,13 +32,12 @@ export default function CommentInput({
 
   return (
     <form className={cn('wrapper')} onSubmit={handleSubmit(onSubmit)}>
-      <Input
+      <TextArea
         placeholder={placeholder}
         register={{ ...register('comment', { required: true }) }}
       />
       <DefaultButton
         disabled={isSubmitting}
-        onClick={() => console.log('댓글 전송 클릭')}
         buttonType="submit"
         size="small"
         color="purple"

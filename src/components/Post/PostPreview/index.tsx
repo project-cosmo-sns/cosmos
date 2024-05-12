@@ -1,5 +1,5 @@
+import EmojiBundle from '@/components/Common/EmojiBundle';
 import WriterProfile from '@/components/Common/WriterProfile';
-import ReactionContainer from '@/components/Common/ReactionContainer';
 import { MARKDOWN_SYMBOL_REGEX } from '@/constants/regexPattern';
 import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import getElapsedTime from '@/utils/getElaspedTime';
@@ -24,7 +24,6 @@ export default function PostPreview({ postData }: PostPreviewProps) {
     content,
     emojis,
     viewCount,
-    emojiCount,
     commentCount,
     hashTags,
   } = postData.post;
@@ -32,7 +31,7 @@ export default function PostPreview({ postData }: PostPreviewProps) {
   const formattedCreatedAt = getElapsedTime(createdAt);
 
   const { handleEmojiClick, isAddPending, isDeletePending } =
-    useSendEmojiRequest(postId as number, true);
+    useSendEmojiRequest({ id: postId as number, isPost: true });
 
   return (
     <div
@@ -51,13 +50,12 @@ export default function PostPreview({ postData }: PostPreviewProps) {
           <HashTag key={tag.tagName} tag={tag} />
         ))}
       </div>
-      <ReactionContainer
+      <EmojiBundle
         isPost
-        emojiCount={emojiCount}
+        emojiList={emojis}
+        handleEmojiClick={handleEmojiClick}
         commentCount={commentCount}
         viewCount={viewCount}
-        emojis={emojis}
-        handleEmojiClick={handleEmojiClick}
       />
     </div>
   );

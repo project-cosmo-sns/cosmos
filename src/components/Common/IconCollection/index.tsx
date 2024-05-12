@@ -1,6 +1,7 @@
 import { MouseEvent } from 'react';
 import IconTemplate from './IconTemplate';
 import variables from '@/styles/export.module.scss';
+import { propagateServerField } from 'next/dist/server/lib/render-server';
 
 export interface IconCollectionType {
   width?: string;
@@ -149,6 +150,26 @@ export function CheckIcon({
         clipRule="evenodd"
         d="M23.6805 4.31614C24.1065 4.73766 24.1065 5.42107 23.6805 5.84259L8.68048 20.6839C8.25445 21.1054 7.56373 21.1054 7.1377 20.6839L0.31952 13.9378C-0.106507 13.5163 -0.106507 12.8329 0.31952 12.4114C0.745546 11.9899 1.43627 11.9899 1.8623 12.4114L7.90909 18.3942L22.1377 4.31614C22.5637 3.89462 23.2545 3.89462 23.6805 4.31614Z"
         fill={fill}
+      />
+    </IconTemplate>
+  );
+}
+
+export function CompleteIcon({
+  fill = '#0ACF83',
+  ...props
+}: IconCollectionType) {
+  return (
+    <IconTemplate width="24" height="24" viewBox="0 0 17 16" {...props}>
+      <path
+        fill-rule="evenodd"
+        clip-rule="evenodd"
+        d="M15.1287 3.20735C15.3717 3.4542 15.3717 3.85443 15.1287 4.10128L6.57316 12.7926C6.33017 13.0395 5.9362 13.0395 5.6932 12.7926L1.80431 8.84202C1.56132 8.59517 1.56132 8.19495 1.80431 7.9481C2.04731 7.70125 2.44128 7.70125 2.68427 7.9481L6.13318 11.4518L14.2488 3.20735C14.4918 2.9605 14.8857 2.9605 15.1287 3.20735Z"
+        fill={fill}
+        stroke={fill}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </IconTemplate>
   );
@@ -676,6 +697,29 @@ export function PostIcon({
   );
 }
 
+export function PlusIcon({ fill = '', ...props }: IconCollectionType) {
+  return (
+    <IconTemplate width="14" height="14" viewBox="0 0 14 14" {...props}>
+      <g id="icon">
+        <path
+          id="Vector (Stroke)"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M7.07399 3.5C7.42228 3.5 7.70462 3.81999 7.70462 4.21471V9.93243C7.70462 10.3272 7.42228 10.6471 7.07399 10.6471C6.7257 10.6471 6.44336 10.3272 6.44336 9.93243V4.21471C6.44336 3.81999 6.7257 3.5 7.07399 3.5Z"
+          fill="#A0A5BB"
+        />
+        <path
+          id="Vector (Stroke)_2"
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M3.5 7.0735C3.5 6.72521 3.81999 6.44287 4.21471 6.44287H9.93243C10.3272 6.44287 10.6471 6.72521 10.6471 7.0735C10.6471 7.42179 10.3272 7.70413 9.93243 7.70413H4.21471C3.81999 7.70413 3.5 7.42179 3.5 7.0735Z"
+          fill="#A0A5BB"
+        />
+      </g>
+    </IconTemplate>
+  );
+}
+
 export function ProfileIcon({
   fill = '#a8a8a8',
   ...props
@@ -897,21 +941,21 @@ export function WarnIcon({ fill = '#FFC700', ...props }: IconCollectionType) {
         stroke="#FFC700"
         strokeWidth="2"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M11 7.17785V11.0063"
         stroke="#FFC700"
         strokeWidth="2"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
       <path
         d="M11 14.8348H11.01"
         stroke="#FFC700"
         strokeWidth="2"
         strokeLinecap="round"
-        stroke-linejoin="round"
+        strokeLinejoin="round"
       />
     </IconTemplate>
   );
