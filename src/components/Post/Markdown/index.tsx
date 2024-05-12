@@ -61,7 +61,12 @@ export default function MarkdownContent({
         <img
           src={currentImageUrl}
           alt="detail"
-          style={{ width: '100%', maxHeight: '80vh', maxWidth: '80vw' }}
+          style={{
+            'object-fit': 'contain',
+            width: '800px',
+            maxHeight: '80vh',
+            maxWidth: '80vw',
+          }}
         />
       </Modal>
     </>
