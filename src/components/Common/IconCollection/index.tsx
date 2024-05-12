@@ -162,8 +162,8 @@ export function CompleteIcon({
   return (
     <IconTemplate width="24" height="24" viewBox="0 0 17 16" {...props}>
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M15.1287 3.20735C15.3717 3.4542 15.3717 3.85443 15.1287 4.10128L6.57316 12.7926C6.33017 13.0395 5.9362 13.0395 5.6932 12.7926L1.80431 8.84202C1.56132 8.59517 1.56132 8.19495 1.80431 7.9481C2.04731 7.70125 2.44128 7.70125 2.68427 7.9481L6.13318 11.4518L14.2488 3.20735C14.4918 2.9605 14.8857 2.9605 15.1287 3.20735Z"
         fill={fill}
         stroke={fill}
@@ -647,15 +647,15 @@ export function PlusIcon({ fill = '', ...props }: IconCollectionType) {
       <g id="icon">
         <path
           id="Vector (Stroke)"
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M7.07399 3.5C7.42228 3.5 7.70462 3.81999 7.70462 4.21471V9.93243C7.70462 10.3272 7.42228 10.6471 7.07399 10.6471C6.7257 10.6471 6.44336 10.3272 6.44336 9.93243V4.21471C6.44336 3.81999 6.7257 3.5 7.07399 3.5Z"
           fill="#A0A5BB"
         />
         <path
           id="Vector (Stroke)_2"
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M3.5 7.0735C3.5 6.72521 3.81999 6.44287 4.21471 6.44287H9.93243C10.3272 6.44287 10.6471 6.72521 10.6471 7.0735C10.6471 7.42179 10.3272 7.70413 9.93243 7.70413H4.21471C3.81999 7.70413 3.5 7.42179 3.5 7.0735Z"
           fill="#A0A5BB"
         />
