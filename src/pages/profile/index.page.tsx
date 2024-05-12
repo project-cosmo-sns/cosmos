@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ProfileHeader from '@/components/Profile/ProfileHeader';
 import ProfileEditModal from '@/components/Profile/ProfileEditModal';
 import { MemberDataType } from './types';
@@ -12,6 +12,7 @@ import { FeedDetailType } from '@/components/Feed/types';
 import { PostListType } from '@/components/Post/types';
 import ProfileContent from '@/components/Profile/ProfileContent/ProfileContent';
 import EmptyContent from '@/components/Profile/ProfileContent/EmptyContent';
+import { useQueryClient } from '@tanstack/react-query';
 
 const cn = classNames.bind(styles);
 
@@ -56,6 +57,7 @@ export default function MemberDataContainer({
             memberData={memberData}
             setNewMemberData={setNewMemberData}
             newMemberData={newMemberData}
+            initialData={memberData}
           />
         </>
       )}

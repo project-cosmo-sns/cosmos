@@ -9,9 +9,9 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import fetchData from '@/api/fetchData';
 import { AuthFormProps } from '@/@types/type';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import * as Icon from '@/components/Common/IconCollection';
+import { fetchMemberData } from '@/pages/profile/api';
 
 interface ProfileEditModalProps {
   isOpen: boolean;
@@ -19,6 +19,7 @@ interface ProfileEditModalProps {
   memberData: MemberDataType;
   setNewMemberData: (newMemberData: MemberDataType) => void;
   newMemberData: MemberDataType;
+  initialData: MemberDataType;
 }
 
 interface FetchDataResponse {
@@ -144,25 +145,38 @@ export default function ProfileEditModal({
     },
     onSuccess: (e) => {
       console.log('프로필 이미지 삭제 성공');
-      // @/public/images/profile.svg
       setProfileImageUrl('');
-      setPreviewImage(''); // 경로 직접 설정해야함
+      setPreviewImage('');
       setValue('image', '');
-      queryClient.invalidateQueries({ queryKey: ['profileData'] });
-      // e.stopPropagation();
     },
     onError: (error) => {
       console.error('이미지 삭제 에러 : ', error);
     },
   });
 
-  // 프로필 업데이트 : 리액트쿼리
+  // SSR로 가져온 데이터를 쿼리 데이터로 저장 (mutation 후 리패치 위한 작업)
+  useEffect(() => {
+    if (memberData) {
+      queryClient.setQueryData(['memberData'], memberData);
+    }
+  }, [queryClient]);
+
+  useQuery({
+    queryKey: ['memberData'],
+    queryFn: async () => {
+      const result = fetchMemberData;
+      return result.memberData;
+    },
+    initialData: memberData,
+  });
+
+  // 프로필 업데이트
   const { mutate: updateProfile } = useMutation<
     RequestDataProps,
     Error,
     RequestDataProps
   >({
-    mutationKey: ['profileData'],
+    mutationKey: ['memberData'],
     mutationFn: async (requestData: RequestDataProps) => {
       const response = await fetchData({
         param: '/profile/mine',
@@ -177,15 +191,10 @@ export default function ProfileEditModal({
       // 그럼 onSuccess일 때 memberData를 업데이트 해두자
       // 아니면 useEffect로 memberData가 변경될 때마다 새 데이터로 렌더링 되도록??
       console.log('프로필 업데이트 성공, 업데이트 된 데이터 : ', response);
-
-      // setNewMemberData((prevData: MemberDataType) => ({
-      //   ...prevData,
-      //   ...response,
-      // })); // 클라이언트 상태 업데이트
-      setTimeout(() => {
-        queryClient.invalidateQueries({ queryKey: ['profileData'] });
-      }, 800);
-      // setIsOpen(false);
+      queryClient.invalidateQueries({
+        queryKey: ['memberData'],
+      });
+      setIsOpen(false);
     },
     onError: (error) => {
       console.error('프로필 업데이트 에러:', error);
@@ -248,7 +257,7 @@ export default function ProfileEditModal({
               />
               <button
                 className={cn('image-delete-button')}
-                type="submit"
+                type="button"
                 onClick={() => deleteImage()}
               >
                 이미지 삭제
