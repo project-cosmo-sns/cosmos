@@ -51,7 +51,7 @@
       .limit {
         position: absolute;
         right: 16px;
-        bottom: 90px;
+        top: 95px;
         font-size: 1.1rem;
         color: $gray-01;
         padding-left: 16px;
@@ -67,25 +67,31 @@
           display: flex;
           gap: 12px;
 
-          .preview-container {
-            position: relative;
-            .preview-wrapper {
-              width: 102px;
-              height: 102px;
-              border-radius: 5px;
-              overflow: hidden;
+          .preview-box {
+            display: flex;
+            gap: 12px;
+            width: 100%;
 
-              @media (min-width: 768px) {
-                width: 110px;
-                height: 110px;
-              }
+            .preview-container {
+              position: relative;
+              .preview-wrapper {
+                width: 102px;
+                height: 102px;
+                border-radius: 5px;
+                overflow: hidden;
 
-              .file-preview {
-                width: 100%;
-                height: 100%;
+                @media (min-width: 768px) {
+                  width: 110px;
+                  height: 110px;
+                }
+
+                .file-preview {
+                  width: 100%;
+                  height: 102px;
+                  border-radius: 5px;
+                }
               }
             }
-
             .close {
               position: absolute;
               right: -10px;
@@ -100,6 +106,7 @@
             width: 110px;
             border-radius: 5px;
             cursor: pointer;
+            flex-shrink: 0;
 
             .label-text {
               color: $gray-01;

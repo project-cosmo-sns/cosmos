@@ -8,6 +8,7 @@ import '@uiw/react-md-editor/markdown-editor.css';
 import { Provider as ReduxToolkitProvider } from 'react-redux';
 import store from '@/redux/store';
 import Toast from '@/components/Common/Toast';
+import LoginModal from '@/components/Common/LoginModal';
 
 export default function App({ Component, pageProps }: AppProps) {
   const useLayout = !pageProps.noLayout;
@@ -23,6 +24,7 @@ export default function App({ Component, pageProps }: AppProps) {
               <Layout>
                 <Component {...pageProps} />
                 <Toast />
+                <LoginModal />
               </Layout>
             ) : (
               <Component {...pageProps} />

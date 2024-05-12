@@ -19,13 +19,18 @@ export default function AddContentPopOver({
   profileImage,
 }: PopOverProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+
+  const handleCreateFeedClick = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <PopOver onClose={onClose} className={cn('add-popover')}>
       <ul className={cn('content-list-wrapper')}>
         <li
           role="presentation"
           className={cn('content-list')}
-          onClick={() => setIsModalOpen(true)}
+          onClick={handleCreateFeedClick}
         >
           <FeedIcon width="18" height="18" fill="#FFFFFF" />
           <span>피드 작성하기</span>

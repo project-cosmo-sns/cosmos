@@ -36,7 +36,7 @@ export default function PostWritePage() {
       }),
     onSuccess: (response) => {
       router.push(`/post/${response.id}`);
-      showToastHandler(`포스트 작성 완료!`, <CompleteIcon />);
+      showToastHandler(`포스트 작성 완료!`, 'check');
     },
   });
 
@@ -49,7 +49,7 @@ export default function PostWritePage() {
       }),
     onSuccess: () => {
       router.push(`/post/${postId}`);
-      showToastHandler(`포스트 수정 완료!`, <CompleteIcon />);
+      showToastHandler(`포스트 수정 완료!`, 'check');
     },
   });
 
@@ -59,10 +59,7 @@ export default function PostWritePage() {
 
   const handleSubmitPostData = () => {
     if (!data.title || !data.content) {
-      showToastHandler(
-        `${data.title ? '내용' : '제목'}을 입력하세요`,
-        <WarnIcon fill="#ff5151" />,
-      );
+      showToastHandler(`${data.title ? '내용' : '제목'}을 입력하세요`, 'warn');
       // showToastHandler('피드 작성 완료', <CompleteIcon fill="#0ACF83" />);
       return;
     }
