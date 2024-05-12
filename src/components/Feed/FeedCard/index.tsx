@@ -3,7 +3,6 @@ import { useState } from 'react';
 import classNames from 'classnames/bind';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ReactionContainer from '@/components/Common/ReactionContainer';
-import Modal from '@/components/Common/Layout/Modal';
 import { Edits } from '@/components/Feed/FeedCard/api';
 import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
 import fetchData from '@/api/fetchData';
@@ -48,7 +47,6 @@ export default function FeedCard({
   forDetails,
   onClick,
 }: FeedCardTypes) {
-  const [moreModalOpen, setMoreModalOpen] = useState(false);
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const {
     register,
@@ -213,17 +211,6 @@ export default function FeedCard({
             isPost={false}
             handleEmojiClick={handleEmojiClick}
           />
-        )}
-        {hasPadding || (
-          <Modal
-            title="임시모달"
-            cssModalSize={cn('')}
-            cssComponentDisplay={cn('')}
-            modalVisible={moreModalOpen}
-            toggleModal={setMoreModalOpen}
-          >
-            <div>테스트 모달</div>
-          </Modal>
         )}
       </div>
     </div>
