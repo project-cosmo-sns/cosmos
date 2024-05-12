@@ -102,7 +102,7 @@ export default function FeedCard({
       isPost: false,
     });
 
-  console.log(imageUrls, '------피드 상세에서 받는 이미지 url------');
+  // 1. 편집하기 이모지 클릭 -> 2. 편집모드 상태 변경 -> 3. textArea 나타남 -> 4. 글 수정 기능 / x 아이콘 클릭시,  ***** -> 5. 등록 버튼 클릭 -> 이미지 삭제 요청 보내기 + form Post 요청
 
   return (
     <div
