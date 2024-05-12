@@ -9,10 +9,15 @@
   align-items: center;
   gap: 20px;
   position: absolute;
-  top: 0px;
+  top: 110;
   right: 0;
-
   animation: fadeout 5s;
+  z-index: 100;
+  @media (min-width: 768px) {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 
   @keyframes fadeout {
     0% {

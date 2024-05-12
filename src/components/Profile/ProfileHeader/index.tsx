@@ -8,6 +8,12 @@ import { useState } from 'react';
 import FollowList from '../FollowList';
 import useFollowClick from '@/hooks/useFollowClick';
 import FollowButton from '@/components/Common/Buttons/FollowButton';
+import AuthForm from '../AuthForm';
+import ProfilePopOver from '@/components/Common/ProfilePopOver';
+import { logout } from '@/redux/logoutSlice';
+import { useDispatch } from 'react-redux';
+import { memberLogout } from '@/api/member';
+import router from 'next/router';
 
 export interface ProfileHeaderProps {
   memberData: MemberDataType;
@@ -20,22 +26,23 @@ const cn = classNames.bind(styles);
 export default function ProfileHeader({
   memberData,
   setIsModalOpen,
-  // error,
 }: ProfileHeaderProps) {
   const [followModal, setFollowModal] = useState({
     follower: false,
     following: false,
+    authForm: false,
   });
+
   const memberId = memberData?.memberId;
+
   const { isActive, toggleFollow } = useFollowClick(memberId);
 
-  const toggleModal = (type: 'follower' | 'following') => {
+  const toggleModal = (type: 'follower' | 'following' | 'authForm') => {
     setFollowModal({
       ...followModal,
       [type]: !followModal[type],
     });
   };
-  console.log('memberData:', memberData);
 
   const renderButton = () => {
     if (memberData.memberId) {
@@ -47,28 +54,39 @@ export default function ProfileHeader({
         />
       );
     }
+    // 테스트용 (memberData.isAuthorized) 으로 바꿔줘야함
     if (memberData.isAuthorized) {
+      console.log('memberData:', memberData);
       return (
-        <div
-          onClick={() => setIsModalOpen((prev) => !prev)}
-          className={cn('profile-setting-button')}
-        >
-          <Icon.SettingIcon width="18" height="18" fill="#C2C7D9" />
+        <div className={cn('profile-setting-button')}>
+          <ProfilePopOver onSetting={() => setIsModalOpen((prev) => !prev)} />
         </div>
       );
+      // 테스트용 (!memberData.isAuthorized) 으로 바꿔줘야함
     }
-
     return (
       <button
         type="button"
-        onClick={() => {
-          console.log('인증모달띄우기');
-        }}
+        onClick={() => toggleModal('authForm')}
+        className={cn('authorization-button')}
       >
         인증하기
       </button>
     );
   };
+
+  function introduceContent() {
+    // 테스트용 (memberData.isAuthorized) 으로 바꿔줘야함
+    if (!memberData.isAuthorized) {
+      return (
+        <div className={cn('introduce-empty')}>인증되지 않은 사용자입니다.</div>
+      );
+    } else if (memberData.introduce === '') {
+      return <div className={cn('introduce-empty')}>소개가 없습니다.</div>;
+    } else {
+      return memberData.introduce;
+    }
+  }
 
   return (
     <div className={cn('header-container')}>
@@ -87,7 +105,7 @@ export default function ProfileHeader({
       <div className={cn('profile-middle-section')} />
       <div className={cn('profile-information')}>
         <div className={cn('profile-name-section')}>
-          {memberData ? memberData.nickname : '게스트'}
+          {memberData.isAuthorized ? memberData.nickname : '미인증'}
           <div className={cn('generation-badge')}>
             <GenerationBadge
               generationInfo={memberData?.generation}
@@ -129,14 +147,15 @@ export default function ProfileHeader({
         </div>
       </div>
       <div className={cn('profile-introduce-section')}>
-        {memberData.introduce === '' ? (
-          <div className={cn('introduce-empty')}>소개가 없습니다.</div>
-        ) : (
-          memberData.introduce
-        )}
+        {introduceContent()}
       </div>
-
       <div className={cn('profile-setting-or-following')}>{renderButton()}</div>
+      {followModal.authForm && (
+        <AuthForm
+          modalVisible={followModal.authForm}
+          toggleModal={() => toggleModal('authForm')}
+        />
+      )}
     </div>
   );
 }

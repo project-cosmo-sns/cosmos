@@ -19,6 +19,10 @@
     border-width: 1px;
   }
 
+  .profile-image {
+    border-radius: 50%;
+  }
+
   .profile-content {
     @include flex-arrange(flex-start);
     gap: 20px;
