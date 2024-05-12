@@ -322,13 +322,13 @@ export function DropDown({
       />
       <path
         fillRule="evenodd"
-        clip-rule="evenodd"
+        clipRule="evenodd"
         d="M4.125 10.5C3.29657 10.5 2.625 9.82843 2.625 9C2.625 8.17157 3.29657 7.5 4.125 7.5C4.95343 7.5 5.625 8.17157 5.625 9C5.625 9.82843 4.95343 10.5 4.125 10.5Z"
         fill={fill}
       />
       <path
         fillRule="evenodd"
-        clip-rule="evenodd"
+        clipRule="evenodd"
         d="M14.625 10.5C13.7966 10.5 13.125 9.82843 13.125 9C13.125 8.17157 13.7966 7.5 14.625 7.5C15.4534 7.5 16.125 8.17157 16.125 9C16.125 9.82843 15.4534 10.5 14.625 10.5Z"
         fill={fill}
       />
@@ -703,15 +703,15 @@ export function PlusIcon({ fill = '', ...props }: IconCollectionType) {
       <g id="icon">
         <path
           id="Vector (Stroke)"
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M7.07399 3.5C7.42228 3.5 7.70462 3.81999 7.70462 4.21471V9.93243C7.70462 10.3272 7.42228 10.6471 7.07399 10.6471C6.7257 10.6471 6.44336 10.3272 6.44336 9.93243V4.21471C6.44336 3.81999 6.7257 3.5 7.07399 3.5Z"
           fill="#A0A5BB"
         />
         <path
           id="Vector (Stroke)_2"
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M3.5 7.0735C3.5 6.72521 3.81999 6.44287 4.21471 6.44287H9.93243C10.3272 6.44287 10.6471 6.72521 10.6471 7.0735C10.6471 7.42179 10.3272 7.70413 9.93243 7.70413H4.21471C3.81999 7.70413 3.5 7.42179 3.5 7.0735Z"
           fill="#A0A5BB"
         />
