@@ -257,7 +257,7 @@ export default function ProfileEditModal({
             <div className={cn('name')}>{memberData?.nickname}</div>
             <GenerationBadge
               generationInfo={memberData?.generation}
-              isAuthorized={memberData?.isAuthorized}
+              authorizationStatus={memberData?.authorizationStatus}
             />
 
             <div className={cn('introduce')}>

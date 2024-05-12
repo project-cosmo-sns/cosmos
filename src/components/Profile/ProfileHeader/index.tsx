@@ -55,15 +55,14 @@ export default function ProfileHeader({
         />
       );
     }
-    // 테스트용 (memberData.isAuthorized) 으로 바꿔줘야함
-    if (memberData.isAuthorized) {
+    // 테스트 시 ! 붙이기
+    if (memberData.authorizationStatus === 'ACCEPT') {
       console.log('memberData:', memberData);
       return (
         <div className={cn('profile-setting-button')}>
           <ProfilePopOver onSetting={() => setIsModalOpen((prev) => !prev)} />
         </div>
       );
-      // 테스트용 (!memberData.isAuthorized) 으로 바꿔줘야함
     }
     return (
       <>
@@ -76,8 +75,7 @@ export default function ProfileHeader({
   };
 
   function introduceContent() {
-    // 테스트용 (memberData.isAuthorized) 으로 바꿔줘야함
-    if (!memberData.isAuthorized) {
+    if (memberData.authorizationStatus === 'NONE') {
       return (
         <div className={cn('introduce-empty')}>인증되지 않은 사용자입니다.</div>
       );
@@ -105,11 +103,13 @@ export default function ProfileHeader({
       <div className={cn('profile-middle-section')} />
       <div className={cn('profile-information')}>
         <div className={cn('profile-name-section')}>
-          {memberData.isAuthorized ? memberData.nickname : '미인증'}
+          {memberData.authorizationStatus === 'NONE'
+            ? memberData.nickname
+            : '미인증'}
           <div className={cn('generation-badge')}>
             <GenerationBadge
               generationInfo={memberData?.generation}
-              isAuthorized={memberData?.isAuthorized}
+              authorizationStatus={memberData?.authorizationStatus}
             />
           </div>
         </div>
