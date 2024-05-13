@@ -32,7 +32,7 @@ export default function NotificationItem({
     notification: {
       id,
       content,
-      notificationType: { type, feedId, postId },
+      notificationType: { type, feedId, postId, followerMemberId },
       isConfirmed,
       createdAt,
     },
@@ -55,6 +55,10 @@ export default function NotificationItem({
   const handleNotificationClick = () => {
     if (!isConfirmed) {
       mutation.mutate();
+    }
+
+    if (type === notificationType.FOLLOW) {
+      router.push(`profile?memberId=${followerMemberId}`);
     }
 
     if (
