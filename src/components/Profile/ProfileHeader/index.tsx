@@ -107,7 +107,7 @@ export default function ProfileHeader({
       <div className={cn('profile-middle-section')} />
       <div className={cn('profile-information')}>
         <div className={cn('profile-name-section')}>
-          {memberData.authorizationStatus === 'NONE'
+          {memberData.authorizationStatus === 'ACCEPT'
             ? memberData.nickname
             : '미인증'}
           <div className={cn('generation-badge')}>

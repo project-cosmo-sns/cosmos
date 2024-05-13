@@ -12,13 +12,12 @@ import { AuthFormProps } from '@/@types/type';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 import { fetchMemberData } from '@/pages/profile/api';
+import instance from '@/api/axios';
 
 interface ProfileEditModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   memberData: MemberDataType;
-  setNewMemberData: (newMemberData: MemberDataType) => void;
-  newMemberData: MemberDataType;
   initialData: MemberDataType;
 }
 
@@ -38,15 +37,13 @@ export default function ProfileEditModal({
   setIsOpen,
   memberData,
 }: ProfileEditModalProps) {
+  const { register, handleSubmit, watch, setValue } = useForm<AuthFormProps>();
   const [previewImage, setPreviewImage] = useState(
     memberData.profileImageUrl || '',
   );
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
   const queryClient = useQueryClient();
-  const { register, handleSubmit, watch, setValue } = useForm<AuthFormProps>();
-  // 프로필 이미지 상태 (이미지 URL 또는 빈 문자열)
   const [profileImageUrl, setProfileImageUrl] = useState(
-    // '',
     memberData.profileImageUrl,
   );
 
@@ -154,22 +151,6 @@ export default function ProfileEditModal({
     },
   });
 
-  // SSR로 가져온 데이터를 쿼리 데이터로 저장 (mutation 후 리패치 위한 작업)
-  useEffect(() => {
-    if (memberData) {
-      queryClient.setQueryData(['memberData'], memberData);
-    }
-  }, [queryClient]);
-
-  useQuery({
-    queryKey: ['memberData'],
-    queryFn: async () => {
-      const result = fetchMemberData;
-      return result.memberData;
-    },
-    initialData: memberData,
-  });
-
   // 프로필 업데이트
   const { mutate: updateProfile } = useMutation<
     RequestDataProps,
@@ -186,10 +167,6 @@ export default function ProfileEditModal({
       return response;
     },
     onSuccess: (response: RequestDataProps) => {
-      // 패치가 안되는 이유? -> 사실 패치는 되는 것 같다. 왜? 콘솔이 찍힘.
-      // 근데 왜 안되는 것처럼 보이냐? -> 이전 값을 패치중인가봐. 이전 값이 콘솔에 찍힘.
-      // 그럼 onSuccess일 때 memberData를 업데이트 해두자
-      // 아니면 useEffect로 memberData가 변경될 때마다 새 데이터로 렌더링 되도록??
       console.log('프로필 업데이트 성공, 업데이트 된 데이터 : ', response);
       queryClient.invalidateQueries({
         queryKey: ['memberData'],
@@ -213,7 +190,6 @@ export default function ProfileEditModal({
       introduce,
       profileImageUrl: uploadedImageUrl || profileImageUrl,
     };
-    // uploadedImageUrl : 올라간 이미지 / 삭제된 이미지
     updateProfile(requestData);
     console.log('requestData:', requestData);
   };
