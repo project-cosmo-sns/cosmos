@@ -14,8 +14,11 @@ import {
 import { useRouter } from 'next/router';
 import { useGetProfileImage } from '@/api/member';
 import Image from 'next/image';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { openLoginModal } from '@/redux/loginModalSlice';
+import { RootState } from '@/redux/store';
+import { login, logout } from '@/redux/logoutSlice';
+import { set } from 'react-hook-form';
 
 const cn = classNames.bind(styles);
 
@@ -28,9 +31,10 @@ export default function SideBar() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  const { data: userProfileImage } = useGetProfileImage();
-  const isLogin = userProfileImage?.isLogin;
-
+  const { data: member } = useGetProfileImage();
+  const isLogin = member?.isLogin;
+  const loggedin = useSelector((state: RootState) => state.logout.isLoggedIn);
+  
   const profileClick = () => {
     if (isLogin) {
       router.push('/profile?tab=feed');
@@ -58,10 +62,13 @@ export default function SideBar() {
   };
 
   useEffect(() => {
-    if (isLogin) {
-      setUserImage(userProfileImage?.profileImageUrl);
+    if (!isLogin) {
+      dispatch(logout());
+      return;
     }
-  }, [userProfileImage]);
+    setUserImage(member?.profileImageUrl);
+    dispatch(login());
+  }, [isLogin]);
 
   return (
     <div className={cn('sideBar-container')}>
@@ -90,8 +97,8 @@ export default function SideBar() {
             <Notification onClose={handleClosePopOver} />
           )}
         </div>
-        {!isLogin && <UserIcon fill="#FFFFFF" onClick={profileClick} />}
-        {isLogin && userImage && (
+        {!loggedin && <UserIcon fill="#FFFFFF" onClick={profileClick} />}
+        {loggedin && userImage && (
           <Image
             src={userImage}
             alt="profile"
@@ -100,7 +107,7 @@ export default function SideBar() {
             onClick={profileClick}
           />
         )}
-        {isLogin && !userImage && <ProfileIconDark onClick={profileClick} />}
+        {loggedin && !userImage && <ProfileIconDark onClick={profileClick} />}
       </div>
     </div>
   );
