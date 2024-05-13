@@ -3,7 +3,7 @@ import ReactDom from 'react-dom';
 
 interface ModalPortalTypes {
   children: React.ReactNode;
-  modalVisible: boolean;
+  modalVisible?: boolean;
 }
 
 export default function ModalPortal({
