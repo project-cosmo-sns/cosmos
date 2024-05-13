@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 
 type ProfileData = {
   profileImageUrl: string;
-  isisLogin: boolean;
+  isLogin: boolean;
 };
 
 export function useGetProfileImage() {
