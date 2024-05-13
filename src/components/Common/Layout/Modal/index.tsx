@@ -52,7 +52,7 @@ export default function Modal({
   return (
     <div className="Modal">
       {modalVisible && (
-        <ModalPortal>
+        <ModalPortal modalVisible={modalVisible}>
           <div className={cn('container', className)}>
             <div
               role="presentation"
