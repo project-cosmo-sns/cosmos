@@ -58,7 +58,6 @@ export default function SideBar() {
 
   useEffect(() => {
     if (!userProfileImage) return;
-
     setUserImage(userProfileImage?.profileImageUrl);
     dispatch(login());
   }, [userProfileImage]);
