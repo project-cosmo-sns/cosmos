@@ -14,9 +14,7 @@ import {
 import { useRouter } from 'next/router';
 import { useGetProfileImage } from '@/api/member';
 import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
-import { login, logout } from '@/redux/logoutSlice';
+import { useDispatch } from 'react-redux';
 import { openLoginModal } from '@/redux/loginModalSlice';
 
 const cn = classNames.bind(styles);
