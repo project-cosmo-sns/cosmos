@@ -4,12 +4,11 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import TermBadge from '../Badge/TermBadge';
 import styles from './WriterProfile.module.scss';
-import getElapsedTime from '@/utils/getElaspedTime';
-import GenerationBadge from '../GenerationBadge';
+
 
 interface WriterProfileProps {
   writer: Writer;
-  createdAt: string;
+  createdAt?: string;
 }
 
 const cn = classNames.bind(styles);

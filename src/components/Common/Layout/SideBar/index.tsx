@@ -44,6 +44,10 @@ export default function SideBar() {
     e: React.MouseEvent<HTMLElement>,
     popOverType: 'add' | 'bell',
   ) => {
+    if (!isLogin) {
+      dispatch(openLoginModal());
+      return;
+    }
     e.stopPropagation();
     setActivePopover((prevPopover) =>
       prevPopover === popOverType ? null : popOverType,

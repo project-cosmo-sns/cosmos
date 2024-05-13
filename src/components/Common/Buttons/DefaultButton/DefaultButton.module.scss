@@ -20,6 +20,12 @@
   &.gray-02 {
     @include color($gray-02, $white-01);
   }
+  &.black-01 {
+    @include color($black-01, $white-01);
+  }
+  &.gray-02 {
+    @include color($gray-02, $white-01);
+  }
 
   &.red-01 {
     @include color($red-01, $white-01);

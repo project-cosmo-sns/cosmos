@@ -3,6 +3,7 @@ export enum notificationType {
   CREATE_POST_COMMENT = 'CREATE_POST_COMMENT',
   CREATE_FEED_EMOJI = 'CREATE_FEED_EMOJI',
   CREATE_POST_EMOJI = 'CREATE_POST_EMOJI',
+  FOLLOW = 'FOLLOW',
 }
 
 interface NotificationType {
@@ -10,6 +11,7 @@ interface NotificationType {
   feedId?: number;
   postId?: number;
   commentId?: number;
+  followerMemberId?: number;
 }
 
 interface SendMember {
