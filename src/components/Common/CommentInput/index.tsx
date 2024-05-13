@@ -22,7 +22,6 @@ export default function CommentInput({
   const {
     register,
     handleSubmit,
-    reset,
     formState: { isSubmitting },
   } = useForm<Comment>({
     defaultValues: {
@@ -34,7 +33,9 @@ export default function CommentInput({
     <form className={cn('wrapper')} onSubmit={handleSubmit(onSubmit)}>
       <TextArea
         placeholder={placeholder}
-        register={{ ...register('comment', { required: true }) }}
+        register={{
+          ...register('comment', { required: true, maxLength: 300 }),
+        }}
       />
       <DefaultButton
         disabled={isSubmitting}
