@@ -61,7 +61,7 @@ export default function MemberDataContainer({
     // SSR 쪽에 코드를 추가 수정할 필요 있음. .
     // 클라이언트엔 이미 쿼리 정보가 있으니까 서버사이드에서 가져왔딴걸 알게됨
     // 하이드레이션 / 디하이드레이션 과정이 있다. - 다시 패치할지 말지 알려주는 과정이 필요함.
-    // react query SSR....
+    // react query SSR...
   });
 
   if (!memberData) {

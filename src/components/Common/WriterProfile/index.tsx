@@ -2,13 +2,12 @@ import { Writer } from '@/components/Feed/types';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import TermBadge from '../Badge/TermBadge';
 import styles from './WriterProfile.module.scss';
-import getElapsedTime from '@/utils/getElaspedTime';
+import GenerationBadge from '../GenerationBadge';
 
 interface WriterProfileProps {
   writer: Writer;
-  createdAt: string;
+  createdAt?: string;
 }
 
 const cn = classNames.bind(styles);
@@ -44,7 +43,7 @@ export default function WriterProfile({
         >
           {nickname}
         </button>
-        <TermBadge term={generation} />
+        <GenerationBadge generationInfo={generation} />
       </div>
       <span className={cn('created-at')}>{createdAt}</span>
     </div>

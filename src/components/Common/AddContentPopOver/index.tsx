@@ -49,7 +49,11 @@ export default function AddContentPopOver({
         cssModalSize={cn('create-feed-modalSize')}
         cssComponentDisplay={cn('')}
       >
-        <CreateFeed profileImage={profileImage} />
+        <CreateFeed
+          toggleModal={setIsModalOpen}
+          modalVisible={isModalOpen}
+          profileImage={profileImage}
+        />
       </Modal>
     </PopOver>
   );

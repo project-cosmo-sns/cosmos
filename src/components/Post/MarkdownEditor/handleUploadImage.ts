@@ -25,7 +25,6 @@ export default async function createPresinedURL(file: File) {
     if (response?.uploadURL) {
       const s3Response = await uploadImageToS3(response.uploadURL, file);
       if (s3Response) {
-        console.log(s3Response);
         return response.uploadURL;
       }
       throw new Error();

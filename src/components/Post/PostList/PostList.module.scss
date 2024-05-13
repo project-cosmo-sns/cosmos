@@ -2,6 +2,7 @@
   @include flex-arrange(center, flex-start);
   flex-direction: column;
   position: relative;
+  gap: 8px;
 }
 
 .category-container {
@@ -25,6 +26,10 @@
 }
 
 @media (min-width: 768px) {
+  .wrapper {
+    gap: 0;
+  }
+
   .post-container {
     padding: 0 24px 12px;
     gap: 12px;

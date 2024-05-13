@@ -10,14 +10,19 @@ import { notificationType, NotificationData } from '../type';
 import getElapsedTime from '@/utils/getElaspedTime';
 import styles from './NotificationItem.module.scss';
 import fetchData from '@/api/fetchData';
+import FollowButton from '@/components/Common/Buttons/FollowButton';
 
 const cn = classNames.bind(styles);
 
 type NotificationItemProps = {
   data: NotificationData;
+  onClose: () => void;
 };
 
-export default function NotificationItem({ data }: NotificationItemProps) {
+export default function NotificationItem({
+  data,
+  onClose,
+}: NotificationItemProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const router = useRouter();
@@ -27,7 +32,7 @@ export default function NotificationItem({ data }: NotificationItemProps) {
     notification: {
       id,
       content,
-      notificationType: { type, feedId, postId },
+      notificationType: { type, feedId, postId, followerMemberId },
       isConfirmed,
       createdAt,
     },
@@ -52,13 +57,25 @@ export default function NotificationItem({ data }: NotificationItemProps) {
       mutation.mutate();
     }
 
-    if (type === notificationType.CREATE_POST_COMMENT) {
+    if (type === notificationType.FOLLOW) {
+      router.push(`profile?memberId=${followerMemberId}`);
+    }
+
+    if (
+      type === notificationType.CREATE_POST_COMMENT ||
+      notificationType.CREATE_POST_EMOJI
+    ) {
       router.push(`/post/${postId}`);
     }
 
-    if (type === notificationType.CREATE_FEED_COMMENT) {
+    if (
+      type === notificationType.CREATE_FEED_COMMENT ||
+      notificationType.CREATE_FEED_EMOJI
+    ) {
       setIsModalOpen(true);
     }
+
+    onClose();
   };
 
   const formattedCreatedAt = getElapsedTime(createdAt);
@@ -90,6 +107,10 @@ export default function NotificationItem({ data }: NotificationItemProps) {
           <strong>{content}</strong>
           <span>{formattedCreatedAt}</span>
         </p>
+
+        {type === notificationType.FOLLOW && (
+          <FollowButton onClick={() => console.log('클릭')} isFollowButton />
+        )}
 
         {isConfirmed ? (
           <span className={cn('notification-confirm')}>

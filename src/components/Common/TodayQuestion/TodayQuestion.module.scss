@@ -1,7 +1,7 @@
 .question-container {
   @include glass-01;
   width: 100%;
-  padding: 16px 24px;
+  padding: 12px 24px;
   margin-bottom: 8px;
   position: relative;
   transition: 0.3s all;
@@ -42,5 +42,14 @@
 
   @media (min-width: 768px) {
     border-radius: 10px;
+  }
+
+  .unauthorized-content {
+    @include flex-arrange;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    margin: 0 auto;
+    color: #fff;
   }
 }

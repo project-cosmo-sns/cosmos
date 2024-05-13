@@ -4,6 +4,10 @@
   position: relative;
   box-sizing: border-box;
 
+  @media (min-width: 768px) {
+    margin-bottom: 10px;
+  }
+
   input {
     width: 210px;
     height: 36px;
