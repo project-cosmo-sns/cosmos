@@ -1,10 +1,12 @@
 import { useQuery, useMutation } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
-import { UrlType } from '@/components/Feed/CreateFeed/type';
+import { UrlType, FeedType } from '@/components/Feed/CreateFeed/type';
 import axios from 'axios';
 import { baseURL } from '@/api/axios';
+import { useRouter } from 'next/router';
 
 export function useCreateFeedRequest() {
+  const router = useRouter();
   const { refetch: getUrl } = useQuery<UrlType>({
     queryKey: ['signedUrl'],
     queryFn: () =>
@@ -32,8 +34,27 @@ export function useCreateFeedRequest() {
     deleteUrlMutate.mutate(url);
   };
 
+  const postFeedMutataion = useMutation({
+    mutationFn: (data: FeedType) =>
+      fetchData({
+        param: '/feed',
+        method: 'post',
+        requestData: {
+          content: data.content,
+          imageUrls: data.feedImage,
+        },
+      }),
+    onError: () => console.log('피드 등록에 실패하였습니다.'),
+    onSuccess: () => router.push('/?tab=feed'),
+  });
+
+  const postFeed = (data: FeedType) => {
+    postFeedMutataion.mutate(data);
+  };
+
   return {
     getUrl,
     deleteImage,
+    postFeed,
   };
 }
