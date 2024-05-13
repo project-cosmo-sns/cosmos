@@ -44,6 +44,10 @@ export default function SideBar() {
     e: React.MouseEvent<HTMLElement>,
     popOverType: 'add' | 'bell',
   ) => {
+    if (!isLogin) {
+      dispatch(openLoginModal());
+      return;
+    }
     e.stopPropagation();
     setActivePopover((prevPopover) =>
       prevPopover === popOverType ? null : popOverType,
@@ -82,9 +86,7 @@ export default function SideBar() {
         </div>
         <div
           className={cn('icon-box')}
-          onClick={(e) =>
-            !isLogin ? profileClick() : togglePopOver(e, 'bell')
-          }
+          onClick={(e) => togglePopOver(e, 'bell')}
         >
           <BellIcon fill="#FFFFFF" />
           {activePopover === 'bell' && (

@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import styles from './Modal.module.scss';
 import classNames from 'classnames/bind';
 import * as Icon from '@/components/Common/IconCollection/index';
@@ -37,6 +37,14 @@ export default function Modal({
   cssComponentDisplay,
   className,
 }: ModalType) {
+  useEffect(() => {
+    if (modalVisible) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [modalVisible]);
+
   return (
     <div className="Modal">
       {modalVisible && (
