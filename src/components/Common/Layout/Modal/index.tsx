@@ -1,8 +1,9 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useRef } from 'react';
 import styles from './Modal.module.scss';
 import classNames from 'classnames/bind';
 import * as Icon from '@/components/Common/IconCollection/index';
 import ModalPortal from './ModalPortal';
+import useOutSideClick from '@/hooks/useOutSideClick';
 
 interface ModalType {
   children: ReactNode;
@@ -37,6 +38,17 @@ export default function Modal({
   cssComponentDisplay,
   className,
 }: ModalType) {
+  const modalRef = useRef<HTMLDivElement>(null);
+
+  const handleCloseModal = () => {
+    toggleModal && toggleModal(!modalVisible);
+  };
+
+  useOutSideClick({
+    ref: modalRef,
+    callback: handleCloseModal,
+  });
+
   return (
     <div className="Modal">
       {modalVisible && (
@@ -55,7 +67,7 @@ export default function Modal({
                 }}
               />
             </div>
-            <div className={cn(cssModalSize)}>
+            <div className={cn(cssModalSize)} ref={modalRef}>
               <div className={cn('wrapper')}>
                 {title && (
                   <div className={cn('title')}>
