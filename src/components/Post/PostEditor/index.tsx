@@ -1,7 +1,7 @@
 import fetchData from '@/api/fetchData';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import CategoryList from '../CategoryList';
 import HashTagInput from '../HashTag/HashTagInput';
 import MarkdownEditor from '../MarkdownEditor';
@@ -9,6 +9,7 @@ import { PostDetailType, PostRequestType } from '../types';
 import styles from './PostEditor.module.scss';
 import { CATEGORY_LIST } from '@/constants/categoryList';
 import getKeyByValue from '@/utils/getKeyByValue';
+import { useToast } from '@/hooks/useToast';
 
 interface PostEditorProps {
   postId: string;
@@ -23,6 +24,7 @@ export default function PostEditor({
   postData,
   mergeState,
 }: PostEditorProps) {
+  const { showToastHandler } = useToast();
   const [selectedCategory, setSelectedCategory] = useState('NOTICE');
 
   const { data, isSuccess } = useQuery<PostDetailType>({
@@ -33,6 +35,15 @@ export default function PostEditor({
       }),
     enabled: !!postId,
   });
+
+  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value.length > 50) {
+      showToastHandler('50자 이상 작성할 수 없습니다.', 'warn');
+      return '';
+    }
+    mergeState({ title: event.target.value });
+    return '';
+  };
 
   useEffect(() => {
     if (postId && isSuccess) {
@@ -68,7 +79,7 @@ export default function PostEditor({
         <input
           className={cn('title', 'input')}
           value={postData.title}
-          onChange={(event) => mergeState({ title: event.target.value })}
+          onChange={handleTitleChange}
           placeholder="제목을 입력하세요"
         />
         <MarkdownEditor

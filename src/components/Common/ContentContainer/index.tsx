@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 
 const cn = classNames.bind(styles);
 
-interface ContentContainerProps {
+export interface ContentContainerProps {
   children: React.ReactNode;
   keyword?: string | null;
   selectedOption: ContainerOptionType;
@@ -69,7 +69,9 @@ export default function ContentContainer({
   );
 
   useEffect(() => {
-    setSelectedOption(router.query.tab as ContainerOptionType);
+    setSelectedOption(
+      router.query.tab ? (router.query.tab as ContainerOptionType) : 'feed',
+    );
   }, [router.query.tab]);
 
   return (

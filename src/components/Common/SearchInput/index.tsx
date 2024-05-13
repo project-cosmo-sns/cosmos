@@ -27,7 +27,7 @@ export default function SearchInput() {
         `/search?tab=hashtag&query=${encodeURIComponent(inputValue)}`,
       );
     } else {
-      router.push('/');
+      router.push('/?tab=feed');
     }
   };
 

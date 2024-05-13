@@ -25,7 +25,8 @@
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
+  line-height: 135%;
+  -webkit-line-clamp: 2;
 }
 
 .content {
@@ -34,6 +35,9 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
+
+  line-height: 135%;
+  font-weight: 600;
 }
 
 .hashtag-container {

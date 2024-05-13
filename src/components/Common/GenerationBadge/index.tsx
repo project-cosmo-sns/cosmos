@@ -3,14 +3,14 @@ import classNames from 'classnames/bind';
 
 type GenerationType = {
   generationInfo: number | null;
-  isAuthorized: boolean;
+  authorizationStatus: 'NONE' | 'PENDING' | 'ACCEPT';
 };
 
 const cn = classNames.bind(styles);
 
 export default function GenerationBadge({
   generationInfo,
-  isAuthorized,
+  authorizationStatus,
 }: GenerationType) {
   const generationColor = [
     ['#FFEAEA', '#FF5151'],
@@ -22,7 +22,7 @@ export default function GenerationBadge({
   ];
 
   // 미인증 상태 처리
-  if (!isAuthorized || generationInfo === null) {
+  if (authorizationStatus === 'NONE' || generationInfo === null) {
     return <div className={cn('waiting')}>미인증</div>;
   }
 

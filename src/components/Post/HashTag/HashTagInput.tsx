@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import HashTag from '.';
 import styles from './HashTagInput.module.scss';
 import HashTagRecommend from './HashTagRecommend';
+import { useToast } from '@/hooks/useToast';
 
 interface HashTagInputProps {
   hashtags: HashTagType[];
@@ -20,6 +21,7 @@ export default function HashTagInput({
   setHashtags,
 }: HashTagInputProps) {
   const [tagValue, setTagValue] = useState<string>('');
+  const { showToastHandler } = useToast();
 
   const { data, isSuccess } = useQuery<HashTagType[]>({
     queryKey: ['hashtag', tagValue],
@@ -77,7 +79,12 @@ export default function HashTagInput({
   };
 
   const handleSearchHashtag = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.value.length > 15) {
+      showToastHandler('15자 이상 작성할 수 없습니다.', 'warn');
+      return '';
+    }
     setTagValue(event.target.value);
+    return '';
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {

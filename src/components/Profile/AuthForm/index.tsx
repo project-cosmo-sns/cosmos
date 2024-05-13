@@ -48,7 +48,7 @@ export default function AuthForm({
         image: uploadedImageUrl,
       });
       showToastHandler('인증 신청이 완료되었습니다.', 'check');
-      router.push('/');
+      router.push('/?tab=feed');
     } catch (error) {
       console.error('인증 신청 에러: ', error);
     }

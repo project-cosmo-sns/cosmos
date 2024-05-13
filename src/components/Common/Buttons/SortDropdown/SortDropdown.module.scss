@@ -5,7 +5,7 @@
 .dropdown-expand-button {
   @include flex-arrange(space-between, center);
   @include font-style(1.3rem, $white-01, 600);
-  border-radius: 10px;
+  border-radius: 5px;
   border: $glass-edge-01;
   width: 84px;
   height: 32px;
@@ -18,7 +18,6 @@
   display: flex;
   flex-direction: column;
   position: absolute;
-
   margin-top: 4px;
 }
 

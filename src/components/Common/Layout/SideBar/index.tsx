@@ -34,7 +34,7 @@ export default function SideBar() {
 
   const profileClick = () => {
     if (isLogin) {
-      router.push('/profile');
+      router.push('/profile?tab=feed');
       return;
     }
     dispatch(openLoginModal());
@@ -58,7 +58,6 @@ export default function SideBar() {
 
   useEffect(() => {
     if (!userProfileImage) return;
-
     setUserImage(userProfileImage?.profileImageUrl);
     dispatch(login());
   }, [userProfileImage]);

@@ -3,7 +3,7 @@ import { showToast } from '@/redux/toastSlice';
 
 /**
  * @param {string} text - text 속성은 토스트에 표시할 텍스트
- * @param { React.ReactNode} icon - icon 속성은 토스트에 표시할 아이콘
+ * @param { React.ReactNode} type - 토스트에 표시할 아이콘에 따라 'check' | 'warn' 두 가지 타입을 가짐
  * @returns {function} showToastHandler - 토스트를 보여주는 함수
  * @example
  * const { showToastHandler } = useToast();
@@ -12,7 +12,7 @@ import { showToast } from '@/redux/toastSlice';
 
 export const useToast = () => {
   const dispatch = useDispatch();
-  const showToastHandler = (text: string, type: string) => {
+  const showToastHandler = (text: string, type: 'check' | 'warn') => {
     dispatch(
       showToast({
         text,
