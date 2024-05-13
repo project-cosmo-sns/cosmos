@@ -18,7 +18,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { openLoginModal } from '@/redux/loginModalSlice';
 import { RootState } from '@/redux/store';
 import { login, logout } from '@/redux/logoutSlice';
-import { set } from 'react-hook-form';
 
 const cn = classNames.bind(styles);
 
@@ -27,14 +26,12 @@ export default function SideBar() {
     null,
   );
   const [userImage, setUserImage] = useState<string | null>(null);
-
   const router = useRouter();
   const dispatch = useDispatch();
-
   const { data: member } = useGetProfileImage();
   const isLogin = member?.isLogin;
   const loggedin = useSelector((state: RootState) => state.logout.isLoggedIn);
-  
+
   const profileClick = () => {
     if (isLogin) {
       router.push('/profile?tab=feed');
