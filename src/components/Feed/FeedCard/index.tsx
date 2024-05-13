@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useState } from 'react';
 import classNames from 'classnames/bind';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import ReactionContainer from '@/components/Common/ReactionContainer';
@@ -12,12 +11,14 @@ import {
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
+import { Dispatch, SetStateAction } from 'react';
 import WriterProfile from '@/components/Common/WriterProfile';
 import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import { FeedDetailType } from '../types';
 import styles from './FeedCard.module.scss';
 import getElapsedTime from '@/utils/getElaspedTime';
 import EmojiBundle from '@/components/Common/EmojiBundle';
+import { FeedType } from '../CreateFeed/type';
 
 interface FeedCardTypes {
   refetch?: (
@@ -27,6 +28,8 @@ interface FeedCardTypes {
   hasPadding: boolean;
   forDetails?: boolean;
   onClick?: () => void;
+  editState: boolean;
+  toggleEditMode: Dispatch<SetStateAction<boolean>>;
 }
 
 const cn = classNames.bind(styles);
@@ -46,8 +49,9 @@ export default function FeedCard({
   hasPadding,
   forDetails,
   onClick,
+  editState,
+  toggleEditMode,
 }: FeedCardTypes) {
-  const [isEdit, setIsEdit] = useState<boolean>(false);
   const {
     register,
     handleSubmit,
@@ -69,13 +73,13 @@ export default function FeedCard({
   const queryClient = useQueryClient();
 
   const patchMutaion = useMutation({
-    mutationFn: (data: Edits) =>
-      fetchData<Edits>({
+    mutationFn: (data: FeedType) =>
+      fetchData<FeedType>({
         param: `/feed/${feedId}`,
         method: 'patch',
         requestData: {
           content: data.content,
-          imageUrls: data.imageUrls,
+          feedImage: data.feedImage,
         },
       }),
     onSuccess: () => {
@@ -92,7 +96,7 @@ export default function FeedCard({
   });
 
   const onSubmit: SubmitHandler<Edits> = (data) => {
-    setIsEdit(false);
+    toggleEditMode(false);
     patchMutaion.mutate(data);
   };
 
@@ -127,7 +131,7 @@ export default function FeedCard({
                     width="18"
                     height="18"
                     onClick={() => {
-                      setIsEdit(!isEdit);
+                      toggleEditMode(!editState);
                     }}
                   />
                   <DeleteIcon
@@ -154,24 +158,7 @@ export default function FeedCard({
                 ))}
               </div>
             )}
-            {isEdit ? (
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <textarea
-                  defaultValue={content}
-                  className={cn('text')}
-                  placeholder="글을 작성해보세요."
-                  {...register('content', {
-                    required: '게시글을 작성해주세요',
-                  })}
-                />
-                {errors.content && (
-                  <span className={cn('error')}>{errors.content.message}</span>
-                )}
-                <button type="submit">편집완료</button>
-              </form>
-            ) : (
-              <div className={cn('content')}>{content}</div>
-            )}
+            <div className={cn('content')}>{content}</div>
           </div>
           {forDetails ||
             (!!imageUrls?.length && (
