@@ -12,11 +12,19 @@
   position: relative;
   margin-bottom: 12px;
   margin-top: 40px;
+  text-align: center;
 }
 
 .name {
   font-weight: 700;
   margin-bottom: 8px;
+}
+
+.image-delete-button {
+  color: $gray-02;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 12px;
 }
 
 .introduce {

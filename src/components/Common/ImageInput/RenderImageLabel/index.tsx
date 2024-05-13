@@ -6,6 +6,7 @@ import {
 } from '@/components/Common/IconCollection';
 import styles from '../ImageInput.module.scss';
 import classNames from 'classnames/bind';
+import { onErrorImg } from '@/utils/onErrorImage';
 
 const cn = classNames.bind(styles);
 
@@ -16,7 +17,7 @@ type props = {
 
 export default function RenderImageLabel({ imageFile, type }: props) {
   if (imageFile) {
-    return <Image src={imageFile} fill alt="image" />;
+    return <Image src={imageFile} onError={onErrorImg} fill alt="image" />;
   }
   if (type === 'certify') {
     return (

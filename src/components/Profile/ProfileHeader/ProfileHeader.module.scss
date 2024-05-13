@@ -1,5 +1,5 @@
 .header-container {
-  @include glass-01;
+  @include glass-01(none);
   display: grid;
   grid-template-columns: auto 1fr auto;
   grid-template-rows: auto auto;
@@ -11,18 +11,6 @@
   position: relative;
   align-items: center;
 }
-
-// @mixin glass-01($color: $glass-01, $blur: 15px, $edge: $glass-edge-01) {
-//   background-color: $color;
-//   backdrop-filter: blur($blur);
-//   border: $glass-edge-01;
-// }
-
-// @mixin glass-02($color: $glass-02, $blur: 15px, $edge: $glass-edge-01) {
-//   background-color: $color;
-//   backdrop-filter: blur($blur);
-//   border: $glass-edge-01;
-// }
 
 .profile-image {
   grid-row: 1;
@@ -93,6 +81,16 @@
   }
 }
 
+.authorization-button {
+  @include color($primary-01, $white-01);
+  @include flex-arrange;
+  width: 80px;
+  height: 32px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  border-radius: 5px;
+}
+
 @media (min-width: 768px) {
   .header-container {
     position: relative;
@@ -138,7 +136,7 @@
 }
 .profile-setting-or-following {
   position: absolute;
-  // top: -20px;
+  top: -5px;
   right: 30px;
   cursor: pointer;
 

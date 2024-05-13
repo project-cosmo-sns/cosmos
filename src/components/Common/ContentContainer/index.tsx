@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 
 const cn = classNames.bind(styles);
 
-interface ContentContainerProps {
+export interface ContentContainerProps {
   children: React.ReactNode;
   keyword?: string | null;
   selectedOption: ContainerOptionType;
