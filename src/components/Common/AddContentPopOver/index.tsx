@@ -5,9 +5,6 @@ import PopOver from '../PopOverBox';
 import Modal from '@/components/Common/Layout/Modal';
 import { PostIcon, FeedIcon } from '@/components/Common/IconCollection';
 import CreateFeed from '@/components/Feed/CreateFeed';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
-import { useToast } from '@/hooks/useToast';
 import { useRouter } from 'next/router';
 
 type PopOverProps = {
@@ -23,24 +20,14 @@ export default function AddContentPopOver({
 }: PopOverProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const router = useRouter();
-  const { showToastHandler } = useToast();
-  const isLogin = useSelector((state: RootState) => state.logout.isLoggedIn);
 
   const handleCreateFeedClick = () => {
-    if (!isLogin) {
-      showToastHandler('로그인이 필요한 서비스입니다.', 'warn');
-      return;
-    }
     setIsModalOpen(true);
   };
 
   const handleCreatePostClick = () => {
-    if (!isLogin) {
-      showToastHandler('로그인이 필요한 서비스입니다.', 'warn');
-      return;
-    }
-    onClose();
     router.push('/write');
+    onClose();
   };
 
   return (
