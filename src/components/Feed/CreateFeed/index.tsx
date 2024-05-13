@@ -17,7 +17,11 @@ import { postFeed } from './api';
  * @return {JSX.Element} 글작성 인풋과 이미지 추가하는 인풋을 포함하는 CreatedFeed 컴포넌트 입니다.
  */
 
-export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
+export default function CreateFeed({
+  profileImage,
+  toggleModal,
+  modalVisible,
+}: CreatedFeedTypes) {
   const cn = classNames.bind(styles);
   const {
     register,
@@ -103,6 +107,7 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
       console.log(error, '------error------');
     }
     console.log(data, '------제출 데이터-----');
+    toggleModal(!modalVisible);
   };
 
   const imagePreview = updateImageUrls();

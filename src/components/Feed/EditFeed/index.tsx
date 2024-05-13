@@ -139,6 +139,7 @@ export default function EditFeed({
     } catch (error) {
       console.log(error, '------error------');
     }
+    toggleEditMode(!editState);
   };
 
   const editCancel = async () => {
@@ -146,7 +147,6 @@ export default function EditFeed({
       newBucket,
       '-----이번에 추가됐지만 취소돼서 지워야하는 애들-------',
     );
-    toggleEditMode(!editState);
     try {
       for (let i = 0; i < newBucket.length; i += 1) {
         const splittedImageUrl = newBucket[i].split('/');
@@ -156,6 +156,7 @@ export default function EditFeed({
     } catch (error) {
       console.log(error);
     }
+    toggleEditMode(!editState);
   };
 
   // useEffect(() => {
