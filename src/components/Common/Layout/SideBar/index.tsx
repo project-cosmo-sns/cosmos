@@ -16,7 +16,7 @@ import { useGetProfileImage } from '@/api/member';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
-import { login } from '@/redux/logoutSlice';
+import { login, logout } from '@/redux/logoutSlice';
 import { openLoginModal } from '@/redux/loginModalSlice';
 
 const cn = classNames.bind(styles);
@@ -28,9 +28,10 @@ export default function SideBar() {
   const [userImage, setUserImage] = useState<string | null>(null);
 
   const router = useRouter();
-  const isLogin = useSelector((state: RootState) => state.logout.isLoggedIn);
-
   const dispatch = useDispatch();
+
+  const { data: userProfileImage } = useGetProfileImage();
+  const isLogin = userProfileImage?.isLogin;
 
   const profileClick = () => {
     if (isLogin) {
@@ -54,12 +55,10 @@ export default function SideBar() {
     setActivePopover(null);
   };
 
-  const { data: userProfileImage } = useGetProfileImage();
-
   useEffect(() => {
-    if (!userProfileImage) return;
-    setUserImage(userProfileImage?.profileImageUrl);
-    dispatch(login());
+    if (isLogin) {
+      setUserImage(userProfileImage?.profileImageUrl);
+    }
   }, [userProfileImage]);
 
   return (
