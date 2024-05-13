@@ -25,6 +25,7 @@ export default function EditFeed({
 }: EditFeedTypes) {
   const [images, setImages] = useState<Blob[]>([]);
   const [wasteBucket, setWasteBucket] = useState<string[]>([]);
+  const [newBucket, setNewBucket] = useState<string[]>([]);
   const cn = classNames.bind(styles);
   const {
     register,
@@ -64,6 +65,7 @@ export default function EditFeed({
         if (prev) {
           setValue('feedImage', [...prev, imageUrl]);
           setUrlBucket([...prev, imageUrl]);
+          setNewBucket((prevNew) => [...prevNew, imageUrl]);
         } else {
           setValue('feedImage', [imageUrl]);
           setUrlBucket([imageUrl]);
@@ -136,6 +138,23 @@ export default function EditFeed({
       await editFeed(feedId, data);
     } catch (error) {
       console.log(error, '------error------');
+    }
+  };
+
+  const editCancel = async () => {
+    console.log(
+      newBucket,
+      '-----이번에 추가됐지만 취소돼서 지워야하는 애들-------',
+    );
+    toggleEditMode(!editState);
+    try {
+      for (let i = 0; i < newBucket.length; i += 1) {
+        const splittedImageUrl = newBucket[i].split('/');
+        const imageUrl = splittedImageUrl[splittedImageUrl.length - 1];
+        deleteImage(imageUrl);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -221,7 +240,7 @@ export default function EditFeed({
           등록
         </DefaultButton>
         <DefaultButton
-          onClick={() => toggleEditMode(!editState)}
+          onClick={editCancel}
           buttonType="button"
           color="black-01"
           size="medium"
