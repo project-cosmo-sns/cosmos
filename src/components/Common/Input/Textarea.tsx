@@ -1,7 +1,8 @@
 import classNames from 'classnames/bind';
-import styles from './Textarea.module.scss';
-import React, { HTMLAttributes } from 'react';
+import React, { ChangeEvent, HTMLAttributes, useState } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
+import styles from './Textarea.module.scss';
+import { useToast } from '@/hooks/useToast';
 
 interface TextareaProps extends HTMLAttributes<HTMLTextAreaElement> {
   register?: UseFormRegisterReturn;
@@ -27,6 +28,18 @@ export default function TextArea({
   children,
   ...rest
 }: TextareaProps) {
+  const { showToastHandler } = useToast();
+  const [value, setValue] = useState('');
+
+  const handleTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+    if (event.target.value.length > 300) {
+      showToastHandler('300자 이상 작성할 수 없습니다.', 'warn');
+      return '';
+    }
+    setValue(event.target.value);
+    return '';
+  };
+
   return (
     <div className={cn('wrapper')}>
       <textarea
@@ -34,6 +47,8 @@ export default function TextArea({
         name="commentInput"
         {...rest}
         {...register}
+        value={value}
+        onChange={handleTextChange}
       />
       {children}
     </div>

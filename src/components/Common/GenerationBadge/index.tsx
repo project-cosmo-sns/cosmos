@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 
 type GenerationType = {
   generationInfo: number | null;
-  authorizationStatus: 'NONE' | 'PENDING' | 'ACCEPT';
+  authorizationStatus?: 'NONE' | 'PENDING' | 'ACCEPT';
 };
 
 const cn = classNames.bind(styles);
