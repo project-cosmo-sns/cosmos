@@ -42,10 +42,12 @@ export default function MemberDataContainer({
   // SSR로 가져온 데이터를 쿼리 데이터로 저장 (mutation 후 리패치 위한 작업)
 
   const { data } = useQuery({
-    queryKey: ['memberData'],
+    queryKey: ['memberData', memberData.memberId], // 사용자 ID 포함시키게 변경
     queryFn: async () => {
       // 이게 어떤 애인지 알아보기
-      const endpoint = '/profile/mine';
+      const endpoint = memberData.memberId
+        ? `/profile/${memberData.memberId}`
+        : '/profile/mine';
       const res = await instance.get(endpoint, {});
       const fetchedMemberData: MemberDataType = await res.data;
       return fetchedMemberData;
