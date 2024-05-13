@@ -7,26 +7,30 @@ import GenerationBadge from '@/components/Common/GenerationBadge';
 import ImageInput from '@/components/Common/ImageInput';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
-import GetProfileImageUrl from './getImageUploadUrl';
 import fetchData from '@/api/fetchData';
 import { AuthFormProps } from '@/@types/type';
-import { uploadImageToS3 } from './uploadImageToS3';
-import router from 'next/router';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import axios from 'axios';
+import { fetchMemberData } from '@/pages/profile/api';
 
 interface ProfileEditModalProps {
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   memberData: MemberDataType;
+  setNewMemberData: (newMemberData: MemberDataType) => void;
+  newMemberData: MemberDataType;
+  initialData: MemberDataType;
 }
 
-export interface ProfileEditProps extends AuthFormProps {
-  introduce: string;
+interface FetchDataResponse {
+  uploadURL: string;
 }
 
-interface FileWithUploadURL extends File {
-  uploadURL?: string; // uploadURL 속성을 선택적(optional)으로 추가
+interface RequestDataProps {
+  profileImageUrl: string;
+  nickname: string;
+  introduce: string | undefined;
 }
-
 const cn = classNames.bind(styles);
 
 export default function ProfileEditModal({
@@ -34,114 +38,197 @@ export default function ProfileEditModal({
   setIsOpen,
   memberData,
 }: ProfileEditModalProps) {
-  const [previewImage, setPreviewImage] = useState('');
-  const [introduce, setIntroduce] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
-  const [upLoadComplete, setUploadComplete] = useState(false);
+  const [previewImage, setPreviewImage] = useState(
+    memberData.profileImageUrl || '',
+  );
   const [uploadedImageUrl, setUploadedImageUrl] = useState<string | null>(null);
-  const [profileData, setProfileData] = useState<MemberDataType | null>(null);
-
+  const queryClient = useQueryClient();
   const { register, handleSubmit, watch, setValue } = useForm<AuthFormProps>();
+  // 프로필 이미지 상태 (이미지 URL 또는 빈 문자열)
+  const [profileImageUrl, setProfileImageUrl] = useState(
+    // '',
+    memberData.profileImageUrl,
+  );
 
-  // 기본값 설정하기
-  useEffect(() => {
-    if (memberData) {
-      if (memberData.profileImageUrl) {
-        setPreviewImage(memberData.profileImageUrl);
-      }
-      // 기존 introduce 값으로 상태 초기화
-      setIntroduce(memberData.introduce || '');
-      // 'react-hook-form'에서도 기존 값을 설정
-      setValue('introduce', memberData.introduce || '');
+  // 이 과정을 통해서는 이미지 url을 받는게 아니다.
+  // 그냥 S3버킷에 업로드 가능한 pre-signed URL만 받고
+  // 이걸 이용해서 이미지를 S3에 업로드하는것
+  async function getPresignedUrl() {
+    try {
+      const response = (await fetchData({
+        param: '/profile/image/create',
+      })) as FetchDataResponse;
+
+      const { uploadURL } = response;
+      return uploadURL;
+    } catch (error) {
+      console.error('GetUploadUrl 에러: ', error);
+      throw error;
     }
-  }, [memberData.introduce, setValue]);
+  }
+
+  async function uploadFileToS3(file: File) {
+    const uploadUrl = await getPresignedUrl();
+    if (!uploadUrl) {
+      console.error('업로드 URL GET 실패');
+      return null;
+    }
+    try {
+      const response = await fetch(uploadUrl, {
+        method: 'PUT',
+        body: file, // 업로드할 파일
+        headers: {
+          'Content-Type': file.type, // 파일 타입 지정
+        },
+      });
+      if (response.ok) {
+        console.log('이미지 업로드 성공');
+        console.log('getPresignedUrl: ', uploadUrl);
+        return uploadUrl.split('?')[0]; // 업로드된 이미지의 S3 URL을 반환
+      }
+      console.error('Upload failed:', response);
+      return null;
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      return null;
+    }
+  }
 
   const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // // 임시 미리보기 URL 생성
     const tempPreviewUrl = URL.createObjectURL(file);
     setPreviewImage(tempPreviewUrl);
 
     try {
-      const response = await uploadImageToS3(file);
-      console.log('Uploaded image URL:', response);
-
-      // setImageUrl(uploadedImageUrl); // 이미지 URL 상태 업데이트
-      // setValue('image', uploadedImageUrl);
-      // setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
-      console.log(uploadedImageUrl);
+      const response = await uploadFileToS3(file); // S3에 파일 업로드
+      console.log('Uploaded image URL(reponse of uploadFileToS3):', response);
       setUploadedImageUrl(response);
-      // setUploadComplete(true); // 얘떠ㅐ문임
+      console.log('업로드 성공:', uploadedImageUrl);
     } catch (error) {
-      console.error('이미지 업로드 에러 :', error);
-      // setPreviewImage(tempPreviewUrl);
+      console.error('업로드 실패:', error);
     }
   };
 
   useEffect(() => {
-    if (upLoadComplete) {
-      if (uploadedImageUrl) {
-        setImageUrl(uploadedImageUrl); // 이미지 URL 상태 업데이트
-        setValue('image', uploadedImageUrl);
-        setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
-      }
-      console.log(uploadedImageUrl);
-      setUploadComplete(false);
+    if (uploadedImageUrl) {
+      setValue('image', uploadedImageUrl);
+      setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
+      console.log(
+        'uploadedImageUrl을 preview이미지로 교체하며 이미지가 사라질 가능성 있음',
+        uploadedImageUrl,
+      );
     }
-  }, [upLoadComplete, uploadedImageUrl, setValue]);
+  }, [setValue]);
+  // uploadedImageUrl을 의존성 배열에 넣으니까 얘가 바뀔 때마다 업데이트돼서
+  // 아직 비동기 작업하느라 uploadedImageUrl에 아무것도 없을 때 바로 업데이트 돼버림.
+  // 그래서 미리보기 안뜨길래 뺐다.
 
-  const handleIntroduceChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newValue = e.target.value || '';
-    setIntroduce(newValue);
-    setValue('introduce', newValue);
-  };
+  // ==================================================
+  // 이미지 삭제 mutation으로 리팩토링
+  const { mutate: deleteImage } = useMutation({
+    mutationKey: ['profileData'],
+    mutationFn: async () => {
+      const imageUrlArray = memberData.profileImageUrl.split('/');
+      const imageName = imageUrlArray[imageUrlArray.length - 1];
+      console.log(imageName);
 
-  const refetchProfile = async () => {
-    try {
-      const fetchedProfileData = await fetchData<MemberDataType>({
-        param: '/profile/mine',
-        method: 'get',
-      });
-      setProfileData(fetchedProfileData); // 상태 업데이트
-      console.log('프로필 데이터 리패치 성공:', fetchedProfileData);
-    } catch (error) {
-      console.error('프로필 리패치 에러:', error);
+      const response = await axios.delete(
+        `https://api-alpha.cosmo-sns.com/profile/image/delete?imageUrls[]=${encodeURIComponent(imageName)}`,
+        {
+          withCredentials: true,
+          headers: { 'Cache-Control': 'no-cache' },
+        },
+      );
+      return response.data;
+    },
+    onSuccess: (e) => {
+      console.log('프로필 이미지 삭제 성공');
+      setProfileImageUrl('');
+      setPreviewImage('');
+      setValue('image', '');
+    },
+    onError: (error) => {
+      console.error('이미지 삭제 에러 : ', error);
+    },
+  });
+
+  // SSR로 가져온 데이터를 쿼리 데이터로 저장 (mutation 후 리패치 위한 작업)
+  useEffect(() => {
+    if (memberData) {
+      queryClient.setQueryData(['memberData'], memberData);
     }
-  };
+  }, [queryClient]);
 
-  const handleProfileSubmit = async (
-    profileImageUrl: string | null,
-    newIntroduce: string,
-  ) => {
-    try {
-      const requestData = {
-        nickname: memberData.nickname,
-        introduce: newIntroduce || memberData.introduce || '',
-        profileImageUrl: profileImageUrl || memberData.profileImageUrl || null,
-      };
+  useQuery({
+    queryKey: ['memberData'],
+    queryFn: async () => {
+      const result = fetchMemberData;
+      return result.memberData;
+    },
+    initialData: memberData,
+  });
 
+  // 프로필 업데이트
+  const { mutate: updateProfile } = useMutation<
+    RequestDataProps,
+    Error,
+    RequestDataProps
+  >({
+    mutationKey: ['memberData'],
+    mutationFn: async (requestData: RequestDataProps) => {
       const response = await fetchData({
         param: '/profile/mine',
         method: 'patch',
         requestData,
       });
-
-      console.log('프로필 업데이트 성공:', response);
-      await refetchProfile();
+      return response;
+    },
+    onSuccess: (response: RequestDataProps) => {
+      // 패치가 안되는 이유? -> 사실 패치는 되는 것 같다. 왜? 콘솔이 찍힘.
+      // 근데 왜 안되는 것처럼 보이냐? -> 이전 값을 패치중인가봐. 이전 값이 콘솔에 찍힘.
+      // 그럼 onSuccess일 때 memberData를 업데이트 해두자
+      // 아니면 useEffect로 memberData가 변경될 때마다 새 데이터로 렌더링 되도록??
+      console.log('프로필 업데이트 성공, 업데이트 된 데이터 : ', response);
+      queryClient.invalidateQueries({
+        queryKey: ['memberData'],
+      });
       setIsOpen(false);
-      router.reload();
-    } catch (error) {
+    },
+    onError: (error) => {
       console.error('프로필 업데이트 에러:', error);
-    }
+    },
+  });
+
+  const handleIntroduceChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newValue = e.target.value || '';
+    setValue('introduce', newValue);
   };
 
-  const onSubmit: SubmitHandler<AuthFormProps> = async (data) => {
-    // 폼 데이터를 사용하여 프로필 업데이트 로직 구현
-    console.log('introduce:', introduce);
-    await handleProfileSubmit(uploadedImageUrl, introduce);
+  const onSubmit: SubmitHandler<AuthFormProps> = (data: AuthFormProps) => {
+    const introduce = data.introduce || '';
+    const requestData = {
+      nickname: memberData.nickname,
+      introduce,
+      profileImageUrl: uploadedImageUrl || profileImageUrl,
+    };
+    // uploadedImageUrl : 올라간 이미지 / 삭제된 이미지
+    updateProfile(requestData);
+    console.log('requestData:', requestData);
   };
+
+  console.log('preview: ', previewImage);
+
+  // 기본값 설정하기
+  useEffect(() => {
+    if (memberData.profileImageUrl) {
+      setPreviewImage(memberData.profileImageUrl);
+      // } else {
+      //   setPreviewImage('');
+    } // 'react-hook-form'에서도 기존 값을 설정
+    setValue('introduce', memberData.introduce || '');
+  }, [memberData, setValue, previewImage]);
 
   return (
     <div>
@@ -162,16 +249,26 @@ export default function ProfileEditModal({
                 type="profile"
                 watch={watch}
                 register={{
-                  ...register('image', { onChange: handleImageChange }),
+                  ...register('image', {
+                    onChange: handleImageChange,
+                  }),
                 }}
-                initialImageUrl={previewImage || uploadedImageUrl}
+                initialImageUrl={previewImage}
               />
+              <button
+                className={cn('image-delete-button')}
+                type="button"
+                onClick={() => deleteImage()}
+              >
+                이미지 삭제
+              </button>
             </div>
             <div className={cn('name')}>{memberData?.nickname}</div>
             <GenerationBadge
               generationInfo={memberData?.generation}
-              isAuthorized={memberData?.isAuthorized}
+              authorizationStatus={memberData?.authorizationStatus}
             />
+
             <div className={cn('introduce')}>
               한줄소개
               {memberData?.introduce ? (
@@ -186,15 +283,17 @@ export default function ProfileEditModal({
                   })}
                 />
               ) : (
-                <textarea placeholder="한줄소개를 입력하세요 (?자제한)" />
+                <textarea
+                  placeholder="한줄소개를 입력하세요 (?자제한)"
+                  {...register('introduce', {
+                    onBlur: handleIntroduceChange,
+                  })}
+                />
               )}
             </div>
             <div className={cn('flex-grow-div')}> </div>
             <div className={cn('edit-button')}>
               <DefaultButton
-                // onClick={() => {
-                //   handleProfileSubmit(imageUrl);
-                // }}
                 buttonType="submit"
                 size="modal"
                 color="$primary-01"
