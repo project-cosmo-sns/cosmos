@@ -29,13 +29,13 @@ export default function AddContentPopOver({
       <ul className={cn('content-list-wrapper')}>
         <li
           role="presentation"
-          className={cn('content-list')}
+          className={cn('content-list', 'feed')}
           onClick={handleCreateFeedClick}
         >
           <FeedIcon width="18" height="18" fill="#FFFFFF" />
           <span>피드 작성하기</span>
         </li>
-        <li className={cn('content-list')}>
+        <li className={cn('content-list', 'post')}>
           <PostIcon width="18" height="18" fill="#FFFFFF" />
           <Link href="/write">
             <span className={cn('post-span')}>포스트 작성하기</span>
