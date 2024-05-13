@@ -37,14 +37,6 @@ export default function Modal({
   cssComponentDisplay,
   className,
 }: ModalType) {
-  useEffect(() => {
-    if (modalVisible) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [modalVisible]);
-
   return (
     <div className="Modal">
       {modalVisible && (
