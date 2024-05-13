@@ -882,21 +882,21 @@ export function WarnIcon({ fill = '#FFC700', ...props }: IconCollectionType) {
     <IconTemplate {...props}>
       <path
         d="M9.36333 2.25822L1.25653 15.7919C1.08938 16.0813 1.00094 16.4095 1.00001 16.7438C0.999072 17.078 1.08567 17.4067 1.25119 17.6971C1.41671 17.9874 1.65538 18.2294 1.94346 18.3989C2.23153 18.5684 2.55897 18.6596 2.8932 18.6632H19.1068C19.441 18.6596 19.7685 18.5684 20.0565 18.3989C20.3446 18.2294 20.5833 17.9874 20.7488 17.6971C20.9143 17.4067 21.0009 17.078 21 16.7438C20.9991 16.4095 20.9106 16.0813 20.7435 15.7919L12.6367 2.25822C12.466 1.97693 12.2258 1.74436 11.9391 1.58296C11.6524 1.42155 11.329 1.33676 11 1.33676C10.671 1.33676 10.3476 1.42155 10.0609 1.58296C9.7742 1.74436 9.53395 1.97693 9.36333 2.25822Z"
-        stroke="#FFC700"
+        stroke={fill}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M11 7.17785V11.0063"
-        stroke="#FFC700"
+        stroke={fill}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
       <path
         d="M11 14.8348H11.01"
-        stroke="#FFC700"
+        stroke={fill}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
