@@ -16,7 +16,7 @@
 }
 
 .container {
-  display: flex;
+  @include flex-arrange;
   gap: 24px;
 }
 
@@ -31,7 +31,6 @@
   white-space: pre-wrap;
   line-height: 135%;
 
-  // color: $white 로 수정 예정;
   textarea {
     width: 100%;
     font-size: 1.6rem;

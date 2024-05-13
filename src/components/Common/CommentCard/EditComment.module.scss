@@ -1,8 +1,20 @@
 .wrapper {
   display: flex;
-  flex-direction: column;
   align-items: flex-end;
   gap: 8px;
+
+  textarea {
+    background-color: $black-03;
+    color: $white-01;
+    padding: 15px 16px;
+    height: 48px;
+    line-height: 135%;
+    border-radius: 5px;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
 
 .edit-button {
@@ -10,4 +22,5 @@
   border-radius: 5px;
   background-color: $primary-01;
   color: $white-01;
+  height: 100%;
 }
