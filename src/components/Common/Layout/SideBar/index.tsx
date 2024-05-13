@@ -82,7 +82,9 @@ export default function SideBar() {
         </div>
         <div
           className={cn('icon-box')}
-          onClick={(e) => togglePopOver(e, 'bell')}
+          onClick={(e) =>
+            !isLogin ? profileClick() : togglePopOver(e, 'bell')
+          }
         >
           <BellIcon fill="#FFFFFF" />
           {activePopover === 'bell' && (
