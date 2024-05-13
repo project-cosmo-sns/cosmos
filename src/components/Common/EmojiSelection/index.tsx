@@ -11,7 +11,6 @@ interface EmojiSelectionProps {
   handleEmojiClick: (emojiCode: EmojiCode, isClicked: boolean) => void; // 추가/삭제 요청
   setCurrentEmojiList: (args: EmojiType[]) => void;
   isPending?: boolean; // 펜딩 상태
-  isDetail?: boolean;
 }
 
 const cn = classNames.bind(styles);
@@ -23,16 +22,11 @@ export default function EmojiSelection({
   handleEmojiClick,
   setCurrentEmojiList,
   isPending,
-  isDetail = false,
 }: EmojiSelectionProps) {
   return (
     isVisible && (
       <div className={cn('wrapper')}>
-        <div
-          className={cn('emoji-container', {
-            'emoji-container-detail': isDetail,
-          })}
-        >
+        <div className={cn('emoji-container')}>
           {EMOJI_CODE.map((emojiCode) => (
             <EmojiButton
               key={emojiCode}

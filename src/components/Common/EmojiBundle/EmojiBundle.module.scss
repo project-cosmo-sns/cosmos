@@ -21,7 +21,6 @@
   position: relative;
   flex-direction: row;
   gap: 12px;
-  margin-left: -10px;
 }
 
 .reaction {
@@ -31,6 +30,7 @@
 }
 
 .emoji {
+  position: relative;
   cursor: pointer;
   gap: 0;
   background-color: $black-01;
