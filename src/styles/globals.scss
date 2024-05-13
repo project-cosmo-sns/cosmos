@@ -48,6 +48,10 @@ body {
   background-attachment: fixed;
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
 button {
   border: none;
   background: none;

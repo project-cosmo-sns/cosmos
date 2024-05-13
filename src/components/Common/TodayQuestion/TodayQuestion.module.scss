@@ -43,4 +43,13 @@
   @media (min-width: 768px) {
     border-radius: 10px;
   }
+
+  .unauthorized-content {
+    @include flex-arrange;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    margin: 0 auto;
+    color: #fff;
+  }
 }

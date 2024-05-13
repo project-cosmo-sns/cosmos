@@ -10,6 +10,11 @@ export default function ModalPortal({ children }: ModalPortalTypes) {
 
   useEffect(() => {
     setIsCSR(true);
+    document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
   }, []);
 
   if (typeof window === 'undefined') return <></>;
