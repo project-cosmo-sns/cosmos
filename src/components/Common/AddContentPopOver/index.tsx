@@ -5,7 +5,10 @@ import PopOver from '../PopOverBox';
 import Modal from '@/components/Common/Layout/Modal';
 import { PostIcon, FeedIcon } from '@/components/Common/IconCollection';
 import CreateFeed from '@/components/Feed/CreateFeed';
-import Link from 'next/link';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { useToast } from '@/hooks/useToast';
+import { useRouter } from 'next/router';
 
 type PopOverProps = {
   onClose: () => void;
@@ -19,9 +22,25 @@ export default function AddContentPopOver({
   profileImage,
 }: PopOverProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const router = useRouter();
+  const { showToastHandler } = useToast();
+  const isLogin = useSelector((state: RootState) => state.logout.isLoggedIn);
 
   const handleCreateFeedClick = () => {
+    if (!isLogin) {
+      showToastHandler('로그인이 필요한 서비스입니다.', 'warn');
+      return;
+    }
     setIsModalOpen(true);
+  };
+
+  const handleCreatePostClick = () => {
+    if (!isLogin) {
+      showToastHandler('로그인이 필요한 서비스입니다.', 'warn');
+      return;
+    }
+    onClose();
+    router.push('/write');
   };
 
   return (
@@ -35,11 +54,12 @@ export default function AddContentPopOver({
           <FeedIcon width="18" height="18" fill="#FFFFFF" />
           <span>피드 작성하기</span>
         </li>
-        <li className={cn('content-list', 'post')}>
+        <li
+          className={cn('content-list', 'post')}
+          onClick={handleCreatePostClick}
+        >
           <PostIcon width="18" height="18" fill="#FFFFFF" />
-          <Link href="/write">
-            <span className={cn('post-span')}>포스트 작성하기</span>
-          </Link>
+          <span className={cn('post-span')}>포스트 작성하기</span>
         </li>
       </ul>
       <Modal
