@@ -59,7 +59,6 @@ export default function PostComment({ postId }: PostCommentProps) {
                   postLikeRequest={postLikeRequest}
                   deleteCommentRequest={deleteCommentRequest}
                   editCommentRequest={editCommentRequest}
-                  commentRefetch={refetch}
                 />
               </div>
             ))

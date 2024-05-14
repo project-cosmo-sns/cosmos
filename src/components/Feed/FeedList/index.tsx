@@ -51,7 +51,6 @@ export default function FeedList({ feedList }: FeedListProps) {
               hasPadding
               forDetails={false}
               onClick={() => handleClick(feed.feed.id)}
-              refetchFeedList={refetch}
             />
           )),
         )}

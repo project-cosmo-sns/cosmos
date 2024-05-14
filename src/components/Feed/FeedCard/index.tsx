@@ -9,9 +9,8 @@ import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import getElapsedTime from '@/utils/getElaspedTime';
 import EmojiBundle from '@/components/Common/EmojiBundle';
 import DeleteModal from '@/components/Common/DeleteModal';
-import { FeedDetailType, FeedListType } from '../types';
+import { FeedDetailType } from '../types';
 import styles from './FeedCard.module.scss';
-import { InfiniteDataRefetchType } from '@/@types/type';
 import { useRouter } from 'next/router';
 
 interface FeedCardTypes {
@@ -21,7 +20,6 @@ interface FeedCardTypes {
   onClick?: () => void;
   editState?: boolean;
   toggleEditMode?: Dispatch<SetStateAction<boolean>>;
-  refetchFeedList: InfiniteDataRefetchType<FeedListType>;
 }
 
 const cn = classNames.bind(styles);
@@ -42,7 +40,6 @@ export default function FeedCard({
   onClick,
   editState,
   toggleEditMode,
-  refetchFeedList,
 }: FeedCardTypes) {
   const {
     id: feedId,
