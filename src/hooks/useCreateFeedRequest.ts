@@ -51,7 +51,7 @@ export function useCreateFeedRequest(
     onSuccess: () => {
       if (toggleModal) {
         toggleModal(false);
-        window.location.reload();
+        router.reload();
       }
     },
   });

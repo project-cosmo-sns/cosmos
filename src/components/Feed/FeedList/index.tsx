@@ -37,6 +37,7 @@ export default function FeedList({ feedList }: FeedListProps) {
     getNextPageParam: (lastPage) =>
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
+
   const feedPages = feedListData?.pages ?? [];
 
   return (
@@ -45,12 +46,12 @@ export default function FeedList({ feedList }: FeedListProps) {
         {feedPages.map((feedPage) =>
           feedPage.data.map((feed) => (
             <FeedCard
-              refetch={refetch}
               key={feed.feed.id}
               feedData={feed}
               hasPadding
               forDetails={false}
               onClick={() => handleClick(feed.feed.id)}
+              refetchFeedList={refetch}
             />
           )),
         )}

@@ -2,30 +2,26 @@ import Image from 'next/image';
 import classNames from 'classnames/bind';
 import fetchData from '@/api/fetchData';
 import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
-import {
-  InfiniteData,
-  QueryObserverResult,
-  RefetchOptions,
-  useMutation,
-} from '@tanstack/react-query';
-import { Dispatch, SetStateAction } from 'react';
+import { useMutation } from '@tanstack/react-query';
+import { Dispatch, SetStateAction, useState } from 'react';
 import WriterProfile from '@/components/Common/WriterProfile';
 import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import getElapsedTime from '@/utils/getElaspedTime';
 import EmojiBundle from '@/components/Common/EmojiBundle';
+import DeleteModal from '@/components/Common/DeleteModal';
 import { FeedDetailType, FeedListType } from '../types';
 import styles from './FeedCard.module.scss';
+import { InfiniteDataRefetchType } from '@/@types/type';
+import { useRouter } from 'next/router';
 
 interface FeedCardTypes {
-  refetch?: (
-    options?: RefetchOptions | undefined,
-  ) => Promise<QueryObserverResult<InfiniteData<FeedListType, unknown>, Error>>;
   feedData: FeedDetailType;
   hasPadding: boolean;
   forDetails?: boolean;
   onClick?: () => void;
   editState?: boolean;
   toggleEditMode?: Dispatch<SetStateAction<boolean>>;
+  refetchFeedList: InfiniteDataRefetchType<FeedListType>;
 }
 
 const cn = classNames.bind(styles);
@@ -40,13 +36,13 @@ const cn = classNames.bind(styles);
  */
 
 export default function FeedCard({
-  refetch,
   feedData,
   hasPadding,
   forDetails,
   onClick,
   editState,
   toggleEditMode,
+  refetchFeedList,
 }: FeedCardTypes) {
   const {
     id: feedId,
@@ -58,6 +54,8 @@ export default function FeedCard({
     isMine,
     emojis,
   } = feedData.feed;
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const router = useRouter();
 
   const deleteMutaion = useMutation({
     mutationFn: () =>
@@ -65,6 +63,7 @@ export default function FeedCard({
         param: `/feed/${feedId}`,
         method: 'delete',
       }),
+    onSuccess: () => router.reload(),
   });
 
   const { handleEmojiClick, isAddPending, isDeletePending } =
@@ -72,8 +71,6 @@ export default function FeedCard({
       id: feedId as number,
       isPost: false,
     });
-
-  // 1. 편집하기 이모지 클릭 -> 2. 편집모드 상태 변경 -> 3. textArea 나타남 -> 4. 글 수정 기능 / x 아이콘 클릭시,  ***** -> 5. 등록 버튼 클릭 -> 이미지 삭제 요청 보내기 + form Post 요청
 
   return (
     <div
@@ -103,9 +100,7 @@ export default function FeedCard({
                   <DeleteIcon
                     width="18"
                     height="18"
-                    onClick={() => {
-                      deleteMutaion.mutate();
-                    }}
+                    onClick={() => setIsDeleteModalOpen(true)}
                   />
                 </div>
               )}
@@ -154,6 +149,15 @@ export default function FeedCard({
           isPending={isAddPending || isDeletePending}
         />
       </div>
+      <DeleteModal
+        title="삭제"
+        isDeleteModalOpen={isDeleteModalOpen}
+        setIsDeleteModalOpen={setIsDeleteModalOpen}
+        handleDelete={() => {
+          setIsDeleteModalOpen(!isDeleteModalOpen);
+          deleteMutaion.mutate();
+        }}
+      />
     </div>
   );
 }
