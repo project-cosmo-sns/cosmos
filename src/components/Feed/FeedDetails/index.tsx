@@ -55,7 +55,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
     postLikeRequest,
     deleteLikeRequest,
     editCommentRequest,
-  } = useCommentRequest(feedId, true);
+  } = useCommentRequest(feedId, true, commentRefetch);
 
   const feed: FeedDetailType = feedData ?? {
     writer: {
@@ -116,6 +116,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
                       postLikeRequest={postLikeRequest}
                       deleteCommentRequest={deleteCommentRequest}
                       editCommentRequest={editCommentRequest}
+                      commentRefetch={commentRefetch}
                     />
                   </div>
                 ))

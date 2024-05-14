@@ -1,5 +1,5 @@
 import { EditCommentType } from '@/@types/type';
-import { CommentDetailType } from '@/components/Feed/types';
+import { CommentDetailType, CommentRefetchType } from '@/components/Feed/types';
 import getElapsedTime from '@/utils/getElaspedTime';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
@@ -28,12 +28,14 @@ export default function CommentCard({
   postLikeRequest,
   deleteCommentRequest,
   editCommentRequest,
+  commentRefetch,
 }: {
   comment: CommentDetailType;
   deleteLikeRequest: CommentRequestType;
   postLikeRequest: CommentRequestType;
   deleteCommentRequest: CommentRequestType;
   editCommentRequest: EditCommentRequestType;
+  commentRefetch: CommentRefetchType;
 }) {
   const commentData = comment.comment;
 
@@ -113,6 +115,7 @@ export default function CommentCard({
         setIsDeleteModalOpen={setIsDeleteModalOpen}
         handleDelete={() => {
           deleteCommentRequest(commentId);
+          setIsDeleteModalOpen(false);
         }}
       />
     </div>

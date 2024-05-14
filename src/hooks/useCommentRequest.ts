@@ -2,23 +2,14 @@
 import { PostCommentType } from '@/components/Common/CommentInput/api';
 import { Comment } from '@/components/Common/CommentInput';
 import { EditCommentType } from '@/@types/type';
-import {
-  InfiniteData,
-  QueryObserverResult,
-  RefetchOptions,
-  useMutation,
-} from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
-import { CommentListType } from '@/components/Feed/types';
+import { CommentRefetchType } from '@/components/Feed/types';
 
 export function useCommentRequest(
   postId: number,
   forFeeds: boolean,
-  refetch?: (
-    options?: RefetchOptions | undefined,
-  ) => Promise<
-    QueryObserverResult<InfiniteData<CommentListType, unknown>, Error>
-  >,
+  refetch?: CommentRefetchType,
 ) {
   const { mutate: postCommentMutate } = useMutation({
     mutationFn: (dataParam: Comment) =>
@@ -42,6 +33,11 @@ export function useCommentRequest(
         param: `${forFeeds ? 'feed' : 'post'}/${postId}/comment/${commentId}`,
         method: 'delete',
       }),
+    onSuccess: async () => {
+      if (refetch) {
+        await refetch();
+      }
+    },
   });
 
   const deleteCommentRequest = (commentId: number) => {
@@ -87,6 +83,11 @@ export function useCommentRequest(
           content: data.editedComment,
         },
       }),
+    onSuccess: async () => {
+      if (refetch) {
+        await refetch();
+      }
+    },
   });
 
   const editCommentRequest = ({
