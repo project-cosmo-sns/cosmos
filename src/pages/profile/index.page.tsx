@@ -69,7 +69,7 @@ export default function MemberDataContainer({
   } // 로딩페이지 만들면 좋겠다.
 
   return (
-    <div className={cn('content')}>
+    <div className={cn('profile')}>
       {memberData && (
         <>
           <ProfileHeader
@@ -88,14 +88,16 @@ export default function MemberDataContainer({
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
       >
-        {memberData.authorizationStatus === 'ACCEPT' && (
-          <ProfileContent
-            selectedOption={selectedOption}
-            myFeedList={myFeedList}
-            myPostList={myPostList}
-            memberData={memberData}
-          />
-        )}
+        <div className={cn('profile-content')}>
+          {memberData.authorizationStatus === 'ACCEPT' && (
+            <ProfileContent
+              selectedOption={selectedOption}
+              myFeedList={myFeedList}
+              myPostList={myPostList}
+              memberData={memberData}
+            />
+          )}
+        </div>
         ;
         {memberData.authorizationStatus === 'NONE' && (
           <EmptyContent selectedOption={selectedOption} />

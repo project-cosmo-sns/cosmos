@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import classNames from 'classnames/bind';
 import { PostListType } from '@/components/Post/types';
-import styles from '@/components/Post/PostList/PostList.module.scss';
+import styles from './MyPostList.module.scss';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import fetchData from '@/api/fetchData';
 import PostListContent from '@/components/Post/PostList/PostListContent';
