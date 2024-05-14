@@ -44,10 +44,10 @@ export default function Modal({
     toggleModal && toggleModal(!modalVisible);
   };
 
-  useOutSideClick({
-    ref: modalRef,
-    callback: handleCloseModal,
-  });
+  // useOutSideClick({
+  //   ref: modalRef,
+  //   callback: handleCloseModal,
+  // });
 
   return (
     <div className="Modal">
