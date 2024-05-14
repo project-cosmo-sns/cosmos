@@ -9,7 +9,8 @@ import { useMutation } from '@tanstack/react-query';
 import { useCreateFeedRequest } from '@/hooks/useCreateFeedRequest';
 import styles from './CreateFeed.module.scss';
 import { FeedType, CreatedFeedTypes, Inputs } from './type';
-import { postFeed } from './api';
+import fetchData from '@/api/fetchData';
+import { baseURL } from '@/api/axios';
 
 /**
  * CreatedFeed component
@@ -100,14 +101,25 @@ export default function CreateFeed({
     return [];
   };
 
+  const { mutate: postFeed } = useMutation({
+    mutationFn: async (data: FeedType) =>
+      fetchData({
+        param: `${baseURL}/feed`,
+        method: 'post',
+        requestData: {
+          content: data.content,
+          imageUrls: data.feedImage,
+        },
+      }),
+    onSuccess: () => {
+      toggleModal(!modalVisible);
+      refetch();
+    },
+  });
+
   const onSubmit = async (data: FeedType) => {
-    try {
-      await postFeed(data);
-    } catch (error) {
-      console.log(error, '------error------');
-    }
-    console.log(data, '------제출 데이터-----');
-    toggleModal(!modalVisible);
+    postFeed(data);
+    // 리패치 하기 @@@@@@@@@@@2
   };
 
   const imagePreview = updateImageUrls();
@@ -201,12 +213,7 @@ export default function CreateFeed({
         </div>
       </div>
       <div className={cn('button')}>
-        <DefaultButton
-          buttonType="submit"
-          color="primary-01"
-          onClick={() => console.log('')}
-          size="medium"
-        >
+        <DefaultButton buttonType="submit" color="primary-01" size="medium">
           등록
         </DefaultButton>
       </div>
