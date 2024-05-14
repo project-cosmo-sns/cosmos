@@ -1,20 +1,22 @@
-import Image from 'next/image';
-import classNames from 'classnames/bind';
 import fetchData from '@/api/fetchData';
+import DetailImageModal from '@/components/Common/DetailImageModal';
+import EmojiBundle from '@/components/Common/EmojiBundle';
 import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
+import WriterProfile from '@/components/Common/WriterProfile';
+import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
+import getElapsedTime from '@/utils/getElaspedTime';
 import {
   InfiniteData,
   QueryObserverResult,
   RefetchOptions,
   useMutation,
 } from '@tanstack/react-query';
+import classNames from 'classnames/bind';
+import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
-import WriterProfile from '@/components/Common/WriterProfile';
-import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
-import getElapsedTime from '@/utils/getElaspedTime';
-import EmojiBundle from '@/components/Common/EmojiBundle';
 import { FeedDetailType, FeedListType } from '../types';
 import styles from './FeedCard.module.scss';
+import { useImageDetail } from '@/hooks/useImageDetail';
 
 interface FeedCardTypes {
   refetch?: (
@@ -48,6 +50,12 @@ export default function FeedCard({
   editState,
   toggleEditMode,
 }: FeedCardTypes) {
+  const {
+    currentImageUrl,
+    isImageModalVisible,
+    showImageDetail,
+    hideImageDetail,
+  } = useImageDetail();
   const {
     id: feedId,
     content,
@@ -113,7 +121,11 @@ export default function FeedCard({
             {forDetails && !!imageUrls?.length && (
               <div className={cn('detail-upload-image-wrapper')}>
                 {imageUrls.map((url: string, index) => (
-                  <div key={index} className={cn('detail-upload-image')}>
+                  <div
+                    key={index}
+                    className={cn('detail-upload-image')}
+                    onClick={() => showImageDetail(url)}
+                  >
                     <Image
                       fill
                       style={{ objectFit: 'cover' }}
@@ -154,6 +166,11 @@ export default function FeedCard({
           isPending={isAddPending || isDeletePending}
         />
       </div>
+      <DetailImageModal
+        currentImageUrl={currentImageUrl}
+        isImageModalVisible={isImageModalVisible}
+        hideImageDetail={hideImageDetail}
+      />
     </div>
   );
 }
