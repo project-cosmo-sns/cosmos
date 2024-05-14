@@ -3,6 +3,7 @@ import { PostCommentType } from '@/components/Common/CommentInput/api';
 import { Comment } from '@/components/Common/CommentInput';
 import { EditCommentType } from '@/@types/type';
 import {
+  InfiniteData,
   QueryObserverResult,
   RefetchOptions,
   useMutation,
@@ -15,7 +16,9 @@ export function useCommentRequest(
   forFeeds: boolean,
   refetch?: (
     options?: RefetchOptions | undefined,
-  ) => Promise<QueryObserverResult<CommentListType, Error>>,
+  ) => Promise<
+    QueryObserverResult<InfiniteData<CommentListType, unknown>, Error>
+  >,
 ) {
   const { mutate: postCommentMutate } = useMutation({
     mutationFn: (dataParam: Comment) =>
