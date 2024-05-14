@@ -113,6 +113,7 @@ export default function CommentCard({
         setIsDeleteModalOpen={setIsDeleteModalOpen}
         handleDelete={() => {
           deleteCommentRequest(commentId);
+          setIsDeleteModalOpen(false);
         }}
       />
     </div>

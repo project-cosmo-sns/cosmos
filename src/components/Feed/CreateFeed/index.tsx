@@ -9,7 +9,6 @@ import { useMutation } from '@tanstack/react-query';
 import { useCreateFeedRequest } from '@/hooks/useCreateFeedRequest';
 import styles from './CreateFeed.module.scss';
 import { FeedType, CreatedFeedTypes, Inputs } from './type';
-import { postFeed } from './api';
 
 /**
  * CreatedFeed component
@@ -34,7 +33,7 @@ export default function CreateFeed({
   } = useForm<Inputs>();
   const [images, setImages] = useState<Blob[]>([]);
   const [urlBucket, setUrlBucket] = useState<string[]>([]);
-  const { getUrl, deleteImage } = useCreateFeedRequest();
+  const { getUrl, deleteImage, postFeed } = useCreateFeedRequest(toggleModal);
 
   const putUrlMutate = useMutation({
     mutationFn: ({ url, file }: { url: string; file: Blob }) =>
@@ -101,13 +100,7 @@ export default function CreateFeed({
   };
 
   const onSubmit = async (data: FeedType) => {
-    try {
-      await postFeed(data);
-    } catch (error) {
-      console.log(error, '------error------');
-    }
-    console.log(data, '------제출 데이터-----');
-    toggleModal(!modalVisible);
+    postFeed(data);
   };
 
   const imagePreview = updateImageUrls();
@@ -201,12 +194,7 @@ export default function CreateFeed({
         </div>
       </div>
       <div className={cn('button')}>
-        <DefaultButton
-          buttonType="submit"
-          color="primary-01"
-          onClick={() => console.log('')}
-          size="medium"
-        >
+        <DefaultButton buttonType="submit" color="primary-01" size="medium">
           등록
         </DefaultButton>
       </div>

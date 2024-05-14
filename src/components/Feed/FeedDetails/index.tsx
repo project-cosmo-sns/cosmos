@@ -7,7 +7,7 @@ import fetchData from '@/api/fetchData';
 import { useQuery } from '@tanstack/react-query';
 import { useCommentRequest } from '@/hooks/useCommentRequest';
 import EditFeed from '@/components/Feed/EditFeed/index';
-import { FeedDetailType, CommentDetailType, CommentListType } from '../types';
+import { FeedDetailType, CommentListType } from '../types';
 import styles from './FeedDetails.module.scss';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
@@ -55,7 +55,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
     postLikeRequest,
     deleteLikeRequest,
     editCommentRequest,
-  } = useCommentRequest(feedId, true);
+  } = useCommentRequest(feedId, true, commentRefetch);
 
   const feed: FeedDetailType = feedData ?? {
     writer: {
@@ -89,6 +89,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
           feedData={feed}
           editState={isEdit}
           toggleEditMode={setIsEdit}
+          feedContentRefetch={feedRefetch}
         />
       ) : (
         <div className={cn('container')}>
