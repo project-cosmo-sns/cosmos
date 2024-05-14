@@ -3,9 +3,12 @@ import fetchData from '@/api/fetchData';
 import { UrlType, FeedType } from '@/components/Feed/CreateFeed/type';
 import axios from 'axios';
 import { baseURL } from '@/api/axios';
+import { Dispatch, SetStateAction } from 'react';
 import { useRouter } from 'next/router';
 
-export function useCreateFeedRequest() {
+export function useCreateFeedRequest(
+  toggleModal?: Dispatch<SetStateAction<boolean>>,
+) {
   const router = useRouter();
   const { refetch: getUrl } = useQuery<UrlType>({
     queryKey: ['signedUrl'],
@@ -15,7 +18,7 @@ export function useCreateFeedRequest() {
       }),
     enabled: false,
   });
-  // https://api-alpha.cosmo-sns.com/profile/image/delete?imageUrls[]=${encodeURIComponent(imageName)}
+
   const deleteUrlMutate = useMutation({
     mutationFn: (url: string) =>
       axios({
@@ -34,7 +37,7 @@ export function useCreateFeedRequest() {
     deleteUrlMutate.mutate(url);
   };
 
-  const postFeedMutataion = useMutation({
+  const { mutate: postFeed, isSuccess } = useMutation({
     mutationFn: (data: FeedType) =>
       fetchData({
         param: '/feed',
@@ -45,16 +48,18 @@ export function useCreateFeedRequest() {
         },
       }),
     onError: () => console.log('피드 등록에 실패하였습니다.'),
-    onSuccess: () => router.push('/?tab=feed'),
+    onSuccess: () => {
+      if (toggleModal) {
+        toggleModal(false);
+        router.reload();
+      }
+    },
   });
-
-  const postFeed = (data: FeedType) => {
-    postFeedMutataion.mutate(data);
-  };
 
   return {
     getUrl,
     deleteImage,
     postFeed,
+    isSuccess,
   };
 }

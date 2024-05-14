@@ -15,13 +15,6 @@ const cn = classNames.bind(styles);
 
 export default function PostComment({ postId }: PostCommentProps) {
   const {
-    deleteCommentRequest,
-    postLikeRequest,
-    deleteLikeRequest,
-    editCommentRequest,
-  } = useCommentRequest(postId, false);
-
-  const {
     data: commentData,
     ref,
     isFetchingNextPage,
@@ -37,6 +30,13 @@ export default function PostComment({ postId }: PostCommentProps) {
       return lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined;
     },
   });
+
+  const {
+    deleteCommentRequest,
+    postLikeRequest,
+    deleteLikeRequest,
+    editCommentRequest,
+  } = useCommentRequest(postId, false, refetch);
 
   if (isPending) <>Loading...</>;
 
