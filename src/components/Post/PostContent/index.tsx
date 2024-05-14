@@ -91,7 +91,7 @@ export default function PostContent() {
             />
             <ActionButtons
               isButtonShow={isMine}
-              handleClickEdit={() => router.push(`/write?postId=${postId}`)}
+              handleClickEdit={() => router.replace(`/write?postId=${postId}`)}
               handleClickDelete={() => setIsDeleteModalOpen(true)}
             />
           </div>

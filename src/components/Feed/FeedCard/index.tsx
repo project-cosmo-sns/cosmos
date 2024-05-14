@@ -1,28 +1,27 @@
-import Image from 'next/image';
-import classNames from 'classnames/bind';
 import fetchData from '@/api/fetchData';
+import DetailImageModal from '@/components/Common/DetailImageModal';
+import EmojiBundle from '@/components/Common/EmojiBundle';
 import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
-import { Edits } from '@/components/Feed/FeedCard/api';
-import {
-  QueryObserverResult,
-  RefetchOptions,
-  useMutation,
-  useQueryClient,
-} from '@tanstack/react-query';
-import { Dispatch, SetStateAction } from 'react';
 import WriterProfile from '@/components/Common/WriterProfile';
 import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import getElapsedTime from '@/utils/getElaspedTime';
-import EmojiBundle from '@/components/Common/EmojiBundle';
-import { FeedType } from '../CreateFeed/type';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { FeedDetailType } from '../types';
+import {
+  InfiniteData,
+  QueryObserverResult,
+  RefetchOptions,
+  useMutation,
+} from '@tanstack/react-query';
+import classNames from 'classnames/bind';
+import Image from 'next/image';
+import { Dispatch, SetStateAction } from 'react';
+import { FeedDetailType, FeedListType } from '../types';
 import styles from './FeedCard.module.scss';
+import { useImageDetail } from '@/hooks/useImageDetail';
 
 interface FeedCardTypes {
   refetch?: (
     options?: RefetchOptions | undefined,
-  ) => Promise<QueryObserverResult<FeedDetailType, Error>>;
+  ) => Promise<QueryObserverResult<InfiniteData<FeedListType, unknown>, Error>>;
   feedData: FeedDetailType;
   hasPadding: boolean;
   forDetails?: boolean;
@@ -52,11 +51,11 @@ export default function FeedCard({
   toggleEditMode,
 }: FeedCardTypes) {
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Edits>();
-
+    currentImageUrl,
+    isImageModalVisible,
+    showImageDetail,
+    hideImageDetail,
+  } = useImageDetail();
   const {
     id: feedId,
     content,
@@ -68,23 +67,6 @@ export default function FeedCard({
     emojis,
   } = feedData.feed;
 
-  const queryClient = useQueryClient();
-
-  const patchMutaion = useMutation({
-    mutationFn: (data: FeedType) =>
-      fetchData<FeedType>({
-        param: `/feed/${feedId}`,
-        method: 'patch',
-        requestData: {
-          content: data.content,
-          feedImage: data.feedImage,
-        },
-      }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['feedComments'] });
-    },
-  });
-
   const deleteMutaion = useMutation({
     mutationFn: () =>
       fetchData({
@@ -92,11 +74,6 @@ export default function FeedCard({
         method: 'delete',
       }),
   });
-
-  // const onSubmit: SubmitHandler<Edits> = (data) => {
-  //   toggleEditMode(false);
-  //   patchMutaion.mutate(data);
-  // };
 
   const { handleEmojiClick, isAddPending, isDeletePending } =
     useSendEmojiRequest({
@@ -144,7 +121,11 @@ export default function FeedCard({
             {forDetails && !!imageUrls?.length && (
               <div className={cn('detail-upload-image-wrapper')}>
                 {imageUrls.map((url: string, index) => (
-                  <div key={index} className={cn('detail-upload-image')}>
+                  <div
+                    key={index}
+                    className={cn('detail-upload-image')}
+                    onClick={() => showImageDetail(url)}
+                  >
                     <Image
                       fill
                       style={{ objectFit: 'cover' }}
@@ -185,6 +166,11 @@ export default function FeedCard({
           isPending={isAddPending || isDeletePending}
         />
       </div>
+      <DetailImageModal
+        currentImageUrl={currentImageUrl}
+        isImageModalVisible={isImageModalVisible}
+        hideImageDetail={hideImageDetail}
+      />
     </div>
   );
 }
