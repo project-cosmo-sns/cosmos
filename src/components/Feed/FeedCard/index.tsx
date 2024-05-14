@@ -1,25 +1,25 @@
-import Image from 'next/image';
-import classNames from 'classnames/bind';
 import fetchData from '@/api/fetchData';
+import DetailImageModal from '@/components/Common/DetailImageModal';
+import EmojiBundle from '@/components/Common/EmojiBundle';
 import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
+import WriterProfile from '@/components/Common/WriterProfile';
 import { Edits } from '@/components/Feed/FeedCard/api';
+import { useImageDetail } from '@/hooks/useImageDetail';
+import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
+import getElapsedTime from '@/utils/getElaspedTime';
 import {
   QueryObserverResult,
   RefetchOptions,
   useMutation,
   useQueryClient,
 } from '@tanstack/react-query';
+import classNames from 'classnames/bind';
+import Image from 'next/image';
 import { Dispatch, SetStateAction } from 'react';
-import WriterProfile from '@/components/Common/WriterProfile';
-import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
-import getElapsedTime from '@/utils/getElaspedTime';
-import EmojiBundle from '@/components/Common/EmojiBundle';
-import { FeedType } from '../CreateFeed/type';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { FeedType } from '../CreateFeed/type';
 import { FeedDetailType } from '../types';
 import styles from './FeedCard.module.scss';
-import { useImageDetail } from '@/hooks/useImageDetail';
-import Modal from '@/components/Common/Layout/Modal';
 
 interface FeedCardTypes {
   refetch?: (
@@ -197,23 +197,11 @@ export default function FeedCard({
           isPending={isAddPending || isDeletePending}
         />
       </div>
-      <Modal
-        modalVisible={isImageModalVisible}
-        cssComponentDisplay={cn('modal-container')}
-        cssModalSize={cn('modal-wrapper')}
-        toggleModal={hideImageDetail}
-      >
-        <img
-          src={currentImageUrl}
-          alt="detail"
-          style={{
-            objectFit: 'contain',
-            width: '800px',
-            maxHeight: '80vh',
-            maxWidth: '80vw',
-          }}
-        />
-      </Modal>
+      <DetailImageModal
+        currentImageUrl={currentImageUrl}
+        isImageModalVisible={isImageModalVisible}
+        hideImageDetail={hideImageDetail}
+      />
     </div>
   );
 }
