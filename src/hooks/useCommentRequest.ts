@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-cycle
 import { PostCommentType } from '@/components/Common/CommentInput/api';
 import { Comment } from '@/components/Common/CommentInput';
 import { EditCommentType } from '@/@types/type';
@@ -12,7 +13,7 @@ import { CommentListType } from '@/components/Feed/types';
 export function useCommentRequest(
   postId: number,
   forFeeds: boolean,
-  refetch: (
+  refetch?: (
     options?: RefetchOptions | undefined,
   ) => Promise<QueryObserverResult<CommentListType, Error>>,
 ) {
@@ -25,16 +26,12 @@ export function useCommentRequest(
           content: dataParam.comment,
         },
       }),
-    onSuccess: () => {
+    onSuccess: async () => {
       if (refetch) {
-        refetch();
+        await refetch();
       }
     },
   });
-
-  const onSubmit = (data: Comment) => {
-    postCommentMutate(data);
-  };
 
   const { mutate: deleteCommentMutate } = useMutation({
     mutationFn: (commentId: number) =>
@@ -100,7 +97,7 @@ export function useCommentRequest(
   };
 
   return {
-    onSubmit,
+    postCommentMutate,
     deleteCommentRequest,
     postLikeRequest,
     deleteLikeRequest,

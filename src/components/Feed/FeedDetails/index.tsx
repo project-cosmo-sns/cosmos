@@ -45,12 +45,11 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
   });
 
   const {
-    onSubmit,
     deleteCommentRequest,
     postLikeRequest,
     deleteLikeRequest,
     editCommentRequest,
-  } = useCommentRequest(feedId, true, commentRefetch);
+  } = useCommentRequest(feedId, true);
 
   const feed: FeedDetailType = feedData ?? {
     writer: {
@@ -94,7 +93,11 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
             editState={isEdit}
             toggleEditMode={setIsEdit}
           />
-          <CommentInput placeholder="댓글을 입력하세요" onSubmit={onSubmit} />
+          <CommentInput
+            placeholder="댓글을 입력하세요"
+            feedId={feedId}
+            refetch={commentRefetch}
+          />
           <div className={cn('comment-list-area')}>
             {commentList.length ? (
               commentList.map((comment) => (
