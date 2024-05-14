@@ -77,7 +77,7 @@ export default function SideBar() {
           className={cn('icon-box', 'add-icon')}
           onClick={(e) => togglePopOver(e, 'add')}
         >
-          <AddIcon fill="#8576FF" width='32px' height='32px'/>
+          <AddIcon fill="#8576FF" width="32px" height="32px" />
           {activePopover === 'add' && (
             <AddContentPopOver
               profileImage={userImage}
