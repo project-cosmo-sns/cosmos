@@ -4,11 +4,7 @@ import DefaultButton from '../Buttons/DefaultButton';
 import styles from './CommentInput.module.scss';
 // eslint-disable-next-line import/no-cycle
 import { useCommentRequest } from '@/hooks/useCommentRequest';
-import {
-  InfiniteData,
-  QueryObserverResult,
-  RefetchOptions,
-} from '@tanstack/react-query';
+import { InfiniteDataRefetchType } from '@/@types/type';
 import { CommentListType } from '@/components/Feed/types';
 
 export interface Comment {
@@ -19,11 +15,7 @@ interface CommentInputTypes {
   placeholder: string;
   postId: number;
   isFeed: boolean;
-  refetch: (
-    options?: RefetchOptions | undefined,
-  ) => Promise<
-    QueryObserverResult<InfiniteData<CommentListType, unknown>, Error>
-  >;
+  refetch: InfiniteDataRefetchType<CommentListType>;
 }
 
 const cn = classNames.bind(styles);

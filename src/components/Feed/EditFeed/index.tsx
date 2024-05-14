@@ -10,18 +10,21 @@ import { FeedDetailType } from '@/components/Feed/types';
 import { useForm, Controller } from 'react-hook-form';
 import styles from './EditFeed.module.scss';
 import WriterProfile from '@/components/Common/WriterProfile';
-import { editFeed } from '../FeedCard/api';
+import { refetchType } from '@/@types/type';
+import fetchData from '@/api/fetchData';
 
 interface EditFeedTypes {
   feedData: FeedDetailType;
   editState: boolean;
   toggleEditMode: Dispatch<SetStateAction<boolean>>;
+  feedContentRefetch: refetchType<FeedDetailType>;
 }
 
 export default function EditFeed({
   feedData,
   editState,
   toggleEditMode,
+  feedContentRefetch,
 }: EditFeedTypes) {
   const [images, setImages] = useState<Blob[]>([]);
   const [wasteBucket, setWasteBucket] = useState<string[]>([]);
@@ -128,6 +131,19 @@ export default function EditFeed({
   //   return [];
   // };
 
+  const { mutate: editFeed } = useMutation({
+    mutationFn: (data: FeedType) =>
+      fetchData({
+        param: `/feed/${feedId}`,
+        method: 'patch',
+        requestData: {
+          content: data.content,
+          imageUrls: data.feedImage,
+        },
+      }),
+    onSuccess: () => feedContentRefetch(),
+  });
+
   const onSubmit = async (data: FeedType) => {
     try {
       for (let i = 0; i < wasteBucket.length; i += 1) {
@@ -135,7 +151,7 @@ export default function EditFeed({
         const imageUrl = splittedImageUrl[splittedImageUrl.length - 1];
         deleteImage(imageUrl);
       }
-      await editFeed(feedId, data);
+      editFeed(data);
     } catch (error) {
       console.log(error, '------error------');
     }
@@ -143,10 +159,6 @@ export default function EditFeed({
   };
 
   const editCancel = async () => {
-    console.log(
-      newBucket,
-      '-----이번에 추가됐지만 취소돼서 지워야하는 애들-------',
-    );
     try {
       for (let i = 0; i < newBucket.length; i += 1) {
         const splittedImageUrl = newBucket[i].split('/');

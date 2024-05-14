@@ -37,14 +37,15 @@ export default function FeedList({ feedList }: FeedListProps) {
     getNextPageParam: (lastPage) =>
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
+
   const feedPages = feedListData?.pages ?? [];
+
   return (
     <>
       <div className={cn('container')}>
         {feedPages.map((feedPage) =>
           feedPage.data.map((feed) => (
             <FeedCard
-              refetch={refetch}
               key={feed.feed.id}
               feedData={feed}
               hasPadding
