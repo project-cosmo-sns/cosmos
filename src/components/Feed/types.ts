@@ -1,9 +1,4 @@
 import { EmojiType, metaType } from '@/@types/type';
-import {
-  InfiniteData,
-  QueryObserverResult,
-  RefetchOptions,
-} from '@tanstack/react-query';
 
 export interface Writer {
   id: number;
@@ -52,9 +47,3 @@ export interface CommentListType {
   data: CommentDetailType[];
   meta: metaType;
 }
-
-export type CommentRefetchType = (
-  options?: RefetchOptions | undefined,
-) => Promise<
-  QueryObserverResult<InfiniteData<CommentListType, unknown>, Error>
->;

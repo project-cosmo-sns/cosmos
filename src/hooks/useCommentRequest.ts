@@ -1,15 +1,15 @@
 // eslint-disable-next-line import/no-cycle
 import { PostCommentType } from '@/components/Common/CommentInput/api';
 import { Comment } from '@/components/Common/CommentInput';
-import { EditCommentType } from '@/@types/type';
+import { EditCommentType, InfiniteDataRefetchType } from '@/@types/type';
 import { useMutation } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
-import { CommentRefetchType } from '@/components/Feed/types';
+import { CommentListType } from '@/components/Feed/types';
 
 export function useCommentRequest(
   postId: number,
   forFeeds: boolean,
-  refetch?: CommentRefetchType,
+  refetch?: InfiniteDataRefetchType<CommentListType>,
 ) {
   const { mutate: postCommentMutate } = useMutation({
     mutationFn: (dataParam: Comment) =>

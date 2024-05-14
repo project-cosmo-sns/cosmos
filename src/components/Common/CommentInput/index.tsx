@@ -4,7 +4,8 @@ import DefaultButton from '../Buttons/DefaultButton';
 import styles from './CommentInput.module.scss';
 // eslint-disable-next-line import/no-cycle
 import { useCommentRequest } from '@/hooks/useCommentRequest';
-import { CommentRefetchType } from '@/components/Feed/types';
+import { InfiniteDataRefetchType } from '@/@types/type';
+import { CommentListType } from '@/components/Feed/types';
 
 export interface Comment {
   comment: string;
@@ -14,7 +15,7 @@ interface CommentInputTypes {
   placeholder: string;
   postId: number;
   isFeed: boolean;
-  refetch: CommentRefetchType;
+  refetch: InfiniteDataRefetchType<CommentListType>;
 }
 
 const cn = classNames.bind(styles);

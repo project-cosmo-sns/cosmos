@@ -9,8 +9,6 @@ import { useMutation } from '@tanstack/react-query';
 import { useCreateFeedRequest } from '@/hooks/useCreateFeedRequest';
 import styles from './CreateFeed.module.scss';
 import { FeedType, CreatedFeedTypes, Inputs } from './type';
-import fetchData from '@/api/fetchData';
-import { baseURL } from '@/api/axios';
 
 /**
  * CreatedFeed component
@@ -35,7 +33,7 @@ export default function CreateFeed({
   } = useForm<Inputs>();
   const [images, setImages] = useState<Blob[]>([]);
   const [urlBucket, setUrlBucket] = useState<string[]>([]);
-  const { getUrl, deleteImage } = useCreateFeedRequest();
+  const { getUrl, deleteImage, postFeed } = useCreateFeedRequest(toggleModal);
 
   const putUrlMutate = useMutation({
     mutationFn: ({ url, file }: { url: string; file: Blob }) =>
@@ -101,25 +99,8 @@ export default function CreateFeed({
     return [];
   };
 
-  const { mutate: postFeed } = useMutation({
-    mutationFn: async (data: FeedType) =>
-      fetchData({
-        param: `${baseURL}/feed`,
-        method: 'post',
-        requestData: {
-          content: data.content,
-          imageUrls: data.feedImage,
-        },
-      }),
-    onSuccess: () => {
-      toggleModal(!modalVisible);
-      refetch();
-    },
-  });
-
   const onSubmit = async (data: FeedType) => {
     postFeed(data);
-    // 리패치 하기 @@@@@@@@@@@2
   };
 
   const imagePreview = updateImageUrls();

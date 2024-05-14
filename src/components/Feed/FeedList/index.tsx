@@ -38,6 +38,7 @@ export default function FeedList({ feedList }: FeedListProps) {
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
   const feedPages = feedListData?.pages ?? [];
+
   return (
     <>
       <div className={cn('container')}>
