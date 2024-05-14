@@ -13,7 +13,6 @@ export function useGetProfileImage() {
       fetchData<ProfileData>({
         param: '/member/summary',
       }),
-      
   });
 }
 

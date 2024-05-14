@@ -67,8 +67,6 @@ export default function SideBar() {
     dispatch(login());
   }, [isLogin]);
 
-  console.log('isLogin', isLogin);
-
   return (
     <div className={cn('sideBar-container')}>
       <div className={cn('icon-wrapper')}>
