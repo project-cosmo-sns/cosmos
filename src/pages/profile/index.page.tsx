@@ -8,7 +8,7 @@ import ContentContainer from '@/components/Common/ContentContainer';
 import { ContainerOptionType } from '@/@types/type';
 import { fetchMemberData } from './api';
 import { GetServerSideProps } from 'next';
-import { FeedDetailType, FeedListType } from '@/components/Feed/types';
+import { FeedListType } from '@/components/Feed/types';
 import { PostListType } from '@/components/Post/types';
 import ProfileContent from '@/components/Profile/ProfileContent/ProfileContent';
 import EmptyContent from '@/components/Profile/ProfileContent/EmptyContent';

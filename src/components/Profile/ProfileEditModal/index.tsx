@@ -11,8 +11,6 @@ import fetchData from '@/api/fetchData';
 import { AuthFormProps } from '@/@types/type';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
-import { fetchMemberData } from '@/pages/profile/api';
-import instance from '@/api/axios';
 
 interface ProfileEditModalProps {
   isOpen: boolean;
@@ -80,7 +78,6 @@ export default function ProfileEditModal({
       });
       if (response.ok) {
         console.log('이미지 업로드 성공');
-        console.log('getPresignedUrl: ', uploadUrl);
         return uploadUrl.split('?')[0]; // 업로드된 이미지의 S3 URL을 반환
       }
       console.error('Upload failed:', response);
@@ -112,10 +109,6 @@ export default function ProfileEditModal({
     if (uploadedImageUrl) {
       setValue('image', uploadedImageUrl);
       setPreviewImage(uploadedImageUrl); // 실제 업로드 URL로 미리보기 업데이트
-      console.log(
-        'uploadedImageUrl을 preview이미지로 교체하며 이미지가 사라질 가능성 있음',
-        uploadedImageUrl,
-      );
     }
   }, [setValue]);
   // uploadedImageUrl을 의존성 배열에 넣으니까 얘가 바뀔 때마다 업데이트돼서
@@ -129,7 +122,6 @@ export default function ProfileEditModal({
     mutationFn: async () => {
       const imageUrlArray = memberData.profileImageUrl.split('/');
       const imageName = imageUrlArray[imageUrlArray.length - 1];
-      console.log(imageName);
 
       const response = await axios.delete(
         `https://api-alpha.cosmo-sns.com/profile/image/delete?imageUrls[]=${encodeURIComponent(imageName)}`,
@@ -141,7 +133,6 @@ export default function ProfileEditModal({
       return response.data;
     },
     onSuccess: (e) => {
-      console.log('프로필 이미지 삭제 성공');
       setProfileImageUrl('');
       setPreviewImage('');
       setValue('image', '');
@@ -167,7 +158,6 @@ export default function ProfileEditModal({
       return response;
     },
     onSuccess: (response: RequestDataProps) => {
-      console.log('프로필 업데이트 성공, 업데이트 된 데이터 : ', response);
       queryClient.invalidateQueries({
         queryKey: ['memberData'],
       });
@@ -191,10 +181,7 @@ export default function ProfileEditModal({
       profileImageUrl: uploadedImageUrl || profileImageUrl,
     };
     updateProfile(requestData);
-    console.log('requestData:', requestData);
   };
-
-  console.log('preview: ', previewImage);
 
   // 기본값 설정하기
   useEffect(() => {

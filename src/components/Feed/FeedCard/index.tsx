@@ -27,8 +27,8 @@ interface FeedCardTypes {
   hasPadding: boolean;
   forDetails?: boolean;
   onClick?: () => void;
-  editState: boolean;
-  toggleEditMode: Dispatch<SetStateAction<boolean>>;
+  editState?: boolean;
+  toggleEditMode?: Dispatch<SetStateAction<boolean>>;
 }
 
 const cn = classNames.bind(styles);
@@ -93,10 +93,10 @@ export default function FeedCard({
       }),
   });
 
-  const onSubmit: SubmitHandler<Edits> = (data) => {
-    toggleEditMode(false);
-    patchMutaion.mutate(data);
-  };
+  // const onSubmit: SubmitHandler<Edits> = (data) => {
+  //   toggleEditMode(false);
+  //   patchMutaion.mutate(data);
+  // };
 
   const { handleEmojiClick, isAddPending, isDeletePending } =
     useSendEmojiRequest({
@@ -128,7 +128,7 @@ export default function FeedCard({
                     width="18"
                     height="18"
                     onClick={() => {
-                      toggleEditMode(!editState);
+                      toggleEditMode && toggleEditMode(!editState);
                     }}
                   />
                   <DeleteIcon

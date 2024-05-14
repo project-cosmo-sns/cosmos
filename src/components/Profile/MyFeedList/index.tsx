@@ -8,8 +8,6 @@ import { FeedListType } from '@/components/Feed/types';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import fetchData from '@/api/fetchData';
 import { MemberDataType } from '@/pages/profile/types';
-import { useQuery } from '@tanstack/react-query';
-import instance from '@/api/axios';
 
 interface FeedListProps {
   feedList: FeedListType;
@@ -25,8 +23,6 @@ export default function MyFeedList({ feedList, memberData }: FeedListProps) {
     setFeedId(selectedFeedId);
     setIsModalOpen(!isModalOpen);
   };
-
-  console.log('memberData가 설마 undefined? : ', memberData);
 
   const memberId = memberData?.memberId ?? 'mine';
 
