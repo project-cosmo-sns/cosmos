@@ -22,6 +22,7 @@ export default function CommentInput({
   const {
     register,
     handleSubmit,
+    reset,
     formState: { isSubmitting },
   } = useForm<Comment>({
     defaultValues: {

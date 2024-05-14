@@ -17,19 +17,12 @@ import styles from './FeedDetails.module.scss';
 export default function FeedDetails({ feedId }: { feedId: number }) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const cn = classNames.bind(styles);
-  const {
-    onSubmit,
-    deleteCommentRequest,
-    postLikeRequest,
-    deleteLikeRequest,
-    editCommentRequest,
-  } = useCommentRequest(feedId, true);
 
   const {
     data: feedData,
     isPending: isFeedDataPending,
     isError: isFeedDataError,
-    refetch,
+    refetch: feedRefetch,
   } = useQuery({
     queryKey: ['feedDetails', feedId],
     queryFn: ({ queryKey }) =>
@@ -40,6 +33,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
 
   const {
     data: commentListData,
+    refetch: commentRefetch,
     isPending: isCommentDataPending,
     isError: isCommentDataError,
   } = useQuery({
@@ -49,6 +43,14 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
         param: `feed/${queryKey[1]}/comment/list`,
       }),
   });
+
+  const {
+    onSubmit,
+    deleteCommentRequest,
+    postLikeRequest,
+    deleteLikeRequest,
+    editCommentRequest,
+  } = useCommentRequest(feedId, true, commentRefetch);
 
   const feed: FeedDetailType = feedData ?? {
     writer: {
@@ -86,7 +88,6 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
       ) : (
         <div className={cn('container')}>
           <FeedCard
-            refetch={refetch}
             feedData={feed}
             hasPadding={false}
             forDetails
@@ -94,7 +95,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
             toggleEditMode={setIsEdit}
           />
           <CommentInput placeholder="댓글을 입력하세요" onSubmit={onSubmit} />
-          <div>
+          <div className={cn('comment-list-area')}>
             {commentList.length ? (
               commentList.map((comment) => (
                 <div key={comment.comment.id} className={cn('comment-list')}>

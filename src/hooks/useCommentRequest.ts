@@ -1,10 +1,21 @@
 import { PostCommentType } from '@/components/Common/CommentInput/api';
 import { Comment } from '@/components/Common/CommentInput';
 import { EditCommentType } from '@/@types/type';
-import { useMutation } from '@tanstack/react-query';
+import {
+  QueryObserverResult,
+  RefetchOptions,
+  useMutation,
+} from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
+import { CommentListType } from '@/components/Feed/types';
 
-export function useCommentRequest(postId: number, forFeeds: boolean) {
+export function useCommentRequest(
+  postId: number,
+  forFeeds: boolean,
+  refetch: (
+    options?: RefetchOptions | undefined,
+  ) => Promise<QueryObserverResult<CommentListType, Error>>,
+) {
   const { mutate: postCommentMutate } = useMutation({
     mutationFn: (dataParam: Comment) =>
       fetchData<PostCommentType>({
@@ -14,6 +25,11 @@ export function useCommentRequest(postId: number, forFeeds: boolean) {
           content: dataParam.comment,
         },
       }),
+    onSuccess: () => {
+      if (refetch) {
+        refetch();
+      }
+    },
   });
 
   const onSubmit = (data: Comment) => {
