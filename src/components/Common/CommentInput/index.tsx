@@ -4,7 +4,11 @@ import DefaultButton from '../Buttons/DefaultButton';
 import styles from './CommentInput.module.scss';
 // eslint-disable-next-line import/no-cycle
 import { useCommentRequest } from '@/hooks/useCommentRequest';
-import { QueryObserverResult, RefetchOptions } from '@tanstack/react-query';
+import {
+  InfiniteData,
+  QueryObserverResult,
+  RefetchOptions,
+} from '@tanstack/react-query';
 import { CommentListType } from '@/components/Feed/types';
 
 export interface Comment {
@@ -13,18 +17,22 @@ export interface Comment {
 
 interface CommentInputTypes {
   placeholder: string;
-  feedId: number;
+  postId: number;
+  isFeed: boolean;
   refetch: (
     options?: RefetchOptions | undefined,
-  ) => Promise<QueryObserverResult<CommentListType, Error>>;
+  ) => Promise<
+    QueryObserverResult<InfiniteData<CommentListType, unknown>, Error>
+  >;
 }
 
 const cn = classNames.bind(styles);
 
 export default function CommentInput({
   placeholder,
-  feedId,
+  postId,
   refetch,
+  isFeed,
 }: CommentInputTypes) {
   const {
     register,
@@ -37,7 +45,7 @@ export default function CommentInput({
     },
   });
 
-  const { postCommentMutate } = useCommentRequest(feedId, true, refetch);
+  const { postCommentMutate } = useCommentRequest(postId, isFeed, refetch);
 
   const onSubmit = async (data: Comment) => {
     postCommentMutate(data);

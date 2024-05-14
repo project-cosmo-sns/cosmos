@@ -9,6 +9,7 @@ import { useCommentRequest } from '@/hooks/useCommentRequest';
 import EditFeed from '@/components/Feed/EditFeed/index';
 import { FeedDetailType, CommentDetailType, CommentListType } from '../types';
 import styles from './FeedDetails.module.scss';
+import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 /**
  * @return {JSX.Element} FeedDetails - 추후에 변경 예정입니다. 피드 리스트에서 특정 피드를 클릭한다면 클리한 피드의 아이디를 통해 데이터를 요청해 화면에 보여줍니다.
@@ -36,12 +37,17 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
     refetch: commentRefetch,
     isPending: isCommentDataPending,
     isError: isCommentDataError,
-  } = useQuery({
+    isFetchingNextPage,
+    ref,
+  } = useInfiniteScroll<CommentListType>({
     queryKey: ['feedComments', feedId],
-    queryFn: ({ queryKey }) =>
-      fetchData<CommentListType>({
-        param: `feed/${queryKey[1]}/comment/list`,
+    fetchFunction: (page: number) =>
+      fetchData({
+        param: `feed/${feedId}/comment/list?order=DESC&page=${page}&take=10`,
       }),
+    getNextPageParam: (lastPage) => {
+      return lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined;
+    },
   });
 
   const {
@@ -70,7 +76,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
       emojis: [],
     },
   };
-  const commentList: CommentDetailType[] = commentListData?.data ?? [];
+
   if (isFeedDataPending) return '피드 데이터 불러오는 중...';
   if (isFeedDataError) return '피드 데이터 에러 발생!';
   if (isCommentDataPending) return '코멘트 데이터 불러오는 중...';
@@ -95,30 +101,35 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
           />
           <CommentInput
             placeholder="댓글을 입력하세요"
-            feedId={feedId}
+            postId={feedId}
             refetch={commentRefetch}
+            isFeed
           />
           <div className={cn('comment-list-area')}>
-            {commentList.length ? (
-              commentList.map((comment) => (
-                <div key={comment.comment.id} className={cn('comment-list')}>
-                  <CommentCard
-                    comment={comment}
-                    deleteLikeRequest={deleteLikeRequest}
-                    postLikeRequest={postLikeRequest}
-                    deleteCommentRequest={deleteCommentRequest}
-                    editCommentRequest={editCommentRequest}
-                  />
+            {commentListData?.pages.map(({ data: commentList }, index) =>
+              commentList.length ? (
+                commentList.map((comment) => (
+                  <div key={comment.comment.id} className={cn('comment-list')}>
+                    <CommentCard
+                      comment={comment}
+                      deleteLikeRequest={deleteLikeRequest}
+                      postLikeRequest={postLikeRequest}
+                      deleteCommentRequest={deleteCommentRequest}
+                      editCommentRequest={editCommentRequest}
+                    />
+                  </div>
+                ))
+              ) : (
+                <div key={index} className={cn('empty-comment')}>
+                  <span className={cn('message')}>
+                    😭 {feed.writer.nickname} 님에게 남겨진 댓글이 아직 없어요.
+                    😭
+                  </span>
                 </div>
-              ))
-            ) : (
-              <div className={cn('empty-comment')}>
-                <span className={cn('message')}>
-                  😭 {feed.writer.nickname} 님에게 남겨진 댓글이 아직 없어요. 😭
-                </span>
-              </div>
+              ),
             )}
           </div>
+          {!isFetchingNextPage && <div ref={ref} />}
         </div>
       )}
     </>
