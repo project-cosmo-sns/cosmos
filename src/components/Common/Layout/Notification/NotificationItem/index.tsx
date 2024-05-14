@@ -63,19 +63,18 @@ export default function NotificationItem({
 
     if (
       type === notificationType.CREATE_POST_COMMENT ||
-      notificationType.CREATE_POST_EMOJI
+      type === notificationType.CREATE_POST_EMOJI
     ) {
       router.push(`/post/${postId}`);
     }
 
     if (
       type === notificationType.CREATE_FEED_COMMENT ||
-      notificationType.CREATE_FEED_EMOJI
+      type === notificationType.CREATE_FEED_EMOJI
     ) {
       setIsModalOpen(true);
+      // console.log(feedId);
     }
-
-    onClose();
   };
 
   const formattedCreatedAt = getElapsedTime(createdAt);
@@ -120,14 +119,14 @@ export default function NotificationItem({
           <span className={cn('notification-dot')} />
         )}
       </div>
-      {type === notificationType.CREATE_FEED_COMMENT && isModalOpen && (
+      {isModalOpen && feedId && (
         <Modal
           toggleModal={() => setIsModalOpen(false)}
           modalVisible={isModalOpen}
           cssModalSize={cn('feed-detail-modalSize')}
           cssComponentDisplay={cn('feed-detail-componentDisplay')}
         >
-          <FeedDetails feedId={feedId!} />
+          <FeedDetails feedId={feedId} />
         </Modal>
       )}
     </>
