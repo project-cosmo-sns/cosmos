@@ -12,7 +12,7 @@
   }
 
   @media (min-width: 768px) {
-    grid-template-columns: 1fr 76px 30px 614px 30px 1fr;
+    grid-template-columns: 1fr 76px 20px 614px 20px 1fr;
     display: grid;
     grid-template-rows: 109px auto;
     .layout-content {
@@ -36,6 +36,6 @@
     }
   }
   @media (min-width: 1200px) {
-    grid-template-columns: 1fr 76px 30px 740px 30px 1fr;
+    grid-template-columns: 1fr 76px 20px 740px 20px 1fr;
   }
 }

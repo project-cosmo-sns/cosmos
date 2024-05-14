@@ -10,9 +10,8 @@ import { SortType } from '@/constants/sortType';
 import styles from '@/styles/Home.module.scss';
 import classNames from 'classnames/bind';
 import { GetServerSidePropsContext } from 'next';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FeedListType } from '../components/Feed/types';
-import { useRouter } from 'next/router';
 
 export const getServerSideProps = async (
   context: GetServerSidePropsContext,

@@ -41,7 +41,6 @@ export default function ProfilePopOver({
     const res = await memberLogout();
     dispatch(logout());
     router.push('/');
-    setIsExpanded(false); // 모달을 띄운 후 드롭다운 닫기
   };
 
   return (
