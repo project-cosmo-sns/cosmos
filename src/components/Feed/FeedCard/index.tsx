@@ -18,6 +18,8 @@ import { FeedType } from '../CreateFeed/type';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { FeedDetailType } from '../types';
 import styles from './FeedCard.module.scss';
+import { useImageDetail } from '@/hooks/useImageDetail';
+import Modal from '@/components/Common/Layout/Modal';
 
 interface FeedCardTypes {
   refetch?: (
@@ -56,6 +58,12 @@ export default function FeedCard({
     handleSubmit,
     formState: { errors },
   } = useForm<Edits>();
+  const {
+    currentImageUrl,
+    isImageModalVisible,
+    showImageDetail,
+    hideImageDetail,
+  } = useImageDetail();
 
   const {
     id: feedId,
@@ -144,7 +152,11 @@ export default function FeedCard({
             {forDetails && !!imageUrls?.length && (
               <div className={cn('detail-upload-image-wrapper')}>
                 {imageUrls.map((url: string, index) => (
-                  <div key={index} className={cn('detail-upload-image')}>
+                  <div
+                    key={index}
+                    className={cn('detail-upload-image')}
+                    onClick={() => showImageDetail(url)}
+                  >
                     <Image
                       fill
                       style={{ objectFit: 'cover' }}
@@ -185,6 +197,23 @@ export default function FeedCard({
           isPending={isAddPending || isDeletePending}
         />
       </div>
+      <Modal
+        modalVisible={isImageModalVisible}
+        cssComponentDisplay={cn('modal-container')}
+        cssModalSize={cn('modal-wrapper')}
+        toggleModal={hideImageDetail}
+      >
+        <img
+          src={currentImageUrl}
+          alt="detail"
+          style={{
+            objectFit: 'contain',
+            width: '800px',
+            maxHeight: '80vh',
+            maxWidth: '80vw',
+          }}
+        />
+      </Modal>
     </div>
   );
 }

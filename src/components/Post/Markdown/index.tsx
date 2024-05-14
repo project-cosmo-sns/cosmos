@@ -2,29 +2,28 @@ import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeRaw from 'rehype-raw';
 import CodeBlock from './CodeBlock';
-import { useState } from 'react';
-import Modal from '@/components/Common/Layout/Modal';
 import classNames from 'classnames/bind';
 import styles from './Markdown.module.scss';
+import Modal from '@/components/Common/Layout/Modal';
+import { useImageDetail } from '@/hooks/useImageDetail';
 
-interface MarkdownContent {
+const cn = classNames.bind(styles);
+
+interface MarkdownContentProps {
   className: string;
   content: string;
 }
 
-const cn = classNames.bind(styles);
-
 export default function MarkdownContent({
   className,
   content,
-}: MarkdownContent) {
-  const [currentImageUrl, setCurrentImageUrl] = useState('');
-  const [isImageModalVisible, setIsImageModalVisible] = useState(false);
-
-  const showImageDetail = (imageUrl: string) => {
-    setIsImageModalVisible(true);
-    setCurrentImageUrl(imageUrl);
-  };
+}: MarkdownContentProps) {
+  const {
+    currentImageUrl,
+    isImageModalVisible,
+    showImageDetail,
+    hideImageDetail,
+  } = useImageDetail();
 
   const renderImage = ({ ...props }) => {
     const { src: imageUrl, alt } = props;
@@ -56,7 +55,7 @@ export default function MarkdownContent({
         modalVisible={isImageModalVisible}
         cssComponentDisplay={cn('modal-container')}
         cssModalSize={cn('modal-wrapper')}
-        toggleModal={setIsImageModalVisible}
+        toggleModal={hideImageDetail}
       >
         <img
           src={currentImageUrl}
