@@ -152,15 +152,20 @@ export default function CreateFeed({
                     className={cn('file-input')}
                     id="feedImage"
                     type="file"
+                    accept="image/png, image/jpeg"
                     multiple
                     onChange={(event) => {
                       const fileList = event.target.files
                         ? Array.from(event.target.files)
                         : [];
-                      const currentImageValue = [...images, ...fileList];
-                      console.log([...fileList], '-----파일리스트----');
-                      setImages(currentImageValue);
-                      updateUrlBucket(fileList);
+                      if (fileList.length < 4) {
+                        const currentImageValue = [...images, ...fileList];
+                        setImages(currentImageValue);
+                        updateUrlBucket(fileList);
+                      } else {
+                        setValue('feedImage', []);
+                        alert('파일은 3개까지 제출 가능');
+                      }
                     }}
                   />
                 )}
