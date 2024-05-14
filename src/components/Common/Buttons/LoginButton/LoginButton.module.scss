@@ -1,11 +1,15 @@
 .login-button {
-  @include flex-arrange(flex-start);
+  @include flex-arrange(center);
   width: 320px;
   height: 48px;
   padding-left: 20px;
-  gap: 40px;
   border-radius: 5px;
   background: #131314;
+  position: relative;
+  .icon {
+    position: absolute;
+    left: 20px;
+  }
   span {
     @include font-style(1.6rem, $white-01, 700);
   }
