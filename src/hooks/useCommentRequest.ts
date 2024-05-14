@@ -1,10 +1,25 @@
+// eslint-disable-next-line import/no-cycle
 import { PostCommentType } from '@/components/Common/CommentInput/api';
 import { Comment } from '@/components/Common/CommentInput';
 import { EditCommentType } from '@/@types/type';
-import { useMutation } from '@tanstack/react-query';
+import {
+  InfiniteData,
+  QueryObserverResult,
+  RefetchOptions,
+  useMutation,
+} from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
+import { CommentListType } from '@/components/Feed/types';
 
-export function useCommentRequest(postId: number, forFeeds: boolean) {
+export function useCommentRequest(
+  postId: number,
+  forFeeds: boolean,
+  refetch?: (
+    options?: RefetchOptions | undefined,
+  ) => Promise<
+    QueryObserverResult<InfiniteData<CommentListType, unknown>, Error>
+  >,
+) {
   const { mutate: postCommentMutate } = useMutation({
     mutationFn: (dataParam: Comment) =>
       fetchData<PostCommentType>({
@@ -14,11 +29,12 @@ export function useCommentRequest(postId: number, forFeeds: boolean) {
           content: dataParam.comment,
         },
       }),
+    onSuccess: async () => {
+      if (refetch) {
+        await refetch();
+      }
+    },
   });
-
-  const onSubmit = (data: Comment) => {
-    postCommentMutate(data);
-  };
 
   const { mutate: deleteCommentMutate } = useMutation({
     mutationFn: (commentId: number) =>
@@ -84,7 +100,7 @@ export function useCommentRequest(postId: number, forFeeds: boolean) {
   };
 
   return {
-    onSubmit,
+    postCommentMutate,
     deleteCommentRequest,
     postLikeRequest,
     deleteLikeRequest,

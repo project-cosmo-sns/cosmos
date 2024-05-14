@@ -1,8 +1,15 @@
 import classNames from 'classnames/bind';
 import { useForm } from 'react-hook-form';
 import DefaultButton from '../Buttons/DefaultButton';
-import TextArea from '../Input/Textarea';
 import styles from './CommentInput.module.scss';
+// eslint-disable-next-line import/no-cycle
+import { useCommentRequest } from '@/hooks/useCommentRequest';
+import {
+  InfiniteData,
+  QueryObserverResult,
+  RefetchOptions,
+} from '@tanstack/react-query';
+import { CommentListType } from '@/components/Feed/types';
 
 export interface Comment {
   comment: string;
@@ -10,18 +17,27 @@ export interface Comment {
 
 interface CommentInputTypes {
   placeholder: string;
-  onSubmit: (data: Comment) => void;
+  postId: number;
+  isFeed: boolean;
+  refetch: (
+    options?: RefetchOptions | undefined,
+  ) => Promise<
+    QueryObserverResult<InfiniteData<CommentListType, unknown>, Error>
+  >;
 }
 
 const cn = classNames.bind(styles);
 
 export default function CommentInput({
   placeholder,
-  onSubmit,
+  postId,
+  refetch,
+  isFeed,
 }: CommentInputTypes) {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { isSubmitting },
   } = useForm<Comment>({
     defaultValues: {
@@ -29,14 +45,22 @@ export default function CommentInput({
     },
   });
 
+  const { postCommentMutate } = useCommentRequest(postId, isFeed, refetch);
+
+  const onSubmit = async (data: Comment) => {
+    postCommentMutate(data);
+    reset();
+  };
+
   return (
     <form className={cn('wrapper')} onSubmit={handleSubmit(onSubmit)}>
-      <TextArea
-        placeholder={placeholder}
-        register={{
-          ...register('comment', { required: true, maxLength: 300 }),
-        }}
-      />
+      <div className={cn('textarea-wrapper')}>
+        <textarea
+          className={cn('textarea')}
+          placeholder={placeholder}
+          {...register('comment', { required: true, maxLength: 300 })}
+        />
+      </div>
       <DefaultButton
         disabled={isSubmitting}
         buttonType="submit"

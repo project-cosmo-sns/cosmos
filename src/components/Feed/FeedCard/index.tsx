@@ -2,33 +2,30 @@ import Image from 'next/image';
 import classNames from 'classnames/bind';
 import fetchData from '@/api/fetchData';
 import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
-import { Edits } from '@/components/Feed/FeedCard/api';
 import {
+  InfiniteData,
   QueryObserverResult,
   RefetchOptions,
   useMutation,
-  useQueryClient,
 } from '@tanstack/react-query';
 import { Dispatch, SetStateAction } from 'react';
 import WriterProfile from '@/components/Common/WriterProfile';
 import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import getElapsedTime from '@/utils/getElaspedTime';
 import EmojiBundle from '@/components/Common/EmojiBundle';
-import { FeedType } from '../CreateFeed/type';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { FeedDetailType } from '../types';
+import { FeedDetailType, FeedListType } from '../types';
 import styles from './FeedCard.module.scss';
 
 interface FeedCardTypes {
   refetch?: (
     options?: RefetchOptions | undefined,
-  ) => Promise<QueryObserverResult<FeedDetailType, Error>>;
+  ) => Promise<QueryObserverResult<InfiniteData<FeedListType, unknown>, Error>>;
   feedData: FeedDetailType;
   hasPadding: boolean;
   forDetails?: boolean;
   onClick?: () => void;
-  editState: boolean;
-  toggleEditMode: Dispatch<SetStateAction<boolean>>;
+  editState?: boolean;
+  toggleEditMode?: Dispatch<SetStateAction<boolean>>;
 }
 
 const cn = classNames.bind(styles);
@@ -52,12 +49,6 @@ export default function FeedCard({
   toggleEditMode,
 }: FeedCardTypes) {
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Edits>();
-
-  const {
     id: feedId,
     content,
     viewCount,
@@ -68,23 +59,6 @@ export default function FeedCard({
     emojis,
   } = feedData.feed;
 
-  const queryClient = useQueryClient();
-
-  const patchMutaion = useMutation({
-    mutationFn: (data: FeedType) =>
-      fetchData<FeedType>({
-        param: `/feed/${feedId}`,
-        method: 'patch',
-        requestData: {
-          content: data.content,
-          feedImage: data.feedImage,
-        },
-      }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['feedComments'] });
-    },
-  });
-
   const deleteMutaion = useMutation({
     mutationFn: () =>
       fetchData({
@@ -92,11 +66,6 @@ export default function FeedCard({
         method: 'delete',
       }),
   });
-
-  const onSubmit: SubmitHandler<Edits> = (data) => {
-    toggleEditMode(false);
-    patchMutaion.mutate(data);
-  };
 
   const { handleEmojiClick, isAddPending, isDeletePending } =
     useSendEmojiRequest({
@@ -128,7 +97,7 @@ export default function FeedCard({
                     width="18"
                     height="18"
                     onClick={() => {
-                      toggleEditMode(!editState);
+                      toggleEditMode && toggleEditMode(!editState);
                     }}
                   />
                   <DeleteIcon

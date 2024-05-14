@@ -27,6 +27,7 @@ export default function FeedList({ feedList }: FeedListProps) {
     data: feedListData,
     ref,
     isFetchingNextPage,
+    refetch,
   } = useInfiniteScroll<FeedListType>({
     queryKey: ['feedList'],
     fetchFunction: (pageParam) =>
@@ -43,6 +44,7 @@ export default function FeedList({ feedList }: FeedListProps) {
         {feedPages.map((feedPage) =>
           feedPage.data.map((feed) => (
             <FeedCard
+              refetch={refetch}
               key={feed.feed.id}
               feedData={feed}
               hasPadding
