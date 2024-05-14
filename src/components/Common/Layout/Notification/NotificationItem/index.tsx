@@ -16,13 +16,9 @@ const cn = classNames.bind(styles);
 
 type NotificationItemProps = {
   data: NotificationData;
-  onClose: () => void;
 };
 
-export default function NotificationItem({
-  data,
-  onClose,
-}: NotificationItemProps) {
+export default function NotificationItem({ data }: NotificationItemProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const router = useRouter();
@@ -73,7 +69,6 @@ export default function NotificationItem({
       type === notificationType.CREATE_FEED_EMOJI
     ) {
       setIsModalOpen(true);
-      // console.log(feedId);
     }
   };
 
