@@ -12,7 +12,7 @@ import { FeedDetailType } from '@/components/Feed/types';
 import { PostListType } from '@/components/Post/types';
 import ProfileContent from '@/components/Profile/ProfileContent/ProfileContent';
 import EmptyContent from '@/components/Profile/ProfileContent/EmptyContent';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import instance from '@/api/axios';
 
 const cn = classNames.bind(styles);

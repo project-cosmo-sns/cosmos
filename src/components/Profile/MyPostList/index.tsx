@@ -1,13 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import classNames from 'classnames/bind';
-import CategoryList from '@/components/Post/CategoryList/index';
-import PostPreview from '@/components/Post/PostPreview';
-import {
-  PostInfoType,
-  PostListDataType,
-  PostListType,
-  PostType,
-} from '@/components/Post/types';
+import { PostListType } from '@/components/Post/types';
 import styles from '@/components/Post/PostList/PostList.module.scss';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import fetchData from '@/api/fetchData';
@@ -49,7 +42,7 @@ export default function MyPostList({ postList, memberData }: PostListProps) {
     isFetchingNextPage,
     isPending,
   } = useInfiniteScroll<PostListType>({
-    queryKey: ['postList', memberId],
+    queryKey: ['postList', 'memberData', memberId],
     fetchFunction: (pageParam) =>
       fetchData({
         // 내 포스트
