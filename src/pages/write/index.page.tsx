@@ -35,7 +35,7 @@ export default function PostWritePage() {
         requestData: data,
       }),
     onSuccess: (response) => {
-      router.push(`/post/${response.id}`);
+      router.replace(`/post/${response.id}`);
       showToastHandler(`포스트 작성 완료!`, 'check');
     },
   });
@@ -48,7 +48,7 @@ export default function PostWritePage() {
         requestData: data,
       }),
     onSuccess: () => {
-      router.push(`/post/${postId}`);
+      router.replace(`/post/${postId}`);
       showToastHandler(`포스트 수정 완료!`, 'check');
     },
   });
