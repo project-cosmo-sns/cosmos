@@ -52,9 +52,12 @@ export default function CommentInput({
           placeholder={placeholder}
           {...register('comment', {
             required: '댓글을 입력해주세요',
-            maxLength: 300,
-            validate: (value) => {
-              return !!value.trim() || '댓글을 입력해주세요';
+            maxLength: {
+              value: 310,
+              message: '300자 이하로 작성해주세요.',
+            },
+            validate: {
+              whiteSpace: (value) => !!value.trim() || '댓글을 입력해주세요',
             },
           })}
         />
