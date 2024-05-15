@@ -85,18 +85,14 @@ export default function NotificationItem({ data }: NotificationItemProps) {
         className={cn('notification-item')}
         onClick={handleNotificationClick}
       >
-        {sendMember.profileImageUrl ? (
-          <Image
-            src={sendMember.profileImageUrl}
-            onError={onErrorImg}
-            alt="프로필 이미지"
-            width={40}
-            height={40}
-            className={cn('profile-image')}
-          />
-        ) : (
-          <ProfileIconDark width="54" height="54" />
-        )}
+        <Image
+          src={sendMember?.profileImageUrl || '/images/profile.svg'}
+          onError={onErrorImg}
+          alt="프로필 이미지"
+          width={40}
+          height={40}
+          className={cn('profile-image')}
+        />
         <p>
           <strong>{content}</strong>
           <span>{formattedCreatedAt}</span>

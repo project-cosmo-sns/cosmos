@@ -28,7 +28,7 @@ export default function EmojiSelection({
       <div className={cn('wrapper')}>
         <div
           className={cn('emoji-container', {
-            left: emojiList.length < 2,
+            left: emojiList.length <= 1,
             middle: emojiList.length >= 2 && emojiList.length <= 3,
             right: emojiList.length >= 4,
           })}
