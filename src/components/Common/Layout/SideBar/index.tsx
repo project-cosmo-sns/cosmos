@@ -94,17 +94,17 @@ export default function SideBar() {
             <Notification onClose={handleClosePopOver} />
           )}
         </div>
-        {!loggedin && <UserIcon fill="#FFFFFF" onClick={profileClick} />}
-        {loggedin && userImage && (
+        {loggedin ? (
           <Image
-            src={userImage}
+            src={userImage || '/images/profile.svg'}
             alt="profile"
-            width={27}
-            height={27}
+            width={32}
+            height={32}
             onClick={profileClick}
           />
+        ) : (
+          <UserIcon fill="#FFFFFF" onClick={profileClick} />
         )}
-        {loggedin && !userImage && <ProfileIconDark onClick={profileClick} />}
       </div>
     </div>
   );
