@@ -8,7 +8,7 @@ import { useToast } from './useToast';
  * const { checkMemberStatus } = useFetchMemberStatus(callback);
  */
 
-export function useFetchMemberStatus(callback: () => void) {
+export function useFetchMemberStatus() {
   const { showToastHandler } = useToast();
   const { showLoginModalHandler } = useOpenLoginModal();
 
@@ -20,7 +20,7 @@ export function useFetchMemberStatus(callback: () => void) {
     queryFn: () => fetchData({ param: '/member/status' }),
   });
 
-  const checkMemberStatus = () => {
+  const checkMemberStatus = (callback: () => void) => {
     if (isSuccess) {
       if (data.isLogin) {
         if (!data.isAuthorized) {

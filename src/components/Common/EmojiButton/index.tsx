@@ -43,13 +43,11 @@ export default function EmojiButton({
   });
 
   const handleUpdateCurrentEmojiList = () => {
-    // emojiCode에 해당하는 객체를 찾아서 emojiCount속성에 +1
     if (
       emojiList.some((emoji) => emoji.emojiCode === emojiData[0]?.emojiCode)
     ) {
       setCurrentEmojiList(updatedEmojiList);
     } else {
-      // emojiCode에 해당하는 객체를 만들어서 emojiCount 속성에 값 1로 세팅
       const newEmoji = {
         emojiCode,
         emojiCount: 1,

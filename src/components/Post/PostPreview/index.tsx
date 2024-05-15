@@ -31,15 +31,18 @@ export default function PostPreview({ postData }: PostPreviewProps) {
 
   const formattedCreatedAt = getElapsedTime(createdAt);
 
-  const { handleEmojiClick, isAddPending, isDeletePending } =
-    useSendEmojiRequest({ id: postId as number, isPost: true });
+  const { handleEmojiClick } = useSendEmojiRequest({
+    id: postId as number,
+    isPost: true,
+  });
 
-  const { checkMemberStatus } = useFetchMemberStatus(() =>
-    router.push(`/post/${postId}`),
-  );
+  const { checkMemberStatus } = useFetchMemberStatus();
 
   return (
-    <div className={cn('wrapper')} onClick={checkMemberStatus}>
+    <div
+      className={cn('wrapper')}
+      onClick={() => checkMemberStatus(() => router.push(`/post/${postId}`))}
+    >
       <WriterProfile writer={postData.writer} createdAt={formattedCreatedAt} />
       <div className={cn('content-wrapper')}>
         <div className={cn('title')}>{title}</div>
@@ -55,7 +58,9 @@ export default function PostPreview({ postData }: PostPreviewProps) {
       <EmojiBundle
         isPost
         emojiList={emojis}
-        handleEmojiClick={handleEmojiClick}
+        handleEmojiClick={(emojiCode, isClicked) =>
+          checkMemberStatus(() => handleEmojiClick(emojiCode, isClicked))
+        }
         commentCount={commentCount}
         viewCount={viewCount}
       />
