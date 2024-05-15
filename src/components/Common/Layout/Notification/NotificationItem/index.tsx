@@ -11,6 +11,7 @@ import getElapsedTime from '@/utils/getElaspedTime';
 import styles from './NotificationItem.module.scss';
 import fetchData from '@/api/fetchData';
 import FollowButton from '@/components/Common/Buttons/FollowButton';
+import useFollowClick from '@/hooks/useFollowClick';
 
 const cn = classNames.bind(styles);
 
@@ -28,7 +29,13 @@ export default function NotificationItem({ data }: NotificationItemProps) {
     notification: {
       id,
       content,
-      notificationType: { type, feedId, postId, followerMemberId },
+      notificationType: {
+        type,
+        feedId,
+        postId,
+        followingMemberId,
+        // isFollowing,
+      },
       isConfirmed,
       createdAt,
     },
@@ -54,7 +61,7 @@ export default function NotificationItem({ data }: NotificationItemProps) {
     }
 
     if (type === notificationType.FOLLOW) {
-      router.push(`profile?memberId=${followerMemberId}`);
+      router.push(`profile?memberId=${followingMemberId}`);
     }
 
     if (
@@ -79,6 +86,12 @@ export default function NotificationItem({ data }: NotificationItemProps) {
     target.src = '/images/profile.svg';
   };
 
+  // 같은 유저로부터 팔로우 요청이 여러번 오면 하나로 통합되는게 아니라 여러 개가 오고있어서 임시로 제거.
+  // const { isActive, toggleFollow } = useFollowClick(
+  //   followingMemberId,
+  //   isFollowing,
+  // );
+
   return (
     <>
       <div
@@ -97,11 +110,13 @@ export default function NotificationItem({ data }: NotificationItemProps) {
           <strong>{content}</strong>
           <span>{formattedCreatedAt}</span>
         </p>
-
-        {type === notificationType.FOLLOW && (
-          <FollowButton onClick={() => console.log('클릭')} isFollowButton />
-        )}
-
+        {/* {type === notificationType.FOLLOW && (
+          <FollowButton
+            onClick={toggleFollow}
+            isActive={isActive}
+            isFollowButton
+          />
+        )} */}
         {isConfirmed ? (
           <span className={cn('notification-confirm')}>
             <CheckIcon fill="#fff" width="13" height="9.5" />
