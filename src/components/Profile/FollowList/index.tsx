@@ -67,6 +67,10 @@ export default function FollowList({ followListProps }: FollowListType) {
     },
   );
 
+  const followDataList =
+    followDataResult?.pages === undefined ||
+    followDataResult.pages.length === 0;
+
   return (
     <Modal
       title={title}
@@ -90,6 +94,9 @@ export default function FollowList({ followListProps }: FollowListType) {
               />
             );
           }),
+        )}
+        {followDataList && (
+          <p className={cn('follow-list')}>팔로우가 없습니다.</p>
         )}
         <div ref={ref} />
       </div>
