@@ -83,7 +83,6 @@ export default function useFollowClick(
   }
 
   const toggleFollow = async () => {
-    // setIsActive((prev) => !prev);
     if (!isActive) {
       addFollow();
     } else {
