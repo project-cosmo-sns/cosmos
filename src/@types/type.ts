@@ -1,3 +1,9 @@
+import {
+  InfiniteData,
+  QueryObserverResult,
+  RefetchOptions,
+} from '@tanstack/react-query';
+
 export type useOutSideClickProps = {
   ref: React.RefObject<HTMLDivElement>;
   callback: () => void;
@@ -16,7 +22,7 @@ export type ContainerOptionType =
   | 'user';
 
 export interface AuthFormProps {
-  generation: string;
+  generation?: number;
   image: string;
   introduce?: string;
 }
@@ -41,3 +47,11 @@ export type metaType = {
   hasPreviousPage: boolean;
   hasNextPage: boolean;
 };
+
+export type InfiniteDataRefetchType<T> = (
+  options?: RefetchOptions | undefined,
+) => Promise<QueryObserverResult<InfiniteData<T, unknown>, Error>>;
+
+export type refetchType<T> = (
+  options?: RefetchOptions | undefined,
+) => Promise<QueryObserverResult<T, Error>>;

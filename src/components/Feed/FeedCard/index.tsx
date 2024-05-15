@@ -1,32 +1,27 @@
 import fetchData from '@/api/fetchData';
-import EmojiBundle from '@/components/Common/EmojiBundle';
+import DetailImageModal from '@/components/Common/DetailImageModal';
 import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
-import Modal from '@/components/Common/Layout/Modal';
+import { useMutation } from '@tanstack/react-query';
+import { Dispatch, SetStateAction, useState } from 'react';
+import EmojiBundle from '@/components/Common/EmojiBundle';
+import DeleteModal from '@/components/Common/DeleteModal';
+import { FeedDetailType } from '../types';
+import { useRouter } from 'next/router';
 import WriterProfile from '@/components/Common/WriterProfile';
-import { Edits } from '@/components/Feed/FeedCard/api';
 import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import getElapsedTime from '@/utils/getElaspedTime';
-import {
-  QueryObserverResult,
-  RefetchOptions,
-  useMutation,
-  useQueryClient,
-} from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
-import { useState } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
-import { FeedDetailType } from '../types';
 import styles from './FeedCard.module.scss';
+import { useImageDetail } from '@/hooks/useImageDetail';
 
 interface FeedCardTypes {
-  refetch?: (
-    options?: RefetchOptions | undefined,
-  ) => Promise<QueryObserverResult<FeedDetailType, Error>>;
   feedData: FeedDetailType;
   hasPadding: boolean;
   forDetails?: boolean;
   onClick?: () => void;
+  editState?: boolean;
+  toggleEditMode?: Dispatch<SetStateAction<boolean>>;
 }
 
 const cn = classNames.bind(styles);
@@ -41,20 +36,19 @@ const cn = classNames.bind(styles);
  */
 
 export default function FeedCard({
-  refetch,
   feedData,
   hasPadding,
   forDetails,
   onClick,
+  editState,
+  toggleEditMode,
 }: FeedCardTypes) {
-  const [moreModalOpen, setMoreModalOpen] = useState(false);
-  const [isEdit, setIsEdit] = useState<boolean>(false);
   const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Edits>();
-
+    currentImageUrl,
+    isImageModalVisible,
+    showImageDetail,
+    hideImageDetail,
+  } = useImageDetail();
   const {
     id: feedId,
     content,
@@ -65,23 +59,8 @@ export default function FeedCard({
     isMine,
     emojis,
   } = feedData.feed;
-
-  const queryClient = useQueryClient();
-
-  const patchMutaion = useMutation({
-    mutationFn: (data: Edits) =>
-      fetchData<Edits>({
-        param: `/feed/${feedId}`,
-        method: 'patch',
-        requestData: {
-          content: data.content,
-          imageUrls: data.imageUrls,
-        },
-      }),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['feedComments'] });
-    },
-  });
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const router = useRouter();
 
   const deleteMutaion = useMutation({
     mutationFn: () =>
@@ -89,20 +68,14 @@ export default function FeedCard({
         param: `/feed/${feedId}`,
         method: 'delete',
       }),
+    onSuccess: () => router.reload(),
   });
-
-  const onSubmit: SubmitHandler<Edits> = (data) => {
-    setIsEdit(false);
-    patchMutaion.mutate(data);
-  };
 
   const { handleEmojiClick, isAddPending, isDeletePending } =
     useSendEmojiRequest({
       id: feedId as number,
       isPost: false,
     });
-
-  // 1. 편집하기 이모지 클릭 -> 2. 편집모드 상태 변경 -> 3. textArea 나타남 -> 4. 글 수정 기능 / x 아이콘 클릭시,  ***** -> 5. 등록 버튼 클릭 -> 이미지 삭제 요청 보내기 + form Post 요청
 
   return (
     <div
@@ -126,15 +99,13 @@ export default function FeedCard({
                     width="18"
                     height="18"
                     onClick={() => {
-                      setIsEdit(!isEdit);
+                      toggleEditMode && toggleEditMode(!editState);
                     }}
                   />
                   <DeleteIcon
                     width="18"
                     height="18"
-                    onClick={() => {
-                      deleteMutaion.mutate();
-                    }}
+                    onClick={() => setIsDeleteModalOpen(true)}
                   />
                 </div>
               )}
@@ -142,7 +113,11 @@ export default function FeedCard({
             {forDetails && !!imageUrls?.length && (
               <div className={cn('detail-upload-image-wrapper')}>
                 {imageUrls.map((url: string, index) => (
-                  <div key={index} className={cn('detail-upload-image')}>
+                  <div
+                    key={index}
+                    className={cn('detail-upload-image')}
+                    onClick={() => showImageDetail(url)}
+                  >
                     <Image
                       fill
                       style={{ objectFit: 'cover' }}
@@ -153,24 +128,7 @@ export default function FeedCard({
                 ))}
               </div>
             )}
-            {isEdit ? (
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <textarea
-                  defaultValue={content}
-                  className={cn('text')}
-                  placeholder="글을 작성해보세요."
-                  {...register('content', {
-                    required: '게시글을 작성해주세요',
-                  })}
-                />
-                {errors.content && (
-                  <span className={cn('error')}>{errors.content.message}</span>
-                )}
-                <button type="submit">편집완료</button>
-              </form>
-            ) : (
-              <div className={cn('content')}>{content}</div>
-            )}
+            <div className={cn('content')}>{content}</div>
           </div>
           {forDetails ||
             (!!imageUrls?.length && (
@@ -199,18 +157,21 @@ export default function FeedCard({
           handleEmojiClick={handleEmojiClick}
           isPending={isAddPending || isDeletePending}
         />
-        {hasPadding || (
-          <Modal
-            title="임시모달"
-            cssModalSize={cn('')}
-            cssComponentDisplay={cn('')}
-            modalVisible={moreModalOpen}
-            toggleModal={setMoreModalOpen}
-          >
-            <div>테스트 모달</div>
-          </Modal>
-        )}
       </div>
+      <DeleteModal
+        title="삭제"
+        isDeleteModalOpen={isDeleteModalOpen}
+        setIsDeleteModalOpen={setIsDeleteModalOpen}
+        handleDelete={() => {
+          setIsDeleteModalOpen(!isDeleteModalOpen);
+          deleteMutaion.mutate();
+        }}
+      />
+      <DetailImageModal
+        currentImageUrl={currentImageUrl}
+        isImageModalVisible={isImageModalVisible}
+        hideImageDetail={hideImageDetail}
+      />
     </div>
   );
 }

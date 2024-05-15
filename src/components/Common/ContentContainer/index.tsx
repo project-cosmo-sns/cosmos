@@ -13,7 +13,7 @@ import { useEffect } from 'react';
 
 const cn = classNames.bind(styles);
 
-interface ContentContainerProps {
+export interface ContentContainerProps {
   children: React.ReactNode;
   keyword?: string | null;
   selectedOption: ContainerOptionType;
@@ -51,13 +51,11 @@ export default function ContentContainer({
   const handleOptionClick = (option: string) => {
     scrollToTop();
     setSelectedOption(option as ContainerOptionType);
-    if (router.query.query) {
-      router.push(
-        `${router.pathname}?tab=${option}&query=${router.query.query}`,
-      );
-    } else {
-      router.push(`${router.pathname}?tab=${option}`);
-    }
+
+    router.push({
+      pathname: `${router.pathname}`,
+      query: { ...router.query, tab: option },
+    });
   };
 
   const renderOptionButton = (label: string, option: string) => (
@@ -116,7 +114,7 @@ export default function ContentContainer({
           {children}
         </div>
       </div>
-      <ModalPortal>
+      <ModalPortal modalVisible>
         <div className={cn('scroll-top')} onClick={scrollToTop}>
           <ScrollTopIcon />
         </div>

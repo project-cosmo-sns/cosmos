@@ -15,9 +15,9 @@ import { useRouter } from 'next/router';
 import { useGetProfileImage } from '@/api/member';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
-import { login } from '@/redux/logoutSlice';
 import { openLoginModal } from '@/redux/loginModalSlice';
+import { RootState } from '@/redux/store';
+import { login, logout } from '@/redux/logoutSlice';
 
 const cn = classNames.bind(styles);
 
@@ -26,11 +26,11 @@ export default function SideBar() {
     null,
   );
   const [userImage, setUserImage] = useState<string | null>(null);
-
   const router = useRouter();
-  const isLogin = useSelector((state: RootState) => state.logout.isLoggedIn);
-
   const dispatch = useDispatch();
+  const { data: member } = useGetProfileImage();
+  const isLogin = member?.isLogin;
+  const loggedin = useSelector((state: RootState) => state.logout.isLoggedIn);
 
   const profileClick = () => {
     if (isLogin) {
@@ -44,6 +44,10 @@ export default function SideBar() {
     e: React.MouseEvent<HTMLElement>,
     popOverType: 'add' | 'bell',
   ) => {
+    if (!isLogin) {
+      dispatch(openLoginModal());
+      return;
+    }
     e.stopPropagation();
     setActivePopover((prevPopover) =>
       prevPopover === popOverType ? null : popOverType,
@@ -54,13 +58,14 @@ export default function SideBar() {
     setActivePopover(null);
   };
 
-  const { data: userProfileImage } = useGetProfileImage();
-
   useEffect(() => {
-    if (!userProfileImage) return;
-    setUserImage(userProfileImage?.profileImageUrl);
+    if (!isLogin) {
+      dispatch(logout());
+      return;
+    }
+    setUserImage(member?.profileImageUrl);
     dispatch(login());
-  }, [userProfileImage]);
+  }, [isLogin]);
 
   return (
     <div className={cn('sideBar-container')}>
@@ -72,7 +77,7 @@ export default function SideBar() {
           className={cn('icon-box', 'add-icon')}
           onClick={(e) => togglePopOver(e, 'add')}
         >
-          <AddIcon fill="#9747FF" />
+          <AddIcon fill="#8576FF" />
           {activePopover === 'add' && (
             <AddContentPopOver
               profileImage={userImage}
@@ -89,8 +94,8 @@ export default function SideBar() {
             <Notification onClose={handleClosePopOver} />
           )}
         </div>
-        {!isLogin && <UserIcon fill="#FFFFFF" onClick={profileClick} />}
-        {isLogin && userImage && (
+        {!loggedin && <UserIcon fill="#FFFFFF" onClick={profileClick} />}
+        {loggedin && userImage && (
           <Image
             src={userImage}
             alt="profile"
@@ -99,7 +104,7 @@ export default function SideBar() {
             onClick={profileClick}
           />
         )}
-        {isLogin && !userImage && <ProfileIconDark onClick={profileClick} />}
+        {loggedin && !userImage && <ProfileIconDark onClick={profileClick} />}
       </div>
     </div>
   );

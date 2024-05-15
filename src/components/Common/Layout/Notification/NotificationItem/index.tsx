@@ -10,6 +10,7 @@ import { notificationType, NotificationData } from '../type';
 import getElapsedTime from '@/utils/getElaspedTime';
 import styles from './NotificationItem.module.scss';
 import fetchData from '@/api/fetchData';
+import FollowButton from '@/components/Common/Buttons/FollowButton';
 
 const cn = classNames.bind(styles);
 
@@ -27,7 +28,7 @@ export default function NotificationItem({ data }: NotificationItemProps) {
     notification: {
       id,
       content,
-      notificationType: { type, feedId, postId },
+      notificationType: { type, feedId, postId, followerMemberId },
       isConfirmed,
       createdAt,
     },
@@ -52,11 +53,21 @@ export default function NotificationItem({ data }: NotificationItemProps) {
       mutation.mutate();
     }
 
-    if (type === notificationType.CREATE_POST_COMMENT) {
+    if (type === notificationType.FOLLOW) {
+      router.push(`profile?memberId=${followerMemberId}`);
+    }
+
+    if (
+      type === notificationType.CREATE_POST_COMMENT ||
+      type === notificationType.CREATE_POST_EMOJI
+    ) {
       router.push(`/post/${postId}`);
     }
 
-    if (type === notificationType.CREATE_FEED_COMMENT) {
+    if (
+      type === notificationType.CREATE_FEED_COMMENT ||
+      type === notificationType.CREATE_FEED_EMOJI
+    ) {
       setIsModalOpen(true);
     }
   };
@@ -91,6 +102,10 @@ export default function NotificationItem({ data }: NotificationItemProps) {
           <span>{formattedCreatedAt}</span>
         </p>
 
+        {type === notificationType.FOLLOW && (
+          <FollowButton onClick={() => console.log('클릭')} isFollowButton />
+        )}
+
         {isConfirmed ? (
           <span className={cn('notification-confirm')}>
             <CheckIcon fill="#fff" width="13" height="9.5" />
@@ -99,14 +114,14 @@ export default function NotificationItem({ data }: NotificationItemProps) {
           <span className={cn('notification-dot')} />
         )}
       </div>
-      {type === notificationType.CREATE_FEED_COMMENT && isModalOpen && (
+      {isModalOpen && feedId && (
         <Modal
           toggleModal={() => setIsModalOpen(false)}
           modalVisible={isModalOpen}
           cssModalSize={cn('feed-detail-modalSize')}
           cssComponentDisplay={cn('feed-detail-componentDisplay')}
         >
-          <FeedDetails feedId={feedId!} />
+          <FeedDetails feedId={feedId} />
         </Modal>
       )}
     </>

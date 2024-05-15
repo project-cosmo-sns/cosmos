@@ -5,7 +5,7 @@ import PopOver from '../PopOverBox';
 import Modal from '@/components/Common/Layout/Modal';
 import { PostIcon, FeedIcon } from '@/components/Common/IconCollection';
 import CreateFeed from '@/components/Feed/CreateFeed';
-import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 type PopOverProps = {
   onClose: () => void;
@@ -19,9 +19,15 @@ export default function AddContentPopOver({
   profileImage,
 }: PopOverProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const router = useRouter();
 
   const handleCreateFeedClick = () => {
     setIsModalOpen(true);
+  };
+
+  const handleCreatePostClick = () => {
+    router.push('/write');
+    onClose();
   };
 
   return (
@@ -29,17 +35,18 @@ export default function AddContentPopOver({
       <ul className={cn('content-list-wrapper')}>
         <li
           role="presentation"
-          className={cn('content-list')}
+          className={cn('content-list', 'feed')}
           onClick={handleCreateFeedClick}
         >
           <FeedIcon width="18" height="18" fill="#FFFFFF" />
           <span>피드 작성하기</span>
         </li>
-        <li className={cn('content-list')}>
+        <li
+          className={cn('content-list', 'post')}
+          onClick={handleCreatePostClick}
+        >
           <PostIcon width="18" height="18" fill="#FFFFFF" />
-          <Link href="/write">
-            <span className={cn('post-span')}>포스트 작성하기</span>
-          </Link>
+          <span className={cn('post-span')}>포스트 작성하기</span>
         </li>
       </ul>
       <Modal
@@ -49,7 +56,11 @@ export default function AddContentPopOver({
         cssModalSize={cn('create-feed-modalSize')}
         cssComponentDisplay={cn('')}
       >
-        <CreateFeed profileImage={profileImage} />
+        <CreateFeed
+          toggleModal={setIsModalOpen}
+          modalVisible={isModalOpen}
+          profileImage={profileImage}
+        />
       </Modal>
     </PopOver>
   );

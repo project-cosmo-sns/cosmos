@@ -27,6 +27,7 @@ export default function FeedList({ feedList }: FeedListProps) {
     data: feedListData,
     ref,
     isFetchingNextPage,
+    refetch,
   } = useInfiniteScroll<FeedListType>({
     queryKey: ['feedList'],
     fetchFunction: (pageParam) =>
@@ -36,7 +37,9 @@ export default function FeedList({ feedList }: FeedListProps) {
     getNextPageParam: (lastPage) =>
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
   });
+
   const feedPages = feedListData?.pages ?? [];
+
   return (
     <>
       <div className={cn('container')}>

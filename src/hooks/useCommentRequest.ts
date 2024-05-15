@@ -1,10 +1,19 @@
-import { PostCommentType } from '@/components/Common/CommentInput/api';
+// eslint-disable-next-line import/no-cycle
 import { Comment } from '@/components/Common/CommentInput';
-import { EditCommentType } from '@/@types/type';
+import { EditCommentType, InfiniteDataRefetchType } from '@/@types/type';
 import { useMutation } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
+import { CommentListType } from '@/components/Feed/types';
 
-export function useCommentRequest(postId: number, forFeeds: boolean) {
+export interface PostCommentType {
+  content: string;
+}
+
+export function useCommentRequest(
+  postId: number,
+  forFeeds: boolean,
+  refetch?: InfiniteDataRefetchType<CommentListType>,
+) {
   const { mutate: postCommentMutate } = useMutation({
     mutationFn: (dataParam: Comment) =>
       fetchData<PostCommentType>({
@@ -14,11 +23,12 @@ export function useCommentRequest(postId: number, forFeeds: boolean) {
           content: dataParam.comment,
         },
       }),
+    onSuccess: async () => {
+      if (refetch) {
+        await refetch();
+      }
+    },
   });
-
-  const onSubmit = (data: Comment) => {
-    postCommentMutate(data);
-  };
 
   const { mutate: deleteCommentMutate } = useMutation({
     mutationFn: (commentId: number) =>
@@ -26,6 +36,11 @@ export function useCommentRequest(postId: number, forFeeds: boolean) {
         param: `${forFeeds ? 'feed' : 'post'}/${postId}/comment/${commentId}`,
         method: 'delete',
       }),
+    onSuccess: async () => {
+      if (refetch) {
+        await refetch();
+      }
+    },
   });
 
   const deleteCommentRequest = (commentId: number) => {
@@ -71,6 +86,11 @@ export function useCommentRequest(postId: number, forFeeds: boolean) {
           content: data.editedComment,
         },
       }),
+    onSuccess: async () => {
+      if (refetch) {
+        await refetch();
+      }
+    },
   });
 
   const editCommentRequest = ({
@@ -84,7 +104,7 @@ export function useCommentRequest(postId: number, forFeeds: boolean) {
   };
 
   return {
-    onSubmit,
+    postCommentMutate,
     deleteCommentRequest,
     postLikeRequest,
     deleteLikeRequest,

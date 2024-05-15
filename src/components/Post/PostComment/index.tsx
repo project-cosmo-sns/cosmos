@@ -15,18 +15,11 @@ const cn = classNames.bind(styles);
 
 export default function PostComment({ postId }: PostCommentProps) {
   const {
-    onSubmit,
-    deleteCommentRequest,
-    postLikeRequest,
-    deleteLikeRequest,
-    editCommentRequest,
-  } = useCommentRequest(postId, false);
-
-  const {
     data: commentData,
     ref,
     isFetchingNextPage,
     isPending,
+    refetch,
   } = useInfiniteScroll<CommentListType>({
     queryKey: ['commentList', postId],
     fetchFunction: (page: number) =>
@@ -38,11 +31,23 @@ export default function PostComment({ postId }: PostCommentProps) {
     },
   });
 
+  const {
+    deleteCommentRequest,
+    postLikeRequest,
+    deleteLikeRequest,
+    editCommentRequest,
+  } = useCommentRequest(postId, false, refetch);
+
   if (isPending) <>Loading...</>;
 
   return (
     <div className={cn('wrapper')}>
-      <CommentInput placeholder="댓글을 입력하세요" onSubmit={onSubmit} />
+      <CommentInput
+        placeholder="댓글을 입력하세요"
+        postId={postId}
+        refetch={refetch}
+        isFeed={false}
+      />
       <div className={cn('comment-container')}>
         {commentData?.pages.map(({ data: commentList }, index) =>
           commentList.length ? (
