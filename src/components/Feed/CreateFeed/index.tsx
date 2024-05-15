@@ -30,7 +30,12 @@ export default function CreateFeed({
     control,
     formState: { errors, isValid },
     watch,
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: {
+      content: '',
+      feedImage: [],
+    },
+  });
   const [images, setImages] = useState<Blob[]>([]);
   const [urlBucket, setUrlBucket] = useState<string[]>([]);
   const { getUrl, deleteImage, postFeed } = useCreateFeedRequest(toggleModal);
@@ -114,7 +119,7 @@ export default function CreateFeed({
     setValue('feedImage', filteredUrlBucket);
     setUrlBucket(filteredUrlBucket);
   };
-
+  console.log(getValues('feedImage'));
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <div className={cn('wrapper')}>
@@ -175,9 +180,13 @@ export default function CreateFeed({
                   />
                 )}
               />
-              <label htmlFor="feedImage" className={cn('file-label')}>
-                <span className={cn('label-text')}>이미지 업로드</span>
-              </label>
+              {watch('feedImage')?.length < 3 ? (
+                <label htmlFor="feedImage" className={cn('file-label')}>
+                  <span className={cn('label-text')}>이미지 업로드</span>
+                </label>
+              ) : (
+                ''
+              )}
               {imagePreview && (
                 <div className={cn('preview-box')}>
                   {imagePreview.map((item, index) => (

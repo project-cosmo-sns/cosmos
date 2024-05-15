@@ -69,8 +69,11 @@
 
           .preview-box {
             display: flex;
-            gap: 12px;
             width: 100%;
+            justify-content: left;
+            gap: 7px;
+            // overflow: scroll;
+            // scrollbar-width: none;
 
             .preview-container {
               position: relative;
@@ -78,7 +81,6 @@
                 width: 102px;
                 height: 102px;
                 border-radius: 5px;
-                overflow: hidden;
 
                 @media (min-width: 768px) {
                   width: 110px;
