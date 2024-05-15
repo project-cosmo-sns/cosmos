@@ -2,6 +2,8 @@ import { EmojiCode, EmojiType } from '@/@types/type';
 import { EMOJI_ICON } from '@/constants/EmojiCode';
 import classNames from 'classnames/bind';
 import styles from './EmojiButton.module.scss';
+import { MouseEvent } from 'react';
+import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
 
 const cn = classNames.bind(styles);
 
@@ -57,6 +59,15 @@ export default function EmojiButton({
     }
   };
 
+  const handleClickEmojiButton = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    handleUpdateCurrentEmojiList();
+    handleEmojiClick(emojiCode, emojiData[0]?.isClicked);
+    if (setIsEmojiContainerVisible) setIsEmojiContainerVisible(false);
+  };
+
+  const { checkMemberStatus } = useFetchMemberStatus();
+
   return (
     <button
       type="button"
@@ -64,12 +75,7 @@ export default function EmojiButton({
         clicked: isClickVisible ? emojiData[0]?.isClicked : false,
         detail: isDetail,
       })}
-      onClick={(event) => {
-        event.stopPropagation();
-        handleUpdateCurrentEmojiList();
-        handleEmojiClick(emojiCode, emojiData[0]?.isClicked);
-        if (setIsEmojiContainerVisible) setIsEmojiContainerVisible(false);
-      }}
+      onClick={() => checkMemberStatus(() => handleClickEmojiButton)}
       disabled={isPending}
     >
       <div className={cn('container')}>
