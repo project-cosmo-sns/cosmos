@@ -112,6 +112,45 @@ textarea {
 .w-md-editor-text {
   padding: 16px 20px !important;
   font-size: 1.6rem !important;
+
+  span {
+    color: $white-01 !important;
+  }
+
+  .w-md-editor-text-pre {
+    .token.content {
+      color: $white-01 !important;
+    }
+
+    .token.url {
+      color: #ccb3eb !important;
+      .token.content {
+        color: #ccb3eb !important;
+      }
+    }
+
+    .token.bold {
+      color: white;
+      font-weight: 700 !important;
+    }
+
+    .token.italic {
+      .token.content {
+        font-style: italic;
+      }
+    }
+
+    .token.strike {
+      .token.content {
+        color: $gray-01 !important;
+        text-decoration: line-through;
+      }
+    }
+  }
+}
+
+.w-md-editor-bar {
+  display: none;
 }
 
 .w-md-editor-preview {
