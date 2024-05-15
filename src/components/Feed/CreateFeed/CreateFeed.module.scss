@@ -122,8 +122,20 @@
               height: 110px;
             }
 
+            .image-icon-wrapper {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 6px;
+
+              .image-icon {
+                width: 18px;
+                height: 18px;
+              }
+            }
+
             .label-text {
-              color: $gray-01;
+              color: $gray-02;
               font-size: 1.2rem;
               display: inline;
             }

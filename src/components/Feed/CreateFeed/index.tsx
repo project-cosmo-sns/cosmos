@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
-import { CloseIcon } from '@/components/Common/IconCollection';
+import { AddImageIcon, CloseIcon } from '@/components/Common/IconCollection';
 import { useMutation } from '@tanstack/react-query';
 import { useCreateFeedRequest } from '@/hooks/useCreateFeedRequest';
 import styles from './CreateFeed.module.scss';
@@ -182,7 +182,10 @@ export default function CreateFeed({
               />
               {watch('feedImage')?.length < 3 ? (
                 <label htmlFor="feedImage" className={cn('file-label')}>
-                  <span className={cn('label-text')}>이미지 업로드</span>
+                  <div className={cn('image-icon-wrapper')}>
+                    <AddImageIcon className={cn('image-icon')} />
+                    <span className={cn('label-text')}>이미지 업로드</span>
+                  </div>
                 </label>
               ) : (
                 ''

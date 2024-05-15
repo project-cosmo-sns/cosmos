@@ -2,7 +2,7 @@ import { useState, Dispatch, SetStateAction } from 'react';
 import classNames from 'classnames/bind';
 import axios from 'axios';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
-import { CloseIcon } from '@/components/Common/IconCollection';
+import { CloseIcon, AddImageIcon } from '@/components/Common/IconCollection';
 import { Inputs, FeedType } from '@/components/Feed/CreateFeed/type';
 import { useCreateFeedRequest } from '@/hooks/useCreateFeedRequest';
 import { useMutation } from '@tanstack/react-query';
@@ -207,7 +207,10 @@ export default function EditFeed({
               />
               {watch('feedImage')?.length < 3 ? (
                 <label htmlFor="feedImage" className={cn('file-label')}>
-                  <span className={cn('label-text')}>이미지 업로드</span>
+                  <div className={cn('image-icon-wrapper')}>
+                    <AddImageIcon className={cn('image-icon')} />
+                    <span className={cn('label-text')}>이미지 업로드</span>
+                  </div>
                 </label>
               ) : (
                 ''
