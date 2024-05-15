@@ -26,7 +26,13 @@ export default function EmojiSelection({
   return (
     isVisible && (
       <div className={cn('wrapper')}>
-        <div className={cn('emoji-container')}>
+        <div
+          className={cn('emoji-container', {
+            left: emojiList.length < 2,
+            middle: emojiList.length >= 2 && emojiList.length <= 3,
+            right: emojiList.length >= 4,
+          })}
+        >
           {EMOJI_CODE.map((emojiCode) => (
             <EmojiButton
               key={emojiCode}

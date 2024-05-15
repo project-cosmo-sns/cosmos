@@ -12,9 +12,21 @@
   gap: 4px;
 }
 
+.left {
+  left: 0px;
+}
+
+.middle {
+  left: -80px;
+}
+
+.right {
+  left: -180px;
+}
+
 @media (min-width: 768px) {
   .emoji-container {
     top: -48px;
-    left: 0px;
+    left: -80px;
   }
 }
