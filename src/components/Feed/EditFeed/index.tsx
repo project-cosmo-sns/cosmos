@@ -205,9 +205,13 @@ export default function EditFeed({
                   />
                 )}
               />
-              <label htmlFor="feedImage" className={cn('file-label')}>
-                <span className={cn('label-text')}>이미지 업로드</span>
-              </label>
+              {watch('feedImage')?.length < 3 ? (
+                <label htmlFor="feedImage" className={cn('file-label')}>
+                  <span className={cn('label-text')}>이미지 업로드</span>
+                </label>
+              ) : (
+                ''
+              )}
               {urlBucket && (
                 <div className={cn('preview-box')}>
                   {urlBucket.map((item, index) => (

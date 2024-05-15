@@ -122,10 +122,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
                 ))
               ) : (
                 <div key={index} className={cn('empty-comment')}>
-                  <span className={cn('message')}>
-                    😭 {feed.writer.nickname} 님에게 남겨진 댓글이 아직 없어요.
-                    😭
-                  </span>
+                  <span className={cn('message')}>댓글이 없습니다.</span>
                 </div>
               ),
             )}

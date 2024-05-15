@@ -19,7 +19,7 @@
       padding: 15px 16px;
       touch-action: none;
       overflow: hidden;
-      
+
       @include color($black-03, $white-01);
 
       &::-webkit-scrollbar {

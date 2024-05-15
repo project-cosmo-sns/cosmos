@@ -35,6 +35,6 @@
   height: 100px;
 
   .message {
-    @include font-style(2rem, $gray-02, 600);
+    @include font-style(1.6rem, $gray-02, 500);
   }
 }
