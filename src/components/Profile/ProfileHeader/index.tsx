@@ -153,6 +153,7 @@ export default function ProfileHeader({
               }}
             />
           )}
+          <div id="profile-popover-box" className={cn('profile-popover-box')} />
         </div>
       </div>
       <div className={cn('profile-introduce-section')}>
