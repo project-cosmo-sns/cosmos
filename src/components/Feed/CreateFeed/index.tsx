@@ -28,7 +28,7 @@ export default function CreateFeed({
     setValue,
     getValues,
     control,
-    formState: { errors },
+    formState: { errors, isValid },
     watch,
   } = useForm<Inputs>();
   const [images, setImages] = useState<Blob[]>([]);
@@ -130,14 +130,19 @@ export default function CreateFeed({
           <textarea
             className={cn('text')}
             rows={5}
-            maxLength={300}
             placeholder="글을 작성해보세요"
             {...register('content', {
               required: '게시글을 작성해주세요',
+              maxLength: 300,
+              validate: (value) => {
+                return !!value.trim();
+              },
             })}
           />
           {errors.content && (
-            <span className={cn('error')}>{errors.content.message}</span>
+            <span className={cn('error')}>
+              {errors.content.message?.toString()}
+            </span>
           )}
           <span className={cn('limit')}>
             {watch('content') && watch('content').length}/300

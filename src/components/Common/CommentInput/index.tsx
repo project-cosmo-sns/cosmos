@@ -30,7 +30,7 @@ export default function CommentInput({
     register,
     handleSubmit,
     reset,
-    formState: { isSubmitting },
+    formState: { errors, isValid },
   } = useForm<Comment>({
     defaultValues: {
       comment: '',
@@ -50,15 +50,21 @@ export default function CommentInput({
         <textarea
           className={cn('textarea')}
           placeholder={placeholder}
-          {...register('comment', { required: true, maxLength: 300 })}
+          {...register('comment', {
+            required: '댓글을 입력해주세요',
+            maxLength: 300,
+            validate: (value) => {
+              return !!value.trim() || '댓글을 입력해주세요';
+            },
+          })}
         />
+        {errors.comment && (
+          <span className={cn('error')}>
+            {errors.comment.message?.toString()}
+          </span>
+        )}
       </div>
-      <DefaultButton
-        disabled={isSubmitting}
-        buttonType="submit"
-        size="small"
-        color="purple"
-      >
+      <DefaultButton buttonType="submit" size="small" color="purple">
         등록
       </DefaultButton>
     </form>
