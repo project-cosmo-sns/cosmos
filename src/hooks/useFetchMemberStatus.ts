@@ -34,5 +34,10 @@ export function useFetchMemberStatus() {
     }
   };
 
-  return { checkMemberStatus };
+  return {
+    checkMemberStatus,
+    isSuccess,
+    isLogin: data?.isLogin,
+    isAuthorized: data?.isAuthorized,
+  };
 }

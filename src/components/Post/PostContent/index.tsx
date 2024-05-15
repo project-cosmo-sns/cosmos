@@ -13,6 +13,9 @@ import MarkdownContent from '../Markdown';
 import PostComment from '../PostComment';
 import { HashTagType, PostDetailType } from '../types';
 import styles from './PostContent.module.scss';
+import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
+import { useToast } from '@/hooks/useToast';
+import { useOpenLoginModal } from '@/hooks/useOpenLoginModal';
 
 const cn = classNames.bind(styles);
 
@@ -21,19 +24,45 @@ export default function PostContent() {
   const router = useRouter();
   const { postId } = router.query;
 
+  const { showToastHandler } = useToast();
+  const { showLoginModalHandler } = useOpenLoginModal();
+  const {
+    isSuccess: isMemberStatusSuccess,
+    isLogin,
+    isAuthorized,
+  } = useFetchMemberStatus();
+
   const {
     data: postData,
     isSuccess,
     isPending,
     isError,
+    refetch,
   } = useQuery<PostDetailType>({
     queryKey: ['postData', postId],
     queryFn: () =>
       fetchData({
         param: `/post/${postId}/detail`,
       }),
-    enabled: !!postId,
+    enabled: false,
   });
+
+  useEffect(() => {
+    if (postId) {
+      if (isMemberStatusSuccess)
+        if (isLogin) {
+          if (isAuthorized) {
+            refetch();
+          } else {
+            router.replace('/');
+            showToastHandler('인증된 사용자만 확인할 수 있습니다', 'warn');
+          }
+        } else {
+          router.replace('/');
+          showLoginModalHandler();
+        }
+    }
+  }, [postId, isMemberStatusSuccess]);
 
   const { mutate } = useMutation({
     mutationFn: () =>
