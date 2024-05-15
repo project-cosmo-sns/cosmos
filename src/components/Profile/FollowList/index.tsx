@@ -98,7 +98,7 @@ export default function FollowList({ followListProps }: FollowListType) {
           </div>
         ))}
         {followDataList && (
-          <p className={cn('follow-list')}>팔로우가 없습니다.</p>
+          <p className={cn('follow-list')}>친구가 없습니다🙄</p>
         )}
         <div ref={ref} />
       </div>

@@ -1,7 +1,6 @@
 import { MouseEvent } from 'react';
 import IconTemplate from './IconTemplate';
 import variables from '@/styles/export.module.scss';
-import { propagateServerField } from 'next/dist/server/lib/render-server';
 
 export interface IconCollectionType {
   width?: string;
