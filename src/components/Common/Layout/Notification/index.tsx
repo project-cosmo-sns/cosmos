@@ -4,11 +4,11 @@ import PopOver from '@/components/Common/PopOverBox';
 import NotificationItem from './NotificationItem';
 import { BackIcon, SettingIcon } from '../../IconCollection';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import NotificationModal from './NotificationModal';
 import { NotificationResult } from './type';
 import fetchData from '@/api/fetchData';
-import LoadingSpinner from '@/components/Common/LoadingSpinner';
+import { useToast } from '@/hooks/useToast';
 
 type PopOverProps = {
   onClose: () => void;
@@ -19,11 +19,15 @@ const cn = classNames.bind(styles);
 export default function Notification({ onClose }: PopOverProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const { showToastHandler } = useToast();
+
   const {
     data: notificationListData,
     ref,
     isFetchingNextPage,
     isLoading,
+    isError,
+    isSuccess,
   } = useInfiniteScroll<NotificationResult>({
     queryKey: ['notification'],
     fetchFunction: (pageParam) =>
@@ -36,42 +40,47 @@ export default function Notification({ onClose }: PopOverProps) {
 
   const notificationList = notificationListData?.pages ?? [];
 
-  return (
-    <PopOver onClose={onClose} className={cn('notification-popover')}>
-      <BackIcon
-        className={cn('notification-close')}
-        width="18"
-        height="18"
-        onClick={onClose}
-      />
-      <h2>알림</h2>
-      <SettingIcon
-        className={cn('setting-icon')}
-        onClick={() => setIsModalOpen(true)}
-        fill="#C2C7D9"
-      />
+  useEffect(() => {
+    if (isError) {
+      showToastHandler('인증된 사용자만 확인할 수 있습니다.', 'warn');
+    }
+  }, [isError]);
 
-      {isLoading ? (
-        <LoadingSpinner />
-      ) : (
-        <>
-          {notificationList.map((notification) =>
-            notification.data.map((notificationitem) => (
-              <NotificationItem
-                key={notificationitem.notification.id}
-                data={notificationitem}
+  return (
+    <>
+      {!isLoading && isSuccess && (
+        <PopOver onClose={onClose} className={cn('notification-popover')}>
+          <BackIcon
+            className={cn('notification-close')}
+            width="18"
+            height="18"
+            onClick={onClose}
+          />
+          <h2>알림</h2>
+          <SettingIcon
+            className={cn('setting-icon')}
+            onClick={() => setIsModalOpen(true)}
+            fill="#C2C7D9"
+          />
+          <>
+            {notificationList.map((notification) =>
+              notification.data.map((notificationitem) => (
+                <NotificationItem
+                  key={notificationitem.notification.id}
+                  data={notificationitem}
+                />
+              )),
+            )}
+            {!isFetchingNextPage && <div ref={ref} />}
+            {isModalOpen && (
+              <NotificationModal
+                isOpen={isModalOpen}
+                setIsOpen={setIsModalOpen}
               />
-            )),
-          )}
-          {!isFetchingNextPage && <div ref={ref} />}
-          {isModalOpen && (
-            <NotificationModal
-              isOpen={isModalOpen}
-              setIsOpen={setIsModalOpen}
-            />
-          )}
-        </>
+            )}
+          </>
+        </PopOver>
       )}
-    </PopOver>
+    </>
   );
 }
