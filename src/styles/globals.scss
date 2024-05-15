@@ -46,6 +46,8 @@ body {
   background-image: url('/images/cosmos.png');
   background-size: cover;
   background-attachment: fixed;
+
+  -webkit-tap-highlight-color: transparent;
 }
 
 body.modal-open {
