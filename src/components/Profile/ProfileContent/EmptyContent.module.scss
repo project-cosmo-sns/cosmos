@@ -3,5 +3,11 @@
   color: $gray-03;
   font-size: 1.6rem;
   font-weight: 500;
-  margin: 180px;
+  margin: 140px;
+}
+
+@media (min-width: 768px) {
+  .empty-content {
+    margin: 180px;
+  }
 }

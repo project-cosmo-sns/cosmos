@@ -7,22 +7,16 @@ import { useDispatch } from 'react-redux';
 import { memberLogout } from '@/api/member';
 import { logout } from '@/redux/logoutSlice';
 import router from 'next/router';
+import PopOver from '../PopOverBox';
 
 const cn = classNames.bind(styles);
 
-interface ProfileSettingDropdownProps {
+interface PopOverProps {
+  onClose: () => void;
   onSetting: () => void;
 }
 
-/**
- * @param {Function} onSetting : 설정 버튼 클릭 시 동작할 로직
- */
-
-export type ProfileSettingType = 'EDIT' | 'LOGOUT';
-
-export default function ProfilePopOver({
-  onSetting,
-}: ProfileSettingDropdownProps) {
+export default function ProfilePopOver({ onClose, onSetting }: PopOverProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
 
@@ -34,7 +28,6 @@ export default function ProfilePopOver({
       setIsExpanded(true);
     }
   };
-
   const dispatch = useDispatch();
 
   const memberLogoutClick = async () => {
@@ -46,43 +39,42 @@ export default function ProfilePopOver({
   return (
     <div className={cn('wrapper')}>
       <Icon.DropDown onClick={ExpandHandler} />
-
       {isExpanded && (
-        <div
-          onClick={ExpandHandler}
-          className={cn('expanded-dropdown-container')}
-          role="button"
-          tabIndex={0}
-        >
-          <div
-            onClick={() => {
-              onSetting();
-              setIsExpanded(false);
-            }}
-            className={cn('expanded-dropdown-list', { 'first-item': true })}
-          >
-            <Icon.SettingIcon width="18" height="18" fill="#C2C7D9" />
-            프로필 수정
-          </div>
-          <div
-            onClick={(e) => {
-              e.stopPropagation();
-              setDeleteModal(true);
-            }}
-            className={cn('expanded-dropdown-list', { 'last-item': true })}
-          >
-            <Icon.LogoutIcon width="18" height="18" fill="#FFFFFF" />
-            로그아웃
-          </div>
-        </div>
+        <PopOver onClose={onClose}>
+          <ul className={cn('expanded-popover-container')}>
+            <li
+              role="presentation"
+              className={cn('content-list', 'profile-edit')}
+              onClick={() => {
+                onSetting();
+              }}
+            >
+              <div>
+                <Icon.SettingIcon width="18" height="18" fill="#C2C7D9" />
+                <span>프로필 수정</span>
+              </div>
+            </li>
+            <li
+              role="presentation"
+              className={cn('content-list', 'loglout')}
+              onClick={(e) => {
+                e.stopPropagation();
+                setDeleteModal(true);
+              }}
+            >
+              <Icon.LogoutIcon width="18" height="18" fill="#FFFFFF" />
+              로그아웃
+            </li>
+          </ul>
+          <DeleteModal
+            isDeleteModalOpen={deleteModal}
+            setIsDeleteModalOpen={setDeleteModal}
+            handleDelete={memberLogoutClick}
+            title="로그아웃"
+            deleteText="로그아웃"
+          />
+        </PopOver>
       )}
-      <DeleteModal
-        isDeleteModalOpen={deleteModal}
-        setIsDeleteModalOpen={setDeleteModal}
-        handleDelete={memberLogoutClick}
-        title="로그아웃"
-        deleteText="로그아웃"
-      />
     </div>
   );
 }

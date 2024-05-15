@@ -93,6 +93,7 @@
 
 @media (min-width: 768px) {
   .header-container {
+    @include glass-01;
     position: relative;
     display: grid;
     height: 126px;

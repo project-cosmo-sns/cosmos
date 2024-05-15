@@ -60,7 +60,12 @@ export default function ProfileHeader({
       console.log('memberData:', memberData);
       return (
         <div className={cn('profile-setting-button')}>
-          <ProfilePopOver onSetting={() => setIsModalOpen((prev) => !prev)} />
+          <ProfilePopOver
+            onClose={() => {
+              setIsModalOpen(false);
+            }}
+            onSetting={() => setIsModalOpen((prev) => !prev)}
+          />
         </div>
       );
     }

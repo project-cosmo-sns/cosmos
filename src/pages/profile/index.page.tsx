@@ -89,7 +89,7 @@ export default function MemberDataContainer({
         setSelectedOption={setSelectedOption}
       >
         <div className={cn('profile-content')}>
-          {memberData.authorizationStatus === 'ACCEPT' && (
+          {memberData.authorizationStatus === 'NONE' && (
             <ProfileContent
               selectedOption={selectedOption}
               myFeedList={myFeedList}
@@ -97,11 +97,11 @@ export default function MemberDataContainer({
               memberData={memberData}
             />
           )}
+          ;
+          {memberData.authorizationStatus === 'ACCEPT' && (
+            <EmptyContent selectedOption={selectedOption} />
+          )}
         </div>
-        ;
-        {memberData.authorizationStatus === 'NONE' && (
-          <EmptyContent selectedOption={selectedOption} />
-        )}
       </ContentContainer>
     </div>
   );
