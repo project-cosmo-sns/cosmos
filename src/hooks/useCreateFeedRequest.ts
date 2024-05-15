@@ -1,4 +1,4 @@
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
 import { UrlType, FeedType } from '@/components/Feed/CreateFeed/type';
 import axios from 'axios';
@@ -10,6 +10,7 @@ export function useCreateFeedRequest(
   toggleModal?: Dispatch<SetStateAction<boolean>>,
 ) {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { refetch: getUrl } = useQuery<UrlType>({
     queryKey: ['signedUrl'],
     queryFn: () =>
@@ -51,7 +52,10 @@ export function useCreateFeedRequest(
     onSuccess: () => {
       if (toggleModal) {
         toggleModal(false);
-        router.reload();
+        queryClient.invalidateQueries({
+          queryKey: ['feedList'],
+        });
+        // router.reload();
       }
     },
   });

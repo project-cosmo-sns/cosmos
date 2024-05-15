@@ -2,7 +2,7 @@
 import { PostCommentType } from '@/components/Common/CommentInput/api';
 import { Comment } from '@/components/Common/CommentInput';
 import { EditCommentType, InfiniteDataRefetchType } from '@/@types/type';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
 import { CommentListType } from '@/components/Feed/types';
 
@@ -11,6 +11,8 @@ export function useCommentRequest(
   forFeeds: boolean,
   refetch?: InfiniteDataRefetchType<CommentListType>,
 ) {
+  const queryClient = useQueryClient();
+
   const { mutate: postCommentMutate } = useMutation({
     mutationFn: (dataParam: Comment) =>
       fetchData<PostCommentType>({
@@ -21,9 +23,7 @@ export function useCommentRequest(
         },
       }),
     onSuccess: async () => {
-      if (refetch) {
-        await refetch();
-      }
+      queryClient.invalidateQueries({ queryKey: ['feedComments'] });
     },
   });
 
@@ -34,9 +34,7 @@ export function useCommentRequest(
         method: 'delete',
       }),
     onSuccess: async () => {
-      if (refetch) {
-        await refetch();
-      }
+      queryClient.invalidateQueries({ queryKey: ['feedComments'] });
     },
   });
 

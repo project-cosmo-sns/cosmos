@@ -9,7 +9,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import fetchData from '@/api/fetchData';
 import { AuthFormProps } from '@/@types/type';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
 interface ProfileEditModalProps {
