@@ -68,8 +68,7 @@ export default function FollowList({ followListProps }: FollowListType) {
   );
 
   const followDataList =
-    followDataResult?.pages === undefined ||
-    followDataResult.pages.length === 0;
+    followDataResult?.pages.flatMap((page) => page.data).length === 0;
 
   return (
     <Modal
