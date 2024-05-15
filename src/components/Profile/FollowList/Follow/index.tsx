@@ -53,10 +53,7 @@ export default function Follow({
           />
         </Link>
         <span>{nickname}</span>
-        <GenerationBadge
-          generationInfo={generation}
-          isAuthorized={!!generation}
-        />
+        <GenerationBadge generationInfo={generation} />
       </div>
       <FollowButton
         onClick={isFollowButton ? toggleFollow : deleteClick}
