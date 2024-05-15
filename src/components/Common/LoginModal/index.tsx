@@ -3,25 +3,15 @@ import classNames from 'classnames/bind';
 import Modal from '../Layout/Modal';
 import { GitHubIcon, GoogleIcon, LogoIcon } from '../IconCollection';
 import LoginButton from '@/components/Common/Buttons/LoginButton';
-import { baseURL } from '@/api/axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { closeLoginModal } from '@/redux/loginModalSlice';
+import openAuthPopup from '@/utils/openAuthPopup';
+import { useEffect } from 'react';
 
 const cn = classNames.bind(styles);
 
 export default function LoginModal() {
-  const openAuthPopup = async (authType: string) => {
-    let popupX = window.innerWidth / 2 - 300;
-    let popupY = window.innerHeight / 2 - 300;
-
-    window.open(
-      `${baseURL}/auth/${authType}/login`,
-      '_blank',
-      `width=600, height=600, top=${popupY}, left=${popupX}`,
-    );
-  };
-
   const githubClick = async () => {
     await openAuthPopup('github');
   };
@@ -35,9 +25,17 @@ export default function LoginModal() {
   );
 
   const dispatch = useDispatch();
+
   const closedModals = () => {
     dispatch(closeLoginModal());
   };
+  // useEffect(() => {
+  //   window.addEventListener('message', (event) => {
+  //     if (event.data === 'close') {
+  //       window.location.reload();
+  //     }
+  //   });
+  // }, []);
 
   return (
     <Modal

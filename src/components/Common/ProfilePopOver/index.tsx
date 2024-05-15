@@ -40,7 +40,9 @@ export default function ProfilePopOver({
   const memberLogoutClick = async () => {
     const res = await memberLogout();
     dispatch(logout());
-    router.push('/');
+    router.push('/').then(() => {
+      window.location.reload();
+    });
   };
 
   return (
