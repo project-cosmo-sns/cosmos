@@ -1,11 +1,11 @@
 .wrapper {
-  position: relative;
   display: flex;
   justify-content: center;
   width: 100%;
   gap: 8px;
 
   .textarea-wrapper {
+    position: relative;
     width: 100%;
 
     .textarea {
@@ -23,14 +23,14 @@
         display: none;
       }
     }
-  }
 
-  .error {
-    position: absolute;
-    font-size: 1.3rem;
-    color: #ed1c24;
-    padding-left: 16px;
-    left: 0px;
-    bottom: -15px;
+    .error {
+      position: absolute;
+      font-size: 1.3rem;
+      color: #ed1c24;
+      padding-left: 16px;
+      right: 0px;
+      bottom: -19px;
+    }
   }
 }
