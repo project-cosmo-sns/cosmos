@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { openLoginModal } from '@/redux/loginModalSlice';
 import { RootState } from '@/redux/store';
 import { login, logout } from '@/redux/logoutSlice';
+import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
 
 const cn = classNames.bind(styles);
 
@@ -32,6 +33,8 @@ export default function SideBar() {
   const isLogin = member?.isLogin;
   const loggedin = useSelector((state: RootState) => state.logout.isLoggedIn);
 
+  const { checkMemberStatus } = useFetchMemberStatus();
+
   const profileClick = () => {
     if (isLogin) {
       router.push('/profile?tab=feed');
@@ -44,13 +47,11 @@ export default function SideBar() {
     e: React.MouseEvent<HTMLElement>,
     popOverType: 'add' | 'bell',
   ) => {
-    if (!isLogin) {
-      dispatch(openLoginModal());
-      return;
-    }
     e.stopPropagation();
-    setActivePopover((prevPopover) =>
-      prevPopover === popOverType ? null : popOverType,
+    checkMemberStatus(() =>
+      setActivePopover((prevPopover) =>
+        prevPopover === popOverType ? null : popOverType,
+      ),
     );
   };
 
