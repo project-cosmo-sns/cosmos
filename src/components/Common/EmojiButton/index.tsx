@@ -75,7 +75,9 @@ export default function EmojiButton({
         clicked: isClickVisible ? emojiData[0]?.isClicked : false,
         detail: isDetail,
       })}
-      onClick={() => checkMemberStatus(() => handleClickEmojiButton)}
+      onClick={(event) =>
+        checkMemberStatus(() => handleClickEmojiButton(event))
+      }
       disabled={isPending}
     >
       <div className={cn('container')}>

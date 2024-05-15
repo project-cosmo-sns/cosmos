@@ -58,9 +58,7 @@ export default function PostPreview({ postData }: PostPreviewProps) {
       <EmojiBundle
         isPost
         emojiList={emojis}
-        handleEmojiClick={(emojiCode, isClicked) =>
-          checkMemberStatus(() => handleEmojiClick(emojiCode, isClicked))
-        }
+        handleEmojiClick={handleEmojiClick}
         commentCount={commentCount}
         viewCount={viewCount}
       />
