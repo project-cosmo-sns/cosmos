@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import { githubLogin } from '@/api/Oauth';
-import { useMutation } from '@tanstack/react-query';
 
 export async function getStaticProps() {
   return {
@@ -12,16 +10,31 @@ export async function getStaticProps() {
 }
 
 export default function GithubRedirect() {
-  const router = useRouter();
-  const { mutate } = useMutation({
-    mutationFn: githubLogin,
-  });
+  // useEffect(() => {
+  //   const handleLogin = async () => {
+  //     const code = new URLSearchParams(window.location.search).get('code');
+  //     if (code) {
+  //       try {
+  //         await githubLogin(code);
+  //         if (window.opener) {
+  //           window.opener.postMessage('close', '*');
+  //           console.log(code)
+  //         }
+  //         // window.close();
+  //       } catch (error) {
+  //         console.error('로그인 중 오류 발생:', error);
+  //       }
+  //     }
+  //   };
 
+  //   handleLogin();
+  // }, []);
   useEffect(() => {
-    if (router.query.code) {
-      mutate(router.query.code as string);
+    const code = new URLSearchParams(window.location.search).get('code');
+    if (code) {
+      githubLogin(code);
     }
-  }, [router.query.code]);
+  }, []);
 
   return <div>redirect 이동중~~</div>;
 }
