@@ -248,6 +248,10 @@ export default function EditFeed({
             placeholder="글을 작성해보세요"
             {...register('content', {
               required: '게시글을 작성해주세요',
+              maxLength: 300,
+              validate: {
+                whiteSpace: (value) => !!value.trim() || '댓글을 입력해주세요',
+              },
             })}
           />
           {errors.content && (

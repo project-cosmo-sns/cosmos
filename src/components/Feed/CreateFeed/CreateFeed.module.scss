@@ -51,7 +51,7 @@
       .limit {
         position: absolute;
         right: 16px;
-        top: 96px;
+        top: 105px;
         font-size: 1.1rem;
         color: $gray-01;
         padding-left: 16px;
@@ -79,8 +79,8 @@
               position: relative;
               .preview-wrapper {
                 position: relative;
-                width: auto;
-                height: auto;
+                width: 102px;
+                height: 102px;
                 border-radius: 5px;
 
                 @media (min-width: 768px) {

@@ -17,6 +17,7 @@
       justify-content: space-between;
       gap: 12px;
       color: $white-01;
+      overflow: hidden;
 
       .icon-wrapper {
         display: flex;
@@ -115,6 +116,9 @@
 
 .content {
   white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-all;
 }
 
 .content-hidden {
