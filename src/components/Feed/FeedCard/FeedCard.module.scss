@@ -139,10 +139,10 @@
 
 .blur {
   filter: blur(5px);
-  transition: filter 0.3s ease-in;
+  transition: filter 0.23s ease-in;
 }
- 
+
 .remove-blur {
   filter: blur(0px);
-  transition: filter 0.3s ease-in;
+  transition: filter 0.23s ease-in;
 }

@@ -9,6 +9,7 @@ import { useToast } from './useToast';
 export function useCreateFeedRequest(
   toggleModal?: Dispatch<SetStateAction<boolean>>,
 ) {
+  const { showToastHandler } = useToast();
   const queryClient = useQueryClient();
   const { refetch: getUrl } = useQuery<UrlType>({
     queryKey: ['signedUrl'],
@@ -36,8 +37,6 @@ export function useCreateFeedRequest(
   const deleteImage = (url: string) => {
     deleteUrlMutate.mutate(url);
   };
-
-  const { showToastHandler } = useToast();
 
   const { mutate: postFeed, isSuccess } = useMutation({
     mutationFn: (data: FeedType) =>

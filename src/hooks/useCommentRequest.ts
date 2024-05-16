@@ -4,6 +4,7 @@ import { EditCommentType, InfiniteDataRefetchType } from '@/@types/type';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
 import { CommentListType } from '@/components/Feed/types';
+import { useToast } from './useToast';
 
 export interface PostCommentType {
   content: string;
@@ -15,6 +16,7 @@ export function useCommentRequest(
   refetch?: InfiniteDataRefetchType<CommentListType>,
 ) {
   const queryClient = useQueryClient();
+  const { showToastHandler } = useToast();
 
   const { mutate: postCommentMutate } = useMutation({
     mutationFn: (dataParam: Comment) =>
@@ -38,6 +40,7 @@ export function useCommentRequest(
       }),
     onSuccess: async () => {
       queryClient.invalidateQueries({ queryKey: ['feedComments'] });
+      showToastHandler('댓글 삭제 완료!', 'check');
     },
   });
 
@@ -85,9 +88,8 @@ export function useCommentRequest(
         },
       }),
     onSuccess: async () => {
-      if (refetch) {
-        await refetch();
-      }
+      showToastHandler('댓글 수정 완료!', 'check');
+      queryClient.invalidateQueries({ queryKey: ['feedComments'] });
     },
   });
 

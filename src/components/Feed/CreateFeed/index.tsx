@@ -28,7 +28,7 @@ export default function CreateFeed({
     setValue,
     getValues,
     control,
-    formState: { errors, isValid },
+    formState: { errors },
     watch,
   } = useForm<Inputs>({
     defaultValues: {
