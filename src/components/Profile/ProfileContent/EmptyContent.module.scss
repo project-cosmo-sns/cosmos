@@ -1,4 +1,7 @@
 .empty-content {
+  @include flex-arrange;
+  width: 100%;
+  height: 60vh;
   text-align: center;
   color: $gray-03;
   font-size: 1.6rem;

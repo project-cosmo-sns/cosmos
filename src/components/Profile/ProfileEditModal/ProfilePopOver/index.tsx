@@ -10,6 +10,7 @@ import router from 'next/router';
 import ReactDOM from 'react-dom';
 import { MemberDataType } from '@/pages/profile/types';
 import AuthForm from '../../AuthForm';
+import { useToast } from '@/hooks/useToast';
 
 const cn = classNames.bind(styles);
 
@@ -61,7 +62,7 @@ export default function ProfilePopOver({
       if (kebabButtonRect) {
         profilePopover.style.position = 'absolute';
         profilePopover.style.top = `${kebabButtonRect.bottom}px`;
-        profilePopover.style.left = `${kebabButtonRect.left - 90}px`;
+        profilePopover.style.left = `${kebabButtonRect.left - 100}px`;
       }
       console.log('kebabButtonRect', kebabButtonRect);
       console.log('profilePopover', profilePopover);
@@ -69,11 +70,11 @@ export default function ProfilePopOver({
   }, [isExpanded]);
   // isExpanded가 변경될 때마다 실행
 
-  const authorizationButton = {};
-
   const authFormClick = () => {
     setShowAuthForm(!showAuthForm);
   };
+
+  const { showToastHandler } = useToast();
 
   return (
     <div className={cn('wrapper')}>
@@ -88,7 +89,7 @@ export default function ProfilePopOver({
             className={cn('expanded-dropdown-container')}
             role="presentation"
           >
-            {memberData.authorizationStatus === 'NONE' && (
+            {memberData.authorizationStatus === 'ACCEPT' && (
               <li
                 onClick={() => {
                   onSetting();
@@ -100,12 +101,13 @@ export default function ProfilePopOver({
                 프로필 수정
               </li>
             )}
-            {memberData.authorizationStatus === 'ACCEPT' && (
+            {memberData.authorizationStatus === 'PENDING' && (
               <>
                 <li
                   onClick={(e) => {
                     e.stopPropagation();
-                    authFormClick();
+                    // 토스트!
+                    showToastHandler('인증 대기중입니다.', 'warn');
                   }}
                   className={cn('expanded-dropdown-list', 'profile-edit')}
                 >
@@ -118,12 +120,16 @@ export default function ProfilePopOver({
                 />
               </>
             )}
-            {memberData.authorizationStatus === 'PENDING' && (
+            {memberData.authorizationStatus === 'NONE' && (
               <>
                 <li
-                  onClick={authFormClick}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    authFormClick();
+                  }}
                   className={cn('expanded-dropdown-list', 'profile-edit')}
                 >
+                  <Icon.Certification width="18" height="18" />
                   인증하기
                 </li>
                 <AuthForm

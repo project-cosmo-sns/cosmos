@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import HashTag from '../HashTag';
 import { PostInfoType } from '../types';
 import styles from './PostPreview.module.scss';
+import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
 
 interface PostPreviewProps {
   postData: PostInfoType;
@@ -30,13 +31,17 @@ export default function PostPreview({ postData }: PostPreviewProps) {
 
   const formattedCreatedAt = getElapsedTime(createdAt);
 
-  const { handleEmojiClick, isAddPending, isDeletePending } =
-    useSendEmojiRequest({ id: postId as number, isPost: true });
+  const { handleEmojiClick } = useSendEmojiRequest({
+    id: postId as number,
+    isPost: true,
+  });
+
+  const { checkMemberStatus } = useFetchMemberStatus();
 
   return (
     <div
       className={cn('wrapper')}
-      onClick={() => router.push(`/post/${postId}`)}
+      onClick={() => checkMemberStatus(() => router.push(`/post/${postId}`))}
     >
       <WriterProfile writer={postData.writer} createdAt={formattedCreatedAt} />
       <div className={cn('content-wrapper')}>

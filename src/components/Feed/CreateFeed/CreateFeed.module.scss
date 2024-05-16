@@ -139,10 +139,9 @@
       flex-direction: row;
     }
   }
-
   .button {
-    display: flex;
-    flex-direction: row-reverse;
+    width: 156px;
     margin-top: 30px;
+    margin-left: auto;
   }
 }

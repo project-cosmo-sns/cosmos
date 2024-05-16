@@ -2,6 +2,8 @@ import { EmojiCode, EmojiType } from '@/@types/type';
 import { EMOJI_ICON } from '@/constants/EmojiCode';
 import classNames from 'classnames/bind';
 import styles from './EmojiButton.module.scss';
+import { MouseEvent } from 'react';
+import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
 
 const cn = classNames.bind(styles);
 
@@ -43,13 +45,11 @@ export default function EmojiButton({
   });
 
   const handleUpdateCurrentEmojiList = () => {
-    // emojiCode에 해당하는 객체를 찾아서 emojiCount속성에 +1
     if (
       emojiList.some((emoji) => emoji.emojiCode === emojiData[0]?.emojiCode)
     ) {
       setCurrentEmojiList(updatedEmojiList);
     } else {
-      // emojiCode에 해당하는 객체를 만들어서 emojiCount 속성에 값 1로 세팅
       const newEmoji = {
         emojiCode,
         emojiCount: 1,
@@ -59,6 +59,15 @@ export default function EmojiButton({
     }
   };
 
+  const handleClickEmojiButton = (event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    handleUpdateCurrentEmojiList();
+    handleEmojiClick(emojiCode, emojiData[0]?.isClicked);
+    if (setIsEmojiContainerVisible) setIsEmojiContainerVisible(false);
+  };
+
+  const { checkMemberStatus } = useFetchMemberStatus();
+
   return (
     <button
       type="button"
@@ -66,12 +75,9 @@ export default function EmojiButton({
         clicked: isClickVisible ? emojiData[0]?.isClicked : false,
         detail: isDetail,
       })}
-      onClick={(event) => {
-        event.stopPropagation();
-        handleUpdateCurrentEmojiList();
-        handleEmojiClick(emojiCode, emojiData[0]?.isClicked);
-        if (setIsEmojiContainerVisible) setIsEmojiContainerVisible(false);
-      }}
+      onClick={(event) =>
+        checkMemberStatus(() => handleClickEmojiButton(event))
+      }
       disabled={isPending}
     >
       <div className={cn('container')}>

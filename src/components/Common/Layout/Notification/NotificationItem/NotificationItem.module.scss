@@ -1,7 +1,7 @@
 .notification-item {
   @include flex-arrange(space-between, center);
   gap: 12px;
-  padding: 6px 0;
+  padding: 6px 5px 6px 12px;
   line-height: 1.5em;
   color: $white-01;
   cursor: pointer;
@@ -34,6 +34,7 @@
 
   .profile-image {
     border-radius: 50%;
+    flex-shrink: 0;
   }
 
   .notification-dot {
@@ -46,7 +47,7 @@
   }
 
   &:hover {
-    background-color: $black-02;
+    background-color: $black-03;
   }
 
   .notification-confirm {

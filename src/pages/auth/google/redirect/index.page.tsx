@@ -12,15 +12,11 @@ export async function getStaticProps() {
 }
 
 export default function GoogleRedirect() {
-  const router = useRouter();
-  const { mutate } = useMutation({
-    mutationFn: googleLogin,
-  });
   useEffect(() => {
-    if (router.query.code) {
-      mutate(router.query.code as string);
+    const code = new URLSearchParams(window.location.search).get('code');
+    if (code) {
+      googleLogin(code);
     }
-    console.log(router.query.code);
-  }, [router.query.code]);
+  }, []);
   return <div>Google Redirect</div>;
 }

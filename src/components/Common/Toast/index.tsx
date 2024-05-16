@@ -33,7 +33,7 @@ export default function Toast() {
         {type === 'check' ? (
           <CompleteIcon fill="#0ACF83" />
         ) : (
-          <WarnIcon fill="#FF0000" />
+          <WarnIcon fill="#FFC700" />
         )}
         <span className={cn('toast-message')}>{text}</span>
       </div>

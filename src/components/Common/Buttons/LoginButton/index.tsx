@@ -13,7 +13,7 @@ type LoginButtonProps = {
 export default function LoginButton({ text, icon, onClick }: LoginButtonProps) {
   return (
     <button type="button" className={cn('login-button')} onClick={onClick}>
-      {icon}
+      <div className={cn('icon')}>{icon}</div>
       <span>{text}</span>
     </button>
   );

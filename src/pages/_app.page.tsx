@@ -16,6 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Cosmos</title>
+        <link rel="icon" href="favicon.ico" />
       </Head>
       <CookiesProvider>
         <QueryProvider>
