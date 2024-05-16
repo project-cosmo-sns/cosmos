@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
-import { CloseIcon } from '@/components/Common/IconCollection';
+import { AddImageIcon, CloseIcon } from '@/components/Common/IconCollection';
 import { useMutation } from '@tanstack/react-query';
 import { useCreateFeedRequest } from '@/hooks/useCreateFeedRequest';
 import styles from './CreateFeed.module.scss';
@@ -30,7 +30,12 @@ export default function CreateFeed({
     control,
     formState: { errors },
     watch,
-  } = useForm<Inputs>();
+  } = useForm<Inputs>({
+    defaultValues: {
+      content: '',
+      feedImage: [],
+    },
+  });
   const [images, setImages] = useState<Blob[]>([]);
   const [urlBucket, setUrlBucket] = useState<string[]>([]);
   const { getUrl, deleteImage, postFeed } = useCreateFeedRequest(toggleModal);
@@ -49,7 +54,6 @@ export default function CreateFeed({
       const prev = getValues('feedImage');
       if (data.config.url) {
         const imageUrl = data.config.url.split('?')[0];
-        console.log(imageUrl, '-----성공 응답 url --------');
         if (prev) {
           setValue('feedImage', [...prev, imageUrl]);
           setUrlBucket([...prev, imageUrl]);
@@ -60,7 +64,7 @@ export default function CreateFeed({
       }
     },
     onError: () => {
-      console.log('에러');
+      console.error('에러');
     },
   });
 
@@ -114,7 +118,6 @@ export default function CreateFeed({
     setValue('feedImage', filteredUrlBucket);
     setUrlBucket(filteredUrlBucket);
   };
-
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <div className={cn('wrapper')}>
@@ -124,7 +127,6 @@ export default function CreateFeed({
           alt="profile_image"
           width={40}
           height={40}
-          onClick={() => console.log('프로필모달 열기')}
         />
         <div className={cn('content')}>
           <textarea
@@ -134,10 +136,16 @@ export default function CreateFeed({
             placeholder="글을 작성해보세요"
             {...register('content', {
               required: '게시글을 작성해주세요',
+              maxLength: 300,
+              validate: {
+                whiteSpace: (value) => !!value.trim() || '댓글을 입력해주세요',
+              },
             })}
           />
           {errors.content && (
-            <span className={cn('error')}>{errors.content.message}</span>
+            <span className={cn('error')}>
+              {errors.content.message?.toString()}
+            </span>
           )}
           <span className={cn('limit')}>
             {watch('content') && watch('content').length}/300
@@ -152,22 +160,34 @@ export default function CreateFeed({
                     className={cn('file-input')}
                     id="feedImage"
                     type="file"
+                    accept="image/png, image/jpeg, image/webp"
                     multiple
                     onChange={(event) => {
                       const fileList = event.target.files
                         ? Array.from(event.target.files)
                         : [];
-                      const currentImageValue = [...images, ...fileList];
-                      console.log([...fileList], '-----파일리스트----');
-                      setImages(currentImageValue);
-                      updateUrlBucket(fileList);
+                      if (fileList.length < 4) {
+                        const currentImageValue = [...images, ...fileList];
+                        setImages(currentImageValue);
+                        updateUrlBucket(fileList);
+                      } else {
+                        setValue('feedImage', []);
+                        alert('이미지는 3개 까지 업로드 가능합니다.');
+                      }
                     }}
                   />
                 )}
               />
-              <label htmlFor="feedImage" className={cn('file-label')}>
-                <span className={cn('label-text')}>이미지 업로드</span>
-              </label>
+              {watch('feedImage')?.length < 3 ? (
+                <label htmlFor="feedImage" className={cn('file-label')}>
+                  <div className={cn('image-icon-wrapper')}>
+                    <AddImageIcon className={cn('image-icon')} />
+                    <span className={cn('label-text')}>이미지 업로드</span>
+                  </div>
+                </label>
+              ) : (
+                ''
+              )}
               {imagePreview && (
                 <div className={cn('preview-box')}>
                   {imagePreview.map((item, index) => (
@@ -179,10 +199,12 @@ export default function CreateFeed({
                         }}
                       />
                       <div className={cn('preview-wrapper')}>
-                        <img
+                        <Image
+                          fill
                           className={cn('file-preview')}
                           src={item}
                           alt="image_item"
+                          priority
                         />
                       </div>
                     </div>

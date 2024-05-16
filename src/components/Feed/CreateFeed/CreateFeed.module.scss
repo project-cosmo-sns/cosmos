@@ -6,7 +6,6 @@
   .wrapper {
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
     gap: 12px;
     height: 100%;
 
@@ -37,13 +36,14 @@
         padding: 16px;
         border-radius: 5px;
         resize: none;
+        white-space: pre-wrap;
       }
 
       .error {
         position: absolute;
-        right: 16px;
-        bottom: 99px;
-        font-size: 1.1rem;
+        right: 12px;
+        bottom: 90px;
+        font-size: 1.3rem;
         color: #ed1c24;
         padding-left: 16px;
       }
@@ -51,7 +51,7 @@
       .limit {
         position: absolute;
         right: 16px;
-        top: 95px;
+        top: 105px;
         font-size: 1.1rem;
         color: $gray-01;
         padding-left: 16px;
@@ -69,16 +69,19 @@
 
           .preview-box {
             display: flex;
-            gap: 12px;
             width: 100%;
+            justify-content: left;
+            gap: 7px;
+            // overflow: scroll;
+            // scrollbar-width: none;
 
             .preview-container {
               position: relative;
               .preview-wrapper {
+                position: relative;
                 width: 102px;
                 height: 102px;
                 border-radius: 5px;
-                overflow: hidden;
 
                 @media (min-width: 768px) {
                   width: 110px;
@@ -89,13 +92,19 @@
                   width: 100%;
                   height: 102px;
                   border-radius: 5px;
+
+                  @media (min-width: 768px) {
+                    height: 110px;
+                  }
                 }
               }
             }
             .close {
+              width: 18px;
+              height: 18px;
               position: absolute;
-              right: -10px;
-              top: -10px;
+              right: 0.5px;
+              top: 0.5px;
               z-index: 1;
             }
           }
@@ -103,13 +112,31 @@
           .file-label {
             @include flex-arrange;
             background-color: $black-03;
-            width: 110px;
+            width: 102px;
+            height: 102px;
             border-radius: 5px;
             cursor: pointer;
             flex-shrink: 0;
 
+            @media (min-width: 768px) {
+              width: 110px;
+              height: 110px;
+            }
+
+            .image-icon-wrapper {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 6px;
+
+              .image-icon {
+                width: 18px;
+                height: 18px;
+              }
+            }
+
             .label-text {
-              color: $gray-01;
+              color: $gray-02;
               font-size: 1.2rem;
               display: inline;
             }

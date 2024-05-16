@@ -1,15 +1,16 @@
-import { useQuery, useMutation } from '@tanstack/react-query';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
 import { UrlType, FeedType } from '@/components/Feed/CreateFeed/type';
 import axios from 'axios';
 import { baseURL } from '@/api/axios';
 import { Dispatch, SetStateAction } from 'react';
-import { useRouter } from 'next/router';
+import { useToast } from './useToast';
 
 export function useCreateFeedRequest(
   toggleModal?: Dispatch<SetStateAction<boolean>>,
 ) {
-  const router = useRouter();
+  const { showToastHandler } = useToast();
+  const queryClient = useQueryClient();
   const { refetch: getUrl } = useQuery<UrlType>({
     queryKey: ['signedUrl'],
     queryFn: () =>
@@ -29,8 +30,8 @@ export function useCreateFeedRequest(
         },
         withCredentials: true,
       }),
-    onError: () => console.log('이미지 삭제 요청 에러 '),
-    onSuccess: () => console.log('이미지 삭체 요청 성공'),
+    onError: () => console.error('이미지 삭제 요청 에러 '),
+    onSuccess: () => console.error('이미지 삭체 요청 성공'),
   });
 
   const deleteImage = (url: string) => {
@@ -47,12 +48,13 @@ export function useCreateFeedRequest(
           imageUrls: data.feedImage,
         },
       }),
-    onError: () => console.log('피드 등록에 실패하였습니다.'),
+    onError: () => console.error('피드 등록에 실패하였습니다.'),
     onSuccess: () => {
-      if (toggleModal) {
-        toggleModal(false);
-        router.reload();
-      }
+      queryClient.invalidateQueries({
+        queryKey: ['feedList'],
+      });
+      showToastHandler('피드 작성 완료!', 'check');
+      if (toggleModal) toggleModal(false);
     },
   });
 

@@ -17,6 +17,7 @@
       justify-content: space-between;
       gap: 12px;
       color: $white-01;
+      overflow: hidden;
 
       .icon-wrapper {
         display: flex;
@@ -57,7 +58,7 @@
 
       .upload-image-wrapper {
         position: relative;
-        box-shadow: 5px 6px 15px $black-01;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
         .upload-image {
           position: relative;
@@ -66,6 +67,11 @@
           flex-shrink: 0;
           border-radius: 5px;
           overflow: hidden;
+
+          .image-tag {
+            border-radius: 5px;
+            background-color: $black-01;
+          }
         }
 
         .extra-stuff {
@@ -94,8 +100,12 @@
     width: 212px;
     height: 212px;
     flex-shrink: 0;
-    border-radius: 5px;
+
     cursor: pointer;
+  }
+
+  .image-item {
+    border-radius: 5px;
   }
 }
 
@@ -114,8 +124,25 @@
 }
 
 .content {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+
+.content-hidden {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
+}
+
+.blur {
+  filter: blur(5px);
+  transition: filter 0.23s ease-in;
+}
+
+.remove-blur {
+  filter: blur(0px);
+  transition: filter 0.23s ease-in;
 }

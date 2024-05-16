@@ -14,6 +14,7 @@
     margin-top: 16px;
     gap: 12px;
     height: 100%;
+    width: 100%;
 
     .profile-image {
       border-radius: 50%;
@@ -42,6 +43,7 @@
         padding: 16px;
         border-radius: 5px;
         resize: none;
+        white-space: pre-wrap;
       }
 
       .error {
@@ -56,7 +58,7 @@
       .limit {
         position: absolute;
         right: 16px;
-        top: 95px;
+        bottom: 16px;
         font-size: 1.1rem;
         color: $gray-01;
         padding-left: 16px;
@@ -64,6 +66,8 @@
 
       .addImage {
         width: 100%;
+        overflow: scroll;
+        scrollbar-width: none;
 
         .image-wrapper {
           width: 100%;
@@ -76,19 +80,28 @@
             gap: 12px;
             width: 100%;
             height: 100%;
-            overflow: scroll;
-            scrollbar-width: none;
 
             .preview-container {
               position: relative;
               .preview-wrapper {
                 border-radius: 5px;
+                width: 156px;
+                height: 156px;
+
+                @media (min-width: 768px) {
+                  width: 170px;
+                  height: 170px;
+                }
+
+                @media (min-width: 1200px) {
+                  width: 212px;
+                  height: 212px;
+                }
 
                 .file-preview {
                   width: 100%;
                   height: 156px;
                   border-radius: 5px;
-                  flex-shrink: 0;
 
                   @media (min-width: 768px) {
                     width: 170px;
@@ -103,9 +116,11 @@
               }
             }
             .close {
+              width: 18px;
+              height: 18px;
               position: absolute;
-              right: -10px;
-              top: -10px;
+              right: 0.5px;
+              top: 0.5px;
               z-index: 1;
             }
           }
@@ -127,6 +142,18 @@
             @media (min-width: 1200px) {
               width: 212px;
               height: 212px;
+            }
+
+            .image-icon-wrapper {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 6px;
+
+              .image-icon {
+                width: 18px;
+                height: 18px;
+              }
             }
 
             .label-text {

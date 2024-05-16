@@ -1,7 +1,16 @@
+.profile {
+  width: 100%;
+}
+
 .profile-edit-modal {
   margin: 0;
 }
 
-.content {
-  width: 100%;
+.profile-content {
+}
+
+@media (min-width: 768px) {
+  .content {
+    width: 100%;
+  }
 }

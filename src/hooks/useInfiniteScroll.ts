@@ -1,13 +1,19 @@
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { FollowDataProps } from '@/api/Follow';
+import {
+  InfiniteData,
+  InitialDataFunction,
+  useInfiniteQuery,
+} from '@tanstack/react-query';
 
 type UseInfiniteScrollProps<T> = {
   queryKey: (string | number)[];
   fetchFunction: (page: number) => Promise<T>;
   getNextPageParam: (lastPage: T) => number | undefined;
   onError?: (error: unknown) => void;
+  initialData?:
+    | InfiniteData<T, unknown>
+    | InitialDataFunction<InfiniteData<T, unknown>>;
   enabled?: boolean;
 };
 
@@ -35,6 +41,7 @@ export default function useInfiniteScroll<T>({
   queryKey,
   fetchFunction,
   getNextPageParam,
+  initialData,
   enabled = true,
 }: UseInfiniteScrollProps<T>) {
   const { data, fetchNextPage, hasNextPage, ...rest } = useInfiniteQuery<T>({
@@ -42,6 +49,7 @@ export default function useInfiniteScroll<T>({
     queryFn: ({ pageParam }) => fetchFunction(pageParam as number),
     initialPageParam: 1,
     getNextPageParam,
+    initialData,
     enabled,
   });
 

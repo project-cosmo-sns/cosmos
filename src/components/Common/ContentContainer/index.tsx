@@ -114,7 +114,7 @@ export default function ContentContainer({
           {children}
         </div>
       </div>
-      <ModalPortal modalVisible>
+      <ModalPortal>
         <div className={cn('scroll-top')} onClick={scrollToTop}>
           <ScrollTopIcon />
         </div>

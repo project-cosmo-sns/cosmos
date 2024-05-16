@@ -49,7 +49,10 @@ export default function Home({ feedList, postList }: HomePropsType) {
         setSelectedSort={setSelectedSort}
       >
         {selectedOption === 'feed' ? (
-          <FeedList feedList={feedList.props.response} />
+          <FeedList
+            feedList={feedList.props.response}
+            selectedSort={selectedSort}
+          />
         ) : (
           <PostList
             initialPostList={postList.props.response}

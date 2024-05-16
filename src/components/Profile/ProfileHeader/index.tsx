@@ -9,7 +9,7 @@ import FollowList from '../FollowList';
 import useFollowClick from '@/hooks/useFollowClick';
 import FollowButton from '@/components/Common/Buttons/FollowButton';
 import AuthForm from '../AuthForm';
-import ProfilePopOver from '@/components/Common/ProfilePopOver';
+import ProfilePopOver from '@/components/Profile/ProfileEditModal/ProfilePopOver';
 
 export interface ProfileHeaderProps {
   memberData: MemberDataType;
@@ -56,27 +56,28 @@ export default function ProfileHeader({
       );
     }
     // 테스트 시 상태 바꿀 곳
-    if (memberData.authorizationStatus === 'ACCEPT') {
-      console.log('memberData:', memberData);
-      return (
-        <div className={cn('profile-setting-button')}>
-          <ProfilePopOver onSetting={() => setIsModalOpen((prev) => !prev)} />
-        </div>
-      );
-    }
+
     return (
-      <>
-        <button
-          type="button"
-          onClick={authFormClick}
-          className={cn('authorization-button')}
-        >
-          인증하기
-        </button>
-        <AuthForm modalVisible={showAuthForm} toggleModal={authFormClick} />
-      </>
+      <div className={cn('profile-setting-button')}>
+        <ProfilePopOver
+          memberData={memberData}
+          onSetting={() => setIsModalOpen((prev) => !prev)}
+        />
+      </div>
     );
   };
+  // return (
+  //   <>
+  //     <button
+  //       type="button"
+  //       onClick={authFormClick}
+  //       className={cn('authorization-button')}
+  //     >
+  //       인증하기
+  //     </button>
+  //     <AuthForm modalVisible={showAuthForm} toggleModal={authFormClick} />
+  //   </>
+  // );
 
   function introduceContent() {
     if (memberData.authorizationStatus === 'NONE') {
