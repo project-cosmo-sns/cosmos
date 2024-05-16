@@ -58,6 +58,7 @@ export default function Notification({ onClose }: PopOverProps) {
                 <NotificationItem
                   key={notificationitem.notification.id}
                   data={notificationitem}
+                  handleClosePopOver={onClose}
                 />
               )),
             )}
