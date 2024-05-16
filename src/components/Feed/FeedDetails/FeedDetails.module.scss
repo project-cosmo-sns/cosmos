@@ -29,7 +29,11 @@
 
     &:last-child {
       border: none;
-      padding-bottom: 0px;
+      padding-bottom: 120px;
+
+      @media (min-width: 768px) {
+        padding-bottom: 0;
+      }
     }
   }
 }
