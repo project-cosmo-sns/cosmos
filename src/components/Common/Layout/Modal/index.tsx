@@ -12,6 +12,7 @@ interface ModalType {
   cssModalSize: string;
   cssComponentDisplay: string;
   className?: string;
+  border?: boolean;
 }
 
 const cn = classNames.bind(styles);
@@ -36,6 +37,7 @@ export default function Modal({
   cssModalSize,
   cssComponentDisplay,
   className,
+  border,
 }: ModalType) {
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -67,7 +69,7 @@ export default function Modal({
               />
             </div>
             <div className={cn(cssModalSize)} ref={modalRef}>
-              <div className={cn('wrapper')}>
+              <div className={cn('wrapper', { border })}>
                 {title && (
                   <div className={cn('title')}>
                     <span>{title}</span>

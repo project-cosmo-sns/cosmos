@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { openLoginModal } from '@/redux/loginModalSlice';
 import { RootState } from '@/redux/store';
 import { login, logout } from '@/redux/logoutSlice';
+import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
 
 const cn = classNames.bind(styles);
 
@@ -32,6 +33,8 @@ export default function SideBar() {
   const isLogin = member?.isLogin;
   const loggedin = useSelector((state: RootState) => state.logout.isLoggedIn);
 
+  const { checkMemberStatus } = useFetchMemberStatus();
+
   const profileClick = () => {
     if (isLogin) {
       router.push('/profile?tab=feed');
@@ -44,13 +47,11 @@ export default function SideBar() {
     e: React.MouseEvent<HTMLElement>,
     popOverType: 'add' | 'bell',
   ) => {
-    if (!isLogin) {
-      dispatch(openLoginModal());
-      return;
-    }
     e.stopPropagation();
-    setActivePopover((prevPopover) =>
-      prevPopover === popOverType ? null : popOverType,
+    checkMemberStatus(() =>
+      setActivePopover((prevPopover) =>
+        prevPopover === popOverType ? null : popOverType,
+      ),
     );
   };
 
@@ -94,17 +95,17 @@ export default function SideBar() {
             <Notification onClose={handleClosePopOver} />
           )}
         </div>
-        {!loggedin && <UserIcon fill="#FFFFFF" onClick={profileClick} />}
-        {loggedin && userImage && (
+        {loggedin ? (
           <Image
-            src={userImage}
+            src={userImage || '/images/profile.svg'}
             alt="profile"
-            width={27}
-            height={27}
+            width={32}
+            height={32}
             onClick={profileClick}
           />
+        ) : (
+          <UserIcon fill="#FFFFFF" onClick={profileClick} />
         )}
-        {loggedin && !userImage && <ProfileIconDark onClick={profileClick} />}
       </div>
     </div>
   );
