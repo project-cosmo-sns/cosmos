@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
-import { useQuery } from '@tanstack/react-query';
 
 /**
  * 팔로우 버튼 클릭을 처리하는 커스텀 훅입니다.

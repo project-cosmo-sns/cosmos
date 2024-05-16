@@ -12,9 +12,9 @@
     width: 100%;
     @include flex-arrange(space-between, center);
   }
-  .icon-wrapper{
+  .icon-wrapper {
     display: flex;
-    gap:8px;
+    gap: 8px;
   }
 
   @media (min-width: 768px) {
