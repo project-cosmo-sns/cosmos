@@ -30,7 +30,7 @@ export default function CommentInput({
     register,
     handleSubmit,
     reset,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<Comment>({
     defaultValues: {
       comment: '',
