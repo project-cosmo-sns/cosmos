@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react';
 import { githubLogin } from '@/api/Oauth';
+import { MainLogoIcon, LogoIcon } from '@/components/Common/IconCollection';
+import styles from './GithubRedirect.module.scss';
+import classNames from 'classnames/bind';
+
+const cn = classNames.bind(styles);
 
 export async function getStaticProps() {
   return {
@@ -17,5 +22,10 @@ export default function GithubRedirect() {
     }
   }, []);
 
-  return <div>redirect 이동중~~</div>;
+  return (
+    <div className={cn('githubRedirect-container')}>
+      <MainLogoIcon width='50' height='50'/>
+      <LogoIcon width="150" height="150" />
+    </div>
+  );
 }
