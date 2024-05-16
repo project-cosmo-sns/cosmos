@@ -102,19 +102,21 @@
   display: inline-block; // 이부분은 상황에 따라 조정이 필요할 수 있습니다.
 }
 
+.icon {
+  position: relative;
+}
+
 .expanded-dropdown-container {
   @include glass-02;
   position: absolute;
-  right: 0;
-  width: 170px;
-  height: 100px;
-  backdrop-filter: blur(40px);
+  backdrop-filter: blur(20px);
+  width: auto;
+  height: auto;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 0 10px;
-  z-index: 10;
 }
 
 .expanded-dropdown-list {
@@ -122,11 +124,7 @@
   @include font-style(1.6rem, $white-01, 600);
   width: 100%;
   height: 45px;
-  gap: 12px;
-  background: none;
   border: none;
-  padding: 10px;
-  text-align: left;
   width: 100%;
   cursor: pointer;
 
@@ -134,12 +132,16 @@
     background-color: $glass-01;
   }
 
-  &.first-item {
-    margin-top: auto;
+  .profile-edit {
+    gap: 12px;
+    padding: 20px 20px 0 20px;
+  }
+  .logout {
+    padding: 0 20px 20px 20px;
   }
 
-  &.last-item {
-    margin-bottom: auto;
+  .authorization-button {
+    padding: 20px 20px 0 20px;
   }
 }
 

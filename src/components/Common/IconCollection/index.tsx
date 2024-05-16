@@ -138,19 +138,71 @@ export function CameraIcon({
     </IconTemplate>
   );
 }
-
-export function CheckIcon({
-  fill = variables.black01,
+export function CustomIcon({
+  fill = variables.white,
   ...props
 }: IconCollectionType) {
   return (
-    <IconTemplate {...props}>
-      <path
-        fillRule="evenodd"
-        clipRule="evenodd"
-        d="M23.6805 4.31614C24.1065 4.73766 24.1065 5.42107 23.6805 5.84259L8.68048 20.6839C8.25445 21.1054 7.56373 21.1054 7.1377 20.6839L0.31952 13.9378C-0.106507 13.5163 -0.106507 12.8329 0.31952 12.4114C0.745546 11.9899 1.43627 11.9899 1.8623 12.4114L7.90909 18.3942L22.1377 4.31614C22.5637 3.89462 23.2545 3.89462 23.6805 4.31614Z"
-        fill={fill}
-      />
+    <IconTemplate viewBox="0 0 18 19" {...props}>
+      <g id="icon">
+        <path
+          id="Vector (Stroke)"
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M11.9101 7.33368C12.03 7.44526 12.03 7.62617 11.9101 7.73774L7.69139 11.6663C7.57157 11.7779 7.3773 11.7779 7.25748 11.6663L5.33986 9.8806C5.22005 9.76902 5.22005 9.58812 5.33986 9.47654C5.45968 9.36496 5.65395 9.36496 5.77377 9.47654L7.47443 11.0602L11.4762 7.33368C11.596 7.22211 11.7903 7.22211 11.9101 7.33368Z"
+          fill={fill}
+          stroke={fill}
+          strokeWidth="0.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          id="Vector"
+          d="M8.625 17.75C8.625 17.75 15.75 14.45 15.75 9.5V3.725L8.625 1.25L1.5 3.725V9.5C1.5 14.45 8.625 17.75 8.625 17.75Z"
+          stroke={fill}
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </IconTemplate>
+  );
+}
+
+export function Certification({
+  width = '18',
+  height = '19',
+  fill = 'none',
+  className,
+}: IconCollectionType) {
+  return (
+    <IconTemplate
+      width={width}
+      height={height}
+      viewBox="0 0 18 19"
+      className={className}
+    >
+      <g id="icon">
+        <path
+          id="Vector (Stroke)"
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M11.9101 7.33368C12.03 7.44526 12.03 7.62617 11.9101 7.73774L7.69139 11.6663C7.57157 11.7779 7.3773 11.7779 7.25748 11.6663L5.33986 9.8806C5.22005 9.76902 5.22005 9.58812 5.33986 9.47654C5.45968 9.36496 5.65395 9.36496 5.77377 9.47654L7.47443 11.0602L11.4762 7.33368C11.596 7.22211 11.7903 7.22211 11.9101 7.33368Z"
+          fill="white"
+          stroke="white"
+          strokeWidth="0.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          id="Vector"
+          d="M8.625 17.75C8.625 17.75 15.75 14.45 15.75 9.5V3.725L8.625 1.25L1.5 3.725V9.5C1.5 14.45 8.625 17.75 8.625 17.75Z"
+          stroke="white"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
     </IconTemplate>
   );
 }

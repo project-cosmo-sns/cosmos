@@ -9,7 +9,7 @@ import FollowList from '../FollowList';
 import useFollowClick from '@/hooks/useFollowClick';
 import FollowButton from '@/components/Common/Buttons/FollowButton';
 import AuthForm from '../AuthForm';
-import ProfilePopOver from '@/components/Common/ProfilePopOver';
+import ProfilePopOver from '@/components/Profile/ProfileEditModal/ProfilePopOver';
 
 export interface ProfileHeaderProps {
   memberData: MemberDataType;
@@ -61,9 +61,7 @@ export default function ProfileHeader({
       return (
         <div className={cn('profile-setting-button')}>
           <ProfilePopOver
-            onClose={() => {
-              setIsModalOpen(false);
-            }}
+            memberData={memberData}
             onSetting={() => setIsModalOpen((prev) => !prev)}
           />
         </div>
@@ -153,7 +151,6 @@ export default function ProfileHeader({
               }}
             />
           )}
-          <div id="profile-popover-box" className={cn('profile-popover-box')} />
         </div>
       </div>
       <div className={cn('profile-introduce-section')}>
