@@ -121,9 +121,13 @@ export default function FeedCard({
                   >
                     <Image
                       fill
+                      className={cn('image-item')}
                       style={{ objectFit: 'cover' }}
                       src={url}
+                      sizes="33vw"
+                      priority
                       alt="feedImage"
+                      loading="eager"
                     />
                   </div>
                 ))}
@@ -138,11 +142,13 @@ export default function FeedCard({
               <div className={cn('upload-image-wrapper')}>
                 <div className={cn('upload-image')}>
                   <Image
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className={cn('image-tag')}
+                    sizes="33vw"
                     fill
                     style={{ objectFit: 'cover' }}
                     src={`${imageUrls[0]}`}
                     alt="feedImage"
+                    priority
                   />
                 </div>
                 {imageUrls.length > 1 && (

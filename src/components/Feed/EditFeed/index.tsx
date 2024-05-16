@@ -232,6 +232,7 @@ export default function EditFeed({
                           className={cn('file-preview')}
                           src={item}
                           alt="image_item"
+                          sizes="33vw"
                           priority
                         />
                       </div>

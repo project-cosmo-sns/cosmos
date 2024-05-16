@@ -58,7 +58,7 @@
 
       .upload-image-wrapper {
         position: relative;
-        box-shadow: 5px 6px 15px $black-01;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
         .upload-image {
           position: relative;
@@ -67,6 +67,11 @@
           flex-shrink: 0;
           border-radius: 5px;
           overflow: hidden;
+
+          .image-tag {
+            border-radius: 5px;
+            background-color: $black-01;
+          }
         }
 
         .extra-stuff {
@@ -95,8 +100,12 @@
     width: 212px;
     height: 212px;
     flex-shrink: 0;
-    border-radius: 5px;
+
     cursor: pointer;
+  }
+
+  .image-item {
+    border-radius: 5px;
   }
 }
 
