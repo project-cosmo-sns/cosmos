@@ -77,8 +77,8 @@ export default function ProfilePopOver({
 
   return (
     <div className={cn('wrapper')}>
-      <div className={cn('icon')} ref={iconRef}>
-        <Icon.DropDown onClick={ExpandHandler} />
+      <div className={cn('icon')} ref={iconRef} onClick={ExpandHandler}>
+        <Icon.DropDown />
       </div>
       {isExpanded &&
         ReactDOM.createPortal(
@@ -103,7 +103,10 @@ export default function ProfilePopOver({
             {memberData.authorizationStatus === 'ACCEPT' && (
               <>
                 <li
-                  onClick={authFormClick}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    authFormClick();
+                  }}
                   className={cn('expanded-dropdown-list', 'profile-edit')}
                 >
                   <Icon.Certification width="18" height="18" />
