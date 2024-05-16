@@ -1,102 +1,3 @@
-// .wrapper {
-//   position: relative;
-//   display: inline-block;
-// }
-
-// .expanded-popover-container {
-//   position: absolute;
-//   @include glass-02;
-//   backdrop-filter: blur(20px);
-//   position: absolute;
-//   left: 450px;
-//   top: 110px;
-//   width: 145px;
-//   height: auto;
-//   gap: 24px;
-//   border-radius: 10px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   z-index: 10;
-//   text-align: center;
-// }
-// .content-list {
-//   @include flex-arrange(flex-start, center);
-//   @include font-style(1.6rem, $white-01, 600);
-//   width: 100%;
-//   gap: 12px;
-//   list-style: none;
-//   cursor: pointer;
-//   padding: 20px;
-//   span {
-//     @include font-style(1.6rem, $white-01, 600);
-//   }
-
-//   &:hover {
-//     background-color: $glass-01;
-//   }
-// }
-// .profile-edit {
-//   padding: 20px 20px 0 20px;
-// }
-// .logout {
-//   padding: 0 20px 20px 20px;
-// }
-
-// .expanded-dropdown-list {
-//   @include flex-arrange(flex-start, center);
-//   @include font-style(1.6rem, $white-01, 600);
-//   width: 100%;
-//   height: 45px;
-//   gap: 12px;
-//   background: none;
-//   border: none;
-//   text-align: left;
-//   width: 100%;
-//   cursor: pointer;
-
-//   &:hover {
-//     background-color: $glass-01;
-//   }
-
-//   &.first-item {
-//     margin-top: auto;
-//   }
-
-//   &.last-item {
-//     margin-bottom: auto;
-//   }
-// }
-
-// // 아이콘과 텍스트 간 간격 조정
-// .icon {
-//   margin-right: 8px;
-// }
-
-// @media (min-width: 768px) {
-//   .expanded-popover-container {
-//     left: 535px;
-//     top: 45px;
-//   }
-
-//   @media (min-width: 1200px) {
-//     .expanded-popover-container {
-//       left: 660px;
-//       top: 45px;
-//     }
-//   }
-// }
-
-// .add-popover {
-//   left: 90px;
-//   bottom: 78px;
-
-//   @media (min-width: 768px) {
-//     bottom: unset;
-//     top: 200px;
-//   }
-// }
-
 .wrapper {
   position: relative;
   display: inline-block; // 이부분은 상황에 따라 조정이 필요할 수 있습니다.
@@ -116,7 +17,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 0 10px;
+
+  li {
+    padding: 20px;
+    gap: 12px;
+  }
 }
 
 .expanded-dropdown-list {
@@ -127,6 +32,10 @@
   border: none;
   width: 100%;
   cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 
   &:hover {
     background-color: $glass-01;
