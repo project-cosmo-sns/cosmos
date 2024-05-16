@@ -80,7 +80,7 @@ export default function EditFeed({
       }
     },
     onError: () => {
-      console.log('에러');
+      console.error('에러');
     },
   });
 
@@ -159,7 +159,7 @@ export default function EditFeed({
       }
       editFeed(data);
     } catch (error) {
-      console.log(error, '------error------');
+      console.error(error, '------error------');
     }
     toggleEditMode(!editState);
   };
@@ -172,7 +172,7 @@ export default function EditFeed({
         deleteImage(imageUrl);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
     toggleEditMode(!editState);
   };

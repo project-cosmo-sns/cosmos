@@ -77,7 +77,6 @@ export default function ProfileEditModal({
         },
       });
       if (response.ok) {
-        console.log('이미지 업로드 성공');
         return uploadUrl.split('?')[0]; // 업로드된 이미지의 S3 URL을 반환
       }
       console.error('Upload failed:', response);
