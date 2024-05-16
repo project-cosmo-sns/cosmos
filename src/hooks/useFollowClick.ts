@@ -9,9 +9,6 @@ import fetchData from '@/api/fetchData';
  * @returns {Object} 현재 팔로우 상태와 팔로우 상태를 토글하는 함수를 포함하는 객체를 반환합니다.
  */
 
-// export default function useFollowClick(memberId?: number) {
-//   const [isActive, setIsActive] = useState(false);
-
 export default function useFollowClick(
   memberId: number | undefined,
   isFollowing = false,
@@ -83,7 +80,6 @@ export default function useFollowClick(
   }
 
   const toggleFollow = async () => {
-    // setIsActive((prev) => !prev);
     if (!isActive) {
       addFollow();
     } else {

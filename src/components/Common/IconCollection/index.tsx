@@ -1,7 +1,6 @@
 import { MouseEvent } from 'react';
 import IconTemplate from './IconTemplate';
 import variables from '@/styles/export.module.scss';
-import { propagateServerField } from 'next/dist/server/lib/render-server';
 
 export interface IconCollectionType {
   width?: string;
@@ -1191,6 +1190,44 @@ export function ScrollTopIcon({ width = '32', ...props }: IconCollectionType) {
           fill="white"
         />
       </svg>
+    </IconTemplate>
+  );
+}
+
+export function MainLogoIcon({ ...props }: IconCollectionType) {
+  return (
+    <IconTemplate width="90" height="90" viewBox="0 0 90 90" {...props}>
+      <rect
+        x="20.0801"
+        y="73.543"
+        width="71.0633"
+        height="9.39475"
+        rx="4.69737"
+        transform="rotate(-60 20.0801 73.543)"
+        fill="white"
+      />
+      <path
+        d="M58.1151 51.3591C59.0112 48.7292 62.913 48.7292 63.8092 51.3591L65.1627 55.3315C65.5634 56.5076 66.7128 57.3039 68.0097 57.3039H72.3899C75.2898 57.3039 76.4955 60.8424 74.1494 62.4678L70.6058 64.9228C69.5566 65.6497 69.1176 66.9382 69.5183 68.1143L70.8719 72.0866C71.768 74.7165 68.6114 76.9035 66.2653 75.2781L62.7217 72.823C61.6725 72.0962 60.2518 72.0962 59.2026 72.823L55.659 75.2781C53.3129 76.9035 50.1563 74.7165 51.0524 72.0866L52.406 68.1143C52.8067 66.9382 52.3677 65.6497 51.3185 64.9228L47.7749 62.4678C45.4288 60.8424 46.6345 57.3039 49.5344 57.3039H53.9146C55.2115 57.3039 56.3608 56.5076 56.7616 55.3315L58.1151 51.3591Z"
+        fill="white"
+      />
+      <rect
+        x="59.9062"
+        y="43.3203"
+        width="25.3261"
+        height="9.39475"
+        rx="4.69737"
+        transform="rotate(-60 59.9062 43.3203)"
+        fill="white"
+      />
+      <rect
+        x="9"
+        y="54.5234"
+        width="45.8805"
+        height="9.39475"
+        rx="4.69737"
+        transform="rotate(-60 9 54.5234)"
+        fill="white"
+      />
     </IconTemplate>
   );
 }

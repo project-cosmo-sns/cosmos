@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { closeLoginModal } from '@/redux/loginModalSlice';
 import openAuthPopup from '@/utils/openAuthPopup';
-import { useEffect } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -29,13 +28,6 @@ export default function LoginModal() {
   const closedModals = () => {
     dispatch(closeLoginModal());
   };
-  // useEffect(() => {
-  //   window.addEventListener('message', (event) => {
-  //     if (event.data === 'close') {
-  //       window.location.reload();
-  //     }
-  //   });
-  // }, []);
 
   return (
     <Modal
