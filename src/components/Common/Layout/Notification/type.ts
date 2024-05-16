@@ -11,7 +11,8 @@ interface NotificationType {
   feedId?: number;
   postId?: number;
   commentId?: number;
-  followerMemberId?: number;
+  followingMemberId?: number;
+  isFollowing?: boolean;
 }
 
 interface SendMember {

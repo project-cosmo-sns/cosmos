@@ -128,7 +128,7 @@ export default function ProfileHeader({
                 title: '팔로워',
                 toggleModal: () => toggleModal('follower'),
                 followData: memberData.memberId ? 'userFollower' : 'follower',
-                isFollowButton: false,
+                isFollowButton: !!memberData.memberId,
                 modalVisible: followModal.follower,
               }}
             />

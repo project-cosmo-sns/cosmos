@@ -21,6 +21,10 @@
     }
   }
 
+  .wrapper.border {
+    border-radius: 10px;
+  }
+
   .wrapper {
     @include glass-02;
     display: flex;
@@ -34,6 +38,7 @@
       right: 20px;
       left: 20px;
     }
+
     @media (min-width: 768px) {
       border-radius: 10px;
       padding-top: 30px;

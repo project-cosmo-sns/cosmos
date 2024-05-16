@@ -23,10 +23,21 @@ export default function EmojiSelection({
   setCurrentEmojiList,
   isPending,
 }: EmojiSelectionProps) {
+  const filteredCurrentEmojiList = emojiList.filter(
+    (emoji) => emoji.emojiCount !== 0,
+  );
   return (
     isVisible && (
       <div className={cn('wrapper')}>
-        <div className={cn('emoji-container')}>
+        <div
+          className={cn('emoji-container', {
+            left: filteredCurrentEmojiList.length <= 1,
+            middle:
+              filteredCurrentEmojiList.length >= 2 &&
+              filteredCurrentEmojiList.length <= 3,
+            right: filteredCurrentEmojiList.length >= 4,
+          })}
+        >
           {EMOJI_CODE.map((emojiCode) => (
             <EmojiButton
               key={emojiCode}

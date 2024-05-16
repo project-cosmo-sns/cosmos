@@ -10,25 +10,6 @@ export async function getStaticProps() {
 }
 
 export default function GithubRedirect() {
-  // useEffect(() => {
-  //   const handleLogin = async () => {
-  //     const code = new URLSearchParams(window.location.search).get('code');
-  //     if (code) {
-  //       try {
-  //         await githubLogin(code);
-  //         if (window.opener) {
-  //           window.opener.postMessage('close', '*');
-  //           console.log(code)
-  //         }
-  //         // window.close();
-  //       } catch (error) {
-  //         console.error('로그인 중 오류 발생:', error);
-  //       }
-  //     }
-  //   };
-
-  //   handleLogin();
-  // }, []);
   useEffect(() => {
     const code = new URLSearchParams(window.location.search).get('code');
     if (code) {

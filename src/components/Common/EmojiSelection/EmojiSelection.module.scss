@@ -1,7 +1,6 @@
 .emoji-container {
   display: flex;
   position: absolute;
-  // 모바일일 경우 위치 조정 필요함 (+버튼 기준 왼정렬 시 이모지 많을 때 오른쪽 짤리고, +버튼 중심으로 정렬 시 이모지 없을 때 왼쪽 짤림
   top: -50px;
   left: 0px;
   background-color: $black-02;
@@ -12,9 +11,25 @@
   gap: 4px;
 }
 
+.left {
+  left: 0px;
+}
+
+.middle {
+  left: -80px;
+}
+
+.right {
+  left: -180px;
+}
+
 @media (min-width: 768px) {
   .emoji-container {
     top: -48px;
+    left: -80px;
+  }
+
+  .left {
     left: 0px;
   }
 }

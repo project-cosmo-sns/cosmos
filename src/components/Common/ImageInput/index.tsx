@@ -5,8 +5,6 @@ import RenderImageLabel from './RenderImageLabel';
 import Input from '../Input';
 import { UseFormRegisterReturn, UseFormWatch } from 'react-hook-form';
 import { AuthFormProps } from '@/@types/type';
-import * as Icon from '@/components/Common/IconCollection';
-// import defaultProfileImg from '@/public/images/profile.svg';
 
 const cn = classNames.bind(styles);
 

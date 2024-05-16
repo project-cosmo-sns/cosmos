@@ -1,24 +1,27 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
-import classNames from 'classnames/bind';
-import { ProfileIconDark, CheckIcon } from '@/components/Common/IconCollection';
+import fetchData from '@/api/fetchData';
+import { CheckIcon } from '@/components/Common/IconCollection';
 import Modal from '@/components/Common/Layout/Modal';
 import FeedDetails from '@/components/Feed/FeedDetails/index';
-import { notificationType, NotificationData } from '../type';
 import getElapsedTime from '@/utils/getElaspedTime';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import classNames from 'classnames/bind';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import { NotificationData, notificationType } from '../type';
 import styles from './NotificationItem.module.scss';
-import fetchData from '@/api/fetchData';
-import FollowButton from '@/components/Common/Buttons/FollowButton';
 
 const cn = classNames.bind(styles);
 
 type NotificationItemProps = {
   data: NotificationData;
+  handleClosePopOver: () => void;
 };
 
-export default function NotificationItem({ data }: NotificationItemProps) {
+export default function NotificationItem({
+  data,
+  handleClosePopOver,
+}: NotificationItemProps) {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const queryClient = useQueryClient();
   const router = useRouter();
@@ -28,7 +31,13 @@ export default function NotificationItem({ data }: NotificationItemProps) {
     notification: {
       id,
       content,
-      notificationType: { type, feedId, postId, followerMemberId },
+      notificationType: {
+        type,
+        feedId,
+        postId,
+        followingMemberId,
+        // isFollowing,
+      },
       isConfirmed,
       createdAt,
     },
@@ -54,7 +63,8 @@ export default function NotificationItem({ data }: NotificationItemProps) {
     }
 
     if (type === notificationType.FOLLOW) {
-      router.push(`profile?memberId=${followerMemberId}`);
+      router.push(`/profile?memberId=${followingMemberId}`);
+      handleClosePopOver();
     }
 
     if (
@@ -62,6 +72,7 @@ export default function NotificationItem({ data }: NotificationItemProps) {
       type === notificationType.CREATE_POST_EMOJI
     ) {
       router.push(`/post/${postId}`);
+      handleClosePopOver();
     }
 
     if (
@@ -79,33 +90,37 @@ export default function NotificationItem({ data }: NotificationItemProps) {
     target.src = '/images/profile.svg';
   };
 
+  // 같은 유저로부터 팔로우 요청이 여러번 오면 하나로 통합되는게 아니라 여러 개가 오고있어서 임시로 주석처리.
+  // const { isActive, toggleFollow } = useFollowClick(
+  //   followingMemberId,
+  //   isFollowing,
+  // );
+
   return (
     <>
       <div
         className={cn('notification-item')}
         onClick={handleNotificationClick}
       >
-        {sendMember.profileImageUrl ? (
-          <Image
-            src={sendMember.profileImageUrl}
-            onError={onErrorImg}
-            alt="프로필 이미지"
-            width={40}
-            height={40}
-            className={cn('profile-image')}
-          />
-        ) : (
-          <ProfileIconDark width="54" height="54" />
-        )}
+        <Image
+          src={sendMember?.profileImageUrl || '/images/profile.svg'}
+          onError={onErrorImg}
+          alt="프로필 이미지"
+          width={40}
+          height={40}
+          className={cn('profile-image')}
+        />
         <p>
           <strong>{content}</strong>
           <span>{formattedCreatedAt}</span>
         </p>
-
-        {type === notificationType.FOLLOW && (
-          <FollowButton onClick={() => console.log('클릭')} isFollowButton />
-        )}
-
+        {/* {type === notificationType.FOLLOW && (
+          <FollowButton
+            onClick={toggleFollow}
+            isActive={isActive}
+            isFollowButton
+          />
+        )} */}
         {isConfirmed ? (
           <span className={cn('notification-confirm')}>
             <CheckIcon fill="#fff" width="13" height="9.5" />
