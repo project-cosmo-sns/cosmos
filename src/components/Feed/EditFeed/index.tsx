@@ -5,7 +5,7 @@ import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import { CloseIcon, AddImageIcon } from '@/components/Common/IconCollection';
 import { Inputs, FeedType } from '@/components/Feed/CreateFeed/type';
 import { useCreateFeedRequest } from '@/hooks/useCreateFeedRequest';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FeedDetailType } from '@/components/Feed/types';
 import { useForm, Controller } from 'react-hook-form';
 import styles from './EditFeed.module.scss';
@@ -13,6 +13,7 @@ import WriterProfile from '@/components/Common/WriterProfile';
 import { refetchType } from '@/@types/type';
 import fetchData from '@/api/fetchData';
 import Image from 'next/image';
+import { useToast } from '@/hooks/useToast';
 
 interface EditFeedTypes {
   feedData: FeedDetailType;
@@ -30,6 +31,8 @@ export default function EditFeed({
   const [images, setImages] = useState<Blob[]>([]);
   const [wasteBucket, setWasteBucket] = useState<string[]>([]);
   const [newBucket, setNewBucket] = useState<string[]>([]);
+  const queryClient = useQueryClient();
+  const { showToastHandler } = useToast();
   const cn = classNames.bind(styles);
   const {
     register,
@@ -91,7 +94,6 @@ export default function EditFeed({
   };
 
   const updateUrlBucket = async (currentImageValue: Blob[]) => {
-    console.log('-----업데이트 url 버켓 실행------');
     let urlList: string[] = [];
     if (currentImageValue && currentImageValue.length > 0) {
       for (let i = 0; i < currentImageValue.length; i += 1) {
@@ -142,7 +144,10 @@ export default function EditFeed({
           imageUrls: data.feedImage,
         },
       }),
-    onSuccess: () => feedContentRefetch(),
+    onSuccess: () => {
+      feedContentRefetch();
+      showToastHandler('피드 수정 완료!', 'check');
+    },
   });
 
   const onSubmit = async (data: FeedType) => {

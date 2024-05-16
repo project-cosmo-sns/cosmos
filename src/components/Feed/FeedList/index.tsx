@@ -62,8 +62,6 @@ export default function FeedList({ feedList, selectedSort }: FeedListProps) {
     refetch();
   }, [selectedCategory, selectedSort]);
 
-  console.log(feedPages);
-
   return (
     <>
       <div className={cn('container')}>
