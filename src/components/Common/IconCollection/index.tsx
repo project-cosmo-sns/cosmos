@@ -7,7 +7,7 @@ export interface IconCollectionType {
   height?: string;
   fill?: string;
   className?: string;
-  // onClick?: (e: MouseEvent<SVGSVGElement, globalThis.MouseEvent>) => void;
+  onClick?: (e: MouseEvent<SVGSVGElement, globalThis.MouseEvent>) => void;
   // 사용 안되는 프롭이라고 린트 오류나길래 일단 주석처리했습니다.
 }
 
