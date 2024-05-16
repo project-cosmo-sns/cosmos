@@ -1,14 +1,13 @@
-import styles from './Notification.module.scss';
-import classNames from 'classnames/bind';
+import fetchData from '@/api/fetchData';
 import PopOver from '@/components/Common/PopOverBox';
-import NotificationItem from './NotificationItem';
-import { BackIcon, SettingIcon } from '../../IconCollection';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
-import { useEffect, useState } from 'react';
+import classNames from 'classnames/bind';
+import { useState } from 'react';
+import { BackIcon, SettingIcon } from '../../IconCollection';
+import styles from './Notification.module.scss';
+import NotificationItem from './NotificationItem';
 import NotificationModal from './NotificationModal';
 import { NotificationResult } from './type';
-import fetchData from '@/api/fetchData';
-import { useToast } from '@/hooks/useToast';
 
 type PopOverProps = {
   onClose: () => void;
@@ -19,14 +18,11 @@ const cn = classNames.bind(styles);
 export default function Notification({ onClose }: PopOverProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const { showToastHandler } = useToast();
-
   const {
     data: notificationListData,
     ref,
     isFetchingNextPage,
     isLoading,
-    isError,
     isSuccess,
   } = useInfiniteScroll<NotificationResult>({
     queryKey: ['notification'],
@@ -39,12 +35,6 @@ export default function Notification({ onClose }: PopOverProps) {
   });
 
   const notificationList = notificationListData?.pages ?? [];
-
-  useEffect(() => {
-    if (isError) {
-      showToastHandler('인증된 사용자만 확인할 수 있습니다.', 'warn');
-    }
-  }, [isError]);
 
   return (
     <>
@@ -68,6 +58,7 @@ export default function Notification({ onClose }: PopOverProps) {
                 <NotificationItem
                   key={notificationitem.notification.id}
                   data={notificationitem}
+                  handleClosePopOver={onClose}
                 />
               )),
             )}

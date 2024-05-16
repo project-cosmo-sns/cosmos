@@ -7,6 +7,7 @@ import { FeedListType } from '../types';
 import styles from './FeedList.module.scss';
 import fetchData from '@/api/fetchData';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
 /**
  * @return {JSX.Element} FeedCardList - 추후에 변경 예정입니다. 지금은 목데이터를 화면에 출력하지만 변경한다면 상위 컴포넌트에서 피드 데이터를 받아서 뿌려줄 예정입니다.
  */
@@ -15,14 +16,17 @@ interface FeedListProps {
   feedList: FeedListType;
 }
 
+const cn = classNames.bind(styles);
+
 export default function FeedList({ feedList }: FeedListProps) {
-  const cn = classNames.bind(styles);
+  const { checkMemberStatus } = useFetchMemberStatus();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [feedId, setFeedId] = useState<number>(0);
   const handleClick = (selectedFeedId: number) => {
     setFeedId(selectedFeedId);
     setIsModalOpen(!isModalOpen);
   };
+
   const {
     data: feedListData,
     ref,
@@ -50,7 +54,7 @@ export default function FeedList({ feedList }: FeedListProps) {
               feedData={feed}
               hasPadding
               forDetails={false}
-              onClick={() => handleClick(feed.feed.id)}
+              onClick={() => checkMemberStatus(() => handleClick(feed.feed.id))}
             />
           )),
         )}

@@ -1,7 +1,7 @@
 import { EmojiCode, EmojiType } from '@/@types/type';
 import useOutSideClick from '@/hooks/useOutSideClick';
 import classNames from 'classnames/bind';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import EmojiButton from '../EmojiButton';
 import EmojiSelection from '../EmojiSelection';
 import { CommentIcon, EmojiIcon, EyeIcon, PlusIcon } from '../IconCollection';
