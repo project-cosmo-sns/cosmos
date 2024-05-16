@@ -3,6 +3,7 @@ import styles from './Modal.module.scss';
 import classNames from 'classnames/bind';
 import * as Icon from '@/components/Common/IconCollection/index';
 import ModalPortal from './ModalPortal';
+import useOutSideClick from '@/hooks/useOutSideClick';
 
 interface ModalType {
   children: ReactNode;

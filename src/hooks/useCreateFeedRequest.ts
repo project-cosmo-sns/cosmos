@@ -50,13 +50,11 @@ export function useCreateFeedRequest(
       }),
     onError: () => console.log('피드 등록에 실패하였습니다.'),
     onSuccess: () => {
-      if (toggleModal) {
-        toggleModal(false);
-        queryClient.invalidateQueries({
-          queryKey: ['feedList'],
-        });
-        showToastHandler('피드 작성 완료!', 'check');
-      }
+      queryClient.invalidateQueries({
+        queryKey: ['feedList'],
+      });
+      showToastHandler('피드 작성 완료!', 'check');
+      if (toggleModal) toggleModal(false);
     },
   });
 
