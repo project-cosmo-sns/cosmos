@@ -136,3 +136,13 @@
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
 }
+
+.blur {
+  filter: blur(5px);
+  transition: filter 0.3s ease-in;
+}
+ 
+.remove-blur {
+  filter: blur(0px);
+  transition: filter 0.3s ease-in;
+}
