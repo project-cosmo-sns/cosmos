@@ -8,6 +8,7 @@ export interface IconCollectionType {
   fill?: string;
   className?: string;
   onClick?: (e: MouseEvent<SVGSVGElement, globalThis.MouseEvent>) => void;
+  // 사용 안되는 프롭이라고 린트 오류나길래 일단 주석처리했습니다.
 }
 
 /**
@@ -134,6 +135,74 @@ export function CameraIcon({
         d="M12.0018 7.88717C10.287 7.88717 8.89694 9.27728 8.89694 10.9921C8.89694 12.7069 10.287 14.097 12.0018 14.097C13.7166 14.097 15.1067 12.7069 15.1067 10.9921C15.1067 9.27728 13.7166 7.88717 12.0018 7.88717ZM7.05078 10.9921C7.05078 8.25767 9.26744 6.04102 12.0018 6.04102C14.7362 6.04102 16.9529 8.25767 16.9529 10.9921C16.9529 13.7265 14.7362 15.9431 12.0018 15.9431C9.26744 15.9431 7.05078 13.7265 7.05078 10.9921Z"
         fill={fill}
       />
+    </IconTemplate>
+  );
+}
+export function CustomIcon({
+  fill = variables.white,
+  ...props
+}: IconCollectionType) {
+  return (
+    <IconTemplate viewBox="0 0 18 19" {...props}>
+      <g id="icon">
+        <path
+          id="Vector (Stroke)"
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M11.9101 7.33368C12.03 7.44526 12.03 7.62617 11.9101 7.73774L7.69139 11.6663C7.57157 11.7779 7.3773 11.7779 7.25748 11.6663L5.33986 9.8806C5.22005 9.76902 5.22005 9.58812 5.33986 9.47654C5.45968 9.36496 5.65395 9.36496 5.77377 9.47654L7.47443 11.0602L11.4762 7.33368C11.596 7.22211 11.7903 7.22211 11.9101 7.33368Z"
+          fill={fill}
+          stroke={fill}
+          strokeWidth="0.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          id="Vector"
+          d="M8.625 17.75C8.625 17.75 15.75 14.45 15.75 9.5V3.725L8.625 1.25L1.5 3.725V9.5C1.5 14.45 8.625 17.75 8.625 17.75Z"
+          stroke={fill}
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
+    </IconTemplate>
+  );
+}
+
+export function Certification({
+  width = '18',
+  height = '19',
+  fill = 'none',
+  className,
+}: IconCollectionType) {
+  return (
+    <IconTemplate
+      width={width}
+      height={height}
+      viewBox="0 0 18 19"
+      className={className}
+    >
+      <g id="icon">
+        <path
+          id="Vector (Stroke)"
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M11.9101 7.33368C12.03 7.44526 12.03 7.62617 11.9101 7.73774L7.69139 11.6663C7.57157 11.7779 7.3773 11.7779 7.25748 11.6663L5.33986 9.8806C5.22005 9.76902 5.22005 9.58812 5.33986 9.47654C5.45968 9.36496 5.65395 9.36496 5.77377 9.47654L7.47443 11.0602L11.4762 7.33368C11.596 7.22211 11.7903 7.22211 11.9101 7.33368Z"
+          fill="white"
+          stroke="white"
+          strokeWidth="0.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          id="Vector"
+          d="M8.625 17.75C8.625 17.75 15.75 14.45 15.75 9.5V3.725L8.625 1.25L1.5 3.725V9.5C1.5 14.45 8.625 17.75 8.625 17.75Z"
+          stroke="white"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </g>
     </IconTemplate>
   );
 }
