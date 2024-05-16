@@ -56,29 +56,28 @@ export default function ProfileHeader({
       );
     }
     // 테스트 시 상태 바꿀 곳
-    if (memberData.authorizationStatus === 'ACCEPT') {
-      return (
-        <div className={cn('profile-setting-button')}>
-          <ProfilePopOver
-            memberData={memberData}
-            onSetting={() => setIsModalOpen((prev) => !prev)}
-          />
-        </div>
-      );
-    }
+
     return (
-      <>
-        <button
-          type="button"
-          onClick={authFormClick}
-          className={cn('authorization-button')}
-        >
-          인증하기
-        </button>
-        <AuthForm modalVisible={showAuthForm} toggleModal={authFormClick} />
-      </>
+      <div className={cn('profile-setting-button')}>
+        <ProfilePopOver
+          memberData={memberData}
+          onSetting={() => setIsModalOpen((prev) => !prev)}
+        />
+      </div>
     );
   };
+  // return (
+  //   <>
+  //     <button
+  //       type="button"
+  //       onClick={authFormClick}
+  //       className={cn('authorization-button')}
+  //     >
+  //       인증하기
+  //     </button>
+  //     <AuthForm modalVisible={showAuthForm} toggleModal={authFormClick} />
+  //   </>
+  // );
 
   function introduceContent() {
     if (memberData.authorizationStatus === 'NONE') {

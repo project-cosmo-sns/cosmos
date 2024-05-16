@@ -12,8 +12,14 @@ import { FeedListType } from '@/components/Feed/types';
 import { PostListType } from '@/components/Post/types';
 import ProfileContent from '@/components/Profile/ProfileContent/ProfileContent';
 import EmptyContent from '@/components/Profile/ProfileContent/EmptyContent';
-import { useQuery } from '@tanstack/react-query';
 import instance from '@/api/axios';
+import {
+  hydrate,
+  useQueryClient,
+  dehydrate,
+  QueryClientProvider,
+  useQuery,
+} from '@tanstack/react-query';
 
 const cn = classNames.bind(styles);
 
@@ -26,7 +32,15 @@ export interface MemberDataContainerPropsType {
 
 // 프로필 SSR get 컴포넌트
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  return fetchMemberData(context);
+  const queryClient = useQueryClient();
+  await queryClient.prefetchQuery(['memberData'], fetchMemberData);
+
+  return {
+    props: {
+      dehydratedState: dehydrate(QueryClient),
+      // 기타 필요한 props
+    },
+  };
 };
 
 export default function MemberDataContainer({
