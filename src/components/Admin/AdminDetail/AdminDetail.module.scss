@@ -1,0 +1,32 @@
+.admin-detail-container {
+  @include glass-02;
+  padding: 10px;
+  width: 100%;
+  height: 160px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  .image-container {
+    position: relative;
+    width: 200px;
+  }
+  .text-wrapper {
+    text-align: center;
+    h1 {
+      @include font-style(2.3rem, $white-01, 600);
+    }
+    p {
+      @include font-style(1.8rem, $white-01, 400);
+      padding-top: 30px;
+    }
+  }
+  .button-container {
+    width: 160px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (min-width: 768px) {
+  }
+}
