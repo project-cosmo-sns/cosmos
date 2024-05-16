@@ -12,12 +12,16 @@
     width: 100%;
     @include flex-arrange(space-between, center);
   }
+  .icon-wrapper{
+    display: flex;
+    gap:8px;
+  }
 
   @media (min-width: 768px) {
     @include flex-arrange;
     width: 100%;
     height: 109px;
-    padding: 45px 0 12px 80px;
+    padding: 45px 0 12px 70px;
 
     .navigaionBar-wrapper {
       display: flex;
