@@ -30,8 +30,8 @@ export function useCreateFeedRequest(
         },
         withCredentials: true,
       }),
-    onError: () => console.log('이미지 삭제 요청 에러 '),
-    onSuccess: () => console.log('이미지 삭체 요청 성공'),
+    onError: () => console.error('이미지 삭제 요청 에러 '),
+    onSuccess: () => console.error('이미지 삭체 요청 성공'),
   });
 
   const deleteImage = (url: string) => {
@@ -48,7 +48,7 @@ export function useCreateFeedRequest(
           imageUrls: data.feedImage,
         },
       }),
-    onError: () => console.log('피드 등록에 실패하였습니다.'),
+    onError: () => console.error('피드 등록에 실패하였습니다.'),
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: ['feedList'],
