@@ -45,7 +45,7 @@ export default function ProfilePopOver({
   const dispatch = useDispatch();
 
   const memberLogoutClick = async () => {
-    const res = await memberLogout();
+    await memberLogout();
     dispatch(logout());
     router.push('/').then(() => {
       window.location.reload();

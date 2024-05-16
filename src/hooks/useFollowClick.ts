@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, useQuery } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
 
 /**
@@ -21,21 +21,14 @@ export default function useFollowClick(
     isFollowed: boolean;
   }
 
-  const checkFollowStatus = async () => {
-    try {
-      const response = (await fetchData({
+  const { data: checkFollowStatus } = useQuery({
+    queryKey: ['followStatus', memberId],
+    queryFn: () => {
+      return fetchData({
         param: `/profile/${memberId}`,
-      })) as FollowResponse;
-      setIsActive(response.isFollowed);
-    } catch (error) {
-      console.error('팔로우 상태 확인 중 오류 발생');
-    }
-  };
-
-  // 팔로우 성공 후, 팔로우 상태를 다시 확인하는 함수
-  const handleSuccess = async () => {
-    await checkFollowStatus();
-  };
+      }) as Promise<FollowResponse>;
+    },
+  });
 
   const { mutate: addFollow } = useMutation({
     mutationFn: () => {
@@ -48,7 +41,6 @@ export default function useFollowClick(
     onSuccess: () => {
       if (memberId) {
         queryClient.invalidateQueries({ queryKey: ['followStatus', memberId] });
-        handleSuccess();
       }
     },
   });
@@ -64,14 +56,13 @@ export default function useFollowClick(
     onSuccess: () => {
       if (memberId) {
         queryClient.invalidateQueries({ queryKey: ['followStatus', memberId] });
-        handleSuccess();
       }
     },
   });
 
   useEffect(() => {
-    if (memberId) {
-      checkFollowStatus();
+    if (memberId && checkFollowStatus) {
+      setIsActive(checkFollowStatus.isFollowed);
     }
   }, [memberId, checkFollowStatus]);
 
