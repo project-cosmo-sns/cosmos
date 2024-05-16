@@ -36,7 +36,7 @@ export default function FeedList({ feedList, selectedSort }: FeedListProps) {
   };
 
   const initialData: InfiniteData<FeedListType> = {
-    pages: [feedList], // 초기 데이터가 들어있는 페이지 배열
+    pages: [feedList], // 초기 데이터가 들어있는 페이지 배열.
     pageParams: [1], // 초기 데이터의 페이지 매개변수 배열
   };
 
