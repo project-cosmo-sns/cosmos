@@ -2,6 +2,12 @@
   margin: 0;
 }
 
-.content {
-  width: 100%;
+.profile-content {
+  margin: 20px;
+}
+
+@media (min-width: 768px) {
+  .content {
+    width: 100%;
+  }
 }
