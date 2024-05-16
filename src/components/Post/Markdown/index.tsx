@@ -4,7 +4,6 @@ import Markdown from 'react-markdown';
 import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import CodeBlock from './CodeBlock';
-import MDEditor from '@uiw/react-md-editor';
 
 interface MarkdownContentProps {
   className: string;
@@ -37,7 +36,6 @@ export default function MarkdownContent({
 
   return (
     <>
-      <MDEditor.Markdown source={content} />
       <Markdown
         className={className}
         remarkPlugins={[remarkGfm]}
