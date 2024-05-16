@@ -1,19 +1,20 @@
 import fetchData from '@/api/fetchData';
-import DetailImageModal from '@/components/Common/DetailImageModal';
-import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
-import { useMutation } from '@tanstack/react-query';
-import { Dispatch, SetStateAction, useState } from 'react';
-import EmojiBundle from '@/components/Common/EmojiBundle';
 import DeleteModal from '@/components/Common/DeleteModal';
-import { FeedDetailType } from '../types';
-import { useRouter } from 'next/router';
+import DetailImageModal from '@/components/Common/DetailImageModal';
+import EmojiBundle from '@/components/Common/EmojiBundle';
+import { DeleteIcon, EditIcon } from '@/components/Common/IconCollection';
 import WriterProfile from '@/components/Common/WriterProfile';
+import { useImageDetail } from '@/hooks/useImageDetail';
 import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import getElapsedTime from '@/utils/getElaspedTime';
+import { useMutation } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { FeedDetailType } from '../types';
 import styles from './FeedCard.module.scss';
-import { useImageDetail } from '@/hooks/useImageDetail';
+import TextWithLinks from '@/components/Common/TextWithLinks';
 
 interface FeedCardTypes {
   feedData: FeedDetailType;
@@ -129,7 +130,7 @@ export default function FeedCard({
               </div>
             )}
             <div className={cn('content', forDetails || 'content-hidden')}>
-              {content}
+              <TextWithLinks text={content} />
             </div>
           </div>
           {forDetails ||

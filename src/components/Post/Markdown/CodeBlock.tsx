@@ -10,16 +10,14 @@ export default function CodeBlock(
 ) {
   const { className, children } = props;
   const match = /language-(\w+)/.exec(className || '');
-  return match ? (
+  return (
     <SyntaxHighlighter
       PreTag="div"
       showLineNumbers
-      language={match[1]}
+      language={match ? match[1] : 'text'}
       style={oneDark}
     >
       {String(children).replace(/\n$/, '')}
     </SyntaxHighlighter>
-  ) : (
-    <code {...props}>{children}</code>
   );
 }

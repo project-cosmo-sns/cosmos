@@ -1,10 +1,13 @@
 // eslint-disable-next-line import/no-cycle
-import { PostCommentType } from '@/components/Common/CommentInput/api';
 import { Comment } from '@/components/Common/CommentInput';
 import { EditCommentType, InfiniteDataRefetchType } from '@/@types/type';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
 import { CommentListType } from '@/components/Feed/types';
+
+export interface PostCommentType {
+  content: string;
+}
 
 export function useCommentRequest(
   postId: number,

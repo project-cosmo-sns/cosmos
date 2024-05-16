@@ -21,6 +21,10 @@
     }
   }
 
+  .wrapper.border {
+    border-radius: 10px;
+  }
+
   .wrapper {
     @include glass-02;
     display: flex;

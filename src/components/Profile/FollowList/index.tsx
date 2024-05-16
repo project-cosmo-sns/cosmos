@@ -67,6 +67,9 @@ export default function FollowList({ followListProps }: FollowListType) {
     },
   );
 
+  const followDataList =
+    followDataResult?.pages.flatMap((page) => page.data).length === 0;
+
   return (
     <Modal
       title={title}
@@ -76,20 +79,26 @@ export default function FollowList({ followListProps }: FollowListType) {
       cssComponentDisplay={cn('followList-wrapper')}
     >
       <div>
-        {followDataResult?.pages.map((page) =>
-          page.data.map((follow: FollowDataProps) => {
-            const followDetailInfo =
-              followData === 'userFollowing' || followData === 'following'
-                ? follow.followingInfo
-                : follow.followerInfo;
-            return (
-              <Follow
-                key={followDetailInfo?.memberId}
-                {...followDetailInfo}
-                isFollowButton={isFollowButton}
-              />
-            );
-          }),
+        {followDataResult?.pages.map((page, pageIndex) => (
+          <div key={pageIndex}>
+            {page.data.map((follow: FollowDataProps, index) => {
+              const followDetailInfo =
+                followData === 'userFollowing' || followData === 'following'
+                  ? follow.followingInfo
+                  : follow.followerInfo;
+              const key = `${pageIndex}-${index}`;
+              return (
+                <Follow
+                  key={key}
+                  {...followDetailInfo}
+                  isFollowButton={isFollowButton}
+                />
+              );
+            })}
+          </div>
+        ))}
+        {followDataList && (
+          <p className={cn('follow-list')}>친구가 없습니다🙄</p>
         )}
         <div ref={ref} />
       </div>

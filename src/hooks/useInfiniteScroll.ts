@@ -14,6 +14,7 @@ type UseInfiniteScrollProps<T> = {
   initialData?:
     | InfiniteData<T, unknown>
     | InitialDataFunction<InfiniteData<T, unknown>>;
+  enabled?: boolean;
 };
 
 /**
@@ -41,6 +42,7 @@ export default function useInfiniteScroll<T>({
   fetchFunction,
   getNextPageParam,
   initialData,
+  enabled = true,
 }: UseInfiniteScrollProps<T>) {
   const { data, fetchNextPage, hasNextPage, ...rest } = useInfiniteQuery<T>({
     queryKey,
@@ -48,6 +50,7 @@ export default function useInfiniteScroll<T>({
     initialPageParam: 1,
     getNextPageParam,
     initialData,
+    enabled,
   });
 
   const [ref, inView] = useInView({

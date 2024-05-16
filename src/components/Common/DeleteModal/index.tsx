@@ -25,6 +25,7 @@ export default function DeleteModal({
       toggleModal={() => setIsDeleteModalOpen(false)}
       cssModalSize={cn()}
       cssComponentDisplay={cn()}
+      border
     >
       <div className={cn('wrapper')}>
         <span>정말 {title} 하시겠습니까?</span>

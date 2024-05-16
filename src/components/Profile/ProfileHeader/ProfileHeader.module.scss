@@ -34,7 +34,7 @@
 .profile-name-section {
   display: flex;
   margin: auto 0;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   align-items: center;
   @include font-style(1.6rem, $white-01, 700);
 }
@@ -100,7 +100,7 @@
     grid-template-columns: auto 2fr;
     grid-template-rows: auto auto;
     height: auto;
-    padding: 20px 30px;
+    padding: 25px 30px;
     border-radius: 10px;
     grid-gap: 0;
     align-items: start;
@@ -118,16 +118,12 @@
     margin-left: 20px;
   }
 
-  .profile-following-section {
-    padding-bottom: 10px;
-  }
-
   .profile-introduce-section {
     @include font-style(1.4rem, $gray-03, 500);
     grid-column: 2;
     grid-row: 2;
     border-top: none;
-    padding-bottom: 1px;
+    padding: 12px 0 1px 20px;
   }
 
   .introduce-empty {
@@ -136,7 +132,7 @@
 }
 .profile-setting-or-following {
   position: absolute;
-  top: -5px;
+  top: 0px;
   right: 30px;
   cursor: pointer;
 

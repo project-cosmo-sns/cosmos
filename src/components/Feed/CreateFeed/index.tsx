@@ -216,7 +216,7 @@ export default function CreateFeed({
         </div>
       </div>
       <div className={cn('button')}>
-        <DefaultButton buttonType="submit" color="primary-01" size="medium">
+        <DefaultButton buttonType="submit" color="primary-01" size="large">
           등록
         </DefaultButton>
       </div>

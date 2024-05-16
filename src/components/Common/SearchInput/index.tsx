@@ -6,6 +6,7 @@ import { ChangeEvent, KeyboardEvent, useEffect, useState } from 'react';
 import { GlassIcon, CloseIcon } from '@/components/Common/IconCollection';
 import { useRouter } from 'next/router';
 import { useSearchParams } from 'next/navigation';
+import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
 
 const cn = classNames.bind(styles);
 
@@ -15,6 +16,8 @@ export default function SearchInput() {
   const searchParams = useSearchParams();
   const keyword: string = searchParams.get('query') || '';
   const [inputValue, setInputValue] = useState<string>(keyword);
+
+  const { checkMemberStatus } = useFetchMemberStatus();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -33,7 +36,7 @@ export default function SearchInput() {
 
   const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      handleSearch();
+      checkMemberStatus(() => handleSearch());
     }
   };
 
