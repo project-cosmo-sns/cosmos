@@ -97,7 +97,6 @@ export default function MemberDataContainer({
               memberData={memberData}
             />
           )}
-          ;
           {memberData.authorizationStatus === 'NONE' && (
             <EmptyContent selectedOption={selectedOption} />
           )}
