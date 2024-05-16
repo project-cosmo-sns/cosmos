@@ -64,8 +64,6 @@ export default function ProfilePopOver({
         profilePopover.style.top = `${kebabButtonRect.bottom}px`;
         profilePopover.style.left = `${kebabButtonRect.left - 100}px`;
       }
-      console.log('kebabButtonRect', kebabButtonRect);
-      console.log('profilePopover', profilePopover);
     }
   }, [isExpanded]);
   // isExpanded가 변경될 때마다 실행

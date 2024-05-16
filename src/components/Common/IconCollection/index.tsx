@@ -207,6 +207,22 @@ export function Certification({
   );
 }
 
+export function CheckIcon({
+  fill = variables.black01,
+  ...props
+}: IconCollectionType) {
+  return (
+    <IconTemplate {...props}>
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M23.6805 4.31614C24.1065 4.73766 24.1065 5.42107 23.6805 5.84259L8.68048 20.6839C8.25445 21.1054 7.56373 21.1054 7.1377 20.6839L0.31952 13.9378C-0.106507 13.5163 -0.106507 12.8329 0.31952 12.4114C0.745546 11.9899 1.43627 11.9899 1.8623 12.4114L7.90909 18.3942L22.1377 4.31614C22.5637 3.89462 23.2545 3.89462 23.6805 4.31614Z"
+        fill={fill}
+      />
+    </IconTemplate>
+  );
+}
+
 export function CompleteIcon({
   fill = '#0ACF83',
   ...props
