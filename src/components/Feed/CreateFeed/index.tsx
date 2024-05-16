@@ -54,7 +54,6 @@ export default function CreateFeed({
       const prev = getValues('feedImage');
       if (data.config.url) {
         const imageUrl = data.config.url.split('?')[0];
-        console.log(imageUrl, '-----성공 응답 url --------');
         if (prev) {
           setValue('feedImage', [...prev, imageUrl]);
           setUrlBucket([...prev, imageUrl]);

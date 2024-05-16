@@ -4,12 +4,11 @@ import { UrlType, FeedType } from '@/components/Feed/CreateFeed/type';
 import axios from 'axios';
 import { baseURL } from '@/api/axios';
 import { Dispatch, SetStateAction } from 'react';
-import { useRouter } from 'next/router';
+import { useToast } from './useToast';
 
 export function useCreateFeedRequest(
   toggleModal?: Dispatch<SetStateAction<boolean>>,
 ) {
-  const router = useRouter();
   const queryClient = useQueryClient();
   const { refetch: getUrl } = useQuery<UrlType>({
     queryKey: ['signedUrl'],
@@ -38,6 +37,8 @@ export function useCreateFeedRequest(
     deleteUrlMutate.mutate(url);
   };
 
+  const { showToastHandler } = useToast();
+
   const { mutate: postFeed, isSuccess } = useMutation({
     mutationFn: (data: FeedType) =>
       fetchData({
@@ -55,7 +56,7 @@ export function useCreateFeedRequest(
         queryClient.invalidateQueries({
           queryKey: ['feedList'],
         });
-        // router.reload();
+        showToastHandler('피드 작성 완료!', 'check');
       }
     },
   });
