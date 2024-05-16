@@ -3,6 +3,7 @@
   @include glass-02($edge: none);
   padding: 18px 20px;
   border-radius: 5px;
+  z-index: 999;
 
   gap: 12px;
   position: fixed;

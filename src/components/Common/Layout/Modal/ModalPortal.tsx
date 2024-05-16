@@ -15,13 +15,16 @@ export default function ModalPortal({
   useEffect(() => {
     setIsCSR(true);
 
-    // if (modalVisible) {
-    //   document.body.style.overflow = 'hidden';
-    // }
+    if (modalVisible) {
+      document.body.style.overflow = 'hidden';
+    }
+    if (!modalVisible) {
+      document.body.style.overflow = 'auto';
+    }
 
-    // return () => {
-    //   document.body.style.overflow = 'unset';
-    // };
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
   }, []);
 
   if (typeof window === 'undefined') return <></>;

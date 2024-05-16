@@ -2,16 +2,18 @@ import { useState, Dispatch, SetStateAction } from 'react';
 import classNames from 'classnames/bind';
 import axios from 'axios';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
-import { CloseIcon } from '@/components/Common/IconCollection';
+import { CloseIcon, AddImageIcon } from '@/components/Common/IconCollection';
 import { Inputs, FeedType } from '@/components/Feed/CreateFeed/type';
 import { useCreateFeedRequest } from '@/hooks/useCreateFeedRequest';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FeedDetailType } from '@/components/Feed/types';
 import { useForm, Controller } from 'react-hook-form';
 import styles from './EditFeed.module.scss';
 import WriterProfile from '@/components/Common/WriterProfile';
 import { refetchType } from '@/@types/type';
 import fetchData from '@/api/fetchData';
+import Image from 'next/image';
+import { useToast } from '@/hooks/useToast';
 
 interface EditFeedTypes {
   feedData: FeedDetailType;
@@ -29,6 +31,8 @@ export default function EditFeed({
   const [images, setImages] = useState<Blob[]>([]);
   const [wasteBucket, setWasteBucket] = useState<string[]>([]);
   const [newBucket, setNewBucket] = useState<string[]>([]);
+  const queryClient = useQueryClient();
+  const { showToastHandler } = useToast();
   const cn = classNames.bind(styles);
   const {
     register,
@@ -90,7 +94,6 @@ export default function EditFeed({
   };
 
   const updateUrlBucket = async (currentImageValue: Blob[]) => {
-    console.log('-----업데이트 url 버켓 실행------');
     let urlList: string[] = [];
     if (currentImageValue && currentImageValue.length > 0) {
       for (let i = 0; i < currentImageValue.length; i += 1) {
@@ -141,7 +144,10 @@ export default function EditFeed({
           imageUrls: data.feedImage,
         },
       }),
-    onSuccess: () => feedContentRefetch(),
+    onSuccess: () => {
+      feedContentRefetch();
+      showToastHandler('피드 수정 완료!', 'check');
+    },
   });
 
   const onSubmit = async (data: FeedType) => {
@@ -205,9 +211,16 @@ export default function EditFeed({
                   />
                 )}
               />
-              <label htmlFor="feedImage" className={cn('file-label')}>
-                <span className={cn('label-text')}>이미지 업로드</span>
-              </label>
+              {watch('feedImage')?.length < 3 ? (
+                <label htmlFor="feedImage" className={cn('file-label')}>
+                  <div className={cn('image-icon-wrapper')}>
+                    <AddImageIcon className={cn('image-icon')} />
+                    <span className={cn('label-text')}>이미지 업로드</span>
+                  </div>
+                </label>
+              ) : (
+                ''
+              )}
               {urlBucket && (
                 <div className={cn('preview-box')}>
                   {urlBucket.map((item, index) => (
@@ -219,10 +232,13 @@ export default function EditFeed({
                         }}
                       />
                       <div className={cn('preview-wrapper')}>
-                        <img
+                        <Image
+                          fill
                           className={cn('file-preview')}
                           src={item}
                           alt="image_item"
+                          sizes="33vw"
+                          priority
                         />
                       </div>
                     </div>
@@ -238,6 +254,10 @@ export default function EditFeed({
             placeholder="글을 작성해보세요"
             {...register('content', {
               required: '게시글을 작성해주세요',
+              maxLength: 300,
+              validate: {
+                whiteSpace: (value) => !!value.trim() || '댓글을 입력해주세요',
+              },
             })}
           />
           {errors.content && (

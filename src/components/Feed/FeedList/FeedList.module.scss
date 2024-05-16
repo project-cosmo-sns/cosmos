@@ -13,6 +13,14 @@
     }
   }
 }
+
+.no-feed {
+  @include flex-arrange;
+  width: 100%;
+  height: 540px;
+  color: $white-01;
+}
+
 .feed-detail-modalSize {
   width: 100%;
   height: 100%;

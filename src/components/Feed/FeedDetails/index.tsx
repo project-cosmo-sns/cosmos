@@ -6,6 +6,7 @@ import FeedCard from '@/components/Feed/FeedCard/index';
 import fetchData from '@/api/fetchData';
 import { useQuery } from '@tanstack/react-query';
 import { useCommentRequest } from '@/hooks/useCommentRequest';
+import LoadingSpinner from '@/components/Common/LoadingSpinner';
 import EditFeed from '@/components/Feed/EditFeed/index';
 import { FeedDetailType, CommentListType } from '../types';
 import styles from './FeedDetails.module.scss';
@@ -77,9 +78,9 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
     },
   };
 
-  if (isFeedDataPending) return '피드 데이터 불러오는 중...';
+  if (isFeedDataPending) return <LoadingSpinner />;
   if (isFeedDataError) return '피드 데이터 에러 발생!';
-  if (isCommentDataPending) return '코멘트 데이터 불러오는 중...';
+  if (isCommentDataPending) return <LoadingSpinner />;
   if (isCommentDataError) return '코멘트 데이터 에러 발생!';
 
   return (
@@ -122,10 +123,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
                 ))
               ) : (
                 <div key={index} className={cn('empty-comment')}>
-                  <span className={cn('message')}>
-                    😭 {feed.writer.nickname} 님에게 남겨진 댓글이 아직 없어요.
-                    😭
-                  </span>
+                  <span className={cn('message')}>댓글이 없습니다.</span>
                 </div>
               ),
             )}

@@ -1,10 +1,11 @@
-import styles from './TodayQuestion.module.scss';
-import classNames from 'classnames/bind';
-import { RightIcon } from '../IconCollection';
-import { useQuery } from '@tanstack/react-query';
-import { TodayQuestionResult } from './type';
 import fetchData from '@/api/fetchData';
+import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
+import { useQuery } from '@tanstack/react-query';
+import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
+import { RightIcon } from '../IconCollection';
+import styles from './TodayQuestion.module.scss';
+import { TodayQuestionResult } from './type';
 
 const cn = classNames.bind(styles);
 
@@ -19,10 +20,14 @@ export default function TodayQuestion() {
       }),
   });
 
+  const { checkMemberStatus } = useFetchMemberStatus();
+
   return (
     <div
       className={cn('question-container')}
-      onClick={() => router.push(`/post/${data?.postId}`)}
+      onClick={() =>
+        checkMemberStatus(() => router.push(`/post/${data?.postId}`))
+      }
     >
       <div className={cn('question-title')}>
         <strong>오늘의 질문</strong>
