@@ -24,7 +24,7 @@ export default function GoogleRedirect() {
 
   return (
     <div className={cn('googleRedirect-container')}>
-      <MainLogoIcon width='50' height='50'/>
+      <MainLogoIcon width="50" height="50" />
       <LogoIcon width="150" height="150" />
     </div>
   );
