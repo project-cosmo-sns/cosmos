@@ -6,10 +6,14 @@
 }
 
 .comment-list-area {
-  max-height: 350px;
-  overflow: scroll;
-  scrollbar-width: none;
+  max-height: 400px;
+  // overflow: scroll;
+  // scrollbar-width: none;
   border-radius: 5px;
+
+  @media (min-width: 768px) {
+    max-height: 350px;
+  }
 
   .comment-list {
     padding-bottom: 20px;
@@ -35,6 +39,6 @@
   height: 100px;
 
   .message {
-    @include font-style(2rem, $gray-02, 600);
+    @include font-style(1.6rem, $gray-02, 500);
   }
 }

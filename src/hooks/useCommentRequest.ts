@@ -1,9 +1,10 @@
 // eslint-disable-next-line import/no-cycle
 import { Comment } from '@/components/Common/CommentInput';
 import { EditCommentType, InfiniteDataRefetchType } from '@/@types/type';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import fetchData from '@/api/fetchData';
 import { CommentListType } from '@/components/Feed/types';
+import { useToast } from './useToast';
 
 export interface PostCommentType {
   content: string;
@@ -14,6 +15,9 @@ export function useCommentRequest(
   forFeeds: boolean,
   refetch?: InfiniteDataRefetchType<CommentListType>,
 ) {
+  const queryClient = useQueryClient();
+  const { showToastHandler } = useToast();
+
   const { mutate: postCommentMutate } = useMutation({
     mutationFn: (dataParam: Comment) =>
       fetchData<PostCommentType>({
@@ -24,9 +28,7 @@ export function useCommentRequest(
         },
       }),
     onSuccess: async () => {
-      if (refetch) {
-        await refetch();
-      }
+      queryClient.invalidateQueries({ queryKey: ['feedComments'] });
     },
   });
 
@@ -37,9 +39,8 @@ export function useCommentRequest(
         method: 'delete',
       }),
     onSuccess: async () => {
-      if (refetch) {
-        await refetch();
-      }
+      queryClient.invalidateQueries({ queryKey: ['feedComments'] });
+      showToastHandler('댓글 삭제 완료!', 'check');
     },
   });
 
@@ -87,9 +88,8 @@ export function useCommentRequest(
         },
       }),
     onSuccess: async () => {
-      if (refetch) {
-        await refetch();
-      }
+      showToastHandler('댓글 수정 완료!', 'check');
+      queryClient.invalidateQueries({ queryKey: ['feedComments'] });
     },
   });
 

@@ -15,6 +15,7 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { FeedDetailType } from '../types';
 import styles from './FeedCard.module.scss';
 import TextWithLinks from '@/components/Common/TextWithLinks';
+import LoadingSpinner from '@/components/Common/LoadingSpinner';
 
 interface FeedCardTypes {
   feedData: FeedDetailType;
@@ -61,6 +62,7 @@ export default function FeedCard({
     emojis,
   } = feedData.feed;
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isImageLoading, setImageLoading] = useState(true);
   const router = useRouter();
 
   const deleteMutaion = useMutation({
@@ -120,16 +122,25 @@ export default function FeedCard({
                     onClick={() => showImageDetail(url)}
                   >
                     <Image
+                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
                       fill
+                      onLoad={() => setImageLoading(false)}
+                      className={cn(
+                        'image-item',
+                        isImageLoading ? 'blur' : 'remove-blur',
+                      )}
                       style={{ objectFit: 'cover' }}
                       src={url}
+                      sizes="33vw"
+                      priority
                       alt="feedImage"
+                      loading="eager"
                     />
                   </div>
                 ))}
               </div>
             )}
-            <div className={cn('content')}>
+            <div className={cn('content', forDetails || 'content-hidden')}>
               <TextWithLinks text={content} />
             </div>
           </div>
@@ -138,11 +149,13 @@ export default function FeedCard({
               <div className={cn('upload-image-wrapper')}>
                 <div className={cn('upload-image')}>
                   <Image
-                    sizes="(max-width: 768px) 100vw, 33vw"
+                    className={cn('image-tag')}
+                    sizes="33vw"
                     fill
                     style={{ objectFit: 'cover' }}
                     src={`${imageUrls[0]}`}
                     alt="feedImage"
+                    priority
                   />
                 </div>
                 {imageUrls.length > 1 && (
