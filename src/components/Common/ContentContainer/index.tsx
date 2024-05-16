@@ -1,15 +1,15 @@
 import { ContainerOptionType } from '@/@types/type';
-import useScrollDirection from '@/hooks/useScrollDirection';
-import classNames from 'classnames/bind';
-import SortDropdown from '../Buttons/SortDropdown';
-import styles from './ContentContainer.module.scss';
-import OptionButton from './OptionButton';
-import scrollToTop from '@/utils/scrollToTop';
-import ModalPortal from '../Layout/Modal/ModalPortal';
-import { ScrollTopIcon } from '../IconCollection';
 import { SortType } from '@/constants/sortType';
+import useScrollDirection from '@/hooks/useScrollDirection';
+import scrollToTop from '@/utils/scrollToTop';
+import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import SortDropdown from '../Buttons/SortDropdown';
+import { ScrollTopIcon } from '../IconCollection';
+import ModalPortal from '../Layout/Modal/ModalPortal';
+import styles from './ContentContainer.module.scss';
+import OptionButton from './OptionButton';
 
 const cn = classNames.bind(styles);
 
