@@ -119,7 +119,6 @@ export default function CreateFeed({
     setValue('feedImage', filteredUrlBucket);
     setUrlBucket(filteredUrlBucket);
   };
-  console.log(getValues('feedImage'));
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <div className={cn('wrapper')}>
@@ -129,7 +128,6 @@ export default function CreateFeed({
           alt="profile_image"
           width={40}
           height={40}
-          onClick={() => console.log('프로필모달 열기')}
         />
         <div className={cn('content')}>
           <textarea
@@ -174,7 +172,7 @@ export default function CreateFeed({
                         updateUrlBucket(fileList);
                       } else {
                         setValue('feedImage', []);
-                        alert('파일은 3개까지 제출 가능');
+                        alert('이미지는 3개 까지 업로드 가능합니다.');
                       }
                     }}
                   />
@@ -201,10 +199,12 @@ export default function CreateFeed({
                         }}
                       />
                       <div className={cn('preview-wrapper')}>
-                        <img
+                        <Image
+                          fill
                           className={cn('file-preview')}
                           src={item}
                           alt="image_item"
+                          priority
                         />
                       </div>
                     </div>

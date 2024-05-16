@@ -12,6 +12,7 @@ import styles from './EditFeed.module.scss';
 import WriterProfile from '@/components/Common/WriterProfile';
 import { refetchType } from '@/@types/type';
 import fetchData from '@/api/fetchData';
+import Image from 'next/image';
 
 interface EditFeedTypes {
   feedData: FeedDetailType;
@@ -226,10 +227,12 @@ export default function EditFeed({
                         }}
                       />
                       <div className={cn('preview-wrapper')}>
-                        <img
+                        <Image
+                          fill
                           className={cn('file-preview')}
                           src={item}
                           alt="image_item"
+                          priority
                         />
                       </div>
                     </div>

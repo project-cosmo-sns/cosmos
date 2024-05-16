@@ -78,8 +78,9 @@
             .preview-container {
               position: relative;
               .preview-wrapper {
-                width: 102px;
-                height: 102px;
+                position: relative;
+                width: auto;
+                height: auto;
                 border-radius: 5px;
 
                 @media (min-width: 768px) {

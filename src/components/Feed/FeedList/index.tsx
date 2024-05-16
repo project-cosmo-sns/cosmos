@@ -1,8 +1,10 @@
 import Modal from '@/components/Common/Layout/Modal';
 import FeedCard from '@/components/Feed/FeedCard/index';
 import FeedDetails from '@/components/Feed/FeedDetails/index';
+import { SortType } from '@/constants/sortType';
+import { CATEGORY_LIST } from '@/constants/categoryList';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { FeedListType } from '../types';
 import styles from './FeedList.module.scss';
 import fetchData from '@/api/fetchData';
@@ -14,11 +16,16 @@ import { InfiniteData } from '@tanstack/react-query';
 
 interface FeedListProps {
   feedList: FeedListType;
+  selectedSort: SortType;
 }
 
-export default function FeedList({ feedList }: FeedListProps) {
+export default function FeedList({ feedList, selectedSort }: FeedListProps) {
   const cn = classNames.bind(styles);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+  const queryParam = CATEGORY_LIST[selectedCategory]
+    ? `&category=${selectedCategory}`
+    : '';
   const [feedId, setFeedId] = useState<number>(0);
   const handleClick = (selectedFeedId: number) => {
     setFeedId(selectedFeedId);
@@ -34,11 +41,12 @@ export default function FeedList({ feedList }: FeedListProps) {
     data: feedListData,
     ref,
     isFetchingNextPage,
+    refetch,
   } = useInfiniteScroll<FeedListType>({
     queryKey: ['feedList'],
     fetchFunction: (pageParam) =>
       fetchData({
-        param: `feed/list?order=DESC&page=${pageParam}&take=10`,
+        param: `feed/list?order=DESC&page=${pageParam}&take=10&sortBy=${selectedSort}${queryParam}`,
       }),
     getNextPageParam: (lastPage) =>
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
@@ -47,19 +55,29 @@ export default function FeedList({ feedList }: FeedListProps) {
 
   const feedPages = feedListData?.pages ?? [];
 
+  useEffect(() => {
+    refetch();
+  }, [selectedCategory, selectedSort]);
+
+  console.log(feedPages);
+
   return (
     <>
       <div className={cn('container')}>
-        {feedPages.map((feedPage) =>
-          feedPage.data.map((feed) => (
-            <FeedCard
-              key={feed.feed.id}
-              feedData={feed}
-              hasPadding
-              forDetails={false}
-              onClick={() => handleClick(feed.feed.id)}
-            />
-          )),
+        {feedPages[0].data.length ? (
+          feedPages.map((feedPage) =>
+            feedPage.data.map((feed) => (
+              <FeedCard
+                key={feed.feed.id}
+                feedData={feed}
+                hasPadding
+                forDetails={false}
+                onClick={() => handleClick(feed.feed.id)}
+              />
+            )),
+          )
+        ) : (
+          <div className={cn('no-feed')}>피드가 없습니다</div>
         )}
       </div>
       {!isFetchingNextPage && <div ref={ref} />}
