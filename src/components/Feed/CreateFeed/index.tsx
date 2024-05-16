@@ -132,12 +132,13 @@ export default function CreateFeed({
           <textarea
             className={cn('text')}
             rows={5}
+            maxLength={300}
             placeholder="글을 작성해보세요"
             {...register('content', {
               required: '게시글을 작성해주세요',
               maxLength: 300,
-              validate: (value) => {
-                return !!value.trim();
+              validate: {
+                whiteSpace: (value) => !!value.trim() || '댓글을 입력해주세요',
               },
             })}
           />

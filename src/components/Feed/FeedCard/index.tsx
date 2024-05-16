@@ -128,7 +128,9 @@ export default function FeedCard({
                 ))}
               </div>
             )}
-            <div className={cn('content')}>{content}</div>
+            <div className={cn('content', forDetails || 'content-hidden')}>
+              {content}
+            </div>
           </div>
           {forDetails ||
             (!!imageUrls?.length && (

@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './AddContentPopOver.module.scss';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PopOver from '../PopOverBox';
 import Modal from '@/components/Common/Layout/Modal';
 import { PostIcon, FeedIcon } from '@/components/Common/IconCollection';

@@ -6,7 +6,6 @@
   .wrapper {
     display: flex;
     flex-direction: column;
-    margin-top: 40px;
     gap: 12px;
     height: 100%;
 
@@ -37,6 +36,7 @@
         padding: 16px;
         border-radius: 5px;
         resize: none;
+        white-space: pre-wrap;
       }
 
       .error {
@@ -51,7 +51,7 @@
       .limit {
         position: absolute;
         right: 16px;
-        top: 95px;
+        top: 96px;
         font-size: 1.1rem;
         color: $gray-01;
         padding-left: 16px;

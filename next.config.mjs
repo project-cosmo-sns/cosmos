@@ -12,6 +12,7 @@ const nextConfig = removeImports({})({
         hostname: '*',
       },
     ],
+    formats: ['image/avif', 'image/webp'],
   },
   transpilePackages: ['@uiw/react-markdown-preview', '@uiw/react-md-editor'],
   reactStrictMode: true,
