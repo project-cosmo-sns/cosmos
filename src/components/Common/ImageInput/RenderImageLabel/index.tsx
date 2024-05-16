@@ -17,7 +17,16 @@ type props = {
 
 export default function RenderImageLabel({ imageFile, type }: props) {
   if (imageFile) {
-    return <Image src={imageFile} onError={onErrorImg} fill alt="image" />;
+    return (
+      <Image
+        src={imageFile}
+        onError={onErrorImg}
+        fill
+        alt="image"
+        quality={50}
+        sizes="33vw"
+      />
+    );
   }
   if (type === 'certify') {
     return (

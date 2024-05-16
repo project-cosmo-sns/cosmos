@@ -2,6 +2,11 @@
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding-bottom: 70px;
+
+  @media (min-width: 768px) {
+    padding-bottom: 0px;
+  }
 
   .wrapper {
     display: flex;

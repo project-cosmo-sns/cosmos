@@ -5,7 +5,7 @@
   padding: 12px 24px;
   display: flex;
   position: fixed;
-  z-index: 9999;
+  z-index: 99;
   bottom: 10px;
   left: 50%;
   transform: translate(-50%);
@@ -33,7 +33,7 @@
     padding: 30px 0;
     position: relative;
     position: fixed;
-    z-index: 99;
+    z-index: 9;
     left: unset;
     transform: unset;
     top: 110px;
