@@ -9,7 +9,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useEffect, useState } from 'react';
 import fetchData from '@/api/fetchData';
 import { AuthFormProps } from '@/@types/type';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
 
 interface ProfileEditModalProps {
@@ -97,9 +97,7 @@ export default function ProfileEditModal({
 
     try {
       const response = await uploadFileToS3(file); // S3에 파일 업로드
-      console.log('Uploaded image URL(reponse of uploadFileToS3):', response);
       setUploadedImageUrl(response);
-      console.log('업로드 성공:', uploadedImageUrl);
     } catch (error) {
       console.error('업로드 실패:', error);
     }

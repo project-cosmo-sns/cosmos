@@ -1,0 +1,60 @@
+.wrapper {
+  position: relative;
+  display: inline-block; // 이부분은 상황에 따라 조정이 필요할 수 있습니다.
+}
+
+.icon {
+  position: relative;
+}
+
+.expanded-dropdown-container {
+  @include glass-02;
+  position: absolute;
+  backdrop-filter: blur(20px);
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  li {
+    padding: 20px;
+    gap: 12px;
+  }
+}
+
+.expanded-dropdown-list {
+  @include flex-arrange(flex-start, center);
+  @include font-style(1.6rem, $white-01, 600);
+  width: 100%;
+  height: 45px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  &:hover {
+    background-color: $glass-01;
+  }
+
+  .profile-edit {
+    gap: 12px;
+    padding: 20px 20px 0 20px;
+  }
+  .logout {
+    padding: 0 20px 20px 20px;
+  }
+
+  .authorization-button {
+    padding: 20px 20px 0 20px;
+  }
+}
+
+// 아이콘과 텍스트 간 간격 조정
+.icon {
+  margin-right: 8px;
+}
