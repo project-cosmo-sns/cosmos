@@ -1,5 +1,4 @@
-<img width="731" alt="image" src="https://github.com/project-cosmo-sns/cosmos/assets/127701092/a5c4af35-a58e-49f5-bb9a-992902949180"><h1 align=center>Cosmos</h2>
-
+<h1 align=center>Cosmos</h2>
 > 코드잇 스프린터가 모인 SNS, 코스모스 !
 
 <img width="1200" alt="image" src="https://github.com/project-cosmo-sns/cosmos/assets/127701092/b433d14d-228b-40b3-8bc7-f895e3aaff62">
