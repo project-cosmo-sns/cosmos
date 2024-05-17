@@ -70,7 +70,7 @@ export default function MarkdownEditor({
       setPreviewUrl(url);
       mutate(selectedFile);
     } else {
-      alert('jpeg, png, tiff 파일만 업로드 가능합니다.');
+      alert('jpg,jpeg, png, tif, tiff파일만 업로드 가능합니다.');
     }
   }, []);
 

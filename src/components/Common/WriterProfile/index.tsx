@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import styles from './WriterProfile.module.scss';
 import GenerationBadge from '../GenerationBadge';
+import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
 
 interface WriterProfileProps {
   writer: Writer;
@@ -19,6 +20,8 @@ export default function WriterProfile({
   const router = useRouter();
   const { id: memberId, nickname, profileImageUrl, generation } = writer;
 
+  const { checkMemberStatus } = useFetchMemberStatus();
+
   return (
     <div className={cn('wrapper')}>
       <Image
@@ -29,7 +32,7 @@ export default function WriterProfile({
         height={40}
         onClick={(event) => {
           event.stopPropagation();
-          router.push(`/profile?memberId=${memberId}`);
+          checkMemberStatus(() => router.push(`/profile?memberId=${memberId}`));
         }}
       />
       <div className={cn('info')}>
@@ -38,7 +41,9 @@ export default function WriterProfile({
           className={cn('nickname')}
           onClick={(event) => {
             event.stopPropagation();
-            router.push(`/profile?memberId=${memberId}`);
+            checkMemberStatus(() =>
+              router.push(`/profile?memberId=${memberId}`),
+            );
           }}
         >
           {nickname}
