@@ -16,6 +16,7 @@
     .profile-image {
       border-radius: 50%;
       overflow: hidden;
+      flex-shrink: 0;
     }
 
     .user {
