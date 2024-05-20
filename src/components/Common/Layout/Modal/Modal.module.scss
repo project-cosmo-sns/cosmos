@@ -6,7 +6,11 @@
   width: 100vw;
   height: 100vh;
   background: rgba(0, 0, 0, 0.6);
-  z-index: 99;
+  z-index: 9;
+
+  @media (min-width: 768px) {
+    z-index: 99;
+  }
 
   .x {
     position: absolute;

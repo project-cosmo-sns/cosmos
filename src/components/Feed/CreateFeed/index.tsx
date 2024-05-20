@@ -160,7 +160,7 @@ export default function CreateFeed({
                     className={cn('file-input')}
                     id="feedImage"
                     type="file"
-                    accept="image/png, image/jpeg, image/webp"
+                    accept=".jpg, .png, .webp, .jpeg"
                     multiple
                     onChange={(event) => {
                       const fileList = event.target.files

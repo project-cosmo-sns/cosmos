@@ -60,7 +60,7 @@ export default function HashTagInput({
         return;
       }
       // 해시태그 컬러없으면 난수로 설정
-      const randomNumber = Math.floor(Math.random() * 5 + 1);
+      const randomNumber = Math.floor(Math.random() * 6);
       setHashtags([
         ...hashtags,
         {

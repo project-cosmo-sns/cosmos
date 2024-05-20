@@ -28,7 +28,7 @@ export default function DetailImageModal({
         style={{
           objectFit: 'contain',
           width: '800px',
-          maxHeight: '80vh',
+          maxHeight: '70vh',
           maxWidth: '80vw',
         }}
       />

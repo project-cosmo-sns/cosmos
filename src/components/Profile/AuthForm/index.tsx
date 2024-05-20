@@ -54,57 +54,63 @@ export default function AuthForm({
     }
   };
 
+  const modalContentClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+  };
+
   return (
-    <Modal
-      title="스프린터 인증"
-      modalVisible={modalVisible}
-      toggleModal={toggleModal}
-      cssModalSize={cn('auth-container')}
-      cssComponentDisplay={cn('auth-wrapper')}
-    >
-      <form className={cn('auth-Form')} onSubmit={handleSubmit(onSubmit)}>
-        <div className={cn('auth-generation')}>
-          <h2>기수</h2>
-          <Input
-            id="generation"
-            type="text"
-            placeholder="기수를 입력하세요. ex) 3"
-            register={{
-              ...register('generation', {
-                required: '기수를 입력해 주세요.',
-                pattern: {
-                  value: generationRegex,
-                  message: '숫자만 입력해 주세요.',
-                },
-              }),
-            }}
-          />
-          {errors.generation && <small>{errors.generation.message}</small>}
-        </div>
-        <div className={cn('auth-image')}>
-          <h2>스프린터 인증</h2>
-          <span>코드잇 프로필 페이지 또는 수료증을 업로드해 주세요</span>
-          <ImageInput
-            type="certify"
-            watch={watch}
-            register={{
-              ...register('image', {
-                onChange: (e) => {
-                  handleImageChange(e);
-                },
-              }),
-            }}
-          />
-        </div>
-        <DefaultButton
-          buttonType="button"
-          size="modal"
-          color="primary-01"
-          onClick={handleSubmit(onSubmit)}
-        >
-          신청하기
-        </DefaultButton>
-      </form>
-    </Modal>
+    <div className={cn('modal-content')} onClick={modalContentClick}>
+      <Modal
+        title="스프린터 인증"
+        modalVisible={modalVisible}
+        toggleModal={toggleModal}
+        cssModalSize={cn('auth-container')}
+        cssComponentDisplay={cn('auth-wrapper')}
+      >
+        <form className={cn('auth-Form')} onSubmit={handleSubmit(onSubmit)}>
+          <div className={cn('auth-generation')}>
+            <h2>기수</h2>
+            <Input
+              id="generation"
+              type="text"
+              placeholder="기수를 입력하세요. ex) 3"
+              register={{
+                ...register('generation', {
+                  required: '기수를 입력해 주세요.',
+                  pattern: {
+                    value: generationRegex,
+                    message: '숫자만 입력해 주세요.',
+                  },
+                }),
+              }}
+            />
+            {errors.generation && <small>{errors.generation.message}</small>}
+          </div>
+          <div className={cn('auth-image')}>
+            <h2>스프린터 인증</h2>
+            <span>코드잇 프로필 페이지 또는 수료증을 업로드해 주세요</span>
+            <ImageInput
+              type="certify"
+              watch={watch}
+              register={{
+                ...register('image', {
+                  onChange: (e) => {
+                    handleImageChange(e);
+                  },
+                }),
+              }}
+            />
+          </div>
+          <DefaultButton
+            buttonType="button"
+            size="modal"
+            color="primary-01"
+            onClick={handleSubmit(onSubmit)}
+          >
+            신청하기
+          </DefaultButton>
+        </form>
+      </Modal>
+    </div>
   );
 }

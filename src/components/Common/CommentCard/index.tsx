@@ -9,6 +9,7 @@ import { LikeIcon, LikedIcon } from '../IconCollection';
 import WriterProfile from '../WriterProfile';
 import styles from './CommentCard.module.scss';
 import EditComment from './EditComment';
+import TextWithLinks from '../TextWithLinks';
 
 const cn = classNames.bind(styles);
 
@@ -104,7 +105,7 @@ export default function CommentCard({
         {isCommentEditing ? (
           <EditComment onSubmit={onSubmit} content={content} />
         ) : (
-          content
+          <TextWithLinks text={content} />
         )}
       </div>
       <DeleteModal

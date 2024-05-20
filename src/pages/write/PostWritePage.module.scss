@@ -9,7 +9,7 @@
   position: relative;
 
   @include font-style(2rem, $white-01, 700);
-  // @include font-style(2rem, $white, 700); 로 수정 예정
+  padding-bottom: 70px;
 }
 
 .back {

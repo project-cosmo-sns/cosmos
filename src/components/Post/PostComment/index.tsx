@@ -21,7 +21,7 @@ export default function PostComment({ postId }: PostCommentProps) {
     isPending,
     refetch,
   } = useInfiniteScroll<CommentListType>({
-    queryKey: ['commentList', postId],
+    queryKey: ['postComments', postId],
     fetchFunction: (page: number) =>
       fetchData({
         param: `/post/${postId}/comment/list?order=DESC&page=${page}&take=10`,
