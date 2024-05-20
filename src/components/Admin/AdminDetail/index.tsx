@@ -12,9 +12,9 @@ const cn = classNames.bind(styles);
 
 export default function AdminDetail({
   memberId,
-  nickname,
   generation,
   imageUrl,
+  realName,
 }: AdminDetailProps) {
   const acceptMember = useAcceptMember(memberId);
   const declineMember = useDeclineMember(memberId);
@@ -33,8 +33,7 @@ export default function AdminDetail({
         <Image src={imageUrl} fill alt="인증이미지 " />
       </div>
       <div className={cn('text-wrapper')}>
-        <div>{memberId}</div>
-        <h1>{nickname}</h1>
+        <h1> {realName}</h1>
         <p>{generation}기</p>
       </div>
       <div className={cn('button-container')}>
