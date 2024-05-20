@@ -15,12 +15,6 @@ export type AdminListProps = {
   meta: metaType;
 };
 
-export async function getAdminList(page = 1) {
-  const res = await fetchData<AdminDetailProps>({
-    param: `/admin/authorization/list?order=DESC&page=${page}&take=10`,
-  });
-}
-
 export function useAcceptMember(memberId: string | undefined) {
   const queryClient = useQueryClient();
   const { mutate } = useMutation({
