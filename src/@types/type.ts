@@ -24,6 +24,7 @@ export type ContainerOptionType =
 export interface AuthFormProps {
   generation?: number;
   image: string;
+  authName: string;
   introduce?: string;
 }
 
