@@ -3,10 +3,11 @@ import fetchData from './fetchData';
 import { metaType } from '@/@types/type';
 
 export type AdminDetailProps = {
-  memberId?: string;
+  memberId: string;
   nickname: string;
   generation: number;
   imageUrl: string;
+  realName: string | null;
   createdAt?: string;
 };
 

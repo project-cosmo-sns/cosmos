@@ -7,7 +7,7 @@ import classNames from 'classnames/bind';
 import styles from './AuthForm.module.scss';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { generationRegex } from '@/constants/generationRegex';
+import { generationRegex, nameRegex } from '@/constants/generationRegex';
 import { useToast } from '@/hooks/useToast';
 import { useSendAuthData, s3UploadImage } from '@/api/authorization';
 import { useState } from 'react';
@@ -45,6 +45,7 @@ export default function AuthForm({
     try {
       await sendAuth({
         generation: Number(data.generation),
+        name: data.name,
         image: uploadedImageUrl,
       });
       showToastHandler('인증 신청이 완료되었습니다.', 'check');
@@ -68,6 +69,24 @@ export default function AuthForm({
         cssComponentDisplay={cn('auth-wrapper')}
       >
         <form className={cn('auth-Form')} onSubmit={handleSubmit(onSubmit)}>
+          <div className={cn('auth-name')}>
+            <h2>이름</h2>
+            <Input
+              id="name"
+              type="text"
+              placeholder="이름을 입력하세요. ex) 코스모"
+              register={{
+                ...register('name', {
+                  required: '이름을 입력해주세요',
+                  pattern: {
+                    value: nameRegex,
+                    message: '한글만 입력해 주세요',
+                  },
+                }),
+              }}
+            />
+            {errors.name && <small>{errors.name.message}</small>}
+          </div>
           <div className={cn('auth-generation')}>
             <h2>기수</h2>
             <Input

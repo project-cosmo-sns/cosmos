@@ -12,6 +12,7 @@ interface FetchDataResponse {
 
 type sendAuthData = {
   generation: number;
+  name: string;
   image: string | null;
 };
 
@@ -57,12 +58,13 @@ export async function s3UploadImage(file: File) {
 
 export function useSendAuthData() {
   const { mutate: sendAuth } = useMutation({
-    mutationFn: ({ generation, image }: sendAuthData) =>
+    mutationFn: ({ generation, name, image }: sendAuthData) =>
       fetchData({
         param: '/authorization',
         method: 'post',
         requestData: {
           generation,
+          name,
           imageUrl: image,
         },
       }),
