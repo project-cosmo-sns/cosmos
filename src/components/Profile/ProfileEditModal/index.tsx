@@ -160,9 +160,6 @@ export default function ProfileEditModal({
       queryClient.invalidateQueries({
         queryKey: ['memberData'],
       });
-      queryClient.invalidateQueries({
-        queryKey: ['profileImage'],
-      });
       setIsOpen(false);
       router.reload();
     },
