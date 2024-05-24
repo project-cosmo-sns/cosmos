@@ -34,7 +34,11 @@
 .markdown-content {
   @include markdown-style;
   line-height: 3rem;
-  max-width: 100%;
+  width: 100%;
+
+  iframe {
+    width: 100%;
+  }
 }
 
 .hashtag-container {
