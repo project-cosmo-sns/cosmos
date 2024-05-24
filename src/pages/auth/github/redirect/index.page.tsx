@@ -18,7 +18,7 @@ export default function GithubRedirect() {
   useEffect(() => {
     const code = new URLSearchParams(window.location.search).get('code');
     if (code) {
-      githubLogin(code);
+      githubLogin(code);  
     }
   }, []);
 
