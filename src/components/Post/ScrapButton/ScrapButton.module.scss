@@ -1,0 +1,13 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.scrap-icon {
+  cursor: pointer;
+}
+
+// .scrap-count {
+//   @include font-style(1.2rem, $gray-02, 600);
+// }
