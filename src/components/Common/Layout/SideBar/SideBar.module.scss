@@ -28,7 +28,7 @@
 
   @media (min-width: 768px) {
     width: 76px;
-    height: 268px;
+    height: 334px;
     backdrop-filter: blur(15px);
     padding: 30px 0;
     position: relative;
@@ -40,9 +40,6 @@
     margin: 0;
     .icon-wrapper {
       flex-direction: column;
-      .add-icon {
-        order: 1;
-      }
     }
   }
 }

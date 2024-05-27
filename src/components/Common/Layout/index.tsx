@@ -2,6 +2,8 @@ import NavigaionBar from './NavigationBar';
 import SideBar from './SideBar';
 import classNames from 'classnames/bind';
 import styles from './Layout.module.scss';
+import HotPost from './SideContent/HotPost';
+import TopRanker from './SideContent/TopRanker';
 
 type layoutProps = {
   children: React.ReactNode;
@@ -19,7 +21,11 @@ export default function Layout({ children }: layoutProps) {
       <div className={cn('layout-navigaionBar')}>
         <NavigaionBar />
       </div>
-      <div className={cn('layout-content')}>{children}</div>
+      <div className={cn('layout-main-content')}>{children}</div>
+      <div className={cn('layout-side-content')}>
+        <TopRanker />
+        <HotPost />
+      </div>
     </div>
   );
 }

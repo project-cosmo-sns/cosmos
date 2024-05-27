@@ -1,0 +1,24 @@
+@media (min-width: 1200px) {
+  .sideContent-container {
+    @include glass-01;
+    width: 264px;
+    height: 270px;
+    border-radius: 10px;
+    .sideContent-header {
+      height: 50px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: $glass-edge-01;
+      padding: 0 12px 0 20px;
+      h1 {
+        @include font-style(1.4rem, $gray-02, 600);
+      }
+    }
+
+    .sideContent-Main {
+      @include font-style(1.4rem, $white-01, 600);
+      padding: 16px 12px 16px 20px;
+    }
+  }
+}
