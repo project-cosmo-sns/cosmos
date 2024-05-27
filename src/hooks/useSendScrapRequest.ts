@@ -12,7 +12,7 @@ export default function useSendScrapRequest({ postId }: { postId: number }) {
         method: 'post',
       }),
     onSuccess: () => {
-      showToastHandler('스크랩에 저장되었습니다.', 'check');
+      showToastHandler('스크랩 완료되었습니다.', 'check');
     },
   });
 
