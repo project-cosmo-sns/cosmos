@@ -11,7 +11,7 @@ export interface PostCommentType {
 }
 
 export function useCommentRequest(
-  postId: number,
+  id: number,
   forFeeds: boolean,
   refetch?: InfiniteDataRefetchType<CommentListType>,
 ) {
@@ -21,25 +21,29 @@ export function useCommentRequest(
   const { mutate: postCommentMutate } = useMutation({
     mutationFn: (dataParam: Comment) =>
       fetchData<PostCommentType>({
-        param: `${forFeeds ? 'feed' : 'post'}/${postId}/comment/${forFeeds ? '' : 'write'}`,
+        param: `${forFeeds ? 'feed' : 'post'}/${id}/comment/${forFeeds ? '' : 'write'}`,
         method: 'post',
         requestData: {
           content: dataParam.comment,
         },
       }),
     onSuccess: async () => {
-      queryClient.invalidateQueries({ queryKey: ['feedComments'] });
+      queryClient.invalidateQueries({
+        queryKey: [forFeeds ? 'feedComments' : 'postComments'],
+      });
     },
   });
 
   const { mutate: deleteCommentMutate } = useMutation({
     mutationFn: (commentId: number) =>
       fetchData<void>({
-        param: `${forFeeds ? 'feed' : 'post'}/${postId}/comment/${commentId}`,
+        param: `${forFeeds ? 'feed' : 'post'}/${id}/comment/${commentId}`,
         method: 'delete',
       }),
     onSuccess: async () => {
-      queryClient.invalidateQueries({ queryKey: ['feedComments'] });
+      queryClient.invalidateQueries({
+        queryKey: [forFeeds ? 'feedComments' : 'postComments'],
+      });
       showToastHandler('댓글 삭제 완료!', 'check');
     },
   });
@@ -51,7 +55,7 @@ export function useCommentRequest(
   const { mutate: postLikeCommentMutate } = useMutation({
     mutationFn: (commentId: number) =>
       fetchData<void>({
-        param: `${forFeeds ? 'feed' : 'post'}/${postId}/comment/${commentId}/like`,
+        param: `${forFeeds ? 'feed' : 'post'}/${id}/comment/${commentId}/like`,
         method: 'post',
       }),
   });
@@ -63,7 +67,7 @@ export function useCommentRequest(
   const { mutate: deleteLikeCommentMutate } = useMutation({
     mutationFn: (commentId: number) =>
       fetchData<void>({
-        param: `${forFeeds ? 'feed' : 'post'}/${postId}/comment/${commentId}/like`,
+        param: `${forFeeds ? 'feed' : 'post'}/${id}/comment/${commentId}/like`,
         method: 'delete',
       }),
   });
@@ -81,7 +85,7 @@ export function useCommentRequest(
       data: EditCommentType;
     }) =>
       fetchData({
-        param: `${forFeeds ? 'feed' : 'post'}/${postId}/comment/${commentId}/${forFeeds ? '' : 'modify'}`,
+        param: `${forFeeds ? 'feed' : 'post'}/${id}/comment/${commentId}/${forFeeds ? '' : 'modify'}`,
         method: 'patch',
         requestData: {
           content: data.editedComment,
@@ -89,7 +93,9 @@ export function useCommentRequest(
       }),
     onSuccess: async () => {
       showToastHandler('댓글 수정 완료!', 'check');
-      queryClient.invalidateQueries({ queryKey: ['feedComments'] });
+      queryClient.invalidateQueries({
+        queryKey: [forFeeds ? 'feedComments' : 'postComments'],
+      });
     },
   });
 

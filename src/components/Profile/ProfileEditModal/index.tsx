@@ -11,6 +11,7 @@ import fetchData from '@/api/fetchData';
 import { AuthFormProps } from '@/@types/type';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios from 'axios';
+import { useRouter } from 'next/router';
 
 interface ProfileEditModalProps {
   isOpen: boolean;
@@ -35,6 +36,7 @@ export default function ProfileEditModal({
   setIsOpen,
   memberData,
 }: ProfileEditModalProps) {
+  const router = useRouter();
   const { register, handleSubmit, watch, setValue } = useForm<AuthFormProps>();
   const [previewImage, setPreviewImage] = useState(
     memberData.profileImageUrl || '',
@@ -159,6 +161,7 @@ export default function ProfileEditModal({
         queryKey: ['memberData'],
       });
       setIsOpen(false);
+      router.reload();
     },
     onError: (error) => {
       console.error('프로필 업데이트 에러:', error);

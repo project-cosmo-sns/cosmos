@@ -10,6 +10,7 @@ import useFollowClick from '@/hooks/useFollowClick';
 import FollowButton from '@/components/Common/Buttons/FollowButton';
 import AuthForm from '../AuthForm';
 import ProfilePopOver from '@/components/Profile/ProfileEditModal/ProfilePopOver';
+import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
 
 export interface ProfileHeaderProps {
   memberData: MemberDataType;
@@ -44,6 +45,8 @@ export default function ProfileHeader({
   const authFormClick = () => {
     setShowAuthForm(!showAuthForm);
   };
+
+  const { checkMemberStatus } = useFetchMemberStatus();
 
   const renderButton = () => {
     if (memberData.memberId) {
@@ -119,7 +122,10 @@ export default function ProfileHeader({
           </div>
         </div>
         <div className={cn('profile-following-section')}>
-          <button type="button" onClick={() => toggleModal('follower')}>
+          <button
+            type="button"
+            onClick={() => checkMemberStatus(() => toggleModal('follower'))}
+          >
             <span>팔로워</span>
             {memberData && memberData.followerCount}
           </button>
@@ -134,7 +140,10 @@ export default function ProfileHeader({
               }}
             />
           )}
-          <button type="button" onClick={() => toggleModal('following')}>
+          <button
+            type="button"
+            onClick={() => checkMemberStatus(() => toggleModal('following'))}
+          >
             <span>팔로잉</span>
             {memberData && memberData.followingCount}
           </button>

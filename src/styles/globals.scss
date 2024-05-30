@@ -96,10 +96,27 @@ textarea {
     background-color: #585c6d !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2) !important;
 
+    flex-direction: column-reverse;
+    align-items: flex-start !important;
+
     ul {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
+
+      &:last-child {
+        margin-top: 4px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      padding: 0 12px !important;
+      flex-direction: row;
+      justify-content: space-between !important;
+
+      ul:last-child {
+        margin-top: 6px;
+      }
     }
   }
 
@@ -165,4 +182,11 @@ textarea {
 textarea::placeholder,
 input::placeholder {
   @include font-style(1.6rem, $gray-01, 600);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-progress-bar {
 }
