@@ -152,7 +152,7 @@ export default function ProfileEditModal({
       const response = await fetchData({
         param: '/profile/mine',
         method: 'patch',
-        requestData,
+        requestData, // 리퀘스트 데이터에 이전에 클릭한 프로필 값이 왜 들어가지?
       });
       return response;
     },
@@ -178,7 +178,7 @@ export default function ProfileEditModal({
     const requestData = {
       nickname: memberData.nickname,
       introduce,
-      profileImageUrl: uploadedImageUrl || profileImageUrl,
+      profileImageUrl: uploadedImageUrl || memberData.profileImageUrl, // requestData
     };
     updateProfile(requestData);
   };
