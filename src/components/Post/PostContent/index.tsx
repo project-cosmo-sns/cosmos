@@ -3,7 +3,10 @@ import ActionButtons from '@/components/Common/Buttons/ActionButtons';
 import DeleteModal from '@/components/Common/DeleteModal';
 import EmojiBundle from '@/components/Common/EmojiBundle';
 import WriterProfile from '@/components/Common/WriterProfile';
+import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
+import { useOpenLoginModal } from '@/hooks/useOpenLoginModal';
 import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
+import { useToast } from '@/hooks/useToast';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
@@ -11,11 +14,10 @@ import { useEffect, useState } from 'react';
 import HashTag from '../HashTag';
 import MarkdownContent from '../Markdown';
 import PostComment from '../PostComment';
+import ScrapButton from '../ScrapButton';
 import { HashTagType, PostDetailType } from '../types';
 import styles from './PostContent.module.scss';
-import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
-import { useToast } from '@/hooks/useToast';
-import { useOpenLoginModal } from '@/hooks/useOpenLoginModal';
+import useSendScrapRequest from '@/hooks/useSendScrapRequest';
 
 const cn = classNames.bind(styles);
 
@@ -88,6 +90,10 @@ export default function PostContent() {
       isPost: true,
     });
 
+  const { handleScrapClick } = useSendScrapRequest({
+    postId: Number(postId),
+  });
+
   useEffect(() => {
     if (postId && isSuccess) mutate();
   }, [postId, isSuccess]);
@@ -103,7 +109,8 @@ export default function PostContent() {
       content,
       hashTags,
       emojis,
-      emojiCount,
+      // scrapCount,
+      isScraped,
       viewCount,
       commentCount,
       isMine,
@@ -123,6 +130,14 @@ export default function PostContent() {
               isButtonShow={isMine}
               handleClickEdit={() => router.replace(`/write?postId=${postId}`)}
               handleClickDelete={() => setIsDeleteModalOpen(true)}
+            />
+            <ScrapButton
+              isButtonShow={!isMine}
+              handleClickScrap={(isClicked: boolean) =>
+                handleScrapClick(isClicked)
+              }
+              isScraped={isScraped}
+              // scrapCount={scrapCount}
             />
           </div>
           <div className={cn('divide-line')} />

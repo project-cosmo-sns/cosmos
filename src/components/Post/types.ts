@@ -19,6 +19,8 @@ export interface PostType extends PostRequestType {
   viewCount: number;
   commentCount: number;
   emojiCount: number;
+  isScraped: boolean;
+  // scrapCount: number;
   createdAt: string;
   emojis: EmojiType[];
   isMine: boolean;
