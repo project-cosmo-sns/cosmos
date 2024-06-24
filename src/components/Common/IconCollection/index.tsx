@@ -28,7 +28,7 @@ export function AddIcon({
 }: IconCollectionType) {
   return (
     <IconTemplate {...props}>
-      <circle cx="12" cy="12" r="12" fill={fill} />
+      <circle cx="12" cy="12" r="12" fill="#585C6D" fillOpacity="0.4" />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
