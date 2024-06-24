@@ -1345,3 +1345,36 @@ export function RankIcon({ ...props }: IconCollectionType) {
     </IconTemplate>
   );
 }
+
+export function MeatBallsIcon({ ...props }: IconCollectionType) {
+  return (
+    <IconTemplate viewBox="0 0 24 24" {...props}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M12.5 14C11.3954 14 10.5 13.1046 10.5 12C10.5 10.8954 11.3954 10 12.5 10C13.6046 10 14.5 10.8954 14.5 12C14.5 13.1046 13.6046 14 12.5 14Z"
+          fill="#A0A5BB"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M5.5 14C4.39543 14 3.5 13.1046 3.5 12C3.5 10.8954 4.39543 10 5.5 10C6.60457 10 7.5 10.8954 7.5 12C7.5 13.1046 6.60457 14 5.5 14Z"
+          fill="#A0A5BB"
+        />
+        <path
+          fill-rule="evenodd"
+          clip-rule="evenodd"
+          d="M19.5 14C18.3954 14 17.5 13.1046 17.5 12C17.5 10.8954 18.3954 10 19.5 10C20.6046 10 21.5 10.8954 21.5 12C21.5 13.1046 20.6046 14 19.5 14Z"
+          fill="#A0A5BB"
+        />
+      </svg>
+    </IconTemplate>
+  );
+}
