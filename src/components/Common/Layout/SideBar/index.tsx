@@ -9,7 +9,6 @@ import {
   BellIcon,
   UserIcon,
   AddIcon,
-  RankIcon,
 } from '@/components/Common/IconCollection';
 import { useRouter } from 'next/router';
 import { useGetProfileImage } from '@/api/member';
@@ -74,7 +73,6 @@ export default function SideBar() {
         <Link href="/">
           <HomeIcon fill="#FFFFFF" />
         </Link>
-        <RankIcon />
         <div
           className={cn('icon-box', 'add-icon')}
           onClick={(e) => togglePopOver(e, 'add')}
