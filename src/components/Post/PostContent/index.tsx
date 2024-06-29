@@ -140,14 +140,13 @@ export default function PostContent() {
                   onClick={() => setIsEditDeleteMenuOpen((prev) => !prev)}
                 />
               )}
-              <EditDeleteMenu isShow={isEditDeleteMenuOpen} />
-              {/* <ActionButtons
-                isButtonShow={isMine}
+              <EditDeleteMenu
+                isShow={isEditDeleteMenuOpen}
                 handleClickEdit={() =>
                   router.replace(`/write?postId=${postId}`)
                 }
                 handleClickDelete={() => setIsDeleteModalOpen(true)}
-              /> */}
+              />
             </div>
           </div>
           <div className={cn('divide-line')} />
