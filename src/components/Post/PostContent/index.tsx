@@ -137,11 +137,15 @@ export default function PostContent() {
               />
               {isMine && (
                 <MeatBallsIcon
-                  onClick={() => setIsEditDeleteMenuOpen((prev) => !prev)}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    setIsEditDeleteMenuOpen((prev) => !prev);
+                  }}
                 />
               )}
               <EditDeleteMenu
                 isShow={isEditDeleteMenuOpen}
+                handleCloseMenu={() => setIsEditDeleteMenuOpen(false)}
                 handleClickEdit={() =>
                   router.replace(`/write?postId=${postId}`)
                 }

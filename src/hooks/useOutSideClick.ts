@@ -7,10 +7,9 @@ import { useOutSideClickProps } from '@/@types/type';
  * @param {() => void} callback - 감지되었을 때 실행할 콜백
  */
 
-export default function useOutSideClick({
-  ref,
-  callback,
-}: useOutSideClickProps) {
+export default function useOutSideClick<
+  T extends HTMLElement = HTMLDivElement,
+>({ ref, callback }: useOutSideClickProps<T>) {
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
