@@ -1,7 +1,7 @@
 import fetchData from '@/api/fetchData';
-import ActionButtons from '@/components/Common/Buttons/ActionButtons';
 import DeleteModal from '@/components/Common/DeleteModal';
 import EmojiBundle from '@/components/Common/EmojiBundle';
+import { MeatBallsIcon } from '@/components/Common/IconCollection';
 import WriterProfile from '@/components/Common/WriterProfile';
 import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
 import { useOpenLoginModal } from '@/hooks/useOpenLoginModal';
@@ -12,18 +12,20 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import EditDeleteMenu from '../EditDeleteMenu';
 import HashTag from '../HashTag';
 import MarkdownContent from '../Markdown';
 import PostComment from '../PostComment';
 import ScrapButton from '../ScrapButton';
 import { HashTagType, PostDetailType } from '../types';
 import styles from './PostContent.module.scss';
-import { MeatBallsIcon } from '@/components/Common/IconCollection';
 
 const cn = classNames.bind(styles);
 
 export default function PostContent() {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditDeleteMenuOpen, setIsEditDeleteMenuOpen] = useState(false);
+
   const router = useRouter();
   const { postId } = router.query;
 
@@ -40,7 +42,6 @@ export default function PostContent() {
     data: postData,
     isSuccess,
     isPending,
-    isError,
     refetch,
   } = useQuery<PostDetailType>({
     queryKey: ['postData', postId],
@@ -134,7 +135,12 @@ export default function PostContent() {
                 isScraped={isScraped}
                 // scrapCount={scrapCount}
               />
-              <MeatBallsIcon />
+              {isMine && (
+                <MeatBallsIcon
+                  onClick={() => setIsEditDeleteMenuOpen((prev) => !prev)}
+                />
+              )}
+              <EditDeleteMenu isShow={isEditDeleteMenuOpen} />
               {/* <ActionButtons
                 isButtonShow={isMine}
                 handleClickEdit={() =>
