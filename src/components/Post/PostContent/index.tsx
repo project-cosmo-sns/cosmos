@@ -6,6 +6,7 @@ import WriterProfile from '@/components/Common/WriterProfile';
 import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
 import { useOpenLoginModal } from '@/hooks/useOpenLoginModal';
 import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
+import useSendScrapRequest from '@/hooks/useSendScrapRequest';
 import { useToast } from '@/hooks/useToast';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
@@ -17,7 +18,7 @@ import PostComment from '../PostComment';
 import ScrapButton from '../ScrapButton';
 import { HashTagType, PostDetailType } from '../types';
 import styles from './PostContent.module.scss';
-import useSendScrapRequest from '@/hooks/useSendScrapRequest';
+import { MeatBallsIcon } from '@/components/Common/IconCollection';
 
 const cn = classNames.bind(styles);
 
@@ -99,7 +100,6 @@ export default function PostContent() {
   }, [postId, isSuccess]);
 
   if (isPending) <>...Loading</>;
-  if (isError) <>로그인모달</>;
   if (isSuccess) {
     const { post, writer } = postData.postDetail;
     const {
@@ -126,19 +126,23 @@ export default function PostContent() {
               writer={writer}
               createdAt={createdAt.slice(0, 10).replace(/-/g, '.')}
             />
-            <ActionButtons
-              isButtonShow={isMine}
-              handleClickEdit={() => router.replace(`/write?postId=${postId}`)}
-              handleClickDelete={() => setIsDeleteModalOpen(true)}
-            />
-            <ScrapButton
-              isButtonShow={!isMine}
-              handleClickScrap={(isClicked: boolean) =>
-                handleScrapClick(isClicked)
-              }
-              isScraped={isScraped}
-              // scrapCount={scrapCount}
-            />
+            <div className={cn('menu')}>
+              <ScrapButton
+                handleClickScrap={(isClicked: boolean) =>
+                  handleScrapClick(isClicked)
+                }
+                isScraped={isScraped}
+                // scrapCount={scrapCount}
+              />
+              <MeatBallsIcon />
+              {/* <ActionButtons
+                isButtonShow={isMine}
+                handleClickEdit={() =>
+                  router.replace(`/write?postId=${postId}`)
+                }
+                handleClickDelete={() => setIsDeleteModalOpen(true)}
+              /> */}
+            </div>
           </div>
           <div className={cn('divide-line')} />
           <MarkdownContent
