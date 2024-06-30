@@ -1,13 +1,12 @@
 import fetchData from '@/api/fetchData';
 import { ReplyListType } from '@/components/Feed/types';
-import getElapsedTime from '@/utils/getElaspedTime';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { ChangeEvent, useState } from 'react';
 import DefaultButton from '../Buttons/DefaultButton';
-import { LikeIcon, LikedIcon, ReplyIcon } from '../IconCollection';
+import { ReplyIcon } from '../IconCollection';
 import Input from '../Input';
-import WriterProfile from '../WriterProfile';
+import ReplyCard from '../ReplyCard';
 import styles from './ReplyContainer.module.scss';
 
 const cn = classNames.bind(styles);
@@ -22,6 +21,7 @@ export default function ReplyContainer({
   commentId,
 }: ReplyContainerProps) {
   const [replyValue, setReplyValue] = useState('');
+
   const { data: replyData, isPending } = useQuery<ReplyListType>({
     queryKey: ['postCommentReply', commentId],
     queryFn: () =>
@@ -37,25 +37,7 @@ export default function ReplyContainer({
         <div className={cn('container')}>
           <div className={cn('reply-container')}>
             {replyData?.data.map((item) => (
-              <div className={cn('reply-card')} key={item.reply.id}>
-                <div className={cn('reply-writer')}>
-                  <WriterProfile
-                    writer={item.writer}
-                    createdAt={getElapsedTime(item.reply.createdAt)}
-                  />
-                  {/* <div className={cn('like-container')}>
-                    {item.reply.isHearted ? (
-                      <LikedIcon width="18" />
-                    ) : (
-                      <LikeIcon width="18" />
-                    )}
-                    <span className={cn('like-count')}>
-                      {item.reply.heartCount}
-                    </span>
-                  </div> */}
-                </div>
-                <span>{item.reply.content}</span>
-              </div>
+              <ReplyCard key={item.reply.id} replyData={item} />
             ))}
           </div>
           <div className={cn('reply-input')}>

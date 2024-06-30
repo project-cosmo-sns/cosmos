@@ -1,0 +1,36 @@
+.reply-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: $gray-03;
+  padding: 16px 0;
+  border-bottom: 1px solid transparent;
+  border-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  border-image-slice: 1;
+
+  &:first-child {
+    padding-top: 0;
+  }
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 32px;
+  }
+}
+
+.reply-writer {
+  @include flex-arrange(space-between, center);
+  width: 100%;
+}
+.like-container {
+  @include flex-arrange;
+  gap: 8px;
+}
+
+.like-count {
+  @include font-style(1.2rem, $gray-01, 500);
+}
