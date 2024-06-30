@@ -1,12 +1,12 @@
 import { ReplyDetailType } from '@/components/Feed/types';
 import getElapsedTime from '@/utils/getElaspedTime';
 import classNames from 'classnames/bind';
+import { useState } from 'react';
 import ActionButtons from '../Buttons/ActionButtons';
+import DeleteModal from '../DeleteModal';
 import TextWithLinks from '../TextWithLinks';
 import WriterProfile from '../WriterProfile';
 import styles from './ReplyCard.module.scss';
-import DeleteModal from '../DeleteModal';
-import { useState } from 'react';
 
 const cn = classNames.bind(styles);
 

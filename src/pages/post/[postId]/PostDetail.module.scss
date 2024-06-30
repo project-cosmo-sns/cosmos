@@ -26,6 +26,13 @@
 
   @include flex-arrange;
   cursor: pointer;
+
+  &:hover {
+    background-color: $primary-01;
+    transform: scale(1.1);
+    transition-property: transform, background-color;
+    transition-duration: 0.2s;
+  }
 }
 
 @media (min-width: 768px) {
