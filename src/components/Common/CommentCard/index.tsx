@@ -10,6 +10,7 @@ import TextWithLinks from '../TextWithLinks';
 import WriterProfile from '../WriterProfile';
 import styles from './CommentCard.module.scss';
 import EditComment from './EditComment';
+import ReplyContainer from '../ReplyContainer';
 
 const cn = classNames.bind(styles);
 
@@ -49,6 +50,7 @@ export default function CommentCard({
 
   const [isCommentEditing, setIsCommentEditing] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isReplyVisible, setIsReplyVisible] = useState(false);
 
   const [isLiked, setIsLiked] = useState(isHearted);
   const [reactionCount, setReactionCount] = useState(heartCount);
@@ -78,7 +80,11 @@ export default function CommentCard({
       <div className={cn('header')}>
         <WriterProfile writer={comment.writer} createdAt={formattedCreatedAt} />
         <div className={cn('container')}>
-          <button type="button" className={cn('reply-button')}>
+          <button
+            type="button"
+            onClick={() => setIsReplyVisible((prev) => !prev)}
+            className={cn('reply-button')}
+          >
             답글 달기
           </button>
           <div className={cn('like')} onClick={handleClickLikeComment}>
@@ -111,6 +117,7 @@ export default function CommentCard({
           <TextWithLinks text={content} />
         )}
       </div>
+      <ReplyContainer isVisible={isReplyVisible} commentId={commentId} />
       <DeleteModal
         title="삭제"
         isDeleteModalOpen={isDeleteModalOpen}
