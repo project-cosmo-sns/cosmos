@@ -67,7 +67,7 @@ export default function CommentInput({
           </span>
         )}
       </div>
-      <DefaultButton buttonType="submit" size="small" color="purple">
+      <DefaultButton buttonType="submit" size="small" color="black-01">
         등록
       </DefaultButton>
     </form>
