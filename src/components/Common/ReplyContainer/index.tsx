@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import { ChangeEvent, useState } from 'react';
 import DefaultButton from '../Buttons/DefaultButton';
-import { LikeIcon, ReplyIcon } from '../IconCollection';
+import { LikeIcon, LikedIcon, ReplyIcon } from '../IconCollection';
 import Input from '../Input';
 import WriterProfile from '../WriterProfile';
 import styles from './ReplyContainer.module.scss';
@@ -30,9 +30,6 @@ export default function ReplyContainer({
       }),
   });
 
-  console.log(commentId);
-  console.log(replyData);
-
   return (
     isVisible && (
       <div className={cn('wrapper')}>
@@ -46,12 +43,16 @@ export default function ReplyContainer({
                     writer={item.writer}
                     createdAt={getElapsedTime(item.reply.createdAt)}
                   />
-                  <div className={cn('like-container')}>
-                    <LikeIcon width="18" />
+                  {/* <div className={cn('like-container')}>
+                    {item.reply.isHearted ? (
+                      <LikedIcon width="18" />
+                    ) : (
+                      <LikeIcon width="18" />
+                    )}
                     <span className={cn('like-count')}>
                       {item.reply.heartCount}
                     </span>
-                  </div>
+                  </div> */}
                 </div>
                 <span>{item.reply.content}</span>
               </div>

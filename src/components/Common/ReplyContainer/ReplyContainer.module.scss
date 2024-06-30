@@ -7,7 +7,6 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 12px;
   width: 100%;
 }
 
@@ -25,8 +24,13 @@
   );
   border-image-slice: 1;
 
+  &:first-child {
+    padding-top: 0;
+  }
+
   &:last-child {
     border-bottom: none;
+    padding-bottom: 32px;
   }
 }
 
