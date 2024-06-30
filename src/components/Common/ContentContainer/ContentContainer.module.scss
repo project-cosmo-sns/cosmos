@@ -1,4 +1,5 @@
 .scroll-top {
+  @include glass-02(none);
   position: fixed;
   bottom: 100px;
   right: 20px;

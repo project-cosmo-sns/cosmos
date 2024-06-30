@@ -4,8 +4,8 @@ import {
   RefetchOptions,
 } from '@tanstack/react-query';
 
-export type useOutSideClickProps = {
-  ref: React.RefObject<HTMLDivElement>;
+export type useOutSideClickProps<T> = {
+  ref: React.RefObject<T>;
   callback: () => void;
 };
 
