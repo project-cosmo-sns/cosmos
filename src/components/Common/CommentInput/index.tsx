@@ -2,8 +2,6 @@ import classNames from 'classnames/bind';
 import { useForm } from 'react-hook-form';
 import DefaultButton from '../Buttons/DefaultButton';
 import styles from './CommentInput.module.scss';
-// eslint-disable-next-line import/no-cycle
-import { useCommentRequest } from '@/hooks/useCommentRequest';
 import { InfiniteDataRefetchType } from '@/@types/type';
 import { CommentListType } from '@/components/Feed/types';
 
@@ -12,19 +10,17 @@ export interface Comment {
 }
 
 interface CommentInputTypes {
-  placeholder: string;
-  postId: number;
-  isFeed: boolean;
+  placeholder?: string;
+  mutateFn: (data: string) => void;
   refetch: InfiniteDataRefetchType<CommentListType>;
 }
 
 const cn = classNames.bind(styles);
 
 export default function CommentInput({
-  placeholder,
-  postId,
+  placeholder = '댓글을 입력하세요',
+  mutateFn,
   refetch,
-  isFeed,
 }: CommentInputTypes) {
   const {
     register,
@@ -37,10 +33,8 @@ export default function CommentInput({
     },
   });
 
-  const { postCommentMutate } = useCommentRequest(postId, isFeed, refetch);
-
   const onSubmit = async (data: Comment) => {
-    postCommentMutate(data);
+    mutateFn(data.comment);
     reset();
   };
 

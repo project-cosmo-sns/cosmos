@@ -19,12 +19,12 @@ export function useCommentRequest(
   const { showToastHandler } = useToast();
 
   const { mutate: postCommentMutate } = useMutation({
-    mutationFn: (dataParam: Comment) =>
+    mutationFn: (dataParam: string) =>
       fetchData<PostCommentType>({
         param: `${forFeeds ? 'feed' : 'post'}/${id}/comment/${forFeeds ? '' : 'write'}`,
         method: 'post',
         requestData: {
-          content: dataParam.comment,
+          content: dataParam,
         },
       }),
     onSuccess: async () => {

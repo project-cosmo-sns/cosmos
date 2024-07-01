@@ -52,6 +52,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
   });
 
   const {
+    postCommentMutate,
     deleteCommentRequest,
     postLikeRequest,
     deleteLikeRequest,
@@ -101,12 +102,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
             editState={isEdit}
             toggleEditMode={setIsEdit}
           />
-          <CommentInput
-            placeholder="댓글을 입력하세요"
-            postId={feedId}
-            refetch={commentRefetch}
-            isFeed
-          />
+          <CommentInput mutateFn={postCommentMutate} refetch={commentRefetch} />
           <div className={cn('comment-list-area')}>
             {commentListData?.pages.map(({ data: commentList }, index) =>
               commentList.length ? (
