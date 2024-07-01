@@ -50,6 +50,7 @@ export default function PostComment({ postId }: PostCommentProps) {
             commentList.map((comment) => (
               <div key={comment.comment.id} className={cn('comment-list')}>
                 <CommentCard
+                  isPost
                   id={postId}
                   comment={comment}
                   deleteLikeRequest={deleteLikeRequest}

@@ -25,6 +25,7 @@ type EditCommentRequestType = ({
 }) => void;
 
 interface CommentCardProps {
+  isPost?: boolean;
   id: number;
   comment: CommentDetailType;
   deleteLikeRequest: CommentRequestType;
@@ -34,6 +35,7 @@ interface CommentCardProps {
 }
 
 export default function CommentCard({
+  isPost = false,
   id,
   comment,
   deleteLikeRequest,
@@ -122,7 +124,7 @@ export default function CommentCard({
         )}
       </div>
       <ReplyContainer
-        isPost
+        isPost={isPost}
         isVisible={isReplyVisible}
         id={id}
         commentId={commentId}
