@@ -43,7 +43,7 @@ export default function PostComment({ postId }: PostCommentProps) {
 
   return (
     <div className={cn('wrapper')}>
-      <CommentInput mutateFn={postCommentMutate} refetch={refetch} />
+      <CommentInput mutateFn={postCommentMutate} />
       <div className={cn('comment-container')}>
         {commentData?.pages.map(({ data: commentList }, index) =>
           commentList.length ? (

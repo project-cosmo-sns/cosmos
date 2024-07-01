@@ -10,12 +10,14 @@ import styles from './ReplyContainer.module.scss';
 const cn = classNames.bind(styles);
 
 interface ReplyContainerProps {
+  isPost?: boolean;
   isVisible: boolean;
   id: number;
   commentId: number;
 }
 
 export default function ReplyContainer({
+  isPost = false,
   isVisible,
   id,
   commentId,
@@ -23,17 +25,17 @@ export default function ReplyContainer({
   const queryClient = useQueryClient();
 
   const { data: replyData } = useQuery<ReplyListType>({
-    queryKey: ['postCommentReply', commentId],
+    queryKey: [isPost ? 'postCommentReply' : 'feedCommentReply', commentId],
     queryFn: () =>
       fetchData({
-        param: `/post/comment/${commentId}/reply/list`,
+        param: `/${isPost ? 'post' : 'feed'}/comment/${commentId}/reply/list`,
       }),
   });
 
-  const { mutate } = useMutation({
+  const { mutate: writeReplyMutate } = useMutation({
     mutationFn: (replyValue: string) =>
       fetchData({
-        param: `/post/${id}/comment/${commentId}/write`,
+        param: `/${isPost ? 'post' : 'feed'}/${id}/comment/${commentId}/write`,
         method: 'post',
         requestData: {
           content: replyValue,
@@ -41,7 +43,7 @@ export default function ReplyContainer({
       }),
     onSuccess: async () => {
       queryClient.invalidateQueries({
-        queryKey: ['postCommentReply', commentId],
+        queryKey: [isPost ? 'postCommentReply' : 'feedCommentReply', commentId],
       });
     },
   });
@@ -53,10 +55,10 @@ export default function ReplyContainer({
         <div className={cn('container')}>
           <div className={cn('reply-container')}>
             {replyData?.data.map((item) => (
-              <ReplyCard key={item.reply.id} replyData={item} />
+              <ReplyCard key={item.reply.id} id={id} replyData={item} isPost />
             ))}
           </div>
-          <CommentInput mutateFn={mutate} />
+          <CommentInput mutateFn={writeReplyMutate} />
         </div>
       </div>
     )

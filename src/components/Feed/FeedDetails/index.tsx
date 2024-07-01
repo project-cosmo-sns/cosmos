@@ -102,7 +102,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
             editState={isEdit}
             toggleEditMode={setIsEdit}
           />
-          <CommentInput mutateFn={postCommentMutate} refetch={commentRefetch} />
+          <CommentInput mutateFn={postCommentMutate} />
           <div className={cn('comment-list-area')}>
             {commentListData?.pages.map(({ data: commentList }, index) =>
               commentList.length ? (

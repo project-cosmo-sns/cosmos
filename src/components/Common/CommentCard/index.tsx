@@ -122,6 +122,7 @@ export default function CommentCard({
         )}
       </div>
       <ReplyContainer
+        isPost
         isVisible={isReplyVisible}
         id={id}
         commentId={commentId}
