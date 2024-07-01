@@ -67,7 +67,7 @@ export default function ReplyCard({
     </div> */}
         <ActionButtons
           isButtonShow={replyData.reply.isMine}
-          handleClickEdit={() => setIsEditing(true)}
+          handleClickEdit={() => setIsEditing((prev) => !prev)}
           handleClickDelete={() => setIsDeleteModalOpen(true)}
         />
       </div>
