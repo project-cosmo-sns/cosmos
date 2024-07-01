@@ -1,0 +1,25 @@
+.container {
+  @include glass-02($edge: none);
+  border-radius: 10px;
+  width: 120px;
+  position: absolute;
+  top: 200px;
+  right: 20px;
+
+  list-style: none;
+}
+
+.option {
+  @include font-style(1.6rem, 400);
+  cursor: pointer;
+
+  &:first-child {
+    color: $gray-03;
+    padding: 20px 20px 12px;
+  }
+
+  &:last-child {
+    color: $pink-01;
+    padding: 12px 20px 20px;
+  }
+}

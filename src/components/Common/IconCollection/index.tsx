@@ -28,7 +28,7 @@ export function AddIcon({
 }: IconCollectionType) {
   return (
     <IconTemplate {...props}>
-      <circle cx="12" cy="12" r="12" fill={fill} />
+      <circle cx="12" cy="12" r="12" fill="#585C6D" fillOpacity="0.4" />
       <path
         fillRule="evenodd"
         clipRule="evenodd"
@@ -1297,6 +1297,84 @@ export function MainLogoIcon({ ...props }: IconCollectionType) {
         transform="rotate(-60 9 54.5234)"
         fill="white"
       />
+    </IconTemplate>
+  );
+}
+
+export function RankIcon({ ...props }: IconCollectionType) {
+  return (
+    <IconTemplate viewBox="0 0 24 22" {...props}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="22"
+        viewBox="0 0 24 22"
+        fill="none"
+      >
+        <path
+          fillRule="evenodd"
+          clip-rule="evenodd"
+          d="M6.14667 2.0125V9.5C6.14667 12.5307 8.76729 14.9875 12 14.9875C15.2327 14.9875 17.8533 12.5307 17.8533 9.5V2.0125H6.14667ZM4.93333 0C4.41787 0 4 0.39175 4 0.874999V9.5C4 13.6421 7.58172 17 12 17C16.4183 17 20 13.6421 20 9.5V0.875C20 0.391751 19.5821 0 19.0667 0H4.93333Z"
+          fill="white"
+        />
+        <path
+          fillRule="evenodd"
+          clip-rule="evenodd"
+          d="M4.275 5.0125H3C2.29584 5.0125 1.725 5.67848 1.725 6.5V7.5C1.725 8.32152 2.29584 8.9875 3 8.9875H4.275V5.0125ZM3 3C1.34315 3 0 4.56701 0 6.5V7.5C0 9.433 1.34315 11 3 11H5.25C5.66421 11 6 10.6082 6 10.125V3.875C6 3.39175 5.66421 3 5.25 3H3Z"
+          fill="white"
+        />
+        <path
+          fillRule="evenodd"
+          clip-rule="evenodd"
+          d="M19.725 5.0125V8.9875H21C21.7042 8.9875 22.275 8.32152 22.275 7.5V6.5C22.275 5.67848 21.7042 5.0125 21 5.0125H19.725ZM18.75 3C18.3358 3 18 3.39175 18 3.875V10.125C18 10.6082 18.3358 11 18.75 11H21C22.6569 11 24 9.43299 24 7.5V6.5C24 4.567 22.6569 3 21 3H18.75Z"
+          fill="white"
+        />
+        <path
+          fillRule="evenodd"
+          clip-rule="evenodd"
+          d="M11.0402 20.9941L11.0402 14.9961L12.9722 14.9961L12.9722 20.9941L11.0402 20.9941Z"
+          fill="white"
+        />
+        <path
+          fillRule="evenodd"
+          clip-rule="evenodd"
+          d="M21 21C21 21.5523 20.4598 22 19.7935 22L4.20649 22C3.54016 22 3 21.5523 3 21C3 20.4477 3.54016 20 4.20649 20L19.7935 20C20.4598 20 21 20.4477 21 21Z"
+          fill="white"
+        />
+      </svg>
+    </IconTemplate>
+  );
+}
+
+export function MeatBallsIcon({ ...props }: IconCollectionType) {
+  return (
+    <IconTemplate viewBox="0 0 24 24" {...props}>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M12.5 14C11.3954 14 10.5 13.1046 10.5 12C10.5 10.8954 11.3954 10 12.5 10C13.6046 10 14.5 10.8954 14.5 12C14.5 13.1046 13.6046 14 12.5 14Z"
+          fill="#A0A5BB"
+        />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M5.5 14C4.39543 14 3.5 13.1046 3.5 12C3.5 10.8954 4.39543 10 5.5 10C6.60457 10 7.5 10.8954 7.5 12C7.5 13.1046 6.60457 14 5.5 14Z"
+          fill="#A0A5BB"
+        />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M19.5 14C18.3954 14 17.5 13.1046 17.5 12C17.5 10.8954 18.3954 10 19.5 10C20.6046 10 21.5 10.8954 21.5 12C21.5 13.1046 20.6046 14 19.5 14Z"
+          fill="#A0A5BB"
+        />
+      </svg>
     </IconTemplate>
   );
 }

@@ -24,6 +24,12 @@
     .icon-box {
       cursor: pointer;
     }
+
+    .add-icon {
+      height: 32px;
+      background-color: $glass-02;
+      border-radius: 50%;
+    }
   }
 
   @media (min-width: 768px) {

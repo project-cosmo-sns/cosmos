@@ -9,7 +9,6 @@ import {
   BellIcon,
   UserIcon,
   AddIcon,
-  ProfileIconDark,
 } from '@/components/Common/IconCollection';
 import { useRouter } from 'next/router';
 import { useGetProfileImage } from '@/api/member';
@@ -78,7 +77,7 @@ export default function SideBar() {
           className={cn('icon-box', 'add-icon')}
           onClick={(e) => togglePopOver(e, 'add')}
         >
-          <AddIcon fill="#8576FF" width="32px" height="32px" />
+          <AddIcon width="32px" height="32px" />
           {activePopover === 'add' && (
             <AddContentPopOver
               profileImage={userImage}

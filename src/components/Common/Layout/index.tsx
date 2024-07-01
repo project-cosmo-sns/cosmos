@@ -19,7 +19,7 @@ export default function Layout({ children }: layoutProps) {
       <div className={cn('layout-navigaionBar')}>
         <NavigaionBar />
       </div>
-      <div className={cn('layout-content')}>{children}</div>
+      <div className={cn('layout-main-content')}>{children}</div>
     </div>
   );
 }

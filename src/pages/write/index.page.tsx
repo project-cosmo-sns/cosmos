@@ -58,9 +58,8 @@ export default function PostWritePage() {
   };
 
   const handleSubmitPostData = () => {
-    if (!data.title || !data.content) {
+    if (!data.title.trim() || !data.content.trim()) {
       showToastHandler(`${data.title ? '내용' : '제목'}을 입력하세요`, 'warn');
-      // showToastHandler('피드 작성 완료', <CompleteIcon fill="#0ACF83" />);
       return;
     }
     if (postId) {
