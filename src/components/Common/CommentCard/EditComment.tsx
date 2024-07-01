@@ -41,7 +41,7 @@ export default function EditComment({
           </span>
         )}
       </div>
-      <DefaultButton buttonType="submit" size="small" color="purple">
+      <DefaultButton buttonType="submit" size="small" color="black-01">
         수정
       </DefaultButton>
     </form>
