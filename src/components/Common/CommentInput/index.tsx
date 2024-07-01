@@ -12,7 +12,6 @@ export interface Comment {
 interface CommentInputTypes {
   placeholder?: string;
   mutateFn: (data: string) => void;
-  refetch: InfiniteDataRefetchType<CommentListType>;
 }
 
 const cn = classNames.bind(styles);
@@ -20,7 +19,6 @@ const cn = classNames.bind(styles);
 export default function CommentInput({
   placeholder = '댓글을 입력하세요',
   mutateFn,
-  refetch,
 }: CommentInputTypes) {
   const {
     register,

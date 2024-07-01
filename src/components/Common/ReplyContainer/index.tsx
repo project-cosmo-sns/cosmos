@@ -1,11 +1,9 @@
 import fetchData from '@/api/fetchData';
+import CommentInput from '@/components/Common/CommentInput';
 import { ReplyListType } from '@/components/Feed/types';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
-import { ChangeEvent, useState } from 'react';
-import DefaultButton from '../Buttons/DefaultButton';
 import { ReplyIcon } from '../IconCollection';
-import Input from '../Input';
 import ReplyCard from '../ReplyCard';
 import styles from './ReplyContainer.module.scss';
 
@@ -13,21 +11,39 @@ const cn = classNames.bind(styles);
 
 interface ReplyContainerProps {
   isVisible: boolean;
+  id: number;
   commentId: number;
 }
 
 export default function ReplyContainer({
   isVisible,
+  id,
   commentId,
 }: ReplyContainerProps) {
-  const [replyValue, setReplyValue] = useState('');
+  const queryClient = useQueryClient();
 
-  const { data: replyData, isPending } = useQuery<ReplyListType>({
+  const { data: replyData } = useQuery<ReplyListType>({
     queryKey: ['postCommentReply', commentId],
     queryFn: () =>
       fetchData({
         param: `/post/comment/${commentId}/reply/list`,
       }),
+  });
+
+  const { mutate } = useMutation({
+    mutationFn: (replyValue: string) =>
+      fetchData({
+        param: `/post/${id}/comment/${commentId}/write`,
+        method: 'post',
+        requestData: {
+          content: replyValue,
+        },
+      }),
+    onSuccess: async () => {
+      queryClient.invalidateQueries({
+        queryKey: ['postCommentReply', commentId],
+      });
+    },
   });
 
   return (
@@ -40,23 +56,7 @@ export default function ReplyContainer({
               <ReplyCard key={item.reply.id} replyData={item} />
             ))}
           </div>
-          <div className={cn('reply-input')}>
-            <Input
-              placeholder="댓글을 입력하세요"
-              type="input"
-              onChange={(event: ChangeEvent<HTMLInputElement>) =>
-                setReplyValue(event.target.value)
-              }
-            />
-            <DefaultButton
-              buttonType="button"
-              size="small"
-              color="black-01"
-              onClick={() => console.log(replyValue)}
-            >
-              등록
-            </DefaultButton>
-          </div>
+          <CommentInput mutateFn={mutate} />
         </div>
       </div>
     )

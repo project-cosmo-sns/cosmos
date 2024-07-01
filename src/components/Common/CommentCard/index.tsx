@@ -24,19 +24,23 @@ type EditCommentRequestType = ({
   data: EditCommentType;
 }) => void;
 
-export default function CommentCard({
-  comment,
-  deleteLikeRequest,
-  postLikeRequest,
-  deleteCommentRequest,
-  editCommentRequest,
-}: {
+interface CommentCardProps {
+  id: number;
   comment: CommentDetailType;
   deleteLikeRequest: CommentRequestType;
   postLikeRequest: CommentRequestType;
   deleteCommentRequest: CommentRequestType;
   editCommentRequest: EditCommentRequestType;
-}) {
+}
+
+export default function CommentCard({
+  id,
+  comment,
+  deleteLikeRequest,
+  postLikeRequest,
+  deleteCommentRequest,
+  editCommentRequest,
+}: CommentCardProps) {
   const commentData = comment.comment;
 
   const {
@@ -117,7 +121,11 @@ export default function CommentCard({
           <TextWithLinks text={content} />
         )}
       </div>
-      <ReplyContainer isVisible={isReplyVisible} commentId={commentId} />
+      <ReplyContainer
+        isVisible={isReplyVisible}
+        id={id}
+        commentId={commentId}
+      />
       <DeleteModal
         title="삭제"
         isDeleteModalOpen={isDeleteModalOpen}

@@ -109,6 +109,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
                 commentList.map((comment) => (
                   <div key={comment.comment.id} className={cn('comment-list')}>
                     <CommentCard
+                      id={feedId}
                       comment={comment}
                       deleteLikeRequest={deleteLikeRequest}
                       postLikeRequest={postLikeRequest}
