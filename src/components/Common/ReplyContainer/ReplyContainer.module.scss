@@ -1,0 +1,21 @@
+.wrapper {
+  display: flex;
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.reply-input {
+  display: flex;
+  gap: 8px;
+}
+
+.loadmore-button {
+  @include font-style(1.6rem, $gray-03, 500);
+  padding-bottom: 20px;
+}

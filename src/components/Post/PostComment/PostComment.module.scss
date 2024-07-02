@@ -15,14 +15,13 @@
 
 .comment-list {
   padding-bottom: 20px;
-  border-style: solid;
+  border-bottom: 1px solid transparent;
   border-image: linear-gradient(
     90deg,
     rgba(255, 255, 255, 0.15) 0%,
     rgba(255, 255, 255, 0.05) 100%
   );
   border-image-slice: 1;
-  border-image-width: 0 0 1px 0;
   margin-bottom: 20px;
 
   &:first-child {

@@ -32,6 +32,7 @@ export default function PostComment({ postId }: PostCommentProps) {
   });
 
   const {
+    postCommentMutate,
     deleteCommentRequest,
     postLikeRequest,
     deleteLikeRequest,
@@ -42,18 +43,15 @@ export default function PostComment({ postId }: PostCommentProps) {
 
   return (
     <div className={cn('wrapper')}>
-      <CommentInput
-        placeholder="댓글을 입력하세요"
-        postId={postId}
-        refetch={refetch}
-        isFeed={false}
-      />
+      <CommentInput mutateFn={postCommentMutate} />
       <div className={cn('comment-container')}>
         {commentData?.pages.map(({ data: commentList }, index) =>
           commentList.length ? (
             commentList.map((comment) => (
               <div key={comment.comment.id} className={cn('comment-list')}>
                 <CommentCard
+                  isPost
+                  id={postId}
                   comment={comment}
                   deleteLikeRequest={deleteLikeRequest}
                   postLikeRequest={postLikeRequest}
