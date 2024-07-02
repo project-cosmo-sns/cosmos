@@ -6,10 +6,11 @@ import { useState } from 'react';
 import ActionButtons from '../Buttons/ActionButtons';
 import DeleteModal from '../DeleteModal';
 import { LikeIcon, LikedIcon } from '../IconCollection';
+import TextWithLinks from '../TextWithLinks';
 import WriterProfile from '../WriterProfile';
 import styles from './CommentCard.module.scss';
 import EditComment from './EditComment';
-import TextWithLinks from '../TextWithLinks';
+import ReplyContainer from '../ReplyContainer';
 
 const cn = classNames.bind(styles);
 
@@ -23,19 +24,25 @@ type EditCommentRequestType = ({
   data: EditCommentType;
 }) => void;
 
-export default function CommentCard({
-  comment,
-  deleteLikeRequest,
-  postLikeRequest,
-  deleteCommentRequest,
-  editCommentRequest,
-}: {
+interface CommentCardProps {
+  isPost?: boolean;
+  id: number;
   comment: CommentDetailType;
   deleteLikeRequest: CommentRequestType;
   postLikeRequest: CommentRequestType;
   deleteCommentRequest: CommentRequestType;
   editCommentRequest: EditCommentRequestType;
-}) {
+}
+
+export default function CommentCard({
+  isPost = false,
+  id,
+  comment,
+  deleteLikeRequest,
+  postLikeRequest,
+  deleteCommentRequest,
+  editCommentRequest,
+}: CommentCardProps) {
   const commentData = comment.comment;
 
   const {
@@ -49,6 +56,7 @@ export default function CommentCard({
 
   const [isCommentEditing, setIsCommentEditing] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isReplyVisible, setIsReplyVisible] = useState(false);
 
   const [isLiked, setIsLiked] = useState(isHearted);
   const [reactionCount, setReactionCount] = useState(heartCount);
@@ -78,6 +86,13 @@ export default function CommentCard({
       <div className={cn('header')}>
         <WriterProfile writer={comment.writer} createdAt={formattedCreatedAt} />
         <div className={cn('container')}>
+          <button
+            type="button"
+            onClick={() => setIsReplyVisible((prev) => !prev)}
+            className={cn('reply-button')}
+          >
+            답글 달기
+          </button>
           <div className={cn('like')} onClick={handleClickLikeComment}>
             {isLiked ? (
               <LikedIcon
@@ -108,6 +123,12 @@ export default function CommentCard({
           <TextWithLinks text={content} />
         )}
       </div>
+      <ReplyContainer
+        isPost={isPost}
+        isVisible={isReplyVisible}
+        id={id}
+        commentId={commentId}
+      />
       <DeleteModal
         title="삭제"
         isDeleteModalOpen={isDeleteModalOpen}

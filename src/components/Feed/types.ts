@@ -30,10 +30,10 @@ export interface FeedListType {
 }
 
 export interface Comment {
-  content: string;
-  createdAt: string;
-  heartCount: number;
   id: number;
+  content: string;
+  heartCount: number;
+  createdAt: string;
   isHearted: boolean;
   isMine: boolean;
 }
@@ -43,7 +43,17 @@ export interface CommentDetailType {
   comment: Comment;
 }
 
+export interface ReplyDetailType {
+  writer: Writer;
+  reply: Comment;
+}
+
 export interface CommentListType {
   data: CommentDetailType[];
+  meta: metaType;
+}
+
+export interface ReplyListType {
+  data: ReplyDetailType[];
   meta: metaType;
 }

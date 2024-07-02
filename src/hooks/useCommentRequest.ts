@@ -19,12 +19,12 @@ export function useCommentRequest(
   const { showToastHandler } = useToast();
 
   const { mutate: postCommentMutate } = useMutation({
-    mutationFn: (dataParam: Comment) =>
+    mutationFn: (dataParam: string) =>
       fetchData<PostCommentType>({
         param: `${forFeeds ? 'feed' : 'post'}/${id}/comment/${forFeeds ? '' : 'write'}`,
         method: 'post',
         requestData: {
-          content: dataParam.comment,
+          content: dataParam,
         },
       }),
     onSuccess: async () => {
@@ -64,7 +64,7 @@ export function useCommentRequest(
     postLikeCommentMutate(commentId);
   };
 
-  const { mutate: deleteLikeCommentMutate } = useMutation({
+  const { mutate: deleteLikeRequest } = useMutation({
     mutationFn: (commentId: number) =>
       fetchData<void>({
         param: `${forFeeds ? 'feed' : 'post'}/${id}/comment/${commentId}/like`,
@@ -72,11 +72,7 @@ export function useCommentRequest(
       }),
   });
 
-  const deleteLikeRequest = (commentId: number) => {
-    deleteLikeCommentMutate(commentId);
-  };
-
-  const { mutate: patchCommentMutate } = useMutation({
+  const { mutate: editCommentRequest } = useMutation({
     mutationFn: ({
       commentId,
       data,
@@ -98,16 +94,6 @@ export function useCommentRequest(
       });
     },
   });
-
-  const editCommentRequest = ({
-    commentId,
-    data,
-  }: {
-    commentId: number;
-    data: EditCommentType;
-  }) => {
-    patchCommentMutate({ commentId, data });
-  };
 
   return {
     postCommentMutate,

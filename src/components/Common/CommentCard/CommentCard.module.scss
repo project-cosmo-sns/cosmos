@@ -8,6 +8,10 @@
   @include flex-arrange(space-between, center);
 }
 
+.reply-button {
+  @include font-style(1.4rem, $gray-01, 600);
+}
+
 .like {
   @include flex-arrange;
   @include font-style(1.2rem, $gray-01, 500);
