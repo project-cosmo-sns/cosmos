@@ -40,6 +40,7 @@ export default function MemberDataContainer({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
+  const isMine = !memberData.memberId;
 
   // SSR로 가져온 데이터를 쿼리 데이터로 저장 (mutation 후 리패치 위한 작업)
 
@@ -47,9 +48,9 @@ export default function MemberDataContainer({
     queryKey: ['memberData', memberData.memberId], // 사용자 ID 포함시키게 변경
     queryFn: async () => {
       // 이게 어떤 애인지 알아보기
-      const endpoint = memberData.memberId
-        ? `/profile/${memberData.memberId}`
-        : '/profile/mine';
+      const endpoint = isMine
+        ? '/profile/mine'
+        : `/profile/${memberData.memberId}`;
       const res = await instance.get(endpoint, {});
       const fetchedMemberData: MemberDataType = await res.data;
       return fetchedMemberData;
@@ -89,7 +90,7 @@ export default function MemberDataContainer({
       <ContentContainer
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
-        isMyProfile
+        isMyProfile={isMine}
       >
         <div className={cn('profile-content')}>
           {memberData.authorizationStatus === 'ACCEPT' && (
