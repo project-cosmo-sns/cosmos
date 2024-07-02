@@ -20,6 +20,7 @@ const cn = classNames.bind(styles);
 export interface MemberDataContainerPropsType {
   myFeedList: FeedListType;
   myPostList: PostListType;
+  myScrapList: PostListType;
   memberData: MemberDataType;
   error?: boolean;
 }
@@ -33,6 +34,7 @@ export default function MemberDataContainer({
   myFeedList,
   myPostList,
   memberData,
+  myScrapList,
   error,
 }: MemberDataContainerPropsType) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -87,6 +89,7 @@ export default function MemberDataContainer({
       <ContentContainer
         selectedOption={selectedOption}
         setSelectedOption={setSelectedOption}
+        isMyProfile
       >
         <div className={cn('profile-content')}>
           {memberData.authorizationStatus === 'ACCEPT' && (
@@ -94,6 +97,7 @@ export default function MemberDataContainer({
               selectedOption={selectedOption}
               myFeedList={myFeedList}
               myPostList={myPostList}
+              myScrapList={myScrapList}
               memberData={memberData}
             />
           )}

@@ -5,6 +5,7 @@ import { FeedDetailType, FeedListType } from '@/components/Feed/types';
 import { PostListDataType, PostListType } from '@/components/Post/types';
 import getMyPostList from '@/components/Profile/MyPostList/api';
 import getMyFeedList from '@/components/Profile/MyFeedList/api';
+import getMyScrapList from '@/components/Profile/MyScrapList/api';
 
 export async function fetchMemberData(
   context: GetServerSidePropsContext,
@@ -12,6 +13,7 @@ export async function fetchMemberData(
   props: {
     myFeedList: FeedDetailType[];
     myPostList: PostListDataType[];
+    myScrapList: PostListDataType[];
     memberData: MemberDataType;
   };
 }> {
@@ -31,11 +33,13 @@ export async function fetchMemberData(
     const memberData: MemberDataType = await res.data;
     const myFeedList: FeedListType = await getMyFeedList(context);
     const myPostList: PostListType = await getMyPostList(context);
+    const myScrapList: PostListType = await getMyScrapList(context);
 
     return {
       props: {
         myFeedList: myFeedList.data,
         myPostList: myPostList.data,
+        myScrapList: myScrapList.data,
         memberData,
       },
     };
@@ -45,6 +49,7 @@ export async function fetchMemberData(
       props: {
         myFeedList: [],
         myPostList: [],
+        myScrapList: [],
         memberData: {
           nickname: '',
           introduce: '',

@@ -7,3 +7,10 @@
   font-size: 1.6rem;
   font-weight: 500;
 }
+
+.no-post {
+  @include flex-arrange;
+  width: 100%;
+  height: 540px;
+  color: $white-01;
+}
