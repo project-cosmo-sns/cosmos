@@ -23,6 +23,7 @@
   height: 56px;
   border-radius: 50%;
   background-color: $glass-02;
+  backdrop-filter: blur(10px);
 
   @include flex-arrange;
   cursor: pointer;

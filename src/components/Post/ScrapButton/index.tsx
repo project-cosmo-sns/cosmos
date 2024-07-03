@@ -25,7 +25,6 @@ export default function ScrapButton({
         width="24"
         height="24"
         viewBox="0 0 24 24"
-        // 스크랩 시 임시로 색상 설정. 추후 색상 변경 예정
         fill={isClicked ? '#A0A5BB' : 'none'}
         onClick={() => {
           setIsClicked(!isClicked);
