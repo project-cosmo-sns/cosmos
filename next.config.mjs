@@ -1,13 +1,8 @@
 /** @type {import('next').NextConfig} */
 import path from 'path';
 import removeImports from 'next-remove-imports';
-import nextPwa from 'next-pwa';
 
 const dirname = path.dirname(new URL(import.meta.url).pathname);
-
-const withPWA = nextPwa({
-  dest: 'public',
-});
 
 const nextConfig = removeImports({})({
   images: {
@@ -26,7 +21,6 @@ const nextConfig = removeImports({})({
     includePaths: [path.join(dirname, 'styles')],
     prependData: `@import "src/styles/_variables.scss"; @import "src/styles/_mixins.scss";`,
   },
-  swcMinify: true,
 });
 
-export default withPWA(nextConfig);
+export default nextConfig;
