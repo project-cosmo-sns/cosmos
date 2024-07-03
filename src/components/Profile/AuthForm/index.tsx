@@ -113,6 +113,7 @@ export default function AuthForm({
               watch={watch}
               register={{
                 ...register('image', {
+                  required: '이미지를 업로드해 주세요',
                   onChange: (e) => {
                     handleImageChange(e);
                   },
