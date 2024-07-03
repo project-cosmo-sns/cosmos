@@ -3,10 +3,7 @@ import { Html, Head, Main, NextScript } from 'next/document';
 export default function Document() {
   return (
     <Html lang="ko">
-      <Head>
-        <meta name="theme-color" content="#3D39F1" />
-        <link rel="manifest" href="/manifest.json" />
-      </Head>
+      <Head />
       <body>
         <Main />
         <NextScript />
