@@ -120,6 +120,7 @@ export default function AuthForm({
                 }),
               }}
             />
+            {errors.image && <small>{errors.image.message}</small>}
           </div>
           <DefaultButton
             buttonType="button"
