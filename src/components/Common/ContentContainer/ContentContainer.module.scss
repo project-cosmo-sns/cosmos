@@ -7,9 +7,17 @@
   height: 56px;
   border-radius: 50%;
   background-color: $glass-02;
+  backdrop-filter: blur(10px);
 
   @include flex-arrange;
   cursor: pointer;
+
+  &:hover {
+    background-color: $primary-01;
+    transform: scale(1.1);
+    transition-property: transform, background-color;
+    transition-duration: 0.2s;
+  }
 }
 
 .wrapper {

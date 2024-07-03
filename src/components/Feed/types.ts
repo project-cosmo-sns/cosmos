@@ -36,6 +36,7 @@ export interface Comment {
   createdAt: string;
   isHearted: boolean;
   isMine: boolean;
+  isReplied?: boolean;
 }
 
 export interface CommentDetailType {

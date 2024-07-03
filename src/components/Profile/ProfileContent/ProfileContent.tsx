@@ -1,21 +1,28 @@
-import ScrapList from '@/components/Common/ScrapList';
-import MyFeedList from '../MyFeedList';
-import MyPostList from '../MyPostList';
 import { ContainerOptionType } from '@/@types/type';
-import { FeedDetailType, FeedListType } from '@/components/Feed/types';
+import { FeedListType } from '@/components/Feed/types';
 import { PostListType } from '@/components/Post/types';
 import { MemberDataType } from '@/pages/profile/types';
+import MyFeedList from '../MyFeedList';
+import MyPostList from '../MyPostList';
+import MyScrapList from '../MyScrapList';
+import classNames from 'classnames/bind';
+import styles from './EmptyContent.module.scss';
 
 interface ProfileContentProps {
   selectedOption: ContainerOptionType;
   myFeedList: FeedListType;
   myPostList: PostListType;
+  myScrapList: PostListType;
   memberData: MemberDataType;
 }
+
+const cn = classNames.bind(styles);
+
 export default function ProfileContent({
   selectedOption,
   myFeedList,
   myPostList,
+  myScrapList,
   memberData,
 }: ProfileContentProps) {
   switch (selectedOption) {
@@ -23,17 +30,21 @@ export default function ProfileContent({
       return myFeedList ? (
         <MyFeedList feedList={myFeedList} memberData={memberData} />
       ) : (
-        '피드가 없습니다.'
+        <div className={cn('no-post')}>피드가 없습니다.</div>
       );
     case 'post':
       return myPostList ? (
         <MyPostList postList={myPostList} memberData={memberData} />
       ) : (
-        '포스트가 없습니다.'
+        <div className={cn('no-post')}>포스트가 없습니다.</div>
       );
 
     case 'scrap':
-      return <ScrapList />;
+      return myScrapList ? (
+        <MyScrapList scrapList={myScrapList} />
+      ) : (
+        <div className={cn('no-post')}>스크랩 한 게시물이 없습니다.</div>
+      );
     default:
       return null;
   }

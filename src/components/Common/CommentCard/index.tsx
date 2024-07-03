@@ -6,11 +6,11 @@ import { useState } from 'react';
 import ActionButtons from '../Buttons/ActionButtons';
 import DeleteModal from '../DeleteModal';
 import { LikeIcon, LikedIcon } from '../IconCollection';
+import ReplyContainer from '../ReplyContainer';
 import TextWithLinks from '../TextWithLinks';
 import WriterProfile from '../WriterProfile';
 import styles from './CommentCard.module.scss';
 import EditComment from './EditComment';
-import ReplyContainer from '../ReplyContainer';
 
 const cn = classNames.bind(styles);
 
@@ -52,6 +52,7 @@ export default function CommentCard({
     isHearted,
     createdAt,
     isMine,
+    isReplied,
   } = commentData;
 
   const [isCommentEditing, setIsCommentEditing] = useState(false);
