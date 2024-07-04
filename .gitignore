@@ -46,3 +46,9 @@ next-env.d.ts
 certificates
 
 .env
+
+#pwa
+sw.js
+sw.js.map
+workbox-e43f5367.js
+workbox-e43f5367.js.map

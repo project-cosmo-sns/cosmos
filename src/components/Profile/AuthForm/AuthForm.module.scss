@@ -24,7 +24,7 @@
         }
 
         small {
-          color: red;
+          color: $red-01;
         }
       }
 
@@ -37,7 +37,7 @@
           @include font-style(1.2rem, $gray-01, 500);
         }
         small {
-          color: red;
+          color: $red-01;
         }
       }
     }
