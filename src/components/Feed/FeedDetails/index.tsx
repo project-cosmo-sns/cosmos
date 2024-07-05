@@ -13,7 +13,7 @@ import styles from './FeedDetails.module.scss';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 
 /**
- * @return {JSX.Element} FeedDetails - 추후에 변경 예정입니다. 피드 리스트에서 특정 피드를 클릭한다면 클리한 피드의 아이디를 통해 데이터를 요청해 화면에 보여줍니다.
+ * @return {JSX.Element} FeedDetails - 추후에 변경 예정입니다. 피드 리스트에서 특정 피드를 클릭한다면 클리한 피드의 아이디를 통해 데이터를 요청해 화면에 보여줍니다
  */
 
 export default function FeedDetails({ feedId }: { feedId: number }) {
