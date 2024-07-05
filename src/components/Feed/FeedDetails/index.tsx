@@ -80,9 +80,9 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
   };
 
   if (isFeedDataPending) return <LoadingSpinner />;
-  if (isFeedDataError) return '피드 데이터 에러 발생!';
+  if (isFeedDataError) return '피드 데이터 에러 발생';
   if (isCommentDataPending) return <LoadingSpinner />;
-  if (isCommentDataError) return '코멘트 데이터 에러 발생!';
+  if (isCommentDataError) return '코멘트 데이터 에러 발생';
 
   return (
     <>
