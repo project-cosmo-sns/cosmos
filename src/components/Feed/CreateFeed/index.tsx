@@ -133,7 +133,7 @@ export default function CreateFeed({
             className={cn('text')}
             rows={5}
             maxLength={300}
-            placeholder="글을 작성해보세요"
+            placeholder="글을 작성해주세요"
             {...register('content', {
               required: '게시글을 작성해주세요',
               maxLength: 300,
@@ -172,7 +172,7 @@ export default function CreateFeed({
                         updateUrlBucket(fileList);
                       } else {
                         setValue('feedImage', []);
-                        alert('이미지는 3개 까지 업로드 가능합니다.');
+                        alert('3개 까지 업로드 가능합니다.');
                       }
                     }}
                   />
