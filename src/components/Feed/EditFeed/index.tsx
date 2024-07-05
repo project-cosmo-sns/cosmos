@@ -120,7 +120,6 @@ export default function EditFeed({
   };
 
   // const updateImageUrls = () => {
-  //   console.log('-----업데이트 이미지 유알엘 실행------');
   //   if (images && images.length > 0) {
   //     let urlList = [];
   //     for (let i = 0; i < images.length; i += 1) {
