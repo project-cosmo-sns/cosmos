@@ -179,7 +179,7 @@ export default function EditFeed({
 
   // useEffect(() => {
   //   console.log('-----유즈 이펙트 실행------');
-  //   updateImageUrls();
+  //   updateImageUrls()
   // }, [urlBucket]);
 
   return (
