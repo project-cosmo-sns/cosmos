@@ -1,12 +1,11 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 export default function TouchHandler() {
   let slideBeginX = 0;
 
   const touchStart = (event: TouchEvent) => {
-    // event.preventDefault();
+    event.preventDefault();
     slideBeginX = event.targetTouches[0].pageX;
-    console.log(slideBeginX, '---slideBeginX---');
   };
 
   const touchMove = (event: TouchEvent) => {
@@ -29,7 +28,6 @@ export default function TouchHandler() {
         // User scrolled from left to right
       }
     }
-    console.log(slideEndX - slideBeginX, '---slideEndX - slideBeginX---');
   };
 
   useEffect(() => {
