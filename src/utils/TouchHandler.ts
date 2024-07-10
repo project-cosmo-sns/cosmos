@@ -6,6 +6,7 @@ export default function TouchHandler() {
   const touchStart = (event: TouchEvent) => {
     // event.preventDefault();
     slideBeginX = event.targetTouches[0].pageX;
+    console.log(slideBeginX, '---slideBeginX---');
   };
 
   const touchMove = (event: TouchEvent) => {
@@ -13,16 +14,22 @@ export default function TouchHandler() {
   };
 
   const touchEnd = (event: TouchEvent) => {
-    // event.preventDefault();
     const slideEndX = event.changedTouches[0].pageX;
 
     if (Math.abs(slideEndX - slideBeginX) > 200) {
       if (slideEndX - slideBeginX > 0) {
+        event.preventDefault();
         // User scrolled from left to right
-      } else {
+      }
+      if (slideEndX - slideBeginX < 0) {
+        event.preventDefault();
         // User scrolled from right to left
       }
+      if (slideEndX - slideBeginX === 0) {
+        // User scrolled from left to right
+      }
     }
+    console.log(slideEndX - slideBeginX, '---slideEndX - slideBeginX---');
   };
 
   useEffect(() => {
