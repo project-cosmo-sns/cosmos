@@ -3,7 +3,7 @@
   "background_color": "#f69435",
   "display": "standalone",
   "scope": "/",
-  "start_url": "/",
+  "start_url": "/?tab=feed",
   "name": "cosmos",
   "short_name": "cosmos",
   "description": "cosmos",
