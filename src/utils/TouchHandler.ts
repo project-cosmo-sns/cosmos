@@ -4,7 +4,7 @@ export default function TouchHandler() {
   let slideBeginX = 0;
 
   const touchStart = (event: TouchEvent) => {
-    event.preventDefault();
+    // event.preventDefault();
     slideBeginX = event.targetTouches[0].pageX;
   };
 
@@ -13,7 +13,7 @@ export default function TouchHandler() {
   };
 
   const touchEnd = (event: TouchEvent) => {
-    event.preventDefault();
+    // event.preventDefault();
     const slideEndX = event.changedTouches[0].pageX;
 
     if (Math.abs(slideEndX - slideBeginX) > 200) {
