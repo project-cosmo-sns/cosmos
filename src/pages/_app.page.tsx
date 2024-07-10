@@ -9,6 +9,7 @@ import { Provider as ReduxToolkitProvider } from 'react-redux';
 import store from '@/redux/store';
 import Toast from '@/components/Common/Toast';
 import LoginModal from '@/components/Common/LoginModal';
+import TouchHandler from '@/utils/TouchHandler';
 
 export default function App({ Component, pageProps }: AppProps) {
   const useLayout = !pageProps.noLayout;
@@ -26,6 +27,7 @@ export default function App({ Component, pageProps }: AppProps) {
                 <Component {...pageProps} />
                 <Toast />
                 <LoginModal />
+                <TouchHandler />
               </Layout>
             ) : (
               <Component {...pageProps} />
