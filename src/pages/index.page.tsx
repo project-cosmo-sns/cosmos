@@ -16,6 +16,8 @@ import { FeedListType } from '../components/Feed/types';
 export const getServerSideProps = async (
   context: GetServerSidePropsContext,
 ) => {
+  const initialOption = context.query.tab === 'post' ? 'post' : 'feed';
+
   const feedList = await fetchInitialFeed<FeedListType>(context);
   const postList = await fetchInitialPost<PostListType>(context);
 
@@ -23,6 +25,7 @@ export const getServerSideProps = async (
     props: {
       feedList,
       postList,
+      initialOption,
     },
   };
 };
@@ -30,13 +33,18 @@ export const getServerSideProps = async (
 interface HomePropsType {
   feedList: { props: { response: FeedListType } };
   postList: { props: { response: PostListType } };
+  initialOption: ContainerOptionType;
 }
 
 const cn = classNames.bind(styles);
 
-export default function Home({ feedList, postList }: HomePropsType) {
+export default function Home({
+  feedList,
+  postList,
+  initialOption,
+}: HomePropsType) {
   const [selectedOption, setSelectedOption] =
-    useState<ContainerOptionType>('feed');
+    useState<ContainerOptionType>(initialOption);
   const [selectedSort, setSelectedSort] = useState<SortType>('ALL');
 
   return (
