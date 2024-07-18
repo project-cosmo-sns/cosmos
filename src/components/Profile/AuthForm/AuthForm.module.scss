@@ -3,6 +3,8 @@
   height: 100%;
 
   .auth-wrapper {
+    padding-bottom: 60px;
+
     @include flex-arrange(center, flex-start);
     h2 {
       @include font-style(1.6rem, $white-01, 700);
@@ -12,6 +14,7 @@
       display: flex;
       flex-direction: column;
       gap: 40px;
+
       .auth-generation,
       .auth-name {
         height: 100px;
@@ -21,16 +24,20 @@
         }
 
         small {
-          color: red;
+          color: $red-01;
         }
       }
 
       .auth-image {
+        height: 260px;
         display: flex;
         flex-direction: column;
         gap: 12px;
         span {
           @include font-style(1.2rem, $gray-01, 500);
+        }
+        small {
+          color: $red-01;
         }
       }
     }
@@ -39,5 +46,8 @@
   @media (min-width: 768px) {
     width: 380px;
     height: auto;
+    .auth-wrapper {
+      padding-bottom: 0;
+    }
   }
 }
