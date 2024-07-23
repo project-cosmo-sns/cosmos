@@ -70,7 +70,7 @@ export default function Modal({
               />
             </div>
             <div className={cn(cssModalSize)} ref={modalRef}>
-              <div className={cn('wrapper', { border })}>
+              <div className={cn('wrapper', border && 'border')}>
                 {title && (
                   <div className={cn('title')}>
                     <span>{title}</span>

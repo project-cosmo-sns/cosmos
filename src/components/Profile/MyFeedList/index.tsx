@@ -72,6 +72,7 @@ export default function MyFeedList({ feedList, memberData }: FeedListProps) {
         modalVisible={isModalOpen}
         cssModalSize={cn('feed-detail-modalSize')}
         cssComponentDisplay={cn('feed-detail-componentDisplay')}
+        className="forFeed"
       >
         <FeedDetails feedId={feedId} />
       </Modal>

@@ -90,6 +90,7 @@ export default function FeedList({ feedList, selectedSort }: FeedListProps) {
         cssModalSize={cn('feed-detail-modalSize')}
         cssComponentDisplay={cn('feed-detail-componentDisplay')}
         className="forFeed"
+        border={false}
       >
         <FeedDetails feedId={feedId} />
       </Modal>
