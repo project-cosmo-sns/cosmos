@@ -18,6 +18,9 @@ import { openLoginModal } from '@/redux/loginModalSlice';
 import { RootState } from '@/redux/store';
 import { login, logout } from '@/redux/logoutSlice';
 import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
+import { handleCreateFeedModal } from '@/redux/createFeedModalSlice';
+import CreateFeed from '@/components/Feed/CreateFeed';
+import Modal from '@/components/Common/Layout/Modal';
 
 const cn = classNames.bind(styles);
 
@@ -31,6 +34,7 @@ export default function SideBar() {
   const { data: member } = useGetProfileImage();
   const isLogin = member?.isLogin;
   const loggedin = useSelector((state: RootState) => state.logout.isLoggedIn);
+  const isModalOpen = useSelector((state: RootState) => state.feedModal.isOpen);
 
   const { checkMemberStatus } = useFetchMemberStatus();
 
@@ -58,6 +62,11 @@ export default function SideBar() {
     setActivePopover(null);
   };
 
+  const handleCreateFeedClick = (state: boolean) => {
+    dispatch(handleCreateFeedModal(state));
+    handleClosePopOver();
+  };
+
   useEffect(() => {
     if (!isLogin) {
       dispatch(logout());
@@ -79,10 +88,7 @@ export default function SideBar() {
         >
           <AddIcon width="32px" height="32px" />
           {activePopover === 'add' && (
-            <AddContentPopOver
-              profileImage={userImage}
-              onClose={handleClosePopOver}
-            />
+            <AddContentPopOver onClose={handleClosePopOver} />
           )}
         </div>
         <div
@@ -106,6 +112,15 @@ export default function SideBar() {
           <UserIcon fill="#FFFFFF" onClick={profileClick} />
         )}
       </div>
+      <Modal
+        title="피드 생성"
+        modalVisible={isModalOpen}
+        toggleModal={handleCreateFeedClick}
+        cssModalSize={cn('create-feed-modalSize')}
+        cssComponentDisplay={cn('')}
+      >
+        <CreateFeed modalVisible={isModalOpen} profileImage={userImage} />
+      </Modal>
     </div>
   );
 }

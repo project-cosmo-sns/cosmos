@@ -18,7 +18,6 @@ import { FeedType, CreatedFeedTypes, Inputs } from './type';
 
 export default function CreateFeed({
   profileImage,
-  toggleModal,
   modalVisible,
 }: CreatedFeedTypes) {
   const cn = classNames.bind(styles);
@@ -38,7 +37,7 @@ export default function CreateFeed({
   });
   const [images, setImages] = useState<Blob[]>([]);
   const [urlBucket, setUrlBucket] = useState<string[]>([]);
-  const { getUrl, deleteImage, postFeed } = useCreateFeedRequest(toggleModal);
+  const { getUrl, deleteImage, postFeed } = useCreateFeedRequest();
 
   const putUrlMutate = useMutation({
     mutationFn: ({ url, file }: { url: string; file: Blob }) =>

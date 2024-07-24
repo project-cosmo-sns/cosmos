@@ -8,7 +8,6 @@ export interface UrlType {
 }
 export interface CreatedFeedTypes {
   profileImage: string | null;
-  toggleModal: React.Dispatch<React.SetStateAction<boolean>>;
   modalVisible: boolean;
 }
 
