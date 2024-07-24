@@ -118,6 +118,7 @@ export default function SideBar() {
         toggleModal={handleCreateFeedClick}
         cssModalSize={cn('create-feed-modalSize')}
         cssComponentDisplay={cn('')}
+        className="forFeed"
       >
         <CreateFeed modalVisible={isModalOpen} profileImage={userImage} />
       </Modal>
