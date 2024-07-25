@@ -83,6 +83,11 @@ export default function SideBar() {
     handleClosePopOver();
   };
 
+  const handleNotificationClick = () => {
+    handleClosePopOver();
+    dispatch(handleCreateFeedModal(false));
+  };
+
   const handleHomeIconClick = () => {
     dispatch(handleCreateFeedModal(false));
     dispatch(handleFeedDetailModal(false));
@@ -125,7 +130,7 @@ export default function SideBar() {
         >
           <BellIcon fill="#FFFFFF" />
           {activePopover === 'bell' && (
-            <Notification onClose={handleClosePopOver} />
+            <Notification onClose={handleNotificationClick} />
           )}
         </div>
         {loggedin ? (

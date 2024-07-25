@@ -7,7 +7,7 @@ import WriterProfile from '@/components/Common/WriterProfile';
 import { useImageDetail } from '@/hooks/useImageDetail';
 import useSendEmojiRequest from '@/hooks/useSendEmojiRequest';
 import getElapsedTime from '@/utils/getElaspedTime';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import classNames from 'classnames/bind';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -16,6 +16,8 @@ import { FeedDetailType } from '../types';
 import styles from './FeedCard.module.scss';
 import TextWithLinks from '@/components/Common/TextWithLinks';
 import LoadingSpinner from '@/components/Common/LoadingSpinner';
+import { useDispatch } from 'react-redux';
+import { handleFeedDetailModal } from '@/redux/feedDetailModalSlice';
 
 interface FeedCardTypes {
   feedData: FeedDetailType;
@@ -66,6 +68,8 @@ export default function FeedCard({
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isImageLoading, setImageLoading] = useState(true);
   const router = useRouter();
+  const dispatch = useDispatch();
+  const queryClient = useQueryClient();
 
   const deleteMutaion = useMutation({
     mutationFn: () =>
@@ -73,7 +77,13 @@ export default function FeedCard({
         param: `/feed/${feedId}`,
         method: 'delete',
       }),
-    onSuccess: () => router.reload(),
+    onSuccess: () => {
+      dispatch(handleFeedDetailModal(false));
+      router.push('/?tab=feed');
+      queryClient.invalidateQueries({
+        queryKey: ['feedList'],
+      });
+    },
   });
 
   const { handleEmojiClick, isAddPending, isDeletePending } =

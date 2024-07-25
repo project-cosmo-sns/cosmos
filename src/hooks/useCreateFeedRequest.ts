@@ -6,9 +6,11 @@ import { baseURL } from '@/api/axios';
 import { useToast } from './useToast';
 import { useDispatch } from 'react-redux';
 import { handleCreateFeedModal } from '@/redux/createFeedModalSlice';
+import { useRouter } from 'next/router';
 
 export function useCreateFeedRequest() {
   const dispatch = useDispatch();
+  const router = useRouter();
   const { showToastHandler } = useToast();
   const queryClient = useQueryClient();
   const { refetch: getUrl } = useQuery<UrlType>({
@@ -54,6 +56,7 @@ export function useCreateFeedRequest() {
       // FeedList도 invalidate 합니다.
       showToastHandler('피드 작성 완료!', 'check');
       dispatch(handleCreateFeedModal(false));
+      router.push('/?tab=feed');
       queryClient.invalidateQueries({
         queryKey: ['feedList'],
       });
