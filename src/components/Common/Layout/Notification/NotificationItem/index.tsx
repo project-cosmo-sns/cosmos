@@ -135,6 +135,7 @@ export default function NotificationItem({
           modalVisible={isModalOpen}
           cssModalSize={cn('feed-detail-modalSize')}
           cssComponentDisplay={cn('feed-detail-componentDisplay')}
+          className={cn('forNotification')}
         >
           <FeedDetails feedId={feedId} />
         </Modal>
