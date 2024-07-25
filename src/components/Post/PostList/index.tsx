@@ -8,6 +8,7 @@ import CategoryList from '../CategoryList';
 import { PostListType } from '../types';
 import styles from './PostList.module.scss';
 import PostListContent from './PostListContent';
+import { InfiniteData } from '@tanstack/react-query';
 
 interface PostListProps {
   selectedSort?: SortType;
@@ -25,6 +26,11 @@ export default function PostList({
     ? `&category=${selectedCategory}`
     : '';
 
+  const initialData: InfiniteData<PostListType> = {
+    pages: [initialPostList],
+    pageParams: [1],
+  };
+
   const {
     data: postListData,
     ref,
@@ -39,6 +45,7 @@ export default function PostList({
       }),
     getNextPageParam: (lastPage) =>
       lastPage.meta.hasNextPage ? lastPage.meta.page + 1 : undefined,
+    initialData,
   });
 
   const postDataList = postListData?.pages ?? [];
@@ -55,13 +62,9 @@ export default function PostList({
           setSelectedCategory={setSelectedCategory}
         />
       </div>
-      {isPending ? (
-        <PostListContent postDataList={initialPostList} />
-      ) : (
-        postDataList.map((post) => (
-          <PostListContent key={post.meta.page} postDataList={post} />
-        ))
-      )}
+      {postDataList.map((post) => (
+        <PostListContent key={post.meta.page} postDataList={post} />
+      ))}
       {!isFetchingNextPage && <div ref={ref} />}
     </div>
   );
