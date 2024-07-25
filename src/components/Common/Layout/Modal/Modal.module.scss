@@ -36,6 +36,8 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
+    overflow: scroll;
+    border-radius: 10px;
     padding: {
       top: 70px;
       bottom: 30px;
@@ -62,9 +64,20 @@
     .component {
       flex-grow: 1;
     }
+  }
+  overflow: scroll;
+  scrollbar-width: none;
+  border-radius: 5px;
+}
 
-    overflow: scroll;
-    scrollbar-width: none;
-    border-radius: 5px;
+.forFeed {
+  border-radius: 0px;
+  .wrapper {
+    border: none;
+    border-radius: 0px;
+    @media (min-width: 768px) {
+      @include glass-02;
+      border-radius: 10px;
+    }
   }
 }
