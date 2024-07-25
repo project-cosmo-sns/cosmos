@@ -122,6 +122,9 @@ export default function FeedDetails({
                       postLikeRequest={postLikeRequest}
                       deleteCommentRequest={deleteCommentRequest}
                       editCommentRequest={editCommentRequest}
+                      setIsNotificationFeedModalOpen={
+                        setIsNotificationFeedModalOpen
+                      }
                     />
                   </div>
                 ))
