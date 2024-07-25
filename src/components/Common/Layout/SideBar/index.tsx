@@ -75,6 +75,10 @@ export default function SideBar() {
   };
 
   const handleCreateFeedClick = (state: boolean) => {
+    // 피드 상세 모달 On -> 피드 작성하기 -> 피드 상세 모달 Off -> 피드 작성 모달 On
+    if (isFeedDetailModalOpen) {
+      dispatch(handleFeedDetailModal(false));
+    }
     dispatch(handleCreateFeedModal(state));
     handleClosePopOver();
   };
