@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import CommentCard from '@/components/Common/CommentCard';
 import CommentInput from '@/components/Common/CommentInput';
 import classNames from 'classnames/bind';
@@ -16,7 +16,13 @@ import useInfiniteScroll from '@/hooks/useInfiniteScroll';
  * @return {JSX.Element} FeedDetails - 추후에 변경 예정입니다. 피드 리스트에서 특정 피드를 클릭한다면 클리한 피드의 아이디를 통해 데이터를 요청해 화면에 보여줍니다
  */
 
-export default function FeedDetails({ feedId }: { feedId: number }) {
+export default function FeedDetails({
+  feedId,
+  setIsNotificationFeedModalOpen,
+}: {
+  feedId: number;
+  setIsNotificationFeedModalOpen?: Dispatch<SetStateAction<boolean>>;
+}) {
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const cn = classNames.bind(styles);
 
@@ -101,6 +107,7 @@ export default function FeedDetails({ feedId }: { feedId: number }) {
             forDetails
             editState={isEdit}
             toggleEditMode={setIsEdit}
+            setIsNotificationFeedModalOpen={setIsNotificationFeedModalOpen}
           />
           <CommentInput mutateFn={postCommentMutate} />
           <div className={cn('comment-list-area')}>

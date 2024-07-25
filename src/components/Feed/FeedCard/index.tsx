@@ -24,6 +24,7 @@ interface FeedCardTypes {
   onClick?: () => void;
   editState?: boolean;
   toggleEditMode?: Dispatch<SetStateAction<boolean>>;
+  setIsNotificationFeedModalOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
 const cn = classNames.bind(styles);
@@ -44,6 +45,7 @@ export default function FeedCard({
   onClick,
   editState,
   toggleEditMode,
+  setIsNotificationFeedModalOpen,
 }: FeedCardTypes) {
   const {
     currentImageUrl,
@@ -95,6 +97,7 @@ export default function FeedCard({
               <WriterProfile
                 writer={feedData.writer}
                 createdAt={getElapsedTime(createdAt)}
+                setIsNotificationFeedModalOpen={setIsNotificationFeedModalOpen}
               />
               {forDetails && isMine && (
                 <div className={cn('icon-wrapper')}>

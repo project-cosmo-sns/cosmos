@@ -83,6 +83,12 @@ export default function NotificationItem({
     }
   };
 
+  // 피드 아이디 클릭 시, 모달 모두 닫기
+  const handleOpenedModal = () => {
+    setIsModalOpen(false);
+    handleClosePopOver();
+  };
+
   const formattedCreatedAt = getElapsedTime(createdAt);
 
   const onErrorImg: React.ReactEventHandler<HTMLImageElement> = (e) => {
@@ -137,7 +143,10 @@ export default function NotificationItem({
           cssComponentDisplay={cn('feed-detail-componentDisplay')}
           className={cn('forNotification')}
         >
-          <FeedDetails feedId={feedId} />
+          <FeedDetails
+            setIsNotificationFeedModalOpen={handleOpenedModal}
+            feedId={feedId}
+          />
         </Modal>
       )}
     </>
