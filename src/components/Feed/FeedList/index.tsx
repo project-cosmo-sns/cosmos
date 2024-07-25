@@ -11,6 +11,9 @@ import styles from './FeedList.module.scss';
 import fetchData from '@/api/fetchData';
 import { InfiniteData } from '@tanstack/react-query';
 import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleFeedDetailModal } from '@/redux/feedDetailModalSlice';
+import { RootState } from '@/redux/store';
 /**
  * @return {JSX.Element} FeedCardList - 추후에 변경 예정입니다. 지금은 목데이터를 화면에 출력하지만 변경한다면 상위 컴포넌트에서 피드 데이터를 받아서 뿌려줄 예정입니다.
  */
@@ -24,15 +27,24 @@ const cn = classNames.bind(styles);
 
 export default function FeedList({ feedList, selectedSort }: FeedListProps) {
   const { checkMemberStatus } = useFetchMemberStatus();
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
   const queryParam = CATEGORY_LIST[selectedCategory]
     ? `&category=${selectedCategory}`
     : '';
   const [feedId, setFeedId] = useState<number>(0);
+  const dispatch = useDispatch();
+
+  const isFeedDetailModalOpen = useSelector(
+    (state: RootState) => state.feedDetailModal.isDetailOpen,
+  );
+
+  const setIsFeedDetailModalOpen = (state: boolean) => {
+    dispatch(handleFeedDetailModal(state));
+  };
+
   const handleClick = (selectedFeedId: number) => {
     setFeedId(selectedFeedId);
-    setIsModalOpen(!isModalOpen);
+    setIsFeedDetailModalOpen(true);
   };
 
   const initialData: InfiniteData<FeedListType> = {
@@ -85,8 +97,8 @@ export default function FeedList({ feedList, selectedSort }: FeedListProps) {
       </div>
       {!isFetchingNextPage && <div ref={ref} />}
       <Modal
-        toggleModal={setIsModalOpen}
-        modalVisible={isModalOpen}
+        toggleModal={setIsFeedDetailModalOpen}
+        modalVisible={isFeedDetailModalOpen}
         cssModalSize={cn('feed-detail-modalSize')}
         cssComponentDisplay={cn('feed-detail-componentDisplay')}
         className="forFeed"

@@ -61,7 +61,7 @@ export default function Modal({
               width="18"
               height="18"
               onClick={() => {
-                toggleModal && toggleModal(!modalVisible);
+                toggleModal && toggleModal(false);
               }}
             />
             <div className={cn(cssModalSize)} ref={modalRef}>

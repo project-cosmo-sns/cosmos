@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface FeedModalState {
+interface CreateFeedModalState {
   isOpen: boolean;
 }
 
-const initialState: FeedModalState = {
+const initialState: CreateFeedModalState = {
   isOpen: false,
 };
 
 const createFeedModalSlice = createSlice({
-  name: 'feedModal',
+  name: 'createFeedModal',
   initialState,
   reducers: {
     handleCreateFeedModal(state, action: PayloadAction<boolean>) {

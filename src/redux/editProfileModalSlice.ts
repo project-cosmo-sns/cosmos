@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface ProfileModalState {
-  isOpen: boolean;
+  isProfileOpen: boolean;
 }
 
 const initialState: ProfileModalState = {
-  isOpen: false,
+  isProfileOpen: false,
 };
 
 const editProfileModalSlice = createSlice({
@@ -13,7 +13,7 @@ const editProfileModalSlice = createSlice({
   initialState,
   reducers: {
     handleEditProfileModal(state, action: PayloadAction<boolean>) {
-      state.isOpen = action.payload;
+      state.isProfileOpen = action.payload;
     },
   },
 });

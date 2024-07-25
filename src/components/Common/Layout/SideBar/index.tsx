@@ -19,8 +19,10 @@ import { RootState } from '@/redux/store';
 import { login, logout } from '@/redux/logoutSlice';
 import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
 import { handleCreateFeedModal } from '@/redux/createFeedModalSlice';
+import { handleFeedDetailModal } from '@/redux/feedDetailModalSlice';
 import CreateFeed from '@/components/Feed/CreateFeed';
 import Modal from '@/components/Common/Layout/Modal';
+import { handleEditProfileModal } from '@/redux/editProfileModalSlice';
 
 const cn = classNames.bind(styles);
 
@@ -34,16 +36,26 @@ export default function SideBar() {
   const { data: member } = useGetProfileImage();
   const isLogin = member?.isLogin;
   const loggedin = useSelector((state: RootState) => state.logout.isLoggedIn);
-  const isModalOpen = useSelector((state: RootState) => state.feedModal.isOpen);
+  const isCreateFeedModalOpen = useSelector(
+    (state: RootState) => state.createFeedModal.isOpen,
+  );
+  const isFeedDetailModalOpen = useSelector(
+    (state: RootState) => state.feedDetailModal.isDetailOpen,
+  );
+
+  const isModalOpen = isCreateFeedModalOpen;
 
   const { checkMemberStatus } = useFetchMemberStatus();
 
   const profileClick = () => {
     if (isLogin) {
+      dispatch(handleCreateFeedModal(false));
+      dispatch(handleFeedDetailModal(false));
+      dispatch(handleEditProfileModal(false));
       router.push('/profile?tab=feed');
-      return;
+    } else {
+      dispatch(openLoginModal());
     }
-    dispatch(openLoginModal());
   };
 
   const togglePopOver = (
@@ -67,6 +79,12 @@ export default function SideBar() {
     handleClosePopOver();
   };
 
+  const handleHomeIconClick = () => {
+    dispatch(handleCreateFeedModal(false));
+    dispatch(handleFeedDetailModal(false));
+    dispatch(handleEditProfileModal(false));
+  };
+
   useEffect(() => {
     if (!isLogin) {
       dispatch(logout());
@@ -79,7 +97,13 @@ export default function SideBar() {
   return (
     <div className={cn('sideBar-container')}>
       <div className={cn('icon-wrapper')}>
-        <Link href="/">
+        <Link
+          // className={cn(isModalOpen && 'disabled')}
+          // aria-disabled={isModalOpen}
+          // tabIndex={isModalOpen ? -1 : undefined}
+          href="/"
+          onClick={() => handleHomeIconClick()}
+        >
           <HomeIcon fill="#FFFFFF" />
         </Link>
         <div

@@ -42,7 +42,7 @@ export default function MemberDataContainer({
 }: MemberDataContainerPropsType) {
   const disPatch = useDispatch();
   const isModalOpen = useSelector(
-    (state: RootState) => state.profileModal.isOpen,
+    (state: RootState) => state.editProfileModal.isProfileOpen,
   );
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');

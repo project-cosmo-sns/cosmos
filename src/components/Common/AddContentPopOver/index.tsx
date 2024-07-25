@@ -19,10 +19,10 @@ export default function AddContentPopOver({ onClose }: PopOverProps) {
   const dispatch = useDispatch();
   const { showToastHandler } = useToast();
   const isCreateFeedModalOpen = useSelector(
-    (state: RootState) => state.feedModal.isOpen,
+    (state: RootState) => state.createFeedModal.isOpen,
   );
   const isEditProfileModalOpen = useSelector(
-    (state: RootState) => state.profileModal.isOpen,
+    (state: RootState) => state.editProfileModal.isProfileOpen,
   );
 
   const handleCreateFeedClick = () => {
