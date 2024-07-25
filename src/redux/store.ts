@@ -6,6 +6,7 @@ import toastReducer from './toastSlice';
 import logoutSlice from './logoutSlice';
 import loginModalSlice from './loginModalSlice';
 import createFeedModalSlice from './createFeedModalSlice';
+import editProfileModalSlice from './editProfileModalSlice';
 
 const rootReducer = {
   search: searchReducer,
@@ -13,6 +14,7 @@ const rootReducer = {
   logout: logoutSlice,
   loginModal: loginModalSlice,
   feedModal: createFeedModalSlice,
+  profileModal: editProfileModalSlice,
 };
 
 const store = configureStore({

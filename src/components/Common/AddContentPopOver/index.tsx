@@ -21,23 +21,26 @@ export default function AddContentPopOver({ onClose }: PopOverProps) {
   const isCreateFeedModalOpen = useSelector(
     (state: RootState) => state.feedModal.isOpen,
   );
+  const isEditProfileModalOpen = useSelector(
+    (state: RootState) => state.profileModal.isOpen,
+  );
 
   const handleCreateFeedClick = () => {
-    if (!isCreateFeedModalOpen) {
+    if (!isCreateFeedModalOpen && !isEditProfileModalOpen) {
       dispatch(handleCreateFeedModal(true));
     } else {
       // 모바일에서는 하단 메뉴 바가 보이기 때문에 '피드 생성하기' 버튼을 한번 더 누를 수 있음.
-      showToastHandler('피드를 작성 중입니다.', 'warn');
+      showToastHandler('해당 작업을 완료해주세요.', 'warn');
     }
     onClose();
   };
 
   const handleCreatePostClick = () => {
-    if (!isCreateFeedModalOpen) {
+    if (!isCreateFeedModalOpen && !isEditProfileModalOpen) {
       router.push('/write');
     } else {
       // 피드 작성 모달이 떠잇는데 포스트 작성을 클릭할 경우 토스트 메세지 출력
-      showToastHandler('피드를 작성 중입니다.', 'warn');
+      showToastHandler('해당 작업을 완료해주세요.', 'warn');
     }
     onClose();
   };

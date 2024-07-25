@@ -15,7 +15,7 @@ import { useRouter } from 'next/router';
 
 interface ProfileEditModalProps {
   isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsOpen: (state: boolean) => void;
   memberData: MemberDataType;
   initialData: MemberDataType;
 }
