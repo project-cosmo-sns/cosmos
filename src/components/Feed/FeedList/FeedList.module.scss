@@ -4,9 +4,10 @@
   gap: 12px;
   margin: {
     top: 16px;
-    bottom: 16px;
+    bottom: 63px;
   }
   @media (min-width: 768px) {
+    margin-bottom: 16px;
     padding: {
       left: 24px;
       right: 24px;
