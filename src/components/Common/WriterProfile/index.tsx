@@ -38,6 +38,11 @@ export default function WriterProfile({
         height={40}
         onClick={(event) => {
           event.stopPropagation();
+          // 전역으로 관리하는 피드 상세 모달 닫기
+          dispatch(handleFeedDetailModal(false));
+          // notification 컴포넌트에서 관리하는 피드 상세 모달 닫기
+          if (setIsNotificationFeedModalOpen)
+            setIsNotificationFeedModalOpen(false);
           checkMemberStatus(() => router.push(`/profile?memberId=${memberId}`));
         }}
       />
