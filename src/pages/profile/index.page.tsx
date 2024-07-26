@@ -80,7 +80,6 @@ export default function MemberDataContainer({
   if (!memberData) {
     return <div>Lodading~~~~~</div>;
   } // 로딩페이지 만들면 좋겠다.
-
   return (
     <div className={cn('profile')}>
       {memberData && (

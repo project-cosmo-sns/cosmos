@@ -48,10 +48,10 @@ export default function FollowList({ followListProps }: FollowListType) {
     if (followData === 'userFollower' && memberId) {
       return getUserFollowerData(Number(memberId), page);
     }
-    if (followData === 'following' && !memberId) {
+    if (followData === 'following') {
       return getMyFollowingData(page);
     }
-    if (followData === 'follower' && !memberId) {
+    if (followData === 'follower') {
       return getMyFollowerData(page);
     }
     throw new Error('Invalid followData or memberId');
@@ -92,6 +92,7 @@ export default function FollowList({ followListProps }: FollowListType) {
                   key={key}
                   {...followDetailInfo}
                   isFollowButton={isFollowButton}
+                  toggleModal={toggleModal}
                 />
               );
             })}

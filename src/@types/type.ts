@@ -13,6 +13,12 @@ export type ModalPropsType = {
   modalVisible: boolean;
   toggleModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
+export type ProfileFollowModalPropsType = {
+  modalVisible: boolean;
+  toggleModal: React.Dispatch<
+    React.SetStateAction<'follower' | 'following' | 'authForm'>
+  >;
+};
 
 export type ContainerOptionType =
   | 'feed'
