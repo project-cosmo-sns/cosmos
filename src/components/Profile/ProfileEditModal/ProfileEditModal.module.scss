@@ -1,3 +1,21 @@
+.profile-edit-modalSize {
+  width: 100%;
+  height: 100%;
+
+  @media (min-width: 768px) {
+    width: 614px;
+    height: auto;
+  }
+  @media (min-width: 1200px) {
+    width: 740px;
+  }
+}
+.profile-edit-modal{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .profile-edit-Form {
   @include font-style(1.6rem, $white-01, 700);
   width: 380px;

@@ -83,9 +83,12 @@ export default function SideBar() {
     handleClosePopOver();
   };
 
+  // 알림 아이템 || 뒤로가기 클릭 -> 피드생성 모달 닫힘 & 피드상세 모달 닫힘 & 사이드바 팝오버 닫힘 & 프로필 모달 닫힘
   const handleNotificationClick = () => {
     handleClosePopOver();
     dispatch(handleCreateFeedModal(false));
+    dispatch(handleFeedDetailModal(false));
+    dispatch(handleEditProfileModal(false));
   };
 
   const handleHomeIconClick = () => {

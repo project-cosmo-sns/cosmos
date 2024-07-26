@@ -86,9 +86,10 @@ export default function FeedDetails({
   };
 
   if (isFeedDataPending) return <LoadingSpinner />;
-  if (isFeedDataError) return '피드 데이터 에러 발생';
+  if (isFeedDataError)
+    return '삭제된 피드 입니다. 새로 고침 후 다시 이용해주세요.';
   if (isCommentDataPending) return <LoadingSpinner />;
-  if (isCommentDataError) return '코멘트 데이터 에러 발생';
+  if (isCommentDataError) return '코멘트 데이터 에러';
 
   return (
     <>

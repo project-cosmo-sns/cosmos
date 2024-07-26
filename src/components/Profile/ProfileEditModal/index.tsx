@@ -194,79 +194,72 @@ export default function ProfileEditModal({
   }, [memberData, setValue, previewImage]);
 
   return (
-    <div>
-      {isOpen && (
-        <Modal
-          modalVisible={isOpen}
-          toggleModal={setIsOpen}
-          title="프로필 수정"
-          cssComponentDisplay={cn('profile-edit-modal')}
-          cssModalSize={cn('380px')}
-        >
-          <form
-            className={cn('profile-edit-Form')}
-            onSubmit={handleSubmit(onSubmit)}
+    <Modal
+      modalVisible={isOpen}
+      toggleModal={setIsOpen}
+      title="프로필 수정"
+      cssComponentDisplay={cn('profile-edit-modal')}
+      cssModalSize={cn('profile-edit-modalSize')}
+      className="forFeed"
+    >
+      <form
+        className={cn('profile-edit-Form')}
+        onSubmit={handleSubmit(onSubmit)}
+      >
+        <div className={cn('profile-image-edit')}>
+          <ImageInput
+            type="profile"
+            watch={watch}
+            register={{
+              ...register('image', {
+                onChange: handleImageChange,
+              }),
+            }}
+            initialImageUrl={previewImage}
+          />
+          <button
+            className={cn('image-delete-button')}
+            type="button"
+            onClick={() => deleteImage()}
           >
-            <div className={cn('profile-image-edit')}>
-              <ImageInput
-                type="profile"
-                watch={watch}
-                register={{
-                  ...register('image', {
-                    onChange: handleImageChange,
-                  }),
-                }}
-                initialImageUrl={previewImage}
-              />
-              <button
-                className={cn('image-delete-button')}
-                type="button"
-                onClick={() => deleteImage()}
-              >
-                이미지 삭제
-              </button>
-            </div>
-            <div className={cn('name')}>{memberData?.nickname}</div>
-            <GenerationBadge
-              generationInfo={memberData?.generation}
-              authorizationStatus={memberData?.authorizationStatus}
-            />
+            이미지 삭제
+          </button>
+        </div>
+        <div className={cn('name')}>{memberData?.nickname}</div>
+        <GenerationBadge
+          generationInfo={memberData?.generation}
+          authorizationStatus={memberData?.authorizationStatus}
+        />
 
-            <div className={cn('introduce')}>
-              한줄소개
-              {memberData?.introduce ? (
-                <textarea
-                  {...register('introduce', {
-                    onBlur: handleIntroduceChange,
-                  })}
-                  // value={introduce}
-                  autoComplete="on"
-                  className={cn('textarea', {
-                    textareaActive: memberData?.introduce,
-                  })}
-                />
-              ) : (
-                <textarea
-                  placeholder="한줄소개를 입력하세요 (?자제한)"
-                  {...register('introduce', {
-                    onBlur: handleIntroduceChange,
-                  })}
-                />
-              )}
-            </div>
-            <div className={cn('flex-grow-div')}> </div>
-            <div className={cn('edit-button')}>
-              <DefaultButton
-                buttonType="submit"
-                size="modal"
-                color="$primary-01"
-              >
-                수정하기
-              </DefaultButton>
-            </div>
-          </form>
-        </Modal>
-      )}
-    </div>
+        <div className={cn('introduce')}>
+          한줄소개
+          {memberData?.introduce ? (
+            <textarea
+              {...register('introduce', {
+                onBlur: handleIntroduceChange,
+              })}
+              // value={introduce}
+              autoComplete="on"
+              className={cn('textarea', {
+                textareaActive: memberData?.introduce,
+              })}
+            />
+          ) : (
+            <textarea
+              placeholder="한줄소개를 입력하세요 (?자제한)"
+              {...register('introduce', {
+                onBlur: handleIntroduceChange,
+              })}
+            />
+          )}
+        </div>
+        <div className={cn('flex-grow-div')}> </div>
+        <div className={cn('edit-button')}>
+          <DefaultButton buttonType="submit" size="modal" color="$primary-01">
+            수정하기
+          </DefaultButton>
+        </div>
+      </form>
+    </Modal>
   );
 }
