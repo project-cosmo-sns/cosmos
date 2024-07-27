@@ -75,7 +75,7 @@ export default function FeedList({ feedList, selectedSort }: FeedListProps) {
   }, [selectedCategory, selectedSort]);
 
   return (
-    <>
+    <div className={cn('wrapper')}>
       <div className={cn('container')}>
         {feedPages[0].data.length ? (
           feedPages.map((feedPage) =>
@@ -106,6 +106,6 @@ export default function FeedList({ feedList, selectedSort }: FeedListProps) {
       >
         <FeedDetails feedId={feedId} />
       </Modal>
-    </>
+    </div>
   );
 }

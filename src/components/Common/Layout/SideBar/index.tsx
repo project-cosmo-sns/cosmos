@@ -52,7 +52,6 @@ export default function SideBar() {
       dispatch(handleCreateFeedModal(false));
       dispatch(handleFeedDetailModal(false));
       dispatch(handleEditProfileModal(false));
-      router.push('/profile?tab=feed');
     } else {
       dispatch(openLoginModal());
     }
@@ -136,17 +135,18 @@ export default function SideBar() {
             <Notification onClose={handleNotificationClick} />
           )}
         </div>
-        {loggedin ? (
-          <Image
-            src={userImage || '/images/profile.svg'}
-            alt="profile"
-            width={32}
-            height={32}
-            onClick={profileClick}
-          />
-        ) : (
-          <UserIcon fill="#FFFFFF" onClick={profileClick} />
-        )}
+        <Link href="/profile?tab=feed" onClick={profileClick}>
+          {loggedin ? (
+            <Image
+              src={userImage || '/images/profile.svg'}
+              alt="profile"
+              width={32}
+              height={32}
+            />
+          ) : (
+            <UserIcon fill="#FFFFFF" />
+          )}
+        </Link>
       </div>
       <Modal
         title="피드 생성"
