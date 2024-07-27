@@ -36,6 +36,7 @@ html {
   height: 100%;
   font-size: 62.5%;
   overflow-x: hidden;
+  max-width: 100%;
 }
 
 body {
@@ -48,6 +49,7 @@ body {
   background-size: cover;
   background-attachment: fixed;
   overflow-x: hidden;
+  max-width: 100%;
 
   -webkit-tap-highlight-color: transparent;
 }
