@@ -2,7 +2,7 @@ import { EditCommentType } from '@/@types/type';
 import { CommentDetailType } from '@/components/Feed/types';
 import getElapsedTime from '@/utils/getElaspedTime';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import ActionButtons from '../Buttons/ActionButtons';
 import DeleteModal from '../DeleteModal';
 import { LikeIcon, LikedIcon } from '../IconCollection';
@@ -32,6 +32,7 @@ interface CommentCardProps {
   postLikeRequest: CommentRequestType;
   deleteCommentRequest: CommentRequestType;
   editCommentRequest: EditCommentRequestType;
+  setIsNotificationFeedModalOpen?: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function CommentCard({
@@ -42,6 +43,7 @@ export default function CommentCard({
   postLikeRequest,
   deleteCommentRequest,
   editCommentRequest,
+  setIsNotificationFeedModalOpen,
 }: CommentCardProps) {
   const commentData = comment.comment;
 
@@ -85,7 +87,11 @@ export default function CommentCard({
   return (
     <div className={cn('wrapper')}>
       <div className={cn('header')}>
-        <WriterProfile writer={comment.writer} createdAt={formattedCreatedAt} />
+        <WriterProfile
+          setIsNotificationFeedModalOpen={setIsNotificationFeedModalOpen}
+          writer={comment.writer}
+          createdAt={formattedCreatedAt}
+        />
         <div className={cn('container')}>
           <button
             type="button"

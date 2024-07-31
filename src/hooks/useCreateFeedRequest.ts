@@ -3,12 +3,14 @@ import fetchData from '@/api/fetchData';
 import { UrlType, FeedType } from '@/components/Feed/CreateFeed/type';
 import axios from 'axios';
 import { baseURL } from '@/api/axios';
-import { Dispatch, SetStateAction } from 'react';
 import { useToast } from './useToast';
+import { useDispatch } from 'react-redux';
+import { handleCreateFeedModal } from '@/redux/createFeedModalSlice';
+import { useRouter } from 'next/router';
 
-export function useCreateFeedRequest(
-  toggleModal?: Dispatch<SetStateAction<boolean>>,
-) {
+export function useCreateFeedRequest() {
+  const dispatch = useDispatch();
+  const router = useRouter();
   const { showToastHandler } = useToast();
   const queryClient = useQueryClient();
   const { refetch: getUrl } = useQuery<UrlType>({
@@ -50,11 +52,14 @@ export function useCreateFeedRequest(
       }),
     onError: () => console.error('피드 등록에 실패하였습니다.'),
     onSuccess: () => {
+      // 요청에 성공하면 토스트를 출력하고 피드 생성 모달 출력을 비활성화 합니다.
+      // FeedList도 invalidate 합니다.
+      showToastHandler('피드 작성 완료!', 'check');
+      dispatch(handleCreateFeedModal(false));
+      router.push('/?tab=feed');
       queryClient.invalidateQueries({
         queryKey: ['feedList'],
       });
-      showToastHandler('피드 작성 완료!', 'check');
-      if (toggleModal) toggleModal(false);
     },
   });
 

@@ -2,6 +2,12 @@
   @include flex-arrange(center, flex-start);
   flex-direction: column;
   position: relative;
+
+  margin-bottom: 63px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 0px;
+  }
 }
 
 .category-container {
@@ -33,6 +39,7 @@
     padding: 0 24px 12px;
     gap: 12px;
   }
+
   .category-container {
     padding: 16px 24px;
   }

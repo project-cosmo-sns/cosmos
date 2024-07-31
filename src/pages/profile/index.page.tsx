@@ -14,6 +14,9 @@ import ProfileContent from '@/components/Profile/ProfileContent/ProfileContent';
 import EmptyContent from '@/components/Profile/ProfileContent/EmptyContent';
 import { useQuery } from '@tanstack/react-query';
 import instance from '@/api/axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { handleEditProfileModal } from '@/redux/editProfileModalSlice';
+import { RootState } from '@/redux/store';
 
 const cn = classNames.bind(styles);
 
@@ -37,7 +40,10 @@ export default function MemberDataContainer({
   myScrapList,
   error,
 }: MemberDataContainerPropsType) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const disPatch = useDispatch();
+  const isModalOpen = useSelector(
+    (state: RootState) => state.editProfileModal.isProfileOpen,
+  );
   const [selectedOption, setSelectedOption] =
     useState<ContainerOptionType>('feed');
   const isMine = !memberData.memberId;
@@ -67,10 +73,13 @@ export default function MemberDataContainer({
     // react query SSR...
   });
 
+  const setIsModalOpen = (state: boolean) => {
+    disPatch(handleEditProfileModal(state));
+  };
+
   if (!memberData) {
     return <div>Lodading~~~~~</div>;
   } // 로딩페이지 만들면 좋겠다.
-
   return (
     <div className={cn('profile')}>
       {memberData && (

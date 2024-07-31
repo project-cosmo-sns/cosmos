@@ -8,6 +8,10 @@ import { FeedListType } from '@/components/Feed/types';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
 import fetchData from '@/api/fetchData';
 import { MemberDataType } from '@/pages/profile/types';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { handleFeedDetailModal } from '@/redux/feedDetailModalSlice';
+import { handleCreateFeedModal } from '@/redux/createFeedModalSlice';
 
 interface FeedListProps {
   feedList: FeedListType;
@@ -16,12 +20,18 @@ interface FeedListProps {
 
 export default function MyFeedList({ feedList, memberData }: FeedListProps) {
   const cn = classNames.bind(styles);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [feedId, setFeedId] = useState<number>(0);
+  const dispatch = useDispatch();
+  const isFeedDetailOpen = useSelector(
+    (state: RootState) => state.feedDetailModal.isDetailOpen,
+  );
+  const setIsFeedDetailModalOpen = (state: boolean) => {
+    dispatch(handleFeedDetailModal(state));
+  };
 
   const handleClick = (selectedFeedId: number) => {
     setFeedId(selectedFeedId);
-    setIsModalOpen(!isModalOpen);
+    setIsFeedDetailModalOpen(true);
   };
 
   const memberId = memberData?.memberId ?? 'mine';
@@ -68,10 +78,11 @@ export default function MyFeedList({ feedList, memberData }: FeedListProps) {
         {!isFetchingNextPage && <div ref={ref} />}
       </div>
       <Modal
-        toggleModal={setIsModalOpen}
-        modalVisible={isModalOpen}
+        toggleModal={setIsFeedDetailModalOpen}
+        modalVisible={isFeedDetailOpen}
         cssModalSize={cn('feed-detail-modalSize')}
         cssComponentDisplay={cn('feed-detail-componentDisplay')}
+        className="forFeed"
       >
         <FeedDetails feedId={feedId} />
       </Modal>

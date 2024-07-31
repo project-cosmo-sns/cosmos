@@ -18,6 +18,11 @@ import { openLoginModal } from '@/redux/loginModalSlice';
 import { RootState } from '@/redux/store';
 import { login, logout } from '@/redux/logoutSlice';
 import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
+import { handleCreateFeedModal } from '@/redux/createFeedModalSlice';
+import { handleFeedDetailModal } from '@/redux/feedDetailModalSlice';
+import CreateFeed from '@/components/Feed/CreateFeed';
+import Modal from '@/components/Common/Layout/Modal';
+import { handleEditProfileModal } from '@/redux/editProfileModalSlice';
 
 const cn = classNames.bind(styles);
 
@@ -31,15 +36,25 @@ export default function SideBar() {
   const { data: member } = useGetProfileImage();
   const isLogin = member?.isLogin;
   const loggedin = useSelector((state: RootState) => state.logout.isLoggedIn);
+  const isCreateFeedModalOpen = useSelector(
+    (state: RootState) => state.createFeedModal.isOpen,
+  );
+  const isFeedDetailModalOpen = useSelector(
+    (state: RootState) => state.feedDetailModal.isDetailOpen,
+  );
+
+  const isModalOpen = isCreateFeedModalOpen;
 
   const { checkMemberStatus } = useFetchMemberStatus();
 
   const profileClick = () => {
     if (isLogin) {
-      router.push('/profile?tab=feed');
-      return;
+      dispatch(handleCreateFeedModal(false));
+      dispatch(handleFeedDetailModal(false));
+      dispatch(handleEditProfileModal(false));
+    } else {
+      dispatch(openLoginModal());
     }
-    dispatch(openLoginModal());
   };
 
   const togglePopOver = (
@@ -58,6 +73,29 @@ export default function SideBar() {
     setActivePopover(null);
   };
 
+  const handleCreateFeedClick = (state: boolean) => {
+    // 피드 상세 모달 On -> 피드 작성하기 -> 피드 상세 모달 Off -> 피드 작성 모달 On
+    if (isFeedDetailModalOpen) {
+      dispatch(handleFeedDetailModal(false));
+    }
+    dispatch(handleCreateFeedModal(state));
+    handleClosePopOver();
+  };
+
+  // 알림 아이템 || 뒤로가기 클릭 -> 피드생성 모달 닫힘 & 피드상세 모달 닫힘 & 사이드바 팝오버 닫힘 & 프로필 모달 닫힘
+  const handleNotificationClick = () => {
+    handleClosePopOver();
+    dispatch(handleCreateFeedModal(false));
+    dispatch(handleFeedDetailModal(false));
+    dispatch(handleEditProfileModal(false));
+  };
+
+  const handleHomeIconClick = () => {
+    dispatch(handleCreateFeedModal(false));
+    dispatch(handleFeedDetailModal(false));
+    dispatch(handleEditProfileModal(false));
+  };
+
   useEffect(() => {
     if (!isLogin) {
       dispatch(logout());
@@ -70,7 +108,13 @@ export default function SideBar() {
   return (
     <div className={cn('sideBar-container')}>
       <div className={cn('icon-wrapper')}>
-        <Link href="/">
+        <Link
+          // className={cn(isModalOpen && 'disabled')}
+          // aria-disabled={isModalOpen}
+          // tabIndex={isModalOpen ? -1 : undefined}
+          href="/"
+          onClick={() => handleHomeIconClick()}
+        >
           <HomeIcon fill="#FFFFFF" />
         </Link>
         <div
@@ -79,10 +123,7 @@ export default function SideBar() {
         >
           <AddIcon width="32px" height="32px" />
           {activePopover === 'add' && (
-            <AddContentPopOver
-              profileImage={userImage}
-              onClose={handleClosePopOver}
-            />
+            <AddContentPopOver onClose={handleClosePopOver} />
           )}
         </div>
         <div
@@ -91,21 +132,32 @@ export default function SideBar() {
         >
           <BellIcon fill="#FFFFFF" />
           {activePopover === 'bell' && (
-            <Notification onClose={handleClosePopOver} />
+            <Notification onClose={handleNotificationClick} />
           )}
         </div>
-        {loggedin ? (
-          <Image
-            src={userImage || '/images/profile.svg'}
-            alt="profile"
-            width={32}
-            height={32}
-            onClick={profileClick}
-          />
-        ) : (
-          <UserIcon fill="#FFFFFF" onClick={profileClick} />
-        )}
+        <Link href="/profile?tab=feed" onClick={profileClick}>
+          {loggedin ? (
+            <Image
+              src={userImage || '/images/profile.svg'}
+              alt="profile"
+              width={32}
+              height={32}
+            />
+          ) : (
+            <UserIcon fill="#FFFFFF" />
+          )}
+        </Link>
       </div>
+      <Modal
+        title="피드 생성"
+        modalVisible={isModalOpen}
+        toggleModal={handleCreateFeedClick}
+        cssModalSize={cn('create-feed-modalSize')}
+        cssComponentDisplay={cn('')}
+        className="forFeed"
+      >
+        <CreateFeed modalVisible={isModalOpen} profileImage={userImage} />
+      </Modal>
     </div>
   );
 }

@@ -18,7 +18,6 @@ import { FeedType, CreatedFeedTypes, Inputs } from './type';
 
 export default function CreateFeed({
   profileImage,
-  toggleModal,
   modalVisible,
 }: CreatedFeedTypes) {
   const cn = classNames.bind(styles);
@@ -38,7 +37,7 @@ export default function CreateFeed({
   });
   const [images, setImages] = useState<Blob[]>([]);
   const [urlBucket, setUrlBucket] = useState<string[]>([]);
-  const { getUrl, deleteImage, postFeed } = useCreateFeedRequest(toggleModal);
+  const { getUrl, deleteImage, postFeed } = useCreateFeedRequest();
 
   const putUrlMutate = useMutation({
     mutationFn: ({ url, file }: { url: string; file: Blob }) =>
@@ -133,7 +132,7 @@ export default function CreateFeed({
             className={cn('text')}
             rows={5}
             maxLength={300}
-            placeholder="글을 작성해보세요"
+            placeholder="글을 작성해주세요"
             {...register('content', {
               required: '게시글을 작성해주세요',
               maxLength: 300,
@@ -172,7 +171,7 @@ export default function CreateFeed({
                         updateUrlBucket(fileList);
                       } else {
                         setValue('feedImage', []);
-                        alert('이미지는 3개 까지 업로드 가능합니다.');
+                        alert('3개 까지 업로드 가능합니다.');
                       }
                     }}
                   />

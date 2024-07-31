@@ -14,7 +14,7 @@ import { useFetchMemberStatus } from '@/hooks/useFetchMemberStatus';
 
 export interface ProfileHeaderProps {
   memberData: MemberDataType;
-  setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsModalOpen: (state: boolean) => void;
   memberId?: string;
 }
 
@@ -62,10 +62,7 @@ export default function ProfileHeader({
 
     return (
       <div className={cn('profile-setting-button')}>
-        <ProfilePopOver
-          memberData={memberData}
-          onSetting={() => setIsModalOpen((prev) => !prev)}
-        />
+        <ProfilePopOver memberData={memberData} onSetting={setIsModalOpen} />
       </div>
     );
   };
