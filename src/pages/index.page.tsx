@@ -48,28 +48,26 @@ export default function Home({
   const [selectedSort, setSelectedSort] = useState<SortType>('ALL');
 
   return (
-    <div className={cn('home-wrapper')}>
-      <div className={cn('home-container')}>
-        <TodayQuestion />
-        <ContentContainer
-          selectedOption={selectedOption}
-          setSelectedOption={setSelectedOption}
-          selectedSort={selectedSort}
-          setSelectedSort={setSelectedSort}
-        >
-          {selectedOption === 'feed' ? (
-            <FeedList
-              feedList={feedList.props.response}
-              selectedSort={selectedSort}
-            />
-          ) : (
-            <PostList
-              initialPostList={postList.props.response}
-              selectedSort={selectedSort}
-            />
-          )}
-        </ContentContainer>
-      </div>
+    <div className={cn('home-container')}>
+      <TodayQuestion />
+      <ContentContainer
+        selectedOption={selectedOption}
+        setSelectedOption={setSelectedOption}
+        selectedSort={selectedSort}
+        setSelectedSort={setSelectedSort}
+      >
+        {selectedOption === 'feed' ? (
+          <FeedList
+            feedList={feedList.props.response}
+            selectedSort={selectedSort}
+          />
+        ) : (
+          <PostList
+            initialPostList={postList.props.response}
+            selectedSort={selectedSort}
+          />
+        )}
+      </ContentContainer>
     </div>
   );
 }
