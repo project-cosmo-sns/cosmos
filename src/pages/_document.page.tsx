@@ -256,6 +256,8 @@ export default function Document() {
       <body>
         <Main />
         <NextScript />
+        <div id="modal-root" />
+        <div id="profile-popover-box" />
       </body>
     </Html>
   );

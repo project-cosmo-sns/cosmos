@@ -51,6 +51,13 @@ export default function Modal({
   //   callback: handleCloseModal,
   // });
 
+  // x icon을 클릭 이벤트 핸들링하는 함수
+  const handleXIconClick = () => {
+    if (toggleModal) {
+      toggleModal(false);
+    }
+  };
+
   return (
     <div className="Modal">
       {modalVisible && (
@@ -60,9 +67,7 @@ export default function Modal({
               className={cn('x')}
               width="18"
               height="18"
-              onClick={() => {
-                toggleModal && toggleModal(false);
-              }}
+              onClick={handleXIconClick}
             />
             <div className={cn(cssModalSize)} ref={modalRef}>
               <div className={cn('wrapper', border && 'border')}>
