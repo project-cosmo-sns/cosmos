@@ -2,6 +2,7 @@ import Image from 'next/image';
 import classNames from 'classnames/bind';
 import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
+import DOMPurify from 'dompurify';
 import axios from 'axios';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import { AddImageIcon, CloseIcon } from '@/components/Common/IconCollection';
@@ -103,7 +104,12 @@ export default function CreateFeed({
   };
 
   const onSubmit = async (data: FeedType) => {
-    postFeed(data);
+    const sanitizedContent = DOMPurify.sanitize(data.content);
+    const sanitizedData = {
+      content: sanitizedContent,
+      feedImage: data.feedImage,
+    };
+    postFeed(sanitizedData);
   };
 
   const imagePreview = updateImageUrls();
