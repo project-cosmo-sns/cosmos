@@ -2,6 +2,7 @@
   @include flex-arrange(center, flex-start);
   flex-direction: column;
   position: relative;
+  overflow-x: hidden;
 
   margin-bottom: 63px;
 
