@@ -129,15 +129,23 @@ export default function CreateFeed({
         />
         <div className={cn('content')}>
           <textarea
-            className={cn('text')}
+            className={cn('text', errors.content && 'error-border')}
             rows={5}
-            maxLength={300}
+            maxLength={350}
             placeholder="글을 작성해주세요"
             {...register('content', {
               required: '게시글을 작성해주세요',
-              maxLength: 300,
+              minLength: {
+                value: 1,
+                message: '게시글을 작성해 주세요.',
+              },
+              maxLength: {
+                value: 300,
+                message: '최대 300자 까지 작성 가능합니다.',
+              },
               validate: {
-                whiteSpace: (value) => !!value.trim() || '댓글을 입력해주세요',
+                whiteSpace: (value) =>
+                  !!value.trim() || '게시글을 작성 해주세요.',
               },
             })}
           />
@@ -146,7 +154,9 @@ export default function CreateFeed({
               {errors.content.message?.toString()}
             </span>
           )}
-          <span className={cn('limit')}>
+          <span
+            className={cn('limit', watch('content').length > 300 && 'warn')}
+          >
             {watch('content') && watch('content').length}/300
           </span>
           <div className={cn('addImage')}>
