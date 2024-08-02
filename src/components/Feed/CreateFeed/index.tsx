@@ -135,7 +135,7 @@ export default function CreateFeed({
         />
         <div className={cn('content')}>
           <textarea
-            className={cn('text', errors.content && 'error-border')}
+            className={cn('text', { 'error-border': errors.content })}
             rows={5}
             maxLength={350}
             placeholder="글을 작성해주세요"
@@ -161,7 +161,7 @@ export default function CreateFeed({
             </span>
           )}
           <span
-            className={cn('limit', watch('content').length > 300 && 'warn')}
+            className={cn('limit', { warn: watch('content').length > 300 })}
           >
             {watch('content') && watch('content').length}/300
           </span>

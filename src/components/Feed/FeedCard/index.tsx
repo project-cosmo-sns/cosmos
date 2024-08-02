@@ -96,8 +96,9 @@ export default function FeedCard({
     <div
       className={cn(
         'container',
-        hasPadding && 'padding',
-        forDetails || 'container-hover',
+        // eslint-disable-next-line prettier/prettier
+        { FeedCardPadding: hasPadding },
+        { 'container-hover': !forDetails },
       )}
     >
       <div className={cn('wrapper')}>
@@ -138,10 +139,10 @@ export default function FeedCard({
                       blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
                       fill
                       onLoad={() => setImageLoading(false)}
-                      className={cn(
-                        'image-item',
-                        isImageLoading ? 'blur' : 'remove-blur',
-                      )}
+                      className={cn('image-item', {
+                        blur: isImageLoading,
+                        'remove-blur': !isImageLoading,
+                      })}
                       style={{ objectFit: 'cover' }}
                       src={url}
                       sizes="33vw"
@@ -153,7 +154,7 @@ export default function FeedCard({
                 ))}
               </div>
             )}
-            <div className={cn('content', forDetails || 'content-hidden')}>
+            <div className={cn('content', { 'content-hidden': forDetails })}>
               <TextWithLinks text={content} />
             </div>
           </div>
