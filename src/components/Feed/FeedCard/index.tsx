@@ -96,7 +96,6 @@ export default function FeedCard({
     <div
       className={cn(
         'container',
-        // eslint-disable-next-line prettier/prettier
         { FeedCardPadding: hasPadding },
         { 'container-hover': !forDetails },
       )}
@@ -154,7 +153,7 @@ export default function FeedCard({
                 ))}
               </div>
             )}
-            <div className={cn('content', { 'content-hidden': forDetails })}>
+            <div className={cn('content', { 'content-hidden': !forDetails })}>
               <TextWithLinks text={content} />
             </div>
           </div>

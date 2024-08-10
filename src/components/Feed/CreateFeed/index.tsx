@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import classNames from 'classnames/bind';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import DOMPurify from 'dompurify';
 import axios from 'axios';
@@ -10,6 +10,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useCreateFeedRequest } from '@/hooks/useCreateFeedRequest';
 import styles from './CreateFeed.module.scss';
 import { FeedType, CreatedFeedTypes, Inputs } from './type';
+import { useToast } from '@/hooks/useToast';
 
 /**
  * CreatedFeed component
@@ -38,7 +39,9 @@ export default function CreateFeed({
   });
   const [images, setImages] = useState<Blob[]>([]);
   const [urlBucket, setUrlBucket] = useState<string[]>([]);
+  const [imagePreview, setImagePreview] = useState<string[]>([]);
   const { getUrl, deleteImage, postFeed } = useCreateFeedRequest();
+  const { showToastHandler } = useToast();
 
   const putUrlMutate = useMutation({
     mutationFn: ({ url, file }: { url: string; file: Blob }) =>
@@ -72,35 +75,22 @@ export default function CreateFeed({
     putUrlMutate.mutate({ url, file });
   };
 
-  const updateImageUrls = () => {
-    if (images && images.length > 0) {
-      let urlList = [];
-      for (let i = 0; i < images.length; i += 1) {
-        const file: Blob | MediaSource = new Blob([images[i]]);
-        const createdUrl = URL.createObjectURL(file);
-        urlList.push(createdUrl);
-      }
-      return [...urlList];
-    }
-    return [];
-  };
-
   const getUrlRequest = async () => {
     const { data } = await getUrl();
     return data?.uploadURL;
   };
 
-  const updateUrlBucket = async (currentImageValue: Blob[]) => {
-    let urlList: string[] = [];
-    if (currentImageValue && currentImageValue.length > 0) {
-      for (let i = 0; i < currentImageValue.length; i += 1) {
-        // eslint-disable-next-line no-await-in-loop
-        const uploadUrl = await getUrlRequest();
-        if (uploadUrl) urlList.push(uploadUrl);
-      }
-      urlList.map((url, i) => putUrl(url, currentImageValue[i]));
+  const updateUrlBucket = async (fileList: Blob[]) => {
+    const currentImageValue = [...images, ...fileList];
+    setImages(currentImageValue);
+
+    const urlList: string[] = [];
+    for (let i = 0; i < fileList.length; i += 1) {
+      // eslint-disable-next-line no-await-in-loop
+      const uploadUrl = await getUrlRequest();
+      if (uploadUrl) urlList.push(uploadUrl);
     }
-    return [];
+    urlList.map((url, i) => putUrl(url, currentImageValue[i]));
   };
 
   const onSubmit = async (data: FeedType) => {
@@ -112,8 +102,6 @@ export default function CreateFeed({
     postFeed(sanitizedData);
   };
 
-  const imagePreview = updateImageUrls();
-
   const filterImage = (index: number) => {
     const urlBox = getValues('feedImage');
     const filteredImages = images.filter((el, i) => i !== index);
@@ -123,6 +111,23 @@ export default function CreateFeed({
     setValue('feedImage', filteredUrlBucket);
     setUrlBucket(filteredUrlBucket);
   };
+
+  const updatePreview = () => {
+    if (images && images.length > 0) {
+      const urlList = [];
+      for (let i = 0; i < images.length; i += 1) {
+        const file: Blob | MediaSource = new Blob([images[i]]);
+        const createdUrl = URL.createObjectURL(file);
+        urlList.push(createdUrl);
+      }
+      setImagePreview(urlList);
+    }
+  };
+
+  useEffect(() => {
+    updatePreview();
+  }, [images]);
+
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>
       <div className={cn('wrapper')}>
@@ -181,13 +186,11 @@ export default function CreateFeed({
                       const fileList = event.target.files
                         ? Array.from(event.target.files)
                         : [];
-                      if (fileList.length < 4) {
-                        const currentImageValue = [...images, ...fileList];
-                        setImages(currentImageValue);
+                      if (fileList.length <= 3) {
                         updateUrlBucket(fileList);
                       } else {
+                        showToastHandler('3개까지 업로드 가능합니다', 'warn');
                         setValue('feedImage', []);
-                        alert('3개 까지 업로드 가능합니다.');
                       }
                     }}
                   />
