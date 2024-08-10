@@ -77,20 +77,40 @@ export default function CreateFeed({
 
   const getUrlRequest = async () => {
     const { data } = await getUrl();
-    return data?.uploadURL;
+    const uploadUrl = String(data?.uploadURL);
+    return uploadUrl;
   };
 
   const updateUrlBucket = async (fileList: Blob[]) => {
     const currentImageValue = [...images, ...fileList];
     setImages(currentImageValue);
 
-    const urlList: string[] = [];
+    // const urlList = [];
+
+    // for (let i = 0; i < fileList.length; i += 1) {
+    //   const url = getUrlRequest();
+    //   urlList.push(url);
+    // }
+
+    // urlList.map((url, i) => putUrl(url, currentImageValue[i]));
+    const urlPromises = [];
+
     for (let i = 0; i < fileList.length; i += 1) {
-      // eslint-disable-next-line no-await-in-loop
-      const uploadUrl = await getUrlRequest();
-      if (uploadUrl) urlList.push(uploadUrl);
+      const promise = getUrlRequest().catch((error) => {
+        console.error(`Failed to get URL for file ${i}:`, error);
+        return null; // or handle the error as needed
+      });
+      urlPromises.push(promise);
     }
-    urlList.map((url, i) => putUrl(url, currentImageValue[i]));
+
+    const urlList = await Promise.all(urlPromises);
+
+    // Handle cases where some URLs might be null due to errors
+    urlList.forEach((url, i) => {
+      if (url) {
+        putUrl(url, currentImageValue[i]);
+      }
+    });
   };
 
   const onSubmit = async (data: FeedType) => {
@@ -121,6 +141,9 @@ export default function CreateFeed({
         urlList.push(createdUrl);
       }
       setImagePreview(urlList);
+    } else {
+      // x 버튼을 클릭하여 이미지 모두 삭제 시, 빈 배열 처리 -> 화면에 이미지 모두 사라짐
+      setImagePreview([]);
     }
   };
 
@@ -190,13 +213,13 @@ export default function CreateFeed({
                         updateUrlBucket(fileList);
                       } else {
                         showToastHandler('3개까지 업로드 가능합니다', 'warn');
-                        setValue('feedImage', []);
                       }
+                      event.target.value = '';
                     }}
                   />
                 )}
               />
-              {watch('feedImage')?.length < 3 ? (
+              {images.length < 3 ? (
                 <label htmlFor="feedImage" className={cn('file-label')}>
                   <div className={cn('image-icon-wrapper')}>
                     <AddImageIcon className={cn('image-icon')} />
