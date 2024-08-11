@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import classNames from 'classnames/bind';
-import { useEffect, useMemo, useState } from 'react';
+import pLimit from 'p-limit';
+import { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import DOMPurify from 'dompurify';
 import axios from 'axios';
@@ -38,7 +39,6 @@ export default function CreateFeed({
     },
   });
   const [images, setImages] = useState<Blob[]>([]);
-  const [urlBucket, setUrlBucket] = useState<string[]>([]);
   const [imagePreview, setImagePreview] = useState<string[]>([]);
   const { getUrl, deleteImage, postFeed } = useCreateFeedRequest();
   const { showToastHandler } = useToast();
@@ -53,19 +53,6 @@ export default function CreateFeed({
           'Access-Control-Allow-Origin': 'https://alpha.cosmo-sns.com',
         },
       }),
-    onSuccess: (data) => {
-      const prev = getValues('feedImage');
-      if (data.config.url) {
-        const imageUrl = data.config.url.split('?')[0];
-        if (prev) {
-          setValue('feedImage', [...prev, imageUrl]);
-          setUrlBucket([...prev, imageUrl]);
-        } else {
-          setValue('feedImage', [imageUrl]);
-          setUrlBucket([imageUrl]);
-        }
-      }
-    },
     onError: () => {
       console.error('에러');
     },
@@ -88,29 +75,36 @@ export default function CreateFeed({
     // const urlList = [];
 
     // for (let i = 0; i < fileList.length; i += 1) {
-    //   const url = getUrlRequest();
+    //   const url = await getUrlRequest();
     //   urlList.push(url);
     // }
 
     // urlList.map((url, i) => putUrl(url, currentImageValue[i]));
-    const urlPromises = [];
 
-    for (let i = 0; i < fileList.length; i += 1) {
-      const promise = getUrlRequest().catch((error) => {
-        console.error(`Failed to get URL for file ${i}:`, error);
-        return null; // or handle the error as needed
-      });
-      urlPromises.push(promise);
-    }
+    const limit = pLimit(1);
+    // url을 발급받는건 순서가 상관이 없습니다. 이미지를 등록할때만 순서대로 해주면 업로드 순서와 싱크가 맞습니다.
+    // map 함수대신 반복문을 써도 될거 같습니다...
+    const urlPromises = fileList.map(() => limit(() => getUrlRequest()));
 
-    const urlList = await Promise.all(urlPromises);
+    const urlList: string[] = await Promise.all(urlPromises);
+    console.log(urlList, '---test-one---');
+    console.log(currentImageValue, '---등록할 파일---');
 
-    // Handle cases where some URLs might be null due to errors
-    urlList.forEach((url, i) => {
-      if (url) {
-        putUrl(url, currentImageValue[i]);
-      }
+    const uploadedUrlPromises = urlList.map((url, i) =>
+      limit(() => putUrl(url, currentImageValue[i])).then(() => url),
+    );
+
+    Promise.all(uploadedUrlPromises).then((uploadedUrlList) => {
+      const splitedUrlList = uploadedUrlList.map(
+        // 이미지 url 추출
+        (uploadedUrl) => uploadedUrl.split('?')[0],
+      );
+      // 한꺼번에 상태 업데이트
+      setValue('feedImage', splitedUrlList);
+      // setUrlBucket([imageUrl]);
     });
+
+    // 파일 등록이 모두 완료 -> url을 split을 통해 추출 -> 상태 업데이트 해주기
   };
 
   const onSubmit = async (data: FeedType) => {
@@ -120,16 +114,15 @@ export default function CreateFeed({
       feedImage: data.feedImage,
     };
     postFeed(sanitizedData);
+    console.log(data.feedImage, '---test-two---');
   };
 
   const filterImage = (index: number) => {
     const urlBox = getValues('feedImage');
     const filteredImages = images.filter((el, i) => i !== index);
     const filteredUrlBucket = urlBox.filter((el, i) => i !== index);
-    deleteImage(urlBucket[index]);
     setImages(filteredImages);
     setValue('feedImage', filteredUrlBucket);
-    setUrlBucket(filteredUrlBucket);
   };
 
   const updatePreview = () => {
