@@ -70,33 +70,39 @@ export default function CreateFeed({
     return uploadUrl;
   };
 
+  // 이미지 업로드 함수
   const uploadFile = async (fileList: Blob[]) => {
-    const currentImageValue = [...images, ...fileList];
+    const currentImageValue =
+      images.length === 0 ? fileList : [...images, ...fileList];
     setImages(currentImageValue);
     const limit = pLimit(1);
 
+    // 서버로 url 발급요청
     const urlPromises = fileList.map(() => limit(() => getUrlRequest()));
 
     const urlList: string[] = await Promise.all(urlPromises);
 
+    // s3 서버로 이미지 등록 요청
     const uploadedUrlPromises = urlList.map((url, i) =>
-      limit(() => putUrl(url, currentImageValue[i])).then(() => url),
+      limit(() => putUrl(url, fileList[i])).then(() => url),
     );
 
     Promise.all(uploadedUrlPromises).then((uploadedUrlList) => {
       const splitedUrlList = uploadedUrlList.map(
-        // 이미지 url 추출
         (uploadedUrl) => uploadedUrl.split('?')[0],
       );
-      // 한꺼번에 상태 업데이트
+
       const prevFeedImage = getValues('feedImage');
-      setValue('feedImage', [...prevFeedImage, ...splitedUrlList]);
+      if (prevFeedImage) {
+        setValue('feedImage', [...prevFeedImage, ...splitedUrlList]);
+      } else {
+        setValue('feedImage', splitedUrlList);
+      }
       setUrlBucket((prev) => [...prev, ...splitedUrlList]);
     });
-
-    // 파일 등록이 모두 완료 -> url을 split을 통해 추출 -> 상태 업데이트 해주기
   };
 
+  // 폼 제출 함수
   const onSubmit = async (data: FeedType) => {
     const sanitizedContent = DOMPurify.sanitize(data.content);
     const sanitizedData = {
@@ -104,9 +110,9 @@ export default function CreateFeed({
       feedImage: data.feedImage,
     };
     postFeed(sanitizedData);
-    console.log(data.feedImage, '---test-two---');
   };
 
+  // 이미지 삭제 함수
   const filterImage = (index: number) => {
     const filteredImages = images.filter((_, i) => i !== index);
     const filteredUrlBucket = urlBucket.filter((_, i) => i !== index);
@@ -118,6 +124,7 @@ export default function CreateFeed({
     setUrlBucket(filteredUrlBucket);
   };
 
+  // 이미지 미리보기 함수
   const updatePreview = () => {
     if (images && images.length > 0) {
       const urlList = [];
@@ -192,10 +199,11 @@ export default function CreateFeed({
                     accept=".jpg, .png, .webp, .jpeg"
                     multiple
                     onChange={(event) => {
+                      const prevImages = getValues('feedImage');
                       const fileList = event.target.files
                         ? Array.from(event.target.files)
                         : [];
-                      if (fileList.length <= 3) {
+                      if (fileList.length + prevImages.length <= 3) {
                         uploadFile(fileList);
                       } else {
                         showToastHandler('3개까지 업로드 가능합니다', 'warn');

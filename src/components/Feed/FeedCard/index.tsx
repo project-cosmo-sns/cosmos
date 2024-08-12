@@ -92,8 +92,6 @@ export default function FeedCard({
       isPost: false,
     });
 
-  console.log(imageUrls, '---test-three---');
-
   return (
     <div
       className={cn(
