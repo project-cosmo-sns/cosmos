@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import Image from 'next/image';
 import classNames from 'classnames/bind';
 import pLimit from 'p-limit';
@@ -40,6 +41,7 @@ export default function CreateFeed({
   });
   const [images, setImages] = useState<Blob[]>([]);
   const [imagePreview, setImagePreview] = useState<string[]>([]);
+  const [urlBucket, setUrlBucket] = useState<string[]>([]);
   const { getUrl, deleteImage, postFeed } = useCreateFeedRequest();
   const { showToastHandler } = useToast();
 
@@ -68,27 +70,14 @@ export default function CreateFeed({
     return uploadUrl;
   };
 
-  const updateUrlBucket = async (fileList: Blob[]) => {
+  const uploadFile = async (fileList: Blob[]) => {
     const currentImageValue = [...images, ...fileList];
     setImages(currentImageValue);
-
-    // const urlList = [];
-
-    // for (let i = 0; i < fileList.length; i += 1) {
-    //   const url = await getUrlRequest();
-    //   urlList.push(url);
-    // }
-
-    // urlList.map((url, i) => putUrl(url, currentImageValue[i]));
-
     const limit = pLimit(1);
-    // url을 발급받는건 순서가 상관이 없습니다. 이미지를 등록할때만 순서대로 해주면 업로드 순서와 싱크가 맞습니다.
-    // map 함수대신 반복문을 써도 될거 같습니다...
+
     const urlPromises = fileList.map(() => limit(() => getUrlRequest()));
 
     const urlList: string[] = await Promise.all(urlPromises);
-    console.log(urlList, '---test-one---');
-    console.log(currentImageValue, '---등록할 파일---');
 
     const uploadedUrlPromises = urlList.map((url, i) =>
       limit(() => putUrl(url, currentImageValue[i])).then(() => url),
@@ -100,8 +89,9 @@ export default function CreateFeed({
         (uploadedUrl) => uploadedUrl.split('?')[0],
       );
       // 한꺼번에 상태 업데이트
-      setValue('feedImage', splitedUrlList);
-      // setUrlBucket([imageUrl]);
+      const prevFeedImage = getValues('feedImage');
+      setValue('feedImage', [...prevFeedImage, ...splitedUrlList]);
+      setUrlBucket((prev) => [...prev, ...splitedUrlList]);
     });
 
     // 파일 등록이 모두 완료 -> url을 split을 통해 추출 -> 상태 업데이트 해주기
@@ -118,11 +108,14 @@ export default function CreateFeed({
   };
 
   const filterImage = (index: number) => {
-    const urlBox = getValues('feedImage');
-    const filteredImages = images.filter((el, i) => i !== index);
-    const filteredUrlBucket = urlBox.filter((el, i) => i !== index);
+    const filteredImages = images.filter((_, i) => i !== index);
+    const filteredUrlBucket = urlBucket.filter((_, i) => i !== index);
+
     setImages(filteredImages);
     setValue('feedImage', filteredUrlBucket);
+
+    deleteImage(urlBucket[index]);
+    setUrlBucket(filteredUrlBucket);
   };
 
   const updatePreview = () => {
@@ -203,7 +196,7 @@ export default function CreateFeed({
                         ? Array.from(event.target.files)
                         : [];
                       if (fileList.length <= 3) {
-                        updateUrlBucket(fileList);
+                        uploadFile(fileList);
                       } else {
                         showToastHandler('3개까지 업로드 가능합니다', 'warn');
                       }
