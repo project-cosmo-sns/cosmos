@@ -70,7 +70,7 @@ export default function Modal({
               onClick={handleXIconClick}
             />
             <div className={cn(cssModalSize)} ref={modalRef}>
-              <div className={cn('wrapper', border && 'border')}>
+              <div className={cn('wrapper', { border })}>
                 {title && (
                   <div className={cn('title')}>
                     <span>{title}</span>
