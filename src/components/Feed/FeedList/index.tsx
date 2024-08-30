@@ -27,9 +27,8 @@ const cn = classNames.bind(styles);
 
 export default function FeedList({ feedList, selectedSort }: FeedListProps) {
   const { checkMemberStatus } = useFetchMemberStatus();
-  const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
-  const queryParam = CATEGORY_LIST[selectedCategory]
-    ? `&category=${selectedCategory}`
+  const queryParam = CATEGORY_LIST[selectedSort]
+    ? `&category=${selectedSort}`
     : '';
   const [feedId, setFeedId] = useState<number>(0);
   const dispatch = useDispatch();
@@ -72,12 +71,12 @@ export default function FeedList({ feedList, selectedSort }: FeedListProps) {
 
   useEffect(() => {
     refetch();
-  }, [selectedCategory, selectedSort]);
+  }, [selectedSort]);
 
   return (
     <div className={cn('wrapper')}>
       <div className={cn('container')}>
-        {feedPages[0].data.length ? (
+        {feedPages.length ? (
           feedPages.map((feedPage) =>
             feedPage.data.map((feed) => (
               <FeedCard

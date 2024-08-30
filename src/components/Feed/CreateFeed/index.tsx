@@ -20,10 +20,7 @@ import { useToast } from '@/hooks/useToast';
  * @return {JSX.Element} 글작성 인풋과 이미지 추가하는 인풋을 포함하는 CreatedFeed 컴포넌트 입니다.
  */
 
-export default function CreateFeed({
-  profileImage,
-  modalVisible,
-}: CreatedFeedTypes) {
+export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
   const cn = classNames.bind(styles);
   const {
     register,
@@ -72,8 +69,7 @@ export default function CreateFeed({
 
   // 이미지 업로드 함수
   const uploadFile = async (fileList: Blob[]) => {
-    const currentImageValue =
-      images.length === 0 ? fileList : [...images, ...fileList];
+    const currentImageValue = [...images, ...fileList];
     setImages(currentImageValue);
     const limit = pLimit(1);
 
