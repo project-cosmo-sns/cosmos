@@ -5,7 +5,7 @@ interface EntireModalState {
 }
 
 const initialState: EntireModalState = {
-  isEntireModalOpen: false,
+  isEntireModalOpen: true,
 };
 
 const entireModalSlice = createSlice({
