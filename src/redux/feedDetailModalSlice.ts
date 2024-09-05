@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { handleEntireModal } from './\bentireModalSlice';
 
 interface FeedDetailModalState {
   isDetailOpen: boolean;
@@ -15,6 +16,11 @@ const feedDetailModalSlice = createSlice({
     handleFeedDetailModal(state, action: PayloadAction<boolean>) {
       state.isDetailOpen = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(handleEntireModal, (state) => {
+      state.isDetailOpen = false;
+    });
   },
 });
 

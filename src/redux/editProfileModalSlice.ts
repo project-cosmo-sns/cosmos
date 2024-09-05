@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { handleEntireModal } from './\bentireModalSlice';
 
 interface ProfileModalState {
   isProfileOpen: boolean;
@@ -15,6 +16,11 @@ const editProfileModalSlice = createSlice({
     handleEditProfileModal(state, action: PayloadAction<boolean>) {
       state.isProfileOpen = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(handleEntireModal, (state) => {
+      state.isProfileOpen = false;
+    });
   },
 });
 

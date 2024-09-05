@@ -8,6 +8,7 @@ import loginModalSlice from './loginModalSlice';
 import createFeedModalReducer from './createFeedModalSlice';
 import editProfileModalReducer from './editProfileModalSlice';
 import feedDetailModalReducer from './feedDetailModalSlice';
+import EntireModalReducer from './\bentireModalSlice';
 
 const rootReducer = {
   search: searchReducer,
@@ -17,6 +18,7 @@ const rootReducer = {
   createFeedModal: createFeedModalReducer,
   editProfileModal: editProfileModalReducer,
   feedDetailModal: feedDetailModalReducer,
+  entireModal: EntireModalReducer,
 };
 
 const store = configureStore({
