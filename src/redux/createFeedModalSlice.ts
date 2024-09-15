@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { handleEntireModal } from './\bentireModalSlice';
 
 interface CreateFeedModalState {
   isOpen: boolean;
@@ -15,6 +16,11 @@ const createFeedModalSlice = createSlice({
     handleCreateFeedModal(state, action: PayloadAction<boolean>) {
       state.isOpen = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(handleEntireModal, (state) => {
+      state.isOpen = false;
+    });
   },
 });
 

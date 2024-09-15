@@ -10,7 +10,6 @@ import {
   UserIcon,
   AddIcon,
 } from '@/components/Common/IconCollection';
-import { useRouter } from 'next/router';
 import { useGetProfileImage } from '@/api/member';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
@@ -22,7 +21,7 @@ import { handleCreateFeedModal } from '@/redux/createFeedModalSlice';
 import { handleFeedDetailModal } from '@/redux/feedDetailModalSlice';
 import CreateFeed from '@/components/Feed/CreateFeed';
 import Modal from '@/components/Common/Layout/Modal';
-import { handleEditProfileModal } from '@/redux/editProfileModalSlice';
+import { handleEntireModal } from '@/redux/\bentireModalSlice';
 
 const cn = classNames.bind(styles);
 
@@ -31,7 +30,6 @@ export default function SideBar() {
     null,
   );
   const [userImage, setUserImage] = useState<string | null>(null);
-  const router = useRouter();
   const dispatch = useDispatch();
   const { data: member } = useGetProfileImage();
   const isLogin = member?.isLogin;
@@ -49,9 +47,7 @@ export default function SideBar() {
 
   const profileClick = () => {
     if (isLogin) {
-      dispatch(handleCreateFeedModal(false));
-      dispatch(handleFeedDetailModal(false));
-      dispatch(handleEditProfileModal(false));
+      dispatch(handleEntireModal(false));
     } else {
       dispatch(openLoginModal());
     }
@@ -85,15 +81,11 @@ export default function SideBar() {
   // 알림 아이템 || 뒤로가기 클릭 -> 피드생성 모달 닫힘 & 피드상세 모달 닫힘 & 사이드바 팝오버 닫힘 & 프로필 모달 닫힘
   const handleNotificationClick = () => {
     handleClosePopOver();
-    dispatch(handleCreateFeedModal(false));
-    dispatch(handleFeedDetailModal(false));
-    dispatch(handleEditProfileModal(false));
+    dispatch(handleEntireModal(false));
   };
 
   const handleHomeIconClick = () => {
-    dispatch(handleCreateFeedModal(false));
-    dispatch(handleFeedDetailModal(false));
-    dispatch(handleEditProfileModal(false));
+    dispatch(handleEntireModal(false));
   };
 
   useEffect(() => {
