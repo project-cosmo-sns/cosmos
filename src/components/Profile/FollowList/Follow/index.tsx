@@ -6,7 +6,7 @@ import FollowButton from '@/components/Common/Buttons/FollowButton';
 import useFollowClick from '@/hooks/useFollowClick';
 import { deleteFollow } from '@/api/Follow';
 import Link from 'next/link';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 const cn = classNames.bind(styles);
 
@@ -16,6 +16,7 @@ export interface FollowType {
   nickname: string;
   generation: number;
   isFollowButton?: boolean;
+  toggleModal: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function Follow({
@@ -24,6 +25,7 @@ export default function Follow({
   generation,
   memberId,
   isFollowButton,
+  toggleModal,
 }: FollowType) {
   const [deletedFollowerIds, setDeletedFollowerIds] = useState<number[]>([]);
 
@@ -44,7 +46,12 @@ export default function Follow({
   return (
     <div key={memberId} className={cn('follow-wrapper')}>
       <div className={cn('follow-info')}>
-        <Link href={`/profile?memberId=${memberId}`}>
+        <Link
+          onClick={() => {
+            toggleModal(false);
+          }}
+          href={`/profile?memberId=${memberId}`}
+        >
           <Image
             src={profileImageUrl || '/images/profile.svg'}
             alt="profile_image"

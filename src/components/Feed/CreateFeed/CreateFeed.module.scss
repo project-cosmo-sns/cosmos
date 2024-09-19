@@ -42,6 +42,7 @@
         border-radius: 5px;
         resize: none;
         white-space: pre-wrap;
+        border: 0.1px solid transparent;
       }
 
       .error {
@@ -53,6 +54,10 @@
         padding-left: 16px;
       }
 
+      .error-border {
+        border: 0.1px solid #ed1c24;
+      }
+
       .limit {
         position: absolute;
         right: 16px;
@@ -60,6 +65,10 @@
         font-size: 1.1rem;
         color: $gray-01;
         padding-left: 16px;
+      }
+
+      .warn {
+        color: #b5141a;
       }
 
       .addImage {

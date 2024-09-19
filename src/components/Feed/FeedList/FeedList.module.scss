@@ -1,17 +1,24 @@
-.container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.wrapper {
+  width: 100%;
+  overflow-x: hidden;
+
   margin: {
     top: 16px;
-    bottom: 16px;
+    bottom: 63px;
   }
   @media (min-width: 768px) {
+    margin-bottom: 16px;
     padding: {
       left: 24px;
       right: 24px;
     }
   }
+}
+
+.container {
+  @include flex-arrange(center, flex-start);
+  flex-direction: column;
+  gap: 12px;
 }
 
 .no-feed {

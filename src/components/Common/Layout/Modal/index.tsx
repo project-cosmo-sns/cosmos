@@ -9,7 +9,7 @@ interface ModalType {
   children: ReactNode;
   title?: string;
   modalVisible: boolean;
-  toggleModal?: React.Dispatch<React.SetStateAction<boolean>>;
+  toggleModal?: (state: boolean) => void;
   cssModalSize: string;
   cssComponentDisplay: string;
   className?: string;
@@ -42,33 +42,33 @@ export default function Modal({
 }: ModalType) {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  const handleCloseModal = () => {
-    toggleModal && toggleModal(!modalVisible);
-  };
+  // const handleCloseModal = () => {
+  //   toggleModal && toggleModal(!modalVisible);
+  // };
 
   // useOutSideClick({
   //   ref: modalRef,
   //   callback: handleCloseModal,
   // });
 
+  // x icon을 클릭 이벤트 핸들링하는 함수
+  const handleXIconClick = () => {
+    if (toggleModal) {
+      toggleModal(false);
+    }
+  };
+
   return (
     <div className="Modal">
       {modalVisible && (
         <ModalPortal modalVisible={modalVisible}>
           <div className={cn('container', className)}>
-            <div
-              role="presentation"
-              onClick={() => toggleModal && toggleModal(!modalVisible)}
-            >
-              <Icon.XIcon
-                className={cn('x')}
-                width="18"
-                height="18"
-                onClick={() => {
-                  toggleModal && toggleModal(!modalVisible);
-                }}
-              />
-            </div>
+            <Icon.XIcon
+              className={cn('x')}
+              width="18"
+              height="18"
+              onClick={handleXIconClick}
+            />
             <div className={cn(cssModalSize)} ref={modalRef}>
               <div className={cn('wrapper', { border })}>
                 {title && (

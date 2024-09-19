@@ -71,3 +71,11 @@
     width: 740px;
   }
 }
+
+.forNotification {
+  z-index: 60;
+
+  @media (min-width: 768px) {
+    z-index: 99;
+  }
+}

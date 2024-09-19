@@ -15,7 +15,7 @@ import { useToast } from '@/hooks/useToast';
 const cn = classNames.bind(styles);
 
 interface ProfileSettingDropdownProps {
-  onSetting: () => void;
+  onSetting: (state: boolean) => void;
   memberData: MemberDataType;
 }
 
@@ -90,7 +90,7 @@ export default function ProfilePopOver({
             {memberData.authorizationStatus === 'ACCEPT' && (
               <li
                 onClick={() => {
-                  onSetting();
+                  onSetting(true);
                   setIsExpanded(false);
                 }}
                 className={cn('expanded-dropdown-list', 'profile-edit')}

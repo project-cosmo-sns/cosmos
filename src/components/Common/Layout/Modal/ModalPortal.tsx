@@ -10,10 +10,10 @@ export default function ModalPortal({
   children,
   modalVisible,
 }: ModalPortalTypes) {
-  const [isCSR, setIsCSR] = useState<boolean>(false);
+  const [mounted, setMounted] = useState<boolean>(false);
 
   useEffect(() => {
-    setIsCSR(true);
+    setMounted(true);
 
     if (modalVisible) {
       document.body.style.overflow = 'hidden';
@@ -27,9 +27,10 @@ export default function ModalPortal({
     };
   }, []);
 
-  if (typeof window === 'undefined') return <></>;
-  if (!isCSR) return <></>;
+  if (typeof window === 'undefined') return null;
+  if (!mounted) return null;
 
   const el = document.getElementById('modal-root') as HTMLElement;
+
   return ReactDom.createPortal(children, el);
 }

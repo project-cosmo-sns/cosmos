@@ -120,7 +120,6 @@ export default function EditFeed({
   };
 
   // const updateImageUrls = () => {
-  //   console.log('-----업데이트 이미지 유알엘 실행------');
   //   if (images && images.length > 0) {
   //     let urlList = [];
   //     for (let i = 0; i < images.length; i += 1) {
@@ -179,8 +178,10 @@ export default function EditFeed({
 
   // useEffect(() => {
   //   console.log('-----유즈 이펙트 실행------');
-  //   updateImageUrls();
+  //   updateImageUrls()
   // }, [urlBucket]);
+
+  // 테스트 테스트;
 
   return (
     <form className={cn('container')} onSubmit={handleSubmit(onSubmit)}>

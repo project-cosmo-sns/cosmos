@@ -5,12 +5,20 @@ import searchReducer from './searchSlice';
 import toastReducer from './toastSlice';
 import logoutSlice from './logoutSlice';
 import loginModalSlice from './loginModalSlice';
+import createFeedModalReducer from './createFeedModalSlice';
+import editProfileModalReducer from './editProfileModalSlice';
+import feedDetailModalReducer from './feedDetailModalSlice';
+import EntireModalReducer from './\bentireModalSlice';
 
 const rootReducer = {
   search: searchReducer,
   toast: toastReducer,
   logout: logoutSlice,
   loginModal: loginModalSlice,
+  createFeedModal: createFeedModalReducer,
+  editProfileModal: editProfileModalReducer,
+  feedDetailModal: feedDetailModalReducer,
+  entireModal: EntireModalReducer,
 };
 
 const store = configureStore({
