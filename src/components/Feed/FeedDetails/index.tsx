@@ -11,6 +11,7 @@ import EditFeed from '@/components/Feed/EditFeed/index';
 import { FeedDetailType, CommentListType } from '../types';
 import styles from './FeedDetails.module.scss';
 import useInfiniteScroll from '@/hooks/useInfiniteScroll';
+import FeedDetailsLoading from './FeedDetailsLoading';
 
 /**
  * @return {JSX.Element} FeedDetails - 추후에 변경 예정입니다. 피드 리스트에서 특정 피드를 클릭한다면 클리한 피드의 아이디를 통해 데이터를 요청해 화면에 보여줍니다
@@ -85,7 +86,7 @@ export default function FeedDetails({
     },
   };
 
-  if (isFeedDataPending) return <LoadingSpinner />;
+  if (isFeedDataPending) return <FeedDetailsLoading />;
   if (isFeedDataError)
     return '삭제된 피드 입니다. 새로 고침 후 다시 이용해주세요.';
   if (isCommentDataPending) return <LoadingSpinner />;
