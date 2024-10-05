@@ -28,7 +28,6 @@ export default function FeedCardImage({
                 style={{ objectFit: 'cover' }}
                 src={`${imageUrls[0]}`}
                 alt="feedImage"
-                priority
               />
             </div>
             {imageUrls.length > 1 && (
