@@ -3,7 +3,10 @@ import classNames from 'classnames/bind';
 import axios from 'axios';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import { CloseIcon, AddImageIcon } from '@/components/Common/IconCollection';
-import { Inputs, FeedType } from '@/components/Feed/CreateFeed/type';
+import {
+  FeedFormController,
+  FeedType,
+} from '@/components/Feed/CreateFeed/type';
 import { useCreateFeedRequest } from '@/hooks/useCreateFeedRequest';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FeedDetailType } from '@/components/Feed/types';
@@ -42,7 +45,7 @@ export default function EditFeed({
     control,
     formState: { errors },
     watch,
-  } = useForm<Inputs>({
+  } = useForm<FeedFormController>({
     defaultValues: {
       content: feedData.feed.content,
       feedImage: feedData.feed.imageUrls,

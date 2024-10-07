@@ -1,8 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './FeedCard.module.scss';
 import Image from 'next/image';
-import { useState } from 'react';
-import LoadingSpinner from '@/components/Common/LoadingSpinner';
 
 const cn = classNames.bind(styles);
 
