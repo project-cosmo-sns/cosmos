@@ -15,9 +15,10 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { FeedDetailType } from '../types';
 import styles from './FeedCard.module.scss';
 import TextWithLinks from '@/components/Common/TextWithLinks';
-import LoadingSpinner from '@/components/Common/LoadingSpinner';
 import { useDispatch } from 'react-redux';
 import { handleFeedDetailModal } from '@/redux/feedDetailModalSlice';
+import FeedCardImage from './FeedCardImage';
+import FeedCardDeatilImage from './FeedCardDetailImage';
 
 interface FeedCardTypes {
   feedData: FeedDetailType;
@@ -66,7 +67,6 @@ export default function FeedCard({
     emojis,
   } = feedData.feed;
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [isImageLoading, setImageLoading] = useState(true);
   const router = useRouter();
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
@@ -126,58 +126,16 @@ export default function FeedCard({
                 </div>
               )}
             </div>
-            {forDetails && !!imageUrls?.length && (
-              <div className={cn('detail-upload-image-wrapper')}>
-                {imageUrls.map((url: string, index) => (
-                  <div
-                    key={index}
-                    className={cn('detail-upload-image')}
-                    onClick={() => showImageDetail(url)}
-                  >
-                    <Image
-                      blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg=="
-                      fill
-                      onLoad={() => setImageLoading(false)}
-                      className={cn('image-item', {
-                        blur: isImageLoading,
-                        'remove-blur': !isImageLoading,
-                      })}
-                      style={{ objectFit: 'cover' }}
-                      src={url}
-                      sizes="33vw"
-                      priority
-                      alt="feedImage"
-                      loading="eager"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
+            <FeedCardDeatilImage
+              forDetails={forDetails}
+              imageUrls={imageUrls}
+              showImageDetail={showImageDetail}
+            />
             <div className={cn('content', { 'content-hidden': !forDetails })}>
               <TextWithLinks text={content} />
             </div>
           </div>
-          {forDetails ||
-            (!!imageUrls?.length && (
-              <div className={cn('upload-image-wrapper')}>
-                <div className={cn('upload-image')}>
-                  <Image
-                    className={cn('image-tag')}
-                    sizes="33vw"
-                    fill
-                    style={{ objectFit: 'cover' }}
-                    src={`${imageUrls[0]}`}
-                    alt="feedImage"
-                    priority
-                  />
-                </div>
-                {imageUrls.length > 1 && (
-                  <span className={cn('extra-stuff')}>
-                    + {imageUrls.length - 1}
-                  </span>
-                )}
-              </div>
-            ))}
+          <FeedCardImage forDetails={forDetails} imageUrls={imageUrls} />
         </div>
         <EmojiBundle
           commentCount={commentCount}
