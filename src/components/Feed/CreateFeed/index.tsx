@@ -7,7 +7,7 @@ import { useCreateFeedRequest } from '@/hooks/useCreateFeedRequest';
 import styles from './CreateFeed.module.scss';
 import { FeedType, CreatedFeedTypes, FeedFormController } from './type';
 import FeedTextArea from './FeedTextArea';
-import FeedImageUpload from './FeedImageUpload';
+import FeedImageUpload from '../UploadFeedImage/ui';
 
 /**
  * CreatedFeed component

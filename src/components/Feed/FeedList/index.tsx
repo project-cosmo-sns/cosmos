@@ -77,15 +77,19 @@ export default function FeedList({ feedList, selectedSort }: FeedListProps) {
     <div className={cn('wrapper')}>
       <div className={cn('container')}>
         {feedPages.length ? (
-          feedPages[0].data.map((feed) => (
-            <FeedCard
-              key={feed.feed.id}
-              feedData={feed}
-              hasPadding
-              forDetails={false}
-              onClick={() => checkMemberStatus(() => handleClick(feed.feed.id))}
-            />
-          ))
+          feedPages.map((feedPage) =>
+            feedPage.data.map((feed) => (
+              <FeedCard
+                key={feed.feed.id}
+                feedData={feed}
+                hasPadding
+                forDetails={false}
+                onClick={() =>
+                  checkMemberStatus(() => handleClick(feed.feed.id))
+                }
+              />
+            )),
+          )
         ) : (
           <div className={cn('no-feed')}>피드가 없습니다</div>
         )}
