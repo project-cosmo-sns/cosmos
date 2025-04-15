@@ -5,7 +5,6 @@ import { Controller } from 'react-hook-form';
 import { useToast } from '@/hooks/useToast';
 import { AddImageIcon } from '@/components/Common/IconCollection';
 import styles from '@/components/Feed/CreateFeed/CreateFeed.module.scss';
-import { useCreateFeedRequest } from '@/hooks/useCreateFeedRequest';
 import { FeedImageUploadTypes } from '../../CreateFeed/type';
 import ImagePreview from './imagePreview';
 import useImagePreview from '../model/useImagePreview';
