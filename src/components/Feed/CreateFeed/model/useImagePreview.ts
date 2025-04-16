@@ -21,7 +21,18 @@ function useImagePreview(images: Blob[]) {
       }
     };
     updatePreview();
-  }, [images]);
+
+    return () => {
+      // 컴포넌트 언마운트 시, URL 객체 해제
+      if (imagePreview.length > 0) {
+        imagePreview.forEach((url) => {
+          URL.revokeObjectURL(url);
+        });
+      }
+      // 이미지 미리보기 상태 초기화
+      setImagePreview([]);
+    };
+  }, [images, imagePreview]);
   return { imagePreview };
 }
 
