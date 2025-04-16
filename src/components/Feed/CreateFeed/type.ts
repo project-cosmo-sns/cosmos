@@ -31,9 +31,13 @@ export interface FeedTextAreaTypes {
   watch: UseFormWatch<FeedFormController>;
 }
 
-export interface FeedImageUploadTypes {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  control: Control<FeedFormController, any>;
-  getValues: UseFormGetValues<FeedFormController>;
-  setValue: UseFormSetValue<FeedFormController>;
+export interface FeedImageInputTypes {
+  FeedImageInputProps: {
+    images: Blob[];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    control: Control<FeedFormController, any>;
+    handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    imagePreview: string[];
+    handleDeleteImage: (index: number) => void;
+  };
 }

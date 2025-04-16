@@ -5,12 +5,15 @@ import styles from '@/components/Feed/CreateFeed/CreateFeed.module.scss';
 
 const cn = classNames.bind(styles);
 
-interface ImagePreviewProps {
+interface FeedImagePreviewProps {
   imagePreview: string[] | null;
   handleDeleteImage: (index: number) => void;
 }
 
-function ImagePreview({ imagePreview, handleDeleteImage }: ImagePreviewProps) {
+function FeedImagePreview({
+  imagePreview,
+  handleDeleteImage,
+}: FeedImagePreviewProps) {
   return (
     <>
       {imagePreview && (
@@ -40,4 +43,4 @@ function ImagePreview({ imagePreview, handleDeleteImage }: ImagePreviewProps) {
   );
 }
 
-export default ImagePreview;
+export default FeedImagePreview;

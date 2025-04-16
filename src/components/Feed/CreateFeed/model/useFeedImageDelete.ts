@@ -1,7 +1,7 @@
 import { UseFormSetValue } from 'react-hook-form';
 
 import { useCreateFeedRequest } from '@/hooks/useCreateFeedRequest';
-import { FeedFormController } from '../../CreateFeed/type';
+import { FeedFormController } from '../type';
 
 interface useImageDeleteProps {
   images: Blob[];

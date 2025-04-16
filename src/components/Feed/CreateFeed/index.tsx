@@ -1,13 +1,19 @@
 import Image from 'next/image';
+import { useState } from 'react';
 import classNames from 'classnames/bind';
 import { useForm } from 'react-hook-form';
 import DOMPurify from 'dompurify';
+
+import { useToast } from '@/hooks/useToast';
 import DefaultButton from '@/components/Common/Buttons/DefaultButton';
 import { useCreateFeedRequest } from '@/hooks/useCreateFeedRequest';
 import styles from './CreateFeed.module.scss';
 import { FeedType, CreatedFeedTypes, FeedFormController } from './type';
-import FeedTextArea from './FeedTextArea';
-import FeedImageUpload from '../UploadFeedImage/ui';
+import FeedTextArea from './ui/FeedTextArea';
+import FeedImageInput from './ui/FeedImageInput';
+import useImagePreview from './model/useImagePreview';
+import useFeedImageUpload from './model/useFeedImageUpload';
+import useImageDelete from './model/useFeedImageDelete';
 
 /**
  * CreatedFeed component
@@ -32,7 +38,47 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
       feedImage: [],
     },
   });
+  const { showToastHandler } = useToast();
+  // 이미지 파일 상태
+  const [images, setImages] = useState<Blob[]>([]);
+  // s3 url 상태
+  const [urlBucket, setUrlBucket] = useState<string[]>([]);
+
+  // 이미지 미리보기
+  const { imagePreview } = useImagePreview(images);
+
+  // 피드 전송 요청
   const { postFeed } = useCreateFeedRequest();
+
+  // 이미지 파일 업로드
+  const { uploadFile } = useFeedImageUpload({
+    images,
+    setImages,
+    getValues,
+    setValue,
+    setUrlBucket,
+  });
+
+  // 이미지 삭제 함수
+  const { handleDeleteImage } = useImageDelete({
+    images,
+    setImages,
+    setValue,
+    urlBucket,
+    setUrlBucket,
+  });
+
+  // 이미지 인풋 핸들러
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const prevImages = getValues('feedImage');
+    const fileList = e.target.files ? Array.from(e.target.files) : [];
+    if (fileList.length + prevImages.length <= 3) {
+      uploadFile(fileList);
+    } else {
+      showToastHandler('3개까지 업로드 가능합니다', 'warn');
+    }
+    e.target.value = '';
+  };
 
   // 폼 제출 함수
   const onSubmit = async (data: FeedType) => {
@@ -56,10 +102,14 @@ export default function CreateFeed({ profileImage }: CreatedFeedTypes) {
         />
         <div className={cn('content')}>
           <FeedTextArea errors={errors} register={register} watch={watch} />
-          <FeedImageUpload
-            control={control}
-            getValues={getValues}
-            setValue={setValue}
+          <FeedImageInput
+            FeedImageInputProps={{
+              images,
+              control,
+              handleChange,
+              imagePreview,
+              handleDeleteImage,
+            }}
           />
         </div>
       </div>

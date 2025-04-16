@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind';
 import styles from './CreateFeed.module.scss';
-import { FeedTextAreaTypes } from './type';
+import { FeedTextAreaTypes } from '../type';
 
 const cn = classNames.bind(styles);
 

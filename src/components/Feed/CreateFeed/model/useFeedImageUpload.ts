@@ -2,7 +2,7 @@ import { UseFormGetValues, UseFormSetValue } from 'react-hook-form';
 
 import { useToast } from '@/hooks/useToast';
 import useImageUpload from './useImageUpload';
-import { FeedFormController } from '../../CreateFeed/type';
+import { FeedFormController } from '../type';
 
 export interface useFeedImageUploadProps {
   images: Blob[];
